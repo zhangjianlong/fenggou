@@ -365,6 +365,7 @@ public class ActivityLoginModel extends BaseObservable {
             return;
         }
         LogKit.v(phoenNum);
+
         isSendPin = true;
         //调用发送手机验证码接口，将验证码发送到手机上
         LoginManager.getPhoneVerificationCode(new BaseProtocol.IResultExecutor<SendPinResultBean>() {
