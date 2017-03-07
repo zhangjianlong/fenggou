@@ -1,5 +1,5 @@
 ext {
-    applicationId = "com.core.op"
+    applicationId = "com.slash.youth"
     versionCode = 1
     versionName = "v1.0.0"
 
@@ -23,7 +23,7 @@ ext {
             zxing                : 'com.google.zxing:core:3.3.0',
 
 
-            eventbus             : 'de.greenrobot:eventbus:3.0.0-beta1',
+            eventbus             : 'org.greenrobot:eventbus:3.0.0',
             rxandroid            : 'io.reactivex:rxandroid:1.2.1',
             rxjava               : 'io.reactivex:rxjava:1.1.6',
             rxlifecycle          : 'com.trello:rxlifecycle-components:0.6.1',
@@ -36,6 +36,9 @@ ext {
             retrofitConverterXml : 'com.squareup.retrofit2:converter-simplexml:2.0.0',
 
             guava                : 'com.google.guava:guava:19.0',
+
+            stetho               : 'com.facebook.stetho:stetho:1.4.1',
+            stethoOkhttp         : 'com.facebook.stetho:stetho-okhttp3:1.4.1',
 
             logger               : 'com.orhanobut:logger:1.15',
 
