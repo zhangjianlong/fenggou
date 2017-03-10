@@ -73,7 +73,6 @@ import io.rong.message.CommandMessage;
 import io.rong.message.CommandNotificationMessage;
 import io.rong.message.TextMessage;
 
-import static com.slash.youth.v2.feature.main.MainActivity.OFF_LINE;
 
 /**
  * Created by Administrator on 2016/8/31.
@@ -103,6 +102,10 @@ public class MsgManager {
     public static int taskMessageCount = -1;
     public static HashMap<Long, Integer> everyTaskMessageCount = null;
 
+
+    public static final String OFF_LINE = "OFF_LINE";
+    public static final String NEW_MESSAGE = "NEW_MESSAGE";
+
     /**
      * 建立与融云服务器的连接
      *
@@ -123,7 +126,6 @@ public class MsgManager {
                         public void run() {
                             if (ActivityUtils.currentActivity instanceof BaseActivity)
                                 ((BaseActivity) ActivityUtils.currentActivity).offline();
-
                             Messenger.getDefault().sendNoMsg(OFF_LINE);
                         }
                     });
@@ -207,6 +209,7 @@ public class MsgManager {
          */
         @Override
         public boolean onReceived(final Message message, final int left) {
+
             //开发者根据自己需求自行处理
             LogKit.v("left:" + left);
 
@@ -585,6 +588,8 @@ public class MsgManager {
                     }
                 }
             }
+
+            Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
 
             return false;
         }
