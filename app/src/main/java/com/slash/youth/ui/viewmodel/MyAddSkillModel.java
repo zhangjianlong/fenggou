@@ -202,9 +202,9 @@ public class MyAddSkillModel extends BaseObservable {
 
     //提交
     public void sumbit(View view) {
-        title = activityMyAddSkillBinding.etTitle.getText().toString();
-        desc = activityMyAddSkillBinding.etSkillManageDesc.getText().toString();
-        quoteString = activityMyAddSkillBinding.etMoney.getText().toString();
+        title = activityMyAddSkillBinding.etTitle.getText().toString().trim();
+        desc = activityMyAddSkillBinding.etSkillManageDesc.getText().toString().trim();
+        quoteString = activityMyAddSkillBinding.etMoney.getText().toString().trim();
 
         if (title.length() < 5 || title.length() > 20) {
             ToastUtils.shortToast("标题必须为5-20字之间");

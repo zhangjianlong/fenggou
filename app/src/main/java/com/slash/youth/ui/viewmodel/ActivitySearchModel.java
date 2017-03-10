@@ -82,6 +82,7 @@ public class ActivitySearchModel extends BaseObservable {
                 break;
             case 1:
                 if (RegexUtils.isChz(searchText)) {
+                    saveHistoryData(searchText);
                     showSearchAllReasultView(searchText);
                 } else {
                     ToastUtils.shortToast("输入信息太少，请重新输入");
@@ -161,9 +162,26 @@ public class ActivitySearchModel extends BaseObservable {
 
     //保存数据在数据库
     private void saveHistoryData(String text) {
+        showHistoryData();
         long count = searchHistoryEntityDao.count();
         SearchHistoryEntity searchHistoryEntity = new SearchHistoryEntity(count + 1, text);
-        searchHistoryEntityDao.insert(searchHistoryEntity);
+        switch (search_contentlist.size()) {
+            case 0:
+                searchHistoryEntityDao.insert(searchHistoryEntity);
+                break;
+            default:
+                boolean isHas = false;
+                for (ItemSearchBean item : search_contentlist) {
+                    if (item.getItem().equals(text)) {
+                        isHas = true;
+                        break;
+                    }
+                }
+                if (!isHas) {
+                    searchHistoryEntityDao.insert(searchHistoryEntity);
+                }
+                break;
+        }
     }
 
     //读取数据库
@@ -245,6 +263,7 @@ public class ActivitySearchModel extends BaseObservable {
                 String item = itemSearchBean.getItem();
                 mActivitySearchBinding.etActivitySearchAssociation.setText(item);
                 showSearchAllReasultView(item);
+                saveHistoryData(item);
             }
         });
     }
