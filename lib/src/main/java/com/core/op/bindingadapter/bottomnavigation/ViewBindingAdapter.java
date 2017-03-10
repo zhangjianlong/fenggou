@@ -14,6 +14,7 @@ public final class ViewBindingAdapter {
 
     /**
      * 底部导航菜单控件初始化
+     *
      * @param bottomNavigation
      * @param navigationRes
      */
@@ -28,7 +29,7 @@ public final class ViewBindingAdapter {
         if (navigationRes.getAccent() != 0) {//选中颜色
             bottomNavigation.setAccentColor(bottomNavigation.getResources().getColor(navigationRes.getAccent()));
         }
-        if (navigationRes.getDefaultBackground() != 0){//默認背景顏色
+        if (navigationRes.getDefaultBackground() != 0) {//默認背景顏色
             bottomNavigation.setDefaultBackgroundColor(bottomNavigation.getResources().getColor(navigationRes.getDefaultBackground()));
         }
         int[] tabColors = bottomNavigation.getContext().getResources().getIntArray(navigationRes.getColors());
@@ -48,6 +49,11 @@ public final class ViewBindingAdapter {
                 return true;
             }
         });
+    }
+
+    @BindingAdapter(value = {"position"}, requireAll = false)
+    public static void setPosition(final AHBottomNavigation bottomNavigation, final int position) {
+        bottomNavigation.setCurrentItem(position);
     }
 
 

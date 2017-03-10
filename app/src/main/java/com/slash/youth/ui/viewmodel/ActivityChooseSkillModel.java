@@ -29,6 +29,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.main.MainActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
@@ -344,7 +345,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
                     public void execute(CommonResultBean dataBean) {
 //                        Intent intentHomeActivity = new Intent(CommonUtils.getContext(), HomeActivity.class);
 //                        mActivity.startActivity(intentHomeActivity);
-                        Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), HomeActivity2.class);
+                        Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), MainActivity.class);
                         mActivity.startActivity(intentHomeActivity2);
                         if (LoginActivity.activity != null) {
                             LoginActivity.activity.finish();

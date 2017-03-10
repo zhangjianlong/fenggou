@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.slash.youth.v2.feature.main.mine.MineViewModel.START_ANIMATION;
 import static com.umeng.socialize.Config.dialog;
 
 @PerActivity
@@ -37,10 +38,14 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
 
     public final List<Fragment> fragments = new ArrayList<>();
 
-    public final NavigationRes navigation = NavigationRes.of(R.array.tab_colors, R.menu.bottom_navigation_main).setAccent(R.color.app_theme_colorPrimary);
+    public final NavigationRes navigation = NavigationRes.of(R.array.tab_colors, R.menu.bottom_navigation_main).setAccent(R.color.app_theme_colorPrimary)
+            .setDefaultBackground(R.color.app_theme_background);
 
     public final ReplyCommand<ViewBindingAdapter.NavigationDataWrapper> selectedCommand = new ReplyCommand<>(p -> {
         selectPosition.set(p.position);
+        if (p.position == 2) {
+            Messenger.getDefault().sendNoMsg(START_ANIMATION);
+        }
     });
 
     @Inject

@@ -31,6 +31,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="进行中"
+                app:clickCommand="@{viewModel.onWayClick}"
                 android:textColor="#666666"
                 android:textSize="13sp" />
 
@@ -39,41 +40,12 @@
                 android:layout_height="1dp"
                 android:background="#E5E5E5" />
 
-            <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center"-->
-            <!--android:onClick="@{pagerHomeWorkbenchModel.filterMyPublishTask}"-->
-            <!--android:text="发布的任务"-->
-            <!--android:textColor="#666666"-->
-            <!--android:textSize="13sp"/>-->
-
-            <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="#E5E5E5"/>-->
-
-            <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center"-->
-            <!--android:onClick="@{pagerHomeWorkbenchModel.filterMyBidTask}"-->
-            <!--android:text="抢到的任务"-->
-            <!--android:textColor="#666666"-->
-            <!--android:textSize="13sp"/>-->
-
-            <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="#E5E5E5"/>-->
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                app:clickCommand="@{viewModel.historyClick}"
                 android:text="历史"
                 android:textColor="#666666"
                 android:textSize="13sp" />

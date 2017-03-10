@@ -20,7 +20,7 @@
             style="@style/App.Theme.TextAppearance.mw.small"
             android:layout_margin="@dimen/app.margin.large12"
             android:drawableLeft="@mipmap/order_icon"
-            android:text=""
+            android:text="@{viewModel.type}"
             android:textColor="@color/black_light" />
 
     </FrameLayout>

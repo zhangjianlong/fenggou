@@ -8,6 +8,8 @@ import com.slash.youth.domain.bean.BannerConfigBean;
 import com.slash.youth.domain.bean.FindDemand;
 import com.slash.youth.domain.bean.FindServices;
 import com.slash.youth.domain.bean.HomeTagInfoBean;
+import com.slash.youth.domain.bean.MineInfo;
+import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.domain.repository.MainRepository;
 
@@ -56,5 +58,15 @@ public class MainRepositoryImp implements MainRepository {
     @Override
     public Observable<TaskList> getTaskList(String def) {
         return apiClient.getTaskList(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer());
+    }
+
+    @Override
+    public Observable<MineInfo> getMineInfo() {
+        return apiClient.getMineInfo().compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<OtherInfo> getOtherInfo(String def) {
+        return apiClient.getOtherInfo(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
     }
 }

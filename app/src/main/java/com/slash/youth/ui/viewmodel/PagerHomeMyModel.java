@@ -554,11 +554,11 @@ public class PagerHomeMyModel extends BaseObservable {
     //设置
     public void mySetting(View view) {
         //test
-//        Intent intentMySettingActivity = new Intent(mActivity, MainActivity.class);
-//        mActivity.startActivity(intentMySettingActivity);
-        Intent intentMySettingActivity = new Intent(CommonUtils.getContext(), MySettingActivity.class);
-        intentMySettingActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        CommonUtils.getContext().startActivity(intentMySettingActivity);
+        Intent intentMySettingActivity = new Intent(mActivity, MainActivity.class);
+            mActivity.startActivity(intentMySettingActivity);
+    //        Intent intentMySettingActivity = new Intent(CommonUtils.getContext(), MySettingActivity.class);
+    //        intentMySettingActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    //        CommonUtils.getContext().startActivity(intentMySettingActivity);
         //设置的埋点
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_SET);
     }

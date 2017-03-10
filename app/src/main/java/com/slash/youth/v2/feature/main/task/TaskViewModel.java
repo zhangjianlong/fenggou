@@ -60,8 +60,11 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
     @Override
     public void afterViews() {
         addFragment(R.id.fl_container, TaskListFragment.instance());
-        Messenger.getDefault().register(activity, SHOW_NODATA, () -> {
-            noDataVisible.set(View.VISIBLE);
+        Messenger.getDefault().register(activity, SHOW_NODATA, Integer.class, data -> {
+            if (data == 0)
+                noDataVisible.set(View.VISIBLE);
+            else
+                noDataVisible.set(View.GONE);
         });
     }
 }

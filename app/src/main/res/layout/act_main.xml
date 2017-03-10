@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:navigation="@{viewModel.navigation}"
-            app:onTabSelectedCommand="@{viewModel.selectedCommand}" />
+            app:onTabSelectedCommand="@{viewModel.selectedCommand}"
+            app:position="@{viewModel.selectPosition}" />
 
         <com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager
             android:id="@+id/view_pager"

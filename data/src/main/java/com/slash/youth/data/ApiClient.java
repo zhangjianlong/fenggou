@@ -7,6 +7,8 @@ import com.slash.youth.domain.bean.FindDemand;
 import com.slash.youth.domain.bean.FindServices;
 import com.slash.youth.domain.bean.HomeTagInfoBean;
 import com.slash.youth.domain.bean.LoginResult;
+import com.slash.youth.domain.bean.MineInfo;
+import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.TaskList;
 
 import okhttp3.RequestBody;
@@ -50,5 +52,11 @@ public interface ApiClient {
     Observable<BaseResponse<TaskList>> getTaskList(@Body RequestBody requestBody);
 
 
+    @POST(UriMethod.MY_INFO)
+    Observable<BaseResponse<MineInfo>> getMineInfo();
+
+
+    @POST(UriMethod.MY_USERINFO)
+    Observable<BaseResponse<OtherInfo>> getOtherInfo(@Body RequestBody requestBody);
 }
 

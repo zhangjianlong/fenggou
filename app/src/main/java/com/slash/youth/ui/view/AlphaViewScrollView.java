@@ -1,6 +1,7 @@
 package com.slash.youth.ui.view;
 
 import android.content.Context;
+import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ScrollView;
@@ -13,7 +14,7 @@ import static com.slash.youth.R.id.view;
  * Created by acer on 2017/2/28.
  */
 
-public class AlphaViewScrollView extends ScrollView {
+public class AlphaViewScrollView extends NestedScrollView {
 
     public static final String TAG = "AlphaTitleScrollView";
     private int mSlop;

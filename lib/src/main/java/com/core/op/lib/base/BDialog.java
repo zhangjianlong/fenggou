@@ -21,7 +21,7 @@ import javax.inject.Inject;
  * @description
  * @createDate 2016/12/21
  */
-public abstract class BDialog<V extends BViewModel, T extends ViewDataBinding> extends BasePickerView {
+public abstract class BDialog<V extends BDViewModel, T extends ViewDataBinding> extends BasePickerView {
 
     protected LayoutInflater inflater;
 
@@ -37,6 +37,7 @@ public abstract class BDialog<V extends BViewModel, T extends ViewDataBinding> e
         viewModel.setBinding(binding);
         bindViewModel();
         InjectUtil.injectAfterView(this);
+        viewModel.setDialog(this);
     }
 
     public static DialogBuilder newDialog(Context context) {

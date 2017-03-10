@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
 
 /**
@@ -18,10 +19,23 @@ public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
     // 记录viewPager是否拖拽的标记
     private boolean mIsVpDragger;
     private final int mTouchSlop;
+    private boolean isMove;
+    private boolean isFirstMove;
+
+    private OnStartDraggerListener onStartDraggerListener;
+
+    public void setOnStartDraggerListener(OnStartDraggerListener onStartDraggerListener) {
+        this.onStartDraggerListener = onStartDraggerListener;
+    }
 
     public VpSwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+    }
+
+    @Override
+    public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
+        return super.onStartNestedScroll(child, target, nestedScrollAxes);
     }
 
     @Override
@@ -34,6 +48,8 @@ public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
                 startX = ev.getX();
                 // 初始化标记
                 mIsVpDragger = false;
+                isMove = false;
+                isFirstMove = true;
                 break;
             case MotionEvent.ACTION_MOVE:
                 // 如果viewpager正在拖拽中，那么不拦截它的事件，直接return false；
@@ -51,14 +67,41 @@ public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
                     mIsVpDragger = true;
                     return false;
                 }
+//                isMove = true;
+//                move();
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 // 初始化标记
                 mIsVpDragger = false;
+//                isMove = false;
+//                isFirstMove = true;
+//
+//                if (onStartDraggerListener != null) {
+//                    onStartDraggerListener.onStopDragger();
+//                }
                 break;
         }
         // 如果是Y轴位移大于X轴，事件交给swipeRefreshLayout处理。
         return super.onInterceptTouchEvent(ev);
+    }
+
+    private void move() {
+        if (isMove && isFirstMove) {
+            startDragger();
+            isFirstMove = false;
+        }
+    }
+
+    protected void startDragger() {
+        if (onStartDraggerListener != null) {
+            onStartDraggerListener.onStartDragger();
+        }
+    }
+
+    public interface OnStartDraggerListener {
+        void onStartDragger();
+
+        void onStopDragger();
     }
 }

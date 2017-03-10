@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 
+import com.core.op.lib.messenger.Messenger;
 import com.google.gson.Gson;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemPushInfoBinding;
@@ -72,6 +73,8 @@ import io.rong.message.CommandMessage;
 import io.rong.message.CommandNotificationMessage;
 import io.rong.message.TextMessage;
 
+import static com.slash.youth.v2.feature.main.MainActivity.OFF_LINE;
+
 /**
  * Created by Administrator on 2016/8/31.
  */
@@ -120,6 +123,8 @@ public class MsgManager {
                         public void run() {
                             if (ActivityUtils.currentActivity instanceof BaseActivity)
                                 ((BaseActivity) ActivityUtils.currentActivity).offline();
+
+                            Messenger.getDefault().sendNoMsg(OFF_LINE);
                         }
                     });
                 }

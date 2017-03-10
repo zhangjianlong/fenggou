@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.core.op.bindingadapter.common.BaseItemViewSelector;
@@ -17,6 +19,7 @@ import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.weight.RecycleScrollView;
+import com.core.op.lib.weight.loading.Indicator;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.FrgFindBinding;
@@ -35,6 +38,7 @@ import com.slash.youth.v2.base.list.ListViewModel;
 import com.slash.youth.v2.feature.main.MainActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
+import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,8 +136,26 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 loadRecommand(false);
             }
         });
+
+        binding.banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setSelectedVpPointer(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         titleVisible.set(View.GONE);
+        initBanner();
         loadData();
+
     }
 
     @Override
@@ -148,19 +170,23 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
         });
     }
 
-    private void loadData() {
-        isRefreshing.set(true);
+    private void initBanner() {
+
         bannerUseCase.execute().compose(activity.bindToLifecycle())
                 .flatMap(data -> {
-//                    bViewModels.clear();
+                    bViewModels.clear();
                     return Observable.from(data.getBanner());
                 })
                 .subscribe(data -> {
                     bViewModels.add(new FindBannerItemViewModel(activity, data));
                 }, error -> {
                 }, () -> {
-//                    binding.banner.notifyViewPager();
+                    initIndicator();
                 });
+    }
+
+    private void loadData() {
+        isRefreshing.set(true);
 
         tagUseCase.execute().compose(activity.bindToLifecycle())
                 .flatMap(data -> {
@@ -175,6 +201,37 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 });
 
         loadRecommand(true);
+    }
+
+    private void initIndicator() {
+        binding.llIndicator.removeAllViews();
+        for (int i = 0; i < bViewModels.size(); i++) {
+            LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(CommonUtils.dip2px(6), CommonUtils.dip2px(6));
+            if (i > 0) {
+                llParams.leftMargin = CommonUtils.dip2px(10);
+            }
+            View vPoint = new View(CommonUtils.getContext());
+            vPoint.setLayoutParams(llParams);
+            binding.llIndicator.addView(vPoint);
+        }
+        int currentItem = binding.banner.getViewPager().getCurrentItem();
+        setSelectedVpPointer(currentItem);
+    }
+
+    private void setSelectedVpPointer(int index) {
+        //这里需要做判断，因为可能执行这段代码的时候，bannerList中的数据还没有从网络加载完毕
+        if (bViewModels != null && bViewModels.size() > 0) {
+            index = index % bViewModels.size();
+            int childCount = binding.llIndicator.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                View vPoint = binding.llIndicator.getChildAt(i);
+                if (i == index) {//选中
+                    vPoint.setBackgroundResource(R.drawable.shape_vpindicator_selected);
+                } else {//未选中
+                    vPoint.setBackgroundResource(R.drawable.shape_vpindicator_unselected);
+                }
+            }
+        }
     }
 
     private void loadRecommand(boolean isRefresh) {
@@ -275,7 +332,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
             public void onAnimationRepeat(Animation animation) {
             }
         });
-        binding.rlTitleBar.startAnimation(animation);
+        binding.rlTitle.startAnimation(animation);
     }
 
     protected void startInAnim() {
@@ -294,6 +351,6 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
             public void onAnimationRepeat(Animation animation) {
             }
         });
-        binding.rlTitleBar.startAnimation(animation);
+        binding.rlTitle.startAnimation(animation);
     }
 }

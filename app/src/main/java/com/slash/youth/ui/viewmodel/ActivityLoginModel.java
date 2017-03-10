@@ -38,6 +38,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.PhoneNumUtils;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.main.MainActivity;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -310,7 +311,7 @@ public class ActivityLoginModel extends BaseObservable {
                     if (!TextUtils.isEmpty(industry) && !TextUtils.isEmpty(direction) && !TextUtils.isEmpty(tag)) {
 //                        Intent intentHomeActivity = new Intent(CommonUtils.getContext(), HomeActivity.class);
 //                        mActivity.startActivity(intentHomeActivity);
-                        Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), HomeActivity2.class);
+                        Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), MainActivity.class);
                         mActivity.startActivity(intentHomeActivity2);
                         if (LoginActivity.activity != null) {
                             LoginActivity.activity.finish();
@@ -676,7 +677,7 @@ public class ActivityLoginModel extends BaseObservable {
                 if (!TextUtils.isEmpty(industry) && !TextUtils.isEmpty(direction) && !TextUtils.isEmpty(tag)) {
 //                    Intent intentHomeActivity = new Intent(CommonUtils.getContext(), HomeActivity.class);
 //                    mActivity.startActivity(intentHomeActivity);
-                    Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), HomeActivity2.class);
+                    Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), MainActivity.class);
                     mActivity.startActivity(intentHomeActivity2);
                     if (LoginActivity.activity != null) {
                         LoginActivity.activity.finish();

@@ -1,27 +1,43 @@
 package com.slash.youth.v2.feature.main.task.list;
 
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.core.op.lib.base.BViewModel;
+import com.core.op.lib.command.ReplyCommand;
 import com.slash.youth.R;
 import com.slash.youth.domain.CommentStatusBean;
+import com.slash.youth.domain.MyTaskBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.engine.MsgManager;
 import com.slash.youth.engine.MyTaskEngine;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.http.protocol.BaseProtocol;
+import com.slash.youth.ui.activity.DemandChooseServiceActivity;
+import com.slash.youth.ui.activity.HomeActivity2;
+import com.slash.youth.ui.activity.MyBidDemandActivity;
+import com.slash.youth.ui.activity.MyBidServiceActivity;
+import com.slash.youth.ui.activity.MyPublishDemandActivity;
+import com.slash.youth.ui.activity.MyPublishServiceActivity;
 import com.slash.youth.utils.BitmapKit;
+import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.umeng.analytics.MobclickAgent;
 
 import java.text.SimpleDateFormat;
 
 import rx.Observable;
 
+import static android.R.attr.breadCrumbShortTitle;
 import static android.R.attr.data;
+import static android.R.attr.switchMinWidth;
 
 /**
  * Created by acer on 2017/3/9.
@@ -50,7 +66,95 @@ public class TaskListItemViewModel extends BViewModel {
 
     String[] optionalPriceUnit = new String[]{"次", "个", "幅", "份", "单", "小时", "分钟", "天", "其他"};
 
-    public TaskListItemViewModel() {
+    public String type;
+
+    public final ReplyCommand click = new ReplyCommand(() -> {
+        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_MY_MISSON_CLICK_MISSON);
+
+        TaskList.TaskBean myTaskBean = taskBean;
+
+        Bundle taskInfo = new Bundle();
+        taskInfo.putLong("tid", myTaskBean.tid);
+        taskInfo.putInt("type", myTaskBean.type);
+        taskInfo.putInt("roleid", myTaskBean.roleid);
+
+//                ToastUtils.shortToast(myTaskBean.status + "");
+
+        if (myTaskBean.roleid == 1) {//发布者
+            if (myTaskBean.type == 1) {//我发的需求
+                switch (myTaskBean.status) {
+                    case 1:
+                    case 4:
+                    case 5:
+                        Intent intentDemandChooseServiceActivity = new Intent(CommonUtils.getContext(), DemandChooseServiceActivity.class);
+                        intentDemandChooseServiceActivity.putExtras(taskInfo);
+                        activity.startActivityForResult(intentDemandChooseServiceActivity, HomeActivity2.REQUEST_CODE_TO_TASK_DETAIL);
+                        break;
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        Intent intentMyPublishDemandActivity = new Intent(CommonUtils.getContext(), MyPublishDemandActivity.class);
+                        intentMyPublishDemandActivity.putExtras(taskInfo);
+                        activity.startActivityForResult(intentMyPublishDemandActivity, HomeActivity2.REQUEST_CODE_TO_TASK_DETAIL);
+                        break;
+                    default:
+                        //其它情况应该跳转到需求详情页
+                        //这里有疑问，是跳到需求详情页还是四个圈的页面，暂时先写成四个圈的页面
+                        Intent intentMyPublishDemandActivity2 = new Intent(CommonUtils.getContext(), MyPublishDemandActivity.class);
+                        intentMyPublishDemandActivity2.putExtras(taskInfo);
+                        activity.startActivityForResult(intentMyPublishDemandActivity2, HomeActivity2.REQUEST_CODE_TO_TASK_DETAIL);
+                        break;
+                }
+            } else if (myTaskBean.type == 2) {//我发的服务
+                Intent intentMyPublishServiceActivity = new Intent(CommonUtils.getContext(), MyPublishServiceActivity.class);
+                intentMyPublishServiceActivity.putExtra("myTaskBean", taskBean);
+                activity.startActivityForResult(intentMyPublishServiceActivity, HomeActivity2.REQUEST_CODE_TO_TASK_DETAIL);
+            }
+
+        } else if (myTaskBean.roleid == 2) {//抢单者
+            if (myTaskBean.type == 1) {//我抢的需求
+                switch (myTaskBean.status) {
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        Intent intentMyBidDemandActivity = new Intent(CommonUtils.getContext(), MyBidDemandActivity.class);
+                        intentMyBidDemandActivity.putExtras(taskInfo);
+                        activity.startActivityForResult(intentMyBidDemandActivity, HomeActivity2.REQUEST_CODE_TO_TASK_DETAIL);
+                        break;
+                    default:
+                        //其它情况应该跳转到需求详情页
+                        //这里有疑问，是跳到需求详情页还是四个圈的页面，暂时先写成四个圈的页面
+                        Intent intentMyBidDemandActivity2 = new Intent(CommonUtils.getContext(), MyBidDemandActivity.class);
+                        intentMyBidDemandActivity2.putExtras(taskInfo);
+                        activity.startActivityForResult(intentMyBidDemandActivity2, HomeActivity2.REQUEST_CODE_TO_TASK_DETAIL);
+                        break;
+                }
+            } else if (myTaskBean.type == 2) {//我抢的服务(我预约的服务)
+                Intent intentMyBidServiceActivity = new Intent(CommonUtils.getContext(), MyBidServiceActivity.class);
+                intentMyBidServiceActivity.putExtra("myTaskBean", myTaskBean);
+                activity.startActivityForResult(intentMyBidServiceActivity, HomeActivity2.REQUEST_CODE_TO_TASK_DETAIL);
+            }
+        }
+        //清空任务item对应的消息数量
+        if (MsgManager.everyTaskMessageCount != null) {//照理说在这里不可能为null
+            MsgManager.everyTaskMessageCount.put(myTaskBean.id, 0);
+            MsgManager.serializeEveryTaskMessageCount(MsgManager.everyTaskMessageCount);
+        }
+        //隐藏任务item上的小圆点
+    });
+
+    public TaskListItemViewModel(int t) {
+        switch (t) {
+            case 0:
+                type = "进行中";
+                break;
+            case 1:
+                type = "历史";
+                break;
+        }
     }
 
     public TaskListItemViewModel(RxAppCompatActivity activity, TaskList.TaskBean data) {

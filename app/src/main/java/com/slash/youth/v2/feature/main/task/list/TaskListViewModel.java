@@ -1,6 +1,8 @@
 package com.slash.youth.v2.feature.main.task.list;
 
 
+import android.os.Message;
+
 import com.core.op.bindingadapter.common.BaseItemViewSelector;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
@@ -21,7 +23,15 @@ import static com.slash.youth.v2.feature.main.task.TaskViewModel.SHOW_NODATA;
 
 @PerActivity
 public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> {
+
+    public static final String TASK_STUTUS = "TASK_STUTUS";
+    public static final String TASK_ONWAY = "TASK_ONWAY";
+
+    public static final String TASK_HISTORY = "TASK_HISTORY";
+
     TaskListUseCase useCase;
+
+    private int type = 0;
 
     @Inject
     public TaskListViewModel(RxAppCompatActivity activity,
@@ -34,6 +44,14 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
     public void afterViews() {
         super.afterViews();
         loadData();
+        Messenger.getDefault().register(this, TASK_STUTUS, String.class, status -> {
+            if (status.equals(TASK_ONWAY)) {
+                type = 0;
+            } else {
+                type = 1;
+            }
+            loadData();
+        });
     }
 
     @Override
@@ -47,16 +65,21 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
 
     public void loadData() {
         isRefreshing.set(true);
-        useCase.setParams("{\"limit\":\"20\"}");
+        useCase.setParams("{\"type\":\"" + type + "\"" +
+                ",\"offset\":\"0\"" +
+                ",\"limit\":\"20\"}");
         useCase.execute().compose(activity.bindToLifecycle())
                 .flatMap(data -> {
-                    if (data.getList() != null && data.getList().size() == 0) {
-                        Messenger.getDefault().sendNoMsg(SHOW_NODATA);
-                        return null;
-                    }
                     itemViewModels.clear();
-                    itemViewModels.add(new TaskListItemViewModel());
-                    return Observable.from(data.getList());
+                    if (data.getList() != null && data.getList().size() == 0) {
+                        Messenger.getDefault().send(0, SHOW_NODATA);
+                        binding.recyclerView.getAdapter().notifyDataSetChanged();
+                        return null;
+                    } else {
+                        Messenger.getDefault().send(1, SHOW_NODATA);
+                        itemViewModels.add(new TaskListItemViewModel(type));
+                        return Observable.from(data.getList());
+                    }
                 })
                 .subscribe(d -> {
                     itemViewModels.add(new TaskListItemViewModel(activity, d));

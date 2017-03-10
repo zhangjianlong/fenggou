@@ -30,6 +30,7 @@ public final class ViewBindingAdapter {
             adapter.setItems(items);
             adapter.setPageTitles(pageTitles);
             bannerView.getViewPager().setAdapter(adapter);
+            bannerView.initIndicator();
         } else if (items != null && items.size() != 0) {
             adapter.setItems(items);
             adapter.setPageTitles(pageTitles);

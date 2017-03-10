@@ -153,6 +153,15 @@ public class PreferenceUtil {
         return preference.getLong(k, defv);
     }
 
+
+    public static long readLong(Context context, String fileName, String k,
+                                long defv) {
+        SharedPreferences preference = context.getSharedPreferences(fileName,
+                Context.MODE_PRIVATE);
+        return preference.getLong(k, defv);
+    }
+
+
     public static boolean readBoolean(Context context, String k) {
         SharedPreferences preference = context.getSharedPreferences(fileName,
                 Context.MODE_PRIVATE);

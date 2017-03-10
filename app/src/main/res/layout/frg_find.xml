@@ -67,8 +67,15 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:scaleType="fitXY"
-                            android:src="@mipmap/tool_topbg_home" />
+                            android:src="@drawable/weight_banner_bg" />
 
+                        <LinearLayout
+                            android:id="@+id/ll_indicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"></LinearLayout>
                     </RelativeLayout>
 
                     <android.support.v7.widget.RecyclerView
@@ -201,8 +208,10 @@
         </com.core.op.lib.weight.VpSwipeRefreshLayout>
 
         <FrameLayout
+            android:id="@+id/rl_title"
             android:layout_width="match_parent"
-            android:layout_height="68dp">
+            android:layout_height="68dp"
+            android:visibility="@{viewModel.titleVisible}">
 
             <FrameLayout
                 android:id="@+id/rl_title_bar"
@@ -214,8 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
                 android:background="@color/transparent"
-                android:paddingTop="25dp"
-                android:visibility="@{viewModel.titleVisible}">
+                android:paddingTop="25dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
