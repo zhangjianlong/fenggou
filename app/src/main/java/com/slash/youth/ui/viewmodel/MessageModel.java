@@ -6,6 +6,7 @@ import android.databinding.BaseObservable;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityMessageBinding;
 import com.slash.youth.domain.ConversationListBean;
@@ -24,6 +25,8 @@ import java.util.List;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
+
+import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 
 /**
  * Created by zhouyifeng on 2017/2/28.
@@ -75,6 +78,8 @@ public class MessageModel extends BaseObservable {
                     //清楚小圆点
                     View viewUnReadPoint = view.findViewById(R.id.tv_info_unread_msg_count);
                     viewUnReadPoint.setVisibility(View.INVISIBLE);
+
+                    Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
                 }
             }
         });

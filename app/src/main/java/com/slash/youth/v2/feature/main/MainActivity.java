@@ -33,10 +33,12 @@ import com.slash.youth.v2.di.modules.MainModule;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 
+import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
+import static com.slash.youth.engine.MsgManager.OFF_LINE;
+
 @RootView(R.layout.act_main)
 public final class MainActivity extends BaseActivity<MainViewModel, ActMainBinding> implements HasComponent<MainComponent> {
 
-    public static final String OFF_LINE = "OFF_LINE";
     MainComponent component;
 
     private OfflineDialog offlineDialog;
@@ -62,6 +64,11 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
     void afterViews() {
         Messenger.getDefault().register(this, OFF_LINE, () -> {
             offline();
+        });
+
+        Messenger.getDefault().register(this, NEW_MESSAGE, () -> {
+            setIvMsgIconState();
+            setMsgChangeListener();
         });
         //向没个Ativity都添加进入消息列表的icon
         msgIconLayer = View.inflate(CommonUtils.getContext(), R.layout.layer_every_msg_icon, null);
