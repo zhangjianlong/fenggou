@@ -55,19 +55,18 @@ public class ReplacePhoneActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.tv_userinfo_save:
-                phone = activityReplacePhoneBinding.etActivityLoginVerificationPhone.getText().toString();
-                code = activityReplacePhoneBinding.etActivityLoginVerificationCode.getText().toString();
-                if(code.isEmpty()){
+                phone = activityReplacePhoneBinding.etActivityLoginVerificationPhone.getText().toString().trim();
+                code = activityReplacePhoneBinding.etActivityLoginVerificationCode.getText().toString().trim();
+                if (code.isEmpty()) {
                     ToastUtils.shortCenterToast("未填写验证码");
                 }
-                if(phone.isEmpty()){
+                if (phone.isEmpty()) {
                     ToastUtils.shortToast("未填写手机号码");
                 }
-                if(!phone.isEmpty()&&!code.isEmpty()){
+                if (!phone.isEmpty() && !code.isEmpty()) {
                     //保存手机号码
                     LoginManager.UpdatePhoneVerificationCodeProtocol(new onCheckPhoneVerificationCode(), phone, code);
                 }
-                finish();
                 break;
         }
     }
@@ -77,16 +76,17 @@ public class ReplacePhoneActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void execute(SendPinResultBean dataBean) {
             int rescode = dataBean.rescode;
-            switch (rescode){
+            switch (rescode) {
                 case 0:
-                    intent.putExtra("phone",phone);
-                    setResult(RESULT_OK,intent);
+                    intent.putExtra("phone", phone);
+                    setResult(RESULT_OK, intent);
+                    finish();
                     break;
                 case 1:
                     LogKit.d("返回失败");
-                    break;
                 case 2:
                     LogKit.d("参数错误");
+                    ToastUtils.shortToast("验证码错误");
                     break;
             }
         }
@@ -94,7 +94,7 @@ public class ReplacePhoneActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void executeResultError(String result) {
             LogKit.d("result:" + result);
-            ToastUtils.shortToast("验证码不正确，请重新验证");
+            ToastUtils.shortToast("验证码错误");
         }
     }
 }
