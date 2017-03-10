@@ -22,11 +22,13 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * 自定义Banner无限轮播控件
  */
-public class BannerView extends RelativeLayout {
+public class BannerView extends RelativeLayout implements ViewPager.OnPageChangeListener {
 
     private WeightBannerBinding binding;
 
     private CompositeSubscription compositeSubscription;
+
+    ViewPager.OnPageChangeListener onPageChangeListener;
 
     //默认轮播时间，10s
     private int delayTime = 10;
@@ -55,15 +57,25 @@ public class BannerView extends RelativeLayout {
         return binding.viewpager;
     }
 
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
+        this.onPageChangeListener = onPageChangeListener;
+    }
+
     private void init() {
         binding.viewpager.clearOnPageChangeListeners();
         binding.viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (onPageChangeListener != null) {
+                    onPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                }
             }
 
             @Override
             public void onPageSelected(int pos) {
+                if (onPageChangeListener != null) {
+                    onPageChangeListener.onPageSelected(pos);
+                }
             }
 
             @Override
@@ -82,6 +94,10 @@ public class BannerView extends RelativeLayout {
             }
         });
         compositeSubscription = new CompositeSubscription();
+    }
+
+    public void initIndicator() {
+//        binding.circlePageIndicator.setViewPager(binding.viewpager);
     }
 
     /**
@@ -119,6 +135,10 @@ public class BannerView extends RelativeLayout {
         compositeSubscription.add(subscription);
     }
 
+    public void notifyViewPager() {
+        binding.viewpager.getAdapter().notifyDataSetChanged();
+    }
+
     /**
      * 图片停止轮播
      */
@@ -131,5 +151,20 @@ public class BannerView extends RelativeLayout {
         if (compositeSubscription != null) {
             compositeSubscription.unsubscribe();
         }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }

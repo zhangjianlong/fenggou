@@ -17,6 +17,9 @@
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
 
+    <string name="app.bottom.menu.find">发现</string>
+    <string name="app.bottom.menu.task">任务</string>
+    <string name="app.bottom.menu.mine">我的</string>
     <string name="pickerview_cancel">取消</string>
     <string name="pickerview_submit">确定</string>
     <string name="pickerview_year">年</string>

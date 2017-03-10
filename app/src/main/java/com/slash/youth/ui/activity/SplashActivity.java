@@ -35,6 +35,7 @@ import com.slash.youth.utils.PackageUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.TimeUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.main.MainActivity;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.umeng.analytics.MobclickAgent;
 
@@ -136,7 +137,7 @@ public class SplashActivity extends BaseActivity {
 
 //                        Intent intentHomeActivity = new Intent(CommonUtils.getContext(), HomeActivity.class);
 //                        startActivity(intentHomeActivity);
-                        Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), HomeActivity2.class);
+                        Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), MainActivity.class);
                         startActivity(intentHomeActivity2);
                         finish();
                     } else {

@@ -1,16 +1,24 @@
 package com.core.op.lib.base;
 
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+
 /**
  * @author op
  * @version 1.0
  * @description
  * @createDate 2016/7/21
  */
-public abstract class BDViewModel<T> {
+public abstract class BDViewModel<T> extends BViewModel<T> {
 
-    T binding;
+    protected BDialog dialog;
 
-    public void setBinding(T binding) {
-        this.binding = binding;
+    public BDViewModel(RxAppCompatActivity activity) {
+        super(activity);
     }
+
+    public void setDialog(BDialog dialog) {
+        this.dialog = dialog;
+    }
+
+
 }

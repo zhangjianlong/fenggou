@@ -23,6 +23,7 @@
     <color name="app.line">#DADADA</color>
     <!-- Theme - Dark Blue -->
     <color name="app.theme.background">#FFFFFF</color>
+    <color name="app.theme.background_edf1f2">#edf1f2</color>
     <color name="app.theme.background_f6f6f6">#f6f6f6</color>
     <color name="app.theme.background_dadada">#DADADA</color>
     <color name="app.theme.background_20B955">#31C5E4</color>
@@ -34,8 +35,8 @@
     <color name="app.theme.colorPrimary">#31C5E4</color><!--toolbar背景顏色-->
     <color name="app.theme.colorPrimaryDark">#31C5E4</color><!--状态栏背景顏色-->
     <color name="app.theme.colorAccent">#31C5E4</color><!--字体顏色-->
-    <color name="app.theme.textColorPrimary">#333333</color><!--toolbar title字体顏色-->
-    <color name="app.theme.textColorSecondary">#999999</color>
+    <color name="app.theme.textColorPrimary">#ffffff</color><!--toolbar title字体顏色-->
+    <color name="app.theme.textColorSecondary">#fff</color>
 
     <color name="app.theme.actionMode.statusBarColor">#31C5E4</color>
     <color name="app.theme.actionMode.background">#9CBDCC</color>

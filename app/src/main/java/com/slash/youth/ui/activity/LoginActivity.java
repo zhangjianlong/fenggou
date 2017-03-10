@@ -17,9 +17,6 @@ import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
-/**
- * Created by zhouyifeng on 2016/9/5.
- */
 public class LoginActivity extends BaseActivity {
 
     public QQLoginUiListener qqLoginUiListener;

@@ -6,8 +6,8 @@
     <data>
 
         <!--<variable-->
-            <!--name="viewModel"-->
-            <!--type="com.core.op.lib.base.BViewModel" />-->
+        <!--name="viewModel"-->
+        <!--type="com.core.op.lib.base.BViewModel" />-->
     </data>
 
     <RelativeLayout
@@ -28,5 +28,18 @@
             android:layout_marginBottom="@dimen/app.margin.normal"
             android:orientation="horizontal"
             android:visibility="visible" />
+
+
+
+        <!--<com.viewpagerindicator.CirclePageIndicator-->
+            <!--android:id="@+id/circlePageIndicator"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--app:centered="true"-->
+            <!--app:fillColor="#56b8e9"-->
+            <!--app:pageColor="#d2d2d2"-->
+            <!--app:radius="5dp"-->
+            <!--app:strokeWidth="0dp" />-->
     </RelativeLayout>
 </layout>

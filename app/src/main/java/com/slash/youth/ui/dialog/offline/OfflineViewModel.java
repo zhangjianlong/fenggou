@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.ObservableField;
 import android.view.View;
 
+import com.core.op.lib.base.BDViewModel;
 import com.core.op.lib.base.BViewModel;
 import com.slash.youth.databinding.DialogOfflineBinding;
 import com.slash.youth.engine.LoginManager;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * Created by acer on 2017/3/1.
  */
 
-public class OfflineViewModel extends BViewModel<DialogOfflineBinding> {
+public class OfflineViewModel extends BDViewModel<DialogOfflineBinding> {
 
     public static final ObservableField<String> info = new ObservableField<>();
 

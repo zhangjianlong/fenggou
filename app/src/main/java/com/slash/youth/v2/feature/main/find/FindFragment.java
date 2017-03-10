@@ -3,6 +3,7 @@ package com.slash.youth.v2.feature.main.find;
 import com.slash.youth.R;
 import com.slash.youth.v2.base.BaseFragment;
 import com.slash.youth.databinding.FrgFindBinding;
+import com.slash.youth.v2.base.list.BaseListFragment;
 import com.slash.youth.v2.di.components.MainComponent;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;

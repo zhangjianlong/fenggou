@@ -18,7 +18,6 @@ public class PublishActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ActivityPublishBinding activityPublishBinding = DataBindingUtil.setContentView(this, R.layout.activity_publish);
         PublishModel publishModel = new PublishModel(activityPublishBinding, this);
         activityPublishBinding.setPublishModel(publishModel);

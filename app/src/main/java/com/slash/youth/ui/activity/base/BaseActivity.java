@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.ui.activity.ChatActivity;
@@ -25,6 +26,8 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 
+import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
+
 /**
  * Created by zhouyifeng on 2017/2/25.
  */
@@ -42,6 +45,10 @@ public class BaseActivity extends RxAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Messenger.getDefault().register(this, NEW_MESSAGE, () -> {
+            setIvMsgIconState();
+            setMsgChangeListener();
+        });
         //向没个Ativity都添加进入消息列表的icon
         msgIconLayer = View.inflate(CommonUtils.getContext(), R.layout.layer_every_msg_icon, null);
         ivMsgIcon = (ImageView) msgIconLayer.findViewById(R.id.iv_msg_icon);
@@ -126,13 +133,5 @@ public class BaseActivity extends RxAppCompatActivity {
         }
         isOffline = true;
     }
-
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK && isOffline)
-//            return true;//不执行父类点击事件
-//        return super.onKeyDown(keyCode, event);//继续执行父类其他点击事件
-//    }
-
 
 }

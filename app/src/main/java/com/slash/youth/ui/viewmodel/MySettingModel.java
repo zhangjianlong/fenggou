@@ -493,7 +493,7 @@ public class MySettingModel extends BaseObservable {
             int rescode = dataBean.getRescode();
             switch (rescode) {
                 case 0:
-                    ToastUtils.shortToast("退出成功");
+//                    ToastUtils.shortToast("退出成功");
                     break;
                 case 1:
                     setLogoutDialogVisibility(View.GONE);
@@ -520,10 +520,10 @@ public class MySettingModel extends BaseObservable {
             MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_THIRD_PARTY_ACCOUNT_WECHAT_BINDING);
             UMShareAPI mShareAPI = UMShareAPI.get(mySettingActivity);
             mShareAPI.doOauthVerify(mySettingActivity, SHARE_MEDIA.WEIXIN, umAuthListener);
-            if (Build.VERSION.SDK_INT >= 23) {
-                String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
-                ActivityCompat.requestPermissions(mySettingActivity, mPermissionList, 123);
-            }
+//            if (Build.VERSION.SDK_INT >= 23) {
+//                String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
+//                ActivityCompat.requestPermissions(mySettingActivity, mPermissionList, 123);
+//            }
         }
     }
 

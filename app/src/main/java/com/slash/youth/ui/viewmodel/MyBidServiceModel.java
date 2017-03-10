@@ -23,6 +23,7 @@ import com.slash.youth.domain.ServiceDetailBean;
 import com.slash.youth.domain.ServiceInstalmentListBean;
 import com.slash.youth.domain.ServiceOrderInfoBean;
 import com.slash.youth.domain.UserInfoBean;
+import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.engine.MyTaskEngine;
 import com.slash.youth.engine.ServiceEngine;
 import com.slash.youth.engine.UserInfoEngine;
@@ -73,11 +74,11 @@ public class MyBidServiceModel extends BaseObservable {
         initListener();
     }
 
-    MyTaskBean myTaskBean;
+    TaskList.TaskBean myTaskBean;
 
     private void initData() {
 //        tid = mActivity.getIntent().getLongExtra("tid", -1);
-        myTaskBean = (MyTaskBean) mActivity.getIntent().getSerializableExtra("myTaskBean");
+        myTaskBean = (TaskList.TaskBean) mActivity.getIntent().getSerializableExtra("myTaskBean");
         tid = myTaskBean.tid;//tid就是soid
         soid = tid;//tid（任务id）就是soid(服务订单id)
         fid = myTaskBean.instalmentcurr;//通过调试接口发现，这个字段当type=2为服务的时候，好像不准，一直都是0
@@ -314,7 +315,7 @@ public class MyBidServiceModel extends BaseObservable {
         MyTaskEngine.getMyTaskItem(new BaseProtocol.IResultExecutor<MyTaskItemBean>() {
             @Override
             public void execute(MyTaskItemBean dataBean) {
-                myTaskBean = dataBean.data.taskinfo;
+                MyTaskBean myTaskBean = dataBean.data.taskinfo;
                 tid = myTaskBean.tid;//tid就是soid
                 soid = tid;//tid（任务id）就是soid(服务订单id)
                 fid = myTaskBean.instalmentcurr;//通过调试接口发现，这个字段当type=2为服务的时候，好像不准，一直都是0
