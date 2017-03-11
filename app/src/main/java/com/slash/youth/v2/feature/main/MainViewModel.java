@@ -85,9 +85,10 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
 
     private int getMessageCount() {
         int count = 0;
-        for (Long key : MsgManager.everyTaskMessageCount.keySet()) {
-            count += MsgManager.everyTaskMessageCount.get(key);
-        }
+        if (MsgManager.everyTaskMessageCount != null && MsgManager.everyTaskMessageCount.keySet() != null)
+            for (Long key : MsgManager.everyTaskMessageCount.keySet()) {
+                count += MsgManager.everyTaskMessageCount.get(key);
+            }
         return count;
     }
 
