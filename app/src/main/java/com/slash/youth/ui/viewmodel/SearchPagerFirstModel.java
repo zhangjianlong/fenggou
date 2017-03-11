@@ -54,6 +54,7 @@ public class SearchPagerFirstModel extends BaseObservable {
     private String userHint = "搜人";
     private CityHistoryEntityDao cityHistoryEntityDao;
 
+
     public SearchPagerFirstModel(SearchPagerFirstBinding searchPagerFirstBinding,ActivitySearchBinding activitySearchBinding,CityHistoryEntityDao cityHistoryEntityDao) {
         this.searchPagerFirstBinding = searchPagerFirstBinding;
         this.activitySearchBinding = activitySearchBinding;

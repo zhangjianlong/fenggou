@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import com.core.op.lib.weight.picker.OptionsPickerView;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivitySearchBinding;
@@ -24,6 +26,7 @@ import com.slash.youth.ui.holder.SubscribeSecondSkilllabelHolder;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.base.BaseDialog;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,8 @@ public class SearchActivityHotServiceModel extends BaseObservable {
     private int firstId;
     private String text = "请点击";
     private CityHistoryEntityDao cityHistoryEntityDao;
+    private OptionsPickerView pvOptions;
+    private ArrayList<String> options1Items = new ArrayList<String>();
 
     public SearchActivityHotServiceModel(SearchActivityHotServiceBinding searchActivityHotServiceBinding,
                                          ActivitySearchBinding mActivitySearchBinding,CityHistoryEntityDao cityHistoryEntityDao) {
@@ -56,6 +61,36 @@ public class SearchActivityHotServiceModel extends BaseObservable {
         initData();
         initView();
         initListener();
+
+    }
+
+    private void initpicker() {
+        for (SkillLabelBean bean:listFirstSkilllabel){
+            options1Items.add(bean.getTag());
+        }
+        pvOptions = new OptionsPickerView(BaseDialog.newDialog(searchActivityHotServiceBinding.getRoot().getContext()));
+        //三级联动效果
+        pvOptions.setPicker(options1Items);
+        pvOptions.setCyclic(false, false, false);
+        //设置默认选中的三级项目
+        pvOptions.setSelectOptions(0, 0, 0);
+        //监听确定选择按钮
+        pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                int value = options1;
+                SearchActivity searchActivity = (SearchActivity) CommonUtils.getCurrentActivity();
+                searchActivityHotServiceBinding.tvOpenChoose.setText(options1Items.get(options1));
+                //一级标签的id，展示二级
+                SkillLabelBean skillLabelBean = listFirstSkilllabel.get(options1);
+                int firstId = skillLabelBean.getId();
+                showSecondLabel(firstId);
+                //二级的id,展示三级
+                SkillLabelBean labelBean = listSkilllabel.get(0);
+                int secondId = labelBean.getId();
+                showThridLabel(firstId,secondId);
+            }
+        });
     }
 
     //加载布局
@@ -104,6 +139,7 @@ public class SearchActivityHotServiceModel extends BaseObservable {
                 int secondId = secondSkillLabelBean.getId();
                 showThridLabel(firstId,secondId);
             }
+            initpicker();
         }
         @Override
         public void executeResultError(String result) {
@@ -169,7 +205,6 @@ public class SearchActivityHotServiceModel extends BaseObservable {
     //初始化展示二级标签
     private void showSecondLabel(int firstId) {
     listSkilllabel.clear();
-
     //初始化的时候展示的是id为对应的的二级标签
     for (SkillLabelBean skillLabelBean : listSecondSkilllabel) {
         int f1 = skillLabelBean.getF1();
@@ -326,7 +361,13 @@ public class SearchActivityHotServiceModel extends BaseObservable {
         searchActivityHotServiceBinding.tvOpenChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setRlChooseMainLabelVisible(View.VISIBLE);
+            pvOptions.show();
+
+
+
+
+
+//                setRlChooseMainLabelVisible(View.VISIBLE);
             }
         });
         searchActivityHotServiceBinding.ivbtn.setOnClickListener(new View.OnClickListener() {
