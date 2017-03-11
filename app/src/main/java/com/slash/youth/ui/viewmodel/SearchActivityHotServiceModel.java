@@ -140,6 +140,7 @@ public class SearchActivityHotServiceModel extends BaseObservable {
                 showThridLabel(firstId,secondId);
             }
             initpicker();
+            searchActivityHotServiceBinding.tvOpenChoose.setText(listFirstSkilllabel.get(0).getTag());
         }
         @Override
         public void executeResultError(String result) {

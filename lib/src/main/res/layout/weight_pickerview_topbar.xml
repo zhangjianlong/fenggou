@@ -24,7 +24,7 @@
         android:layout_toLeftOf="@+id/btnSubmit"
         android:layout_toRightOf="@+id/btnCancel"
         android:gravity="center"
-        android:textColor="@color/pickerview_topbar_title"
+        android:textColor="@color/white"
         android:textSize="@dimen/app.text.xlarge" />
 
     <Button
