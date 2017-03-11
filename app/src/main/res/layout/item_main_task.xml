@@ -10,6 +10,8 @@
             type="com.slash.youth.v2.feature.main.task.list.TaskListItemViewModel" />
 
         <import type="android.view.View" />
+
+        <import type="java.lang.String" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -103,16 +105,18 @@
                         android:layout_height="18dp"
                         android:background="@drawable/shape_circle_news_count"
                         android:gravity="center"
+                        android:text="@{String.valueOf(viewModel.taskBean.bidnum)}"
                         android:textColor="#FFFFFF"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:visibility="@{viewModel.bidnumVisible}" />
 
                     <View
                         android:id="@+id/view_task_message_point"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
                         android:layout_gravity="center"
-                        android:visibility="@{viewModel.taskMsgVisible}"
-                        android:background="@drawable/shape_circle_news_count" />
+                        android:background="@drawable/shape_circle_news_count"
+                        android:visibility="@{viewModel.taskMsgVisible}" />
 
                 </FrameLayout>
 

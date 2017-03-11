@@ -68,7 +68,7 @@
                                         android:layout_marginRight="10dp"
                                         android:orientation="horizontal">
 
-                                        <ImageView
+                                        <com.core.op.lib.weight.RoundImageView
                                             android:id="@+id/iv_assistant_icon"
                                             android:layout_width="59dp"
                                             android:layout_height="59dp"
@@ -542,7 +542,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="@{viewModel.totalMoney}"
+                                android:text="@{viewModel.totalsMoney}"
                                 android:textColor="#FF7333"
                                 android:textSize="14sp" />
 
