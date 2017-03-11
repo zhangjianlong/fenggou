@@ -149,7 +149,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     MineInfoUseCase mineInfoUseCase;
     OtherInfoUseCase otherInfoUseCase;
 
-    public String totalMoney;
+    public String totalsMoney = "0.0元";
 
     public ObservableField<String> uri = new ObservableField<>();
     public String over;
@@ -183,7 +183,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                     MineInfo.DataBean data = d.getMyinfo();
                     this.data.set(data);
 
-                    totalMoney = CountUtils.DecimalFormat(data.getAmount()) + "元";
+                    totalsMoney = CountUtils.DecimalFormat(data.getAmount()) + "元";
                     uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());
 
                     int v = (int) (data.getExpertratio() * 100);

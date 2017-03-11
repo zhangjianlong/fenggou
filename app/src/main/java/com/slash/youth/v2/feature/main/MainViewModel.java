@@ -14,7 +14,10 @@ import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActMainBinding;
+import com.slash.youth.engine.MsgManager;
+import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.feature.main.find.FindFragment;
 import com.slash.youth.v2.feature.main.mine.MineFragment;
 import com.slash.youth.v2.feature.main.task.TaskFragment;
@@ -31,6 +34,7 @@ import io.rong.imlib.model.Conversation;
 
 import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 import static com.slash.youth.v2.feature.main.mine.MineViewModel.START_ANIMATION;
+import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
 import static com.umeng.socialize.Config.dialog;
 
 @PerActivity
@@ -71,11 +75,20 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
             selectPosition.set(0);
         });
 
-        Messenger.getDefault().register(this, NEW_MESSAGE, () -> {
-            binding.bottomNavigation.setNotification("" + PreferenceUtil.readLong(activity, ShareKey.TASK_COUNT), 1);
+        Messenger.getDefault().register(this, TASK_CHANGE, () -> {
+            binding.bottomNavigation.setNotification("" + (getMessageCount() == 0 ? "" : getMessageCount()),
+                    1);
         });
+        binding.bottomNavigation.setNotification("" + (getMessageCount() == 0 ? "" : getMessageCount()),
+                1);
+    }
 
-        setIvMsgIconState();
+    private int getMessageCount() {
+        int count = 0;
+        for (Long key : MsgManager.everyTaskMessageCount.keySet()) {
+            count += MsgManager.everyTaskMessageCount.get(key);
+        }
+        return count;
     }
 
     /**

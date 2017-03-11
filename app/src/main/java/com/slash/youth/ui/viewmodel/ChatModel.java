@@ -36,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.core.op.lib.messenger.Messenger;
 import com.google.gson.Gson;
 import com.slash.youth.BR;
 import com.slash.youth.R;
@@ -107,6 +108,8 @@ import io.rong.message.ImageMessage;
 import io.rong.message.ReadReceiptMessage;
 import io.rong.message.TextMessage;
 import io.rong.message.VoiceMessage;
+
+import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 
 /**
  * Created by zhouyifeng on 2016/11/16.
@@ -2350,6 +2353,7 @@ public class ChatModel extends BaseObservable {
 
             }
         });
+        Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
     }
 
     PagerAdapter vpViewPicAdapter = new PagerAdapter() {

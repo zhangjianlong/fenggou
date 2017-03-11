@@ -12,6 +12,8 @@ import com.core.op.lib.weight.picker.lib.WheelView;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.domain.interactor.main.TaskListUseCase;
+import com.slash.youth.global.GlobalConstants;
+import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.base.list.BaseListViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -20,6 +22,7 @@ import javax.inject.Inject;
 import rx.Observable;
 
 import static com.slash.youth.v2.feature.main.task.TaskViewModel.SHOW_NODATA;
+import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
 
 @PerActivity
 public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> {
@@ -50,6 +53,10 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
             } else {
                 type = 1;
             }
+            loadData();
+        });
+
+        Messenger.getDefault().register(this, TASK_CHANGE, () -> {
             loadData();
         });
     }

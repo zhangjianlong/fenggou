@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.PreferenceUtil;
+import com.core.op.lib.utils.StrUtil;
 import com.google.gson.Gson;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemPushInfoBinding;
@@ -54,6 +55,9 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -74,8 +78,8 @@ import io.rong.message.CommandMessage;
 import io.rong.message.CommandNotificationMessage;
 import io.rong.message.TextMessage;
 
+import static android.R.id.message;
 import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
-import static com.slash.youth.v2.util.ShareKey.TASK_COUNT;
 
 
 /**
@@ -296,7 +300,6 @@ public class MsgManager {
                             taskMessageCount++;
                             SpUtils.setInt(GlobalConstants.SpConfigKey.TASK_MESSAGE_COUNT, taskMessageCount);
                         }
-                        PreferenceUtil.write(CommonUtils.getContext(), TASK_COUNT, taskMessageCount);
                         if (ActivityUtils.currentActivity instanceof HomeActivity && HomeActivity.currentCheckedPageNo == HomeActivity.PAGE_INFO) {
                             HomeInfoPager homeInfoPager = (HomeInfoPager) HomeActivity.currentCheckedPager;
                             PagerHomeInfoModel pagerHomeInfoModel = homeInfoPager.mPagerHomeInfoModel;
@@ -376,6 +379,8 @@ public class MsgManager {
                         //目前还不知道后台斜杠小助手发送过来的内容是什么格式，暂时认为它是"RC:TxtMsg"，其中的content就是内容
                         if (objectName.equals("RC:TxtMsg")) {
 
+                            updateTaskMessage(message);//任务的红点显示
+
                             updateConversationList(senderUserId);
 
                             //获取总的未读消息数
@@ -416,6 +421,8 @@ public class MsgManager {
                         }
                     }
                 });
+
+                Messenger.getDefault().send(TASK_CHANGE);
             } else if (senderUserId.equals(customerServiceUid)) {//斜杠客服助手,目前任务消息类型是TextMessage，内容都在content里面
                 CommonUtils.getHandler().post(new Runnable() {
                     @Override
@@ -599,6 +606,96 @@ public class MsgManager {
 
             return false;
         }
+    }
+
+    private static void updateTaskMessage(Message message) {
+        TextMessage textMessage = (TextMessage) message.getContent();
+        String cmdNtfData = textMessage.getExtra();
+        try {
+            JSONObject jsonObject = new JSONObject(cmdNtfData);
+            if (!StrUtil.isEmpty(jsonObject.getString("tid"))) {
+                //总的任务消息数据的处理
+                if (taskMessageCount != -1) {
+                    taskMessageCount++;
+                    SpUtils.setInt(GlobalConstants.SpConfigKey.TASK_MESSAGE_COUNT, taskMessageCount);
+                } else {
+                    taskMessageCount = SpUtils.getInt(GlobalConstants.SpConfigKey.TASK_MESSAGE_COUNT, 0);
+                    taskMessageCount++;
+                    SpUtils.setInt(GlobalConstants.SpConfigKey.TASK_MESSAGE_COUNT, taskMessageCount);
+                }
+                if (ActivityUtils.currentActivity instanceof HomeActivity && HomeActivity.currentCheckedPageNo == HomeActivity.PAGE_INFO) {
+                    HomeInfoPager homeInfoPager = (HomeInfoPager) HomeActivity.currentCheckedPager;
+                    PagerHomeInfoModel pagerHomeInfoModel = homeInfoPager.mPagerHomeInfoModel;
+                    if (MsgManager.taskMessageCount > 0) {
+                        pagerHomeInfoModel.setTaskMessageCountPointVisibility(View.VISIBLE);
+                        pagerHomeInfoModel.setTaskMessageCount(MsgManager.taskMessageCount + "");
+                    } else {
+                        pagerHomeInfoModel.setTaskMessageCountPointVisibility(View.GONE);
+                    }
+                }
+                //每一个任务对应的消息数量的处理
+                if (everyTaskMessageCount == null) {
+                    everyTaskMessageCount = deserializeEveryTaskMessageCount();
+                    if (everyTaskMessageCount == null) {
+                        everyTaskMessageCount = new HashMap<Long, Integer>();
+                    }
+                }
+//                        CommandNotificationMessage commandNotificationMessage = (CommandNotificationMessage) message.getContent();
+                Gson gson = new Gson();
+                TaskMessageBean taskMessageBean = gson.fromJson(cmdNtfData, TaskMessageBean.class);
+                long id = taskMessageBean.tid;
+                Integer integer = everyTaskMessageCount.get(id);
+                int count;
+                if (integer == null) {
+                    count = 0;
+                } else {
+                    count = integer;
+                }
+                count++;
+                everyTaskMessageCount.put(id, count);
+                //次数更新了，重新序列化到磁盘
+                serializeEveryTaskMessageCount(everyTaskMessageCount);
+
+                //如果当前页面是任务订单详情页，则实时刷新页面数据
+                if (taskMessageBean.type == 1) {//需求订单页
+                    if (ActivityUtils.currentActivity instanceof MyBidDemandActivity) {
+                        MyBidDemandActivity currentActivity = (MyBidDemandActivity) ActivityUtils.currentActivity;
+                        currentActivity.mMyBidDemandModel.reloadData(true);
+                    } else if (ActivityUtils.currentActivity instanceof MyPublishDemandActivity) {
+                        MyPublishDemandActivity currentActivity = (MyPublishDemandActivity) ActivityUtils.currentActivity;
+                        currentActivity.mMyPublishDemandModel.reloadData(true);
+                    }
+                } else if (taskMessageBean.type == 2) {//服务订单页
+                    if (ActivityUtils.currentActivity instanceof MyBidServiceActivity) {
+                        MyBidServiceActivity currentActivity = (MyBidServiceActivity) ActivityUtils.currentActivity;
+                        currentActivity.mMyBidServiceModel.reloadData(true);
+                    } else if (ActivityUtils.currentActivity instanceof MyPublishServiceActivity) {
+                        MyPublishServiceActivity currentActivity = (MyPublishServiceActivity) ActivityUtils.currentActivity;
+                        currentActivity.mMyPublishServiceModel.reloadData(true);
+                    }
+                }
+
+                //100号的消息数量，必须等到上面的代码执行完毕，才会更新，所以在这里去刷新消息数
+                //获取总的未读消息数
+                if (mTotalUnReadCountListener != null) {
+                    RongIMClient.getInstance().getUnreadCount(new RongIMClient.ResultCallback<Integer>() {
+                        @Override
+                        public void onSuccess(Integer integer) {
+                            int totalUnreadCount = integer;
+                            mTotalUnReadCountListener.displayTotalUnReadCount(totalUnreadCount);
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+
+                        }
+                    }, Conversation.ConversationType.PRIVATE);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static ArrayList<String> conversationUidList = new ArrayList<String>();

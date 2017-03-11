@@ -59,12 +59,14 @@ public class TaskListItemViewModel extends BViewModel {
     public String instalment;
     public String dname;
     public String status;
+    public String bidnum;
     public Drawable statusBg;
 
     public ObservableField<Integer> instalmentVisible = new ObservableField<>(View.GONE);
     public ObservableField<Integer> instalmentrationVisible = new ObservableField<>(View.GONE);
 
     public ObservableField<Integer> taskMsgVisible = new ObservableField<>(View.GONE);
+    public ObservableField<Integer> bidnumVisible = new ObservableField<>(View.GONE);
 
     String[] optionalPriceUnit = new String[]{"次", "个", "幅", "份", "单", "小时", "分钟", "天", "其他"};
 
