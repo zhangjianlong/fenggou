@@ -11,12 +11,14 @@ import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActMainBinding;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.v2.feature.main.find.FindFragment;
 import com.slash.youth.v2.feature.main.mine.MineFragment;
 import com.slash.youth.v2.feature.main.task.TaskFragment;
+import com.slash.youth.v2.util.ShareKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
@@ -70,7 +72,7 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
         });
 
         Messenger.getDefault().register(this, NEW_MESSAGE, () -> {
-            setIvMsgIconState();
+            binding.bottomNavigation.setNotification("" + PreferenceUtil.readLong(activity, ShareKey.TASK_COUNT), 1);
         });
 
         setIvMsgIconState();

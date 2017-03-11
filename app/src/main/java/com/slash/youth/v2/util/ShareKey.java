@@ -10,4 +10,5 @@ public class ShareKey {
     public static final String SERVER_TOKEN = "SERVER_TOKEN";
     public static final String IM_TOKEN = "IM_TOKEN";
 
+    public static final String TASK_COUNT = "TASK_COUNT";
 }

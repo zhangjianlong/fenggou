@@ -12,6 +12,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.google.gson.Gson;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemPushInfoBinding;
@@ -72,6 +73,9 @@ import io.rong.imlib.model.Message;
 import io.rong.message.CommandMessage;
 import io.rong.message.CommandNotificationMessage;
 import io.rong.message.TextMessage;
+
+import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
+import static com.slash.youth.v2.util.ShareKey.TASK_COUNT;
 
 
 /**
@@ -292,6 +296,7 @@ public class MsgManager {
                             taskMessageCount++;
                             SpUtils.setInt(GlobalConstants.SpConfigKey.TASK_MESSAGE_COUNT, taskMessageCount);
                         }
+                        PreferenceUtil.write(CommonUtils.getContext(), TASK_COUNT, taskMessageCount);
                         if (ActivityUtils.currentActivity instanceof HomeActivity && HomeActivity.currentCheckedPageNo == HomeActivity.PAGE_INFO) {
                             HomeInfoPager homeInfoPager = (HomeInfoPager) HomeActivity.currentCheckedPager;
                             PagerHomeInfoModel pagerHomeInfoModel = homeInfoPager.mPagerHomeInfoModel;
@@ -361,6 +366,7 @@ public class MsgManager {
                                 }
                             }, Conversation.ConversationType.PRIVATE);
                         }
+                        Messenger.getDefault().send(TASK_CHANGE);
                     }
                 }
             } else if (senderUserId.equals("1000")) {//斜杠消息助手

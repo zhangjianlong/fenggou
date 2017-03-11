@@ -103,8 +103,7 @@
                                                     android:layout_gravity="center_vertical"
                                                     android:layout_marginLeft="9dp"
                                                     android:src="@mipmap/v_icon_home_my"
-                                                    android:visibility="@{viewModel.data.isauth==1?View.VISIBLE:View.GONE}"
-                                                    app:clickCommand="@{viewModel.identificateClick}" />
+                                                    android:visibility="@{viewModel.data.isauth==1?View.VISIBLE:View.GONE}" />
 
                                                 <TextView
                                                     android:id="@+id/tv_my_Approval"
@@ -120,7 +119,8 @@
                                                     android:text="去认证"
                                                     android:textColor="@color/white"
                                                     android:textSize="12sp"
-                                                    android:visibility="@{viewModel.data.isauth==0?View.VISIBLE:View.GONE}" />
+                                                    android:visibility="@{viewModel.data.isauth==0?View.VISIBLE:View.GONE}"
+                                                    app:clickCommand="@{viewModel.identificateClick}" />
 
                                             </LinearLayout>
 

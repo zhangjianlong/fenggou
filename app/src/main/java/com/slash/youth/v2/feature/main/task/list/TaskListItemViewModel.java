@@ -64,6 +64,8 @@ public class TaskListItemViewModel extends BViewModel {
     public ObservableField<Integer> instalmentVisible = new ObservableField<>(View.GONE);
     public ObservableField<Integer> instalmentrationVisible = new ObservableField<>(View.GONE);
 
+    public ObservableField<Integer> taskMsgVisible = new ObservableField<>(View.GONE);
+
     String[] optionalPriceUnit = new String[]{"次", "个", "幅", "份", "单", "小时", "分钟", "天", "其他"};
 
     public String type;
@@ -144,6 +146,22 @@ public class TaskListItemViewModel extends BViewModel {
             MsgManager.serializeEveryTaskMessageCount(MsgManager.everyTaskMessageCount);
         }
         //隐藏任务item上的小圆点
+
+        //显示小圆点
+        if (MsgManager.everyTaskMessageCount != null) {//正常情况，这里应该不可能为null
+            Integer integer = MsgManager.everyTaskMessageCount.get(taskBean.id);
+            int count;
+            if (integer == null) {
+                count = 0;
+            } else {
+                count = integer;
+            }
+            if (count > 0) {
+                taskMsgVisible.set(View.VISIBLE);
+            } else {
+                taskMsgVisible.set(View.GONE);
+            }
+        }
     });
 
     public TaskListItemViewModel(int t) {
