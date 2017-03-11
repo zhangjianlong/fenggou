@@ -186,8 +186,11 @@ public class SearchActivityHotServiceModel extends BaseObservable {
         public void run() {
             View lvActivitySubscribeSecondSkilllableListFirstChild = searchActivityHotServiceBinding.lvActivitySearchSecondSkilllableList.getChildAt(0);
              LogKit.d(lvActivitySubscribeSecondSkilllableListFirstChild + " ");
-            SubscribeSecondSkilllabelHolder tag = (SubscribeSecondSkilllabelHolder) lvActivitySubscribeSecondSkilllableListFirstChild.getTag();//获取他的tag
-            lastClickItemModel = tag.mItemSubscribeSecondSkilllabelModel;
+            if (null!= lvActivitySubscribeSecondSkilllableListFirstChild && null!=lvActivitySubscribeSecondSkilllableListFirstChild.getTag()){
+                SubscribeSecondSkilllabelHolder tag = (SubscribeSecondSkilllabelHolder) lvActivitySubscribeSecondSkilllableListFirstChild.getTag();//获取他的tag
+                lastClickItemModel = tag.mItemSubscribeSecondSkilllabelModel;
+            }
+
         }
     });
     }
@@ -340,5 +343,6 @@ public class SearchActivityHotServiceModel extends BaseObservable {
         currentActivity.changeView(2);
         searchNeedResultTabModel = new SearchNeedResultTabModel(currentActivity.searchNeedResultTabBinding,tag,cityHistoryEntityDao);
         currentActivity.searchNeedResultTabBinding.setSearchNeedResultTabModel(searchNeedResultTabModel);
+        currentActivity.activitySearchBinding.etActivitySearchAssociation.setText(tag);
     }
 }
