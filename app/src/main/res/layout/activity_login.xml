@@ -49,6 +49,7 @@
                 android:inputType="phone"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
+                android:textCursorDrawable="@drawable/shape_edit_cursor"
                 android:textSize="14.5sp" />
 
             <RelativeLayout
@@ -66,6 +67,7 @@
                     android:inputType="phone"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
+                    android:textCursorDrawable="@drawable/shape_edit_cursor"
                     android:textSize="14.5sp" />
 
                 <Button

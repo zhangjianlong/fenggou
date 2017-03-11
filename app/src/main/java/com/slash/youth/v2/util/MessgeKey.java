@@ -7,4 +7,6 @@ package com.slash.youth.v2.util;
 public class MessgeKey {
 
 
+    //任务通知更新红点已任务点数
+    public static final String TASK_CHANGE = "TASK_CHANGE";
 }

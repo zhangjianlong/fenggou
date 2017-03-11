@@ -86,11 +86,11 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     });
 
     public final ReplyCommand moreDemand = new ReplyCommand(() -> {
-        more(true);
+        more(isDemand);
     });
 
     public final ReplyCommand moreService = new ReplyCommand(() -> {
-        more(true);
+        more(isDemand);
     });
 
     @Inject
@@ -109,6 +109,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     @Override
     public void afterViews() {
         super.afterViews();
+        errorVisible.set(View.VISIBLE);
         binding.recyclerView.setNestedScrollingEnabled(false);
         binding.likeRecyclerView.setNestedScrollingEnabled(false);
         binding.scScroll.smoothScrollTo(0, 0);
@@ -245,8 +246,8 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                         for (FindDemand.ListBean listBean : data.getReclist()) {
                             lItemViewModels.add(new FindItemViewModel(activity, listBean));
                         }
-                        binding.likeRecyclerView.getAdapter().notifyDataSetChanged();
                     }
+                    binding.likeRecyclerView.getAdapter().notifyDataSetChanged();
                     return Observable.from(data.getRadlist());
                 })
                 .subscribe(data -> {
@@ -259,6 +260,9 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 }, () -> {
                     binding.recyclerView.getAdapter().notifyDataSetChanged();
 
+                    if (itemViewModels.size() != 0 || lItemViewModels.size() != 0) {
+                        errorVisible.set(View.GONE);
+                    }
                     if (isRefresh) {
                         isRefreshing.set(false);
                         startInAnim();
@@ -277,8 +281,8 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                         for (FindServices.ListBean listBean : data.getReclist()) {
                             lItemViewModels.add(new FindItemViewModel(activity, listBean));
                         }
-                        binding.likeRecyclerView.getAdapter().notifyDataSetChanged();
                     }
+                    binding.likeRecyclerView.getAdapter().notifyDataSetChanged();
                     return Observable.from(data.getRadlist());
                 })
                 .subscribe(data -> {
@@ -290,6 +294,10 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                     }
                 }, () -> {
                     binding.recyclerView.getAdapter().notifyDataSetChanged();
+
+                    if (itemViewModels.size() != 0 || lItemViewModels.size() != 0) {
+                        errorVisible.set(View.GONE);
+                    }
                     if (isRefresh) {
                         startInAnim();
                         isRefreshing.set(false);
@@ -303,7 +311,6 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
         intentFirstPagerMoreActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         CommonUtils.getContext().startActivity(intentFirstPagerMoreActivity);
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_CLICK_BOTTOM_MORE);
-
     }
 
     @Override
