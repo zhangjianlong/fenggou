@@ -1,7 +1,7 @@
 ext {
     applicationId = "com.slash.youth"
-    versionCode = 6
-    versionName = "v1.1.1"
+    versionCode = 8
+    versionName = "v1.1.2"
 
     minSdkVersion = 19
     compileSdkVersion = 23
