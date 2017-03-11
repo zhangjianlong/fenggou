@@ -91,7 +91,7 @@ public class SearchResultAllModel extends BaseObservable {
                     }
                 }
 
-                if (position > demandListBeen.size() + 3 && position < demandListBeen.size() + serviceListBeen.size() + 4) {
+                if (position > demandListBeen.size() + 2 && position < demandListBeen.size() + serviceListBeen.size() + 4) {
                     int i = position - 3 - demandListBeen.size();
                     if (i <= serviceListBeen.size() - 1) {
                         SearchAllBean.DataBean.ServiceListBean serviceListBean = serviceListBeen.get(i);

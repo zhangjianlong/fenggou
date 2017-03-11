@@ -29,7 +29,6 @@ public class MyFriendActivtiy extends BaseActivity implements View.OnClickListen
         activityChooseFriendBinding = DataBindingUtil.setContentView(this, R.layout.activity_choose_friend);
         ChooseFriendModel chooseFriendModel = new ChooseFriendModel(this, activityChooseFriendBinding, this, sendFriend);
         activityChooseFriendBinding.setChooseFriendModel(chooseFriendModel);
-
         listener();
     }
 

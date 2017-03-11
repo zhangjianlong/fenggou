@@ -260,14 +260,14 @@ public class PublishDemandBaseInfoModel extends BaseObservable {
         //设置发布需求的相关信息
         final Bundle publishDemandData = new Bundle();
         publishDemandData.putInt("anonymity", anonymity);
-        demandTitle = mActivityPublishDemandBaseinfoBinding.etPublishDemandTitle.getText().toString();
+        demandTitle = mActivityPublishDemandBaseinfoBinding.etPublishDemandTitle.getText().toString().trim();
         if (demandTitle.length() < 5 || demandTitle.length() > 20) {
             ToastUtils.shortToast("标题必须为5-20字之间");
             isClickNext = false;
             return;
         }
         publishDemandData.putString("demandTitle", demandTitle);
-        demandDesc = mActivityPublishDemandBaseinfoBinding.etPublishDemandDesc.getText().toString();
+        demandDesc = mActivityPublishDemandBaseinfoBinding.etPublishDemandDesc.getText().toString().trim();
         if (demandDesc.length() <= 0) {
             ToastUtils.shortToast("请输入需求描述");
             isClickNext = false;
