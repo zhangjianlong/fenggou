@@ -288,14 +288,14 @@ public class PublishServiceBaseInfoModel extends BaseObservable {
             intentPublishServiceAddInfoActivity.putExtra("serviceDetailBean", serviceDetailBean);
         }
         final Bundle bundleServiceData = new Bundle();
-        String title = mActivityPublishServiceBaseinfoBinding.etPublishServiceTitle.getText().toString();
+        String title = mActivityPublishServiceBaseinfoBinding.etPublishServiceTitle.getText().toString().trim();
         if (title.length() < 5 || title.length() > 20) {
             ToastUtils.shortToast("标题必须为5-20字之间");
             isClickNext = false;
             return;
         }
         bundleServiceData.putString("title", title);
-        String desc = mActivityPublishServiceBaseinfoBinding.etPublishServiceDesc.getText().toString();
+        String desc = mActivityPublishServiceBaseinfoBinding.etPublishServiceDesc.getText().toString().trim();
         if (desc.length() <= 0) {
             ToastUtils.shortToast("请输入服务描述");
             isClickNext = false;
