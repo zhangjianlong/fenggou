@@ -17,4 +17,6 @@ public class AppConfig {
     public static final String APPID_WEIBO = "2605297956";
     public static final String APPID_ALIPAY = "";
     public static final String APPID_RONG_CLOUD = "";
+
+
 }
