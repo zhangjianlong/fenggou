@@ -7,7 +7,6 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-import com.google.common.util.concurrent.ListeningExecutorService;
 import com.slash.youth.databinding.ActivityTransactionRecordBinding;
 import com.slash.youth.domain.TransactionRecoreBean;
 import com.slash.youth.domain.UploadFileResultBean;
