@@ -41,3 +41,4 @@ proguard/
 *.iml
 .idea
 
+android_build/build.properties
