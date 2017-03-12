@@ -37,6 +37,7 @@ import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.CountUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.v2.util.MessgeKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -66,7 +67,6 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     private RotateAnimation raExpertMarksMaker;
     public final ReplyCommand personInfoClick = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_PERSON_MESSAGE);
-
         Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
         intentUserInfoActivity.putExtra("phone", data.get().getPhone());
         intentUserInfoActivity.putExtra("skillTag", data.get().getTag());
@@ -149,7 +149,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     MineInfoUseCase mineInfoUseCase;
     OtherInfoUseCase otherInfoUseCase;
 
-    public String totalMoney;
+    public String totalsMoney = "0.0元";
 
     public ObservableField<String> uri = new ObservableField<>();
     public String over;
@@ -174,8 +174,15 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
         Messenger.getDefault().register(this, START_ANIMATION, () -> {
             doMarksAnimation();
         });
+        Messenger.getDefault().register(this, MessgeKey.UPDATE_FRIEND_NUM, () -> {
+            loadData();
+        });
+
         loadData();
+
+
     }
+
 
     private void loadData() {
         mineInfoUseCase.execute().compose(activity.bindToLifecycle())
@@ -183,7 +190,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                     MineInfo.DataBean data = d.getMyinfo();
                     this.data.set(data);
 
-                    totalMoney = CountUtils.DecimalFormat(data.getAmount()) + "元";
+                    totalsMoney = CountUtils.DecimalFormat(data.getAmount()) + "元";
                     uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());
 
                     int v = (int) (data.getExpertratio() * 100);

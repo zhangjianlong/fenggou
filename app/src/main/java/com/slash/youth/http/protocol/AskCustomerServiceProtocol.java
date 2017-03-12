@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.slash.youth.domain.CustomerServiceBean;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.global.GlobalConstants;
+import com.slash.youth.utils.SpUtils;
 
 import org.xutils.http.RequestParams;
 
@@ -20,7 +21,7 @@ public class AskCustomerServiceProtocol extends BaseProtocol<CustomerServiceBean
 
     @Override
     public void addRequestParams(RequestParams params) {
-        params.addBodyParameter("a", "a");//参数必须加一个，不然服务端会报错
+        params.addBodyParameter("uid", SpUtils.getLong("uid", 0l) + "");//参数必须加一个，不然服务端会报错
     }
 
     @Override

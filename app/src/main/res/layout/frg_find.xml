@@ -153,10 +153,11 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="22dp"
+                                android:layout_height="30dp"
                                 android:background="@color/app.theme.background_edf1f2"
                                 android:gravity="center_vertical"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:paddingTop="@dimen/app.padding.normal">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -197,7 +198,8 @@
                         style="@style/App.Theme.TextAppearance.mw.normal"
                         android:background="@color/app.theme.background_edf1f2"
                         android:gravity="center"
-                        android:padding="@dimen/app.padding.normal"
+                        android:paddingBottom="@dimen/app.padding.large"
+                        android:paddingTop="@dimen/app.padding.normal"
                         android:text="查看更多"
                         android:textColor="@color/app.theme.colorPrimary"
                         android:textSize="@dimen/app.text.small"

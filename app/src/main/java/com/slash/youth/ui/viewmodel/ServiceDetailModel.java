@@ -963,12 +963,12 @@ public class ServiceDetailModel extends BaseObservable {
      */
     public void viewBpExplain(View v) {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_SERVICE_DETAIL_DISPUTE_CONDUCT_BEHIND_QUESTION);
-        DialogUtils.showDialogOne(mActivity, new DialogUtils.DialogCallUnderStandBack() {
+        DialogUtils.showDialogOne1(mActivity, new DialogUtils.DialogCallUnderStandBack() {
             @Override
             public void OkDown() {
                 LogKit.d("close viewBpExplain");
             }
-        }, Html.fromHtml(CommonUtils.getContext().getString(R.string.dispute_handling)), bpTitle);
+        },CommonUtils.getContext().getString(R.string.dispute_handling), bpTitle);
     }
 
     private static final String securityRulesTitle = "斜杠青年顺利成交保障规则";
@@ -1002,12 +1002,12 @@ public class ServiceDetailModel extends BaseObservable {
      * @param v
      */
     public void openSecurityRules(View v) {
-        DialogUtils.showDialogOne(mActivity, new DialogUtils.DialogCallUnderStandBack() {
+        DialogUtils.showDialogOne1(mActivity, new DialogUtils.DialogCallUnderStandBack() {
             @Override
             public void OkDown() {
                 LogKit.d("close SecurityRules");
             }
-        }, securityRulesContent, securityRulesTitle);
+        }, CommonUtils.getContext().getString(R.string.securityRulesContent), securityRulesTitle);
     }
 
     /**

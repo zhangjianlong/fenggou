@@ -43,8 +43,8 @@ public class FindItemViewModel extends BViewModel {
 
     public String quote;
 
-    public final ObservableField<Integer> timeVisibility = new ObservableField<>(View.VISIBLE);
-    public final ObservableField<Integer> instalmentVisibility = new ObservableField<>(View.VISIBLE);
+    public final ObservableField<Integer> timeVisibility = new ObservableField<>(View.GONE);
+    public final ObservableField<Integer> instalmentVisibility = new ObservableField<>(View.GONE);
 
     public String freeTime;
     public String pattern;
@@ -99,6 +99,7 @@ public class FindItemViewModel extends BViewModel {
         }
 
         int instalment = listBean.getInstalment();
+        this.instalment = FirstPagerManager.DEMAND_INSTALMENT;
         switch (instalment) {
             case 0:
                 instalmentVisibility.set(View.VISIBLE);

@@ -68,7 +68,7 @@
                                         android:layout_marginRight="10dp"
                                         android:orientation="horizontal">
 
-                                        <ImageView
+                                        <com.core.op.lib.weight.RoundImageView
                                             android:id="@+id/iv_assistant_icon"
                                             android:layout_width="59dp"
                                             android:layout_height="59dp"
@@ -103,8 +103,7 @@
                                                     android:layout_gravity="center_vertical"
                                                     android:layout_marginLeft="9dp"
                                                     android:src="@mipmap/v_icon_home_my"
-                                                    android:visibility="@{viewModel.data.isauth==1?View.VISIBLE:View.GONE}"
-                                                    app:clickCommand="@{viewModel.identificateClick}" />
+                                                    android:visibility="@{viewModel.data.isauth==1?View.VISIBLE:View.GONE}" />
 
                                                 <TextView
                                                     android:id="@+id/tv_my_Approval"
@@ -120,7 +119,8 @@
                                                     android:text="去认证"
                                                     android:textColor="@color/white"
                                                     android:textSize="12sp"
-                                                    android:visibility="@{viewModel.data.isauth==0?View.VISIBLE:View.GONE}" />
+                                                    android:visibility="@{viewModel.data.isauth==0?View.VISIBLE:View.GONE}"
+                                                    app:clickCommand="@{viewModel.identificateClick}" />
 
                                             </LinearLayout>
 
@@ -542,7 +542,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="@{viewModel.totalMoney}"
+                                android:text="@{viewModel.totalsMoney}"
                                 android:textColor="#FF7333"
                                 android:textSize="14sp" />
 

@@ -87,6 +87,7 @@ public class SearchActivity extends BaseActivity {
         switch (page) {
             case 0:
                 activitySearchBinding.flSearchFirst.addView(searchPagerFirstBinding.getRoot());
+                activitySearchBinding.etActivitySearchAssociation.setHint("找需求、找服务、找人");
                 break;
             case 1:
                 activitySearchBinding.flSearchFirst.addView(searchActivityHotServiceBinding.getRoot());

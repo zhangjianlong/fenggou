@@ -386,8 +386,9 @@ public class MySettingModel extends BaseObservable {
     public void revisePassWord(View view) {
         //埋点
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_SET_MODIFICATE_TRADE_PASSWORD);
-        Intent intentRevisePasswordActivity = new Intent(CommonUtils.getContext(), RevisePasswordActivity.class);
-        mySettingActivity.startActivityForResult(intentRevisePasswordActivity, 2);
+        checkPsdStatus();
+
+
     }
 
     //设置密码
@@ -409,6 +410,39 @@ public class MySettingModel extends BaseObservable {
                 break;
         }
     }
+
+
+    //验证找回密码的状态
+    private void checkPsdStatus() {
+        MyManager.testFindPassWord(new BaseProtocol.IResultExecutor<CommonResultBean>() {
+            @Override
+            public void execute(CommonResultBean dataBean) {
+                int rescode = dataBean.rescode;
+                if (rescode == 0) {
+                    CommonResultBean.Data data = dataBean.data;
+                    int status = data.status;
+                    switch (status) {
+                        case 1://1有审核中的交易密码
+                            ToastUtils.shortToast("密码找回在审核中，请等待审核");
+//                            activityMySettingBinding.tvFindPassWordHint.setText("密码找回在审核中，请等待审核");
+//                            setHintDialogVisibility(View.VISIBLE);
+                            break;
+                        case 2://2没有审核中的交易密码
+                            Intent intentRevisePasswordActivity = new Intent(CommonUtils.getContext(), RevisePasswordActivity.class);
+                            mySettingActivity.startActivityForResult(intentRevisePasswordActivity, 2);
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void executeResultError(String result) {
+                LogKit.d("result:" + result);
+            }
+        });
+    }
+
+
 
     //验证找回密码的状态
     private void testFindPassWord(final int type) {

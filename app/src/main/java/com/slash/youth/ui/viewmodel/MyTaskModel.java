@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityMyTaskBinding;
@@ -34,6 +35,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ import java.util.HashMap;
 
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+
+import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
 
 /**
  * Created by zhouyifeng on 2016/10/26.
@@ -221,7 +225,12 @@ public class MyTaskModel extends BaseObservable {
                 }
                 //清空任务item对应的消息数量
                 if (MsgManager.everyTaskMessageCount != null) {//照理说在这里不可能为null
-                    MsgManager.everyTaskMessageCount.put(myTaskBean.id, 0);
+                    int taskMessageCount = SpUtils.getInt(GlobalConstants.SpConfigKey.TASK_MESSAGE_COUNT, 0);
+                    if (MsgManager.everyTaskMessageCount.get(myTaskBean.id) != null) {
+                        SpUtils.setInt(GlobalConstants.SpConfigKey.TASK_MESSAGE_COUNT, taskMessageCount - MsgManager.everyTaskMessageCount.get(myTaskBean.id));
+                        Messenger.getDefault().sendNoMsg(TASK_CHANGE);
+                    }
+                    MsgManager.everyTaskMessageCount.remove(myTaskBean.id);
                     MsgManager.serializeEveryTaskMessageCount(MsgManager.everyTaskMessageCount);
                 }
                 //隐藏任务item上的小圆点
