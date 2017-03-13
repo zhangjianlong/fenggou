@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.databinding.ActivityExamineCertificatesBinding;
 import com.slash.youth.domain.SetBean;
 import com.slash.youth.domain.UploadFileResultBean;
@@ -21,6 +22,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.MessgeKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.x;
@@ -117,6 +119,7 @@ public class ExamineCertificatesModel extends BaseObservable {
                         break;
                     case 1:
                         ToastUtils.shortCenterToast("上传图片成功");
+                        Messenger.getDefault().sendNoMsg(MessgeKey.TASK_AUTHENTICATION);
                         examineActivity.finish();
                         break;
                     default:

@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityApprovalBinding;
@@ -40,6 +41,7 @@ import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.MessgeKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.image.ImageOptions;
@@ -83,6 +85,9 @@ public class ApprovalModel extends BaseObservable {
         this.careertype = careertype;
         this.approvalActivity = approvalActivity;
         this.uid = uid;
+        Messenger.getDefault().register(this, MessgeKey.TASK_AUTHENTICATION,()->{
+            MyManager.checkoutAuthProcess(new checkoutAuthProcess());
+        });
         initData();
     }
 
@@ -98,6 +103,9 @@ public class ApprovalModel extends BaseObservable {
         MyManager.checkoutAuthProcess(new checkoutAuthProcess());
         MyManager.getMyUserinfo(new OnGetMyUserinfo());
     }
+
+
+
 
     public class checkoutAuthProcess implements BaseProtocol.IResultExecutor<SetBean> {
         @Override

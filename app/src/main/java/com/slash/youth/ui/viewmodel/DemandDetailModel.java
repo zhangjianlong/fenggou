@@ -1517,12 +1517,12 @@ public class DemandDetailModel extends BaseObservable {
      */
     public void viewBpExplain(View v) {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_REQUIREMENT_DETAIL_DISPUTE_CONDUCT_BEHIND_QUESTION);
-        DialogUtils.showDialogOne(mActivity, new DialogUtils.DialogCallUnderStandBack() {
+        DialogUtils.showDialogOne1(mActivity, new DialogUtils.DialogCallUnderStandBack() {
             @Override
             public void OkDown() {
                 LogKit.d("close viewBpExplain");
             }
-        }, bpContent, bpTitle);
+        }, CommonUtils.getContext().getString(R.string.dispute_handling), bpTitle);
     }
 
     private static final String securityRulesTitle = "斜杠青年顺利成交保障规则";
