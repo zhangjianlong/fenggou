@@ -340,8 +340,8 @@ public class PublishServiceBaseInfoModel extends BaseObservable {
         bundleServiceData.putStringArrayList("pic", imgUrl);
         final ArrayList<String> addedPicTempPath = mSaplAddPic.getAddedPicTempPath();
         if (addedPicTempPath.size() <= 0) {
-//            ToastUtils.shortToast("至少上传一张图片");
-//            return;
+////            ToastUtils.shortToast("至少上传一张图片");
+////            return;
             intentPublishServiceAddInfoActivity.putExtras(bundleServiceData);
             mActivity.startActivity(intentPublishServiceAddInfoActivity);
             isClickNext = false;
@@ -484,6 +484,14 @@ public class PublishServiceBaseInfoModel extends BaseObservable {
     }
 
     private static final String publishWayTitle = "发布方式（实名/匿名）";
+    private static final String publishWayContent = "1 匿名发布任务是什么？\n" +
+            "用户在自己不便于公开身份发布服务或者需求时，可使用匿名功能进行发布。当你匿名发布服务或者需求后，其他用户浏览该任务时，则无法查看你的姓名、头像等个人信息；通过搜索、点击头像等方式查看你的个人信息时，你匿名状态下发布的任务将会被隐藏。\n" +
+            "\n" +
+            "2 匿名状态有什么影响？\n" +
+            "匿名发布任务后，其他用户暂时看不到你的姓名、头像等个人信息。在合作意向达成后，匿名状态解除，交易双方恢复实名状态，可查看双方的个人信息。\n" +
+            "\n" +
+            "匿名发布不影响交易流程，但可能会降低其他用户对你发布服务或者需求的信任程度。";
+
     /**
      * 发布方式的问号
      *
@@ -492,12 +500,12 @@ public class PublishServiceBaseInfoModel extends BaseObservable {
     public void openPublishWayInfo(View v) {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.PUBLISH_SERVICE_PUBLISH_MANNER_QUESTION);
 
-        DialogUtils.showDialogOne1(mActivity, new DialogUtils.DialogCallUnderStandBack() {
+        DialogUtils.showDialogOne(mActivity, new DialogUtils.DialogCallUnderStandBack() {
             @Override
             public void OkDown() {
 
             }
-        }, CommonUtils.getContext().getString(R.string.publishWayContent), publishWayTitle);
+        }, publishWayContent, publishWayTitle);
     }
 
     private int chooseDateTimeLayerVisibility = View.GONE;
