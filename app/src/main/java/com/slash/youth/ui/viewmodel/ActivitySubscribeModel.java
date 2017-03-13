@@ -8,14 +8,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.NumberPicker;
 
+import com.core.op.lib.weight.picker.OptionsPickerView;
 import com.slash.youth.BR;
 import com.slash.youth.databinding.ActivitySubscribeBinding;
 import com.slash.youth.domain.SkillLabelBean;
 import com.slash.youth.engine.MyManager;
+import com.slash.youth.ui.activity.SearchActivity;
 import com.slash.youth.ui.activity.SubscribeActivity;
+import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.base.BaseDialog;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,6 +39,8 @@ public class ActivitySubscribeModel extends BaseObservable {
     private boolean isEditor;
     private boolean isPublish;
     private boolean isAddSkill;
+    private OptionsPickerView pvOptions;
+    private ArrayList<String> options1Items = new ArrayList<String>();
 
     public ActivitySubscribeModel(ActivitySubscribeBinding activitySubscribeBinding, SubscribeActivity activity,
                                   boolean isEditor,boolean isAddSkill) {
@@ -44,6 +50,26 @@ public class ActivitySubscribeModel extends BaseObservable {
         this.isPublish = mActivity.getIntent().getBooleanExtra("isPublish", false);
         this.isAddSkill = isAddSkill;
         initView();
+        initpicker();
+    }
+
+    private void initpicker() {
+        pvOptions = new OptionsPickerView(BaseDialog.newDialog(mActivitySubscribeBinding.getRoot().getContext()));
+        //三级联动效果
+        pvOptions.setPicker(options1Items);
+        pvOptions.setCyclic(false, false, false);
+        //设置默认选中的三级项目
+        pvOptions.setSelectOptions(0, 0, 0);
+        //监听确定选择按钮
+        pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                int value = options1;
+                mActivitySubscribeBinding.tvFirstSkillLabelTitle.setText(options1Items.get(options1));
+                mActivity.checkedFirstLabel = options1Items.get(options1);
+                listener.OnOkChooseMainLabelListener(value);
+            }
+        });
     }
 
     private void initView() {
@@ -61,6 +87,7 @@ public class ActivitySubscribeModel extends BaseObservable {
                     String tag = skillLabelBean.getTag();
                     mainLabelsArr[i] = tag;
                     i += 1;
+                    options1Items.add(tag);
                 }
                 mNpChooseMainLabels.setDisplayedValues(mainLabelsArr);
                 mNpChooseMainLabels.setMinValue(0);
@@ -84,7 +111,7 @@ public class ActivitySubscribeModel extends BaseObservable {
 
     public void openRlChooseMainLabel(View v) {
         if(SubscribeActivity.clickCount==0){
-            setRlChooseMainLabelVisible(View.VISIBLE);
+            pvOptions.show();
         }else {
             ToastUtils.shortCenterToast("取消已选标签，重新选择");
         }

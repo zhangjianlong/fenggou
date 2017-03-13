@@ -82,7 +82,6 @@
                                 android:layout_marginLeft="9dp"
                                 android:background="@drawable/shape_demand_detail_btn_bg"
                                 android:gravity="center"
-                                android:onClick="@{serviceDetailModel.offShelfService}"
                                 android:text="下架"
                                 android:textColor="#31C5E4"
                                 android:textSize="12sp"

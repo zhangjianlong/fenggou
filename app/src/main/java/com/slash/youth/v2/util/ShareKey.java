@@ -11,4 +11,5 @@ public class ShareKey {
     public static final String IM_TOKEN = "IM_TOKEN";
 
     public static final String TASK_COUNT = "TASK_COUNT";
+    public static final String USER_PHONE = "TASK_COUNT";//用戶手機號碼
 }

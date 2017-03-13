@@ -48,5 +48,13 @@
 </p><p><strong>3.2冻结：</strong></p><p><span style="color:#999999;">为了保障交易双方的权益，服务期间，涉及到当前任务的已到账资金处于冻结状态。冻结是暂时的，在全部任务顺利完成后，资金将解冻，服务方可以用于提现或支付。如果没有顺利完成，将按照双方选择的平台处理规则或者双方协商的规则来处理，具体请见“帮助-常见问题”。</span>
 </p><p></p><p></p>]]></Data></string>
 
+    <string name="publishWayContent" formatted="false"><Data><![CDATA[<p><strong><span style="color:#000000;">1匿名发布任务是什么？</span></strong>
+</p><p><span style="color:#999999;">用户在自己不便于公开身份发布服务或者需求时，可使用匿名功能进行发布。当你匿名发布服务或者需求后，其他用户浏览该任务时，则无法查看你的姓名、头像等个人信息；通过搜索、点击头像等方式查看你的个人信息时，你匿名状态下发布的任务将会被隐藏。</span>
+</p><p><span style="color:#000000;"><strong>2匿名状态有什么影响？</strong></span>
+</p><p><span style="color:#999999;">匿名发布任务后，其他用户暂时看不到你的姓名、头像等个人信息。在合作意向达成后，匿名状态解除，交易双方恢复实名状态，可查看双方的个人信息。匿名发布不影响交易流程，但可能会降低其他用户对你发布服务或者需求的信任程度。</span>
+</p>]]></Data></string>
+
+    <string name="instalmentInfoContent" formatted="false"><Data><![CDATA[<span style="color:#999999;">基于任务的阶段性特征，若双方将任务划分成若干个阶段，预支付的资金也将会被划分成对应的若干个部分，在需求方确认服务方提交的某阶段的服务时，该阶段的资金将被划转给服务方。</span>]]></Data></string>
+
 
 </resources>

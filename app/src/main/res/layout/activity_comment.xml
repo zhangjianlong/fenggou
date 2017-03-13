@@ -325,6 +325,7 @@
                         android:gravity="top|left"
                         android:hint="请输入评价，上限150个字"
                         android:padding="10dp"
+                        android:textColor="#333333"
                         android:textColorHint="#CCCCCC"
                         android:textSize="14dp"
                     />

@@ -48,7 +48,7 @@ public class SearchActivityHotServiceModel extends BaseObservable {
     private  ArrayList<SkillLabelBean> listThirdSkilllabelName = new ArrayList();
     private int secondId;
     private int firstId;
-    private String text = "请点击";
+    private String text = "请点pvOptions击";
     private CityHistoryEntityDao cityHistoryEntityDao;
     private OptionsPickerView pvOptions;
     private ArrayList<String> options1Items = new ArrayList<String>();

@@ -241,7 +241,7 @@ public class SubscribeActivity extends BaseActivity {
             if (f1 == 0 && f2 == 0) {
                 SkillLabelBean skillLabelBean = new SkillLabelBean(f1, f2, id, tag);
                 listFirstSkilllabelName.add(skillLabelBean);
-                listener.OnListener(listFirstSkilllabelName);
+
             }
 
             //二级标签集合
@@ -254,6 +254,7 @@ public class SubscribeActivity extends BaseActivity {
                 listThirdSkilllabelName.add(new SkillLabelBean(f1, f2, id, tag));
             }
         }
+        listener.OnListener(listFirstSkilllabelName);
         //获取默认的一级id,展示二级
         for (int i = 0; i < listFirstSkilllabelName.size(); i++) {
             String tag = listFirstSkilllabelName.get(i).getTag();
