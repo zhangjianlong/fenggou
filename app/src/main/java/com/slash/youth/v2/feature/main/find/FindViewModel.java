@@ -52,6 +52,8 @@ import rx.Observable;
 @PerActivity
 public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBinding> {
 
+    private boolean isFirstSuccess = false;
+
     private BannerUseCase bannerUseCase;
 
     private TagUseCase tagUseCase;
@@ -167,6 +169,8 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     public void refresh() {
         startOutAnim();
         Observable.timer(1, TimeUnit.SECONDS).subscribe(data -> {
+            if (!isFirstSuccess)
+                initBanner();
             loadData();
         });
     }
@@ -182,6 +186,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                     bViewModels.add(new FindBannerItemViewModel(activity, data));
                 }, error -> {
                 }, () -> {
+                    isFirstSuccess = true;
                     initIndicator();
                 });
     }

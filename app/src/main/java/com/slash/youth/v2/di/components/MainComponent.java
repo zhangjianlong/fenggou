@@ -11,6 +11,7 @@ import com.slash.youth.v2.feature.main.find.FindFragment;
 import com.slash.youth.v2.feature.main.mine.MineFragment;
 import com.slash.youth.v2.feature.main.task.TaskFragment;
 import com.slash.youth.v2.feature.main.task.list.TaskListFragment;
+import com.slash.youth.v2.feature.message.list.MListFragment;
 
 import dagger.Component;
 
@@ -27,4 +28,5 @@ public interface MainComponent extends ActivityComponent {
     void inject(TaskListFragment fragment);
 
     void inject(MineFragment fragment);
+
 }

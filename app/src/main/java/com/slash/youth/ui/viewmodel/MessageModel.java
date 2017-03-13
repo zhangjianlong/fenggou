@@ -26,6 +26,7 @@ import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
 
+import static com.slash.youth.R.id.view;
 import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 
 /**
@@ -60,29 +61,12 @@ public class MessageModel extends BaseObservable {
     }
 
     private void initListener() {
-        mActivityMessageBinding.lvConversationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position <= listConversation.size() - 1) {
-                    ConversationListBean.ConversationInfo conversationInfo = listConversation.get(position);
-                    long uid = conversationInfo.uid;
-                    if (uid == 1000) {
-                        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_CLICK_SLASH_SIGNPICS);
-                    } else {
-                        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_CLICK_OTHER_CHAT);
-                    }
-                    Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
-                    intentChatActivity.putExtra("targetId", uid + "");
-                    mActivity.startActivity(intentChatActivity);
-
-                    //清楚小圆点
-                    View viewUnReadPoint = view.findViewById(R.id.tv_info_unread_msg_count);
-                    viewUnReadPoint.setVisibility(View.INVISIBLE);
-
-                    Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
-                }
-            }
-        });
+//        mActivityMessageBinding.lvConversationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//        });
 
         mActivityMessageBinding.lvConversationList.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -94,6 +78,18 @@ public class MessageModel extends BaseObservable {
         });
     }
 
+    private void itemClick(ConversationListBean.ConversationInfo conversationInfo) {
+        long uid = conversationInfo.uid;
+        if (uid == 1000) {
+            MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_CLICK_SLASH_SIGNPICS);
+        } else {
+            MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_CLICK_OTHER_CHAT);
+        }
+        Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
+        intentChatActivity.putExtra("targetId", uid + "");
+        mActivity.startActivity(intentChatActivity);
+    }
+
     public void getDataFromServer() {
         //这里应该不可能为null
         if (listConversation == null) {
@@ -101,7 +97,17 @@ public class MessageModel extends BaseObservable {
         } else {
             if (listConversation.size() > 0) {
                 if (homeInfoListAdapter == null) {
-                    homeInfoListAdapter = new HomeInfoListAdapter(listConversation);
+                    homeInfoListAdapter = new HomeInfoListAdapter(listConversation, new HomeInfoListAdapter.OnSlidClickListener() {
+                        @Override
+                        public void onDelListener(long id) {
+                            removeConversationList(id);
+                        }
+
+                        @Override
+                        public void onItemClick(ConversationListBean.ConversationInfo conversationInfo) {
+                            itemClick(conversationInfo);
+                        }
+                    });
                     mActivityMessageBinding.lvConversationList.setAdapter(homeInfoListAdapter);
                 } else {
                     homeInfoListAdapter.notifyDataSetChanged();
@@ -154,6 +160,32 @@ public class MessageModel extends BaseObservable {
 
             }
         }, conversationListOffset + "", conversationListLimit + "");
+    }
+
+    private void removeConversationList(final long senderUserId) {
+        ArrayList<Long> updateConversationUidList = new ArrayList<Long>();
+        updateConversationUidList.add(senderUserId);
+        MsgManager.delConversationList(new BaseProtocol.IResultExecutor() {
+            @Override
+            public void execute(Object dataBean) {
+                for (ConversationListBean.ConversationInfo conversationInfo : listConversation) {
+                    if (senderUserId == conversationInfo.uid) {
+                        listConversation.remove(conversationInfo);
+                        if (homeInfoListAdapter != null) {
+                            homeInfoListAdapter.notifyDataSetChanged();
+                        }
+//                        getDataFromServer();
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void executeResultError(String result) {
+
+            }
+        }, updateConversationUidList);
+
     }
 
     HomeInfoListAdapter homeInfoListAdapter;
@@ -222,7 +254,18 @@ public class MessageModel extends BaseObservable {
                             listConversation.clear();
                             listConversation.addAll(listNewConversation);
                             if (homeInfoListAdapter == null) {
-                                homeInfoListAdapter = new HomeInfoListAdapter(listConversation);
+                                homeInfoListAdapter = new HomeInfoListAdapter(listConversation, new HomeInfoListAdapter.OnSlidClickListener() {
+                                    @Override
+                                    public void onDelListener(long id) {
+                                        removeConversationList(id);
+                                    }
+
+
+                                    @Override
+                                    public void onItemClick(ConversationListBean.ConversationInfo conversationInfo) {
+                                        itemClick(conversationInfo);
+                                    }
+                                });
                                 mActivityMessageBinding.lvConversationList.setAdapter(homeInfoListAdapter);
                                 LogKit.v("----HomeInfoListAdapter new HomeInfoListAdapter");
                             } else {
@@ -242,7 +285,17 @@ public class MessageModel extends BaseObservable {
             listConversation.clear();
             listConversation.addAll(listNewConversation);
             if (homeInfoListAdapter == null) {
-                homeInfoListAdapter = new HomeInfoListAdapter(listConversation);
+                homeInfoListAdapter = new HomeInfoListAdapter(listConversation, new HomeInfoListAdapter.OnSlidClickListener() {
+                    @Override
+                    public void onDelListener(long id) {
+                        removeConversationList(id);
+                    }
+
+                    @Override
+                    public void onItemClick(ConversationListBean.ConversationInfo conversationInfo) {
+                        itemClick(conversationInfo);
+                    }
+                });
                 mActivityMessageBinding.lvConversationList.setAdapter(homeInfoListAdapter);
                 LogKit.v("----HomeInfoListAdapter new HomeInfoListAdapter 2222");
             } else {

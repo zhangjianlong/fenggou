@@ -30,7 +30,7 @@
     <color name="app.theme.background_1EB050">#31C5E4</color>
     <color name="app.theme.gradientColor">#507E9F</color>
     <color name="app.theme.colorControlActivated">#31C5E4</color>
-    <color name="app.theme.colorControlHighlight">#31C5E4</color>
+    <color name="app.theme.colorControlHighlight">#DADADA</color>
 
     <color name="app.theme.colorPrimary">#31C5E4</color><!--toolbar背景顏色-->
     <color name="app.theme.colorPrimaryDark">#31C5E4</color><!--状态栏背景顏色-->
@@ -109,6 +109,10 @@
 
     <!-- notice -->
     <color name="app.notice">#E35B5A</color>
+
+    <!-- progress -->
+    <color name="app.progress.default.color">#b1000000</color>
+    <color name="app.progress.grey.color">#449E9E9E</color>
 
     <array name="app_main_tabs">
         <item name="tab1">#455C65</item>

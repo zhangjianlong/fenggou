@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
 import com.slash.youth.domain.CommentStatusBean;
 import com.slash.youth.domain.MyTaskBean;
@@ -38,6 +39,7 @@ import rx.Observable;
 import static android.R.attr.breadCrumbShortTitle;
 import static android.R.attr.data;
 import static android.R.attr.switchMinWidth;
+import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
 
 /**
  * Created by acer on 2017/3/9.
@@ -142,27 +144,12 @@ public class TaskListItemViewModel extends BViewModel {
                 activity.startActivityForResult(intentMyBidServiceActivity, HomeActivity2.REQUEST_CODE_TO_TASK_DETAIL);
             }
         }
+
         //清空任务item对应的消息数量
         if (MsgManager.everyTaskMessageCount != null) {//照理说在这里不可能为null
-            MsgManager.everyTaskMessageCount.put(myTaskBean.id, 0);
+            MsgManager.everyTaskMessageCount.remove(taskBean.tid);
             MsgManager.serializeEveryTaskMessageCount(MsgManager.everyTaskMessageCount);
-        }
-        //隐藏任务item上的小圆点
-
-        //显示小圆点
-        if (MsgManager.everyTaskMessageCount != null) {//正常情况，这里应该不可能为null
-            Integer integer = MsgManager.everyTaskMessageCount.get(taskBean.id);
-            int count;
-            if (integer == null) {
-                count = 0;
-            } else {
-                count = integer;
-            }
-            if (count > 0) {
-                taskMsgVisible.set(View.VISIBLE);
-            } else {
-                taskMsgVisible.set(View.GONE);
-            }
+            Messenger.getDefault().sendNoMsg(TASK_CHANGE);
         }
     });
 
@@ -304,6 +291,24 @@ public class TaskListItemViewModel extends BViewModel {
                     status = "已过期";
                     statusBg = activity.getResources().getDrawable(R.mipmap.state_huise);
                     break;
+            }
+        }
+
+        //隐藏任务item上的小圆点
+
+        //显示小圆点
+        if (MsgManager.everyTaskMessageCount != null) {//正常情况，这里应该不可能为null
+            Integer integer = MsgManager.everyTaskMessageCount.get(taskBean.tid);
+            int count;
+            if (integer == null) {
+                count = 0;
+            } else {
+                count = integer;
+            }
+            if (count > 0) {
+                taskMsgVisible.set(View.VISIBLE);
+            } else {
+                taskMsgVisible.set(View.GONE);
             }
         }
     }

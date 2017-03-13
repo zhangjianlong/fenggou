@@ -91,26 +91,4 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
             }
         return count;
     }
-
-    /**
-     * 刚进入消息页的时候，或者是回退到消息页的时候(这两种情况都会调用onStart方法)，通过融云的API获取总的未读消息数，消息Icon的颜色
-     */
-    private void setIvMsgIconState() {
-        RongIMClient.getInstance().getUnreadCount(new RongIMClient.ResultCallback<Integer>() {
-            @Override
-            public void onSuccess(Integer integer) {
-                int totalUnreadCount = integer;
-                if (totalUnreadCount <= 0) {//没有聊天消息，显示灰色的Icon
-                    binding.bottomNavigation.setNotification("", 1);
-                } else {//有聊天消息，显示红色的Icon
-                    binding.bottomNavigation.setNotification("" + totalUnreadCount, 1);
-                }
-            }
-
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-
-            }
-        }, Conversation.ConversationType.PRIVATE);
-    }
 }

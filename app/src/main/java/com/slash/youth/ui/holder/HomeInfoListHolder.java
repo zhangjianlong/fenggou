@@ -13,6 +13,7 @@ import com.slash.youth.domain.ConversationListBean;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.global.GlobalConstants;
+import com.slash.youth.ui.adapter.HomeInfoListAdapter;
 import com.slash.youth.ui.viewmodel.ItemHomeInfoModel;
 import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
@@ -31,6 +32,8 @@ import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
 import io.rong.message.TextMessage;
 
+import static com.slash.youth.R.id.view;
+
 /**
  * Created by zhouyifeng on 2016/10/11.
  */
@@ -38,6 +41,16 @@ public class HomeInfoListHolder extends BaseHolder<ConversationListBean.Conversa
 
     private ItemHomeInfoModel mItemHomeInfoModel;
     private ItemListviewHomeInfoBinding mItemListviewHomeInfoBinding;
+
+    private HomeInfoListAdapter.OnSlidClickListener onSlidClickListener;
+
+    public void setOnSlidClickListener(HomeInfoListAdapter.OnSlidClickListener onSlidClickListener) {
+        this.onSlidClickListener = onSlidClickListener;
+    }
+
+    public HomeInfoListHolder(HomeInfoListAdapter.OnSlidClickListener onSlidClickListener) {
+        this.onSlidClickListener = onSlidClickListener;
+    }
 
     @Override
     public View initView() {
@@ -240,6 +253,19 @@ public class HomeInfoListHolder extends BaseHolder<ConversationListBean.Conversa
                 }
             }
         }
+
+        mItemListviewHomeInfoBinding.btnDelete.setOnClickListener(view -> {
+            if (onSlidClickListener != null) {
+                mItemListviewHomeInfoBinding.slRoot.smoothClose();
+                onSlidClickListener.onDelListener(data.uid);
+            }
+        });
+
+        mItemListviewHomeInfoBinding.llRoot.setOnClickListener(view -> {
+            //清楚小圆点
+            mItemListviewHomeInfoBinding.tvInfoUnreadMsgCount.setVisibility(View.INVISIBLE);
+            onSlidClickListener.onItemClick(data);
+        });
 //        if (data.isSlashLittleHelper) {
 //            mItemHomeInfoModel.setUsername("斜杠小助手");
 //            mItemHomeInfoModel.setRelatedTasksInfoVisibility(View.INVISIBLE);

@@ -177,6 +177,8 @@ public class ChatModel extends BaseObservable {
             initView();
             initListener();
         }
+
+        Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
     }
 
     private void initData() {

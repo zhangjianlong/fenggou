@@ -44,6 +44,7 @@ import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -443,7 +444,6 @@ public class MySettingModel extends BaseObservable {
     }
 
 
-
     //验证找回密码的状态
     private void testFindPassWord(final int type) {
         MyManager.testFindPassWord(new BaseProtocol.IResultExecutor<CommonResultBean>() {
@@ -615,12 +615,13 @@ public class MySettingModel extends BaseObservable {
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            ToastUtils.shortToast("Authorize succeed");
+            ToastUtils.shortToast("绑定成功");
             UMShareAPI mShareAPI = UMShareAPI.get(mySettingActivity);
             switch (platform) {
                 case QQ:
                     String QQ_access_token = data.get("access_token");
 //                    String QQ_uid = data.get("uid");
+                    isQQBing = true;
                     String QQ_uid = data.get("openid");
                     loginBind(QQ_access_token, QQ_uid, GlobalConstants.LoginPlatformType.QQ, null);
                     break;
@@ -635,12 +636,12 @@ public class MySettingModel extends BaseObservable {
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            ToastUtils.shortToast("Authorize fail");
+            ToastUtils.shortToast("绑定失败");
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            ToastUtils.shortToast("Authorize cancel");
+            ToastUtils.shortToast("绑定失败");
         }
     };
 
@@ -713,4 +714,6 @@ public class MySettingModel extends BaseObservable {
         this.unBindVisibility = unBindVisibility;
         notifyPropertyChanged(BR.unBindVisibility);
     }
+
+
 }
