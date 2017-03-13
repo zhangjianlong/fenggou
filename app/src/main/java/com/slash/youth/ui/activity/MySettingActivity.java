@@ -1,5 +1,6 @@
 package com.slash.youth.ui.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityMySettingBinding;
 import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.MySettingModel;
+import com.umeng.socialize.UMShareAPI;
 
 /**
  * Created by acer on 2016/11/3.
@@ -18,7 +20,7 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
     private TextView title;
     private FrameLayout fl;
     private ActivityMySettingBinding activityMySettingBinding;
-    private String titleString ="设置";
+    private String titleString = "设置";
 
     private MySettingModel mySettingModel;
 
@@ -31,7 +33,7 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        mySettingModel = new MySettingModel(activityMySettingBinding,this);
+        mySettingModel = new MySettingModel(activityMySettingBinding, this);
         activityMySettingBinding.setMySettingModel(mySettingModel);
         listener();
 
@@ -47,10 +49,16 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_userinfo_back:
                 finish();
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

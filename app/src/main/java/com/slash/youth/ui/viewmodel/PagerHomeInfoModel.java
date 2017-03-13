@@ -232,7 +232,12 @@ public class PagerHomeInfoModel extends BaseObservable {
                         currentCount++;
                         if (currentCount >= totalCount) {//避免for循环遍历的时候重复执行
                             if (homeInfoListAdapter == null) {
-                                homeInfoListAdapter = new HomeInfoListAdapter(listConversation);
+//                                homeInfoListAdapter = new HomeInfoListAdapter(listConversation, new HomeInfoListAdapter.OnSlidClickListener() {
+//                                    @Override
+//                                    public void onDelListener(long id) {
+//
+//                                    }
+//                                });
                                 mPagerHomeInfoBinding.lvPagerHomeInfo.setAdapter(homeInfoListAdapter);
                                 LogKit.v("----HomeInfoListAdapter new HomeInfoListAdapter");
                             } else {
@@ -251,7 +256,12 @@ public class PagerHomeInfoModel extends BaseObservable {
             }
         } else {
             if (homeInfoListAdapter == null) {
-                homeInfoListAdapter = new HomeInfoListAdapter(listConversation);
+//                homeInfoListAdapter = new HomeInfoListAdapter(listConversation, new HomeInfoListAdapter.OnSlidClickListener() {
+//                    @Override
+//                    public void onDelListener(long id) {
+//
+//                    }
+//                });
                 mPagerHomeInfoBinding.lvPagerHomeInfo.setAdapter(homeInfoListAdapter);
                 LogKit.v("----HomeInfoListAdapter new HomeInfoListAdapter 2222");
             } else {

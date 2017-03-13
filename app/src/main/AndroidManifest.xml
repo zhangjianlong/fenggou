@@ -577,7 +577,9 @@
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity android:name=".Test" />
-        <activity android:name=".Identificate"></activity>
+        <activity android:name=".Identificate" />
+        <activity android:name=".Message" />
+        <activity android:name=".view.impl.MList"></activity>
     </application>
 
 </manifest>

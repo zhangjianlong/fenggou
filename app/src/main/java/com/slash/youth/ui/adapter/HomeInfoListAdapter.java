@@ -10,9 +10,11 @@ import java.util.ArrayList;
  * Created by zhouyifeng on 2016/10/11.
  */
 public class HomeInfoListAdapter extends SlashBaseAdapter<ConversationListBean.ConversationInfo> {
+    OnSlidClickListener onSlidClickListener;
 
-    public HomeInfoListAdapter(ArrayList<ConversationListBean.ConversationInfo> listData) {
+    public HomeInfoListAdapter(ArrayList<ConversationListBean.ConversationInfo> listData, OnSlidClickListener onSlidClickListener) {
         super(listData);
+        this.onSlidClickListener = onSlidClickListener;
     }
 
     @Override
@@ -22,6 +24,12 @@ public class HomeInfoListAdapter extends SlashBaseAdapter<ConversationListBean.C
 
     @Override
     public BaseHolder getHolder(int position) {
-        return new HomeInfoListHolder();
+        return new HomeInfoListHolder(onSlidClickListener);
+    }
+
+    public interface OnSlidClickListener {
+        void onDelListener(long id);
+
+        void onItemClick(ConversationListBean.ConversationInfo conversationInfo);
     }
 }

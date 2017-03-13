@@ -52,6 +52,7 @@ import com.slash.youth.utils.ActivityUtils;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.RingingUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
 
@@ -79,6 +80,7 @@ import io.rong.message.CommandNotificationMessage;
 import io.rong.message.TextMessage;
 
 import static android.R.id.message;
+import static com.slash.youth.utils.RingingUtil.playSysRinging;
 import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
 
 
@@ -120,6 +122,14 @@ public class MsgManager {
      * @param token
      */
     public static void connectRongCloud(String token) {
+
+        //初始化任务条数
+        if (everyTaskMessageCount == null) {
+            everyTaskMessageCount = deserializeEveryTaskMessageCount();
+            if (everyTaskMessageCount == null) {
+                everyTaskMessageCount = new HashMap<Long, Integer>();
+            }
+        }
 
         RongIMClient.setConnectionStatusListener(new RongIMClient.ConnectionStatusListener() {
             @Override
@@ -310,13 +320,7 @@ public class MsgManager {
                                 pagerHomeInfoModel.setTaskMessageCountPointVisibility(View.GONE);
                             }
                         }
-                        //每一个任务对应的消息数量的处理
-                        if (everyTaskMessageCount == null) {
-                            everyTaskMessageCount = deserializeEveryTaskMessageCount();
-                            if (everyTaskMessageCount == null) {
-                                everyTaskMessageCount = new HashMap<Long, Integer>();
-                            }
-                        }
+
 //                        CommandNotificationMessage commandNotificationMessage = (CommandNotificationMessage) message.getContent();
                         String data = commandNotificationMessage.getData();
                         Gson gson = new Gson();
@@ -422,7 +426,6 @@ public class MsgManager {
                     }
                 });
 
-                Messenger.getDefault().sendNoMsg(TASK_CHANGE);
             } else if (senderUserId.equals(customerServiceUid)) {//斜杠客服助手,目前任务消息类型是TextMessage，内容都在content里面
                 CommonUtils.getHandler().post(new Runnable() {
                     @Override
@@ -603,7 +606,7 @@ public class MsgManager {
             }
 
             Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
-
+            RingingUtil.playSysRinging();//响铃
             return false;
         }
     }
@@ -631,13 +634,6 @@ public class MsgManager {
                         pagerHomeInfoModel.setTaskMessageCount(MsgManager.taskMessageCount + "");
                     } else {
                         pagerHomeInfoModel.setTaskMessageCountPointVisibility(View.GONE);
-                    }
-                }
-                //每一个任务对应的消息数量的处理
-                if (everyTaskMessageCount == null) {
-                    everyTaskMessageCount = deserializeEveryTaskMessageCount();
-                    if (everyTaskMessageCount == null) {
-                        everyTaskMessageCount = new HashMap<Long, Integer>();
                     }
                 }
 //                        CommandNotificationMessage commandNotificationMessage = (CommandNotificationMessage) message.getContent();
@@ -692,6 +688,8 @@ public class MsgManager {
                     }, Conversation.ConversationType.PRIVATE);
                 }
             }
+
+            Messenger.getDefault().sendNoMsg(TASK_CHANGE);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -44,7 +44,7 @@
         <attr name="indicatorColor" format="color" />
     </declare-styleable>
 
-    <!-- ShapedImageView -->
+    <!-- 圆角矩形ImageView -->
     <declare-styleable name="ShapedImageView">
         <attr name="shape_mode" format="enum">
             <enum name="round_rect" value="1" />
@@ -54,6 +54,13 @@
 
         <attr name="stroke_width" format="dimension" />
         <attr name="stroke_color" format="color|reference" />
+    </declare-styleable>
+
+    <!--滑动删除list item-->
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean" />
+        <attr name="ios" format="boolean" />
+        <attr name="leftSwipe" format="boolean" />
     </declare-styleable>
 
 </resources>

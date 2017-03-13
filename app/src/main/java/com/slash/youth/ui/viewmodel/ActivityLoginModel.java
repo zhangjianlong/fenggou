@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.core.op.lib.weight.progress.Progress;
 import com.core.op.lib.utils.PreferenceUtil;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
@@ -66,6 +67,7 @@ public class ActivityLoginModel extends BaseObservable {
     Activity mActivity;
     int currentPageState = PAGE_STATE_GOTOLOGIN;//当前的页面状态，默认为"我有账号,去登录"状态
 
+    Progress progress;
 
     public ActivityLoginModel(ActivityLoginBinding activityLoginBinding, LoginActivity.QQLoginUiListener qqLoginUiListener, LoginActivity loginActivity, SsoHandler ssoHandler, Activity activity) {
         this.mActivityLoginBinding = activityLoginBinding;
@@ -192,10 +194,12 @@ public class ActivityLoginModel extends BaseObservable {
             ToastUtils.shortToast("请输入正确的手机号码");
             return;
         }
+        progress = Progress.create(loginActivity).setStyle(Progress.Style.SPIN_INDETERMINATE)
+                .show();
         LoginManager.phoneLogin(new BaseProtocol.IResultExecutor<PhoneLoginResultBean>() {
             @Override
             public void execute(PhoneLoginResultBean dataBean) {
-                PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_PHONE,mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim());
+                PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_PHONE, mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim());
                 LoginManager.currentLoginUserPhone = mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim();
 
                 //增加验证码错误提示
@@ -239,6 +243,7 @@ public class ActivityLoginModel extends BaseObservable {
                 } else {
                     ToastUtils.shortToast("登录失败:" + dataBean.rescode);
                 }
+                progress.dismiss();
             }
 
             @Override
@@ -603,8 +608,8 @@ public class ActivityLoginModel extends BaseObservable {
             if (dataBean.rescode == 9) {//新用户，需要绑定手机号
                 LogKit.v("新用户，需要绑定手机号");
                 String _3ptoken = dataBean.data.token;
-                if(_3ptoken.split("&").length<=3){
-                    _3ptoken=_3ptoken+"&"+ WEIXIN_openid;
+                if (_3ptoken.split("&").length <= 3) {
+                    _3ptoken = _3ptoken + "&" + WEIXIN_openid;
                 }
 
                 Bundle thirdPlatformBundle = new Bundle();
