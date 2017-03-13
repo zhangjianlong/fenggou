@@ -59,6 +59,10 @@ public class SearchPagerFirstModel extends BaseObservable {
         this.searchPagerFirstBinding = searchPagerFirstBinding;
         this.activitySearchBinding = activitySearchBinding;
         this.cityHistoryEntityDao = cityHistoryEntityDao;
+
+
+
+
     }
 
     //搜索需求

@@ -49,8 +49,7 @@ public class ActivitySubscribeModel extends BaseObservable {
         this.mActivity = activity;
         this.isPublish = mActivity.getIntent().getBooleanExtra("isPublish", false);
         this.isAddSkill = isAddSkill;
-        initView();
-        initpicker();
+
     }
 
     private void initpicker() {
@@ -88,12 +87,15 @@ public class ActivitySubscribeModel extends BaseObservable {
                     mainLabelsArr[i] = tag;
                     i += 1;
                     options1Items.add(tag);
+                    initView();
                 }
                 mNpChooseMainLabels.setDisplayedValues(mainLabelsArr);
                 mNpChooseMainLabels.setMinValue(0);
                 mNpChooseMainLabels.setMaxValue(mainLabelsArr.length - 1);
                 mNpChooseMainLabels.setValue(0);
             }
+
+
         });
     }
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 
+import com.core.op.lib.weight.picker.OptionsPickerView;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityPublishServiceAddinfoBinding;
@@ -28,9 +29,13 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.base.BaseDialog;
 import com.umeng.analytics.MobclickAgent;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by zhouyifeng on 2016/11/9.
@@ -53,6 +58,8 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     private double lat = 0;
     ServiceDetailBean serviceDetailBean;
     boolean isFromSkillManager;
+    private OptionsPickerView pvOptions;
+    private List<String> options1Items = new ArrayList<String>();
 
     public PublishServiceAddInfoModel(ActivityPublishServiceAddinfoBinding activityPublishServiceAddinfoBinding, Activity activity) {
         this.mActivityPublishServiceAddinfoBinding = activityPublishServiceAddinfoBinding;
@@ -61,12 +68,33 @@ public class PublishServiceAddInfoModel extends BaseObservable {
         toggleInstalment(null);
         initData();
         initView();
+        initpicker();
+    }
+
+    private void initpicker() {
+        pvOptions = new OptionsPickerView(BaseDialog.newDialog(mActivityPublishServiceAddinfoBinding.getRoot().getContext()));
+        //三级联动效果
+        pvOptions.setPicker((ArrayList) options1Items);
+        pvOptions.setCyclic(false, false, false);
+        //设置默认选中的三级项目
+        pvOptions.setSelectOptions(0, 0, 0);
+        //监听确定选择按钮
+        pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                int value = options1;
+                mChoosePriceUnit = options1Items.get(options1);
+                setPriceUnit("元");
+                quoteunit = value + 1;
+                mActivityPublishServiceAddinfoBinding.tvChooseQuoteunit.setText(mChoosePriceUnit);
+            }
+        });
     }
 
     private void initData() {
         mSallSkillLabels = mActivityPublishServiceAddinfoBinding.sallPublishServiceAddedSkilllabels;//在 loadOriginServiceData()中会使用，所以必须在这里初始化
         optionalPriceUnit = new String[]{"次", "个", "幅", "份", "单", "小时", "分钟", "天", "其他"};
-
+        options1Items = Arrays.asList(optionalPriceUnit);
         serviceDetailBean = (ServiceDetailBean) mActivity.getIntent().getSerializableExtra("serviceDetailBean");
         isFromSkillManager = mActivity.getIntent().getBooleanExtra("isFromSkillManager", false);
         if (serviceDetailBean != null) {//表示是修改服务，首先需要把服务的数据填充
@@ -375,11 +403,14 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     }
 
     public void openChoosePriceUnit(View v) {
-        setChoosePriceUnitLayerVisibility(View.VISIBLE);
-        mNpChoosePriceUnit.setDisplayedValues(optionalPriceUnit);
-        mNpChoosePriceUnit.setMaxValue(optionalPriceUnit.length - 1);
-        mNpChoosePriceUnit.setMinValue(0);
-        mNpChoosePriceUnit.setValue(1);
+    pvOptions.show();
+
+
+//        setChoosePriceUnitLayerVisibility(View.VISIBLE);
+//        mNpChoosePriceUnit.setDisplayedValues(optionalPriceUnit);
+//        mNpChoosePriceUnit.setMaxValue(optionalPriceUnit.length - 1);
+//        mNpChoosePriceUnit.setMinValue(0);
+//        mNpChoosePriceUnit.setValue(1);
     }
 
     public void okChoosePriceUnit(View v) {
@@ -412,29 +443,6 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     }
 
     private static final String securityRulesTitle = "斜杠青年顺利成交保障规则";
-    private static final String securityRulesContent = "斜杠青年通过顺利成交保证金、预支付、分期到账等一系列规则来保障双方的顺利成交。\n" +
-            "\n" +
-            "1、顺利成交保证金规则\n" +
-            "\n" +
-            "本服务平台将实际交易金额的5%计提为“顺利成交保证金”，任务顺利完成并且服务、需求双方评价分享后，平台将以交易金额的2.5%奖励形式返还给双方。\n" +
-            "\n" +
-            "如果任务并未顺利成交，已经开始的“服务阶段”对应的“顺利成交保证金”将，不予退还，存放奖金池 用于活动基金；未开始“服务阶段”对应的“顺利成交保证金”将退还给需求方。上述“服务阶段”是指双方用户达成的“分期到账”后各期对应的服务阶段。\n" +
-            "\n" +
-            "\n" +
-            "2、预支付与分期到账规则\n" +
-            "\n" +
-            "预支付：为了保障交易双方的权益，双方确认交易意向后，应支付的全部款项将会一次性预支付且托管在斜杠平台。\n" +
-            "\n" +
-            "分期到帐：基于任务的阶段性特征，若双方将任务划分成若干个阶段，预支付的资金也将会被划分成对应的若干个部分，在需求方确认服务方提交的某阶段的服务时，该阶段的资金将被划转给服务方。\n" +
-            "\n" +
-            "3、到账与冻结规则\n" +
-            "到账：\n" +
-            "在没有开启分期付功能的情况下，任务顺利完成后，需求方确认服务后款项立即到账，即可提现；\n" +
-            "在开启分期付功能后，非尾期账款在需求方确认服务后款项立即到账，暂时处于冻结状态；尾期账款在需求方确认服务后款项立即到账，全部资金可提现。\n" +
-            "\n" +
-            "冻结：\n" +
-            "为了保障交易双方的权益，服务期间，涉及到当前任务的已到账资金处于冻结状态。冻结是暂时的，在全部任务顺利完成后，资金将解冻，服务方可以用于提现或支付。如果没有顺利完成，将按照双方选择的平台处理规则或者双方协商的规则来处理，具体请见“帮助-常见问题”。";
-
 
     /**
      * 打开《斜杠青年顺利成交保障规则》

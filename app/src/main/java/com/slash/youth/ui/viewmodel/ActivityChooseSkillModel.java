@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.core.op.lib.weight.picker.OptionsPickerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.slash.youth.BR;
@@ -29,6 +30,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.base.BaseDialog;
 import com.slash.youth.v2.feature.main.MainActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -41,7 +43,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by zhouyifeng on 2016/9/12.
@@ -55,6 +59,9 @@ public class ActivityChooseSkillModel extends BaseObservable {
     String[] optionalSecondLabels;
     private NumberPicker mNpChooseSkillLabel;
     ArrayList<AllSkillLablesBean.Tag_3> choosedThirdLabels = new ArrayList<AllSkillLablesBean.Tag_3>();
+    private OptionsPickerView pvOptions;
+    private List<String> options1Items = new ArrayList<String>();
+    private List<String> options2Items = new ArrayList<String>();
 
     public ActivityChooseSkillModel(ActivityChooseSkillBinding activityChooseSkillBinding, Activity activity) {
         this.mActivityChooseSkillBinding = activityChooseSkillBinding;
@@ -113,7 +120,6 @@ public class ActivityChooseSkillModel extends BaseObservable {
     private void firstLoadLabels() {
         chooseTag1Index = 0;
         chooseTag2Index = 0;
-
         Collection<AllSkillLablesBean.Tag_1> tag1Coll = allSkillLablesBean.mapTag_1.values();
         tag1Arr = new AllSkillLablesBean.Tag_1[tag1Coll.size()];
         tag1Coll.toArray(tag1Arr);
@@ -375,6 +381,67 @@ public class ActivityChooseSkillModel extends BaseObservable {
     private AllSkillLablesBean.Tag_1[] tag1Arr;
     private int chooseTag1Index = -1;
 
+    private void initpicker1() {
+        options1Items.clear();
+        options1Items.addAll(new ArrayList<>(Arrays.asList(optionalMainLabels)));
+        pvOptions = new OptionsPickerView(BaseDialog.newDialog(mActivityChooseSkillBinding.getRoot().getContext()));
+        //三级联动效果
+        pvOptions.setPicker((ArrayList) options1Items);
+        pvOptions.setCyclic(false, false, false);
+        //设置默认选中的三级项目
+        pvOptions.setSelectOptions(0, 0, 0);
+        //监听确定选择按钮
+        pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                int value = options1;
+                    if (value != chooseTag1Index) {
+                        clearCheckedThirdLabels();//选择了不同的一级标签，清空已选择的三级标签
+                        chooseTag1Index = value;
+                        chooseTag2Index = 0;
+                        setChoosedMainLabel(options1Items.get(options1));
+
+                        AllSkillLablesBean.Tag_1 tag_1 = tag1Arr[chooseTag1Index];
+                        Collection<AllSkillLablesBean.Tag_2> tag2Coll = tag_1.mapTag_2.values();
+                        tag2Arr = new AllSkillLablesBean.Tag_2[tag2Coll.size()];
+                        tag2Coll.toArray(tag2Arr);
+                        optionalSecondLabels = new String[tag2Arr.length];
+                        for (int i = 0; i < tag2Arr.length; i++) {
+                            optionalSecondLabels[i] = tag2Arr[i].tag;
+                        }
+                        options2Items.clear();
+                        options2Items.addAll(new ArrayList<>(Arrays.asList(optionalSecondLabels))) ;
+                        setChoosedSecondLabel(options2Items.get(chooseTag2Index));
+                        setThirdSkillLabels();
+                    }
+
+            }
+        });
+        pvOptions.show();
+    }
+
+    private void initpicker2() {
+        pvOptions = new OptionsPickerView(BaseDialog.newDialog(mActivityChooseSkillBinding.getRoot().getContext()));
+        //三级联动效果
+        pvOptions.setPicker((ArrayList) options2Items);
+        pvOptions.setCyclic(false, false, false);
+        //设置默认选中的三级项目
+        pvOptions.setSelectOptions(0, 0, 0);
+        //监听确定选择按钮
+        pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                if (options1 != chooseTag2Index) {
+                    clearCheckedThirdLabels();//选择了不同的二级标签，清空已选择的三级标签
+                    chooseTag2Index = options1;
+                    setChoosedSecondLabel(options2Items.get(options1));
+                    setThirdSkillLabels();
+                }
+            }
+        });
+        pvOptions.show();
+    }
+
     /**
      * 选择一级标签（选择行业）(打开一级标签列表操作)
      *
@@ -382,10 +449,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
      */
     public void chooseMainSkillLabel(View v) {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_EXCLUSIVE_SKILLS_CHOOSE_INDUSTRY);
-
         isChooseMainLabel = true;
-        setChooseSkillLayerVisibility(View.VISIBLE);
-
         Collection<AllSkillLablesBean.Tag_1> tag1Coll = allSkillLablesBean.mapTag_1.values();
         tag1Arr = new AllSkillLablesBean.Tag_1[tag1Coll.size()];
         tag1Coll.toArray(tag1Arr);
@@ -393,13 +457,14 @@ public class ActivityChooseSkillModel extends BaseObservable {
         for (int i = 0; i < tag1Arr.length; i++) {
             optionalMainLabels[i] = tag1Arr[i].tag;
         }
+        initpicker1();
 
-        mNpChooseSkillLabel.setMaxValue(0);
-        mNpChooseSkillLabel.setMinValue(0);
-        mNpChooseSkillLabel.setDisplayedValues(optionalMainLabels);
-        mNpChooseSkillLabel.setMaxValue(optionalMainLabels.length - 1);
-        mNpChooseSkillLabel.setMinValue(0);
-        mNpChooseSkillLabel.setValue(0);
+//        mNpChooseSkillLabel.setMaxValue(0);
+//        mNpChooseSkillLabel.setMinValue(0);
+//        mNpChooseSkillLabel.setDisplayedValues(optionalMainLabels);
+//        mNpChooseSkillLabel.setMaxValue(optionalMainLabels.length - 1);
+//        mNpChooseSkillLabel.setMinValue(0);
+//        mNpChooseSkillLabel.setValue(0);
     }
 
     AllSkillLablesBean.Tag_2[] tag2Arr;
@@ -412,30 +477,30 @@ public class ActivityChooseSkillModel extends BaseObservable {
      */
     public void chooseSecondSkillLabel(View v) {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_EXCLUSIVE_SKILLS_CHOOSE_STATION);
-
-        if (TextUtils.isEmpty(choosedMainLabel)) {
-            return;
-        }
-
-        AllSkillLablesBean.Tag_1 tag_1 = tag1Arr[chooseTag1Index];
-        Collection<AllSkillLablesBean.Tag_2> tag2Coll = tag_1.mapTag_2.values();
-        tag2Arr = new AllSkillLablesBean.Tag_2[tag2Coll.size()];
-        tag2Coll.toArray(tag2Arr);
-        optionalSecondLabels = new String[tag2Arr.length];
-        for (int i = 0; i < tag2Arr.length; i++) {
-            optionalSecondLabels[i] = tag2Arr[i].tag;
-        }
-
-        isChooseMainLabel = false;
-        setChooseSkillLayerVisibility(View.VISIBLE);
-
-        mNpChooseSkillLabel.setMaxValue(0);
-        mNpChooseSkillLabel.setMinValue(0);
-        mNpChooseSkillLabel.setDisplayedValues(optionalSecondLabels);
-        mNpChooseSkillLabel.setMaxValue(optionalSecondLabels.length - 1);
-        mNpChooseSkillLabel.setMinValue(0);
-        mNpChooseSkillLabel.setValue(0);
-        setThirdSkillLabels();
+        initpicker2();
+//        if (TextUtils.isEmpty(choosedMainLabel)) {
+//            return;
+//        }
+//
+//        AllSkillLablesBean.Tag_1 tag_1 = tag1Arr[chooseTag1Index];
+//        Collection<AllSkillLablesBean.Tag_2> tag2Coll = tag_1.mapTag_2.values();
+//        tag2Arr = new AllSkillLablesBean.Tag_2[tag2Coll.size()];
+//        tag2Coll.toArray(tag2Arr);
+//        optionalSecondLabels = new String[tag2Arr.length];
+//        for (int i = 0; i < tag2Arr.length; i++) {
+//            optionalSecondLabels[i] = tag2Arr[i].tag;
+//        }
+//
+//        isChooseMainLabel = false;
+//        setChooseSkillLayerVisibility(View.VISIBLE);
+//
+//        mNpChooseSkillLabel.setMaxValue(0);
+//        mNpChooseSkillLabel.setMinValue(0);
+//        mNpChooseSkillLabel.setDisplayedValues(optionalSecondLabels);
+//        mNpChooseSkillLabel.setMaxValue(optionalSecondLabels.length - 1);
+//        mNpChooseSkillLabel.setMinValue(0);
+//        mNpChooseSkillLabel.setValue(0);
+//        setThirdSkillLabels();
     }
 
     /**

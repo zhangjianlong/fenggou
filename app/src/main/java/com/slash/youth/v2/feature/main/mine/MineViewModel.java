@@ -247,6 +247,9 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     private void loadData() {
         mineInfoUseCase.execute().compose(activity.bindToLifecycle())
                 .subscribe(d -> {
+                    if (null == d){
+                        return;
+                    }
                     MineInfo.DataBean data = d.getMyinfo();
                     this.data.set(data);
 
@@ -277,6 +280,9 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
         otherInfoUseCase.setParams(JsonUtil.mapToJson(map));
         otherInfoUseCase.execute().compose(activity.bindToLifecycle())
                 .subscribe(d -> {
+                    if (null == d){
+                        return;
+                    }
                     connection.set(d.getUinfo().getRelationshipscount() + "");
                 });
     }
