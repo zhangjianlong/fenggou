@@ -2,10 +2,8 @@ package com.slash.youth.http.protocol;
 
 import com.google.gson.Gson;
 import com.slash.youth.domain.SetBean;
-import com.slash.youth.domain.SkillLabelGetBean;
 import com.slash.youth.global.GlobalConstants;
 
-import org.antlr.v4.tool.ast.PredAST;
 import org.xutils.http.RequestParams;
 
 /**

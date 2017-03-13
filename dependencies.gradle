@@ -1,5 +1,6 @@
 ext {
     applicationId = "com.slash.youth"
+
     versionCode = 8
     versionName = "v1.1.2"
 
