@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.core.op.lib.di.HasComponent;
 import com.core.op.lib.messenger.Messenger;
@@ -41,6 +42,8 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
 
     MainComponent component;
 
+    //记录第一次点击的时间
+    private long clickTime = 0;
     private OfflineDialog offlineDialog;
     View msgIconLayer;
     ImageView ivMsgIcon;
@@ -152,6 +155,22 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
         }
         if (!offlineDialog.isShowing()) {
             offlineDialog.show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MsgManager.exit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - clickTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次后退键退出程序", Toast.LENGTH_SHORT).show();
+            clickTime = System.currentTimeMillis();
+        } else {
+            super.onBackPressed();
         }
     }
 }
