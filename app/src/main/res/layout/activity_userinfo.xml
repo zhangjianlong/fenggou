@@ -806,7 +806,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:onClick="@{activityUserInfoModel.attention}">
+                        android:onClick="@{activityUserInfoModel.attention}"
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@+id/iv_care"
@@ -855,8 +856,9 @@
                     </RelativeLayout>
                     <!--加好友-->
                     <RelativeLayout
-                        android:layout_width="173dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="3"
                         android:background="#31C5E4"
                         android:onClick="@{activityUserInfoModel.addFriend}">
 
@@ -879,11 +881,6 @@
         </RelativeLayout>
 
         <FrameLayout
-            android:id="@+id/fl_dialog_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></FrameLayout>
-
-        <FrameLayout
             android:id="@+id/fl_source_avatar_layer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -898,6 +895,11 @@
                 android:onClick="@{activityUserInfoModel.hideViewSourceAvatar}" />
 
         </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_dialog_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
 
     </FrameLayout>
 </layout>

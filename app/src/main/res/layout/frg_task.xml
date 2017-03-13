@@ -47,7 +47,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="进行中"
+                        android:text="@{viewModel.taskStatus}"
                         android:textColor="#FFFFFF"
                         android:textSize="14sp" />
 

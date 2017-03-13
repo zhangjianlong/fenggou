@@ -12,6 +12,9 @@ public abstract class BDViewModel<T> extends BViewModel<T> {
 
     protected BDialog dialog;
 
+    protected OnDialogLisetener onDialogLisetener;
+
+
     public BDViewModel(RxAppCompatActivity activity) {
         super(activity);
     }
@@ -20,5 +23,7 @@ public abstract class BDViewModel<T> extends BViewModel<T> {
         this.dialog = dialog;
     }
 
-
+    public void setOnDialogLisetener(OnDialogLisetener onDialogLisetener) {
+        this.onDialogLisetener = onDialogLisetener;
+    }
 }

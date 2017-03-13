@@ -68,12 +68,15 @@
                                         android:layout_marginRight="10dp"
                                         android:orientation="horizontal">
 
-                                        <com.core.op.lib.weight.RoundImageView
+                                        <com.core.op.lib.weight.ShapedImageView
                                             android:id="@+id/iv_assistant_icon"
                                             android:layout_width="59dp"
                                             android:layout_height="59dp"
                                             android:layout_marginTop="2dp"
                                             android:src="@mipmap/default_avatar"
+                                            app:round_radius="10dp"
+                                            app:shape_mode="round_rect"
+                                            app:stroke_width="0dp"
                                             app:uri="@{viewModel.uri}" />
 
                                         <LinearLayout
@@ -103,7 +106,8 @@
                                                     android:layout_gravity="center_vertical"
                                                     android:layout_marginLeft="9dp"
                                                     android:src="@mipmap/v_icon_home_my"
-                                                    android:visibility="@{viewModel.data.isauth==1?View.VISIBLE:View.GONE}" />
+                                                    android:visibility="@{viewModel.data.isauth==1?View.VISIBLE:View.GONE}"
+                                                    app:clickCommand="@{viewModel.identificateClick}" />
 
                                                 <TextView
                                                     android:id="@+id/tv_my_Approval"
@@ -119,8 +123,8 @@
                                                     android:text="去认证"
                                                     android:textColor="@color/white"
                                                     android:textSize="12sp"
-                                                    android:visibility="@{viewModel.data.isauth==0?View.VISIBLE:View.GONE}"
-                                                    app:clickCommand="@{viewModel.identificateClick}" />
+                                                    app:clickCommand="@{viewModel.approvalClick}"
+                                                    android:visibility="@{viewModel.data.isauth==0?View.VISIBLE:View.GONE}" />
 
                                             </LinearLayout>
 
@@ -812,7 +816,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginRight="30dp"
                         android:layout_toLeftOf="@id/iv_edit"
                         android:background="@mipmap/icon_mine_set"
                         app:clickCommand="@{viewModel.settingClick}" />
@@ -855,7 +859,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginRight="30dp"
                         android:layout_toLeftOf="@id/iv_edit_up"
                         android:background="@mipmap/icon_mine_set_up"
                         app:clickCommand="@{viewModel.settingClick}" />

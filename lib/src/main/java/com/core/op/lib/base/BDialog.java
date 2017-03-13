@@ -46,4 +46,8 @@ public abstract class BDialog<V extends BDViewModel, T extends ViewDataBinding> 
 
     protected abstract void bindViewModel();
 
+    public void setOnDialogLisetener(OnDialogLisetener onDialogLisetener) {
+        viewModel.setOnDialogLisetener(onDialogLisetener);
+    }
+
 }

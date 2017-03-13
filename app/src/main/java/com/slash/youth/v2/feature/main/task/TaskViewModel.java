@@ -20,6 +20,8 @@ import com.trello.rxlifecycle.components.support.RxFragment;
 import javax.inject.Inject;
 
 import static com.slash.youth.v2.feature.main.MainViewModel.CHANG_POSITION;
+import static com.slash.youth.v2.feature.main.task.list.TaskListViewModel.TASK_ONWAY;
+import static com.slash.youth.v2.feature.main.task.list.TaskListViewModel.TASK_STUTUS;
 
 @PerActivity
 public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
@@ -27,6 +29,8 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
     public final static String SHOW_NODATA = "SHOW_NODATA";
 
     private SelectTaskDialog selectTaskDialog;
+
+    public static ObservableField<String> taskStatus = new ObservableField<>("进行中");
 
     private PubTaskDialog pubTaskDialog;
 
@@ -65,6 +69,14 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
                 noDataVisible.set(View.VISIBLE);
             else
                 noDataVisible.set(View.GONE);
+        });
+
+        Messenger.getDefault().register(this, TASK_STUTUS, String.class, status -> {
+            if (status.equals(TASK_ONWAY)) {
+                taskStatus.set("进行中");
+            } else {
+                taskStatus.set("历史");
+            }
         });
     }
 }

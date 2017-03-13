@@ -369,7 +369,7 @@ public class MsgManager {
                                 }
                             }, Conversation.ConversationType.PRIVATE);
                         }
-                        Messenger.getDefault().send(TASK_CHANGE);
+                        Messenger.getDefault().sendNoMsg(TASK_CHANGE);
                     }
                 }
             } else if (senderUserId.equals("1000")) {//斜杠消息助手
@@ -422,7 +422,7 @@ public class MsgManager {
                     }
                 });
 
-                Messenger.getDefault().send(TASK_CHANGE);
+                Messenger.getDefault().sendNoMsg(TASK_CHANGE);
             } else if (senderUserId.equals(customerServiceUid)) {//斜杠客服助手,目前任务消息类型是TextMessage，内容都在content里面
                 CommonUtils.getHandler().post(new Runnable() {
                     @Override

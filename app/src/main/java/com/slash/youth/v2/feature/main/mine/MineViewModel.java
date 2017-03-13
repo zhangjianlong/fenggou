@@ -3,11 +3,14 @@ package com.slash.youth.v2.feature.main.mine;
 
 import android.content.Intent;
 import android.databinding.ObservableField;
+import android.text.TextUtils;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
 import com.core.op.lib.base.BFViewModel;
+import com.core.op.lib.base.OnDialogLisetener;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
@@ -37,6 +40,7 @@ import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.CountUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.v2.feature.dialog.mine.IdentificateDialog;
 import com.slash.youth.v2.util.MessgeKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -46,6 +50,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+
+import static android.R.attr.id;
+import static io.rong.imlib.statistics.UserData.phone;
 
 
 @PerActivity
@@ -65,6 +72,9 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
     boolean isLoadDataFinished = false;
     private RotateAnimation raExpertMarksMaker;
+
+    IdentificateDialog dialog;
+
     public final ReplyCommand personInfoClick = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_PERSON_MESSAGE);
         Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
@@ -80,6 +90,41 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
         intentApprovalActivity.putExtra("Uid", LoginManager.currentLoginUserId);
         activity.startActivityForResult(intentApprovalActivity, UserInfoEngine.MY_USER_EDITOR);
     });
+
+    public final ReplyCommand approvalClick = new ReplyCommand(() -> {
+        //埋点
+        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_APPROVE);
+
+        switch (data.get().getCareertype()) {
+            case 1:
+                if (TextUtils.isEmpty(data.get().getCompany()) || TextUtils.isEmpty(data.get().getName()) || TextUtils.isEmpty(data.get().getPosition())) {
+                    if (!dialog.isShowing())
+                        dialog.show();
+                } else {
+                    jumpApprovalActivity();
+                }
+                break;
+            case 2:
+                if (TextUtils.isEmpty(data.get().getName())) {
+                    if (!dialog.isShowing())
+                        dialog.show();
+                } else {
+                    jumpApprovalActivity();
+                }
+                break;
+            case 0:
+                if (!dialog.isShowing())
+                    dialog.show();
+                break;
+        }
+    });
+
+    private void jumpApprovalActivity() {
+        Intent intentApprovalActivity = new Intent(CommonUtils.getContext(), ApprovalActivity.class);
+        intentApprovalActivity.putExtra("careertype", data.get().getCareertype());
+        intentApprovalActivity.putExtra("Uid", LoginManager.currentLoginUserId);
+        activity.startActivityForResult(intentApprovalActivity, Constants.APPROVAL);
+    }
 
     public final ReplyCommand influenceClick = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_INFLUENCE);
@@ -162,10 +207,25 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     @Inject
     public MineViewModel(RxAppCompatActivity activity,
                          MineInfoUseCase mineInfoUseCase,
-                         OtherInfoUseCase otherInfoUseCase) {
+                         OtherInfoUseCase otherInfoUseCase,
+                         IdentificateDialog dialog) {
         super(activity);
         this.mineInfoUseCase = mineInfoUseCase;
         this.otherInfoUseCase = otherInfoUseCase;
+        this.dialog = dialog;
+        dialog.setOnDialogLisetener(new OnDialogLisetener() {
+            @Override
+            public void onConfirm() {
+                Intent intentUserinfoEditorActivity = new Intent(CommonUtils.getContext(), UserinfoEditorActivity.class);
+                intentUserinfoEditorActivity.putExtra("myId", data.get().getId());
+                activity.startActivityForResult(intentUserinfoEditorActivity, UserInfoEngine.MY_USER_EDITOR);
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
     }
 
     @Override

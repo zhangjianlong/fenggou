@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
+        android:background="@drawable/selector_bg_white_1111"
         app:cardBackgroundColor="#ffffff"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
@@ -42,12 +43,15 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp">
 
-                    <ImageView
+                    <com.core.op.lib.weight.ShapedImageView
                         android:id="@+id/iv_my_task_avatar"
                         android:layout_width="58dp"
                         android:layout_height="58dp"
                         android:scaleType="fitXY"
                         android:src="@mipmap/assistant_icon"
+                        app:round_radius="10dp"
+                        app:shape_mode="round_rect"
+                        app:stroke_width="0dp"
                         app:uri="@{viewModel.uri}" />
 
                     <ImageView
