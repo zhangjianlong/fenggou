@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
@@ -39,6 +40,7 @@ import com.slash.youth.utils.PhoneNumUtils;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -179,8 +181,8 @@ public class ActivityLoginModel extends BaseObservable {
             return;
         }
 
-        String phoenNum = mActivityLoginBinding.etActivityLoginPhonenum.getText().toString();
-        String pin = mActivityLoginBinding.etActivityLoginVerificationCode.getText().toString();
+        String phoenNum = mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim();
+        String pin = mActivityLoginBinding.etActivityLoginVerificationCode.getText().toString().trim();
         if (TextUtils.isEmpty(phoenNum) || TextUtils.isEmpty(pin)) {
             ToastUtils.shortToast("手机号或者验证码不能为空");
             return;
@@ -193,6 +195,8 @@ public class ActivityLoginModel extends BaseObservable {
         LoginManager.phoneLogin(new BaseProtocol.IResultExecutor<PhoneLoginResultBean>() {
             @Override
             public void execute(PhoneLoginResultBean dataBean) {
+                PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_PHONE,mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim());
+                LoginManager.currentLoginUserPhone = mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim();
 
                 //增加验证码错误提示
                 if (dataBean.rescode == 7) {

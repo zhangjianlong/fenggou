@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.DialogVersionUpdateBinding;
 import com.slash.youth.domain.CustomerServiceBean;
@@ -36,6 +37,7 @@ import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.TimeUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.util.ShareKey;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.umeng.analytics.MobclickAgent;
 
@@ -128,6 +130,7 @@ public class SplashActivity extends BaseActivity {
                     if (uid != -1) {
                         LogKit.v("token登录成功，直接跳转到首页");
                         LoginManager.currentLoginUserId = uid;
+                        LoginManager.currentLoginUserPhone =  PreferenceUtil.readString(CommonUtils.getContext(), ShareKey.USER_PHONE);
 //                        LoginManager.token = token;
                         LoginManager.token = dataBean.data.token;//每次token登录，都保存服务端返回过来的最新token
                         LoginManager.rongToken = rongToken;

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.amap.api.maps2d.model.LatLng;
 import com.google.gson.Gson;
+import com.jakewharton.rxbinding.view.RxView;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityServiceDetailBinding;
@@ -61,6 +62,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observer;
 
 /**
  * Created by zhouyifeng on 2016/11/9.
@@ -98,6 +102,22 @@ public class ServiceDetailModel extends BaseObservable {
 
     private void initView() {
 
+        RxView.clicks(mActivityServiceDetailBinding.tvOnshelfOffshelf).throttleFirst(1, TimeUnit.SECONDS).subscribe(new Observer<Void>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Void aVoid) {
+                offShelfService();
+            }
+        });
     }
 
     public void goBack(View v) {
@@ -120,7 +140,7 @@ public class ServiceDetailModel extends BaseObservable {
     }
 
     //下架服务
-    public void offShelfService(View v) {
+    public void offShelfService() {
         if (isonline == 0) {//上架埋点
             MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_SERVICE_DETAIL_SHELVE);
         } else {//下架埋点
