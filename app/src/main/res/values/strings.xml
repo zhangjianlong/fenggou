@@ -56,5 +56,6 @@
 
     <string name="instalmentInfoContent" formatted="false"><Data><![CDATA[<span style="color:#999999;">基于任务的阶段性特征，若双方将任务划分成若干个阶段，预支付的资金也将会被划分成对应的若干个部分，在需求方确认服务方提交的某阶段的服务时，该阶段的资金将被划转给服务方。</span>]]></Data></string>
 
+    <string name="app.manager">发布管理</string>
 
 </resources>
