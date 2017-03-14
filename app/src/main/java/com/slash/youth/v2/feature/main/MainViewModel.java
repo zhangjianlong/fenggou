@@ -24,6 +24,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 import static com.slash.youth.v2.feature.main.mine.MineViewModel.START_ANIMATION;
 import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 

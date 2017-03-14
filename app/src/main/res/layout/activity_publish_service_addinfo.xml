@@ -277,8 +277,8 @@
                             android:background="@android:color/transparent"
                             android:hint="请填写"
                             android:inputType="numberDecimal"
-                            android:textColor="#333"
                             android:textColorHint="#CCCCCC"
+                            android:textColor="#333"
                             android:textSize="13sp" />
 
                         <TextView

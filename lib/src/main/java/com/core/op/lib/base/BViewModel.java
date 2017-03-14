@@ -13,7 +13,7 @@ import com.trello.rxlifecycle.components.support.RxFragment;
  */
 public class BViewModel<T> {
 
-    protected RxAppCompatActivity activity;
+    protected final RxAppCompatActivity activity;
 
     public BViewModel() {
         activity = null;

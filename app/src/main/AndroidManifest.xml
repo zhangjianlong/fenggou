@@ -195,10 +195,6 @@
             android:name=".v2.feature.main.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".v2.feature.back.SimpleBackActivity"
-            android:windowSoftInputMode="adjustPan" />
-
         <activity android:name=".ui.activity.CityLocationActivity" />
         <activity android:name=".ui.activity.SubscribeActivity" />
         <activity
@@ -585,7 +581,11 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-
+        <activity android:name=".Test" />
+        <activity android:name=".Identificate" />
+        <activity android:name=".Message" />
+        <activity android:name=".view.impl.MList" />
+        <activity android:name=".view.impl.Manager"></activity>
     </application>
 
 </manifest>

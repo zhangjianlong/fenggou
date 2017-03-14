@@ -59,7 +59,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     ServiceDetailBean serviceDetailBean;
     boolean isFromSkillManager;
     private OptionsPickerView pvOptions;
-    private ArrayList<String> options1Items = new ArrayList<String>();
+    private List<String> options1Items = new ArrayList<String>();
 
     public PublishServiceAddInfoModel(ActivityPublishServiceAddinfoBinding activityPublishServiceAddinfoBinding, Activity activity) {
         this.mActivityPublishServiceAddinfoBinding = activityPublishServiceAddinfoBinding;
@@ -74,7 +74,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     private void initpicker() {
         pvOptions = new OptionsPickerView(BaseDialog.newDialog(mActivityPublishServiceAddinfoBinding.getRoot().getContext()));
         //三级联动效果
-        pvOptions.setPicker(options1Items);
+        pvOptions.setPicker((ArrayList) options1Items);
         pvOptions.setCyclic(false, false, false);
         //设置默认选中的三级项目
         pvOptions.setSelectOptions(0, 0, 0);
@@ -94,7 +94,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     private void initData() {
         mSallSkillLabels = mActivityPublishServiceAddinfoBinding.sallPublishServiceAddedSkilllabels;//在 loadOriginServiceData()中会使用，所以必须在这里初始化
         optionalPriceUnit = new String[]{"次", "个", "幅", "份", "单", "小时", "分钟", "天", "其他"};
-        options1Items.addAll(Arrays.asList(optionalPriceUnit));
+        options1Items = Arrays.asList(optionalPriceUnit);
         serviceDetailBean = (ServiceDetailBean) mActivity.getIntent().getSerializableExtra("serviceDetailBean");
         isFromSkillManager = mActivity.getIntent().getBooleanExtra("isFromSkillManager", false);
         if (serviceDetailBean != null) {//表示是修改服务，首先需要把服务的数据填充
@@ -403,7 +403,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     }
 
     public void openChoosePriceUnit(View v) {
-        pvOptions.show();
+    pvOptions.show();
 
 
 //        setChoosePriceUnitLayerVisibility(View.VISIBLE);

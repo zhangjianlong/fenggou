@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.core.op.lib.messenger.Messenger;
+import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityApprovalBinding;
 import com.slash.youth.databinding.ApprovalCertificatesBinding;

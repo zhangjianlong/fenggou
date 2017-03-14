@@ -272,7 +272,6 @@
                         android:background="@android:color/transparent"
                         android:hint="不填表示对方报价"
                         android:inputType="numberDecimal"
-                        android:textColor="#333333"
                         android:textColorHint="#CCCCCC"
                         android:textSize="13sp" />
 
@@ -477,7 +476,6 @@
                         android:editable="false"
                         android:hint="输入见面地点或点击图标选择"
                         android:singleLine="true"
-                        android:textColor="#333333"
                         android:textColorHint="#CCCCCC"
                         android:textSize="13sp" />
 
