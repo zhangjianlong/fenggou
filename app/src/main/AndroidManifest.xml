@@ -584,7 +584,8 @@
         <activity android:name=".Test" />
         <activity android:name=".Identificate" />
         <activity android:name=".Message" />
-        <activity android:name=".view.impl.MList"></activity>
+        <activity android:name=".view.impl.MList" />
+        <activity android:name=".view.impl.Manager"></activity>
     </application>
 
 </manifest>
