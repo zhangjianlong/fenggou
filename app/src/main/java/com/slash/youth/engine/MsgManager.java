@@ -53,7 +53,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.RingingUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
-import com.slash.youth.v2.util.MessgeKey;
+import com.slash.youth.v2.util.MessageKey;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -602,7 +602,7 @@ public class MsgManager {
                 }
             }
 
-            Messenger.getDefault().sendNoMsg(MessgeKey.NEW_MESSAGE);
+            Messenger.getDefault().sendNoMsg(MessageKey.NEW_MESSAGE);
             RingingUtil.playSysRinging();//响铃
             return false;
         }
