@@ -29,13 +29,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.Conversation;
 
-import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 import static com.slash.youth.v2.feature.main.mine.MineViewModel.START_ANIMATION;
 import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
-import static com.umeng.socialize.Config.dialog;
 
 @PerActivity
 public class MainViewModel extends BAViewModel<ActMainBinding> {

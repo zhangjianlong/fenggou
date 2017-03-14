@@ -12,7 +12,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 
 import com.core.op.lib.messenger.Messenger;
-import com.core.op.lib.utils.PreferenceUtil;
 import com.core.op.lib.utils.StrUtil;
 import com.google.gson.Gson;
 import com.slash.youth.R;
@@ -43,7 +42,6 @@ import com.slash.youth.ui.activity.MyBidServiceActivity;
 import com.slash.youth.ui.activity.MyPublishDemandActivity;
 import com.slash.youth.ui.activity.MyPublishServiceActivity;
 import com.slash.youth.ui.activity.base.BaseActivity;
-import com.slash.youth.ui.event.OffLineEvent;
 import com.slash.youth.ui.pager.HomeInfoPager;
 import com.slash.youth.ui.viewmodel.ItemPushInfoModel;
 import com.slash.youth.ui.viewmodel.MessageModel;
@@ -80,8 +78,6 @@ import io.rong.message.CommandMessage;
 import io.rong.message.CommandNotificationMessage;
 import io.rong.message.TextMessage;
 
-import static android.R.id.message;
-import static com.slash.youth.utils.RingingUtil.playSysRinging;
 import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
 
 

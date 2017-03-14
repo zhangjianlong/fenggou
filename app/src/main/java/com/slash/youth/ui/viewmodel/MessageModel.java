@@ -26,8 +26,6 @@ import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
 
-import static com.slash.youth.R.id.view;
-import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 
 /**
  * Created by zhouyifeng on 2017/2/28.

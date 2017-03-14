@@ -80,6 +80,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.MessgeKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -109,7 +110,6 @@ import io.rong.message.ReadReceiptMessage;
 import io.rong.message.TextMessage;
 import io.rong.message.VoiceMessage;
 
-import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 
 /**
  * Created by zhouyifeng on 2016/11/16.
@@ -178,7 +178,7 @@ public class ChatModel extends BaseObservable {
             initListener();
         }
 
-        Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
+        Messenger.getDefault().sendNoMsg(MessgeKey.NEW_MESSAGE);
     }
 
     private void initData() {
@@ -2355,7 +2355,7 @@ public class ChatModel extends BaseObservable {
 
             }
         });
-        Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
+        Messenger.getDefault().sendNoMsg(MessgeKey.NEW_MESSAGE);
     }
 
     PagerAdapter vpViewPicAdapter = new PagerAdapter() {
