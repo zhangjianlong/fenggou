@@ -123,8 +123,8 @@
                                                     android:text="去认证"
                                                     android:textColor="@color/white"
                                                     android:textSize="12sp"
-                                                    app:clickCommand="@{viewModel.approvalClick}"
-                                                    android:visibility="@{viewModel.data.isauth==0?View.VISIBLE:View.GONE}" />
+                                                    android:visibility="@{viewModel.data.isauth==0?View.VISIBLE:View.GONE}"
+                                                    app:clickCommand="@{viewModel.approvalClick}" />
 
                                             </LinearLayout>
 
@@ -207,7 +207,7 @@
                                                         android:id="@+id/tv_service_point1"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:text="@{String.valueOf(viewModel.data.userservicepoint)}"
+                                                        android:text="@{viewModel.serverStar}"
                                                         android:textColor="#333333" />
                                                 </LinearLayout>
                                             </LinearLayout>

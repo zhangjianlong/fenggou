@@ -201,6 +201,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
     public String mark = "0";
     public ObservableField<String> connection = new ObservableField<>("0");
+    public ObservableField<String> serverStar = new ObservableField<>("0.0星");
 
     @Inject
     public MineViewModel(RxAppCompatActivity activity,
@@ -268,6 +269,8 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                             mark = (int) (expertscore - expertMarks) + "";
                         }
                     }
+
+                    serverStar.set(data.getUserservicepoint() + "星");
                     setExpertMarks();
                     initAnimation();
                     isLoadDataFinished = true;

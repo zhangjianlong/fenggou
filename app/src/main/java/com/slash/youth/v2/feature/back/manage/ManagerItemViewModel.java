@@ -27,9 +27,6 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.HashMap;
 import java.util.Map;
 
-import rx.Observable;
-
-import static android.R.attr.action;
 
 /**
  * Created by acer on 2017/3/14.
@@ -44,6 +41,19 @@ public class ManagerItemViewModel extends BViewModel {
     PubManagerUseCase pubManagerUseCase;
 
     int position;
+
+
+    public ObservableField<String> status = new ObservableField<>();
+    public ObservableField<String> quote = new ObservableField<>();
+    public ObservableField<String> uri = new ObservableField<>();
+
+    public ObservableField<Integer> statusColor = new ObservableField<>();
+
+    public ObservableField<String> type = new ObservableField<>();
+    public ObservableField<String> pubilcTime = new ObservableField<>();
+    public ObservableField<Integer> typeVisible = new ObservableField<>(View.GONE);
+    public ObservableField<Integer> timeVisible = new ObservableField<>(View.GONE);
+
 
     public final ReplyCommand delClick = new ReplyCommand(() -> {
         Map<String, String> map = new HashMap<>();
@@ -63,7 +73,7 @@ public class ManagerItemViewModel extends BViewModel {
                 });
     });
 
-    public final ReplyCommand pubClick = new ReplyCommand(() -> {
+    public ReplyCommand pubClick = new ReplyCommand(() -> {
 
         String text = status.get();
         int action = 0;
@@ -87,11 +97,11 @@ public class ManagerItemViewModel extends BViewModel {
                         switch (d.getStatus()) {
                             case 1:
                                 if (text.equals(MyManager.UP)) {
-                                    ToastUtils.shortToast("上架成功");
+//                                    ToastUtils.shortToast("架成功");
                                     status.set(MyManager.DOWN);
                                     statusColor.set(Color.parseColor("#999999"));
                                 } else {
-                                    ToastUtils.shortToast("上架成功");
+//                                    ToastUtils.shortToast("上架成功");
                                     status.set(MyManager.UP);
                                     statusColor.set(Color.parseColor("#31C6E4"));
                                 }
@@ -119,17 +129,6 @@ public class ManagerItemViewModel extends BViewModel {
                     });
         }
     });
-
-    public static ObservableField<String> status = new ObservableField<>();
-    public static ObservableField<String> quote = new ObservableField<>();
-    public static ObservableField<String> uri = new ObservableField<>();
-
-    public static ObservableField<Integer> statusColor = new ObservableField<>();
-
-    public static ObservableField<String> type = new ObservableField<>();
-    public static ObservableField<String> pubilcTime = new ObservableField<>();
-    public static ObservableField<Integer> typeVisible = new ObservableField<>(View.GONE);
-    public static ObservableField<Integer> timeVisible = new ObservableField<>(View.GONE);
 
     public ManagerItemViewModel(RxAppCompatActivity activity,
                                 MineManagerList.ListBean listBean,
