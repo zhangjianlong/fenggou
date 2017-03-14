@@ -1,5 +1,6 @@
 package com.slash.youth.v2.feature.back.manage;
 
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.slash.youth.domain.interactor.main.PubManagerUseCase;
 import com.slash.youth.engine.FirstPagerManager;
 import com.slash.youth.engine.MyManager;
 import com.slash.youth.global.GlobalConstants;
+import com.slash.youth.ui.activity.DemandDetailActivity;
+import com.slash.youth.ui.activity.ServiceDetailActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.SpUtils;
@@ -27,9 +30,6 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.HashMap;
 import java.util.Map;
 
-import rx.Observable;
-
-import static android.R.attr.action;
 
 /**
  * Created by acer on 2017/3/14.
@@ -44,6 +44,36 @@ public class ManagerItemViewModel extends BViewModel {
     PubManagerUseCase pubManagerUseCase;
 
     int position;
+
+
+    public ObservableField<String> status = new ObservableField<>();
+    public ObservableField<String> quote = new ObservableField<>();
+    public ObservableField<String> uri = new ObservableField<>();
+
+    public ObservableField<Integer> statusColor = new ObservableField<>();
+
+    public ObservableField<String> type = new ObservableField<>();
+    public ObservableField<String> pubilcTime = new ObservableField<>();
+    public ObservableField<Integer> typeVisible = new ObservableField<>(View.GONE);
+    public ObservableField<Integer> timeVisible = new ObservableField<>(View.GONE);
+
+    public final ReplyCommand click = new ReplyCommand(() -> {
+        int type = data.getType();
+        switch (type) {
+            case 1:
+                long demandId = data.getTid();
+                Intent intentDemandDetailActivity = new Intent(CommonUtils.getContext(), DemandDetailActivity.class);
+                intentDemandDetailActivity.putExtra("demandId", demandId);
+                activity.startActivity(intentDemandDetailActivity);
+                break;
+            case 2:
+                long serviceId = data.getTid();
+                Intent intentServiceDetailActivity = new Intent(CommonUtils.getContext(), ServiceDetailActivity.class);
+                intentServiceDetailActivity.putExtra("serviceId", serviceId);
+                activity.startActivity(intentServiceDetailActivity);
+                break;
+        }
+    });
 
     public final ReplyCommand delClick = new ReplyCommand(() -> {
         Map<String, String> map = new HashMap<>();
@@ -63,7 +93,7 @@ public class ManagerItemViewModel extends BViewModel {
                 });
     });
 
-    public final ReplyCommand pubClick = new ReplyCommand(() -> {
+    public ReplyCommand pubClick = new ReplyCommand(() -> {
 
         String text = status.get();
         int action = 0;
@@ -87,11 +117,11 @@ public class ManagerItemViewModel extends BViewModel {
                         switch (d.getStatus()) {
                             case 1:
                                 if (text.equals(MyManager.UP)) {
-                                    ToastUtils.shortToast("上架成功");
+//                                    ToastUtils.shortToast("架成功");
                                     status.set(MyManager.DOWN);
                                     statusColor.set(Color.parseColor("#999999"));
                                 } else {
-                                    ToastUtils.shortToast("上架成功");
+//                                    ToastUtils.shortToast("上架成功");
                                     status.set(MyManager.UP);
                                     statusColor.set(Color.parseColor("#31C6E4"));
                                 }
@@ -119,17 +149,6 @@ public class ManagerItemViewModel extends BViewModel {
                     });
         }
     });
-
-    public static ObservableField<String> status = new ObservableField<>();
-    public static ObservableField<String> quote = new ObservableField<>();
-    public static ObservableField<String> uri = new ObservableField<>();
-
-    public static ObservableField<Integer> statusColor = new ObservableField<>();
-
-    public static ObservableField<String> type = new ObservableField<>();
-    public static ObservableField<String> pubilcTime = new ObservableField<>();
-    public static ObservableField<Integer> typeVisible = new ObservableField<>(View.GONE);
-    public static ObservableField<Integer> timeVisible = new ObservableField<>(View.GONE);
 
     public ManagerItemViewModel(RxAppCompatActivity activity,
                                 MineManagerList.ListBean listBean,

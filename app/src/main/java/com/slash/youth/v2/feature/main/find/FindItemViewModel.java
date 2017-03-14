@@ -3,6 +3,7 @@ package com.slash.youth.v2.feature.main.find;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.text.TextUtils;
 import android.view.View;
@@ -65,9 +66,7 @@ public class FindItemViewModel extends BViewModel {
         }
     });
 
-    public
-    @DrawableRes
-    int defaulSrc;
+    public Drawable defaulSrc;
 
     public FindItemViewModel(RxAppCompatActivity activity, FindDemand.ListBean listBean) {
         super(activity);
@@ -82,7 +81,7 @@ public class FindItemViewModel extends BViewModel {
                 this.name = name;
                 break;
             case 0://匿名
-                defaulSrc = R.mipmap.anonymity_avater;
+                defaulSrc = activity.getResources().getDrawable(R.mipmap.anonymity_avater);
                 if (!TextUtils.isEmpty(name)) {
                     String firstName = name.substring(0, 1);
                     String anonymityName = firstName + "xx";
@@ -147,7 +146,7 @@ public class FindItemViewModel extends BViewModel {
                 this.name = name;
                 break;
             case 0://匿名
-                defaulSrc = R.mipmap.anonymity_avater;
+                defaulSrc = activity.getResources().getDrawable(R.mipmap.anonymity_avater);
                 if (!TextUtils.isEmpty(name)) {
                     String firstName = name.substring(0, 1);
                     String anonymityName = firstName + "xx";
