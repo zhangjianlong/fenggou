@@ -52,6 +52,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.R.id.list;
+
 /**
  * Created by zss on 2016/9/8.
  */
@@ -254,14 +256,17 @@ public class SubscribeActivity extends BaseActivity {
                 listThirdSkilllabelName.add(new SkillLabelBean(f1, f2, id, tag));
             }
         }
-        listener.OnListener(listFirstSkilllabelName);
+        if (listener != null)
+            listener.OnListener(listFirstSkilllabelName);
         //获取默认的一级id,展示二级
         for (int i = 0; i < listFirstSkilllabelName.size(); i++) {
             String tag = listFirstSkilllabelName.get(i).getTag();
             if (tag.equals(industry)) {
                 industrySkillLabelBean = listFirstSkilllabelName.get(i);
                 mActivitySubscribeBinding.tvFirstSkillLabelTitle.setText(industry);
-                ActivitySubscribeModel.mNpChooseMainLabels.setValue(i);
+                if (ActivitySubscribeModel.mNpChooseMainLabels != null)
+                    ActivitySubscribeModel.mNpChooseMainLabels.setValue(i);
+                break;
             }
         }
         int firstId = 0;

@@ -6,7 +6,9 @@ import com.slash.youth.domain.bean.FindDemand;
 import com.slash.youth.domain.bean.FindServices;
 import com.slash.youth.domain.bean.HomeTagInfoBean;
 import com.slash.youth.domain.bean.MineInfo;
+import com.slash.youth.domain.bean.MineManagerList;
 import com.slash.youth.domain.bean.OtherInfo;
+import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
 
 import rx.Observable;
@@ -32,4 +34,11 @@ public interface MainRepository {
     Observable<OtherInfo> getOtherInfo(String def);
 
     Observable<MineInfo> getMineInfo();
+
+    Observable<MineManagerList> getMineManagerList(String def);
+
+    Observable<StatusBean> delManager(String def);
+
+    Observable<StatusBean> pubManager(String def);
+
 }

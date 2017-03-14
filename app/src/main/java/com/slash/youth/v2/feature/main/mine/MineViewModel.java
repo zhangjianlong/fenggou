@@ -29,7 +29,6 @@ import com.slash.youth.ui.activity.MyCollectionActivity;
 import com.slash.youth.ui.activity.MyFriendActivtiy;
 import com.slash.youth.ui.activity.MyHelpActivity;
 import com.slash.youth.ui.activity.MySettingActivity;
-import com.slash.youth.ui.activity.MySkillManageActivity;
 import com.slash.youth.ui.activity.UserInfoActivity;
 import com.slash.youth.ui.activity.UserinfoEditorActivity;
 import com.slash.youth.ui.activity.VisitorsActivity;
@@ -39,6 +38,8 @@ import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.CountUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.v2.feature.back.SimpleBackActivity;
+import com.slash.youth.v2.feature.back.SimpleBackPage;
 import com.slash.youth.v2.feature.dialog.mine.IdentificateDialog;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -147,10 +148,11 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     });
 
     public final ReplyCommand managerClick = new ReplyCommand(() -> {
-        Intent intentMySkillManageActivity = new Intent(CommonUtils.getContext(), MySkillManageActivity.class);
-        intentMySkillManageActivity.putExtra("Title", Constants.MY_TITLE_MANAGER_MY_PUBLISH);
-        intentMySkillManageActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        activity.startActivity(intentMySkillManageActivity);
+//        Intent intentMySkillManageActivity = new Intent(CommonUtils.getContext(), MySkillManageActivity.class);
+//        intentMySkillManageActivity.putExtra("Title", Constants.MY_TITLE_MANAGER_MY_PUBLISH);
+//        intentMySkillManageActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        activity.startActivity(intentMySkillManageActivity);
+        SimpleBackActivity.instance(activity, SimpleBackPage.MANAGER);
     });
 
     public final ReplyCommand collectionClick = new ReplyCommand(() -> {
@@ -193,7 +195,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     public String totalsMoney = "0.0元";
 
     public ObservableField<String> uri = new ObservableField<>();
-    public String over;
+    public ObservableField<String> over = new ObservableField<>();
 
     public String grade;
 
@@ -243,7 +245,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     private void loadData() {
         mineInfoUseCase.execute().compose(activity.bindToLifecycle())
                 .subscribe(d -> {
-                    if (null == d){
+                    if (null == d) {
                         return;
                     }
                     MineInfo.DataBean data = d.getMyinfo();
@@ -253,7 +255,8 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                     uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());
 
                     int v = (int) (data.getExpertratio() * 100);
-                    over = v + "%";
+
+                    over.set(v + "%");
 
                     List<Integer> expertlevels = data.getExpertlevels();//每个等级对应的分数
                     if (expertlevels.size() != 0) {
@@ -276,7 +279,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
         otherInfoUseCase.setParams(JsonUtil.mapToJson(map));
         otherInfoUseCase.execute().compose(activity.bindToLifecycle())
                 .subscribe(d -> {
-                    if (null == d){
+                    if (null == d) {
                         return;
                     }
                     connection.set(d.getUinfo().getRelationshipscount() + "");

@@ -1,17 +1,11 @@
 package com.slash.youth.v2.feature.back.manage;
 
-import com.slash.youth.R;
-import com.slash.youth.v2.base.BaseFragment;
-import com.slash.youth.databinding.FrgManagerBinding;
-import com.slash.youth.v2.di.components.SimpleBackComponent;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
-import com.core.op.lib.utils.inject.RootView;
+import com.slash.youth.v2.base.list.BaseListFragment;
+import com.slash.youth.v2.di.components.SimpleBackComponent;
 
-import javax.inject.Inject;
-
-@RootView(R.layout.frg_manager)
-public final class ManagerFragment extends BaseFragment<ManagerViewModel, FrgManagerBinding> {
+public final class ManagerFragment extends BaseListFragment<ManagerViewModel> {
 
     public static ManagerFragment instance() {
         return new ManagerFragment();

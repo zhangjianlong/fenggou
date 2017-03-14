@@ -18,6 +18,7 @@ import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.weight.EmptyLayout;
 import com.core.op.lib.weight.RecycleScrollView;
 import com.core.op.lib.weight.loading.Indicator;
 import com.slash.youth.BR;
@@ -247,6 +248,12 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 .flatMap(data -> {
                     lItemViewModels.clear();
                     itemViewModels.clear();
+                    if (data.getRadlist().size() == 0 && data.getReclist().size() == 0) {
+                        errorVisible.set(View.VISIBLE);
+                        errorType.set(EmptyLayout.NODATA);
+                    } else {
+                        errorVisible.set(View.GONE);
+                    }
                     if (data.getReclist() != null && data.getReclist().size() != 0) {
                         for (FindDemand.ListBean listBean : data.getReclist()) {
                             lItemViewModels.add(new FindItemViewModel(activity, listBean));
@@ -265,9 +272,6 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 }, () -> {
                     binding.recyclerView.getAdapter().notifyDataSetChanged();
 
-                    if (itemViewModels.size() != 0 || lItemViewModels.size() != 0) {
-                        errorVisible.set(View.GONE);
-                    }
                     if (isRefresh) {
                         isRefreshing.set(false);
                         startInAnim();
@@ -282,6 +286,12 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 .flatMap(data -> {
                     lItemViewModels.clear();
                     itemViewModels.clear();
+                    if (data.getRadlist().size() == 0 && data.getReclist().size() == 0) {
+                        errorVisible.set(View.VISIBLE);
+                        errorType.set(EmptyLayout.NODATA);
+                    } else {
+                        errorVisible.set(View.GONE);
+                    }
                     if (data.getReclist() != null && data.getReclist().size() != 0) {
                         for (FindServices.ListBean listBean : data.getReclist()) {
                             lItemViewModels.add(new FindItemViewModel(activity, listBean));
@@ -299,10 +309,6 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                     }
                 }, () -> {
                     binding.recyclerView.getAdapter().notifyDataSetChanged();
-
-                    if (itemViewModels.size() != 0 || lItemViewModels.size() != 0) {
-                        errorVisible.set(View.GONE);
-                    }
                     if (isRefresh) {
                         startInAnim();
                         isRefreshing.set(false);

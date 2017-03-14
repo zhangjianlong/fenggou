@@ -49,7 +49,7 @@ public class ActivitySubscribeModel extends BaseObservable {
         this.mActivity = activity;
         this.isPublish = mActivity.getIntent().getBooleanExtra("isPublish", false);
         this.isAddSkill = isAddSkill;
-
+        initView();
     }
 
     private void initpicker() {
@@ -87,7 +87,7 @@ public class ActivitySubscribeModel extends BaseObservable {
                     mainLabelsArr[i] = tag;
                     i += 1;
                     options1Items.add(tag);
-                    initView();
+                    initpicker();
                 }
                 mNpChooseMainLabels.setDisplayedValues(mainLabelsArr);
                 mNpChooseMainLabels.setMinValue(0);
@@ -113,7 +113,11 @@ public class ActivitySubscribeModel extends BaseObservable {
 
     public void openRlChooseMainLabel(View v) {
         if(SubscribeActivity.clickCount==0){
-            pvOptions.show();
+            if (null == pvOptions||(null==options1Items||options1Items.size() == 0)){
+                ToastUtils.shortCenterToast("标签数据为空");
+                return;
+            }
+                pvOptions.show();
         }else {
             ToastUtils.shortCenterToast("取消已选标签，重新选择");
         }

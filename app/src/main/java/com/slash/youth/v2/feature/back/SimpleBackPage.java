@@ -6,7 +6,7 @@ import com.slash.youth.v2.feature.back.manage.ManagerFragment;
 
 public enum SimpleBackPage {
 
-    SETTING(1, R.string.app_manager, ManagerFragment.class);
+    MANAGER(1, R.string.app_manager, ManagerFragment.class);
 
     private int title;
     private Class<?> clz;
