@@ -1,5 +1,6 @@
 package com.slash.youth.v2.feature.back.manage;
 
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.slash.youth.domain.interactor.main.PubManagerUseCase;
 import com.slash.youth.engine.FirstPagerManager;
 import com.slash.youth.engine.MyManager;
 import com.slash.youth.global.GlobalConstants;
+import com.slash.youth.ui.activity.DemandDetailActivity;
+import com.slash.youth.ui.activity.ServiceDetailActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.SpUtils;
@@ -54,6 +57,23 @@ public class ManagerItemViewModel extends BViewModel {
     public ObservableField<Integer> typeVisible = new ObservableField<>(View.GONE);
     public ObservableField<Integer> timeVisible = new ObservableField<>(View.GONE);
 
+    public final ReplyCommand click = new ReplyCommand(() -> {
+        int type = data.getType();
+        switch (type) {
+            case 1:
+                long demandId = data.getTid();
+                Intent intentDemandDetailActivity = new Intent(CommonUtils.getContext(), DemandDetailActivity.class);
+                intentDemandDetailActivity.putExtra("demandId", demandId);
+                activity.startActivity(intentDemandDetailActivity);
+                break;
+            case 2:
+                long serviceId = data.getTid();
+                Intent intentServiceDetailActivity = new Intent(CommonUtils.getContext(), ServiceDetailActivity.class);
+                intentServiceDetailActivity.putExtra("serviceId", serviceId);
+                activity.startActivity(intentServiceDetailActivity);
+                break;
+        }
+    });
 
     public final ReplyCommand delClick = new ReplyCommand(() -> {
         Map<String, String> map = new HashMap<>();
