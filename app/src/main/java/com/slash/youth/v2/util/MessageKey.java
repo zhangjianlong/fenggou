@@ -15,4 +15,7 @@ public class MessageKey {
     public static final String MINE_MANAGER_DEL = "MINE_MANAGER_DEL";
     //我的管理刷新
     public static final String MINE_MANAGER_REFRESH = "MINE_MANAGER_REFRESH";
+
+    public static final String NEW_MESSAGE = "NEW_MESSAGE";
+
 }
