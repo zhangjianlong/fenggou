@@ -31,6 +31,7 @@ import com.slash.youth.v2.base.BaseActivity;
 import com.slash.youth.v2.di.components.DaggerMainComponent;
 import com.slash.youth.v2.di.components.MainComponent;
 import com.slash.youth.v2.di.modules.MainModule;
+import com.slash.youth.v2.util.MessageKey;
 
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
@@ -48,6 +49,7 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
     View msgIconLayer;
     ImageView ivMsgIcon;
     boolean isAddMsgIconLayer = false;
+    private Intent intent;
 
     public final static void instance(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -65,11 +67,26 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
 
     @AfterViews
     void afterViews() {
-        Intent intent = new Intent(this, FloatWinService.class);
+        intent = new Intent(this, FloatWinService.class);
         startService(intent);
         Messenger.getDefault().register(this, OFF_LINE, () -> {
             offline();
         });
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Messenger.getDefault().sendNoMsg(MessageKey.SHOW_FLOAT_WINDOW);
 
     }
 
@@ -98,6 +115,7 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopService(intent);
         MsgManager.exit();
     }
 

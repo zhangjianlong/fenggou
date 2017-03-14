@@ -31,7 +31,6 @@ public class GuidActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
         setContentView(R.layout.activity_guid);
         initView();
         initData();
@@ -40,10 +39,13 @@ public class GuidActivity extends BaseActivity {
 
 
     @Override
-    protected void onStop() {
-        Messenger.getDefault().sendNoMsg(MessageKey.SHOW_FLOAT_WINDOW);
-        super.onStop();
+    protected void onResume() {
+        super.onResume();
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
+
     }
+
+
 
     private void initView() {
         mVpGuidPagers = (ViewPager) findViewById(R.id.vp_guid_pagers);

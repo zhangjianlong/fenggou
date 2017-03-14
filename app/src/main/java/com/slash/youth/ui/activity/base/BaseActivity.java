@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
 import com.slash.youth.ui.activity.MessageActivity;
 import com.slash.youth.ui.dialog.offline.OfflineDialog;
 import com.slash.youth.ui.dialog.offline.OfflineViewModel;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**
@@ -41,6 +43,23 @@ public class BaseActivity extends RxAppCompatActivity {
 //            }
 //        });
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Messenger.getDefault().sendNoMsg(MessageKey.SHOW_FLOAT_WINDOW);
+
+    }
+
 
     @Override
     protected void onStart() {

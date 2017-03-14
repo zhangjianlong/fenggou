@@ -25,15 +25,12 @@ public class ChooseSkillActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
         super.onResume();
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
+
     }
 
-    @Override
-    protected void onPause() {
-        Messenger.getDefault().sendNoMsg(MessageKey.SHOW_FLOAT_WINDOW);
-        super.onPause();
-    }
+
 
 
 }
