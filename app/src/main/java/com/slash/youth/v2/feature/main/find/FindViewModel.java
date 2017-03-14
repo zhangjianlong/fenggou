@@ -156,6 +156,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
 
             }
         });
+        binding.dtChoice.checkedService();
         titleVisible.set(View.GONE);
         initBanner();
         loadData();
@@ -207,7 +208,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                     binding.idRecyclerviewHorizontal.getAdapter().notifyDataSetChanged();
                 });
 
-        loadRecommand(true);
+        loadService(true);
     }
 
     private void initIndicator() {

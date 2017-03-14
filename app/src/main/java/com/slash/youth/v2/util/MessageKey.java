@@ -17,5 +17,7 @@ public class MessageKey {
     public static final String MINE_MANAGER_REFRESH = "MINE_MANAGER_REFRESH";
 
     public static final String NEW_MESSAGE = "NEW_MESSAGE";
+    public static final String HIDE_FLOAT_WINDOW = "HIDE_FLOAT_WINDOW";
+    public static final String SHOW_FLOAT_WINDOW = "SHOW_FLOAT_WINDOW";
 
 }

@@ -1986,6 +1986,7 @@
                     android:layout_height="211dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="50dp"
+                    android:textColor="#999999"
                     android:background="@drawable/shape_remarks_edit_bg"
                     android:gravity="top|left"
                     android:padding="9dp"
@@ -2042,7 +2043,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="9dp"
                     android:text="加载中..."
-                    android:textColor="#999999"
+                    android:textColor="#333333"
                     android:textSize="14dp"/>
             </LinearLayout>
 

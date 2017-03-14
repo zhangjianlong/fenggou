@@ -3,10 +3,12 @@ package com.slash.youth.ui.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityMessageBinding;
 import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.MessageModel;
+import com.slash.youth.v2.util.MessageKey;
 
 /**
  * V1.1版本新增加的消息列表页面，原来V1.0版本是在首页中的一个Page
@@ -21,13 +23,27 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ActivityMessageBinding activityMessageBinding = DataBindingUtil.setContentView(this, R.layout.activity_message);
         mMessageModel = new MessageModel(activityMessageBinding, this);
         activityMessageBinding.setMessageModel(mMessageModel);
 
         isStartActivity = true;
     }
+
+    @Override
+    protected void onPause() {
+        Messenger.getDefault().sendNoMsg(MessageKey.SHOW_FLOAT_WINDOW);
+        super.onPause();
+    }
+
+
+    @Override
+    protected void onResume() {
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
+        super.onResume();
+    }
+
+
 
     @Override
     protected void onStart() {

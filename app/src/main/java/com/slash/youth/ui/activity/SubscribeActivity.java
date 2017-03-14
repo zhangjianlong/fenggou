@@ -205,6 +205,9 @@ public class SubscribeActivity extends BaseActivity {
 
     //获取用户自定义标签的集合
     private void getUserSkillLabelArrayList(ArrayList<SkillLabelGetBean.DataBean> data) {
+        if (null == data){
+            return;
+        }
         listThirdUserCustomSkilllabelName.clear();
         for (SkillLabelGetBean.DataBean bean : data) {
             //用户的id,不同用户不同id
@@ -233,6 +236,9 @@ public class SubscribeActivity extends BaseActivity {
 
     //对集合分类
     private void getSkillLabelAllArrayList(ArrayList<SkillLabelAllBean> arrayList) {
+        if (null == arrayList){
+            return;
+        }
         for (SkillLabelAllBean skillLabelAllBean : arrayList) {
             final int f1 = skillLabelAllBean.getF1();
             int f2 = skillLabelAllBean.getF2();

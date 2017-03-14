@@ -11,11 +11,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
 import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -29,11 +31,18 @@ public class GuidActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
         setContentView(R.layout.activity_guid);
         initView();
         initData();
         initListener();
+    }
+
+
+    @Override
+    protected void onStop() {
+        Messenger.getDefault().sendNoMsg(MessageKey.SHOW_FLOAT_WINDOW);
+        super.onStop();
     }
 
     private void initView() {

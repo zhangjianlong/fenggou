@@ -9,6 +9,7 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.View;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityPerfectInfoBinding;
 import com.slash.youth.domain.UploadFileResultBean;
@@ -20,6 +21,7 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.MessageKey;
 
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
@@ -40,12 +42,27 @@ public class PerfectInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         CommonUtils.setCurrentActivity(this);
         activity = this;
         mActivityPerfectInfoBinding = DataBindingUtil.setContentView(this, R.layout.activity_perfect_info);
         mPerfectInfoModel = new PerfectInfoModel(mActivityPerfectInfoBinding, this);
         mActivityPerfectInfoBinding.setPerfectInfoModel(mPerfectInfoModel);
     }
+
+    @Override
+    protected void onPause() {
+        Messenger.getDefault().sendNoMsg(MessageKey.SHOW_FLOAT_WINDOW);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
+        super.onResume();
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

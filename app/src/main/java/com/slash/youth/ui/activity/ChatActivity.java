@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 
+import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AndroidBug5497Workaround;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityChatBinding;
@@ -15,6 +16,7 @@ import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.ChatModel;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.MessageKey;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,10 +32,21 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ActivityChatBinding activityChatBinding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
         mChatModel = new ChatModel(activityChatBinding, this);
         activityChatBinding.setChatModel(mChatModel);
+    }
+
+    @Override
+    protected void onResume() {
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Messenger.getDefault().sendNoMsg(MessageKey.SHOW_FLOAT_WINDOW);
+        super.onPause();
     }
 
     @Override
@@ -42,15 +55,12 @@ public class ChatActivity extends BaseActivity {
         AndroidBug5497Workaround.assistActivity(this, getApplicationContext());
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
+
 
     @Override
     protected void onDestroy() {
-        mChatModel.onActivityDestory();
 
+        mChatModel.onActivityDestory();
         MsgManager.removeChatTextListener();
         MsgManager.removeChatPicListener();
         MsgManager.removeChatVoiceListener();

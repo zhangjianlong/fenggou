@@ -33,6 +33,13 @@ public class FloatWinService extends Service {
             setIvMsgIconState();
             setMsgChangeListener();
         });
+        Messenger.getDefault().register(this, MessageKey.HIDE_FLOAT_WINDOW, () -> {
+            chatFloatWin.showChatIv(false);
+
+        });
+        Messenger.getDefault().register(this, MessageKey.SHOW_FLOAT_WINDOW, () -> {
+            chatFloatWin.showChatIv(true);
+        });
     }
 
     @Nullable
@@ -83,4 +90,9 @@ public class FloatWinService extends Service {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        chatFloatWin.remove();
+        super.onDestroy();
+    }
 }

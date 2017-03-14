@@ -76,14 +76,14 @@ public class DemandServiceToggleView extends FrameLayout {
         }
     }
 
-    private void checkedService() {
+    public void checkedService() {
         tvService.setBackgroundResource(R.drawable.shape_service_toggle_select);
         tvService.setTextColor(0xff333333);
         tvDemand.setBackgroundResource(R.drawable.shape_demand_toggle_unselect);
         tvDemand.setTextColor(0xffffffff);
     }
 
-    private void checkedDemand() {
+    public void checkedDemand() {
         tvService.setBackgroundResource(R.drawable.shape_service_toggle_unselect);
         tvService.setTextColor(0xffffffff);
         tvDemand.setBackgroundResource(R.drawable.shape_demand_toggle_select);

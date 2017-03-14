@@ -183,6 +183,19 @@ public class ChatFloatWin extends LinearLayout {
         }
     }
 
+    public void showChatIv(boolean isShow){
+        if (null == chatIv){
+            return;
+        }
+
+        if (isShow){
+            chatIv.setVisibility(VISIBLE);
+        }else {
+            chatIv.setVisibility(GONE);
+        }
+
+    }
+
 
 
 
