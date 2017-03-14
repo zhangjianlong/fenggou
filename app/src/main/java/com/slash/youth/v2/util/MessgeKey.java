@@ -11,4 +11,6 @@ public class MessgeKey {
     public static final String TASK_CHANGE = "TASK_CHANGE";
     //任务通知更新认证数据
     public static final String TASK_AUTHENTICATION = "TASK_AUTHENTICATION";
+    public static final String NEW_MESSAGE = "NEW_MESSAGE";
+
 }

@@ -23,6 +23,7 @@ import com.slash.youth.ui.activity.PerfectInfoActivity;
 import com.slash.youth.ui.activity.SplashActivity;
 import com.slash.youth.ui.dialog.offline.OfflineDialog;
 import com.slash.youth.ui.dialog.offline.OfflineViewModel;
+import com.slash.youth.ui.receiver.FloatWinService;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.v2.base.BaseActivity;
@@ -33,7 +34,6 @@ import com.slash.youth.v2.di.modules.MainModule;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 
-import static com.slash.youth.engine.MsgManager.NEW_MESSAGE;
 import static com.slash.youth.engine.MsgManager.OFF_LINE;
 
 @RootView(R.layout.act_main)
@@ -62,24 +62,12 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
 
     @AfterViews
     void afterViews() {
+        Intent intent = new Intent(this, FloatWinService.class);
+        startService(intent);
         Messenger.getDefault().register(this, OFF_LINE, () -> {
             offline();
         });
 
-        Messenger.getDefault().register(this, NEW_MESSAGE, () -> {
-            setIvMsgIconState();
-            setMsgChangeListener();
-        });
-        //向没个Ativity都添加进入消息列表的icon
-        msgIconLayer = View.inflate(CommonUtils.getContext(), R.layout.layer_every_msg_icon, null);
-        ivMsgIcon = (ImageView) msgIconLayer.findViewById(R.id.iv_msg_icon);
-        ivMsgIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentMessageActivity = new Intent(CommonUtils.getContext(), MessageActivity.class);
-                startActivity(intentMessageActivity);
-            }
-        });
     }
 
     @Override
@@ -91,60 +79,9 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
     protected void onStart() {
         super.onStart();
 
-        if (msgIconLayer != null) {
-            if (!isAddMsgIconLayer) {
-                this.addContentView(msgIconLayer, new ViewGroup.LayoutParams(-1, -1));
-                isAddMsgIconLayer = true;
-            }
-        }
-
-        if (ivMsgIcon != null) {
-            setIvMsgIconState();
-            setMsgChangeListener();
-        }
     }
 
 
-    /**
-     * 刚进入消息页的时候，或者是回退到消息页的时候(这两种情况都会调用onStart方法)，通过融云的API获取总的未读消息数，消息Icon的颜色
-     */
-    private void setIvMsgIconState() {
-        RongIMClient.getInstance().getUnreadCount(new RongIMClient.ResultCallback<Integer>() {
-            @Override
-            public void onSuccess(Integer integer) {
-                int totalUnreadCount = integer;
-                LogKit.v("HomeActivity unReadCount:" + totalUnreadCount);
-                if (totalUnreadCount <= 0) {//没有聊天消息，显示灰色的Icon
-                    ivMsgIcon.setImageResource(R.mipmap.news_default);
-                } else {//有聊天消息，显示红色的Icon
-                    ivMsgIcon.setImageResource(R.mipmap.news_activation);
-                }
-            }
-
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-
-            }
-        }, Conversation.ConversationType.PRIVATE);
-    }
-
-    /**
-     * 注册未读消息的监听器，这样每次来新的聊天消息都能根据未读数量来更新icon颜色
-     */
-    private void setMsgChangeListener() {
-        MsgManager.setTotalUnReadCountListener(new MsgManager.TotalUnReadCountListener() {
-
-            @Override
-            public void displayTotalUnReadCount(int count) {
-                LogKit.v("HomeActivity unReadCount:" + count);
-                if (count <= 0) {//没有聊天消息，显示灰色的Icon
-                    ivMsgIcon.setImageResource(R.mipmap.news_default);
-                } else {//有聊天消息，显示红色的Icon
-                    ivMsgIcon.setImageResource(R.mipmap.news_activation);
-                }
-            }
-        });
-    }
 
     public void offline() {
         if (offlineDialog == null) {

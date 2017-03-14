@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.antfortune.freeline'
 
 def ext = rootProject.ext
 
@@ -10,6 +11,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    freeline {
+        hack true
     }
 
     defaultConfig {
@@ -91,7 +95,9 @@ greendao {
 dependencies {
 
     //    compile fileTree(include: ['*.jar'], dir: 'libs')
-
+    debugCompile 'com.antfortune.freeline:runtime:0.8.6'
+    releaseCompile 'com.antfortune.freeline:runtime-no-op:0.8.6'
+    testCompile 'com.antfortune.freeline:runtime-no-op:0.8.6'
 
     compile project(':lib')
     compile project(':data')

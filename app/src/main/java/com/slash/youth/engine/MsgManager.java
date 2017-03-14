@@ -55,6 +55,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.RingingUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.MessgeKey;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -114,7 +115,7 @@ public class MsgManager {
 
 
     public static final String OFF_LINE = "OFF_LINE";
-    public static final String NEW_MESSAGE = "NEW_MESSAGE";
+
 
     /**
      * 建立与融云服务器的连接
@@ -605,7 +606,7 @@ public class MsgManager {
                 }
             }
 
-            Messenger.getDefault().sendNoMsg(NEW_MESSAGE);
+            Messenger.getDefault().sendNoMsg(MessgeKey.NEW_MESSAGE);
             RingingUtil.playSysRinging();//响铃
             return false;
         }

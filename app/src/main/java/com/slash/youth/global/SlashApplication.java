@@ -15,6 +15,7 @@ import android.support.multidex.MultiDex;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.antfortune.freeline.FreelineCore;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.pingplusplus.android.PingppLog;
@@ -87,7 +88,7 @@ public class SlashApplication extends android.support.multidex.MultiDexApplicati
     @Override
     public void onCreate() {
         super.onCreate();
-
+        FreelineCore.init(this);
         Logger.init("YTP")                 // default PRETTYLOGGER or use just init()
                 .methodCount(3)                 // default 2
                 .hideThreadInfo()               // default shown

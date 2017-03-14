@@ -119,6 +119,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.NFC" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <!-- ⼩米 配置开始 < -->
     <permission
         android:name="com.slash.youth.permission.MIPUSH_RECEIVE"
@@ -309,6 +311,9 @@
         <!-- 高德定位相关 -->
         <service android:name="com.amap.api.location.APSService" />
         <!-- 高德定位相关 -->
+
+        <service android:name=".ui.receiver.FloatWinService"
+            android:enabled="true"/>
 
 
         <!-- QQ相关 -->
