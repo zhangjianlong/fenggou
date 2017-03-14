@@ -1,19 +1,14 @@
 package com.slash.youth.v2.feature.main.task.list;
 
 
-import android.os.Message;
-
 import com.core.op.bindingadapter.common.BaseItemViewSelector;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
-import com.core.op.lib.weight.picker.lib.WheelView;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.domain.interactor.main.TaskListUseCase;
-import com.slash.youth.global.GlobalConstants;
-import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.base.list.BaseListViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -22,7 +17,7 @@ import javax.inject.Inject;
 import rx.Observable;
 
 import static com.slash.youth.v2.feature.main.task.TaskViewModel.SHOW_NODATA;
-import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
+import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 
 @PerActivity
 public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> {

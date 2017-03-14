@@ -80,7 +80,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
-import com.slash.youth.v2.util.MessgeKey;
+import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -178,7 +178,7 @@ public class ChatModel extends BaseObservable {
             initListener();
         }
 
-        Messenger.getDefault().sendNoMsg(MessgeKey.NEW_MESSAGE);
+        Messenger.getDefault().sendNoMsg(MessageKey.NEW_MESSAGE);
     }
 
     private void initData() {
@@ -2355,7 +2355,7 @@ public class ChatModel extends BaseObservable {
 
             }
         });
-        Messenger.getDefault().sendNoMsg(MessgeKey.NEW_MESSAGE);
+        Messenger.getDefault().sendNoMsg(MessageKey.NEW_MESSAGE);
     }
 
     PagerAdapter vpViewPicAdapter = new PagerAdapter() {
@@ -2436,7 +2436,7 @@ public class ChatModel extends BaseObservable {
     /**
      * 保存原图的地址
      *
-     * @param imageMessage
+     * @param
      */
     private void recordSourceImageUrl(Message message, boolean isLoadHis) {
         ImageMessage imageMessage = (ImageMessage) message.getContent();

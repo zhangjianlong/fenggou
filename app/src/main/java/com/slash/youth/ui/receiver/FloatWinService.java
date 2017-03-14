@@ -6,11 +6,10 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.core.op.lib.messenger.Messenger;
-import com.slash.youth.R;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.ui.view.ChatFloatWin;
 import com.slash.youth.utils.LogKit;
-import com.slash.youth.v2.util.MessgeKey;
+import com.slash.youth.v2.util.MessageKey;
 
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
@@ -30,7 +29,7 @@ public class FloatWinService extends Service {
     public void onCreate() {
         super.onCreate();
         chatFloatWin = new ChatFloatWin(this);
-        Messenger.getDefault().register(this, MessgeKey.NEW_MESSAGE, () -> {
+        Messenger.getDefault().register(this, MessageKey.NEW_MESSAGE, () -> {
             setIvMsgIconState();
             setMsgChangeListener();
         });

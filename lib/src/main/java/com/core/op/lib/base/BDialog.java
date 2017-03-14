@@ -3,17 +3,11 @@ package com.core.op.lib.base;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
 
-import com.core.op.lib.R;
 import com.core.op.lib.utils.inject.InjectUtil;
 import com.core.op.lib.weight.picker.view.BasePickerView;
 import com.core.op.lib.weight.picker.view.DialogBuilder;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-
-import javax.inject.Inject;
 
 /**
  * @author op

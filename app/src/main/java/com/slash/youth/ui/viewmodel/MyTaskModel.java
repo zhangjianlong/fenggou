@@ -20,7 +20,6 @@ import com.slash.youth.engine.MyTaskEngine;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.http.protocol.BaseProtocol;
 import com.slash.youth.ui.activity.DemandChooseServiceActivity;
-import com.slash.youth.ui.activity.HomeActivity2;
 import com.slash.youth.ui.activity.MyBidDemandActivity;
 import com.slash.youth.ui.activity.MyBidServiceActivity;
 import com.slash.youth.ui.activity.MyPublishDemandActivity;
@@ -35,7 +34,6 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.main.MainActivity;
-import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -44,7 +42,7 @@ import java.util.HashMap;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 
-import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
+import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 
 /**
  * Created by zhouyifeng on 2016/10/26.

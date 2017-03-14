@@ -2,15 +2,9 @@ package com.slash.youth.ui.viewmodel;
 
 import android.content.Intent;
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.core.op.lib.messenger.Messenger;
@@ -20,32 +14,21 @@ import com.slash.youth.databinding.ActivityApprovalBinding;
 import com.slash.youth.databinding.ApprovalCertificatesBinding;
 import com.slash.youth.domain.MyFirstPageBean;
 import com.slash.youth.domain.SetBean;
-import com.slash.youth.domain.SkillManagerBean;
-import com.slash.youth.domain.UploadFileResultBean;
-import com.slash.youth.engine.DemandEngine;
-import com.slash.youth.engine.FirstPagerManager;
 import com.slash.youth.engine.MyManager;
-import com.slash.youth.engine.UserInfoEngine;
 import com.slash.youth.http.protocol.BaseProtocol;
 import com.slash.youth.ui.activity.ApprovalActivity;
 import com.slash.youth.ui.activity.ExamineActivity;
-import com.slash.youth.ui.activity.UserInfoActivity;
 import com.slash.youth.ui.activity.UserinfoEditorActivity;
 import com.slash.youth.ui.adapter.ViewpageAdapter;
-import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.Cardtype;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
-import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
-import com.slash.youth.v2.util.MessgeKey;
+import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
-
-import org.xutils.image.ImageOptions;
-import org.xutils.x;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -85,7 +68,7 @@ public class ApprovalModel extends BaseObservable {
         this.careertype = careertype;
         this.approvalActivity = approvalActivity;
         this.uid = uid;
-        Messenger.getDefault().register(this, MessgeKey.TASK_AUTHENTICATION,()->{
+        Messenger.getDefault().register(this, MessageKey.TASK_AUTHENTICATION,()->{
             MyManager.checkoutAuthProcess(new checkoutAuthProcess());
         });
         initData();

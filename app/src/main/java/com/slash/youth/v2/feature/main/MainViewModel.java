@@ -11,17 +11,12 @@ import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
-import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActMainBinding;
 import com.slash.youth.engine.MsgManager;
-import com.slash.youth.global.GlobalConstants;
-import com.slash.youth.utils.LogKit;
-import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.feature.main.find.FindFragment;
 import com.slash.youth.v2.feature.main.mine.MineFragment;
 import com.slash.youth.v2.feature.main.task.TaskFragment;
-import com.slash.youth.v2.util.ShareKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
@@ -31,7 +26,7 @@ import javax.inject.Inject;
 
 
 import static com.slash.youth.v2.feature.main.mine.MineViewModel.START_ANIMATION;
-import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
+import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 
 @PerActivity
 public class MainViewModel extends BAViewModel<ActMainBinding> {

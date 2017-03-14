@@ -87,6 +87,7 @@ public class SlashApplication extends android.support.multidex.MultiDexApplicati
     @Override
     public void onCreate() {
         super.onCreate();
+
         Logger.init("YTP")                 // default PRETTYLOGGER or use just init()
                 .methodCount(3)                 // default 2
                 .hideThreadInfo()               // default shown

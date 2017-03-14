@@ -23,7 +23,6 @@ import com.slash.youth.domain.OtherInfoBean;
 import com.slash.youth.domain.SetBean;
 import com.slash.youth.engine.ContactsManager;
 import com.slash.youth.engine.LoginManager;
-import com.slash.youth.engine.MsgManager;
 import com.slash.youth.engine.MyManager;
 import com.slash.youth.engine.UserInfoEngine;
 import com.slash.youth.global.GlobalConstants;
@@ -40,7 +39,7 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
-import com.slash.youth.v2.util.MessgeKey;
+import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -623,7 +622,7 @@ public class ActivityUserInfoModel extends BaseObservable {
                 int status = data.getStatus();
                 switch (status) {
                     case 1:
-                        Messenger.getDefault().sendNoMsg(MessgeKey.UPDATE_FRIEND_NUM);
+                        Messenger.getDefault().sendNoMsg(MessageKey.UPDATE_FRIEND_NUM);
                         activityUserinfoBinding.tvAddFriend.setText(ContactsManager.ADD_FRIEND_APPLICATION);
                         friendStatus = 1;
                         break;
@@ -650,7 +649,7 @@ public class ActivityUserInfoModel extends BaseObservable {
                 int status = data.getStatus();
                 switch (status) {
                     case 1:
-                        Messenger.getDefault().sendNoMsg(MessgeKey.UPDATE_FRIEND_NUM);
+                        Messenger.getDefault().sendNoMsg(MessageKey.UPDATE_FRIEND_NUM);
                         activityUserinfoBinding.tvAddFriend.setText(ContactsManager.ADD_FRIEND);
                         friendStatus = 0;
                         break;

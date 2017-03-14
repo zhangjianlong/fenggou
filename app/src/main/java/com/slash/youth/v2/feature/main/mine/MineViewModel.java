@@ -4,7 +4,6 @@ package com.slash.youth.v2.feature.main.mine;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -41,7 +40,7 @@ import com.slash.youth.utils.CountUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.v2.feature.dialog.mine.IdentificateDialog;
-import com.slash.youth.v2.util.MessgeKey;
+import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -50,9 +49,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-
-import static android.R.attr.id;
-import static io.rong.imlib.statistics.UserData.phone;
 
 
 @PerActivity
@@ -234,7 +230,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
         Messenger.getDefault().register(this, START_ANIMATION, () -> {
             doMarksAnimation();
         });
-        Messenger.getDefault().register(this, MessgeKey.UPDATE_FRIEND_NUM, () -> {
+        Messenger.getDefault().register(this, MessageKey.UPDATE_FRIEND_NUM, () -> {
             loadData();
         });
 

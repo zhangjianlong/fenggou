@@ -53,7 +53,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.RingingUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
-import com.slash.youth.v2.util.MessgeKey;
+import com.slash.youth.v2.util.MessageKey;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,7 +78,8 @@ import io.rong.message.CommandMessage;
 import io.rong.message.CommandNotificationMessage;
 import io.rong.message.TextMessage;
 
-import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
+
+import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 
 
 /**
@@ -602,7 +603,7 @@ public class MsgManager {
                 }
             }
 
-            Messenger.getDefault().sendNoMsg(MessgeKey.NEW_MESSAGE);
+            Messenger.getDefault().sendNoMsg(MessageKey.NEW_MESSAGE);
             RingingUtil.playSysRinging();//响铃
             return false;
         }
