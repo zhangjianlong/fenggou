@@ -11,35 +11,23 @@ import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
-import com.slash.youth.domain.CommentStatusBean;
-import com.slash.youth.domain.MyTaskBean;
 import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.engine.MsgManager;
-import com.slash.youth.engine.MyTaskEngine;
 import com.slash.youth.global.GlobalConstants;
-import com.slash.youth.http.protocol.BaseProtocol;
 import com.slash.youth.ui.activity.DemandChooseServiceActivity;
 import com.slash.youth.ui.activity.HomeActivity2;
 import com.slash.youth.ui.activity.MyBidDemandActivity;
 import com.slash.youth.ui.activity.MyBidServiceActivity;
 import com.slash.youth.ui.activity.MyPublishDemandActivity;
 import com.slash.youth.ui.activity.MyPublishServiceActivity;
-import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
-import com.slash.youth.utils.LogKit;
-import com.slash.youth.utils.ToastUtils;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.text.SimpleDateFormat;
 
-import rx.Observable;
-
-import static android.R.attr.breadCrumbShortTitle;
-import static android.R.attr.data;
-import static android.R.attr.switchMinWidth;
-import static com.slash.youth.v2.util.MessgeKey.TASK_CHANGE;
+import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 
 /**
  * Created by acer on 2017/3/9.

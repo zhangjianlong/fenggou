@@ -878,43 +878,13 @@
 
         </FrameLayout>
         <!--  加载页面-->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#edf1f2"
-            android:visibility="@{pagerHomeMyModel.loadLayerVisibility}">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-                <ProgressBar
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:indeterminateDrawable="@anim/rotate_pic_loaddata" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="9dp"
-                    android:text="加载中..."
-                    android:textColor="#999999"
-                    android:textSize="14dp" />
-            </LinearLayout>
-
-        </FrameLayout>
         <!--弹框-->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#66000000"
             android:clickable="true"
-            android:visibility="@{pagerHomeMyModel.approvalDialog}">
+            android:visibility="gone">
             <!--android:visibility="@{pagerHomeMyModel.approvalDialog}"-->
             <!--android:visibility="visible"-->
 
@@ -1041,6 +1011,37 @@
                 </FrameLayout>
 
             </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#edf1f2"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:indeterminateDrawable="@anim/rotate_pic_loaddata" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="9dp"
+                    android:text="加载中..."
+                    android:textColor="#999999"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
         </FrameLayout>
 
     </FrameLayout>

@@ -8,7 +8,9 @@ import com.slash.youth.domain.bean.FindServices;
 import com.slash.youth.domain.bean.HomeTagInfoBean;
 import com.slash.youth.domain.bean.LoginResult;
 import com.slash.youth.domain.bean.MineInfo;
+import com.slash.youth.domain.bean.MineManagerList;
 import com.slash.youth.domain.bean.OtherInfo;
+import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
 
 import okhttp3.RequestBody;
@@ -58,5 +60,16 @@ public interface ApiClient {
 
     @POST(UriMethod.MY_USERINFO)
     Observable<BaseResponse<OtherInfo>> getOtherInfo(@Body RequestBody requestBody);
+
+
+    @POST(UriMethod.MANAGE_PUBLISH_LIST)
+    Observable<BaseResponse<MineManagerList>> getMineManagerList(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SKILL_MANAGE_DELETE)
+    Observable<BaseResponse<StatusBean>> delManager(@Body RequestBody requestBody);
+
+
+    @POST(UriMethod.MANAGE_PUBLISH_UP_AND_DOWN)
+    Observable<BaseResponse<StatusBean>> pubManager(@Body RequestBody requestBody);
 }
 

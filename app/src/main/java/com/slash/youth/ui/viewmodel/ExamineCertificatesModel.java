@@ -1,7 +1,6 @@
 package com.slash.youth.ui.viewmodel;
 
 import android.databinding.BaseObservable;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -9,7 +8,6 @@ import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.databinding.ActivityExamineCertificatesBinding;
 import com.slash.youth.domain.SetBean;
 import com.slash.youth.domain.UploadFileResultBean;
-import com.slash.youth.domain.UserInfoItemBean;
 import com.slash.youth.engine.DemandEngine;
 import com.slash.youth.engine.MyManager;
 import com.slash.youth.global.GlobalConstants;
@@ -20,14 +18,9 @@ import com.slash.youth.utils.Cardtype;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
-import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
-import com.slash.youth.v2.util.MessgeKey;
+import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
-
-import org.xutils.x;
-
-import java.io.File;
 
 /**
  * Created by zss on 2016/11/6.
@@ -119,7 +112,7 @@ public class ExamineCertificatesModel extends BaseObservable {
                         break;
                     case 1:
                         ToastUtils.shortCenterToast("上传图片成功");
-                        Messenger.getDefault().sendNoMsg(MessgeKey.TASK_AUTHENTICATION);
+                        Messenger.getDefault().sendNoMsg(MessageKey.TASK_AUTHENTICATION);
                         examineActivity.finish();
                         break;
                     default:
