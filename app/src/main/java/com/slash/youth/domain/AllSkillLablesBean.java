@@ -3,6 +3,7 @@ package com.slash.youth.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * 分好一、二、三级的标签嵌套逻辑 的实体类
@@ -11,14 +12,14 @@ import java.util.HashMap;
  */
 public class AllSkillLablesBean implements Serializable {
 
-    public HashMap<Long, Tag_1> mapTag_1 = new HashMap<Long, Tag_1>();
+    public LinkedHashMap<Long, Tag_1> mapTag_1 = new LinkedHashMap<Long, Tag_1>();
 
     public class Tag_1 implements Serializable {
         public long f1;
         public long f2;
         public long id;
         public String tag;
-        public HashMap<Long, Tag_2> mapTag_2 = new HashMap<Long, Tag_2>();
+        public LinkedHashMap<Long, Tag_2> mapTag_2 = new LinkedHashMap<Long, Tag_2>();
     }
 
     public class Tag_2 implements Serializable {
@@ -26,7 +27,7 @@ public class AllSkillLablesBean implements Serializable {
         public long f2;
         public long id;
         public String tag;
-        public HashMap<Long, Tag_3> mapTag_3 = new HashMap<Long, Tag_3>();
+        public LinkedHashMap<Long, Tag_3> mapTag_3 = new LinkedHashMap<Long, Tag_3>();
     }
 
     public class Tag_3 implements Serializable {
@@ -76,9 +77,6 @@ public class AllSkillLablesBean implements Serializable {
     ArrayList<LoginTagBean> listTags3 = new ArrayList<LoginTagBean>();
 
     public void addListTags(ArrayList<LoginTagBean> listTags) {
-//        for (LoginTagBean loginTagBean : listTags) {
-//            addTag(loginTagBean);
-//        }
         for (LoginTagBean loginTagBean : listTags) {
             if (loginTagBean.f1 == 0 && loginTagBean.f2 == 0) {//一级标签
                 listTags1.add(loginTagBean);
@@ -88,6 +86,7 @@ public class AllSkillLablesBean implements Serializable {
                 listTags3.add(loginTagBean);
             }
         }
+
         for (LoginTagBean loginTagBean : listTags1) {
             addTag(loginTagBean);
         }

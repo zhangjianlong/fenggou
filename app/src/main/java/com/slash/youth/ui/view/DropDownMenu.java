@@ -2,8 +2,6 @@ package com.slash.youth.ui.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -19,10 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.slash.youth.R;
-import com.slash.youth.utils.CommonUtils;
-import com.slash.youth.utils.LogKit;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,9 +53,15 @@ public class DropDownMenu extends LinearLayout {
     private int index;
 
     public void removeView(){
-        tabMenuView.removeAllViews();
-        containerView.removeAllViews();
-        popupMenuViews.removeAllViews();
+        if (null!=tabMenuView) {
+            tabMenuView.removeAllViews();
+        }
+        if (null!=containerView) {
+            containerView.removeAllViews();
+        }
+        if (null!=popupMenuViews) {
+            popupMenuViews.removeAllViews();
+        }
     }
 
     public void addTabView(String text){
@@ -145,6 +145,7 @@ public class DropDownMenu extends LinearLayout {
      * @param contentView
      */
     public void setDropDownMenu(@NonNull List<String> tabTexts, @NonNull List<View> popupViews, @NonNull View contentView) {
+        removeView();
         if (tabTexts.size() != popupViews.size()) {
             throw new IllegalArgumentException("params not match, tabTexts.size() should be equal popupViews.size()");
         }
