@@ -57,7 +57,6 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
         fragments.add(new FindFragment());
         fragments.add(new TaskFragment());
         fragments.add(new MineFragment());
-
     }
 
     @Override
@@ -70,8 +69,8 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
             binding.bottomNavigation.setNotification("" + (getMessageCount() == 0 ? "" : getMessageCount()),
                     1);
         });
-        binding.bottomNavigation.setNotification("" + (getMessageCount() == 0 ? "" : getMessageCount()),
-                1);
+//        binding.bottomNavigation.setNotification("" + (getMessageCount() == 0 ? "" : getMessageCount()),
+//                1);
     }
 
     private int getMessageCount() {

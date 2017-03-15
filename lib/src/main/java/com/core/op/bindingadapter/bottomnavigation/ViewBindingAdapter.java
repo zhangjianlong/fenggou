@@ -3,10 +3,10 @@ package com.core.op.bindingadapter.bottomnavigation;
 import android.app.Activity;
 import android.databinding.BindingAdapter;
 
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 
 import com.core.op.lib.command.ReplyCommand;
+import com.core.op.lib.weight.navigation.AHBottomNavigation;
+import com.core.op.lib.weight.navigation.AHBottomNavigationAdapter;
 
 
 public final class ViewBindingAdapter {

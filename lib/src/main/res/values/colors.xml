@@ -122,4 +122,18 @@
         <item name="tab5">#F63D2B</item>
     </array>
 
+
+    <!--bottom navigation-->
+    <color name="colorBottomNavigationPrimary">#3F51B5</color>
+    <color name="colorBottomNavigationPrimaryDark">#303F9F</color>
+    <color name="colorBottomNavigationAccent">#FF4081</color>
+    <color name="colorBottomNavigationInactive">#747474</color>
+    <color name="colorBottomNavigationActiveColored">#FFFFFF</color>
+    <color name="colorBottomNavigationInactiveColored">#50FFFFFF</color>
+    <color name="colorBottomNavigationSelectedBackground">#17000000</color>
+    <color name="colorBottomNavigationNotification">#F63D2B</color>
+
+    <!--cookie bar-->
+    <color name="default_color">#BDBDBD</color>
+    <color name="action_color">#26a69a</color>
 </resources>

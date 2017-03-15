@@ -54,7 +54,7 @@ dependencies {
     compile compiles.dagger
     compile compiles.rxlifecycle
     compile compiles.rxpermissions
-    compile compiles.bottomnavigation
+//    compile compiles.bottomnavigation
     compile compiles.zxing
 
     compile 'com.jakewharton.timber:timber:4.1.2'
