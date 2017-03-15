@@ -48,7 +48,7 @@ public class SearchActivityHotServiceModel extends BaseObservable {
     private  ArrayList<SkillLabelBean> listThirdSkilllabelName = new ArrayList();
     private int secondId;
     private int firstId;
-    private String text = "请点pvOptions击";
+    private String text = "";
     private CityHistoryEntityDao cityHistoryEntityDao;
     private OptionsPickerView pvOptions;
     private ArrayList<String> options1Items = new ArrayList<String>();
@@ -188,7 +188,6 @@ public class SearchActivityHotServiceModel extends BaseObservable {
 
     //点击一级标签确定按钮
     public void okChooseMainLabel(View v) {
-        setRlChooseMainLabelVisible(View.INVISIBLE);
         int value = mNpChooseMainLabels.getValue();
         SearchActivity searchActivity = (SearchActivity) CommonUtils.getCurrentActivity();
         searchActivity.checkedFirstLabel = mainLabelsArr[value];
@@ -362,19 +361,18 @@ public class SearchActivityHotServiceModel extends BaseObservable {
         searchActivityHotServiceBinding.tvOpenChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            pvOptions.show();
+                if (null!=pvOptions){
+                    pvOptions.show();
+                }
 
-
-
-
-
-//                setRlChooseMainLabelVisible(View.VISIBLE);
             }
         });
         searchActivityHotServiceBinding.ivbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setRlChooseMainLabelVisible(View.VISIBLE);
+                if (null!=pvOptions){
+                    pvOptions.show();
+                }
             }
         });
     }

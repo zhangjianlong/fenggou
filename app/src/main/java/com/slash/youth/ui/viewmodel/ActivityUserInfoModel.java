@@ -748,6 +748,7 @@ public class ActivityUserInfoModel extends BaseObservable {
                     case 1:
                         activityUserinfoBinding.tvAddFriend.setText(ContactsManager.IS_FRIEND);
                         friendStatus = 3;
+
                         break;
                     case 0:
                         ToastUtils.shortToast("同意未成功");

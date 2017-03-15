@@ -3,6 +3,7 @@ package com.slash.youth.v2.feature.main.mine;
 
 import android.content.Intent;
 import android.databinding.ObservableField;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -29,6 +30,7 @@ import com.slash.youth.ui.activity.MyCollectionActivity;
 import com.slash.youth.ui.activity.MyFriendActivtiy;
 import com.slash.youth.ui.activity.MyHelpActivity;
 import com.slash.youth.ui.activity.MySettingActivity;
+import com.slash.youth.ui.activity.MySkillManageActivity;
 import com.slash.youth.ui.activity.UserInfoActivity;
 import com.slash.youth.ui.activity.UserinfoEditorActivity;
 import com.slash.youth.ui.activity.VisitorsActivity;
@@ -38,6 +40,7 @@ import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.CountUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.feature.back.SimpleBackActivity;
 import com.slash.youth.v2.feature.back.SimpleBackPage;
 import com.slash.youth.v2.feature.dialog.mine.IdentificateDialog;
@@ -75,9 +78,11 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     public final ReplyCommand personInfoClick = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_PERSON_MESSAGE);
         Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
-        intentUserInfoActivity.putExtra("phone", data.get().getPhone());
-        intentUserInfoActivity.putExtra("skillTag", data.get().getTag());
-        intentUserInfoActivity.putExtra("Uid", LoginManager.currentLoginUserId);
+        if (null!=data&&null!=data.get()) {
+            intentUserInfoActivity.putExtra("phone", data.get().getPhone());
+            intentUserInfoActivity.putExtra("skillTag", data.get().getTag());
+            intentUserInfoActivity.putExtra("Uid", LoginManager.currentLoginUserId);
+        }
         activity.startActivity(intentUserInfoActivity);
     });
 
@@ -152,6 +157,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 //        intentMySkillManageActivity.putExtra("Title", Constants.MY_TITLE_MANAGER_MY_PUBLISH);
 //        intentMySkillManageActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        activity.startActivity(intentMySkillManageActivity);
+        SpUtils.setString("myActivityTitle",Constants.MY_TITLE_MANAGER_MY_PUBLISH);
         SimpleBackActivity.instance(activity, SimpleBackPage.MANAGER);
     });
 

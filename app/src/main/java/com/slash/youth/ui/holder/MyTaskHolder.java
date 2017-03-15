@@ -8,6 +8,7 @@ import android.view.View;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemMyTaskBinding;
 import com.slash.youth.domain.MyTaskBean;
+import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.ui.viewmodel.ItemMyTaskModel;
@@ -20,7 +21,7 @@ import java.text.SimpleDateFormat;
 /**
  * Created by zhouyifeng on 2016/10/26.
  */
-public class MyTaskHolder extends BaseHolder<MyTaskBean> {
+public class MyTaskHolder extends BaseHolder<TaskList.TaskBean> {
 
     private ItemMyTaskModel mItemMyTaskModel;
     private ItemMyTaskBinding mItemMyTaskBinding;
@@ -35,7 +36,7 @@ public class MyTaskHolder extends BaseHolder<MyTaskBean> {
     }
 
     @Override
-    public void refreshView(MyTaskBean data) {
+    public void refreshView(TaskList.TaskBean data) {
         mItemMyTaskModel.tid = data.tid;
         mItemMyTaskModel.uid = data.uid;
 

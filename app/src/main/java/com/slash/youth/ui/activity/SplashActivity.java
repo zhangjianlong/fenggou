@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.DialogVersionUpdateBinding;
@@ -37,6 +38,7 @@ import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.TimeUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.util.MessageKey;
 import com.slash.youth.v2.util.ShareKey;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.umeng.analytics.MobclickAgent;
@@ -357,5 +359,12 @@ public class SplashActivity extends BaseActivity {
         Uri data = Uri.fromFile(file);
         intent.setDataAndType(data, "application/vnd.android.package-archive");
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
+
     }
 }

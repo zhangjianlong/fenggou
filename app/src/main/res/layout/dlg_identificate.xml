@@ -38,40 +38,16 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:gravity="center"
                     android:id="@+id/tv_hint"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="14dp"
                     android:lineSpacingExtra="5dp"
-                    android:text="请在个人信息页面完善需认证的信息"
-                    android:textColor="#666666"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="10dp"
-                    android:lineSpacingExtra="5dp"
-                    android:text="1、若你是上班族需完善：职业类型、姓名、最近公司、公司职位"
-                    android:textColor="#666666"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="14dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginTop="14dp"
-                    android:lineSpacingExtra="5dp"
-                    android:text="2、若你是自雇者需完善：职业类型和姓名"
+                    android:text="需完善：职业类型、姓名、最近公司、公司职位"
                     android:textColor="#666666"
                     android:textSize="14dp" />
 

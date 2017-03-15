@@ -91,6 +91,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
                             android:layout_width="15dp"
                             android:layout_height="21dp"
                             android:onClick="@{serviceDetailModel.report}"
