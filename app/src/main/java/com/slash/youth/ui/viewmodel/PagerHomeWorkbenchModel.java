@@ -15,6 +15,7 @@ import com.slash.youth.R;
 import com.slash.youth.databinding.PagerHomeWorkbenchBinding;
 import com.slash.youth.domain.MyTaskBean;
 import com.slash.youth.domain.MyTaskList;
+import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.engine.MyTaskEngine;
 import com.slash.youth.global.GlobalConstants;
@@ -69,7 +70,7 @@ public class PagerHomeWorkbenchModel extends BaseObservable {
         initView();
     }
 
-    ArrayList<MyTaskBean> listMyTask = null;
+    ArrayList<TaskList.TaskBean> listMyTask = null;
 
     private void initData() {
         //去掉100号的我未读消息数量
@@ -150,7 +151,7 @@ public class PagerHomeWorkbenchModel extends BaseObservable {
                 }
                 MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_MY_MISSON_CLICK_MISSON);
 
-                MyTaskBean myTaskBean = listMyTask.get(position);
+                TaskList.TaskBean myTaskBean = listMyTask.get(position);
 
                 Bundle taskInfo = new Bundle();
                 taskInfo.putLong("tid", myTaskBean.tid);
@@ -292,7 +293,7 @@ public class PagerHomeWorkbenchModel extends BaseObservable {
             public void execute(MyTaskList dataBean) {
                 LogKit.v("currentLoadDataType:" + currentLoadDataType);
 
-                ArrayList<MyTaskBean> loadData = dataBean.data.list;
+                ArrayList<TaskList.TaskBean> loadData = dataBean.data.list;
                 if (currentLoadDataType == LOAD_DATA_TYPE_LOAD) {
                     listMyTask = loadData;
                     PagerHomeWorkbenchModel.this.offset = listMyTask.size();
@@ -351,7 +352,7 @@ public class PagerHomeWorkbenchModel extends BaseObservable {
             public void execute(MyTaskList dataBean) {
                 LogKit.v("currentLoadDataType:" + currentLoadDataType);
 
-                ArrayList<MyTaskBean> loadData = dataBean.data.list;
+                ArrayList<TaskList.TaskBean> loadData = dataBean.data.list;
                 if (currentLoadDataType == LOAD_DATA_TYPE_LOAD) {
                     listMyTask = loadData;
                     PagerHomeWorkbenchModel.this.offset = listMyTask.size();
@@ -408,7 +409,7 @@ public class PagerHomeWorkbenchModel extends BaseObservable {
             public void execute(MyTaskList dataBean) {
                 LogKit.v("currentLoadDataType:" + currentLoadDataType);
 
-                ArrayList<MyTaskBean> loadData = dataBean.data.list;
+                ArrayList<TaskList.TaskBean> loadData = dataBean.data.list;
                 if (currentLoadDataType == LOAD_DATA_TYPE_LOAD) {
                     listMyTask = loadData;
                     PagerHomeWorkbenchModel.this.offset = listMyTask.size();
@@ -469,7 +470,7 @@ public class PagerHomeWorkbenchModel extends BaseObservable {
             public void execute(MyTaskList dataBean) {
                 LogKit.v("currentLoadDataType:" + currentLoadDataType);
 
-                ArrayList<MyTaskBean> loadData = dataBean.data.list;
+                ArrayList<TaskList.TaskBean> loadData = dataBean.data.list;
                 if (currentLoadDataType == LOAD_DATA_TYPE_LOAD) {
                     listMyTask = loadData;
                     PagerHomeWorkbenchModel.this.offset = listMyTask.size();

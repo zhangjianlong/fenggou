@@ -1,5 +1,7 @@
 package com.slash.youth.domain;
 
+import com.slash.youth.domain.bean.TaskList;
+
 import java.util.ArrayList;
 
 /**
@@ -11,6 +13,6 @@ public class MyTaskList {
     public Data data;
 
     public class Data {
-        public ArrayList<MyTaskBean> list;
+        public ArrayList<TaskList.TaskBean> list;
     }
 }
