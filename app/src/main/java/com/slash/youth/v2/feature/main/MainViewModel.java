@@ -65,8 +65,8 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
             selectPosition.set(0);
         });
 
-        Messenger.getDefault().register(this, TASK_CHANGE, () -> {
-            binding.bottomNavigation.setNotification("" + (getMessageCount() == 0 ? "" : getMessageCount()),
+        Messenger.getDefault().register(this, TASK_CHANGE, Integer.class, d -> {
+            binding.bottomNavigation.setNotification("" + (d == 0 ? "" : d),
                     1);
         });
 //        binding.bottomNavigation.setNotification("" + (getMessageCount() == 0 ? "" : getMessageCount()),

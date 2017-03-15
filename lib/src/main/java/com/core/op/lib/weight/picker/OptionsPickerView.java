@@ -1,8 +1,8 @@
 package com.core.op.lib.weight.picker;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class OptionsPickerView<T> extends BasePickerView implements View.OnClickListener {
     WheelOptions wheelOptions;
-    private View btnSubmit, btnCancel;
+    private Button btnSubmit, btnCancel;
     private TextView tvTitle;
     private OnOptionsSelectListener optionsSelectListener;
     private static final String TAG_SUBMIT = "submit";
@@ -26,16 +26,24 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
 
     public OptionsPickerView(DialogBuilder builder) {
         super(builder);
-        LayoutInflater.from(context).inflate(R.layout.weight_pickerview_options, contentContainer);
+        View v = LayoutInflater.from(context).inflate(R.layout.weight_pickerview, contentContainer, true);
         // -----确定和取消按钮
-        btnSubmit = findViewById(R.id.btnSubmit);
-        btnSubmit.setTag(TAG_SUBMIT);
-        btnCancel = findViewById(R.id.btnCancel);
-        btnCancel.setTag(TAG_CANCEL);
-        btnSubmit.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
+        btnSubmit = (Button) v.findViewById(R.id.btn_submit);
+        btnSubmit.setTextColor(context.getResources().getColor(R.color.selector_pickerview_btn));
+        btnCancel = (Button) v.findViewById(R.id.btn_cancel);
+        btnCancel.setTextColor(context.getResources().getColor(R.color.selector_pickerview_btn));
+        btnSubmit.setOnClickListener(view -> {
+            if (optionsSelectListener != null) {
+                int[] optionsCurrentItems = wheelOptions.getCurrentItems();
+                optionsSelectListener.onOptionsSelect(optionsCurrentItems[0], optionsCurrentItems[1], optionsCurrentItems[2]);
+            }
+            dismiss();
+        });
+        btnCancel.setOnClickListener(view -> {
+            dismiss();
+        });
         //顶部标题
-        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvTitle = (TextView) findViewById(R.id.tv_title);
         // ----转轮
         final View optionspicker = findViewById(R.id.optionspicker);
         wheelOptions = new WheelOptions(optionspicker);

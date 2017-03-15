@@ -118,7 +118,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.NFC" />
-
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- ⼩米 配置开始 < -->
@@ -315,9 +314,9 @@
         <service android:name="com.amap.api.location.APSService" />
         <!-- 高德定位相关 -->
 
-        <service android:name=".ui.receiver.FloatWinService"
-            android:enabled="true"/>
-
+        <service
+            android:name=".ui.receiver.FloatWinService"
+            android:enabled="true" />
 
         <!-- QQ相关 -->
         <!-- <activity -->
@@ -588,7 +587,8 @@
         <activity android:name=".Identificate" />
         <activity android:name=".Message" />
         <activity android:name=".view.impl.MList" />
-        <activity android:name=".view.impl.Manager"></activity>
+        <activity android:name=".view.impl.Manager" />
+        <activity android:name=".DelManager"></activity>
     </application>
 
 </manifest>

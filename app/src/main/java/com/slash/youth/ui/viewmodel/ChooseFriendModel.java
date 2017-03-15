@@ -7,6 +7,7 @@ import android.databinding.Bindable;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.BR;
 import com.slash.youth.databinding.ActivityChooseFriendBinding;
 import com.slash.youth.domain.ChatCmdBusinesssCardBean;
@@ -27,12 +28,15 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.SpUtils;
+import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.slash.youth.v2.util.MessageKey.HIDE_NEW_CONTACTS;
 
 /**
  * Created by zss on 2016/11/2.
@@ -193,7 +197,7 @@ public class ChooseFriendModel extends BaseObservable {
         openContactsCareActivity(ContactsManager.ADD_ME, "3");
         activityChooseFriendBinding.ivRequest.setVisibility(View.GONE);
         SpUtils.setInt("addMeFriendCount", addMeFriendCount);
-        EventBus.getDefault().post(new MessageEvent());
+        Messenger.getDefault().send(0, MessageKey.HIDE_NEW_CONTACTS);
     }
 
     //我加的

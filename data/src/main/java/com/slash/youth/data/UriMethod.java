@@ -389,7 +389,7 @@ public class UriMethod {
     //技能管理
     public static final String SKILL_MANAGE_HOST = "feed/v1/api/myservicemanagement";
     public static final String SKILL_MANAGE_LIST = SKILL_MANAGE_HOST + "/list";
-    public static final String SKILL_MANAGE_DELETE = SKILL_MANAGE_HOST + "/del";
+    public static final String SKILL_MANAGE_DELETE = "feed/v1/api/mytaskmanagement/del";
     public static final String ADD_SKILL_TEMPLET = SKILL_MANAGE_HOST + "/add";
     public static final String UPDATE_SKILL_TEMPLET = SKILL_MANAGE_HOST + "/update";
     public static final String GET_SKILL_TEMPLET = SKILL_MANAGE_HOST + "/one";

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.view.View;
 
 import com.core.op.lib.base.BViewModel;
+import com.core.op.lib.base.OnDialogLisetener;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AppToast;
@@ -23,12 +24,16 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.dialog.manage.DelManagerDialog;
+import com.slash.youth.v2.feature.dialog.manage.DelManagerViewModel;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.slash.youth.ui.activity.CityLocationActivity.map;
 
 
 /**
@@ -76,21 +81,34 @@ public class ManagerItemViewModel extends BViewModel {
     });
 
     public final ReplyCommand delClick = new ReplyCommand(() -> {
-        Map<String, String> map = new HashMap<>();
-        map.put("id", data.getId() + "");
-        useCase.setParams(JsonUtil.mapToJson(map));
-        useCase.execute().compose(activity.bindToLifecycle())
-                .subscribe(d -> {
-                    if (d.getStatus() == 1) {
-                        Messenger.getDefault().send(position, MessageKey.MINE_MANAGER_DEL);
-                    } else if (d.getStatus() == 0) {
-                        AppToast.show(activity, "删除失败");
-                    } else {
-                        AppToast.show(activity, "在架上无法删除");
-                    }
-                }, error -> {
 
-                });
+        DelManagerDialog delManagerDialog = new DelManagerDialog(activity, new DelManagerViewModel(activity));
+        delManagerDialog.setOnDialogLisetener(new OnDialogLisetener() {
+            @Override
+            public void onConfirm() {
+                Map<String, String> map = new HashMap<>();
+                map.put("id", data.getId() + "");
+                map.put("type", data.getType() + "");
+                useCase.setParams(JsonUtil.mapToJson(map));
+                useCase.execute().compose(activity.bindToLifecycle())
+                        .subscribe(d -> {
+                            if (d.getStatus() == 1) {
+                                Messenger.getDefault().send(position, MessageKey.MINE_MANAGER_DEL);
+                            } else if (d.getStatus() == 0) {
+                                AppToast.show(activity, "删除失败");
+                            } else {
+                                AppToast.show(activity, "在架上无法删除");
+                            }
+                        }, error -> {
+
+                        });
+            }
+
+            @Override
+            public void onCancel() {
+            }
+        });
+        delManagerDialog.show();
     });
 
     public ReplyCommand pubClick = new ReplyCommand(() -> {

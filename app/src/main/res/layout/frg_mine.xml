@@ -601,7 +601,7 @@
                                 android:layout_marginLeft="9dp"
                                 android:layout_marginRight="10dp"
                                 android:src="@mipmap/icon_mine_dot"
-                                android:visibility="gone" />
+                                android:visibility="@{viewModel.contactsVisible}" />
                         </LinearLayout>
 
                         <View

@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.core.op.lib.utils.StrUtil;
 import com.core.op.lib.weight.cookiebar.CookieBar;
 import com.core.op.lib.weight.cookiebar.OnActionClickListener;
@@ -86,7 +87,9 @@ import io.rong.message.CommandNotificationMessage;
 import io.rong.message.TextMessage;
 
 
+import static com.core.op.lib.utils.PreferenceUtil.readLong;
 import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
+import static com.slash.youth.v2.util.MessageKey.TASK_REFRESH;
 
 
 /**
@@ -341,7 +344,7 @@ public class MsgManager {
                         count++;
                         everyTaskMessageCount.put(id, count);
                         //次数更新了，重新序列化到磁盘
-                        serializeEveryTaskMessageCount(everyTaskMessageCount);
+//                        serializeEveryTaskMessageCount(everyTaskMessageCount);
 
                         //如果当前页面是任务订单详情页，则实时刷新页面数据
                         if (taskMessageBean.type == 1) {//需求订单页
@@ -506,6 +509,7 @@ public class MsgManager {
                                         String content = textMessage.getContent();
                                         if (content.contentEquals(MsgManager.CHAT_CMD_ADD_FRIEND)) {
                                             pushInfoBean.pushText = "请求添加您为好友";
+                                            Messenger.getDefault().send(1, MessageKey.HIDE_NEW_CONTACTS);
                                         } else if (content.contentEquals(MsgManager.CHAT_CMD_SHARE_TASK)) {
                                             pushInfoBean.pushText = "分享了一个任务";
                                         } else if (content.contentEquals(MsgManager.CHAT_CMD_BUSINESS_CARD)) {
@@ -622,6 +626,8 @@ public class MsgManager {
         try {
             JSONObject jsonObject = new JSONObject(cmdNtfData);
             if (!StrUtil.isEmpty(jsonObject.getString("tid"))) {
+                long c = PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + jsonObject.getString("tid"), 0);
+                PreferenceUtil.write(CommonUtils.getContext(), "TASK_" + jsonObject.getString("tid"), c++);
                 //总的任务消息数据的处理
                 if (taskMessageCount != -1) {
                     taskMessageCount++;
@@ -655,7 +661,7 @@ public class MsgManager {
                 count++;
                 everyTaskMessageCount.put(id, count);
                 //次数更新了，重新序列化到磁盘
-                serializeEveryTaskMessageCount(everyTaskMessageCount);
+//                serializeEveryTaskMessageCount(everyTaskMessageCount);
 
                 //如果当前页面是任务订单详情页，则实时刷新页面数据
                 if (taskMessageBean.type == 1) {//需求订单页
@@ -694,7 +700,7 @@ public class MsgManager {
                 }
             }
 
-            Messenger.getDefault().sendNoMsg(TASK_CHANGE);
+            Messenger.getDefault().sendNoMsg(TASK_REFRESH);
         } catch (JSONException e) {
             e.printStackTrace();
         }

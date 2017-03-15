@@ -8,6 +8,7 @@ import com.slash.youth.domain.bean.HomeTagInfoBean;
 import com.slash.youth.domain.bean.MineInfo;
 import com.slash.youth.domain.bean.MineManagerList;
 import com.slash.youth.domain.bean.OtherInfo;
+import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
 
@@ -40,5 +41,7 @@ public interface MainRepository {
     Observable<StatusBean> delManager(String def);
 
     Observable<StatusBean> pubManager(String def);
+
+    Observable<PersonRelation> getPersonRelation(String def);
 
 }

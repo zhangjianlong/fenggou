@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -21,6 +22,7 @@ import com.slash.youth.databinding.FrgMineBinding;
 import com.slash.youth.domain.bean.MineInfo;
 import com.slash.youth.domain.interactor.main.MineInfoUseCase;
 import com.slash.youth.domain.interactor.main.OtherInfoUseCase;
+import com.slash.youth.domain.interactor.main.PersonRelationUseCase;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.engine.UserInfoEngine;
 import com.slash.youth.global.GlobalConstants;
@@ -78,7 +80,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     public final ReplyCommand personInfoClick = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_PERSON_MESSAGE);
         Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
-        if (null!=data&&null!=data.get()) {
+        if (null != data && null != data.get()) {
             intentUserInfoActivity.putExtra("phone", data.get().getPhone());
             intentUserInfoActivity.putExtra("skillTag", data.get().getTag());
             intentUserInfoActivity.putExtra("Uid", LoginManager.currentLoginUserId);
@@ -157,7 +159,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 //        intentMySkillManageActivity.putExtra("Title", Constants.MY_TITLE_MANAGER_MY_PUBLISH);
 //        intentMySkillManageActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        activity.startActivity(intentMySkillManageActivity);
-        SpUtils.setString("myActivityTitle",Constants.MY_TITLE_MANAGER_MY_PUBLISH);
+        SpUtils.setString("myActivityTitle", Constants.MY_TITLE_MANAGER_MY_PUBLISH);
         SimpleBackActivity.instance(activity, SimpleBackPage.MANAGER);
     });
 
@@ -197,7 +199,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
     MineInfoUseCase mineInfoUseCase;
     OtherInfoUseCase otherInfoUseCase;
-
+    PersonRelationUseCase personRelationUseCase;
     public String totalsMoney = "0.0元";
 
     public ObservableField<String> uri = new ObservableField<>();
@@ -208,15 +210,18 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     public String mark = "0";
     public ObservableField<String> connection = new ObservableField<>("0");
     public ObservableField<String> serverStar = new ObservableField<>("0.0星");
+    public ObservableField<Integer> contactsVisible = new ObservableField<>(View.GONE);
 
     @Inject
     public MineViewModel(RxAppCompatActivity activity,
                          MineInfoUseCase mineInfoUseCase,
                          OtherInfoUseCase otherInfoUseCase,
+                         PersonRelationUseCase personRelationUseCase,
                          IdentificateDialog dialog) {
         super(activity);
         this.mineInfoUseCase = mineInfoUseCase;
         this.otherInfoUseCase = otherInfoUseCase;
+        this.personRelationUseCase = personRelationUseCase;
         this.dialog = dialog;
         dialog.setOnDialogLisetener(new OnDialogLisetener() {
             @Override
@@ -243,9 +248,13 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
             loadData();
         });
 
+        Messenger.getDefault().register(this, MessageKey.HIDE_NEW_CONTACTS, Integer.class, data -> {
+            if (data == 0)
+                contactsVisible.set(View.GONE);
+            else
+                contactsVisible.set(View.VISIBLE);
+        });
         loadData();
-
-
     }
 
 
@@ -292,6 +301,13 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                         return;
                     }
                     connection.set(d.getUinfo().getRelationshipscount() + "");
+                });
+
+        personRelationUseCase.execute().compose(activity.bindToLifecycle())
+                .subscribe(d -> {
+                    if (SpUtils.getInt("addMeFriendCount", 0) != d.getInfo().getAddMeFriendCount()) {
+                        contactsVisible.set(View.VISIBLE);
+                    }
                 });
     }
 

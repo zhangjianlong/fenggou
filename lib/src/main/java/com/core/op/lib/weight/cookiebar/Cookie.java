@@ -31,7 +31,6 @@ import com.core.op.lib.R;
 import com.core.op.lib.databinding.WeightBannerBinding;
 import com.core.op.lib.databinding.WeightCookieBinding;
 
-import static com.core.op.lib.R.id.tvTitle;
 
 /**
  * Created by Eric on 2017/3/2.
@@ -59,7 +58,7 @@ final class Cookie extends LinearLayout {
 
     private boolean mCloseFlag = false;
 
-    private long duration = 2000;
+    private long duration = 1500;
     private int layoutGravity = Gravity.BOTTOM;
 
     public Cookie(@NonNull final Context context) {

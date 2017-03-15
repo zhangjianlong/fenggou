@@ -10,6 +10,7 @@ import com.slash.youth.domain.bean.LoginResult;
 import com.slash.youth.domain.bean.MineInfo;
 import com.slash.youth.domain.bean.MineManagerList;
 import com.slash.youth.domain.bean.OtherInfo;
+import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
 
@@ -71,5 +72,8 @@ public interface ApiClient {
 
     @POST(UriMethod.MANAGE_PUBLISH_UP_AND_DOWN)
     Observable<BaseResponse<StatusBean>> pubManager(@Body RequestBody requestBody);
+
+    @POST(UriMethod.PERSON_RELATION_FIRST_PAGER)
+    Observable<BaseResponse<PersonRelation>> getPersonRelation(@Body RequestBody requestBody);
 }
 

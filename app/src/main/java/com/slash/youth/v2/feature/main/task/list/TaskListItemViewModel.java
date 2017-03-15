@@ -10,6 +10,7 @@ import android.view.View;
 import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.engine.MsgManager;
@@ -28,6 +29,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.text.SimpleDateFormat;
 
 import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
+import static com.slash.youth.v2.util.MessageKey.TASK_REFRESH;
 
 /**
  * Created by acer on 2017/3/9.
@@ -135,9 +137,9 @@ public class TaskListItemViewModel extends BViewModel {
 
         //清空任务item对应的消息数量
         if (MsgManager.everyTaskMessageCount != null) {//照理说在这里不可能为null
-            MsgManager.everyTaskMessageCount.remove(taskBean.tid);
-            MsgManager.serializeEveryTaskMessageCount(MsgManager.everyTaskMessageCount);
-            Messenger.getDefault().sendNoMsg(TASK_CHANGE);
+            PreferenceUtil.write(activity, "TASK_" + taskBean.tid, 0l);
+            taskMsgVisible.set(View.GONE);
+            Messenger.getDefault().sendNoMsg(TASK_REFRESH);
         }
     });
 

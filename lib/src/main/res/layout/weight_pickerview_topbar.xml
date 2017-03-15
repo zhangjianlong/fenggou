@@ -5,7 +5,7 @@
     android:background="@color/app.theme.colorPrimary">
 
     <Button
-        android:id="@+id/btnCancel"
+        android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:background="@android:color/transparent"
@@ -13,22 +13,11 @@
         android:paddingLeft="@dimen/app.padding.normal"
         android:paddingRight="@dimen/app.padding.large30"
         android:text="@string/pickerview_cancel"
-        android:textColor="@drawable/selector_pickerview_btn"
-        android:textSize="@dimen/app.text.xlarge" />
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/btnSubmit"
-        android:layout_toRightOf="@+id/btnCancel"
-        android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/selector_pickerview_btn"
         android:textSize="@dimen/app.text.xlarge" />
 
     <Button
-        android:id="@id/btnSubmit"
+        android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
@@ -37,6 +26,18 @@
         android:paddingLeft="@dimen/app.padding.large30"
         android:paddingRight="@dimen/app.padding.normal"
         android:text="@string/pickerview_submit"
-        android:textColor="@drawable/selector_pickerview_btn"
+        android:textColor="@color/selector_pickerview_btn"
         android:textSize="@dimen/app.text.xlarge" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/btn_submit"
+        android:layout_toRightOf="@id/btn_cancel"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/app.text.xlarge" />
+
 </RelativeLayout>
