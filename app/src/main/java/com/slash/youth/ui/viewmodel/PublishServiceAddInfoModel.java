@@ -94,7 +94,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     private void initData() {
         mSallSkillLabels = mActivityPublishServiceAddinfoBinding.sallPublishServiceAddedSkilllabels;//在 loadOriginServiceData()中会使用，所以必须在这里初始化
         optionalPriceUnit = new String[]{"次", "个", "幅", "份", "单", "小时", "分钟", "天", "其他"};
-        options1Items.addAll(Arrays.asList(optionalPriceUnit));
+        options1Items.addAll(new ArrayList<String>(Arrays.asList(optionalPriceUnit)));
         serviceDetailBean = (ServiceDetailBean) mActivity.getIntent().getSerializableExtra("serviceDetailBean");
         isFromSkillManager = mActivity.getIntent().getBooleanExtra("isFromSkillManager", false);
         if (serviceDetailBean != null) {//表示是修改服务，首先需要把服务的数据填充
