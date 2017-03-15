@@ -102,7 +102,7 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
                 }, error -> {
                     isRefreshing.set(false);
                 }, () -> {
-                    Messenger.getDefault().send(TASK_CHANGE, count);
+                    Messenger.getDefault().send(count, TASK_CHANGE);
                     binding.recyclerView.getAdapter().notifyDataSetChanged();
                     isRefreshing.set(false);
                 });
