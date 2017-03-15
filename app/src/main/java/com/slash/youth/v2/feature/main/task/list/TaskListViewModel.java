@@ -11,6 +11,7 @@ import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.domain.interactor.main.TaskListUseCase;
 import com.slash.youth.engine.MsgManager;
+import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.v2.base.list.BaseListViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -96,7 +97,7 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
                     }
                 })
                 .subscribe(d -> {
-                    count += PreferenceUtil.readLong(activity, "TASK_" + d.tid);
+                    count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + d.tid);
                     itemViewModels.add(new TaskListItemViewModel(activity, d));
                 }, error -> {
                     isRefreshing.set(false);

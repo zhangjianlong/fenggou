@@ -137,7 +137,7 @@ public class TaskListItemViewModel extends BViewModel {
 
         //清空任务item对应的消息数量
         if (MsgManager.everyTaskMessageCount != null) {//照理说在这里不可能为null
-            PreferenceUtil.write(activity, "TASK_" + taskBean.tid, 0l);
+            PreferenceUtil.write(CommonUtils.getContext(), "TASK_" + taskBean.tid, 0l);
             taskMsgVisible.set(View.GONE);
             Messenger.getDefault().sendNoMsg(TASK_REFRESH);
         }
@@ -287,19 +287,12 @@ public class TaskListItemViewModel extends BViewModel {
         //隐藏任务item上的小圆点
 
         //显示小圆点
-        if (MsgManager.everyTaskMessageCount != null) {//正常情况，这里应该不可能为null
-            Integer integer = MsgManager.everyTaskMessageCount.get(taskBean.tid);
-            int count;
-            if (integer == null) {
-                count = 0;
-            } else {
-                count = integer;
-            }
-            if (count > 0) {
-                taskMsgVisible.set(View.VISIBLE);
-            } else {
-                taskMsgVisible.set(View.GONE);
-            }
+
+        long count = PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + taskBean.tid, 0);
+        if (count > 0) {
+            taskMsgVisible.set(View.VISIBLE);
+        } else {
+            taskMsgVisible.set(View.GONE);
         }
     }
 

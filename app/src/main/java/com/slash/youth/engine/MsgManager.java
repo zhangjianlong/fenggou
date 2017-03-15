@@ -627,7 +627,8 @@ public class MsgManager {
             JSONObject jsonObject = new JSONObject(cmdNtfData);
             if (!StrUtil.isEmpty(jsonObject.getString("tid"))) {
                 long c = PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + jsonObject.getString("tid"), 0);
-                PreferenceUtil.write(CommonUtils.getContext(), "TASK_" + jsonObject.getString("tid"), c++);
+                c++;
+                PreferenceUtil.write(CommonUtils.getContext(), "TASK_" + jsonObject.getString("tid"), c);
                 //总的任务消息数据的处理
                 if (taskMessageCount != -1) {
                     taskMessageCount++;
