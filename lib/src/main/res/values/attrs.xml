@@ -63,4 +63,11 @@
         <attr name="leftSwipe" format="boolean" />
     </declare-styleable>
 
+    <!--bottom navigation-->
+    <declare-styleable name="AHBottomNavigationBehavior_Params">
+        <attr name="tabLayoutId" format="reference" />
+        <attr name="selectedBackgroundVisible" format="boolean" />
+        <attr name="translucentNavigationEnabled" format="boolean" />
+    </declare-styleable>
+
 </resources>

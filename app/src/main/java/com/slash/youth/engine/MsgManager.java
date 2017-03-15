@@ -3,6 +3,7 @@ package com.slash.youth.engine;
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.os.Looper;
+import android.support.annotation.DrawableRes;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.StrUtil;
+import com.core.op.lib.weight.cookiebar.CookieBar;
+import com.core.op.lib.weight.cookiebar.OnActionClickListener;
 import com.google.gson.Gson;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemPushInfoBinding;
@@ -21,6 +25,7 @@ import com.slash.youth.domain.PushInfoBean;
 import com.slash.youth.domain.RongTokenBean;
 import com.slash.youth.domain.SlashMessageExtraBean;
 import com.slash.youth.domain.TaskMessageBean;
+import com.slash.youth.domain.UserInfoBean;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.http.protocol.AddFriendProtocol;
 import com.slash.youth.http.protocol.AddFriendStatusProtocol;
@@ -50,9 +55,11 @@ import com.slash.youth.utils.ActivityUtils;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.MsgType;
 import com.slash.youth.utils.RingingUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.main.MainActivity;
 import com.slash.youth.v2.util.MessageKey;
 
 import org.json.JSONException;
@@ -746,60 +753,52 @@ public class MsgManager {
      * @param pushInfoBean
      */
     public static void displayPushInfo(PushInfoBean pushInfoBean) {
-        Activity topActivity = ActivityUtils.currentActivity;
-        ItemPushInfoBinding itemPushInfoBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_push_info, null, false);
-        ItemPushInfoModel itemPushInfoModel = new ItemPushInfoModel(itemPushInfoBinding, topActivity, pushInfoBean);
-        itemPushInfoBinding.setItemPushInfoModel(itemPushInfoModel);
-        final View pushView = itemPushInfoBinding.getRoot();
-        pushView.measure(0, 0);
-        final int measuredHeight = pushView.getMeasuredHeight();
-        TranslateAnimation translateAppearAnimation = createPushInfoAppearAnimation(measuredHeight);
-        translateAppearAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
+        String title = "";
+        String message = "";
+        if (pushInfoBean.senderUserId.equals("1000")) {
+            title = "斜杠消息助手";
+            show(pushInfoBean, title, null, R.mipmap.message_icon);
+        } else if (pushInfoBean.senderUserId.equals(MsgManager.customerServiceUid)) {
+            title = "斜杠客服助手";
+            show(pushInfoBean, title, null, R.mipmap.customer_service_icon);
+        } else {
+            UserInfoEngine.getOtherUserInfo(new BaseProtocol.IResultExecutor<UserInfoBean>() {
+                @Override
+                public void execute(UserInfoBean dataBean) {
+                    UserInfoBean.UInfo uinfo = dataBean.data.uinfo;
+                    show(pushInfoBean, uinfo.name, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar, 0);
+                }
 
-            }
+                @Override
+                public void executeResultError(String result) {
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                //消失动画
-                CommonUtils.getHandler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        TranslateAnimation translateHideAnimation = createPushInfoHideAnimation(measuredHeight);
-                        translateHideAnimation.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
+                }
+            }, pushInfoBean.senderUserId, "0");
+        }
+    }
 
-                            }
+    private static void show(PushInfoBean pushInfoBean, String title, String uri, @DrawableRes int res) {
+        String message = "";
+        if (pushInfoBean.msg_type == PushInfoBean.CHAT_TEXT_MSG) {
+            message = pushInfoBean.pushText;
+        } else {
+            message = title + pushInfoBean.pushText;
+        }
 
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                //执行完隐藏动画后，把View从 Activity中移除，释放系统资源
-                                LogKit.v("移除pushView,释放资源");
-                                ViewGroup viewGroup = (ViewGroup) pushView.getParent();
-                                viewGroup.removeView(pushView);
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-
-                            }
-                        });
-                        pushView.startAnimation(translateHideAnimation);
-                    }
-                }, 2000);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        topActivity.addContentView(pushView, new FrameLayout.LayoutParams(-1, -2));
-        //出现动画
-        pushView.startAnimation(translateAppearAnimation);
+        CookieBar.Builder builder = new CookieBar.Builder(CommonUtils.getContext())
+                .setTitle(title)
+                .setMessage(message);
+        if (!StrUtil.isEmpty(uri)) {
+            builder.setUri(uri);
+        } else if (res != 0) {
+            builder.setIcon(res);
+        }
+        if (pushInfoBean.msg_type == MsgType.DEMAND_MSG_SELECT_EVENT ||
+                pushInfoBean.msg_type == MsgType.DEMAND_MSG_CONFIRM_EVENT ||
+                pushInfoBean.msg_type == MsgType.SERVICE_MSG_CONFIRM_EVENT) {
+            builder.setDuration(-1);
+        }
+        builder.show();
     }
 
     public static TranslateAnimation createPushInfoAppearAnimation(int measuredHeight) {
