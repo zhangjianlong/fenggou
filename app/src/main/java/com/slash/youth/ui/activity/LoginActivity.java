@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
+import com.core.op.lib.messenger.Messenger;
 import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.slash.youth.R;
@@ -13,6 +14,7 @@ import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.ActivityLoginModel;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.v2.util.MessageKey;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -117,5 +119,10 @@ public class LoginActivity extends BaseActivity {
         public void onCancel() {
 
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
     }
 }
