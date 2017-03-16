@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import static com.slash.youth.v2.feature.main.MainViewModel.CHANG_POSITION;
 import static com.slash.youth.v2.feature.main.task.list.TaskListViewModel.TASK_ONWAY;
 import static com.slash.youth.v2.feature.main.task.list.TaskListViewModel.TASK_STUTUS;
+import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 
 @PerActivity
 public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
@@ -35,6 +36,7 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
     private PubTaskDialog pubTaskDialog;
 
     public final ObservableField<Integer> noDataVisible = new ObservableField<>(View.GONE);
+    public final ObservableField<Integer> taskMsgVisible = new ObservableField<>(View.INVISIBLE);
 
     public final ReplyCommand taskClick = new ReplyCommand(() -> {
         if (selectTaskDialog != null && !selectTaskDialog.isShowing()) {
@@ -76,6 +78,14 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
                 taskStatus.set("进行中");
             } else {
                 taskStatus.set("历史");
+            }
+        });
+
+        Messenger.getDefault().register(this, TASK_CHANGE, Integer.class, d -> {
+            if (d > 0) {
+                taskMsgVisible.set(View.VISIBLE);
+            } else {
+                taskMsgVisible.set(View.INVISIBLE);
             }
         });
     }

@@ -832,9 +832,15 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         mNestedScrollInProgress = false;
         // Finish the spinner for nested scrolling if we ever consumed any
         // unconsumed nested scroll
+
+        isStartDrag = false;
         if (mTotalUnconsumed > 0) {
             finishSpinner(mTotalUnconsumed);
             mTotalUnconsumed = 0;
+        } else {
+            if (onDragListener != null) {
+                onDragListener.onStopDragNoRefresh();
+            }
         }
         // Dispatch up our nested parent
         stopNestedScroll();
@@ -980,7 +986,6 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     }
 
     private void finishSpinner(float overscrollTop) {
-        isStartDrag = false;
         if (overscrollTop > mTotalDragDistance) {
             setRefreshing(true, true /* notify */);
         } else {

@@ -367,7 +367,6 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     }
 
     protected void startInAnim() {
-
         titleVisible.set(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_in);
         animation.setAnimationListener(new Animation.AnimationListener() {

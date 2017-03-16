@@ -199,6 +199,8 @@ public class ActivityLoginModel extends BaseObservable {
         LoginManager.phoneLogin(new BaseProtocol.IResultExecutor<PhoneLoginResultBean>() {
             @Override
             public void execute(PhoneLoginResultBean dataBean) {
+
+                progress.dismiss();
                 PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_PHONE, mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim());
                 LoginManager.currentLoginUserPhone = mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim();
 
@@ -243,7 +245,6 @@ public class ActivityLoginModel extends BaseObservable {
                 } else {
                     ToastUtils.shortToast("登录失败:" + dataBean.rescode);
                 }
-                progress.dismiss();
             }
 
             @Override
