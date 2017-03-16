@@ -9,6 +9,7 @@ import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
+import com.jakewharton.rxbinding.view.RxView;
 import com.slash.youth.R;
 import com.slash.youth.databinding.FrgTaskBinding;
 import com.slash.youth.v2.feature.dialog.task.pub.PubTaskDialog;
@@ -17,8 +18,13 @@ import com.slash.youth.v2.feature.main.task.list.TaskListFragment;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
+import rx.Observer;
+
+import static android.R.attr.button;
 import static com.slash.youth.v2.feature.main.MainViewModel.CHANG_POSITION;
 import static com.slash.youth.v2.feature.main.task.list.TaskListViewModel.TASK_ONWAY;
 import static com.slash.youth.v2.feature.main.task.list.TaskListViewModel.TASK_STUTUS;
@@ -39,9 +45,7 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
     public final ObservableField<Integer> taskMsgVisible = new ObservableField<>(View.INVISIBLE);
 
     public final ReplyCommand taskClick = new ReplyCommand(() -> {
-        if (selectTaskDialog != null && !selectTaskDialog.isShowing()) {
-            selectTaskDialog.show();
-        }
+
     });
 
     public final ReplyCommand pubClick = new ReplyCommand(() -> {
@@ -88,5 +92,26 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
                 taskMsgVisible.set(View.INVISIBLE);
             }
         });
+
+        RxView.clicks(binding.llChange)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onCompleted() {
+                        //
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+                        if (selectTaskDialog != null && !selectTaskDialog.isShowing()) {
+                            selectTaskDialog.show();
+                        }
+                    }
+                });
     }
 }

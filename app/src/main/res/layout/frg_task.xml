@@ -34,14 +34,14 @@
                     android:textSize="17dp" />
 
                 <LinearLayout
+                    android:id="@+id/ll_change"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="17dp"
                     android:background="@drawable/selector_bg_trans"
-                    android:orientation="horizontal"
-                    app:clickCommand="@{viewModel.taskClick}">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_selected_task_text"
