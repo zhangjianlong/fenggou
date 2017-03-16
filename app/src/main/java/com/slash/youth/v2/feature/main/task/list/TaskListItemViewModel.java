@@ -148,7 +148,7 @@ public class TaskListItemViewModel extends BViewModel {
             case 0:
                 type = "进行中";
                 break;
-            case 1:
+            case 3:
                 type = "历史";
                 break;
         }
