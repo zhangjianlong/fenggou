@@ -79,5 +79,18 @@ public class StringUtils {
         return stringBuffer.toString();
     }
 
+    //分割技能标签，返回的格式为**-**-****
+    public static String strFormat(String tempStr){
+
+        // 最多分割出3个字符串
+        int maxSplit = 3;
+        if (tempStr.contains("-")) {
+            String[] sourceStrArray = tempStr.split("-", maxSplit);
+            return sourceStrArray[sourceStrArray.length-1];
+        }
+
+        return tempStr;
+    }
+
 
 }

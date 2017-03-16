@@ -43,6 +43,7 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
 
@@ -174,7 +175,7 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
             activityUserinfoEditorBinding.llSkilllabelContainer.removeAllViews();
             String[] split = tag.split(",");
             for (String textTag : split) {
-                TextView skillTag = createSkillTag(textTag);
+                TextView skillTag = createSkillTag(StringUtils.strFormat(textTag));
                 activityUserinfoEditorBinding.llSkilllabelContainer.addView(skillTag);
             }
         }
