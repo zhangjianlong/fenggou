@@ -251,9 +251,11 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
+                        android:background="@drawable/selector_bg_trans"
+                        android:gravity="center"
                         android:paddingLeft="13dp"
                         android:paddingRight="13dp"
                         android:text="发布"

@@ -588,7 +588,8 @@
         <activity android:name=".Message" />
         <activity android:name=".view.impl.MList" />
         <activity android:name=".view.impl.Manager" />
-        <activity android:name=".DelManager"></activity>
+        <activity android:name=".DelManager" />
+        <activity android:name=".Pub"></activity>
     </application>
 
 </manifest>

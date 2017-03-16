@@ -837,10 +837,6 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
         if (mTotalUnconsumed > 0) {
             finishSpinner(mTotalUnconsumed);
             mTotalUnconsumed = 0;
-        } else {
-            if (onDragListener != null) {
-                onDragListener.onStopDragNoRefresh();
-            }
         }
         // Dispatch up our nested parent
         stopNestedScroll();
@@ -933,9 +929,12 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
 
     @SuppressLint("NewApi")
     private void moveSpinner(float overscrollTop) {
-        if (!isStartDrag && onDragListener != null) {
+        if (!isStartDrag && onDragListener != null && overscrollTop != 0) {
             isStartDrag = true;
             onDragListener.onStartDrag();
+        } else if (overscrollTop == 0 && onDragListener != null) {
+            isStartDrag = false;
+            onDragListener.onStopDragNoRefresh();
         }
         mProgress.showArrow(true);
         float originalDragPercent = overscrollTop / mTotalDragDistance;

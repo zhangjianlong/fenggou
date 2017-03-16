@@ -200,14 +200,14 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     MineInfoUseCase mineInfoUseCase;
     OtherInfoUseCase otherInfoUseCase;
     PersonRelationUseCase personRelationUseCase;
-    public String totalsMoney = "0.0元";
 
+    public ObservableField<String> totalsMoney = new ObservableField<>("0.0元");
     public ObservableField<String> uri = new ObservableField<>();
     public ObservableField<String> over = new ObservableField<>();
 
     public String grade;
 
-    public String mark = "0";
+    public ObservableField<String> mark = new ObservableField<>("0");
     public ObservableField<String> connection = new ObservableField<>("0");
     public ObservableField<String> serverStar = new ObservableField<>("0.0星");
     public ObservableField<Integer> contactsVisible = new ObservableField<>(View.GONE);
@@ -254,9 +254,13 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
             else
                 contactsVisible.set(View.VISIBLE);
         });
-        loadData();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
+    }
 
     private void loadData() {
         mineInfoUseCase.execute().compose(activity.bindToLifecycle())
@@ -267,7 +271,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                     MineInfo.DataBean data = d.getMyinfo();
                     this.data.set(data);
 
-                    totalsMoney = CountUtils.DecimalFormat(data.getAmount()) + "元";
+                    totalsMoney.set(CountUtils.DecimalFormat(data.getAmount()) + "元");
                     uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());
 
                     int v = (int) (data.getExpertratio() * 100);
@@ -281,7 +285,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                         if (expertlevel > 0 && expertlevel <= 4) {
                             grade = grades[expertlevel];
                             int expertscore = expertlevels.get(expertlevel - 1);
-                            mark = (int) (expertscore - expertMarks) + "";
+                            mark.set(((int) (expertscore - expertMarks)) + "");
                         }
                     }
 

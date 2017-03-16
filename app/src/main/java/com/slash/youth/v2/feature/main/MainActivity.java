@@ -72,8 +72,8 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
         Messenger.getDefault().register(this, OFF_LINE, () -> {
             offline();
         });
-
     }
+
 
     @Override
     protected void onPause() {
@@ -100,7 +100,6 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
         super.onStart();
 
     }
-
 
 
     public void offline() {

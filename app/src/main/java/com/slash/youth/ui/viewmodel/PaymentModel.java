@@ -21,6 +21,7 @@ import com.slash.youth.engine.DemandEngine;
 import com.slash.youth.engine.ServiceEngine;
 import com.slash.youth.http.protocol.BaseProtocol;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.utils.CountUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.MD5Utils;
@@ -73,7 +74,7 @@ public class PaymentModel extends BaseObservable {
             public void execute(MyAccountBean dataBean) {
 //                balance = (int) (dataBean.getData().getData().getCurrentmoney());
                 balance = dataBean.getData().getData().getCurrentmoney();
-                setCurrentmoney(balance + "");
+                setCurrentmoney(CountUtils.DecimalFormat(balance) + "");
                 hideLoadLayer();
             }
 

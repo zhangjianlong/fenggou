@@ -87,9 +87,10 @@ public class FirstPagerDemandModel extends BaseObservable {
 
     private void showMoreDemandDialogPager() {
         if (isDemand) {
-            boolean showMoreDemandDialog = SpUtils.getBoolean("showMoreDemandDialog", false);
+            boolean showMoreDemandDialog = SpUtils.getBoolean("showMoreDemandDialog", true);
             if (showMoreDemandDialog) {
                 setMoreDemandDialogVisitibility(View.VISIBLE);
+                SpUtils.setBoolean("showMoreDemandDialog", false);
             }
         }
     }

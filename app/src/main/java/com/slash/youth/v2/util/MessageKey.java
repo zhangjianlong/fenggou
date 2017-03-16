@@ -31,5 +31,7 @@ public class MessageKey {
     public static final String DEL_MANAGER = "DEL_MANAGER";
     //主页显示导航栏
     public static final String SHOW_NAVIGATION = "SHOW_NAVIGATION";
+    //显示主页发布页面
+    public static final String SHOW_MAIN_PUG = "SHOW_MAIN_PUG";
 
 }

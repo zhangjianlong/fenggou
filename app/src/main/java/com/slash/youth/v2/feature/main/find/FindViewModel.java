@@ -18,6 +18,7 @@ import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.weight.EmptyLayout;
 import com.core.op.lib.weight.RecycleScrollView;
 import com.core.op.lib.weight.loading.Indicator;
@@ -37,6 +38,7 @@ import com.slash.youth.ui.activity.SearchActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.v2.base.list.ListViewModel;
+import com.slash.youth.v2.feature.dialog.find.PubDialog;
 import com.slash.youth.v2.feature.main.MainActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -49,6 +51,8 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import rx.Observable;
+
+import static com.slash.youth.v2.util.MessageKey.SHOW_MAIN_PUG;
 
 
 @PerActivity
@@ -63,6 +67,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     FindServiceUseCase findServiceUseCase;
     FindDemandUseCase findDemandUseCase;
 
+    PubDialog dialog;
     public final ObservableField<Integer> titleVisible = new ObservableField<>(View.VISIBLE);
 
     public final ItemView bItemView = ItemView.of(BR.viewModel, R.layout.item_main_find_banner_item);
@@ -85,8 +90,9 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     });
 
     public final ReplyCommand pub = new ReplyCommand(() -> {
-        Intent intentPublishActivity = new Intent(CommonUtils.getContext(), PublishActivity.class);
-        activity.startActivity(intentPublishActivity);
+//        Intent intentPublishActivity = new Intent(CommonUtils.getContext(), PublishActivity.class);
+//        activity.startActivity(intentPublishActivity);
+        Messenger.getDefault().sendNoMsg(SHOW_MAIN_PUG);
     });
 
     public final ReplyCommand moreDemand = new ReplyCommand(() -> {
@@ -99,11 +105,13 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
 
     @Inject
     public FindViewModel(RxAppCompatActivity activity,
+                         PubDialog dialog,
                          BannerUseCase bannerUseCase,
                          TagUseCase tagUseCase,
                          FindServiceUseCase findServiceUseCase,
                          FindDemandUseCase findDemandUseCase) {
         super(activity);
+        this.dialog = dialog;
         this.bannerUseCase = bannerUseCase;
         this.tagUseCase = tagUseCase;
         this.findDemandUseCase = findDemandUseCase;

@@ -279,9 +279,6 @@ final class Cookie extends LinearLayout {
 
         if (mScroller.computeScrollOffset()) {
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-            Log.i("scroller", "getCurrX()= " + mScroller.getCurrX()
-                    + "     getCurrY()=" + mScroller.getCurrY()
-                    + "  getFinalY() =  " + mScroller.getFinalY());
             // 不要遗忘更新界面
             postInvalidate();
         } else {
