@@ -28,6 +28,7 @@ import com.slash.youth.global.SlashApplication;
 import com.slash.youth.ui.activity.SearchActivity;
 import com.slash.youth.ui.adapter.GirdDropDownAdapter;
 import com.slash.youth.ui.adapter.ListDropDownAdapter;
+import com.slash.youth.ui.view.DropDownMenu;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.SpUtils;
@@ -272,7 +273,24 @@ public class SearchNeedResultTabModel extends BaseObservable  {
         mSearchNeedResultTabBinding.dropDownMenu.setDropDownMenu(headerLists, popupViews, contentView);
 
         if(SpUtils.getString("searchType", "").equals(SearchManager.HOT_SEARCH_PERSON)){
-            mSearchNeedResultTabBinding.dropDownMenu.addTabView("影响力");
+            mSearchNeedResultTabBinding.dropDownMenu.addTabView("影响力", new DropDownMenu.ClickTabListener() {
+                @Override
+                public void clickTab(TextView tab) {
+                    switch (pullToRefreshListTabViewModel.sort){
+                        case 0:
+                            pullToRefreshListTabViewModel.sort =1;
+                            tab.setCompoundDrawablesWithIntrinsicBounds(null, null, CommonUtils.getContext().getResources().getDrawable(R.mipmap.shang_icon), null);
+                            break;
+                        case 1:
+                            pullToRefreshListTabViewModel.sort =0;
+                            tab.setCompoundDrawablesWithIntrinsicBounds(null, null, CommonUtils.getContext().getResources().getDrawable(R.mipmap.xia), null);
+                            break;
+                    }
+                    pullToRefreshListTabViewModel.clear();
+                    pullToRefreshListTabViewModel.getData(searchType);
+
+                }
+            });
             mSearchNeedResultTabBinding.dropDownMenu.isAdd = true;
         }
     }
