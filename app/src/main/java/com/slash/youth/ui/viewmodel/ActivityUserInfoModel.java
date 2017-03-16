@@ -38,6 +38,7 @@ import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
@@ -349,7 +350,7 @@ public class ActivityUserInfoModel extends BaseObservable {
                 String[] split = tag.split(",");
                 for (String textTag : split) {
                     textViewTag = new TextView(CommonUtils.getContext());
-                    textViewTag.setText(textTag);
+                    textViewTag.setText(StringUtils.strFormat(textTag));
                     textViewTag.setTextColor(Color.parseColor("#31C5E4"));
                     textViewTag.setTextSize(CommonUtils.dip2px(4));
                     textViewTag.setPadding(CommonUtils.dip2px(8), CommonUtils.dip2px(6), CommonUtils.dip2px(8), CommonUtils.dip2px(6));
@@ -358,7 +359,7 @@ public class ActivityUserInfoModel extends BaseObservable {
                 }
             } else {
                 textViewTag = new TextView(CommonUtils.getContext());
-                textViewTag.setText(tag);
+                textViewTag.setText(StringUtils.strFormat(tag));
                 textViewTag.setTextColor(Color.parseColor("#31C5E4"));
                 textViewTag.setTextSize(CommonUtils.dip2px(4));
                 textViewTag.setPadding(CommonUtils.dip2px(8), CommonUtils.dip2px(6), CommonUtils.dip2px(8), CommonUtils.dip2px(6));
