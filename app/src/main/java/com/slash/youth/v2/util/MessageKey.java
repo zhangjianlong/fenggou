@@ -27,5 +27,7 @@ public class MessageKey {
     public static final String HIDE_NEW_CONTACTS = "HIDE_NEW_CONTACTS";
     //删除任务管理信息
     public static final String DEL_MANAGER = "DEL_MANAGER";
+    //主页显示导航栏
+    public static final String SHOW_NAVIGATION = "SHOW_NAVIGATION";
 
 }

@@ -26,6 +26,7 @@ import javax.inject.Inject;
 
 
 import static com.slash.youth.v2.feature.main.mine.MineViewModel.START_ANIMATION;
+import static com.slash.youth.v2.util.MessageKey.SHOW_NAVIGATION;
 import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 
 @PerActivity
@@ -63,6 +64,10 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
     public void afterViews() {
         Messenger.getDefault().register(this, CHANG_POSITION, () -> {
             selectPosition.set(0);
+        });
+        Messenger.getDefault().register(this, SHOW_NAVIGATION, () -> {
+            if (binding.bottomNavigation.isHidden())
+                binding.bottomNavigation.restoreBottomNavigation(true);
         });
 
         Messenger.getDefault().register(this, TASK_CHANGE, Integer.class, d -> {

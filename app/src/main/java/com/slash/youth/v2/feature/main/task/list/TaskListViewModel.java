@@ -25,6 +25,7 @@ import rx.Observable;
 import static android.R.attr.data;
 import static com.slash.youth.ui.activity.CityLocationActivity.map;
 import static com.slash.youth.v2.feature.main.task.TaskViewModel.SHOW_NODATA;
+import static com.slash.youth.v2.util.MessageKey.SHOW_NAVIGATION;
 import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
 import static com.slash.youth.v2.util.MessageKey.TASK_REFRESH;
 
@@ -91,6 +92,9 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
                         binding.recyclerView.getAdapter().notifyDataSetChanged();
                         return null;
                     } else {
+                        if (data.getList().size() <= 4) {
+                            Messenger.getDefault().sendNoMsg(SHOW_NAVIGATION);
+                        }
                         Messenger.getDefault().send(1, SHOW_NODATA);
                         itemViewModels.add(new TaskListItemViewModel(type));
                         return Observable.from(data.getList());
