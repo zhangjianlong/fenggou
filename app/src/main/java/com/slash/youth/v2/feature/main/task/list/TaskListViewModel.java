@@ -90,6 +90,7 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
                     if (data.getList() != null && data.getList().size() == 0) {
                         Messenger.getDefault().send(0, SHOW_NODATA);
                         binding.recyclerView.getAdapter().notifyDataSetChanged();
+                        Messenger.getDefault().sendNoMsg(SHOW_NAVIGATION);
                         return null;
                     } else {
                         if (data.getList().size() <= 4) {

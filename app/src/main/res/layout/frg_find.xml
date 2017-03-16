@@ -26,7 +26,7 @@
             android:orientation="vertical"
             android:refreshing="@{viewModel.isRefreshing}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:onRefreshCommand="@{viewModel.onRefreshCommand}">
+            app:onSwipeRefreshCommand="@{viewModel.onRefreshCommand}">
 
             <com.core.op.lib.weight.RecycleScrollView
                 android:id="@+id/sc_scroll"
