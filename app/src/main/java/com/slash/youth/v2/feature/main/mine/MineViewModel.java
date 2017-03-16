@@ -184,7 +184,6 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
         Intent intentUserinfoEditorActivity = new Intent(CommonUtils.getContext(), UserinfoEditorActivity.class);
         intentUserinfoEditorActivity.putExtra("phone", data.get().getPhone());
-//        intentUserinfoEditorActivity.putExtra("myUinfo", myinfo);
         intentUserinfoEditorActivity.putExtra("myId", data.get().getId());
         activity.startActivityForResult(intentUserinfoEditorActivity, UserInfoEngine.MY_USER_EDITOR);
     });

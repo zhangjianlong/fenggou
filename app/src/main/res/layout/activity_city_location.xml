@@ -23,7 +23,7 @@
             <RelativeLayout
                 android:id="@+id/rl_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="#31C5E4">
 
                 <LinearLayout
@@ -32,12 +32,10 @@
                     android:onClick="@{activityCityLocationModel.finishCityLocationActivity}">
 
                     <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:layout_marginBottom="11dp"
-                        android:layout_marginLeft="11dp"
-                        android:layout_marginTop="11dp"
+                        android:padding="8dp"
                         android:background="@android:color/transparent"
                         android:src="@mipmap/nav_back" />
                 </LinearLayout>
