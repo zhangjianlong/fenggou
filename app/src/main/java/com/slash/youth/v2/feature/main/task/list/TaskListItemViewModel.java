@@ -29,6 +29,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.text.SimpleDateFormat;
 
 import static com.slash.youth.v2.util.MessageKey.TASK_CHANGE;
+import static com.slash.youth.v2.util.MessageKey.TASK_POINT_REFRESH;
 import static com.slash.youth.v2.util.MessageKey.TASK_REFRESH;
 
 /**
@@ -136,11 +137,9 @@ public class TaskListItemViewModel extends BViewModel {
         }
 
         //清空任务item对应的消息数量
-        if (MsgManager.everyTaskMessageCount != null) {//照理说在这里不可能为null
-            PreferenceUtil.write(CommonUtils.getContext(), "TASK_" + taskBean.tid, 0l);
-            taskMsgVisible.set(View.GONE);
-            Messenger.getDefault().sendNoMsg(TASK_REFRESH);
-        }
+        PreferenceUtil.write(CommonUtils.getContext(), "TASK_" + taskBean.tid, 0l);
+        taskMsgVisible.set(View.GONE);
+        Messenger.getDefault().sendNoMsg(TASK_POINT_REFRESH);
     });
 
     public TaskListItemViewModel(int t) {

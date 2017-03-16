@@ -97,13 +97,13 @@ public class FindItemViewModel extends BViewModel {
             this.quote = FirstPagerManager.DEMAND_QUOTE;
         }
 
-        int instalment = listBean.getInstalment();
+        int instalment = listBean.getInstalment();//0代表分期，1代表一次性到账
         this.instalment = FirstPagerManager.DEMAND_INSTALMENT;
         switch (instalment) {
-            case 0:
+            case 1:
                 instalmentVisibility.set(View.VISIBLE);
                 break;
-            case 1:
+            case 0:
                 instalmentVisibility.set(View.GONE);
                 break;
         }
@@ -163,6 +163,7 @@ public class FindItemViewModel extends BViewModel {
         }
 
         int instalment = listBean.getInstalment();
+        this.instalment = FirstPagerManager.SERVICE_INSTALMENT;
         switch (instalment) {
             case 0:
                 instalmentVisibility.set(View.VISIBLE);

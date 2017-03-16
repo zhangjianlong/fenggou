@@ -2,11 +2,15 @@ package com.core.op.lib.weight;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+
+import com.core.op.lib.weight.swipe.SwipeRefreshLayout;
+
+import java.util.logging.Logger;
 
 /**
  * Created by acer on 2017/3/7.
@@ -31,11 +35,6 @@ public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
     public VpSwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-    }
-
-    @Override
-    public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
-        return super.onStartNestedScroll(child, target, nestedScrollAxes);
     }
 
     @Override

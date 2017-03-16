@@ -23,6 +23,7 @@ import com.slash.youth.domain.PhoneLoginResultBean;
 import com.slash.youth.domain.RongTokenBean;
 import com.slash.youth.domain.SendPinResultBean;
 import com.slash.youth.domain.ThirdPartyLoginResultBean;
+import com.slash.youth.domain.TokenLoginResultBean;
 import com.slash.youth.domain.UserInfoBean;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.engine.MsgManager;
@@ -52,6 +53,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import io.rong.imlib.RongIMClient;
+
+import static com.slash.youth.engine.LoginManager.rongToken;
 
 /**
  * Created by zhouyifeng on 2016/9/5.
@@ -199,6 +202,8 @@ public class ActivityLoginModel extends BaseObservable {
         LoginManager.phoneLogin(new BaseProtocol.IResultExecutor<PhoneLoginResultBean>() {
             @Override
             public void execute(PhoneLoginResultBean dataBean) {
+
+                progress.dismiss();
                 PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_PHONE, mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim());
                 LoginManager.currentLoginUserPhone = mActivityLoginBinding.etActivityLoginPhonenum.getText().toString().trim();
 
@@ -243,7 +248,6 @@ public class ActivityLoginModel extends BaseObservable {
                 } else {
                     ToastUtils.shortToast("登录失败:" + dataBean.rescode);
                 }
-                progress.dismiss();
             }
 
             @Override
@@ -300,6 +304,25 @@ public class ActivityLoginModel extends BaseObservable {
 
     }
 
+    private void getToken() {
+        LoginManager.tokenLogin(new BaseProtocol.IResultExecutor<TokenLoginResultBean>() {
+            @Override
+            public void execute(TokenLoginResultBean dataBean) {
+                //页面跳转
+                LoginManager.currentLoginUserPhone = PreferenceUtil.readString(CommonUtils.getContext(), ShareKey.USER_PHONE);
+//                        LoginManager.token = token;
+                LoginManager.token = dataBean.data.token;//每次token登录，都保存服务端返回过来的最新token
+                SpUtils.setString("token", LoginManager.token);
+                //链接融云
+            }
+
+            @Override
+            public void executeResultError(String result) {
+                LogKit.v("token登录失败");
+            }
+        });
+    }
+
     /**
      * 根据是否设置了个人信息（真实姓名）和技能标签来跳转到不同的页面
      */
@@ -348,7 +371,7 @@ public class ActivityLoginModel extends BaseObservable {
     private void savaLoginState(long uid, String token, String rongToken) {
         LoginManager.currentLoginUserId = uid;
         LoginManager.token = token;
-        LoginManager.rongToken = rongToken;
+        rongToken = rongToken;
 
         SpUtils.setLong("uid", uid);
         SpUtils.setString("token", token);
@@ -643,7 +666,7 @@ public class ActivityLoginModel extends BaseObservable {
                     @Override
                     public void execute(RongTokenBean dataBean) {
                         String rongToken = dataBean.data.token;
-                        LoginManager.rongToken = rongToken;
+                        rongToken = rongToken;
                         SpUtils.setString("rongToken", rongToken);
                         //这里可能需要先断开和融云的链接，然后重新再链接
                         MsgManager.connectRongCloud(rongToken);

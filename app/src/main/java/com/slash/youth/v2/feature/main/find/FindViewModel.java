@@ -21,6 +21,7 @@ import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.weight.EmptyLayout;
 import com.core.op.lib.weight.RecycleScrollView;
 import com.core.op.lib.weight.loading.Indicator;
+import com.core.op.lib.weight.swipe.SwipeRefreshLayout;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.FrgFindBinding;
@@ -156,6 +157,18 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
 
             }
         });
+
+        binding.swipeRefreshLayout.setOnDragListener(new SwipeRefreshLayout.OnDragListener() {
+            @Override
+            public void onStartDrag() {
+                startOutAnim();
+            }
+
+            @Override
+            public void onStopDragNoRefresh() {
+                startInAnim();
+            }
+        });
         binding.dtChoice.checkedService();
         titleVisible.set(View.GONE);
         initBanner();
@@ -169,7 +182,6 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
 
     @Override
     public void refresh() {
-        startOutAnim();
         Observable.timer(1, TimeUnit.SECONDS).subscribe(data -> {
             if (!isFirstSuccess)
                 initBanner();
@@ -355,6 +367,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     }
 
     protected void startInAnim() {
+        titleVisible.set(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(activity, R.anim.anim_alpha_in);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -363,7 +376,6 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                titleVisible.set(View.VISIBLE);
             }
 
             @Override
