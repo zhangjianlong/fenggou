@@ -55,7 +55,7 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
             if (status.equals(TASK_ONWAY)) {
                 type = 0;
             } else {
-                type = 1;
+                type = 3;
             }
             loadData();
         });
