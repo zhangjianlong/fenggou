@@ -57,5 +57,27 @@ public class StringUtils {
         return sd.format(date);
     }
 
+    //手机号码格式变为139****4532
+    public static String phoneFormat(String tempStr){
+        if (StringUtils.isEmpty(tempStr)){
+            return "****";
+        }
+        StringBuffer stringBuffer = new StringBuffer();
+        String first = "";
+        String last = "";
+
+        if (tempStr.length()>=11){
+            first = tempStr.substring(0,3);
+            last = tempStr.substring(tempStr.length()-4,tempStr.length());
+            stringBuffer.append(first).append("****").append(last);
+        }else {
+            first = tempStr.substring(0,1);
+            last = tempStr.substring(tempStr.length()-1,tempStr.length());
+            stringBuffer.append(first).append("****").append(last);
+
+        }
+        return stringBuffer.toString();
+    }
+
 
 }

@@ -8,6 +8,7 @@ import android.databinding.Bindable;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
+import android.widget.TextView;
 
 import com.slash.youth.BR;
 import com.slash.youth.databinding.ActivityMySettingBinding;
@@ -42,6 +43,7 @@ import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
@@ -59,6 +61,22 @@ import java.util.Map;
  * Created by zss on 2016/11/3.
  */
 public class MySettingModel extends BaseObservable {
+    public  static final  int SY_RES_SUCCESS                   = 0; //成功
+    public  static final int SY_RES_FAIL                      = 1 ; //失败
+    public  static final int SY_RES_INVALID_PARAMS            = 2; //参数错误
+    public  static final int SY_RES_INVALID_TOKEN             = 3 ;//Token错误
+    public  static final int SY_RES_TOKEN_TIMEOUT             = 4;  //Token过期
+    public  static final int SY_RES_INVALID_USERNAME_PASSWORD = 5 ; //用户名或密码错误
+    public  static final int SY_RES_USER_EXISTS               = 6 ;//用户名已存在
+    public  static final int  SY_RES_INVALID_PIN               = 7 ; //验证码错误
+    public  static final int  SY_RES_INVALID_UID               = 8;  //UID错误
+    public  static final int  SY_RES_NEED_LOGIN_WITH_PHONE     = 9 ; //通过第三方登录并且未绑定手机号码
+    public  static final int  SY_RES_NOT_FOUND                 = 10; //不存在
+    public  static final int SY_RES_NEW_USER                  = 11; //新用户
+    public  static final int SY_RES_BINDED_THIRDPART          = 12; //已绑定了其他账号
+    public  static final int SY_RES_TAG_EXIST                 = 50 ; //标签已存在
+
+
     private ActivityMySettingBinding activityMySettingBinding;
     private HashMap<String, String> paramsMap = new HashMap<>();
     private int status;
@@ -615,12 +633,10 @@ public class MySettingModel extends BaseObservable {
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            ToastUtils.shortToast("绑定成功");
             UMShareAPI mShareAPI = UMShareAPI.get(mySettingActivity);
             switch (platform) {
                 case QQ:
                     String QQ_access_token = data.get("access_token");
-//                    String QQ_uid = data.get("uid");
                     isQQBing = true;
                     String QQ_uid = data.get("openid");
                     loginBind(QQ_access_token, QQ_uid, GlobalConstants.LoginPlatformType.QQ, null);
@@ -652,25 +668,40 @@ public class MySettingModel extends BaseObservable {
             @Override
             public void execute(LoginBindBean dataBean) {
                 int rescode = dataBean.getRescode();
-                if (rescode == 0) {
-                    switch (type) {
+                TextView textView = null;
+
+                switch (type){
                         case GlobalConstants.LoginPlatformType.WECHAT://微信
-                            activityMySettingBinding.tvWeixinBinding.setText("解绑");
-                            isWinxinBing = true;
+                            textView = activityMySettingBinding.tvWeixinBinding;
+                            if (rescode == SY_RES_SUCCESS){
+                                isWinxinBing = true;
+                            }
                             break;
                         case GlobalConstants.LoginPlatformType.QQ://qq
-                            activityMySettingBinding.tvQQBinding.setText("解绑");
-                            isQQBing = true;
+                            textView =  activityMySettingBinding.tvQQBinding;
+                            if (rescode == SY_RES_SUCCESS){
+                                isQQBing = true;
+                            }
                             break;
-                    }
-                } else {
-                    ToastUtils.shortCenterToast("绑定失败");
+                }
+                switch (rescode){
+                    case SY_RES_SUCCESS:
+                        textView.setText("解绑");
+                        ToastUtils.shortCenterToast("绑定成功");
+                        break;
+                    case SY_RES_BINDED_THIRDPART:
+                        ToastUtils.shortCenterToast(String.format("该三方账号已绑定%S，请解绑后再绑定新账号", StringUtils.phoneFormat(dataBean.getData().getPhone())));
+                        break;
+                    case SY_RES_FAIL:
+                    default:
+                        ToastUtils.shortCenterToast("绑定失败");
+                        break;
                 }
             }
 
             @Override
             public void executeResultError(String result) {
-                LogKit.d("result:" + result);
+                ToastUtils.shortCenterToast("绑定失败");
             }
         });
     }

@@ -5,6 +5,11 @@ package com.slash.youth.domain;
  */
 public class LoginBindBean {
     private int rescode;
+    /**
+     * data : {"phone":"18625254516"}
+     */
+
+    private DataBean data;
 
     public int getRescode() {
         return rescode;
@@ -12,6 +17,30 @@ public class LoginBindBean {
 
     public void setRescode(int rescode) {
         this.rescode = rescode;
+    }
+
+    public DataBean getData() {
+        return data;
+    }
+
+    public void setData(DataBean data) {
+        this.data = data;
+    }
+
+    public static class DataBean {
+        /**
+         * phone : 18625254516
+         */
+
+        private String phone;
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
     }
 
 
