@@ -64,7 +64,7 @@ public class DropDownMenu extends LinearLayout {
         }
     }
 
-    public void addTabView(String text){
+    public void addTabView(String text,ClickTabListener clickTabListener){
         //分割线
        View view = new View(getContext());
         LayoutParams layoutParams = new LayoutParams(dpTpPx(0.5f), dpTpPx(20));
@@ -86,6 +86,12 @@ public class DropDownMenu extends LinearLayout {
         tab.setCompoundDrawablesWithIntrinsicBounds(null, null, imageView.getDrawable(), null);
         tab.setText(text);
         tab.setPadding(dpTpPx(5), dpTpPx(12), dpTpPx(5), dpTpPx(12));
+        tab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickTabListener.clickTab(tab);
+            }
+        });
         tabMenuView.addView(tab);
     }
 
@@ -323,5 +329,9 @@ public class DropDownMenu extends LinearLayout {
     public int dpTpPx(float value) {
         DisplayMetrics dm = getResources().getDisplayMetrics();
         return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, dm) + 0.5);
+    }
+
+    public  interface  ClickTabListener{
+        void clickTab(TextView tab);
     }
 }
