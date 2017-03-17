@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.databinding.BaseObservable;
 import android.view.View;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemChatOtherChangeContactWayBinding;
 import com.slash.youth.engine.LoginManager;
@@ -11,6 +12,7 @@ import com.slash.youth.engine.MsgManager;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.v2.util.ShareKey;
 
 import java.io.File;
 
@@ -64,11 +66,15 @@ public class ChatOtherChangeContactWayModel extends BaseObservable {
                 mItemChatOtherChangeContactWayBinding.tvAgree.setBackgroundResource(R.drawable.shape_chat_agree_add_friend_bg);
             }
         }
-
-        if ((!"1000".equals(MsgManager.targetId)) && (!MsgManager.customerServiceUid.equals(MsgManager.targetId))) {
-            BitmapKit.bindImage(mItemChatOtherChangeContactWayBinding.ivChatOtherAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + mTargetAvatar);
+        if (PreferenceUtil.readBoolean(mActivity, ShareKey.USER_ANONYMITY + MsgManager.targetId, false)) {
+            mItemChatOtherChangeContactWayBinding.ivChatOtherAvatar.setImageResource(R.mipmap.anonymity_avater);
         } else {
-            mItemChatOtherChangeContactWayBinding.ivChatOtherAvatar.setImageResource(MsgManager.targetAvatarResource);
+            if ((!"1000".equals(MsgManager.targetId)) && (!MsgManager.customerServiceUid.equals(MsgManager.targetId))) {
+                BitmapKit.bindImage(mItemChatOtherChangeContactWayBinding.ivChatOtherAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + mTargetAvatar);
+            } else {
+                mItemChatOtherChangeContactWayBinding.ivChatOtherAvatar.setImageResource(MsgManager.targetAvatarResource);
+            }
+
         }
     }
 

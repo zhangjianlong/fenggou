@@ -561,6 +561,7 @@ public class ActivityUserInfoModel extends BaseObservable {
 
     //聊一聊
     public void chat(View view) {
+        PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + otherUid, false);
         Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
         intentChatActivity.putExtra("targetId", otherUid + "");
         intentChatActivity.putExtra("anonymity", String.valueOf(anonymity));

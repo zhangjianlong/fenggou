@@ -37,6 +37,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.google.gson.Gson;
 import com.slash.youth.BR;
 import com.slash.youth.R;
@@ -81,6 +82,7 @@ import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.util.MessageKey;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -298,7 +300,11 @@ public class ChatModel extends BaseObservable {
                 targetAvatar = dataBean.data.uinfo.avatar;
                 MsgManager.targetName = targetName;
                 MsgManager.targetAvatar = targetAvatar;
-                setOtherUsername(targetName);
+                if (!PreferenceUtil.readBoolean(mActivity, ShareKey.USER_ANONYMITY + targetId, false)) {
+                    setOtherUsername(targetName);
+                } else {
+                    setOtherUsername("匿名");
+                }
                 setOtherCompanyAndPosition(dataBean.data.uinfo.company + " " + dataBean.data.uinfo.position);
 
                 getBaseDataFinishedCount++;

@@ -7,6 +7,7 @@ import android.view.View;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemRecommendServicePartBinding;
 import com.slash.youth.domain.RecommendServiceUserBean;
+import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.ui.adapter.RecommendServicePartAdapter;
 import com.slash.youth.ui.viewmodel.ItemRecommendServicePartModel;
 import com.slash.youth.utils.BitmapKit;
@@ -36,7 +37,7 @@ public class RecommendServicePartHoler extends BaseHolder<RecommendServiceUserBe
             mItemRecommendServicePartBinding.ivRecommendServicePartChecked.setImageResource(R.mipmap.default_btn);
         }
 
-        BitmapKit.bindImage(mItemRecommendServicePartBinding.ivServiceUserAvatar, data.avatar);
+        BitmapKit.bindImage(mItemRecommendServicePartBinding.ivServiceUserAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.avatar);
         mItemRecommendServicePartModel.setServiceUsername(data.name);
         mItemRecommendServicePartModel.setCompanyAndPosition(data.company + data.position);
         if (data.isauth == 0) {

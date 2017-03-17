@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.amap.api.maps2d.model.LatLng;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding.view.RxView;
 import com.slash.youth.BR;
@@ -51,6 +52,7 @@ import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ShareUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -718,9 +720,11 @@ public class ServiceDetailModel extends BaseObservable {
                 avatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
 
                 if (anonymity == 1) {//实名
+                    PreferenceUtil.write(mActivity, ShareKey.USER_ANONYMITY + serviceUserId, false);
                     BitmapKit.bindImage(mActivityServiceDetailBinding.ivServiceUserAvatar, avatarUrl);
                     setUsername(uinfo.name);
                 } else {//匿名
+                    PreferenceUtil.write(mActivity, ShareKey.USER_ANONYMITY + serviceUserId, true);
                     mActivityServiceDetailBinding.ivServiceUserAvatar.setImageResource(R.mipmap.anonymity_avater);
                     String anonymityName;
                     if (TextUtils.isEmpty(uinfo.name)) {
@@ -988,7 +992,7 @@ public class ServiceDetailModel extends BaseObservable {
             public void OkDown() {
                 LogKit.d("close viewBpExplain");
             }
-        },CommonUtils.getContext().getString(R.string.dispute_handling), bpTitle);
+        }, CommonUtils.getContext().getString(R.string.dispute_handling), bpTitle);
     }
 
     private static final String securityRulesTitle = "斜杠青年顺利成交保障规则";

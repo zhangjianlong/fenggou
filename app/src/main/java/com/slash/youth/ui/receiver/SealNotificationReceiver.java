@@ -63,7 +63,7 @@ public class SealNotificationReceiver extends PushMessageReceiver {
         //可以点击通知栏的删除按钮删除
         builder.setAutoCancel(true);
         //系统状态栏显示的小图标
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.mipmap.slash_helper_square);
         //下拉显示的大图标
         Intent intent = new Intent(context, SplashActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 1, intent, 0);

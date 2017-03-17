@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.databinding.BaseObservable;
 import android.view.View;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemChatOtherSendAddFriendBinding;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.utils.BitmapKit;
+import com.slash.youth.v2.util.ShareKey;
 
 /**
  * Created by zhouyifeng on 2016/11/17.
@@ -44,10 +46,16 @@ public class ChatOtherSendAddFriendModel extends BaseObservable {
             mItemChatOtherSendAddFriendBinding.tvDeny.setBackgroundResource(R.drawable.shape_chat_deny_change_contact_way_bg);
             mItemChatOtherSendAddFriendBinding.tvAgree.setBackgroundResource(R.drawable.shape_chat_agree_change_contact_way_bg);
         }
-        if ((!"1000".equals(MsgManager.targetId)) && (!MsgManager.customerServiceUid.equals(MsgManager.targetId))) {
-            BitmapKit.bindImage(mItemChatOtherSendAddFriendBinding.ivChatOtherAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + mTargetAvatar);
+
+
+        if (PreferenceUtil.readBoolean(mActivity, ShareKey.USER_ANONYMITY + MsgManager.targetId, false)) {
+            mItemChatOtherSendAddFriendBinding.ivChatOtherAvatar.setImageResource(R.mipmap.anonymity_avater);
         } else {
-            mItemChatOtherSendAddFriendBinding.ivChatOtherAvatar.setImageResource(MsgManager.targetAvatarResource);
+            if ((!"1000".equals(MsgManager.targetId)) && (!MsgManager.customerServiceUid.equals(MsgManager.targetId))) {
+                BitmapKit.bindImage(mItemChatOtherSendAddFriendBinding.ivChatOtherAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + mTargetAvatar);
+            } else {
+                mItemChatOtherSendAddFriendBinding.ivChatOtherAvatar.setImageResource(MsgManager.targetAvatarResource);
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.google.gson.Gson;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemListviewHomeInfoBinding;
@@ -18,6 +19,7 @@ import com.slash.youth.ui.viewmodel.ItemHomeInfoModel;
 import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.IOUtils;
+import com.slash.youth.v2.util.ShareKey;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -89,6 +91,11 @@ public class HomeInfoListHolder extends BaseHolder<ConversationListBean.Conversa
 
             }
             mItemHomeInfoModel.setCompanyAndPosition(companyAndPosition);
+        }
+
+        if (PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + data.uid, false)) {
+            mItemHomeInfoModel.setUsername("匿名");
+            mItemListviewHomeInfoBinding.ivInfoConversationAvatar.setImageResource(R.mipmap.anonymity_avater);
         }
 
         RongIMClient.getInstance().getUnreadCount(Conversation.ConversationType.PRIVATE, data.uid + "", new RongIMClient.ResultCallback<Integer>() {

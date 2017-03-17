@@ -46,6 +46,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.image.ImageOptions;
@@ -760,8 +761,7 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
                     case 1:
                         //技能标签
                         ArrayList<String> listCheckedLabelName = SubscribeActivity.saveListCheckedLabelName;
-                        PreferenceUtil.save(CommonUtils.getContext(),listCheckedLabelName);
-                        PreferenceUtil.load(CommonUtils.getContext(),ArrayList.class);
+                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG,listCheckedLabelName);
                         LogKit.d("保存成功");
                         break;
                 }

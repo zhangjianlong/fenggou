@@ -41,7 +41,6 @@ public class ChatActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
-
     }
 
 
@@ -50,7 +49,6 @@ public class ChatActivity extends BaseActivity {
         super.onStart();
         AndroidBug5497Workaround.assistActivity(this, getApplicationContext());
     }
-
 
 
     @Override
