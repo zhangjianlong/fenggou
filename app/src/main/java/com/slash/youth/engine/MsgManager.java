@@ -805,7 +805,6 @@ public class MsgManager {
                 pushInfoBean.msg_type == MsgType.SERVICE_MSG_CONFIRM_EVENT) {
             builder.setDuration(-1);
         }
-        builder.setOn
         builder.show();
     }
 
