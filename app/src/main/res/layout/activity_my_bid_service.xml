@@ -28,7 +28,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     >
 
                     <ImageView
@@ -947,7 +946,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#edf1f2"
-            android:visibility="@{myBidServiceModel.loadLayerVisibility}">
+            android:visibility="gone"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"

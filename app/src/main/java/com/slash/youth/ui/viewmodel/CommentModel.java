@@ -345,7 +345,6 @@ public class CommentModel extends BaseObservable {
                 ToastUtils.shortToast("分享平台类型错误");
                 return;
             }
-            //ToastUtils.shortToast(platform + " 分享成功");
             ToastUtils.shortToast("分享成功");
 
             //调用 [分享]-服务者分享上报接口
