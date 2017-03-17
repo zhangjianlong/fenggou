@@ -345,7 +345,7 @@ public class CommentModel extends BaseObservable {
             } else if (platform == SHARE_MEDIA.WEIXIN) {
                 rsslink = 4;
             } else if (platform == SHARE_MEDIA.WEIXIN_CIRCLE) {
-                rsslink = 4;
+                rsslink = 8;
             } else {
                 ToastUtils.shortToast("分享平台类型错误");
                 return;

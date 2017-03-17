@@ -54,9 +54,7 @@ public class FreeTimeMoreDemandProtocol extends BaseProtocol<FreeTimeMoreDemandB
             }
         }
 
-        if (sort==1||sort==2||sort==3||sort== 4) {
-            params.addBodyParameter("sort", String.valueOf(4));
-        }
+        params.addBodyParameter("sort", String.valueOf(sort));
 
        if(lng<180&&lng>-180){
             params.addBodyParameter("lng", String.valueOf(lng));
