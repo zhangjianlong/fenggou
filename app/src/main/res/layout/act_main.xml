@@ -93,7 +93,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/xuqiu_icon2" />
+                        android:src="@mipmap/demand_publish_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"

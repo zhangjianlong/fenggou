@@ -140,7 +140,6 @@ public class ChatFloatWin extends LinearLayout {
                         //手指一动的时候就更新悬浮窗位置
                         updateViewPosition();
                         break;
-
                 }
                 return false;
             }

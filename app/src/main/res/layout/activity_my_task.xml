@@ -307,7 +307,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
-                        android:onClick="@{myTaskModel.publishService}"
+                        android:onClick="@{myTaskModel.publishDemand}"
                         android:orientation="vertical">
 
                         <ImageView
@@ -320,16 +320,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="发服务"
+                            android:text="发需求"
                             android:textColor="#666666"
                             android:textSize="13sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_marginLeft="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="@{myTaskModel.publishDemand}"
+                        android:onClick="@{myTaskModel.publishService}"
                         android:orientation="vertical">
 
                         <ImageView
@@ -342,7 +343,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="发需求"
+                            android:text="发服务"
                             android:textColor="#666666"
                             android:textSize="13sp" />
 
