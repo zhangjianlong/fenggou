@@ -334,7 +334,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
     private void initAnimation() {
         raExpertMarksMaker = new RotateAnimation(0, expertMarksProgress, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        raExpertMarksMaker.setDuration(120 * 16);
+        raExpertMarksMaker.setDuration(300);
         raExpertMarksMaker.setInterpolator(new LinearInterpolator());
         raExpertMarksMaker.setFillAfter(true);
     }

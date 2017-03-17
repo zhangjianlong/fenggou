@@ -68,7 +68,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|right"
                             android:src="@mipmap/tab_authentication"
-                            android:visibility="@{viewModel.demandBean.isauth==0?View.GONE:View.VISIBLE}" />
+                            android:visibility="@{viewModel.isauthVisibility}" />
 
                     </FrameLayout>
 

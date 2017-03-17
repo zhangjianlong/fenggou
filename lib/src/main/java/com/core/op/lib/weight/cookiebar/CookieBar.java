@@ -7,6 +7,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -127,6 +128,11 @@ public class CookieBar {
             return this;
         }
 
+        public Builder setOnClickListener(View.OnClickListener onClickListener) {
+            params.onClickListener = onClickListener;
+            return this;
+        }
+
         public Builder setTitleColor(@ColorRes int titleColor) {
             params.titleColor = titleColor;
             return this;
@@ -186,6 +192,7 @@ public class CookieBar {
 
         public OnActionClickListener onActionClickListener;
 
+        public View.OnClickListener onClickListener;
         public int iconResId;
 
         public int backgroundColor;
