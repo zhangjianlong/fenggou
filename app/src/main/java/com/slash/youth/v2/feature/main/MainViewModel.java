@@ -1,12 +1,15 @@
 package com.slash.youth.v2.feature.main;
 
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 
 import com.core.op.bindingadapter.bottomnavigation.NavigationRes;
 import com.core.op.bindingadapter.bottomnavigation.ViewBindingAdapter;
@@ -33,6 +36,8 @@ import javax.inject.Inject;
 
 
 import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 import static android.R.attr.data;
 import static com.slash.youth.v2.feature.main.mine.MineViewModel.START_ANIMATION;
@@ -55,54 +60,28 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
 
     public final List<Fragment> fragments = new ArrayList<>();
 
+    private boolean isPub = false;
     Handler handler = new Handler();
     public final NavigationRes navigation = NavigationRes.of(R.array.tab_colors, R.menu.bottom_navigation_main).setAccent(R.color.app_theme_colorPrimary)
             .setDefaultBackground(R.color.app_theme_background);
 
     public ReplyCommand cancel = new ReplyCommand(() -> {
+        startOutAnim();
+    });
 
-        pubVisible.set(View.GONE);
-//        binding.slDemand.startBounceAnim(-600, 0, 1000);
-////        Observable.timer(300, TimeUnit.MILLISECONDS).subscribe(data -> {
-////        });
-////        Observable.timer(1300, TimeUnit.MILLISECONDS).subscribe(data -> {
-////
-////        });
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                binding.slServer.startBounceAnim(-600, 0, 1000);
-//            }
-//        }, 100);
-//
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//            }
-//        }, 1100);
+    public ReplyCommand pubClick = new ReplyCommand(() -> {
     });
 
     public ReplyCommand pubDemandClick = new ReplyCommand(() -> {
         Intent intentPublishDemandBaseInfoActivity = new Intent(CommonUtils.getContext(), PublishDemandBaseInfoActivity.class);
         activity.startActivity(intentPublishDemandBaseInfoActivity);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                pubVisible.set(View.GONE);
-            }
-        }, 500);
+        startOutAnim();
     });
 
     public ReplyCommand pubServerClick = new ReplyCommand(() -> {
         Intent intentPublishServiceBaseInfoActivity = new Intent(CommonUtils.getContext(), PublishServiceBaseInfoActivity.class);
         activity.startActivity(intentPublishServiceBaseInfoActivity);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                pubVisible.set(View.GONE);
-            }
-        }, 500);
+        startOutAnim();
     });
 
     public final ReplyCommand<ViewBindingAdapter.NavigationDataWrapper> selectedCommand = new ReplyCommand<>(p -> {
@@ -137,30 +116,94 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
         });
 
         Messenger.getDefault().register(this, SHOW_MAIN_PUG, () -> {
+            isPub = true;
             pubVisible.set(View.VISIBLE);
-            binding.slDemand.startBounceAnim(0, -600, 500);
-
-            binding.slServer.startBounceAnim(0, -600, 500);
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    binding.slServer.startBounceAnim(0, -600, 500);
-//                }
-//            }, 100);
-//            Observable.timer(300, TimeUnit.MILLISECONDS).subscribe(data -> {
-//
-//            });
+            startInAnim();
         });
 
     }
 
+    private void startInAnim() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(binding.slDemand, "translationY", 0.0f, 600.0f);
+        animator.setInterpolator(new OvershootInterpolator());
+        animator.setDuration(300).start();
 
-    private int getMessageCount() {
-        int count = 0;
-        if (MsgManager.everyTaskMessageCount != null && MsgManager.everyTaskMessageCount.keySet() != null)
-            for (Long key : MsgManager.everyTaskMessageCount.keySet()) {
-                count += MsgManager.everyTaskMessageCount.get(key);
-            }
-        return count;
+        Observable.timer(100, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Long>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(binding.slServer, "translationY", 0.0f, 600.0f);
+                        animator.setInterpolator(new OvershootInterpolator());
+                        animator.setDuration(500).start();
+                    }
+                });
+    }
+
+    private void startOutAnim() {
+        isPub = false;
+        ObjectAnimator animator = ObjectAnimator.ofFloat(binding.slDemand, "translationY", 600.0f, 0.0f);
+        animator.setInterpolator(new OvershootInterpolator());
+        animator.setDuration(300).start();
+
+        Observable.timer(100, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Long>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(binding.slServer, "translationY", 600.0f, 0.0f);
+                        animator.setInterpolator(new OvershootInterpolator());
+                        animator.addListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                pubVisible.set(View.GONE);
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animation) {
+
+                            }
+                        });
+                        animator.setDuration(500).start();
+                    }
+                });
+    }
+
+    public boolean onBackPressed() {
+        if (isPub) {
+            startOutAnim();
+            return false;
+        }
+        return true;
     }
 }
