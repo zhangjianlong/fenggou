@@ -552,15 +552,16 @@
                     />
 
                 </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="21dp"
                     android:orientation="horizontal">
-
-                    <View android:layout_width="0dp" android:layout_height="0dp"
-                          android:layout_weight="1"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -584,10 +585,8 @@
 
                     </LinearLayout>
 
-                    <View android:layout_width="0dp" android:layout_height="0dp"
-                          android:layout_weight="1"/>
-
                     <LinearLayout
+                        android:layout_marginLeft="40dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{commentModel.shareToWeChatCircle}"
@@ -609,10 +608,8 @@
 
                     </LinearLayout>
 
-                    <View android:layout_width="0dp" android:layout_height="0dp"
-                          android:layout_weight="1"/>
-
                     <LinearLayout
+                        android:layout_marginLeft="40dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{commentModel.shareToQQ}"
@@ -634,10 +631,9 @@
 
                     </LinearLayout>
 
-                    <View android:layout_width="0dp" android:layout_height="0dp"
-                          android:layout_weight="1"/>
-
                     <LinearLayout
+                        android:layout_marginLeft="40dp"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{commentModel.shareToQZone}"
@@ -659,10 +655,9 @@
 
                     </LinearLayout>
 
-                    <View android:layout_width="0dp" android:layout_height="0dp"
-                          android:layout_weight="1"/>
 
                 </LinearLayout>
+                </RelativeLayout>
 
             </LinearLayout>
 

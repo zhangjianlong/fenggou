@@ -281,6 +281,10 @@ public class CommentModel extends BaseObservable {
         setShareLayerVisibility(View.GONE);
     }
 
+    public void cancelShare() {
+        setShareLayerVisibility(View.GONE);
+    }
+
     /**
      * 分享给微信好友
      *
@@ -331,6 +335,7 @@ public class CommentModel extends BaseObservable {
     private UMShareListener umShareListener = new UMShareListener() {
         @Override
         public void onResult(SHARE_MEDIA platform) {
+            cancelShare();
             LogKit.v("platform" + platform);
             int rsslink;
             if (platform == SHARE_MEDIA.QQ) {
@@ -340,7 +345,7 @@ public class CommentModel extends BaseObservable {
             } else if (platform == SHARE_MEDIA.WEIXIN) {
                 rsslink = 4;
             } else if (platform == SHARE_MEDIA.WEIXIN_CIRCLE) {
-                rsslink = 8;
+                rsslink = 4;
             } else {
                 ToastUtils.shortToast("分享平台类型错误");
                 return;
@@ -356,7 +361,7 @@ public class CommentModel extends BaseObservable {
 
                 @Override
                 public void executeResultError(String result) {
-                    ToastUtils.shortToast("分享上报失败:" + result);
+                    ToastUtils.shortToast("分享上报失败");
                 }
             }, type + "", tid + "", rsslink + "");
             //调用 [转发]-服务者转发服务到外界专家系统加分
@@ -375,6 +380,7 @@ public class CommentModel extends BaseObservable {
 
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
+            cancelShare();
             ToastUtils.shortToast(platform + " 分享失败");
             if (t != null) {
                 LogKit.v("throw:" + t.getMessage());
@@ -383,6 +389,7 @@ public class CommentModel extends BaseObservable {
 
         @Override
         public void onCancel(SHARE_MEDIA platform) {
+            cancelShare();
             ToastUtils.shortToast(platform + " 分享取消了");
         }
     };

@@ -47,7 +47,7 @@ public class ShareReportProtocol extends BaseProtocol<ShareReportResultBean> {
     public boolean checkJsonResult(String result) {
         Gson gson = new Gson();
         shareReportResultBean = gson.fromJson(result, ShareReportResultBean.class);
-        if (shareReportResultBean.rescode == 0 && shareReportResultBean.evaluation != null && shareReportResultBean.evaluation.status == 1) {
+        if (shareReportResultBean.getRescode() == 0) {
             return true;
         } else {
             return false;
