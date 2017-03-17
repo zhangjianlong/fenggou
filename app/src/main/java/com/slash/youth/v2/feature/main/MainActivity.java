@@ -120,10 +120,11 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
 
     @Override
     public void onBackPressed() {
-        if ((System.currentTimeMillis() - clickTime) > 2000) {
+        boolean isPub = viewModel.onBackPressed();
+        if (isPub && (System.currentTimeMillis() - clickTime) > 2000) {
             Toast.makeText(getApplicationContext(), "再按一次后退键退出程序", Toast.LENGTH_SHORT).show();
             clickTime = System.currentTimeMillis();
-        } else {
+        } else if (isPub) {
             super.onBackPressed();
         }
     }

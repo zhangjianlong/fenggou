@@ -47,7 +47,8 @@
             android:layout_height="match_parent"
             android:background="@color/app.theme.background"
             android:orientation="vertical"
-            android:visibility="@{viewModel.pubVisible}">
+            android:visibility="@{viewModel.pubVisible}"
+            app:clickCommand="viewModel.pubClick">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,10 +57,10 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <com.core.op.lib.weight.ScrollLinearLayout
+                <LinearLayout
                     android:id="@+id/sl_demand"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:clickCommand="@{viewModel.pubDemandClick}">
 
@@ -78,12 +79,12 @@
                         android:textColor="#666666"
                         android:textSize="14sp" />
 
-                </com.core.op.lib.weight.ScrollLinearLayout>
+                </LinearLayout>
 
-                <com.core.op.lib.weight.ScrollLinearLayout
+                <LinearLayout
                     android:id="@+id/sl_server"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="100dp"
                     android:orientation="vertical"
                     app:clickCommand="@{viewModel.pubServerClick}">
@@ -103,7 +104,7 @@
                         android:textColor="#666666"
                         android:textSize="14sp" />
 
-                </com.core.op.lib.weight.ScrollLinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -144,7 +145,6 @@
                 </RelativeLayout>
 
             </FrameLayout>
-
 
         </FrameLayout>
     </FrameLayout>
