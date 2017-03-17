@@ -37,7 +37,7 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
 
     private SelectTaskDialog selectTaskDialog;
 
-    public static ObservableField<String> taskStatus = new ObservableField<>("进行中");
+    public ObservableField<String> taskStatus = new ObservableField<>("进行中");
 
     private PubTaskDialog pubTaskDialog;
 

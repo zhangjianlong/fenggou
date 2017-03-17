@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.BR;
+import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityChooseFriendBinding;
 import com.slash.youth.domain.ChatCmdBusinesssCardBean;
 import com.slash.youth.domain.ChatCmdShareTaskBean;
@@ -29,6 +31,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.util.MessageKey;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,6 +39,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.data;
 import static com.slash.youth.v2.util.MessageKey.HIDE_NEW_CONTACTS;
 
 /**
@@ -169,15 +173,20 @@ public class ChooseFriendModel extends BaseObservable {
                         intentUserInfoActivity.putExtra("Uid", uid);
                         chooseFriendActivtiy.startActivity(intentUserInfoActivity);
                     }
+
                 } else {
                     //进行斜杠好友分享任务（需求或者服务）
                     long friendUid = friendArrayList.get(position).getUid();
+
+                    PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + friendUid, false);
                     Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
                     intentChatActivity.putExtra("targetId", friendUid + "");
                     intentChatActivity.putExtra("chatCmdName", "sendShareTask");
                     intentChatActivity.putExtra("chatCmdShareTaskBean", chatCmdShareTaskBean);
                     mActivity.startActivity(intentChatActivity);
+                    PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + chatCmdShareTaskBean.uid, false);
                 }
+
             }
         });
     }

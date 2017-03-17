@@ -7,6 +7,7 @@ import android.databinding.Bindable;
 import android.text.SpannableString;
 import android.view.View;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemChatFriendTextBinding;
@@ -16,6 +17,7 @@ import com.slash.youth.ui.activity.MyTaskActivity;
 import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.TextUtil;
+import com.slash.youth.v2.util.ShareKey;
 
 import java.util.Arrays;
 
@@ -41,10 +43,15 @@ public class ChatFriendTextModel extends BaseObservable {
     }
 
     private void initView() {
-        if ((!"1000".equals(MsgManager.targetId)) && (!MsgManager.customerServiceUid.equals(MsgManager.targetId))) {
-            BitmapKit.bindImage(mItemChatFriendTextBinding.ivChatOtherAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + mTargetAvatar);
+
+        if (PreferenceUtil.readBoolean(mActivity, ShareKey.USER_ANONYMITY + MsgManager.targetId, false)) {
+            mItemChatFriendTextBinding.ivChatOtherAvatar.setImageResource(R.mipmap.anonymity_avater);
         } else {
-            mItemChatFriendTextBinding.ivChatOtherAvatar.setImageResource(MsgManager.targetAvatarResource);
+            if ((!"1000".equals(MsgManager.targetId)) && (!MsgManager.customerServiceUid.equals(MsgManager.targetId))) {
+                BitmapKit.bindImage(mItemChatFriendTextBinding.ivChatOtherAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + mTargetAvatar);
+            } else {
+                mItemChatFriendTextBinding.ivChatOtherAvatar.setImageResource(MsgManager.targetAvatarResource);
+            }
         }
     }
 
@@ -77,7 +84,7 @@ public class ChatFriendTextModel extends BaseObservable {
     }
 
     public void setTextContent(String textContent) {
-        this.textContent = TextUtil.matcherSearchTitle(CommonUtils.getContext().getResources().getColor(R.color.app_text_bg_blue),textContent, Arrays.asList(CommonUtils.getContext().getResources().getStringArray(R.array.keyword)));
+        this.textContent = TextUtil.matcherSearchTitle(CommonUtils.getContext().getResources().getColor(R.color.app_text_bg_blue), textContent, Arrays.asList(CommonUtils.getContext().getResources().getStringArray(R.array.keyword)));
         notifyPropertyChanged(BR.textContent);
     }
 

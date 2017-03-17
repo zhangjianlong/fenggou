@@ -12,4 +12,7 @@ public class ShareKey {
 
     public static final String TASK_COUNT = "TASK_COUNT";
     public static final String USER_PHONE = "TASK_COUNT";//用戶手機號碼
+
+
+    public static final String USER_ANONYMITY = "USER_ANONYMITY";//匿名用户
 }

@@ -268,6 +268,9 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                         return;
                     }
                     MineInfo.DataBean data = d.getMyinfo();
+
+                    LoginManager.currentLoginUserAvatar = data.getAvatar();
+                    LoginManager.currentLoginUserName = data.getName();
                     this.data.set(data);
 
                     totalsMoney.set(CountUtils.DecimalFormat(data.getAmount()) + "元");

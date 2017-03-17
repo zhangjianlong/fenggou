@@ -232,13 +232,13 @@ public class PreferenceUtil {
      * @param <T>     Any Bean
      * @return {@link SharedPreferences}
      */
-    public static <T> SharedPreferences getSharedPreferences(Context context, Class<T> clx) {
-        return context.getSharedPreferences(clx.getName(), Context.MODE_PRIVATE);
+    public static <T> SharedPreferences getSharedPreferences(Context context, String key, Class<T> clx) {
+        return context.getSharedPreferences(clx.getName() + key, Context.MODE_PRIVATE);
     }
 
     /**
      * 保存一个Bean到{@link SharedPreferences}文件中，
-     * 该方法会调用{@link #getSharedPreferences(Context, Class)}方法，
+     * 该方法会调用{@link #getSharedPreferences(Context, String, Class)}方法，
      * 创建SharedPreferences文件，如果文件不存在会进行新建操作
      *
      * @param context Context
@@ -246,19 +246,18 @@ public class PreferenceUtil {
      * @param <T>     Any Bean
      * @return 返回是否保存成功
      */
-    public static <T> boolean save(Context context, T t) {
+    public static <T> boolean save(Context context, String k, T t) {
         final Class<?> clx = t.getClass();
 
         // We should remove all data before save data
-        remove(context, clx);
+        remove(context, k, clx);
 
         // Get all data form t
         Map<String, Data> map = new ArrayMap<>();
         buildValuesToMap(clx, t, "", map);
 
-        SharedPreferences sp = getSharedPreferences(context, clx);
+        SharedPreferences sp = getSharedPreferences(context, k, clx);
         SharedPreferences.Editor editor = sp.edit();
-
         // Get all existing key
         Set<String> existKeys = sp.getAll().keySet();
 
@@ -314,8 +313,8 @@ public class PreferenceUtil {
      * @return 加载成功则返回Bean的实例
      */
     @SuppressWarnings("unchecked")
-    public static <T> T load(Context context, Class<T> clx) {
-        SharedPreferences sp = getSharedPreferences(context, clx);
+    public static <T> T load(Context context, String k, Class<T> clx) {
+        SharedPreferences sp = getSharedPreferences(context, k, clx);
         // Get all existing key
         Set<String> existKeys = sp.getAll().keySet();
         if (existKeys.size() == 0)
@@ -326,7 +325,7 @@ public class PreferenceUtil {
     /**
      * 从{@link SharedPreferences}文件中加载数据到Bean中，
      * 如果SharedPreferences文件不存在或者未存储任何信息则返回NULL
-     * 与 {@link #load(Context, Class)} 方法的区别在于，该加载会从原始文件刷新一次缓存，
+     * 与 {@link #load(Context, String, Class)} 方法的区别在于，该加载会从原始文件刷新一次缓存，
      * 以保证任何情况下都从原始文件获取最新信息，可解决{@link SharedPreferences}跨进程问题
      *
      * @param context Context
@@ -335,8 +334,8 @@ public class PreferenceUtil {
      * @return 加载成功则返回Bean的实例
      */
     @SuppressWarnings("unchecked")
-    public static <T> T loadFormSource(Context context, Class<T> clx) {
-        SharedPreferences sp = getSharedPreferences(context, clx);
+    public static <T> T loadFormSource(Context context, String k, Class<T> clx) {
+        SharedPreferences sp = getSharedPreferences(context, k, clx);
 
 //        // Use reflection to force refresh data
 //        try {
@@ -354,14 +353,14 @@ public class PreferenceUtil {
 
     /**
      * 清空一个Bean存储的{@link SharedPreferences}信息，
-     * 之后调用{@link #load(Context, Class)}, {@link #loadFormSource(Context, Class)} 都返回NULL
+     * 之后调用{@link #load(Context, String, Class)}, {@link #loadFormSource(Context, String, Class)} 都返回NULL
      *
      * @param context Context
      * @param clx     Bean'class
      * @param <T>     Any Bean
      */
-    public static <T> void remove(Context context, Class<T> clx) {
-        SharedPreferences sp = getSharedPreferences(context, clx);
+    public static <T> void remove(Context context, String k, Class<T> clx) {
+        SharedPreferences sp = getSharedPreferences(context, k, clx);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
