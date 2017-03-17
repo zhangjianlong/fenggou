@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityUserinfoBinding;
 import com.slash.youth.databinding.DialogRecommendBinding;
@@ -41,6 +42,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.util.MessageKey;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -523,6 +525,9 @@ public class ActivityUserInfoModel extends BaseObservable {
             if (rescode == 0) {
                 OtherInfoBean.DataBean data = dataBean.getData();
                 uinfo = data.getUinfo();
+                if (null!= uinfo) {
+                    PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_TAG, uinfo.getTag());
+                }
                 updateOtherUserInfo();
             } else {
                 LogKit.d("rescode =" + rescode);
