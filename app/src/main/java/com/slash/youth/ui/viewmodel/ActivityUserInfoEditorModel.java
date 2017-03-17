@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityUserinfoEditorBinding;
@@ -45,6 +46,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.image.ImageOptions;
@@ -757,6 +759,9 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
                         LogKit.d("保存失败");
                         break;
                     case 1:
+                        //技能标签
+                        ArrayList<String> listCheckedLabelName = SubscribeActivity.saveListCheckedLabelName;
+                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG,listCheckedLabelName);
                         LogKit.d("保存成功");
                         break;
                 }
