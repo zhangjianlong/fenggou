@@ -300,15 +300,6 @@
             android:name=".ui.activity.ReportTaskActivity"
             android:windowSoftInputMode="adjustPan" />
 
-        <!-- 微信相关 -->
-        <!-- <activity -->
-        <!-- android:name="com.slash.youth.wxapi.WXEntryActivity" -->
-        <!-- android:exported="true"> -->
-
-
-        <!-- </activity> -->
-        <!-- 微信相关 -->
-
 
         <!-- 高德定位相关 -->
         <service android:name="com.amap.api.location.APSService" />
@@ -317,26 +308,6 @@
         <service
             android:name=".ui.receiver.FloatWinService"
             android:enabled="true" />
-
-        <!-- QQ相关 -->
-        <!-- <activity -->
-        <!-- android:name="com.tencent.tauth.AuthActivity" -->
-        <!-- android:launchMode="singleTask" -->
-        <!-- android:noHistory="true"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.VIEW"/> -->
-        <!-- <category android:name="android.intent.category.DEFAULT"/> -->
-        <!-- <category android:name="android.intent.category.BROWSABLE"/> -->
-        <!-- <data android:scheme="1105561277"/> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
-        <!-- &lt;!&ndash;SDK_V2.0引入了AssistActivity，开发者需在androidManifest.xml中注册。代码如下：&ndash;&gt; -->
-        <!-- <activity android:name="com.tencent.connect.common.AssistActivity" -->
-        <!-- android:configChanges="orientation|keyboardHidden|screenSize" -->
-        <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar" -->
-        <!-- /> -->
-
-
         <!-- QQ相关 -->
 
 
@@ -362,6 +333,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- 友盟QQ -->
+
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -371,8 +343,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="tencent100424468" />
+                <data android:scheme="tencent1105561277"/>
             </intent-filter>
         </activity>
         <activity
