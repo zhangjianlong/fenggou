@@ -48,7 +48,7 @@
             android:background="@color/app.theme.background"
             android:orientation="vertical"
             android:visibility="@{viewModel.pubVisible}"
-            app:clickCommand="viewModel.pubClick">
+            app:clickCommand="@{viewModel.pubClick}">
 
             <LinearLayout
                 android:layout_width="match_parent"
