@@ -12,7 +12,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff">
+        android:background="@color/app.theme.background_edf1f2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,23 +27,17 @@
                 <!--标题-->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:background="#31C5E4"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:paddingTop="8dp">
 
-                    <RelativeLayout
-                        android:id="@+id/iv_userinfo_back"
-                        android:layout_width="40dp"
+                    <ImageView
+                        android:id="@+id/ivUserinfoBack"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
-                        android:layout_centerVertical="true">
+                        android:layout_centerVertical="true"
+                        android:padding="8dp"
+                        android:src="@mipmap/nav_back" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:src="@mipmap/nav_back" />
-
-                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/tv_userinfo_title"
@@ -114,9 +108,13 @@
                                 <FrameLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="48dp"
-                                    android:background="#31C5E4"></FrameLayout>
+                                    android:background="#31C5E4">
 
-                                <android.support.v7.widget.CardView
+
+                                </FrameLayout>
+
+                                <FrameLayout
+                                    style="@style/App.Theme.layout"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="7dp"
@@ -278,7 +276,7 @@
                                                 android:textSize="12dp" />
                                         </LinearLayout>
                                     </LinearLayout>
-                                </android.support.v7.widget.CardView>
+                                </FrameLayout>
                             </LinearLayout>
                             <!--粉丝数-->
                             <LinearLayout
@@ -288,6 +286,7 @@
                                 android:orientation="vertical">
 
                                 <LinearLayout
+                                    style="@style/App.Theme.layout"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="22dp"
@@ -363,17 +362,6 @@
                                         android:layout_width="78dp"
                                         android:layout_height="match_parent">
 
-                                        <View
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:background="@drawable/shape_home_my_info_bg"
-                                            android:visibility="gone" />
-
-                                        <View
-                                            android:layout_width="57dp"
-                                            android:layout_height="match_parent"
-                                            android:background="@drawable/shape_home_my_info_fanscount_bg"
-                                            android:visibility="gone" />
 
                                         <ProgressBar
                                             android:id="@+id/pb_fans"
@@ -525,8 +513,8 @@
 
                         </RelativeLayout>
                         <!--技能描述-->
-                        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
+                        <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+                            style="@style/App.Theme.layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dp"
@@ -696,7 +684,7 @@
                                     </FrameLayout>
                                 </RelativeLayout>
                             </LinearLayout>
-                        </android.support.v7.widget.CardView>
+                        </FrameLayout>
                         <!--最新任务-->
                         <LinearLayout
                             android:id="@+id/ll_task_title"

@@ -104,7 +104,8 @@
                         android:onClick="@{demandDetailModel.report}"
                         android:orientation="vertical"
                         android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
+                        android:paddingRight="5dp"
+                        android:visibility="gone">
 
                         <View
                             android:layout_width="5dp"
@@ -2088,8 +2089,6 @@
                     android:text="举报该需求"
                     android:textColor="#333333"
                     android:textSize="12.5sp" />
-
-
             </FrameLayout>
 
         </FrameLayout>

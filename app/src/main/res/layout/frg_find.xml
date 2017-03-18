@@ -255,17 +255,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:gravity="center"
-                        android:paddingLeft="13dp"
+                        android:paddingLeft="12dp"
                         android:paddingRight="13dp"
                         android:text="发布"
                         android:textColor="#FFFFFF"
                         android:textSize="15sp"
-                        app:clickCommand="@{viewModel.pub}"
-                        android:layout_alignParentTop="true"
-                        android:layout_toEndOf="@+id/dt_choice"
-                        android:layout_marginStart="116dp" />
+                        app:clickCommand="@{viewModel.pub}" />
 
                 </RelativeLayout>
             </FrameLayout>
