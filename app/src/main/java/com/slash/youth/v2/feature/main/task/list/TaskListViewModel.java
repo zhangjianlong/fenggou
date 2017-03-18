@@ -6,12 +6,17 @@ import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.BR;
 import com.slash.youth.R;
+import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.base.BaseList;
+import com.slash.youth.domain.interactor.UseCase;
 import com.slash.youth.domain.interactor.main.TaskListUseCase;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.v2.base.list.BaseListItemViewModel;
 import com.slash.youth.v2.base.list.BaseListViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -31,7 +36,7 @@ import static com.slash.youth.v2.util.MessageKey.TASK_POINT_REFRESH;
 import static com.slash.youth.v2.util.MessageKey.TASK_REFRESH;
 
 @PerActivity
-public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> {
+public class TaskListViewModel extends BaseListViewModel<TaskList.TaskBean, TaskListItemViewModel> {
 
     public static final String TASK_STUTUS = "TASK_STUTUS";
     public static final String TASK_ONWAY = "TASK_ONWAY";
@@ -41,6 +46,8 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
     TaskListUseCase useCase;
 
     private int type = 0;
+
+    int count;
 
     @Inject
     public TaskListViewModel(RxAppCompatActivity activity,
@@ -58,11 +65,11 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
             } else {
                 type = 3;
             }
-            loadData();
+            refresh();
         });
 
         Messenger.getDefault().register(this, TASK_REFRESH, () -> {
-            loadData();
+            loadData(false);
         });
 
         Messenger.getDefault().register(this, TASK_POINT_REFRESH, () -> {
@@ -80,67 +87,129 @@ public class TaskListViewModel extends BaseListViewModel<TaskListItemViewModel> 
     @Override
     public void onStart() {
         super.onStart();
-        loadData();
+        loadData(false);
     }
 
     @Override
-    public void loadMore() {
+    public UseCase<BaseList<TaskList.TaskBean>> useCase() {
+        return useCase;
     }
 
     @Override
-    public void refresh() {
-        loadData();
-    }
-
-    int count;
-
-    public void loadData() {
-        isRefreshing.set(true);
-        useCase.setParams("{\"type\":\"" + type + "\"" +
-                ",\"offset\":\"0\"" +
-                ",\"limit\":\"20\"}");
-        count = 0;
-        useCase.execute().compose(activity.bindToLifecycle())
-                .flatMap(data -> {
-                    itemViewModels.clear();
-
-                    if (data.getList() != null && data.getList().size() == 0) {
-                        Messenger.getDefault().send(0, SHOW_NODATA);
-                        binding.recyclerView.getAdapter().notifyDataSetChanged();
-                        Messenger.getDefault().sendNoMsg(SHOW_NAVIGATION);
-                        return null;
-                    } else {
-                        if (data.getList().size() <= 4) {
-                            Messenger.getDefault().sendNoMsg(SHOW_NAVIGATION);
-                        }
-                        Messenger.getDefault().send(1, SHOW_NODATA);
-                        itemViewModels.add(new TaskListItemViewModel(type));
-                        return Observable.from(data.getList());
-                    }
-                })
-                .subscribe(d -> {
-                    count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + d.tid);
-                    itemViewModels.add(new TaskListItemViewModel(activity, d));
-                }, error -> {
-                    isRefreshing.set(false);
-                }, () -> {
-                    Messenger.getDefault().send(count, TASK_CHANGE);
-                    binding.recyclerView.getAdapter().notifyDataSetChanged();
-                    isRefreshing.set(false);
-                });
+    public Map<String, String> prams() {
+        Map<String, String> map = super.prams();
+        map.put("type", type + "");
+        return map;
     }
 
     @Override
-    public ItemViewSelector<TaskListItemViewModel> itemView() {
-        return new BaseItemViewSelector<TaskListItemViewModel>() {
-            @Override
-            public void select(ItemView itemView, int position, TaskListItemViewModel item) {
-                if (position == 0) {
-                    itemView.set(BR.viewModel, R.layout.item_main_task_title);
-                } else {
-                    itemView.set(BR.viewModel, R.layout.item_main_task);
+    public void addData(TaskList.TaskBean taskBean) {
+        itemViewModels.add(new TaskListItemViewModel(activity, taskBean));
+    }
+
+    @Override
+    public void doComplate() {
+        itemViewModels.add(new TaskListItemViewModel(activity, isComplate));
+        Messenger.getDefault().send(count, TASK_CHANGE);
+    }
+
+    @Override
+    protected void doListData(BaseList<TaskList.TaskBean> data, boolean isLoadMore) {
+        if (!isLoadMore) {
+            count = 0;
+            if (data.getList() != null && data.getList().size() == 0) {
+                Messenger.getDefault().send(0, SHOW_NODATA);
+                binding.recyclerView.getAdapter().notifyDataSetChanged();
+                Messenger.getDefault().sendNoMsg(SHOW_NAVIGATION);
+            } else {
+                if (data.getList().size() <= 4) {
+                    Messenger.getDefault().sendNoMsg(SHOW_NAVIGATION);
                 }
+                Messenger.getDefault().send(1, SHOW_NODATA);
+                itemViewModels.add(new TaskListItemViewModel(type));
             }
-        };
+        }
+    }
+
+    @Override
+    protected void doData(TaskList.TaskBean data, boolean isLoadMore) {
+        count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + data.tid);
+    }
+
+//    public void loadData() {
+//        isRefreshing.set(true);
+//
+//        Map<String, String> map = new HashMap<>();
+//        map.put("type", type + "");
+//        map.put("offset", (offset * 10) + "");
+//        map.put("limit", limit + "");
+//        useCase.setParams(JsonUtil.mapToJson(map));
+//        count = 0;
+//        useCase.execute().compose(activity.bindToLifecycle())
+//                .flatMap(data -> {
+//                    itemViewModels.clear();
+//                    if (data.getList() != null && data.getList().size() == 0) {
+//                        Messenger.getDefault().send(0, SHOW_NODATA);
+//                        binding.recyclerView.getAdapter().notifyDataSetChanged();
+//                        Messenger.getDefault().sendNoMsg(SHOW_NAVIGATION);
+//                        return null;
+//                    } else {
+//                        if (data.getList().size() <= 4) {
+//                            Messenger.getDefault().sendNoMsg(SHOW_NAVIGATION);
+//                        }
+//                        Messenger.getDefault().send(1, SHOW_NODATA);
+//                        itemViewModels.add(new TaskListItemViewModel(type));
+//                        return Observable.from(data.getList());
+//                    }
+//                })
+//                .subscribe(d -> {
+//                    count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + d.tid);
+//                    itemViewModels.add(new TaskListItemViewModel(activity, d));
+//                }, error -> {
+//                    isRefreshing.set(false);
+//                }, () -> {
+//                    if (itemViewModels != null && itemViewModels.size() < limit) {
+//                        isComplate = true;
+//                    }
+//                    itemViewModels.add(new TaskListItemViewModel(activity, isComplate));
+//                    Messenger.getDefault().send(count, TASK_CHANGE);
+//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
+//                    isRefreshing.set(false);
+//                });
+//    }
+//
+//    private void loadMoreData() {
+//        Map<String, String> map = new HashMap<>();
+//        map.put("type", type + "");
+//        map.put("offset", (offset * 10) + "");
+//        map.put("limit", limit + "");
+//        useCase.setParams(JsonUtil.mapToJson(map));
+//        useCase.execute().compose(activity.bindToLifecycle())
+//                .flatMap(data -> {
+//                    if (data.getList() != null && data.getList().size() < limit) {
+//                        isComplate = true;
+//                    }
+//                    itemViewModels.remove(itemViewModels.size() - 1);
+//                    return Observable.from(data.getList());
+//                })
+//                .subscribe(d -> {
+//                    count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + d.tid);
+//                    itemViewModels.add(new TaskListItemViewModel(activity, d));
+//                }, error -> {
+//                }, () -> {
+//                    itemViewModels.add(new TaskListItemViewModel(activity, isComplate));
+//                    Messenger.getDefault().send(count, TASK_CHANGE);
+//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
+//                });
+//    }
+
+    @Override
+    public int setItem(ItemView itemView, int position, TaskListItemViewModel item) {
+        if (position == 0) {
+            itemView.set(BR.viewModel, R.layout.item_main_task_title);
+        } else {
+            itemView.set(BR.viewModel, R.layout.item_main_task);
+        }
+        return 2;
     }
 }

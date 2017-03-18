@@ -3,7 +3,9 @@ package com.slash.youth.v2.feature.dialog.task.select;
 import android.content.Context;
 import android.view.Gravity;
 
+import com.blankj.utilcode.utils.AppUtils;
 import com.core.op.lib.base.BDialog;
+import com.core.op.lib.utils.DeviceUtil;
 import com.slash.youth.R;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.RootView;
@@ -20,7 +22,7 @@ public final class SelectTaskDialog extends BaseDialog<SelectTaskViewModel, DlgS
     public SelectTaskDialog(RxAppCompatActivity activity, SelectTaskViewModel viewModel) {
         super(BDialog.newDialog(activity)
                 .setGravity(Gravity.TOP | Gravity.BOTTOM)
-                .setMargin(0, 200, 50, 0)
+                .setMargin(0, DeviceUtil.px2dip(activity, 450f), DeviceUtil.px2dip(activity, 30f), 0)
                 .setBackgroud(false)
                 .setInAnimation(R.anim.anim_scan_in)
                 .setOutAnimation(R.anim.anim_scan_out), viewModel);

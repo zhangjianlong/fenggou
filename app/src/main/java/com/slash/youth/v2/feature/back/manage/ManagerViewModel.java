@@ -13,6 +13,9 @@ import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.data.Global;
 import com.slash.youth.databinding.FrgManagerBinding;
+import com.slash.youth.domain.bean.MineManagerList;
+import com.slash.youth.domain.bean.base.BaseList;
+import com.slash.youth.domain.interactor.UseCase;
 import com.slash.youth.domain.interactor.main.DelManagerUseCase;
 import com.slash.youth.domain.interactor.main.MineManagerListUseCase;
 import com.slash.youth.domain.interactor.main.PubManagerUseCase;
@@ -31,7 +34,7 @@ import static com.slash.youth.v2.util.MessageKey.MINE_MANAGER_DEL;
 import static com.slash.youth.v2.util.MessageKey.MINE_MANAGER_REFRESH;
 
 @PerActivity
-public class ManagerViewModel extends BaseListViewModel<ManagerItemViewModel> {
+public class ManagerViewModel extends BaseListViewModel<MineManagerList.ListBean, ManagerItemViewModel> {
     MineManagerListUseCase useCase;
     DelManagerUseCase delManagerUseCase;
     PubManagerUseCase pubManagerUseCase;
@@ -64,48 +67,58 @@ public class ManagerViewModel extends BaseListViewModel<ManagerItemViewModel> {
     }
 
     @Override
-    public void loadMore() {
-
+    public UseCase<BaseList<MineManagerList.ListBean>> useCase() {
+        return useCase;
     }
 
     @Override
-    public void refresh() {
-        loadData(false);
-    }
-
-    public void loadData(boolean isMore) {
-        isRefreshing.set(true);
-        index = 0;
-        Map<String, String> map = new HashMap<>();
-        map.put("offset", "0");
-        map.put("limit", "20");
-        useCase.setParams(JsonUtil.mapToJson(map));
-        useCase.execute().compose(fragment.bindToLifecycle())
-                .flatMap(data -> {
-                    if (!isMore) {
-                        index = 0;
-                        itemViewModels.clear();
-                    }
-                    return Observable.from(data.getList());
-                })
-                .subscribe(d -> {
-                    itemViewModels.add(new ManagerItemViewModel(activity, d, delManagerUseCase, pubManagerUseCase, index));
-                    index++;
-                }, error -> {
-                    isRefreshing.set(false);
-                }, () -> {
-                    isRefreshing.set(false);
-                    binding.recyclerView.getAdapter().notifyDataSetChanged();
-                });
+    public void addData(MineManagerList.ListBean listBean) {
+        itemViewModels.add(new ManagerItemViewModel(activity, listBean, delManagerUseCase, pubManagerUseCase, index));
+        index++;
     }
 
     @Override
-    public ItemViewSelector<ManagerItemViewModel> itemView() {
-        return new BaseItemViewSelector<ManagerItemViewModel>() {
-            @Override
-            public void select(ItemView itemView, int position, ManagerItemViewModel item) {
-                itemView.set(BR.viewModel, R.layout.item_manage);
-            }
-        };
+    protected void doListData(BaseList<MineManagerList.ListBean> data, boolean isLoadMore) {
+        if (!isLoadMore) {
+            index = 0;
+        }
     }
+
+    @Override
+    public void doComplate() {
+        itemViewModels.add(new ManagerItemViewModel(activity, isComplate));
+    }
+
+//    public void loadData(boolean isMore) {
+//        isRefreshing.set(true);
+//        index = 0;
+//        Map<String, String> map = new HashMap<>();
+//        map.put("offset", "0");
+//        map.put("limit", "20");
+//        useCase.setParams(JsonUtil.mapToJson(map));
+//        useCase.execute().compose(fragment.bindToLifecycle())
+//                .flatMap(data -> {
+//                    if (!isMore) {
+//                        index = 0;
+//                        itemViewModels.clear();
+//                    }
+//                    return Observable.from(data.getList());
+//                })
+//                .subscribe(d -> {
+//                    itemViewModels.add(new ManagerItemViewModel(activity, d, delManagerUseCase, pubManagerUseCase, index));
+//                    index++;
+//                }, error -> {
+//                    isRefreshing.set(false);
+//                }, () -> {
+//                    isRefreshing.set(false);
+//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
+//                });
+//    }
+
+    @Override
+    public int setItem(ItemView itemView, int position, ManagerItemViewModel item) {
+        itemView.set(BR.viewModel, R.layout.item_manage);
+        return 1;
+    }
+
 }

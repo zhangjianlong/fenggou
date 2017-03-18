@@ -138,4 +138,9 @@
 
     <!--cookie bar-->
     <dimen name="default_padding">16dp</dimen>
+
+    <!--mis 相机相册-->
+    <dimen name="mis_image_size">120dp</dimen>
+    <dimen name="mis_space_size">2dp</dimen>
+    <dimen name="mis_folder_cover_size">72dp</dimen>
 </resources>

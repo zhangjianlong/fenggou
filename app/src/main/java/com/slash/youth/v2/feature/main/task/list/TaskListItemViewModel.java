@@ -23,6 +23,7 @@ import com.slash.youth.ui.activity.MyPublishDemandActivity;
 import com.slash.youth.ui.activity.MyPublishServiceActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
+import com.slash.youth.v2.base.list.BaseListItemViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -36,7 +37,7 @@ import static com.slash.youth.v2.util.MessageKey.TASK_REFRESH;
  * Created by acer on 2017/3/9.
  */
 
-public class TaskListItemViewModel extends BViewModel {
+public class TaskListItemViewModel extends BaseListItemViewModel {
 
     public final ObservableField<Integer> vipVisible = new ObservableField<>(View.VISIBLE);
 
@@ -142,6 +143,10 @@ public class TaskListItemViewModel extends BViewModel {
         Messenger.getDefault().sendNoMsg(TASK_POINT_REFRESH);
     });
 
+    public TaskListItemViewModel(RxAppCompatActivity activity, boolean isLoadComplete) {
+        super(activity, isLoadComplete);
+    }
+
     public TaskListItemViewModel(int t) {
         switch (t) {
             case 0:
@@ -243,7 +248,7 @@ public class TaskListItemViewModel extends BViewModel {
                     break;
                 case 8:
                     status = "已完成";
-                    statusBg = activity.getResources().getDrawable(R.mipmap.state_bg);
+                    statusBg = activity.getResources().getDrawable(R.mipmap.state_huise);
                     break;
             }
         } else if (data.type == 2) {//服务

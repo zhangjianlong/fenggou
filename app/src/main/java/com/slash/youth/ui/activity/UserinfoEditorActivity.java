@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityUserinfoEditorBinding;
 import com.slash.youth.ui.activity.base.BaseActivity;
@@ -18,6 +19,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.core.op.lib.weight.imgselector.MultiImageSelector.REQUEST_IMAGE;
 
 /**
  * Created by zss on 2016/11/1.
@@ -32,7 +36,7 @@ public class UserinfoEditorActivity extends BaseActivity {
         Intent intent = getIntent();
         activityUserinfoEditorBinding = DataBindingUtil.setContentView(this, R.layout.activity_userinfo_editor);
         long myId = intent.getLongExtra("myId", -1);
-        activityUserInfoEditorModel = new ActivityUserInfoEditorModel(activityUserinfoEditorBinding,myId,this);
+        activityUserInfoEditorModel = new ActivityUserInfoEditorModel(activityUserinfoEditorBinding, myId, this);
         activityUserinfoEditorBinding.setActivityUserInfoEditorModel(activityUserInfoEditorModel);
         back();
     }
@@ -49,6 +53,14 @@ public class UserinfoEditorActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MultiImageSelector.REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<String> paths = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
+                if (paths != null && paths.size() > 0)
+                    activityUserInfoEditorModel.uploadImage(paths.get(0));
+            }
+        }
         switch (requestCode) {
             case Constants.USERINFO_PHONE:
                 if (resultCode == RESULT_OK) {
@@ -63,9 +75,9 @@ public class UserinfoEditorActivity extends BaseActivity {
                     if (city != null && province != null) {
                         activityUserInfoEditorModel.city = city;
                         activityUserInfoEditorModel.province = province;
-                        if(city.equals(province)){
+                        if (city.equals(province)) {
                             activityUserinfoEditorBinding.tvLocation.setText(city);
-                        }else {
+                        } else {
                             activityUserinfoEditorBinding.tvLocation.setText(province + "" + city);
                         }
                     }
@@ -74,9 +86,9 @@ public class UserinfoEditorActivity extends BaseActivity {
             case Constants.USERINFO_IDENTITY:
                 if (resultCode == RESULT_OK) {
                     String identity = data.getStringExtra("identity");
-                    if(identity.equals("null")){
+                    if (identity.equals("null")) {
                         activityUserinfoEditorBinding.tvIdentity.setText("");
-                    }else {
+                    } else {
                         activityUserinfoEditorBinding.tvIdentity.setText(identity);
                     }
                 }
@@ -93,7 +105,7 @@ public class UserinfoEditorActivity extends BaseActivity {
                             activityUserInfoEditorModel.skillLabelList.clear();
                             activityUserInfoEditorModel.skillLabelList.addAll(listCheckedLabelName);
                             int size = listCheckedLabelName.size();
-                            if(size!=0){
+                            if (size != 0) {
                                 activityUserinfoEditorBinding.llSkilllabelContainer.removeAllViews();
                                 for (String skillTagText : listCheckedLabelName) {
                                     TextView skillTag = activityUserInfoEditorModel.createSkillTag(skillTagText);
@@ -102,16 +114,16 @@ public class UserinfoEditorActivity extends BaseActivity {
                             }
                         }
                         int size = listCheckedLabelName.size();
-                        if(size!=0){
+                        if (size != 0) {
                             //第一级技能标签 //第二级技能标签
                             String checkFirstLabel = bundleCheckedLabelsData.getString("checkedFirstLabel", "未选择");
                             String checkedSecondLabel = bundleCheckedLabelsData.getString("checkedSecondLabel", "未选择");
-                            if ( checkedSecondLabel != null) {
+                            if (checkedSecondLabel != null) {
                                 activityUserinfoEditorBinding.tvDirection.setText(checkedSecondLabel);
                                 activityUserInfoEditorModel.industry = checkFirstLabel;
-                                activityUserInfoEditorModel.direction =  checkedSecondLabel;
+                                activityUserInfoEditorModel.direction = checkedSecondLabel;
                             }
-                        }else {
+                        } else {
                             activityUserinfoEditorBinding.tvDirection.setText("");
                             activityUserinfoEditorBinding.llSkilllabelContainer.removeAllViews();
                         }
@@ -121,20 +133,20 @@ public class UserinfoEditorActivity extends BaseActivity {
         }
 
         //最近访问的城市
-        if(resultCode == Constants.CURRENT_ACCESS_CITY){
+        if (resultCode == Constants.CURRENT_ACCESS_CITY) {
             String currentCityAccess = data.getStringExtra("currentCityAccess");
             String currentyProvince = data.getStringExtra("currentyProvince");
-            activityUserInfoEditorModel.city =  currentCityAccess;
-            activityUserInfoEditorModel.province =  currentyProvince;
-            if(currentCityAccess.equals(currentyProvince)){
+            activityUserInfoEditorModel.city = currentCityAccess;
+            activityUserInfoEditorModel.province = currentyProvince;
+            if (currentCityAccess.equals(currentyProvince)) {
                 activityUserinfoEditorBinding.tvLocation.setText(currentCityAccess);
-            }else {
-                activityUserinfoEditorBinding.tvLocation.setText(currentyProvince+""+currentCityAccess);
+            } else {
+                activityUserinfoEditorBinding.tvLocation.setText(currentyProvince + "" + currentCityAccess);
             }
         }
     }
 
-    private void WriteFile(Bitmap bitmap,File file) {
+    private void WriteFile(Bitmap bitmap, File file) {
         FileOutputStream b = null;
         try {
             b = new FileOutputStream(file);

@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.core.op.lib.utils.PreferenceUtil;
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityUserinfoEditorBinding;
@@ -46,6 +47,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.main.MainActivity;
 import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
@@ -211,9 +213,19 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
         notifyPropertyChanged(BR.uploadPicLayerVisibility);
     }
 
+    private ArrayList<String> mSelectPath;
+
     //点击头像
     public void clickAvatar(View view) {
-        setUploadPicLayerVisibility(View.VISIBLE);
+//        setUploadPicLayerVisibility(View.VISIBLE);
+        MultiImageSelector selector = MultiImageSelector.create(userinfoEditorActivity);
+        selector.showCamera(true);
+        selector.count(9);
+        selector.single();
+        selector.origin(mSelectPath);
+        selector.setCrop(true);
+        selector.start(userinfoEditorActivity, MultiImageSelector.REQUEST_IMAGE);
+
         //编辑头像的埋点
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_EDIT_AVATAR);
     }
@@ -367,6 +379,16 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
             public void onHanlderFailure(int requestCode, String errorMsg) {
             }
         });
+    }
+
+    public void uploadImage(String imgPath) {
+        final File tempFile = new File(imgPath);
+        DemandEngine.uploadFile(new onUploadFile(), tempFile.getAbsolutePath());
+        ImageOptions.Builder builder = new ImageOptions.Builder();
+        ImageOptions imageOptions = builder.build();
+        avatar = tempFile.toURI().toString();
+        x.image().bind(activityUserinfoEditorBinding.ibClickAvatar, tempFile.toURI().toString(), imageOptions);
+        setUploadPicLayerVisibility(View.GONE);
     }
 
     //设置斜杠身份
@@ -761,7 +783,7 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
                     case 1:
                         //技能标签
                         ArrayList<String> listCheckedLabelName = SubscribeActivity.saveListCheckedLabelName;
-                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG,listCheckedLabelName);
+                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG, listCheckedLabelName);
                         LogKit.d("保存成功");
                         break;
                 }
