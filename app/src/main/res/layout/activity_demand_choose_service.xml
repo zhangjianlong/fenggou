@@ -52,32 +52,6 @@
                         android:textColor="#ffffff"
                         android:textSize="17sp" />
 
-                    <!--<LinearLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerInParent="true"-->
-                    <!--android:orientation="horizontal"-->
-                    <!--&gt;-->
-                    <!--<TextView-->
-                    <!--android:layout_width="148dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:ellipsize="end"-->
-                    <!--android:maxLines="1"-->
-                    <!--android:text="@{demandChooseServiceModel.title}"-->
-                    <!--android:textColor="#ffffff"-->
-                    <!--android:textSize="17sp"/>-->
-                    <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:ellipsize="end"-->
-                    <!--android:maxLines="1"-->
-                    <!--android:text="订单"-->
-                    <!--android:textColor="#ffffff"-->
-                    <!--android:textSize="17sp"/>-->
-
-                    <!--</LinearLayout>-->
-
-
                 </RelativeLayout>
             </FrameLayout>
 
@@ -388,29 +362,30 @@
             android:background="#edf1f2"
             android:visibility="@{demandChooseServiceModel.loadLayerVisibility}">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <ProgressBar
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:indeterminateDrawable="@anim/rotate_pic_loaddata" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="9dp"
-                android:text="加载中..."
-                android:textColor="#999999"
-                android:textSize="14dp" />
-        </LinearLayout>
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:indeterminateDrawable="@anim/rotate_pic_loaddata" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="9dp"
+                    android:text="加载中..."
+                    android:textColor="#999999"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+        </FrameLayout>
 
     </FrameLayout>
-
-</FrameLayout></layout>
+</layout>

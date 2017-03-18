@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.core.op.lib.weight.picker.OptionsPickerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +33,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.base.BaseDialog;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
@@ -59,6 +61,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
     String[] optionalSecondLabels;
     private NumberPicker mNpChooseSkillLabel;
     ArrayList<AllSkillLablesBean.Tag_3> choosedThirdLabels = new ArrayList<AllSkillLablesBean.Tag_3>();
+    ArrayList<AllSkillLablesBean.Tag_3> selectThirdLabels = new ArrayList<AllSkillLablesBean.Tag_3>();
     private OptionsPickerView pvOptions1;
     private OptionsPickerView pvOptions2;
     private List<String> options1Items = new ArrayList<String>();
@@ -224,11 +227,11 @@ public class ActivityChooseSkillModel extends BaseObservable {
         mActivityChooseSkillBinding.llActivityChooseSkillLabels.post(new Runnable() {
             @Override
             public void run() {
-                if (choosedThirdLabels.size()==0){
+                if (choosedThirdLabels.size() == 0) {
                     return;
                 }
                 int labelsTotalWidth = mActivityChooseSkillBinding.llActivityChooseSkillLabels.getMeasuredWidth() - 2 * lineLeftRightMargin;
-                for (AllSkillLablesBean.Tag_3 tag_3:choosedThirdLabels) {
+                for (AllSkillLablesBean.Tag_3 tag_3 : choosedThirdLabels) {
                     String labelName = tag_3.tag;
                     if (labelName.length() <= 3) {
                         labelName = " " + labelName + " ";
@@ -286,7 +289,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
                     tvSkillLabel.setTextColor(0xff31c5e4);
 //                    tvSkillLabel.setBackgroundResource(R.mipmap.unchoose_skill_label_bg);
                     tvSkillLabel.setBackgroundResource(R.drawable.label_unselected);
-                    choosedThirdLabels.remove(tag_3);
+                    selectThirdLabels.remove(tag_3);
                 } else {
                     MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_EXCLUSIVE_SKILLS_CHOOSE_LABEL);
 
@@ -298,7 +301,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
                     tvSkillLabel.setTextColor(0xffffffff);
 //                    tvSkillLabel.setBackgroundResource(R.mipmap.choose_skill_label_bg);
                     tvSkillLabel.setBackgroundResource(R.drawable.label_selected);
-                    choosedThirdLabels.add(tag_3);
+                    selectThirdLabels.add(tag_3);
                 }
                 tvSkillLabel.setTag(!isSelected);
             }
@@ -314,6 +317,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_EXCLUSIVE_SKILLS_CLICK_ENTER);
 
         final ArrayList<String> listTag = new ArrayList<String>();//这里存放三级标签
+        final ArrayList<String> listTagName = new ArrayList<String>();//这里存放三级标签
 
         AllSkillLablesBean.Tag_1 tag_1 = tag1Arr[chooseTag1Index];
 //        String choosedTag1 = tag_1.f1 + "-" + tag_1.f2 + "-" + tag_1.tag;
@@ -326,8 +330,9 @@ public class ActivityChooseSkillModel extends BaseObservable {
 //        listTag.add(choosedTag2);
 
         for (AllSkillLablesBean.Tag_3 tag_3 : choosedThirdLabels) {
-//            String choosedTag3 = tag_3.f1 + "-" + tag_3.f2 + "-" + tag_3.tag;
-            String choosedTag3 = tag_3.tag;
+            String choosedTag3 = tag_3.f1 + "-" + tag_3.f2 + "-" + tag_3.tag;
+//            String choosedTag3 = tag_3.tag;
+            listTagName.add(tag_3.tag);
             listTag.add(choosedTag3);
         }
         //调用设置行业和方向的接口（一级和二级标签）
@@ -338,6 +343,8 @@ public class ActivityChooseSkillModel extends BaseObservable {
                 LoginManager.loginSetTag(new BaseProtocol.IResultExecutor<CommonResultBean>() {
                     @Override
                     public void execute(CommonResultBean dataBean) {
+                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG_NAME, listTagName);
+                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG, listTag);
 //                        Intent intentHomeActivity = new Intent(CommonUtils.getContext(), HomeActivity.class);
 //                        mActivity.startActivity(intentHomeActivity);
                         Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), MainActivity.class);
@@ -383,13 +390,13 @@ public class ActivityChooseSkillModel extends BaseObservable {
         pvOptions1.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3) {
-                        clearCheckedThirdLabels();//选择了不同的一级标签，清空已选择的三级标签
-                        chooseTag1Index = options1;
-                        chooseTag2Index = 0;
-                        setChoosedMainLabel(options1Items.get(options1));
-                        initOptionItem2(options1);
-                        setChoosedSecondLabel(options2Items.get(chooseTag2Index));
-                        setThirdSkillLabels();
+                clearCheckedThirdLabels();//选择了不同的一级标签，清空已选择的三级标签
+                chooseTag1Index = options1;
+                chooseTag2Index = 0;
+                setChoosedMainLabel(options1Items.get(options1));
+                initOptionItem2(options1);
+                setChoosedSecondLabel(options2Items.get(chooseTag2Index));
+                setThirdSkillLabels();
 
             }
         });
@@ -399,11 +406,11 @@ public class ActivityChooseSkillModel extends BaseObservable {
             optionalSecondLabels[i] = tag2Arr[0].tag;
         }
         options2Items.clear();
-        options2Items.addAll(new ArrayList<>(Arrays.asList(optionalSecondLabels))) ;
+        options2Items.addAll(new ArrayList<>(Arrays.asList(optionalSecondLabels)));
         pvOptions1.show();
     }
 
-    private void initOptionItem2(int option){
+    private void initOptionItem2(int option) {
         AllSkillLablesBean.Tag_1 tag_1 = tag1Arr[option];
         Collection<AllSkillLablesBean.Tag_2> tag2Coll = tag_1.mapTag_2.values();
         tag2Arr = new AllSkillLablesBean.Tag_2[tag2Coll.size()];
@@ -413,7 +420,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
             optionalSecondLabels[i] = tag2Arr[i].tag;
         }
         options2Items.clear();
-        options2Items.addAll(new ArrayList<>(Arrays.asList(optionalSecondLabels))) ;
+        options2Items.addAll(new ArrayList<>(Arrays.asList(optionalSecondLabels)));
     }
 
     private void initpicker2() {
@@ -517,6 +524,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
     private void clearCheckedThirdLabels() {
         checkedThirdLabelsCount = 0;
         choosedThirdLabels.clear();
+        selectThirdLabels.clear();
     }
 
     private int chooseSkillLayerVisibility = View.INVISIBLE;//选择行业（一级标签）或岗位（二级标签）的浮层是否显示，默认为隐藏

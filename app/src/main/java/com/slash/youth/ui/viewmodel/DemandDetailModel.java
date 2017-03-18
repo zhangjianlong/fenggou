@@ -1540,7 +1540,7 @@ public class DemandDetailModel extends BaseObservable {
             public void OkDown() {
                 LogKit.d("close SecurityRules");
             }
-        }, CommonUtils.getContext().getString(R.string.securityRulesContent), securityRulesTitle);
+        }, CommonUtils.getContext().getString(R.string.ecurity_rules), securityRulesTitle);
     }
 
 

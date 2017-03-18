@@ -42,6 +42,7 @@ import com.slash.youth.ui.viewmodel.ItemSubscribeSecondSkilllabelModel;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.NetUtils;
+import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
 
 import java.io.File;
@@ -205,7 +206,7 @@ public class SubscribeActivity extends BaseActivity {
 
     //获取用户自定义标签的集合
     private void getUserSkillLabelArrayList(ArrayList<SkillLabelGetBean.DataBean> data) {
-        if (null == data){
+        if (null == data) {
             return;
         }
         listThirdUserCustomSkilllabelName.clear();
@@ -236,7 +237,7 @@ public class SubscribeActivity extends BaseActivity {
 
     //对集合分类
     private void getSkillLabelAllArrayList(ArrayList<SkillLabelAllBean> arrayList) {
-        if (null == arrayList){
+        if (null == arrayList) {
             return;
         }
         for (SkillLabelAllBean skillLabelAllBean : arrayList) {
@@ -588,7 +589,7 @@ public class SubscribeActivity extends BaseActivity {
         TextView tvThirdSkilllabelName = new TextView(CommonUtils.getContext());
         // tvThirdSkilllabelName.setTag("label_" + i);
         tvThirdSkilllabelName.setTag(skillLabelBean.getF1() + "-" + skillLabelBean.getF2() + "-" + skillLabelBean.getTag());
-        tvThirdSkilllabelName.setOnClickListener(new CheckThirdLabelListener());
+        setSkillLabelSelectedListener(tvThirdSkilllabelName, skillLabelBean);
         tvThirdSkilllabelName.setLayoutParams(llParamsForSkillLabel);
         tvThirdSkilllabelName.setMaxLines(1);
         tvThirdSkilllabelName.setGravity(Gravity.CENTER);
@@ -640,7 +641,7 @@ public class SubscribeActivity extends BaseActivity {
         index += 1;
 //        textview.setTag(("label_" + index));
         textview.setTag(skillLabelBean.getTag());//自定义标签不需要f1、f2
-        textview.setOnClickListener(new CheckThirdLabelListener());
+        setSkillLabelSelectedListener(textview, skillLabelBean);
         textview.setPadding(CommonUtils.dip2px(16), CommonUtils.dip2px(11), CommonUtils.dip2px(9), CommonUtils.dip2px(11));
 
         imageView = new ImageView(CommonUtils.getContext());
@@ -838,23 +839,29 @@ public class SubscribeActivity extends BaseActivity {
     private String toastText = "此标签已被添加";
     private String toastTextString = "最多添加3个标签";
 
-    public class CheckThirdLabelListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            String labelTag = (String) v.getTag();
-            labelName = ((TextView) v).getText().toString();
-            if (clickCount >= 0 && clickCount < 3) {
-                if (!lastLabelName.equals(labelName)) {
-                    addCheckedLabels(labelTag, labelName);
-                    clickCount += 1;
-                    lastLabelName = labelName;
+
+    private void setSkillLabelSelectedListener(TextView tag, SkillLabelBean skillLabelBeanll) {
+        tag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String labelTag = (String) v.getTag();
+                labelName = ((TextView) v).getText().toString();
+                if (clickCount >= 0 && clickCount < 3) {
+                    if (!lastLabelName.equals(labelName)) {
+                        String temp = skillLabelBeanll.getF1() + "-" + skillLabelBeanll.getF2() + "-" + labelName;
+                        addCheckedLabels(labelTag, temp);
+                        clickCount += 1;
+                        lastLabelName = labelName;
+                    } else {
+                        ToastUtils.shortToast(toastText);
+                    }
                 } else {
-                    ToastUtils.shortToast(toastText);
+                    ToastUtils.shortToast(toastTextString);
                 }
-            } else {
-                ToastUtils.shortToast(toastTextString);
             }
-        }
+        });
+
+
     }
 
     LinearLayout llCheckedLabelsLine = null;
@@ -924,7 +931,7 @@ public class SubscribeActivity extends BaseActivity {
         TextView tvLabelName = new TextView(CommonUtils.getContext());
         tvParams.topMargin = CommonUtils.dip2px(12);
         tvLabelName.setBackgroundResource(R.drawable.shape_rounded_rectangle_skilllabel_gray);
-        tvLabelName.setText(labelName);
+        tvLabelName.setText(StringUtils.strFormat(labelName));
         tvLabelName.setTextColor(Color.parseColor("#333333"));
         tvLabelName.setPadding(CommonUtils.dip2px(15), CommonUtils.dip2px(12), CommonUtils.dip2px(15), CommonUtils.dip2px(12));
         tvLabelName.setLayoutParams(tvParams);

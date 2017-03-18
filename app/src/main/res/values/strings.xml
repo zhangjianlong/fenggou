@@ -29,6 +29,7 @@
 </p>]]></Data></string>
 
 
+
     <string name="securityRulesContent" formatted="false"><Data><![CDATA[<p><strong>斜杠青年通过顺利成交保证金、预支付、分期到账等一系列规则来保障双方的顺利成交。</strong></p><p><strong>1、顺利成交保证金规则</strong>
 </p><p><span style="color:#999999;">本服务平台将实际交易金额的5%计提为“顺利成交保证金”，任务顺利完成并且服务、需求双方评价分享后，平台将以交易金额的2.5%奖励形式返还给双方。"如果任务并未顺利成交，已经开始的“服务阶段”对应的“顺利成交保证金”将，不予退还，存放奖金池 用于活动基金；未开始“服务阶段”对应的“顺利成交保证金”将退还给需求方。上述“服务阶段”是指双方用户达成的“分期到账”后各期对应的服务阶段。</span>
 </p><p><strong>2、预支付与分期到账规则</strong></p>
@@ -45,7 +46,10 @@
 </p><p><span style="color:#000000;"><strong>2匿名状态有什么影响？</strong></span>
 </p><p><span style="color:#999999;">匿名发布任务后，其他用户暂时看不到你的姓名、头像等个人信息。在合作意向达成后，匿名状态解除，交易双方恢复实名状态，可查看双方的个人信息。匿名发布不影响交易流程，但可能会降低其他用户对你发布服务或者需求的信任程度。</span>
 </p>]]></Data></string>
-
+    <string name="ecurity_rules" formatted="false"><Data><![CDATA[<p><span style="color:#999999;">1 已同意《斜杠青年顺利成交保障规则》；</span>
+</p><p><span style="color:#999999;">2 双方合作过程有问题，联系斜杠客服；</span></p><p><span style="color:#999999;"> 3 以上为发布者意向，双方可协商修改。</span>
+</p>
+]]></Data></string>
     <string name="instalmentInfoContent" formatted="false"><Data><![CDATA[<span style="color:#999999;">基于任务的阶段性特征，若双方将任务划分成若干个阶段，预支付的资金也将会被划分成对应的若干个部分，在需求方确认服务方提交的某阶段的服务时，该阶段的资金将被划转给服务方。</span>]]></Data></string>
 
     <string name="app.manager">发布管理</string>

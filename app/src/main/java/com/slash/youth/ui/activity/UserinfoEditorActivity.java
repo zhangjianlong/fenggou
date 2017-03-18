@@ -13,6 +13,7 @@ import com.slash.youth.databinding.ActivityUserinfoEditorBinding;
 import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.ActivityUserInfoEditorModel;
 import com.slash.youth.utils.Constants;
+import com.slash.youth.utils.StringUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -108,7 +109,7 @@ public class UserinfoEditorActivity extends BaseActivity {
                             if (size != 0) {
                                 activityUserinfoEditorBinding.llSkilllabelContainer.removeAllViews();
                                 for (String skillTagText : listCheckedLabelName) {
-                                    TextView skillTag = activityUserInfoEditorModel.createSkillTag(skillTagText);
+                                    TextView skillTag = activityUserInfoEditorModel.createSkillTag(StringUtils.strFormat(skillTagText));
                                     activityUserinfoEditorBinding.llSkilllabelContainer.addView(skillTag);
                                 }
                             }

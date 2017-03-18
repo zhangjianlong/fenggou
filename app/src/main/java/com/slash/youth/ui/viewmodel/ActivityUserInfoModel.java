@@ -525,9 +525,6 @@ public class ActivityUserInfoModel extends BaseObservable {
             if (rescode == 0) {
                 OtherInfoBean.DataBean data = dataBean.getData();
                 uinfo = data.getUinfo();
-                if (null!= uinfo) {
-                    PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_TAG, uinfo.getTag());
-                }
                 updateOtherUserInfo();
             } else {
                 LogKit.d("rescode =" + rescode);
