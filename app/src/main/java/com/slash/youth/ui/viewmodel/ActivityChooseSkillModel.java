@@ -317,6 +317,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_EXCLUSIVE_SKILLS_CLICK_ENTER);
 
         final ArrayList<String> listTag = new ArrayList<String>();//这里存放三级标签
+        final ArrayList<String> listTagName = new ArrayList<String>();//这里存放三级标签
 
         AllSkillLablesBean.Tag_1 tag_1 = tag1Arr[chooseTag1Index];
 //        String choosedTag1 = tag_1.f1 + "-" + tag_1.f2 + "-" + tag_1.tag;
@@ -331,6 +332,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
         for (AllSkillLablesBean.Tag_3 tag_3 : choosedThirdLabels) {
             String choosedTag3 = tag_3.f1 + "-" + tag_3.f2 + "-" + tag_3.tag;
 //            String choosedTag3 = tag_3.tag;
+            listTagName.add(tag_3.tag);
             listTag.add(choosedTag3);
         }
         //调用设置行业和方向的接口（一级和二级标签）
@@ -341,6 +343,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
                 LoginManager.loginSetTag(new BaseProtocol.IResultExecutor<CommonResultBean>() {
                     @Override
                     public void execute(CommonResultBean dataBean) {
+                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG_NAME, listTagName);
                         PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG, listTag);
 //                        Intent intentHomeActivity = new Intent(CommonUtils.getContext(), HomeActivity.class);
 //                        mActivity.startActivity(intentHomeActivity);

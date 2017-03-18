@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.slash.youth.R;
 import com.slash.youth.ui.activity.SubscribeActivity;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.utils.StringUtils;
 
 import java.util.ArrayList;
 
@@ -116,7 +117,7 @@ public class SlashAddLabelsLayout extends LinearLayout {
         TextView tvLabelText = new TextView(CommonUtils.getContext());
         tvLabelText.setBackgroundResource(R.drawable.shape_publish_demand_label_bg_);
         tvLabelText.setGravity(Gravity.CENTER);
-        tvLabelText.setText(labelText);
+        tvLabelText.setText(StringUtils.strFormat(labelText));
         tvLabelText.setTextColor(0xff999999);
         tvLabelText.setTextSize(14);
         tvLabelText.setVisibility(tvLabelTextVisibility);
