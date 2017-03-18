@@ -12,6 +12,7 @@ import com.slash.youth.databinding.ActivityUserinfoEditorBinding;
 import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.ActivityUserInfoEditorModel;
 import com.slash.youth.utils.Constants;
+import com.slash.youth.utils.StringUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,7 +33,7 @@ public class UserinfoEditorActivity extends BaseActivity {
         Intent intent = getIntent();
         activityUserinfoEditorBinding = DataBindingUtil.setContentView(this, R.layout.activity_userinfo_editor);
         long myId = intent.getLongExtra("myId", -1);
-        activityUserInfoEditorModel = new ActivityUserInfoEditorModel(activityUserinfoEditorBinding,myId,this);
+        activityUserInfoEditorModel = new ActivityUserInfoEditorModel(activityUserinfoEditorBinding, myId, this);
         activityUserinfoEditorBinding.setActivityUserInfoEditorModel(activityUserInfoEditorModel);
         back();
     }
@@ -63,9 +64,9 @@ public class UserinfoEditorActivity extends BaseActivity {
                     if (city != null && province != null) {
                         activityUserInfoEditorModel.city = city;
                         activityUserInfoEditorModel.province = province;
-                        if(city.equals(province)){
+                        if (city.equals(province)) {
                             activityUserinfoEditorBinding.tvLocation.setText(city);
-                        }else {
+                        } else {
                             activityUserinfoEditorBinding.tvLocation.setText(province + "" + city);
                         }
                     }
@@ -74,9 +75,9 @@ public class UserinfoEditorActivity extends BaseActivity {
             case Constants.USERINFO_IDENTITY:
                 if (resultCode == RESULT_OK) {
                     String identity = data.getStringExtra("identity");
-                    if(identity.equals("null")){
+                    if (identity.equals("null")) {
                         activityUserinfoEditorBinding.tvIdentity.setText("");
-                    }else {
+                    } else {
                         activityUserinfoEditorBinding.tvIdentity.setText(identity);
                     }
                 }
@@ -93,25 +94,25 @@ public class UserinfoEditorActivity extends BaseActivity {
                             activityUserInfoEditorModel.skillLabelList.clear();
                             activityUserInfoEditorModel.skillLabelList.addAll(listCheckedLabelName);
                             int size = listCheckedLabelName.size();
-                            if(size!=0){
+                            if (size != 0) {
                                 activityUserinfoEditorBinding.llSkilllabelContainer.removeAllViews();
                                 for (String skillTagText : listCheckedLabelName) {
-                                    TextView skillTag = activityUserInfoEditorModel.createSkillTag(skillTagText);
+                                    TextView skillTag = activityUserInfoEditorModel.createSkillTag(StringUtils.strFormat(skillTagText));
                                     activityUserinfoEditorBinding.llSkilllabelContainer.addView(skillTag);
                                 }
                             }
                         }
                         int size = listCheckedLabelName.size();
-                        if(size!=0){
+                        if (size != 0) {
                             //第一级技能标签 //第二级技能标签
                             String checkFirstLabel = bundleCheckedLabelsData.getString("checkedFirstLabel", "未选择");
                             String checkedSecondLabel = bundleCheckedLabelsData.getString("checkedSecondLabel", "未选择");
-                            if ( checkedSecondLabel != null) {
+                            if (checkedSecondLabel != null) {
                                 activityUserinfoEditorBinding.tvDirection.setText(checkedSecondLabel);
                                 activityUserInfoEditorModel.industry = checkFirstLabel;
-                                activityUserInfoEditorModel.direction =  checkedSecondLabel;
+                                activityUserInfoEditorModel.direction = checkedSecondLabel;
                             }
-                        }else {
+                        } else {
                             activityUserinfoEditorBinding.tvDirection.setText("");
                             activityUserinfoEditorBinding.llSkilllabelContainer.removeAllViews();
                         }
@@ -121,20 +122,20 @@ public class UserinfoEditorActivity extends BaseActivity {
         }
 
         //最近访问的城市
-        if(resultCode == Constants.CURRENT_ACCESS_CITY){
+        if (resultCode == Constants.CURRENT_ACCESS_CITY) {
             String currentCityAccess = data.getStringExtra("currentCityAccess");
             String currentyProvince = data.getStringExtra("currentyProvince");
-            activityUserInfoEditorModel.city =  currentCityAccess;
-            activityUserInfoEditorModel.province =  currentyProvince;
-            if(currentCityAccess.equals(currentyProvince)){
+            activityUserInfoEditorModel.city = currentCityAccess;
+            activityUserInfoEditorModel.province = currentyProvince;
+            if (currentCityAccess.equals(currentyProvince)) {
                 activityUserinfoEditorBinding.tvLocation.setText(currentCityAccess);
-            }else {
-                activityUserinfoEditorBinding.tvLocation.setText(currentyProvince+""+currentCityAccess);
+            } else {
+                activityUserinfoEditorBinding.tvLocation.setText(currentyProvince + "" + currentCityAccess);
             }
         }
     }
 
-    private void WriteFile(Bitmap bitmap,File file) {
+    private void WriteFile(Bitmap bitmap, File file) {
         FileOutputStream b = null;
         try {
             b = new FileOutputStream(file);

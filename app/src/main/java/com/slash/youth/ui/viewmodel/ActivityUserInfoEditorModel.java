@@ -177,7 +177,7 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
             activityUserinfoEditorBinding.llSkilllabelContainer.removeAllViews();
             String[] split = tag.split(",");
             for (String textTag : split) {
-                TextView skillTag = createSkillTag(StringUtils.strFormat(textTag));
+                TextView skillTag = createSkillTag(StringUtils.strFormat(StringUtils.strFormat(textTag)));
                 activityUserinfoEditorBinding.llSkilllabelContainer.addView(skillTag);
             }
         }
@@ -402,7 +402,6 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
     public void skillLabel(View view) {
         //埋点
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_EDIT_INDUSTRY_DIRECTION_SKILL_TAG);
-
         Intent intentSubscribeActivity = new Intent(CommonUtils.getContext(), SubscribeActivity.class);
         intentSubscribeActivity.putExtra("isEditor", true);
         intentSubscribeActivity.putExtra("industry", industry);
@@ -761,7 +760,7 @@ public class ActivityUserInfoEditorModel extends BaseObservable {
                     case 1:
                         //技能标签
                         ArrayList<String> listCheckedLabelName = SubscribeActivity.saveListCheckedLabelName;
-                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG,listCheckedLabelName);
+                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG, listCheckedLabelName);
                         LogKit.d("保存成功");
                         break;
                 }
