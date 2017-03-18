@@ -310,7 +310,6 @@ public class DemandDetailModel extends BaseObservable {
             @Override
             public void execute(DemandDetailBean dataBean) {
                 //隐藏加载层
-                setLoadLayerVisibility(View.GONE);
 
                 demandDetailBean = dataBean;
                 DemandDetailBean.Demand demand = dataBean.data.demand;
@@ -524,6 +523,9 @@ public class DemandDetailModel extends BaseObservable {
                 }
 
                 getDemandUserInfo(demand.uid);//获取需求发布者的信息
+
+
+                setLoadLayerVisibility(View.GONE);
             }
 
             @Override

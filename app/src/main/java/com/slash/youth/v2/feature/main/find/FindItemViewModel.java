@@ -46,6 +46,7 @@ public class FindItemViewModel extends BViewModel {
 
     public final ObservableField<Integer> timeVisibility = new ObservableField<>(View.GONE);
     public final ObservableField<Integer> instalmentVisibility = new ObservableField<>(View.GONE);
+    public final ObservableField<Integer> isauthVisibility = new ObservableField<>(View.GONE);
 
     public String freeTime;
     public String pattern;
@@ -74,6 +75,7 @@ public class FindItemViewModel extends BViewModel {
         int anonymity = listBean.getAnonymity();
         String name = listBean.getName();
         String avatar = listBean.getAvatar();
+        isauthVisibility.set((demandBean.getIsauth() == 0) ? View.GONE : View.VISIBLE);
         //匿名，实名
         switch (anonymity) {
             case 1://实名
@@ -139,6 +141,8 @@ public class FindItemViewModel extends BViewModel {
         int anonymity = listBean.getAnonymity();
         String name = listBean.getName();
         String avatar = listBean.getAvatar();
+
+        isauthVisibility.set((serviceBean.getIsauth() == 0) ? View.GONE : View.VISIBLE);
         //匿名，实名
         switch (anonymity) {
             case 1://实名
