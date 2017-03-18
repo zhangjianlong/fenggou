@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.core.op.lib.weight.picker.OptionsPickerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +33,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.base.BaseDialog;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
@@ -338,6 +340,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
                 LoginManager.loginSetTag(new BaseProtocol.IResultExecutor<CommonResultBean>() {
                     @Override
                     public void execute(CommonResultBean dataBean) {
+                        PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG,listTag);
 //                        Intent intentHomeActivity = new Intent(CommonUtils.getContext(), HomeActivity.class);
 //                        mActivity.startActivity(intentHomeActivity);
                         Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), MainActivity.class);
