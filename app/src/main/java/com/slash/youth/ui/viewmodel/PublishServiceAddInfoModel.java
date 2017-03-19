@@ -61,6 +61,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     private OptionsPickerView pvOptions;
     private ArrayList<String> options1Items = new ArrayList<String>();
 
+
     public PublishServiceAddInfoModel(ActivityPublishServiceAddinfoBinding activityPublishServiceAddinfoBinding, Activity activity) {
         this.mActivityPublishServiceAddinfoBinding = activityPublishServiceAddinfoBinding;
         this.mActivity = activity;
@@ -193,7 +194,6 @@ public class PublishServiceAddInfoModel extends BaseObservable {
         intentSubscribeActivity.putStringArrayListExtra("addedTags", addedTags);
         intentSubscribeActivity.putExtra("isPublish", true);
         mActivity.startActivityForResult(intentSubscribeActivity, 10);
-
         mSallSkillLabels.listTotalAddedTagsNames.clear();
         mSallSkillLabels.listTotalAddedTags.clear();
         mSallSkillLabels.initSkillLabels();
@@ -356,7 +356,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
                     isClickPublish = false;
                     ToastUtils.shortToast("修改失败：" + result);
                 }
-            }, serviceDetailBean.data.service.id + "", title, addedSkillLabels, starttime, endtime, anonymity, desc, timetype, listPic, instalment, bp, pattern, place, lng, lat, quote, quoteunit);
+            }, serviceDetailBean.data.service.id + "", title, mSallSkillLabels.listTotalAddedTagsNames, starttime, endtime, anonymity, desc, timetype, listPic, instalment, bp, pattern, place, lng, lat, quote, quoteunit);
         } else {//发布服务
             ServiceEngine.publishService(new BaseProtocol.IResultExecutor<PublishServiceResultBean>() {
                 @Override
@@ -379,7 +379,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
                     isClickPublish = false;
                     ToastUtils.shortToast("发布服务失败：" + result);
                 }
-            }, title, addedSkillLabels, starttime, endtime, anonymity, desc, timetype, listPic, instalment, bp, pattern, place, lng, lat, quote, quoteunit);
+            }, title, mSallSkillLabels.listTotalAddedTagsNames, starttime, endtime, anonymity, desc, timetype, listPic, instalment, bp, pattern, place, lng, lat, quote, quoteunit);
         }
     }
 

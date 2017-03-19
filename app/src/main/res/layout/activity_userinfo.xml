@@ -94,15 +94,15 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <!--信息和图片-->
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/shape_home_my_expert_marks_point"
                             android:orientation="vertical">
 
-                            <LinearLayout
+                            <FrameLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@color/app.theme.background_edf1f2"
                                 android:orientation="vertical">
 
                                 <FrameLayout
@@ -116,21 +116,13 @@
                                 <FrameLayout
                                     style="@style/App.Theme.layout"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="7dp"
-                                    android:layout_marginRight="7dp"
-                                    android:layout_marginTop="-43dp"
-                                    app:cardBackgroundColor="#ffffff"
-                                    app:cardCornerRadius="5dp"
-                                    app:cardElevation="@dimen/cardElevation"
-                                    app:cardUseCompatPadding="true">
+                                    android:layout_height="wrap_content">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:background="@drawable/shape_rounded_my_news_center"
-                                        android:orientation="vertical"
-                                        android:paddingBottom="8dp">
+                                        android:orientation="vertical">
 
                                         <RelativeLayout
                                             android:layout_width="match_parent"
@@ -277,12 +269,12 @@
                                         </LinearLayout>
                                     </LinearLayout>
                                 </FrameLayout>
-                            </LinearLayout>
+                            </FrameLayout>
                             <!--粉丝数-->
                             <LinearLayout
+                                style="@style/App.Theme.layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:orientation="vertical">
 
                                 <LinearLayout
@@ -291,7 +283,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="22dp"
                                     android:layout_marginRight="15dp"
-                                    android:layout_marginTop="135dp"
                                     android:orientation="horizontal">
 
                                     <ImageView
@@ -511,19 +502,12 @@
                                     android:layout_height="11dp" />
                             </LinearLayout>
 
-                        </RelativeLayout>
+                        </LinearLayout>
                         <!--技能描述-->
-                        <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+                        <FrameLayout
                             style="@style/App.Theme.layout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            app:cardBackgroundColor="#ffffff"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="@dimen/cardElevation"
-                            app:cardUseCompatPadding="true"
-                            tools:showIn="@layout/activity_userinfo">
+                            android:layout_height="wrap_content">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -555,7 +539,7 @@
 
                                 <View
                                     android:layout_width="match_parent"
-                                    android:layout_height="1px"
+                                    android:layout_height="0.1dp"
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginRight="10dp"
                                     android:layout_marginTop="15dp"
@@ -583,7 +567,7 @@
 
                                 <View
                                     android:layout_width="match_parent"
-                                    android:layout_height="1px"
+                                    android:layout_height="0.1dp"
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginRight="10dp"
                                     android:layout_marginTop="15dp"
@@ -866,6 +850,7 @@
                     android:background="#e5e5e5" />
             </LinearLayout>
         </RelativeLayout>
+
 
         <FrameLayout
             android:id="@+id/fl_source_avatar_layer"

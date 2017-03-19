@@ -186,6 +186,8 @@ public class SlashAddLabelsLayout extends LinearLayout {
     }
 
     public void getAddLabelsResult(Intent intentAddLabelsData) {
+        listTotalAddedTagsNames.clear();
+        listTotalAddedTags.clear();
         Bundle bundleCheckedLabelsData = intentAddLabelsData.getBundleExtra("bundleCheckedLabelsData");
         if (bundleCheckedLabelsData != null) {
             ArrayList<String> listCheckedLabelName = bundleCheckedLabelsData.getStringArrayList("listCheckedLabelName");

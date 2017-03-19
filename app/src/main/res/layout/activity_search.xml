@@ -52,7 +52,7 @@
                             android:onClick="@{activitySearchModel.etSearch}"
                             android:paddingLeft="10dp"
                             android:textColor="@color/app.text.black"
-                            android:textColorHint="#666666"
+                            android:textColorHint="#999999"
                             android:textSize="15sp" />
                     </LinearLayout>
 

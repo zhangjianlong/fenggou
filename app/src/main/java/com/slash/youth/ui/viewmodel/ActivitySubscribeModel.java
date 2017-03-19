@@ -31,7 +31,6 @@ import java.util.Map;
 public class ActivitySubscribeModel extends BaseObservable {
     ActivitySubscribeBinding mActivitySubscribeBinding;
     SubscribeActivity mActivity;
-    public static NumberPicker mNpChooseMainLabels;
     public   String[] mainLabelsArr;
     private Iterator iter;
     private Map.Entry entry;
@@ -72,7 +71,6 @@ public class ActivitySubscribeModel extends BaseObservable {
     }
 
     private void initView() {
-        mNpChooseMainLabels = mActivitySubscribeBinding.npPublishServiceMainLabels;
         initData();
     }
 
@@ -89,10 +87,7 @@ public class ActivitySubscribeModel extends BaseObservable {
                     options1Items.add(tag);
                     initpicker();
                 }
-                mNpChooseMainLabels.setDisplayedValues(mainLabelsArr);
-                mNpChooseMainLabels.setMinValue(0);
-                mNpChooseMainLabels.setMaxValue(mainLabelsArr.length - 1);
-                mNpChooseMainLabels.setValue(0);
+
             }
 
 
@@ -126,7 +121,6 @@ public class ActivitySubscribeModel extends BaseObservable {
     //点击按钮
     public void okChooseMainLabel(View v) {
         setRlChooseMainLabelVisible(View.INVISIBLE);
-        value = mNpChooseMainLabels.getValue();
         mActivity.checkedFirstLabel = mainLabelsArr[value];
         listener.OnOkChooseMainLabelListener(value);
     }
