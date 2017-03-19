@@ -848,8 +848,7 @@ public class SubscribeActivity extends BaseActivity {
                 labelName = ((TextView) v).getText().toString();
                 if (clickCount >= 0 && clickCount < 3) {
                     if (!lastLabelName.equals(labelName)) {
-                        String temp = skillLabelBeanll.getF1() + "-" + skillLabelBeanll.getF2() + "-" + labelName;
-                        addCheckedLabels(labelTag, temp);
+                        addCheckedLabels(labelName, labelTag);
                         clickCount += 1;
                         lastLabelName = labelName;
                     } else {
@@ -871,6 +870,7 @@ public class SubscribeActivity extends BaseActivity {
     public ArrayList<String> listCheckedLabelTag = new ArrayList<String>();
     public ArrayList<String> listCheckedLabelName = new ArrayList<String>();
     public static ArrayList<String> saveListCheckedLabelName = new ArrayList<String>();
+    public static ArrayList<String> saveListCheckedLabeTag = new ArrayList<String>();
 
     private void addCheckedLabels(String labelTag, String labelName) {
         if (listCheckedLabelTag.contains(labelTag)) {

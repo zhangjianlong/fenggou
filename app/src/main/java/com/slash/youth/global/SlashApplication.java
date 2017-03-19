@@ -29,6 +29,7 @@ import com.slash.youth.utils.ActivityUtils;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.DistanceUtils;
+import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.v2.di.components.AppComponent;
 import com.slash.youth.v2.di.components.DaggerAppComponent;
@@ -41,7 +42,15 @@ import com.umeng.socialize.UMShareAPI;
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -417,4 +426,58 @@ public class SlashApplication extends android.support.multidex.MultiDexApplicati
         return db;
     }
 
+
+    /**
+     * 序列化每个任务对应的消息数量的HashMap
+     */
+    public void saveObject(String key, Object object) {
+        File fileCache = this.getCacheDir();
+        if (!fileCache.exists()) {
+            fileCache.mkdirs();
+        }
+        File fileTaskMessage = new File(fileCache, key);
+        FileOutputStream fosTaskMessage = null;
+        ObjectOutputStream oosTaskMessage = null;
+        try {
+            fosTaskMessage = new FileOutputStream(fileTaskMessage);
+            oosTaskMessage = new ObjectOutputStream(fosTaskMessage);
+            oosTaskMessage.writeObject(object);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.close(oosTaskMessage);
+            IOUtils.close(fosTaskMessage);
+        }
+    }
+
+    /**
+     * 反序列化每个任务对应的消息数量的HashMap
+     */
+    public Object readObject(String key) {
+        File fileCache = this.getCacheDir();
+        File fileTagJson = new File(fileCache, key);
+        if (!fileTagJson.exists()) {
+            return null;
+        } else {
+            FileInputStream fisTaskMessage = null;
+            ObjectInputStream oisTaskMessage = null;
+            try {
+                fisTaskMessage = new FileInputStream(fileTagJson);
+                oisTaskMessage = new ObjectInputStream(fisTaskMessage);
+                return oisTaskMessage.readObject();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                IOUtils.close(oisTaskMessage);
+                IOUtils.close(fisTaskMessage);
+            }
+        }
+        return null;
+    }
 }
