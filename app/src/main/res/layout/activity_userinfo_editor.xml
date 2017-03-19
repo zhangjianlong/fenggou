@@ -113,7 +113,7 @@
                                     android:layout_marginRight="11dp"
                                     android:src="@mipmap/right1_icon" />
 
-                                <ImageButton
+                                <com.core.op.lib.weight.RoundImageView
                                     android:id="@+id/ib_clickAvatar"
                                     android:layout_width="48dp"
                                     android:layout_height="48dp"

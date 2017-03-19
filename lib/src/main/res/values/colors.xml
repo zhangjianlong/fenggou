@@ -136,4 +136,8 @@
     <!--cookie bar-->
     <color name="default_color">#BDBDBD</color>
     <color name="action_color">#26a69a</color>
+
+    <!--mis 相机相册-->
+    <color name="mis_actionbar_color">#21282C</color>
+
 </resources>

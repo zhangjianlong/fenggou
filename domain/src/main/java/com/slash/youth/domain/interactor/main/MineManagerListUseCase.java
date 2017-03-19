@@ -3,6 +3,7 @@ package com.slash.youth.domain.interactor.main;
 
 import com.slash.youth.domain.bean.BannerConfigBean;
 import com.slash.youth.domain.bean.MineManagerList;
+import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.executor.PostExecutionThread;
 import com.slash.youth.domain.executor.ThreadExecutor;
 import com.slash.youth.domain.interactor.UseCase;
@@ -18,7 +19,7 @@ import rx.Observable;
  * @description
  * @createDate 2016/11/14
  */
-public class MineManagerListUseCase extends UseCase<MineManagerList> {
+public class MineManagerListUseCase extends UseCase<BaseList<MineManagerList.ListBean>> {
     MainRepository repository;
 
     @Inject
@@ -28,7 +29,7 @@ public class MineManagerListUseCase extends UseCase<MineManagerList> {
     }
 
     @Override
-    protected Observable<MineManagerList> buildUseCaseObservable() {
+    protected Observable<BaseList<MineManagerList.ListBean>> buildUseCaseObservable() {
         return repository.getMineManagerList(params[0]);
     }
 }

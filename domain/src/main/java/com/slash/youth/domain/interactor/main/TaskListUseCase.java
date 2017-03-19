@@ -3,6 +3,7 @@ package com.slash.youth.domain.interactor.main;
 
 import com.slash.youth.domain.bean.FindDemand;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.executor.PostExecutionThread;
 import com.slash.youth.domain.executor.ThreadExecutor;
 import com.slash.youth.domain.interactor.UseCase;
@@ -18,7 +19,7 @@ import rx.Observable;
  * @description
  * @createDate 2016/11/14
  */
-public class TaskListUseCase extends UseCase<TaskList> {
+public class TaskListUseCase extends UseCase<BaseList<TaskList.TaskBean>> {
     MainRepository repository;
 
     @Inject
@@ -28,7 +29,7 @@ public class TaskListUseCase extends UseCase<TaskList> {
     }
 
     @Override
-    protected Observable<TaskList> buildUseCaseObservable() {
+    protected Observable<BaseList<TaskList.TaskBean>> buildUseCaseObservable() {
         return repository.getTaskList(params[0]);
     }
 }

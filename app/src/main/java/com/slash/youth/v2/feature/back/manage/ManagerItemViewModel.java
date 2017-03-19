@@ -24,6 +24,7 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.base.list.BaseListItemViewModel;
 import com.slash.youth.v2.feature.dialog.manage.DelManagerDialog;
 import com.slash.youth.v2.feature.dialog.manage.DelManagerViewModel;
 import com.slash.youth.v2.util.MessageKey;
@@ -40,7 +41,7 @@ import static com.slash.youth.ui.activity.CityLocationActivity.map;
  * Created by acer on 2017/3/14.
  */
 
-public class ManagerItemViewModel extends BViewModel {
+public class ManagerItemViewModel extends BaseListItemViewModel {
 
     public MineManagerList.ListBean data;
 
@@ -167,6 +168,10 @@ public class ManagerItemViewModel extends BViewModel {
                     });
         }
     });
+
+    public ManagerItemViewModel(RxAppCompatActivity activity, boolean isLoadComplete) {
+        super(activity, isLoadComplete);
+    }
 
     public ManagerItemViewModel(RxAppCompatActivity activity,
                                 MineManagerList.ListBean listBean,

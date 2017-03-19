@@ -14,6 +14,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.repository.MainRepository;
 
 import javax.inject.Inject;
@@ -59,7 +60,7 @@ public class MainRepositoryImp implements MainRepository {
     }
 
     @Override
-    public Observable<TaskList> getTaskList(String def) {
+    public Observable<BaseList<TaskList.TaskBean>> getTaskList(String def) {
         return apiClient.getTaskList(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer());
     }
 
@@ -74,7 +75,7 @@ public class MainRepositoryImp implements MainRepository {
     }
 
     @Override
-    public Observable<MineManagerList> getMineManagerList(String def) {
+    public Observable<BaseList<MineManagerList.ListBean>> getMineManagerList(String def) {
         return apiClient.getMineManagerList(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
     }
 

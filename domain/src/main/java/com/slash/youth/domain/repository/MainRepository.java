@@ -11,6 +11,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.base.BaseList;
 
 import rx.Observable;
 
@@ -30,13 +31,13 @@ public interface MainRepository {
 
     Observable<FindDemand> getFindDemand(String def);
 
-    Observable<TaskList> getTaskList(String def);
+    Observable<BaseList<TaskList.TaskBean>> getTaskList(String def);
 
     Observable<OtherInfo> getOtherInfo(String def);
 
     Observable<MineInfo> getMineInfo();
 
-    Observable<MineManagerList> getMineManagerList(String def);
+    Observable<BaseList<MineManagerList.ListBean>> getMineManagerList(String def);
 
     Observable<StatusBean> delManager(String def);
 

@@ -13,6 +13,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.base.BaseList;
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -52,7 +53,7 @@ public interface ApiClient {
     Observable<BaseResponse<FindDemand>> getFindDemand(@Body RequestBody requestBody);
 
     @POST(UriMethod.GET_MY_TASK_LIST)
-    Observable<BaseResponse<TaskList>> getTaskList(@Body RequestBody requestBody);
+    Observable<BaseResponse<BaseList<TaskList.TaskBean>>> getTaskList(@Body RequestBody requestBody);
 
 
     @POST(UriMethod.MY_INFO)
@@ -64,7 +65,7 @@ public interface ApiClient {
 
 
     @POST(UriMethod.MANAGE_PUBLISH_LIST)
-    Observable<BaseResponse<MineManagerList>> getMineManagerList(@Body RequestBody requestBody);
+    Observable<BaseResponse<BaseList<MineManagerList.ListBean>>> getMineManagerList(@Body RequestBody requestBody);
 
     @POST(UriMethod.SKILL_MANAGE_DELETE)
     Observable<BaseResponse<StatusBean>> delManager(@Body RequestBody requestBody);

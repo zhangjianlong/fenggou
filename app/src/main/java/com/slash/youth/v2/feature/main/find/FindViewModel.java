@@ -84,6 +84,9 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
 
     public boolean isDemand = false;//如果存true，表示展示需求列表，false为展示服务列表,默认为true
 
+    public final ReplyCommand click = new ReplyCommand(() -> {
+    });
+
     public final ReplyCommand search = new ReplyCommand(() -> {
         Intent intentSearchActivity = new Intent(CommonUtils.getContext(), SearchActivity.class);
         activity.startActivity(intentSearchActivity);

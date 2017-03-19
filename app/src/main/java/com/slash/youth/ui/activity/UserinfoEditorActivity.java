@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityUserinfoEditorBinding;
 import com.slash.youth.ui.activity.base.BaseActivity;
@@ -19,6 +20,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.core.op.lib.weight.imgselector.MultiImageSelector.REQUEST_IMAGE;
 
 /**
  * Created by zss on 2016/11/1.
@@ -50,6 +54,14 @@ public class UserinfoEditorActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MultiImageSelector.REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<String> paths = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
+                if (paths != null && paths.size() > 0)
+                    activityUserInfoEditorModel.uploadImage(paths.get(0));
+            }
+        }
         switch (requestCode) {
             case Constants.USERINFO_PHONE:
                 if (resultCode == RESULT_OK) {

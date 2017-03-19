@@ -216,7 +216,8 @@
             android:id="@+id/rl_title"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:visibility="@{viewModel.titleVisible}">
+            android:visibility="@{viewModel.titleVisible}"
+            app:clickCommand="@{viewModel.click}">
 
             <FrameLayout
                 android:id="@+id/rl_title_bar"
