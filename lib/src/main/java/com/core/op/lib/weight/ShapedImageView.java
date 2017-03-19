@@ -18,6 +18,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.core.op.lib.R;
+import com.core.op.lib.utils.DeviceUtil;
 
 import java.util.Arrays;
 
@@ -28,8 +29,8 @@ public class ShapedImageView extends AppCompatImageView {
 
     private static final int LAYER_FLAGS = Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.FULL_COLOR_LAYER_SAVE_FLAG | Canvas.CLIP_TO_LAYER_SAVE_FLAG;
 
-    private int mShapeMode = 0;
-    private float mRadius = 0;
+    private int mShapeMode = SHAPE_MODE_ROUND_RECT;
+    private float mRadius = 10;
     private int mStrokeColor = 0x26000000;
     private float mStrokeWidth = 0;
     private boolean mShapeChanged;
@@ -62,8 +63,8 @@ public class ShapedImageView extends AppCompatImageView {
         }
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ShapedImageView);
-            mShapeMode = a.getInt(R.styleable.ShapedImageView_shape_mode, 0);
-            mRadius = a.getDimension(R.styleable.ShapedImageView_round_radius, 0);
+            mShapeMode = a.getInt(R.styleable.ShapedImageView_shape_mode, SHAPE_MODE_ROUND_RECT);
+            mRadius = a.getDimension(R.styleable.ShapedImageView_round_radius, DeviceUtil.dip2px(getContext(), 10f));
 
             mStrokeWidth = a.getDimension(R.styleable.ShapedImageView_stroke_width, 0);
             mStrokeColor = a.getColor(R.styleable.ShapedImageView_stroke_color, mStrokeColor);

@@ -98,12 +98,10 @@ public class TaskViewModel extends BFViewModel<FrgTaskBinding> {
                 .subscribe(new Observer<Object>() {
                     @Override
                     public void onCompleted() {
-                        //
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        //
                     }
 
                     @Override

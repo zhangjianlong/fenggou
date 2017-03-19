@@ -197,6 +197,11 @@
         <activity
             android:name=".v2.feature.back.SimpleBackActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.message.MessageActivity"
+            android:windowSoftInputMode="adjustPan" />
+
+
         <activity android:name=".ui.activity.CityLocationActivity" />
         <activity android:name=".ui.activity.SubscribeActivity" />
         <activity
@@ -343,7 +348,8 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="tencent1105561277"/>
+
+                <data android:scheme="tencent1105561277" />
             </intent-filter>
         </activity>
         <activity

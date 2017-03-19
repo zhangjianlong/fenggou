@@ -33,5 +33,7 @@ public class MessageKey {
     public static final String SHOW_NAVIGATION = "SHOW_NAVIGATION";
     //显示主页发布页面
     public static final String SHOW_MAIN_PUG = "SHOW_MAIN_PUG";
+    //消息推送
+    public static final String MESSAGE_PUSH = "MESSAGE_PUSH";
 
 }

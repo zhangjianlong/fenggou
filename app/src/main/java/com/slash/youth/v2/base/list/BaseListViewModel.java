@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 
@@ -72,7 +73,9 @@ public abstract class BaseListViewModel<V, T extends BaseListItemViewModel> exte
     public void loadMore() {
         if (!isComplate) {
             pageSize++;
-            loadData(true);
+            Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(d -> {
+                loadData(true);
+            });
         }
     }
 
@@ -98,8 +101,10 @@ public abstract class BaseListViewModel<V, T extends BaseListItemViewModel> exte
 
     public Map<String, String> prams() {
         Map<String, String> map = new HashMap<>();
-        map.put("offset", (pageSize * 10) + "");
-        map.put("limit", limit + "");
+        if (isLoadMore) {
+            map.put("offset", (pageSize * limit) + "");
+            map.put("limit", limit + "");
+        }
         return map;
     }
 
@@ -142,7 +147,7 @@ public abstract class BaseListViewModel<V, T extends BaseListItemViewModel> exte
         return new BaseItemViewSelector<T>() {
             @Override
             public void select(ItemView itemView, int position, T item) {
-                if (isLoadMore && position == itemViewModels.size() - 1) {
+                if (isLoadMore && !isComplate && position == itemViewModels.size() - 1) {
                     itemView.set(BR.viewModel, R.layout.item_loadmore);
                 } else {
                     typeCount = setItem(itemView, position, item);

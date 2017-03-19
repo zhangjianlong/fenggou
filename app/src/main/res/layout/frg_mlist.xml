@@ -5,9 +5,11 @@
 
     <data>
 
-        <!--<variable-->
-            <!--name="viewModel"-->
-            <!--type="com.slash.youth.v2.feature.message.list.MListViewModel" />-->
+        <variable
+            name="viewModel"
+            type="com.slash.youth.v2.feature.message.list.MListViewModel" />
+
+        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>
 
     <LinearLayout
@@ -15,5 +17,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadingEdge="none"
+            app:itemView="@{viewModel.itemView}"
+            app:items="@{viewModel.itemViewModels}"
+            app:layoutManager="@{LayoutManagers.linear()}" />
     </LinearLayout>
 </layout>

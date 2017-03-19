@@ -365,6 +365,5 @@ public class SplashActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
-
     }
 }

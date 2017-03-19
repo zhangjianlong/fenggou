@@ -50,6 +50,8 @@
     <dimen name="app.image.height.normal40">40dp</dimen>
     <dimen name="app.image.width.normal">50dp</dimen>
     <dimen name="app.image.height.normal">50dp</dimen>
+    <dimen name="app.image.width.normal58">58dp</dimen>
+    <dimen name="app.image.height.normal58">58dp</dimen>
     <dimen name="app.image.width.small">20dp</dimen>
     <dimen name="app.image.height.small">20dp</dimen>
     <dimen name="app.image.height.xxlarge">120dp</dimen>

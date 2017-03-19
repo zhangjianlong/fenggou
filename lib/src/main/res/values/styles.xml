@@ -353,6 +353,12 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <!--image style-->
+    <style name="App.Theme.Image">
+        <item name="android:layout_width">@dimen/app.image.height.normal58</item>
+        <item name="android:layout_height">@dimen/app.image.height.normal58</item>
+    </style>
+
     <!--viewgroup style-->
     <style name="App.Theme.Linear">
         <item name="android:layout_width">match_parent</item>
@@ -397,7 +403,7 @@
         <item name="minHeight">48dip</item>
         <item name="maxHeight">48dip</item>
         <item name="indicatorName">BallPulseIndicator</item>
-        <item name="indicatorColor">@color/app.theme.colorPrimary</item>
+        <item name="indicatorColor">@color/app.text.black9d9d9d</item>
     </style>
 
     <style name="App.Theme.Loading.Large">
@@ -406,7 +412,7 @@
         <item name="minHeight">76dip</item>
         <item name="maxHeight">76dip</item>
         <item name="indicatorName">BallPulseIndicator</item>
-        <item name="indicatorColor">@color/app.theme.colorPrimary</item>
+        <item name="indicatorColor">@color/app.text.black9d9d9d</item>
     </style>
 
     <style name="App.Theme.Loading.Small">
@@ -415,7 +421,7 @@
         <item name="minHeight">24dip</item>
         <item name="maxHeight">24dip</item>
         <item name="indicatorName">LineSpinFadeLoaderIndicator</item>
-        <item name="indicatorColor">@color/app.theme.colorPrimary</item>
+        <item name="indicatorColor">@color/app.text.black9d9d9d</item>
     </style>
 
 </resources>

@@ -28,6 +28,6 @@
         <TextView
             style="@style/App.Theme.TextAppearance.ww.normal"
             android:text="@{viewModel.isLoadComplete? @string/app_loadmore_complate : @string/app_loadmore}"
-            android:textColor="@color/app.theme.colorPrimary" />
+            android:textColor="@color/app.text.black9d9d9d" />
     </LinearLayout>
 </layout>

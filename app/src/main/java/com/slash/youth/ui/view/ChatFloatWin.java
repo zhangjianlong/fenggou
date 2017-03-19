@@ -81,12 +81,12 @@ public class ChatFloatWin extends LinearLayout {
     public ChatFloatWin(Context context) {
         super(context);
         LinearLayout view = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.layer_every_msg_icon, this);
-       int viewWidth = view.getWidth();
-       int viewHeight = view.getHeight();
+        int viewWidth = view.getWidth();
+        int viewHeight = view.getHeight();
         wmParams = new WindowManager.LayoutParams();
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-         screenWidth = windowManager.getDefaultDisplay().getWidth();
-         screenHeight = windowManager.getDefaultDisplay().getHeight();
+        screenWidth = windowManager.getDefaultDisplay().getWidth();
+        screenHeight = windowManager.getDefaultDisplay().getHeight();
         //设置window type
         wmParams.type = WindowManager.LayoutParams.TYPE_TOAST;
         //设置图片格式，效果为背景透明
@@ -100,8 +100,8 @@ public class ChatFloatWin extends LinearLayout {
 
         //调整悬浮窗显示的停靠位置为左侧置顶
         wmParams.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;
-        wmParams.x =0;
-        wmParams.y =0;
+        wmParams.x = 0;
+        wmParams.y = 0;
         //设置悬浮窗口长宽数据
         wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -113,7 +113,7 @@ public class ChatFloatWin extends LinearLayout {
         chatIv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentMessageActivity = new Intent(CommonUtils.getContext(),MessageActivity.class);
+                Intent intentMessageActivity = new Intent(CommonUtils.getContext(), MessageActivity.class);
                 intentMessageActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 CommonUtils.getContext().startActivity(intentMessageActivity);
 
@@ -149,6 +149,7 @@ public class ChatFloatWin extends LinearLayout {
 
     /**
      * 用于获取状态栏高度
+     *
      * @return 返回状态栏高度的像素值
      */
     private int getStatusBarHeight() {
@@ -167,36 +168,33 @@ public class ChatFloatWin extends LinearLayout {
     }
 
 
-    public void remove(){
+    public void remove() {
         windowManager.removeViewImmediate(ChatFloatWin.this);
     }
 
-    public void changeIvColor(boolean isRead){
-        if (null == chatIv){
+    public void changeIvColor(boolean isRead) {
+        if (null == chatIv) {
             return;
         }
-        if (isRead){
+        if (isRead) {
             chatIv.setImageResource(R.mipmap.news_default);
-        }else{
+        } else {
             chatIv.setImageResource(R.mipmap.news_activation);
         }
     }
 
-    public void showChatIv(boolean isShow){
-        if (null == chatIv){
+    public void showChatIv(boolean isShow) {
+        if (null == chatIv) {
             return;
         }
 
-        if (isShow){
+        if (isShow) {
             chatIv.setVisibility(VISIBLE);
-        }else {
+        } else {
             chatIv.setVisibility(GONE);
         }
 
     }
-
-
-
 
 
     /**
@@ -204,17 +202,16 @@ public class ChatFloatWin extends LinearLayout {
      */
 
     private void updateViewPosition() {
-        int tempY = (int) (yInScreen - yInView-screenHeight/2);
-        if (tempY<0){
-            tempY =0;
-        }else if (tempY>=screenHeight/2){
-            tempY = screenHeight/2;
+        int tempY = (int) (yInScreen - yInView - screenHeight / 2);
+        if (tempY < 0) {
+            tempY = 0;
+        } else if (tempY >= screenHeight / 2) {
+            tempY = screenHeight / 2;
         }
         wmParams.x = 0;
-        wmParams.y =tempY;
+        wmParams.y = tempY;
         windowManager.updateViewLayout(this, wmParams);
     }
-
 
 
 }

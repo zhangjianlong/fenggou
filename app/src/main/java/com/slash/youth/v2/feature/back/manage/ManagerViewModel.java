@@ -86,34 +86,9 @@ public class ManagerViewModel extends BaseListViewModel<MineManagerList.ListBean
 
     @Override
     public void doComplate() {
-        itemViewModels.add(new ManagerItemViewModel(activity, isComplate));
+        if (!isComplate)
+            itemViewModels.add(new ManagerItemViewModel(activity, isComplate));
     }
-
-//    public void loadData(boolean isMore) {
-//        isRefreshing.set(true);
-//        index = 0;
-//        Map<String, String> map = new HashMap<>();
-//        map.put("offset", "0");
-//        map.put("limit", "20");
-//        useCase.setParams(JsonUtil.mapToJson(map));
-//        useCase.execute().compose(fragment.bindToLifecycle())
-//                .flatMap(data -> {
-//                    if (!isMore) {
-//                        index = 0;
-//                        itemViewModels.clear();
-//                    }
-//                    return Observable.from(data.getList());
-//                })
-//                .subscribe(d -> {
-//                    itemViewModels.add(new ManagerItemViewModel(activity, d, delManagerUseCase, pubManagerUseCase, index));
-//                    index++;
-//                }, error -> {
-//                    isRefreshing.set(false);
-//                }, () -> {
-//                    isRefreshing.set(false);
-//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
-//                });
-//    }
 
     @Override
     public int setItem(ItemView itemView, int position, ManagerItemViewModel item) {

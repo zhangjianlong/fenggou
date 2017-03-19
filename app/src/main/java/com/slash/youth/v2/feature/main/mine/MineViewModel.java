@@ -295,6 +295,8 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                     setExpertMarks();
                     initAnimation();
                     isLoadDataFinished = true;
+                }, error -> {
+
                 });
 
         Map<String, String> map = new HashMap<>();
@@ -307,6 +309,8 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                         return;
                     }
                     connection.set(d.getUinfo().getRelationshipscount() + "");
+                }, error -> {
+
                 });
 
         personRelationUseCase.execute().compose(activity.bindToLifecycle())
@@ -314,6 +318,8 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                     if (SpUtils.getInt("addMeFriendCount", 0) != d.getInfo().getAddMeFriendCount()) {
                         contactsVisible.set(View.VISIBLE);
                     }
+                }, error -> {
+
                 });
     }
 
