@@ -19,6 +19,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
+import com.viewpagerindicator.CirclePageIndicator;
 
 /**
  * Created by zhouyifeng on 2017/1/6.
@@ -26,6 +27,7 @@ import com.umeng.analytics.MobclickAgent;
 public class GuidActivity extends BaseActivity {
 
     private ViewPager mVpGuidPagers;
+    private CirclePageIndicator circlePageIndicator;
     private int[] guidPicResources;
 
     @Override
@@ -46,14 +48,15 @@ public class GuidActivity extends BaseActivity {
     }
 
 
-
     private void initView() {
         mVpGuidPagers = (ViewPager) findViewById(R.id.vp_guid_pagers);
+        circlePageIndicator = (CirclePageIndicator) findViewById(R.id.circlePageIndicator);
     }
 
     private void initData() {
         guidPicResources = new int[]{R.mipmap.guid_pic_1, R.mipmap.guid_pic_2, R.mipmap.guid_pic_3, R.mipmap.guid_pic_4};
         mVpGuidPagers.setAdapter(new GuidPagerAdapter());
+        circlePageIndicator.setViewPager(mVpGuidPagers);
     }
 
     private void initListener() {
@@ -96,7 +99,6 @@ public class GuidActivity extends BaseActivity {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             FrameLayout flBox = new FrameLayout(CommonUtils.getContext());
-
             FrameLayout.LayoutParams flParamsImg = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
             int guidImgResource = guidPicResources[position];
             ImageView ivGuidImg = new ImageView(CommonUtils.getContext());

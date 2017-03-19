@@ -225,7 +225,7 @@ public class PublishDemandAddInfoModel extends BaseObservable {
                     isClickPublish = false;
                     ToastUtils.shortToast("修改需求失败:" + result);
                 }
-            }, demandDetailBean.data.demand.id + "", demandTitle, addedSkillLabels, startTime + "", anonymity + "", demandDesc, listPic, instalment + "", bp + "", pattern + "", place, place, lng + "", lat + "", offer + "", quote + "");
+            }, demandDetailBean.data.demand.id + "", demandTitle, mSallSkillLabels.listTotalAddedTagsNames, startTime + "", anonymity + "", demandDesc, listPic, instalment + "", bp + "", pattern + "", place, place, lng + "", lat + "", offer + "", quote + "");
         } else {//发布需求
             DemandEngine.publishDemand(new BaseProtocol.IResultExecutor<PublishDemandResultBean>() {
                 @Override
@@ -246,7 +246,7 @@ public class PublishDemandAddInfoModel extends BaseObservable {
                     isClickPublish = false;
                     ToastUtils.shortToast("发布需求失败：" + result);
                 }
-            }, demandTitle, addedSkillLabels, startTime + "", anonymity + "", demandDesc, listPic, instalment + "", bp + "", pattern + "", place, place, lng + "", lat + "", offer + "", quote + "");
+            }, demandTitle, mSallSkillLabels.listTotalAddedTagsNames, startTime + "", anonymity + "", demandDesc, listPic, instalment + "", bp + "", pattern + "", place, place, lng + "", lat + "", offer + "", quote + "");
         }
 
 
@@ -377,6 +377,7 @@ public class PublishDemandAddInfoModel extends BaseObservable {
     }
 
     private static final String bpInfoTitle = "纠纷处理规则";
+
     /**
      * 纠纷处理问号
      *
