@@ -271,8 +271,6 @@ public class SubscribeActivity extends BaseActivity {
             if (tag.equals(industry)) {
                 industrySkillLabelBean = listFirstSkilllabelName.get(i);
                 mActivitySubscribeBinding.tvFirstSkillLabelTitle.setText(industry);
-                if (ActivitySubscribeModel.mNpChooseMainLabels != null)
-                    ActivitySubscribeModel.mNpChooseMainLabels.setValue(i);
                 break;
             }
         }
