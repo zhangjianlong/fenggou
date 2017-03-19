@@ -1,14 +1,28 @@
 package com.slash.youth.ui.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.AppOpsManager;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.databinding.Observable;
 import android.net.Uri;
+import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +31,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.core.op.lib.base.OnDialogLisetener;
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.PreferenceUtil;
 import com.slash.youth.R;
@@ -37,6 +52,8 @@ import com.slash.youth.utils.PackageUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.TimeUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.dialog.splash.SplashDialog;
+import com.slash.youth.v2.feature.dialog.splash.SplashViewModel;
 import com.slash.youth.v2.feature.main.MainActivity;
 import com.slash.youth.v2.util.MessageKey;
 import com.slash.youth.v2.util.ShareKey;
@@ -48,6 +65,10 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.File;
+import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by zhouyifeng on 2016/12/11.
@@ -58,12 +79,13 @@ public class SplashActivity extends BaseActivity {
     private ProgressDialog mDialog;
     private DialogVersionUpdateBinding dialogVersionUpdateBinding;
     private AlertDialog dialogVersion;
+    private AlertDialog permissionDialog;
     RxPermissions permissions;
+    SplashDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         MobclickAgent.setScenarioType(CommonUtils.getContext(), MobclickAgent.EScenarioType.E_UM_NORMAL);
         ImageView ivSplash = new ImageView(CommonUtils.getContext());
         ivSplash.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -71,6 +93,22 @@ public class SplashActivity extends BaseActivity {
         ivSplash.setLayoutParams(ll);
         ivSplash.setImageResource(R.mipmap.splash);
         setContentView(ivSplash);
+        dialog = new SplashDialog(this, new SplashViewModel(this));
+        dialog.setOnDialogLisetener(new OnDialogLisetener() {
+            @Override
+            public void onConfirm() {
+
+            }
+
+            @Override
+            public void onCancel() {
+                switchActivity();
+            }
+        });
+        open();
+    }
+
+    private void switchActivity() {
         permissions = new RxPermissions(this);
         permissions.request(Manifest.permission.ACCESS_FINE_LOCATION
                 , Manifest.permission.CAMERA,
@@ -82,8 +120,8 @@ public class SplashActivity extends BaseActivity {
                     login();
                     checkVersion();
                 });
-
     }
+
 
     private void getCustomerServiceUid() {
         long customerServiceUid = MsgManager.getCustomerServiceUidFromSp();
@@ -133,7 +171,7 @@ public class SplashActivity extends BaseActivity {
                     if (uid != -1) {
                         LogKit.v("token登录成功，直接跳转到首页");
                         LoginManager.currentLoginUserId = uid;
-                        LoginManager.currentLoginUserPhone =  PreferenceUtil.readString(CommonUtils.getContext(), ShareKey.USER_PHONE);
+                        LoginManager.currentLoginUserPhone = PreferenceUtil.readString(CommonUtils.getContext(), ShareKey.USER_PHONE);
 //                        LoginManager.token = token;
                         LoginManager.token = dataBean.data.token;//每次token登录，都保存服务端返回过来的最新token
                         LoginManager.rongToken = rongToken;
@@ -366,5 +404,95 @@ public class SplashActivity extends BaseActivity {
         super.onResume();
         Messenger.getDefault().sendNoMsg(MessageKey.HIDE_FLOAT_WINDOW);
 
+    }
+
+
+    public void open() {
+        //开启悬浮框前先请求权限
+        if ("Xiaomi".equals(Build.MANUFACTURER)) {//小米手机
+            requestPermission();
+        } else if ("Meizu".equals(Build.MANUFACTURER)) {//魅族手机
+            requestPermission();
+        } else {
+            switchActivity();
+        }
+    }
+
+
+    /**
+     * 请求用户给予悬浮窗的权限
+     */
+    public void requestPermission() {
+        if (isFloatWindowOpAllowed(this)) {//已经开启
+            switchActivity();
+        } else {
+            dialog.show();
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 11) {
+            if (isFloatWindowOpAllowed(this)) {//已经开启
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                rx.Observable.timer(300, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(d -> {
+                            switchActivity();
+                        });
+            }
+        }
+    }
+
+    /**
+     * 判断悬浮窗权限
+     *
+     * @param context
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static boolean isFloatWindowOpAllowed(Context context) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 19) {
+            return checkOp(context, 24);  // AppOpsManager.OP_SYSTEM_ALERT_WINDOW
+        } else {
+            if ((context.getApplicationInfo().flags & 1 << 27) == 1 << 27) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static boolean checkOp(Context context, int op) {
+        final int version = Build.VERSION.SDK_INT;
+
+        if (version >= 19) {
+            AppOpsManager manager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+            try {
+
+                Class<?> spClazz = Class.forName(manager.getClass().getName());
+                Method method = manager.getClass().getDeclaredMethod("checkOp", int.class, int.class, String.class);
+                int property = (Integer) method.invoke(manager, op,
+                        Binder.getCallingUid(), context.getPackageName());
+                Log.e("399", " property: " + property);
+
+                if (AppOpsManager.MODE_ALLOWED == property) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("399", "Below API 19 cannot invoke!");
+        }
+        return false;
     }
 }
