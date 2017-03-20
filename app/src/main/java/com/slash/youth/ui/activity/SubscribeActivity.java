@@ -638,7 +638,7 @@ public class SubscribeActivity extends BaseActivity {
         textview.setText(skillLabelBean.getTag());
         index += 1;
 //        textview.setTag(("label_" + index));
-        textview.setTag(skillLabelBean.getTag());//自定义标签不需要f1、f2
+        textview.setTag(skillLabelBean.getF1() + "-" + skillLabelBean.getF2() + "-" + skillLabelBean.getTag());//自定义标签不需要f1、f2
         setSkillLabelSelectedListener(textview, skillLabelBean);
         textview.setPadding(CommonUtils.dip2px(16), CommonUtils.dip2px(11), CommonUtils.dip2px(9), CommonUtils.dip2px(11));
 
