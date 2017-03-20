@@ -59,7 +59,6 @@ public class ActivityChooseSkillModel extends BaseObservable {
     boolean isChooseMainLabel;//true为选择添加一级标签，false为选择添加二级标签
     String[] optionalMainLabels;
     String[] optionalSecondLabels;
-    private NumberPicker mNpChooseSkillLabel;
     ArrayList<AllSkillLablesBean.Tag_3> choosedThirdLabels = new ArrayList<AllSkillLablesBean.Tag_3>();
     ArrayList<AllSkillLablesBean.Tag_3> selectThirdLabels = new ArrayList<AllSkillLablesBean.Tag_3>();
     private OptionsPickerView pvOptions1;
@@ -75,7 +74,6 @@ public class ActivityChooseSkillModel extends BaseObservable {
     }
 
     private void initView() {
-        mNpChooseSkillLabel = mActivityChooseSkillBinding.npChooseSkillLabel;
         initData();
     }
 
@@ -152,8 +150,10 @@ public class ActivityChooseSkillModel extends BaseObservable {
             try {
                 fisTagJson = new FileInputStream(fileTagJson);
                 oisTagJson = new ObjectInputStream(fisTagJson);
-                AllSkillLablesBean allSkillLablesBean = (AllSkillLablesBean) oisTagJson.readObject();
-                return allSkillLablesBean;
+                AllSkillLablesBean allSkillLablesBean = null;
+                if ((allSkillLablesBean = (AllSkillLablesBean) oisTagJson.readObject()) != null) {
+                    return allSkillLablesBean;
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -259,6 +259,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
                         currentLabelsWidth = labelWidth;
 
                     } else {
+
                         llSkillLabelsLine.addView(tvSkillLabel);
                     }
                 }
@@ -287,7 +288,6 @@ public class ActivityChooseSkillModel extends BaseObservable {
                         checkedThirdLabelsCount = 0;
                     }
                     tvSkillLabel.setTextColor(0xff31c5e4);
-//                    tvSkillLabel.setBackgroundResource(R.mipmap.unchoose_skill_label_bg);
                     tvSkillLabel.setBackgroundResource(R.drawable.label_unselected);
                     selectThirdLabels.remove(tag_3);
                 } else {
@@ -299,7 +299,6 @@ public class ActivityChooseSkillModel extends BaseObservable {
                     }
                     checkedThirdLabelsCount++;
                     tvSkillLabel.setTextColor(0xffffffff);
-//                    tvSkillLabel.setBackgroundResource(R.mipmap.choose_skill_label_bg);
                     tvSkillLabel.setBackgroundResource(R.drawable.label_selected);
                     selectThirdLabels.add(tag_3);
                 }
@@ -309,7 +308,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
     }
 
     public void finishChooseSkill(View v) {
-        if (choosedThirdLabels.size() <= 0) {
+        if (selectThirdLabels.size() <= 0) {
             ToastUtils.shortToast("请选择技能标签");
             return;
         }
@@ -320,18 +319,13 @@ public class ActivityChooseSkillModel extends BaseObservable {
         final ArrayList<String> listTagName = new ArrayList<String>();//这里存放三级标签
 
         AllSkillLablesBean.Tag_1 tag_1 = tag1Arr[chooseTag1Index];
-//        String choosedTag1 = tag_1.f1 + "-" + tag_1.f2 + "-" + tag_1.tag;
         String choosedTag1 = tag_1.tag;
-//        listTag.add(choosedTag1);
 
         AllSkillLablesBean.Tag_2 tag_2 = tag2Arr[chooseTag2Index];
-//        String choosedTag2 = tag_2.f1 + "-" + tag_2.f2 + "-" + tag_2.tag;
         String choosedTag2 = tag_2.tag;
-//        listTag.add(choosedTag2);
 
-        for (AllSkillLablesBean.Tag_3 tag_3 : choosedThirdLabels) {
+        for (AllSkillLablesBean.Tag_3 tag_3 : selectThirdLabels) {
             String choosedTag3 = tag_3.f1 + "-" + tag_3.f2 + "-" + tag_3.tag;
-//            String choosedTag3 = tag_3.tag;
             listTagName.add(tag_3.tag);
             listTag.add(choosedTag3);
         }
@@ -345,8 +339,6 @@ public class ActivityChooseSkillModel extends BaseObservable {
                     public void execute(CommonResultBean dataBean) {
                         PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG_NAME, listTagName);
                         PreferenceUtil.save(CommonUtils.getContext(), ShareKey.USER_TAG, listTag);
-//                        Intent intentHomeActivity = new Intent(CommonUtils.getContext(), HomeActivity.class);
-//                        mActivity.startActivity(intentHomeActivity);
                         Intent intentHomeActivity2 = new Intent(CommonUtils.getContext(), MainActivity.class);
                         mActivity.startActivity(intentHomeActivity2);
                         if (LoginActivity.activity != null) {
@@ -477,46 +469,6 @@ public class ActivityChooseSkillModel extends BaseObservable {
         initpicker2();
     }
 
-    /**
-     * 确定选择的标签
-     *
-     * @param v
-     */
-    public void okChooseLabel(View v) {
-        setChooseSkillLayerVisibility(View.INVISIBLE);
-        int value = mNpChooseSkillLabel.getValue();
-        if (isChooseMainLabel) {
-            if (value != chooseTag1Index) {
-                clearCheckedThirdLabels();//选择了不同的一级标签，清空已选择的三级标签
-                chooseTag1Index = value;
-//                chooseTag2Index = -1;
-                chooseTag2Index = 0;
-                setChoosedMainLabel(optionalMainLabels[value]);
-
-//                setChoosedSecondLabel(null);
-                AllSkillLablesBean.Tag_1 tag_1 = tag1Arr[chooseTag1Index];
-                Collection<AllSkillLablesBean.Tag_2> tag2Coll = tag_1.mapTag_2.values();
-                tag2Arr = new AllSkillLablesBean.Tag_2[tag2Coll.size()];
-                tag2Coll.toArray(tag2Arr);
-                optionalSecondLabels = new String[tag2Arr.length];
-                for (int i = 0; i < tag2Arr.length; i++) {
-                    optionalSecondLabels[i] = tag2Arr[i].tag;
-                }
-                setChoosedSecondLabel(optionalSecondLabels[chooseTag2Index]);
-
-//                mActivityChooseSkillBinding.llActivityChooseSkillLabels.removeAllViews();
-                setThirdSkillLabels();
-            }
-        } else {
-            if (value != chooseTag2Index) {
-                clearCheckedThirdLabels();//选择了不同的二级标签，清空已选择的三级标签
-                chooseTag2Index = value;
-                setChoosedSecondLabel(optionalSecondLabels[value]);
-                setThirdSkillLabels();
-            }
-        }
-//        ToastUtils.shortToast("value:" + value);
-    }
 
     /**
      * 当重新选择了不同的一级或者二级标签的时候，需要清空已选的三级标签（因为只能选择一个类别下的三级标签）
