@@ -2,6 +2,7 @@ package com.slash.youth.data;
 
 import com.slash.youth.data.api.BaseResponse;
 import com.slash.youth.domain.bean.BannerConfigBean;
+import com.slash.youth.domain.bean.ConversationBean;
 import com.slash.youth.domain.bean.CustomerService;
 import com.slash.youth.domain.bean.FindDemand;
 import com.slash.youth.domain.bean.FindServices;
@@ -71,10 +72,13 @@ public interface ApiClient {
     Observable<BaseResponse<StatusBean>> delManager(@Body RequestBody requestBody);
 
 
-    @POST(UriMethod.MANAGE_PUBLISH_UP_AND_DOWN)
+    @POST(UriMethod.UP_AND_DOWN_TASK)
     Observable<BaseResponse<StatusBean>> pubManager(@Body RequestBody requestBody);
 
     @POST(UriMethod.PERSON_RELATION_FIRST_PAGER)
     Observable<BaseResponse<PersonRelation>> getPersonRelation(@Body RequestBody requestBody);
+
+    @POST(UriMethod.GET_CONVERSATION_LIST)
+    Observable<BaseResponse<BaseList<ConversationBean>>> getConversationList(@Body RequestBody requestBody);
 }
 

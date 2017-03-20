@@ -22,7 +22,7 @@ public final class SelectTaskDialog extends BaseDialog<SelectTaskViewModel, DlgS
     public SelectTaskDialog(RxAppCompatActivity activity, SelectTaskViewModel viewModel) {
         super(BDialog.newDialog(activity)
                 .setGravity(Gravity.TOP | Gravity.BOTTOM)
-                .setMargin(0, DeviceUtil.px2dip(activity, 450f), DeviceUtil.px2dip(activity, 30f), 0)
+                .setMargin(0, DeviceUtil.dip2px(activity, 60f), DeviceUtil.px2dip(activity, 30f), 0)
                 .setBackgroud(false)
                 .setInAnimation(R.anim.anim_scan_in)
                 .setOutAnimation(R.anim.anim_scan_out), viewModel);

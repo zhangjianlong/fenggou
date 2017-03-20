@@ -9,10 +9,12 @@ import com.slash.youth.data.api.ApiOption;
 import com.slash.youth.data.executor.JobExecutor;
 import com.slash.youth.data.repository.LoginRepositoryImp;
 import com.slash.youth.data.repository.MainRepositoryImp;
+import com.slash.youth.data.repository.MessageRepositoryImp;
 import com.slash.youth.domain.executor.PostExecutionThread;
 import com.slash.youth.domain.executor.ThreadExecutor;
 import com.slash.youth.domain.repository.LoginRepository;
 import com.slash.youth.domain.repository.MainRepository;
+import com.slash.youth.domain.repository.MessageRepository;
 import com.slash.youth.global.SlashApplication;
 import com.slash.youth.v2.UIThread;
 
@@ -44,7 +46,6 @@ public class AppModule {
         return ApiOption.Builder.instance(application).url(UrlRoot.HOST).build().create(ApiClient.class);
     }
 
-
     @Provides
     @Singleton
     ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
@@ -67,6 +68,12 @@ public class AppModule {
     @Singleton
     LoginRepository loginRepository(LoginRepositoryImp loginRepository) {
         return loginRepository;
+    }
+
+    @Provides
+    @Singleton
+    MessageRepository messageRepository(MessageRepositoryImp messageRepository) {
+        return messageRepository;
     }
 
     @Provides

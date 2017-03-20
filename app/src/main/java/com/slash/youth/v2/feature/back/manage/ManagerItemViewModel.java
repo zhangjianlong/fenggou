@@ -62,6 +62,7 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
     public ObservableField<String> pubilcTime = new ObservableField<>();
     public ObservableField<Integer> typeVisible = new ObservableField<>(View.GONE);
     public ObservableField<Integer> timeVisible = new ObservableField<>(View.GONE);
+    public ObservableField<Integer> delVisible = new ObservableField<>(View.VISIBLE);
 
     public final ReplyCommand click = new ReplyCommand(() -> {
         int type = data.getType();
@@ -128,7 +129,8 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
 
         if (action != -1) {
             Map<String, String> map = new HashMap<>();
-            map.put("id", data.getId() + "");
+            map.put("tid", data.getTid() + "");
+            map.put("type", data.getType() + "");
             map.put("action", action + "");
             pubManagerUseCase.setParams(JsonUtil.mapToJson(map));
             pubManagerUseCase.execute().compose(activity.bindToLifecycle())
@@ -136,11 +138,11 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
                         switch (d.getStatus()) {
                             case 1:
                                 if (text.equals(MyManager.UP)) {
-//                                    ToastUtils.shortToast("架成功");
+                                    ToastUtils.shortToast("架成功");
                                     status.set(MyManager.DOWN);
                                     statusColor.set(Color.parseColor("#999999"));
                                 } else {
-//                                    ToastUtils.shortToast("上架成功");
+                                    ToastUtils.shortToast("上架成功");
                                     status.set(MyManager.UP);
                                     statusColor.set(Color.parseColor("#31C6E4"));
                                 }
@@ -202,6 +204,7 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
                         statusColor.set(Color.parseColor("#31C6E4"));
                         break;
                     case 1://在架上，那我显示下架
+                        delVisible.set(View.GONE);
                         status.set(MyManager.DOWN);
                         statusColor.set(Color.parseColor("#999999"));
                         break;

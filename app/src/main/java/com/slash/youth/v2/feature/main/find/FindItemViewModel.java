@@ -26,6 +26,7 @@ import com.slash.youth.utils.DistanceUtils;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import static android.R.attr.data;
+import static android.R.attr.track;
 
 /**
  * Created by acer on 2017/3/7.
@@ -137,7 +138,7 @@ public class FindItemViewModel extends BViewModel {
     public FindItemViewModel(RxAppCompatActivity activity, FindServices.ListBean listBean) {
         super(activity);
         this.serviceBean = listBean;
-
+        timeVisibility.set(View.VISIBLE);
         int anonymity = listBean.getAnonymity();
         String name = listBean.getName();
         String avatar = listBean.getAvatar();

@@ -38,7 +38,7 @@
             android:orientation="horizontal"
             android:padding="20dp">
 
-            <com.core.op.lib.weight.RoundImageView
+            <com.core.op.lib.weight.ShapedImageView
                 android:id="@+id/iv_icon"
                 android:layout_width="38dp"
                 android:layout_height="38dp"

@@ -45,7 +45,11 @@ public class SplashViewModel extends BAViewModel<ActSplashBinding> {
 
     @Override
     public void afterViews() {
-        permissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
+        permissions.request(Manifest.permission.ACCESS_FINE_LOCATION
+                , Manifest.permission.CAMERA,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.SYSTEM_ALERT_WINDOW)
                 .subscribe(granted -> {
                     if (granted) {
                         initdata();
@@ -53,6 +57,7 @@ public class SplashViewModel extends BAViewModel<ActSplashBinding> {
                         activity.finish();
                     }
                 });
+
         dialog.setOnDialogLisetener(new OnDialogLisetener() {
             @Override
             public void onConfirm() {

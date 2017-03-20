@@ -109,7 +109,8 @@ public class TaskListViewModel extends BaseListViewModel<TaskList.TaskBean, Task
 
     @Override
     public void doComplate() {
-        itemViewModels.add(new TaskListItemViewModel(activity, isComplate));
+        if (!isComplate)
+            itemViewModels.add(new TaskListItemViewModel(activity, isComplate));
         Messenger.getDefault().send(count, TASK_CHANGE);
     }
 
