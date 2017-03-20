@@ -491,7 +491,6 @@
             android:layout_height="match_parent"
             android:background="#66000000"
             android:clickable="true"
-
             android:visibility="@{chatModel.uploadPicLayerVisibility}">
             <!--android:visibility="gone"-->
 

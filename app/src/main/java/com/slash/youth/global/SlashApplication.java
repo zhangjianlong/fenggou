@@ -110,7 +110,7 @@ public class SlashApplication extends android.support.multidex.MultiDexApplicati
         exception.setOnCrashActionListener(new AppException.OnCrashActionListener() {
             @Override
             public void onCrashAction() {
-                
+
             }
         });
         Thread.setDefaultUncaughtExceptionHandler(exception);

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.core.op.lib.utils.StrUtil;
 import com.google.gson.Gson;
 import com.slash.youth.BR;
 import com.slash.youth.R;
@@ -362,6 +363,7 @@ public class MyBidDemandModel extends BaseObservable {
 
                 //innerDemandCardInfo.QQ_uid = taskinfo.QQ_uid;//这个任务列表中的uid暂时不准确，先不使用，使用需求详情中的uid
                 innerDemandCardInfo.avatar = taskinfo.avatar;
+                innerDemandCardInfo.instalmentratio = taskinfo.instalmentratio;
                 innerDemandCardInfo.username = taskinfo.name;
                 innerDemandCardInfo.isAuth = taskinfo.isauth;
                 innerDemandCardInfo.title = taskinfo.title;
@@ -434,6 +436,10 @@ public class MyBidDemandModel extends BaseObservable {
         DemandEngine.getDemandInstalmentList(new BaseProtocol.IResultExecutor<DemandInstalmentListBean>() {
             @Override
             public void execute(DemandInstalmentListBean dataBean) {
+                if (dataBean.data.list == null || dataBean.data.list.size() == 0) {
+                    setMyPublishDemandInfo();
+                    return;
+                }
                 ArrayList<DemandInstalmentListBean.InstalmentInfo> instalmentList = dataBean.data.list;
                 if (instalmentList.size() >= 2) {//分期至少分两期，如果只分一起，则视为不分期
                     innerDemandCardInfo.instalment = 1;
@@ -469,11 +475,34 @@ public class MyBidDemandModel extends BaseObservable {
         String starttimeStr = sdfStarttime.format(innerDemandCardInfo.starttime);
         setStarttime(starttimeStr);
         setQuote((int) innerDemandCardInfo.quote + "元");
-        if (innerDemandCardInfo.instalment == 1) {//分期
+        if (innerDemandCardInfo.instalment == 1 || !StrUtil.isEmpty(innerDemandCardInfo.instalmentratio)) {//分期
             setInstalmentVisibility(View.VISIBLE);
             String[] ratios = innerDemandCardInfo.instalmentratio.split(",");
             String ratioStr = "";
             for (int i = 0; i < ratios.length; i++) {
+                switch (i) {
+                    case 0:
+                        instalmentCount = 1;
+                        mActivityMyBidDemandBinding.etBidDemandInstalmentRatio1.setText(((int) (Float.valueOf(ratios[i]) * 100)) + "");
+                        setUpdateInstalmentLine1Visibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        instalmentCount = 2;
+                        mActivityMyBidDemandBinding.etBidDemandInstalmentRatio2.setText(((int) (Float.valueOf(ratios[i]) * 100)) + "");
+                        setUpdateInstalmentLine2Visibility(View.VISIBLE);
+                        break;
+                    case 2:
+
+                        instalmentCount = 3;
+                        mActivityMyBidDemandBinding.etBidDemandInstalmentRatio3.setText(((int) (Float.valueOf(ratios[i]) * 100)) + "");
+                        setUpdateInstalmentLine3Visibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        instalmentCount = 4;
+                        mActivityMyBidDemandBinding.etBidDemandInstalmentRatio4.setText(((int) (Float.valueOf(ratios[i]) * 100)) + "");
+                        setUpdateInstalmentLine4Visibility(View.VISIBLE);
+                        break;
+                }
                 String ratio = ratios[i];
                 if (TextUtils.isEmpty(ratio)) {
                     continue;
@@ -504,7 +533,7 @@ public class MyBidDemandModel extends BaseObservable {
         //填写抢单浮层中的报价
         mActivityMyBidDemandBinding.etBidDemandQuote.setText((int) innerDemandCardInfo.quote + "");
         //填写抢单浮层中的分期
-        if (innerDemandCardInfo.instalment == 0) {//不开启
+        if (innerDemandCardInfo.instalment == 0 && StrUtil.isEmpty(innerDemandCardInfo.instalmentratio)) {//不开启
             bidIsInstalment = true;//调用toggleInstalment方法后就变成false了
             toggleInstalment(null);
         } else {//开启分期
@@ -769,6 +798,8 @@ public class MyBidDemandModel extends BaseObservable {
 
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_MY_MISSON_CLICK_MISSON_MODIFY_CONDITION);
         setUpdateBidInfoVisibility(View.VISIBLE);
+
+        setMyPublishDemandInfo();
     }
 
     /**

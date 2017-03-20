@@ -490,7 +490,7 @@ public class ActivityLoginModel extends BaseObservable {
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            ToastUtils.shortToast("Authorize succeed");
+
             UMShareAPI mShareAPI = UMShareAPI.get(loginActivity);
             switch (platform) {
                 case QQ:
@@ -535,16 +535,17 @@ public class ActivityLoginModel extends BaseObservable {
                     }
                     break;
             }
+            ToastUtils.shortToast("登录成功！");
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            ToastUtils.shortToast("Authorize fail");
+            ToastUtils.shortToast("登录失败！");
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            ToastUtils.shortToast("Authorize cancel");
+            ToastUtils.shortToast("登录失败！");
         }
     };
 

@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.PreferenceUtil;
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.google.gson.Gson;
 import com.slash.youth.BR;
 import com.slash.youth.R;
@@ -66,6 +67,7 @@ import com.slash.youth.domain.CommonResultBean;
 import com.slash.youth.domain.IsChangeContactBean;
 import com.slash.youth.domain.SendMessageBean;
 import com.slash.youth.domain.UserInfoBean;
+import com.slash.youth.engine.DemandEngine;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.engine.UserInfoEngine;
@@ -87,6 +89,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.image.ImageOptions;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -98,6 +101,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
@@ -111,6 +115,7 @@ import io.rong.message.ImageMessage;
 import io.rong.message.ReadReceiptMessage;
 import io.rong.message.TextMessage;
 import io.rong.message.VoiceMessage;
+import rx.Observable;
 
 
 /**
@@ -154,6 +159,8 @@ public class ChatModel extends BaseObservable {
     private long oldestMessageDateTime = 0;//读取远程历史消息的时候使用这个。从该时间点开始获取消息。即：消息中的 sentTime；第一次可传 0，获取最新 count 条。
 
     private UserInfo rongUserInfo;
+
+    private ArrayList<String> mSelectPath;
 
     public ChatModel(ActivityChatBinding activityChatBinding, Activity activity) {
         this.mActivityChatBinding = activityChatBinding;
@@ -1734,7 +1741,28 @@ public class ChatModel extends BaseObservable {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_CHAT_CLICK_UPLOAD_PICTURE_PLUS);
 
         hideSoftInputMethod();
-        setUploadPicLayerVisibility(View.VISIBLE);
+//        setUploadPicLayerVisibility(View.VISIBLE);
+        MultiImageSelector selector = MultiImageSelector.create(mActivity);
+        selector.showCamera(true);
+        selector.count(5);
+        selector.multi();
+        selector.origin(mSelectPath);
+        selector.setCrop(true);
+        selector.start(mActivity, MultiImageSelector.REQUEST_IMAGE);
+
+    }
+
+    public void uploadImage(Intent data) {
+        mSelectPath = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
+        if (mSelectPath != null && mSelectPath.size() != 0) {
+            Observable.from(mSelectPath)
+                    .subscribe(d -> {
+                        Observable.timer(300, TimeUnit.MILLISECONDS)
+                                .subscribe(l -> {
+                                    sendPic(d);
+                                });
+                    });
+        }
     }
 
     public void closeUploadPic(View v) {

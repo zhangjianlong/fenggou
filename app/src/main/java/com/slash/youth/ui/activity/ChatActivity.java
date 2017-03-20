@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AndroidBug5497Workaround;
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityChatBinding;
 import com.slash.youth.engine.MsgManager;
@@ -21,6 +22,7 @@ import com.slash.youth.v2.util.MessageKey;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 /**
  * Created by zhouyifeng on 2016/11/16.
@@ -84,6 +86,12 @@ public class ChatActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == MultiImageSelector.REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                mChatModel.uploadImage(data);
+            }
+        }
         if (resultCode == this.RESULT_OK) {
             if (requestCode == 10) {//从相册选择图片发送
 //                这里是用了系统自带的选择图片方式
