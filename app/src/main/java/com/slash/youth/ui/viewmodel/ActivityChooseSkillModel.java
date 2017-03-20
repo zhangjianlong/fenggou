@@ -392,13 +392,6 @@ public class ActivityChooseSkillModel extends BaseObservable {
 
             }
         });
-
-        optionalSecondLabels = new String[tag2Arr.length];
-        for (int i = 0; i < tag2Arr.length; i++) {
-            optionalSecondLabels[i] = tag2Arr[0].tag;
-        }
-        options2Items.clear();
-        options2Items.addAll(new ArrayList<>(Arrays.asList(optionalSecondLabels)));
         pvOptions1.show();
     }
 
