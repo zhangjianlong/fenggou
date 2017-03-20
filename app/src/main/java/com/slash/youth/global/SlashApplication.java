@@ -15,6 +15,7 @@ import android.support.multidex.MultiDex;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.core.op.lib.AppException;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
@@ -104,6 +105,15 @@ public class SlashApplication extends android.support.multidex.MultiDexApplicati
                 .hideThreadInfo()               // default shown
                 .logLevel(LogLevel.FULL)        // default LogLevel.FULL
                 .methodOffset(2);
+
+        AppException exception = AppException.getAppExceptionHandler(this);
+        exception.setOnCrashActionListener(new AppException.OnCrashActionListener() {
+            @Override
+            public void onCrashAction() {
+                
+            }
+        });
+        Thread.setDefaultUncaughtExceptionHandler(exception);
 
         appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
 

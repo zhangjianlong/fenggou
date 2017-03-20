@@ -48,6 +48,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
     // 异常的状态码，这里一般是网络请求的状态码
     private int code;
 
+    private OnCrashActionListener onCrashActionListener;
     /**
      * 系统默认的UncaughtException处理类
      */
@@ -69,6 +70,10 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
 
     public int getType() {
         return this.type;
+    }
+
+    public void setOnCrashActionListener(OnCrashActionListener onCrashActionListener) {
+        this.onCrashActionListener = onCrashActionListener;
     }
 
     public static AppException http(int code) {
@@ -150,6 +155,9 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
+        if (onCrashActionListener != null) {
+            onCrashActionListener.onCrashAction();
+        }
         if (!handleException(ex)) {
             System.exit(0);
         }
@@ -240,5 +248,9 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         pw.print("CPU ABI: ");
         pw.println(Build.CPU_ABI);
         pw.println();
+    }
+
+    public interface OnCrashActionListener {
+        void onCrashAction();
     }
 }
