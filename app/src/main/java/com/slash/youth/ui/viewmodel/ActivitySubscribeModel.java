@@ -31,7 +31,7 @@ import java.util.Map;
 public class ActivitySubscribeModel extends BaseObservable {
     ActivitySubscribeBinding mActivitySubscribeBinding;
     SubscribeActivity mActivity;
-    public   String[] mainLabelsArr;
+    public String[] mainLabelsArr;
     private Iterator iter;
     private Map.Entry entry;
     private int value;
@@ -42,7 +42,7 @@ public class ActivitySubscribeModel extends BaseObservable {
     private ArrayList<String> options1Items = new ArrayList<String>();
 
     public ActivitySubscribeModel(ActivitySubscribeBinding activitySubscribeBinding, SubscribeActivity activity,
-                                  boolean isEditor,boolean isAddSkill) {
+                                  boolean isEditor, boolean isAddSkill) {
         this.mActivitySubscribeBinding = activitySubscribeBinding;
         this.isEditor = isEditor;
         this.mActivity = activity;
@@ -107,13 +107,13 @@ public class ActivitySubscribeModel extends BaseObservable {
     }
 
     public void openRlChooseMainLabel(View v) {
-        if(SubscribeActivity.clickCount==0){
-            if (null == pvOptions||(null==options1Items||options1Items.size() == 0)){
+        if (SubscribeActivity.clickCount == 0) {
+            if (null == pvOptions || (null == options1Items || options1Items.size() == 0)) {
                 ToastUtils.shortCenterToast("标签数据为空");
                 return;
             }
-                pvOptions.show();
-        }else {
+            pvOptions.show();
+        } else {
             ToastUtils.shortCenterToast("取消已选标签，重新选择");
         }
     }
@@ -126,10 +126,15 @@ public class ActivitySubscribeModel extends BaseObservable {
     }
 
     //取消
-   public void cannelChooseMainLabel(View view){
-       setRlChooseMainLabelVisible(View.GONE);
-   }
+    public void cannelChooseMainLabel(View view) {
+        setRlChooseMainLabelVisible(View.GONE);
+    }
 
+    /**
+     * 提交标签
+     *
+     * @param v
+     */
     public void submitChooseSkillLabel(View v) {
         Intent intentResult = new Intent();
         Bundle bundleCheckedLabelsData = new Bundle();
@@ -141,7 +146,7 @@ public class ActivitySubscribeModel extends BaseObservable {
         intentResult.putExtra("bundleCheckedLabelsData", bundleCheckedLabelsData);
         if (isEditor) {
             mActivity.setResult(Activity.RESULT_OK, intentResult);
-        }  else {
+        } else {
             if (isPublish) {
                 mActivity.setResult(10, intentResult);
             } else {
