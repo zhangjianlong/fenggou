@@ -159,7 +159,7 @@ public class MListItemViewModel extends BViewModel {
             } else {
                 long hours = minutes / 60;
                 if (hours < 24) {
-                    time.set(minutes + "小时前");
+                    time.set(hours + "小时前");
                 } else {
                     long days = hours / 24;
                     time.set(days + "天前");
