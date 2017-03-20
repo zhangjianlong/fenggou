@@ -26,6 +26,7 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
 
@@ -100,7 +101,7 @@ public class PublishDemandAddInfoModel extends BaseObservable {
         mSallSkillLabels.reloadSkillLabels(reloadTagsName, reloadTags);
         //回填报价
         if (demand.quote > 0) {
-            mActivityPublishDemandAddinfoBinding.etDemandQuote.setText(demand.quote + "");
+            mActivityPublishDemandAddinfoBinding.etDemandQuote.setText((int) demand.quote + "");
         }
         //回填分期开关
         RelativeLayout.LayoutParams layoutParams
@@ -174,6 +175,11 @@ public class PublishDemandAddInfoModel extends BaseObservable {
         double quote = 0;//报价
         int offer;//报价类型 0 需求方报价    1 服务方报价
         String quoteStr = mActivityPublishDemandAddinfoBinding.etDemandQuote.getText().toString();
+        if (!StringUtils.checkMonkey(quoteStr)) {
+            isClickPublish = false;
+            return;
+        }
+
         if (TextUtils.isEmpty(quoteStr)) {
             offer = 1;//服务方报价
         } else {

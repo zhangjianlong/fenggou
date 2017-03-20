@@ -56,6 +56,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ShareUtils;
+import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
@@ -1301,6 +1302,10 @@ public class DemandDetailModel extends BaseObservable {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_REQUIREMENT_DETAIL_IMMEDIATELY_GRAB_SINGLE);
         double bidQuote;
         String bidQuoteStr = mActivityDemandDetailBinding.etBidDemandQuote.getText().toString();
+        if (!StringUtils.checkMonkey(bidQuoteStr)) {
+            return;
+        }
+
         try {
             bidQuote = Double.parseDouble(bidQuoteStr);
             if (bidQuote <= 0) {

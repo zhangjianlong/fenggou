@@ -308,5 +308,7 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
                 }
                 break;
         }
+
+        delVisible.set(View.GONE);
     }
 }

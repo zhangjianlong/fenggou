@@ -28,6 +28,7 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.utils.StringUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.base.BaseDialog;
 import com.umeng.analytics.MobclickAgent;
@@ -50,7 +51,6 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     public SlashAddLabelsLayout mSallSkillLabels;
 
     public int checkedDisputeHandingTypeIndex = 0;//选择的纠纷处理方式
-    private NumberPicker mNpChoosePriceUnit;
     String[] optionalPriceUnit;
     private String mChoosePriceUnit;
     private int quoteunit = -1;
@@ -109,7 +109,6 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     }
 
     private void initView() {
-        mNpChoosePriceUnit = mActivityPublishServiceAddinfoBinding.npChoosePriceUnit;
 
         mActivityPublishServiceAddinfoBinding.svPublishServiceLabels.setVerticalScrollBarEnabled(false);
 
@@ -123,7 +122,7 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     private void loadOriginServiceData() {
         ServiceDetailBean.Service service = serviceDetailBean.data.service;
         //填报价
-        mActivityPublishServiceAddinfoBinding.etServiceQuote.setText(service.quote + "");
+        mActivityPublishServiceAddinfoBinding.etServiceQuote.setText((int) service.quote + "");
         //报价单位
         quoteunit = service.quoteunit;
         mChoosePriceUnit = optionalPriceUnit[service.quoteunit - 1];
@@ -298,6 +297,11 @@ public class PublishServiceAddInfoModel extends BaseObservable {
         }
         double quote = 0;
         String quoteStr = mActivityPublishServiceAddinfoBinding.etServiceQuote.getText().toString();
+        if (!StringUtils.checkMonkey(quoteStr)) {
+            isClickPublish = false;
+            return;
+        }
+
         if (TextUtils.isEmpty(quoteStr)) {
             ToastUtils.shortToast("请填写报价");
             isClickPublish = false;
@@ -404,27 +408,6 @@ public class PublishServiceAddInfoModel extends BaseObservable {
 
     public void openChoosePriceUnit(View v) {
         pvOptions.show();
-
-
-//        setChoosePriceUnitLayerVisibility(View.VISIBLE);
-//        mNpChoosePriceUnit.setDisplayedValues(optionalPriceUnit);
-//        mNpChoosePriceUnit.setMaxValue(optionalPriceUnit.length - 1);
-//        mNpChoosePriceUnit.setMinValue(0);
-//        mNpChoosePriceUnit.setValue(1);
-    }
-
-    public void okChoosePriceUnit(View v) {
-        setChoosePriceUnitLayerVisibility(View.INVISIBLE);
-        int value = mNpChoosePriceUnit.getValue();
-        mChoosePriceUnit = optionalPriceUnit[value];
-//        if (value < 8) {
-//            setPriceUnit("元/" + mChoosePriceUnit);
-//        } else {
-//            setPriceUnit("元");
-//        }
-        setPriceUnit("元");
-        quoteunit = value + 1;
-        mActivityPublishServiceAddinfoBinding.tvChooseQuoteunit.setText(mChoosePriceUnit);
     }
 
     boolean isCheckedSlashProtocol = true;
