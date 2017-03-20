@@ -47,7 +47,7 @@
                         android:layout_width="58dp"
                         android:layout_height="58dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/assistant_icon"
+                        android:src="@{viewModel.drawable}"
                         app:round_radius="10dp"
                         app:shape_mode="round_rect"
                         app:stroke_width="0dp"
@@ -141,7 +141,7 @@
                     android:gravity="center"
                     android:lines="1"
                     android:maxLines="1"
-                    android:text="@{viewModel.taskBean.name}"
+                    android:text="@{viewModel.name}"
                     android:textColor="#CCCCCC"
                     android:textSize="13sp" />
 

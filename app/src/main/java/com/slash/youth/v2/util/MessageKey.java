@@ -35,5 +35,7 @@ public class MessageKey {
     public static final String SHOW_MAIN_PUG = "SHOW_MAIN_PUG";
     //消息推送
     public static final String MESSAGE_PUSH = "MESSAGE_PUSH";
+    //删除消息
+    public static final String DELETE_MESSAGE = "DELETE_MESSAGE";
 
 }

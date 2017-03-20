@@ -24,6 +24,7 @@ import com.slash.youth.ui.activity.MyPublishServiceActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.v2.base.list.BaseListItemViewModel;
+import com.slash.youth.v2.util.ShareKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -43,18 +44,21 @@ public class TaskListItemViewModel extends BaseListItemViewModel {
 
     public TaskList.TaskBean taskBean;
 
-    public String uri;
+    public ObservableField<String> uri = new ObservableField<>();
     public String date;
 
     public String quote;
 
-    public String instalmentration;
+    public String instalmentration = "";
 
     public String instalment;
     public String dname;
     public String status;
     public String bidnum;
     public Drawable statusBg;
+
+    public ObservableField<String> name = new ObservableField<>();
+    public ObservableField<Drawable> drawable = new ObservableField<>();
 
     public ObservableField<Integer> instalmentVisible = new ObservableField<>(View.GONE);
     public ObservableField<Integer> instalmentrationVisible = new ObservableField<>(View.GONE);
@@ -161,9 +165,21 @@ public class TaskListItemViewModel extends BaseListItemViewModel {
     public TaskListItemViewModel(RxAppCompatActivity activity, TaskList.TaskBean data) {
         super(activity);
         this.taskBean = data;
+
+        if (data.anonymity == 0 && ((data.type == 1 && data.status < 6) || (data.type == 2 && (data.status < 5 || data.status == 11)))) {
+            if (!TextUtils.isEmpty(data.name)) {
+                String firstName = data.name.substring(0, 1);
+                String anonymityName = firstName + "xx";
+                this.name.set(anonymityName);
+            }
+            drawable.set(activity.getResources().getDrawable(R.mipmap.anonymity_avater));
+        } else {
+            name.set(data.name);
+            uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.avatar);
+        }
+
         date = convertStartTimeFormat(taskBean.starttime, taskBean.endtime, taskBean.type, taskBean.timetype);
 
-        uri = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.avatar;
         //显示报价前应该先判断是否需要显示报价
         if (taskBean.type == 1) {//需求
             if (taskBean.quote <= 0) {

@@ -147,6 +147,9 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
                                     statusColor.set(Color.parseColor("#31C6E4"));
                                 }
                                 break;
+                            case 2:
+                                //未实名认证
+                                ToastUtils.shortToast("未认证");
                             case 5:
                                 //状态错误
                                 ToastUtils.shortToast("状态错误");

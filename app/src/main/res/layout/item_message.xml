@@ -17,9 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        app:enable="@{viewModel.enable}"
         app:ios="false"
-        app:leftSwipe="true"
-        app:swipeEnable="true">
+        app:leftSwipe="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,8 +35,8 @@
                 app:clickCommand="@{viewModel.click}">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="10dp">
@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingTop="@dimen/app.margin.normal">
+                        android:paddingTop="@dimen/app.margin.small">
 
                         <TextView
                             android:id="@+id/tv_item_home_info_username"
@@ -116,7 +116,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="11dp"
+                        android:layout_marginTop="5dp"
                         android:ellipsize="end"
                         android:lines="1"
                         android:maxLines="1"
@@ -162,6 +162,7 @@
             android:layout_height="match_parent"
             android:background="#ff4a57"
             android:text="删除"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            app:clickCommand="@{viewModel.delClick}" />
     </com.core.op.lib.weight.SwipeMenuLayout>
 </layout>

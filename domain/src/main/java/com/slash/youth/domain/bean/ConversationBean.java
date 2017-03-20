@@ -9,6 +9,13 @@ public class ConversationBean {
     private long uid;
     private long uts;
 
+    public ConversationBean() {
+    }
+
+    public ConversationBean(long uid) {
+        this.uid = uid;
+    }
+
     public String getAvatar() {
         return avatar;
     }

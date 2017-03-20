@@ -665,15 +665,24 @@ public class MyBidServiceModel extends BaseObservable {
             @Override
             public void execute(UserInfoBean dataBean) {
                 UserInfoBean.UInfo uinfo = dataBean.data.uinfo;
-                sAvatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
-                BitmapKit.bindImage(mActivityMyBidServiceBinding.ivServiceUserAvatar, sAvatarUrl);
+                if (uinfo.anonymity == 0) {
+                    mActivityMyBidServiceBinding.ivServiceUserAvatar.setImageResource(R.mipmap.anonymity_avater);
+                    if (!TextUtils.isEmpty(uinfo.name)) {
+                        String firstName = uinfo.name.substring(0, 1);
+                        String anonymityName = firstName + "xx";
+                        setServiceUsername("服务方:" + anonymityName);
+                    }
+                } else {
+                    sAvatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
+                    BitmapKit.bindImage(mActivityMyBidServiceBinding.ivServiceUserAvatar, sAvatarUrl);
+                    setServiceUsername("服务方:" + uinfo.name);
+                }
                 if (uinfo.isauth == 0) {//未认证
                     setServiceUserIsAuthVisibility(View.GONE);
                 } else {
                     setServiceUserIsAuthVisibility(View.VISIBLE);
                 }
                 sname = uinfo.name;
-                setServiceUsername("服务方:" + uinfo.name);
 
                 LogKit.v("服务方信息 uinfo.id:" + uinfo.id);
 

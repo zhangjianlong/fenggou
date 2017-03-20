@@ -1,6 +1,7 @@
 package com.slash.youth.domain.repository;
 
 import com.slash.youth.domain.bean.ConversationBean;
+import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.base.BaseList;
 
 import rx.Observable;
@@ -12,4 +13,7 @@ import rx.Observable;
 public interface MessageRepository {
 
     Observable<BaseList<ConversationBean>> getConversationList(String def);
+
+    Observable<StatusBean> delConversation(String def);
+
 }

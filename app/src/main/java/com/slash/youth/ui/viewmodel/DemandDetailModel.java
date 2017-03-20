@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.amap.api.maps2d.model.LatLng;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.google.gson.Gson;
 import com.slash.youth.BR;
 import com.slash.youth.R;
@@ -56,6 +57,7 @@ import com.slash.youth.utils.DialogUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ShareUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -67,6 +69,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.R.attr.data;
 
 /**
  * Created by zhouyifeng on 2016/10/24.
@@ -316,6 +320,9 @@ public class DemandDetailModel extends BaseObservable {
                 anonymity = demand.anonymity;
                 demandLatLng = new LatLng(demand.lat, demand.lng);
                 demandUserId = demand.uid;
+                if (demand.anonymity == 0) {
+                    PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + demandUserId, true);
+                }
                 if (LoginManager.currentLoginUserId == demand.uid) {//需求者视角
                     setDemandRecommendLabelVisibility(View.GONE);
 

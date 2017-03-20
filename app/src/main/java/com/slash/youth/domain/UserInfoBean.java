@@ -28,6 +28,7 @@ public class UserInfoBean {
         public String identity;
         public String industry;
         public int isauth;
+        public int anonymity;
         public String name;
         public String position;
         public String province;

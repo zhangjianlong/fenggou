@@ -104,10 +104,10 @@ public class FindItemViewModel extends BViewModel {
         this.instalment = FirstPagerManager.DEMAND_INSTALMENT;
         switch (instalment) {
             case 1:
-                instalmentVisibility.set(View.VISIBLE);
+                instalmentVisibility.set(View.GONE);
                 break;
             case 0:
-                instalmentVisibility.set(View.GONE);
+                instalmentVisibility.set(View.VISIBLE);
                 break;
         }
 
@@ -171,10 +171,10 @@ public class FindItemViewModel extends BViewModel {
         this.instalment = FirstPagerManager.SERVICE_INSTALMENT;
         switch (instalment) {
             case 0:
-                instalmentVisibility.set(View.VISIBLE);
+                instalmentVisibility.set(View.GONE);
                 break;
             case 1:
-                instalmentVisibility.set(View.GONE);
+                instalmentVisibility.set(View.VISIBLE);
                 break;
         }
 

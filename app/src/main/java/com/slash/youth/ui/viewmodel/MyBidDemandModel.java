@@ -535,15 +535,28 @@ public class MyBidDemandModel extends BaseObservable {
             @Override
             public void execute(UserInfoBean dataBean) {
                 UserInfoBean.UInfo uinfo = dataBean.data.uinfo;
-                dAvatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
-                BitmapKit.bindImage(mActivityMyBidDemandBinding.ivDemandUserAvatar, dAvatarUrl);
+
+
+                if (uinfo.anonymity == 0) {
+                    mActivityMyBidDemandBinding.ivDemandUserAvatar.setImageResource(R.mipmap.anonymity_avater);
+                    if (!TextUtils.isEmpty(uinfo.name)) {
+                        String firstName = uinfo.name.substring(0, 1);
+                        String anonymityName = firstName + "xx";
+                        setDemandUsername("需求方:" + uinfo.name);
+                    }
+                } else {
+                    dAvatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
+                    BitmapKit.bindImage(mActivityMyBidDemandBinding.ivDemandUserAvatar, dAvatarUrl);
+                    setDemandUsername("需求方:" + uinfo.name);
+                }
+
+
                 if (uinfo.isauth == 0) {//未认证
                     setDemandUserIsAuthVisibility(View.GONE);
                 } else {
                     setDemandUserIsAuthVisibility(View.VISIBLE);
                 }
                 dname = uinfo.name;
-                setDemandUsername("需求方:" + uinfo.name);
 
                 LogKit.v("需求方用户信息，dataBean.data.uinfo.id:" + dataBean.data.uinfo.id);
             }

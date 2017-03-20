@@ -752,6 +752,8 @@ public class MsgManager {
                 messageModel.setConversationList();
             }
         }
+
+        Messenger.getDefault().sendNoMsg(MessageKey.MESSAGE_PUSH);
     }
 
     /**

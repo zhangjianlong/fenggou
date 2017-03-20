@@ -53,6 +53,8 @@ public class TaskList {
 
         public int timetype;//服务中才有
 
+        public int anonymity;//匿名
+
         public String dname;//服务中的需求方名字，这个字段暂时服务端还没有返回，先写在这里
 
     }

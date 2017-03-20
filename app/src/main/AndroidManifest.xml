@@ -200,8 +200,6 @@
         <activity
             android:name=".v2.feature.message.MessageActivity"
             android:windowSoftInputMode="adjustPan" />
-
-
         <activity android:name=".ui.activity.CityLocationActivity" />
         <activity android:name=".ui.activity.SubscribeActivity" />
         <activity
@@ -566,7 +564,8 @@
         <activity android:name=".view.impl.Manager" />
         <activity android:name=".DelManager" />
         <activity android:name=".Pub" />
-        <activity android:name=".Splash"></activity>
+        <activity android:name=".Splash" />
+        <activity android:name=".DelMessage"></activity>
     </application>
 
 </manifest>

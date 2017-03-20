@@ -80,5 +80,9 @@ public interface ApiClient {
 
     @POST(UriMethod.GET_CONVERSATION_LIST)
     Observable<BaseResponse<BaseList<ConversationBean>>> getConversationList(@Body RequestBody requestBody);
+
+
+    @POST(UriMethod.DEL_CONVERSATION_LIST)
+    Observable<BaseResponse<StatusBean>> delConversation(@Body RequestBody requestBody);
 }
 

@@ -505,11 +505,16 @@ public class ServiceDetailModel extends BaseObservable {
                     //隐藏加载层
                     setLoadLayerVisibility(View.GONE);
 
+
                     LogKit.v("service data:" + dataBean.data.service.title);
                     serviceDetailBean = dataBean;
                     ServiceDetailBean.Service service = dataBean.data.service;
                     anonymity = service.anonymity;
                     serviceLatLng = new LatLng(service.lat, service.lng);
+
+                    if (service.anonymity == 0) {
+                        PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + service.uid, true);
+                    }
                     serviceUserId = service.uid;
                     if (service.uid == LoginManager.currentLoginUserId) {
                         //服务者视角

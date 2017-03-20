@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.slash.youth.R;
-import com.slash.youth.ui.activity.MessageActivity;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.v2.feature.message.MessageActivity;
 
 import java.lang.reflect.Field;
 

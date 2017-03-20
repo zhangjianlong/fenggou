@@ -101,8 +101,9 @@ public class ApiOption {
 //                    .sslSocketFactory(getSSLContext(application).getSocketFactory())
                     .addInterceptor(new HeadInterceptor(application))
                     .addInterceptor(new CacheInterceptor(application))
-                    .addInterceptor(logging)
+                    .addInterceptor(new HttpLoggingInterceptor())
 //                    .addInterceptor(new CookieInterceptor(application))
+                    .addNetworkInterceptor(new NetInterceptor(application))
                     .addNetworkInterceptor(new StethoInterceptor())
                     .cache(provideCache(application))
                     .build();
@@ -230,19 +231,19 @@ public class ApiOption {
     /**
      * 有网请求，没网不读缓存
      */
-    static class CacheInterceptor implements Interceptor {
+    static class NetInterceptor implements Interceptor {
         Application application;
 
-        public CacheInterceptor(Application application) {
+        public NetInterceptor(Application application) {
             this.application = application;
         }
 
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            if (!NetUtil.isNetworkAvailable(application)) {
-                request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
-            }
+//            if (!NetUtil.isNetworkAvailable(application)) {
+//                request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
+//            }
             Response response = chain.proceed(request);
             if (NetUtil.isNetworkAvailable(application)) {
                 int maxAge = 0;
@@ -258,6 +259,29 @@ public class ApiOption {
             return response;
         }
     }
+
+    /**
+     * 有网请求，没网不读缓存
+     */
+    static class CacheInterceptor implements Interceptor {
+        Application application;
+
+        public CacheInterceptor(Application application) {
+            this.application = application;
+        }
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            if (!NetUtil.isNetworkAvailable(application)) {
+                request = request.newBuilder()
+                        .cacheControl(CacheControl.FORCE_CACHE)
+                        .build();
+            }
+            return chain.proceed(request);
+        }
+    }
+
 
     /**
      * 缓存cookie
