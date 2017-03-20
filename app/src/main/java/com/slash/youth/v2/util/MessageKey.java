@@ -25,6 +25,8 @@ public class MessageKey {
     public static final String HIDE_FLOAT_WINDOW = "HIDE_FLOAT_WINDOW";
     //显示浮动消息助手按钮
     public static final String SHOW_FLOAT_WINDOW = "SHOW_FLOAT_WINDOW";
+    //移除浮动消息助手按钮
+    public static final String REMOVE_FLOAT_WINDOW = "REMOVE_FLOAT_WINDOW";
     //新加好友通知
     public static final String HIDE_NEW_CONTACTS = "HIDE_NEW_CONTACTS";
     //删除任务管理信息

@@ -73,6 +73,11 @@ public class ChatFloatWin extends LinearLayout {
      */
     private float yInView;
 
+    private float currentY;
+    private float lastY;
+    private float distance;
+
+
     private static int statusBarHeight;//状态栏高度
     private ImageView chatIv;
     private int screenWidth;
@@ -123,6 +128,7 @@ public class ChatFloatWin extends LinearLayout {
         chatIv.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
                 xInScreen = event.getRawX();
                 yInScreen = event.getRawY();
                 switch (event.getAction()) {
@@ -133,15 +139,24 @@ public class ChatFloatWin extends LinearLayout {
                         yDownInScreen = event.getRawY() - getStatusBarHeight();
                         xInScreen = event.getRawX();
                         yInScreen = event.getRawY();
+                        lastY = event.getY();
+                        distance = 0;
                         break;
                     case MotionEvent.ACTION_MOVE:
                         xInScreen = event.getRawX();
                         yInScreen = event.getRawY();
+                        currentY = event.getY();
+                        distance = Math.abs(currentY - lastY);
+                        lastY = currentY;
                         //手指一动的时候就更新悬浮窗位置
                         updateViewPosition();
                         break;
                 }
-                return false;
+                if (distance > 3) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         });
 

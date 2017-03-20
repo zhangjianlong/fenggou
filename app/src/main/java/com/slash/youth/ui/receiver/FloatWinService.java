@@ -34,11 +34,24 @@ public class FloatWinService extends Service {
             setMsgChangeListener();
         });
         Messenger.getDefault().register(this, MessageKey.HIDE_FLOAT_WINDOW, () -> {
-            chatFloatWin.showChatIv(false);
+            if (null != chatFloatWin) {
+                chatFloatWin.showChatIv(false);
+            }
 
         });
         Messenger.getDefault().register(this, MessageKey.SHOW_FLOAT_WINDOW, () -> {
-            chatFloatWin.showChatIv(true);
+            if (null != chatFloatWin) {
+                chatFloatWin.showChatIv(true);
+            }
+        });
+
+        Messenger.getDefault().register(this, MessageKey.REMOVE_FLOAT_WINDOW, () -> {
+            if (null != chatFloatWin) {
+                chatFloatWin.remove();
+                chatFloatWin = null;
+            }
+
+            stopSelf();
         });
     }
 

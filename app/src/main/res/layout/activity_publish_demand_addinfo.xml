@@ -29,8 +29,8 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:padding="8dp"
                     android:onClick="@{publishDemandAddInfoModel.gotoBack}"
+                    android:padding="8dp"
                     android:src="@mipmap/nav_back" />
 
                 <TextView
@@ -270,7 +270,7 @@
                         android:layout_gravity="center_vertical|right"
                         android:background="@android:color/transparent"
                         android:hint="不填表示对方报价"
-                        android:inputType="numberDecimal"
+                        android:inputType="number"
                         android:textColor="#333333"
                         android:textColorHint="#CCCCCC"
                         android:textSize="13sp" />
