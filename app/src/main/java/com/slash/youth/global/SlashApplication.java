@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.core.op.lib.AppException;
+import com.core.op.lib.messenger.Messenger;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
@@ -36,6 +37,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.v2.di.components.AppComponent;
 import com.slash.youth.v2.di.components.DaggerAppComponent;
 import com.slash.youth.v2.di.modules.AppModule;
+import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
@@ -110,7 +112,7 @@ public class SlashApplication extends android.support.multidex.MultiDexApplicati
         exception.setOnCrashActionListener(new AppException.OnCrashActionListener() {
             @Override
             public void onCrashAction() {
-                
+                Messenger.getDefault().sendNoMsg(MessageKey.REMOVE_FLOAT_WINDOW);
             }
         });
         Thread.setDefaultUncaughtExceptionHandler(exception);
