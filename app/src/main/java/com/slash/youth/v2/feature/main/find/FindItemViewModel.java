@@ -95,7 +95,7 @@ public class FindItemViewModel extends BViewModel {
         title = listBean.getTitle();
         double quote = listBean.getQuote();
         if (quote > 0) {
-            this.quote.set(FirstPagerManager.QUOTE + quote + "元" + "/" + FirstPagerManager.QUOTEUNITS[listBean.getQuoteunit() - 1]);
+            this.quote.set(FirstPagerManager.QUOTE + quote + "元");
         } else {
             this.quote.set(FirstPagerManager.DEMAND_QUOTE);
         }
