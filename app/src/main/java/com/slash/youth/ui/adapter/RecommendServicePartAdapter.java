@@ -15,6 +15,7 @@ public class RecommendServicePartAdapter extends SlashBaseAdapter<RecommendServi
 
     public RecommendServicePartAdapter(ArrayList<RecommendServiceUserBean.ServiceUserInfo> listData) {
         super(listData);
+        listCheckedItemId.clear();
     }
 
     @Override

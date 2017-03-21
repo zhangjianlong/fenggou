@@ -206,6 +206,7 @@
                 android:gravity="top|left"
                 android:hint="输入退款理由（申请退款后请及时与服务方 联系，提醒对方确认）)"
                 android:padding="10dp"
+                android:textColor="#333333"
                 android:textColorHint="#CCCCCC"
                 android:textSize="15dp" />
 

@@ -123,32 +123,6 @@
                             android:layout_height="0dp"
                             android:layout_weight="1" />
 
-                        <LinearLayout
-                            android:id="@+id/ll_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_gravity="center"
-                                android:src="@mipmap/time_icon"
-                                android:visibility="@{viewModel.timeVisibility}" />
-
-                            <TextView
-                                android:id="@+id/tv_time"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="6dp"
-                                android:gravity="center"
-                                android:text="@{viewModel.freeTime}"
-                                android:textColor="#666666"
-                                android:textSize="14sp" />
-
-                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -186,6 +160,33 @@
                             android:textSize="12sp"
                             android:visibility="@{viewModel.instalmentVisibility}" />
 
+                        <LinearLayout
+                            android:id="@+id/ll_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:gravity="right"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_gravity="center"
+                                android:src="@mipmap/time_icon"
+                                android:visibility="@{viewModel.timeVisibility}" />
+
+                            <TextView
+                                android:id="@+id/tv_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="6dp"
+                                android:gravity="center"
+                                android:text="@{viewModel.freeTime}"
+                                android:textColor="#666666"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
                     </LinearLayout>
 
                 </RelativeLayout>

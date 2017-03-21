@@ -138,7 +138,7 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
                         switch (d.getStatus()) {
                             case 1:
                                 if (text.equals(MyManager.UP)) {
-                                    ToastUtils.shortToast("架成功");
+                                    ToastUtils.shortToast("下架成功");
                                     status.set(MyManager.DOWN);
                                     statusColor.set(Color.parseColor("#999999"));
                                 } else {
@@ -165,6 +165,9 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
                             case 7:
                                 //未实名认证
                                 ToastUtils.shortToast("请进行实名认证");
+                                break;
+                            default:
+                                ToastUtils.shortToast("未知错误");
                                 break;
                         }
                         Messenger.getDefault().send(position, MessageKey.MINE_MANAGER_REFRESH);
