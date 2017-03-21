@@ -140,7 +140,8 @@ public class CommentModel extends BaseObservable {
             shareAvatar = new UMImage(CommonUtils.getContext(), sAvatarUrl);
         }
         shareContent = "牵手的过程是这样的...";
-        shareUrl = ShareUtils.STORY_SHARE + "?nav=1&cid=" + LoginManager.currentLoginUserId + "&type=" + type + "&tid=" + tid;
+//        shareUrl = ShareUtils.STORY_SHARE + "?nav=1&cid=" + LoginManager.currentLoginUserId + "&type=" + type + "&tid=" + tid;
+        shareUrl = ShareUtils.STORY_SHARE + "?cid=" + LoginManager.currentLoginUserId + "&type=" + type + "&tid=" + tid;
     }
 
     /**
