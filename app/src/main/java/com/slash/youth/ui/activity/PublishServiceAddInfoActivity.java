@@ -8,6 +8,7 @@ import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityPublishServiceAddinfoBinding;
 import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.PublishServiceAddInfoModel;
+import com.slash.youth.utils.LogKit;
 
 /**
  * Created by zhouyifeng on 2016/11/8.
@@ -33,6 +34,7 @@ public class PublishServiceAddInfoActivity extends BaseActivity {
         if (requestCode == 20 && resultCode == 20) {
             String mCurrentAddress = data.getStringExtra("mCurrentAddress");
             String mCurrentAoiName = data.getStringExtra("mCurrentAoiName");
+            System.out.println("address:" + " onActivityResult" + mCurrentAoiName);
             Double lng = data.getDoubleExtra("lng", 0);
             Double lat = data.getDoubleExtra("lat", 0);
             mPublishServiceAddInfoModel.setLocationInfo(mCurrentAddress,mCurrentAoiName, lng, lat);

@@ -88,6 +88,9 @@ public class ActivityMapModel extends BaseObservable {
                 intentResult.putExtra("lat", mActivity.mCurrentLatlng.latitude);//线下服务地点地图纬度
                 mActivity.setResult(20, intentResult);
                 mActivity.finish();
+                System.out.println("address:" + " closeActivity" + mActivity.mCurrentAoiName);
+                System.out.println("address:" + " lng" + mActivity.mCurrentLatlng.longitude);
+                System.out.println("address:" + "lat" + mActivity.mCurrentLatlng.latitude);
             }
         } else {
             ToastUtils.shortToast("未获取到定位信息，可能没有开启定位权限，请到手机设置中心开启");
