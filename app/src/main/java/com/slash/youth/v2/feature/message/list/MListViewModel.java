@@ -73,9 +73,14 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
     public void afterViews() {
         progress = Progress.create(activity).setStyle(Progress.Style.SPIN_INDETERMINATE);
         Messenger.getDefault().register(this, MessageKey.MESSAGE_PUSH, () -> {
-            itemViewModels.clear();
-            conversationBeens.clear();
-            loadData();
+            Observable.timer(300, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(d -> {
+                        itemViewModels.clear();
+                        conversationBeens.clear();
+                        pageSize = 0;
+                        loadData();
+                    });
         });
 
         Messenger.getDefault().register(this, MessageKey.DELETE_MESSAGE, () -> {
@@ -85,6 +90,7 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
                     .subscribe(d -> {
                         itemViewModels.clear();
                         conversationBeens.clear();
+                        pageSize = 0;
                         loadData();
                     });
         });
@@ -94,6 +100,7 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
     public void onResume() {
         itemViewModels.clear();
         conversationBeens.clear();
+        pageSize = 0;
         loadData();
         super.onResume();
     }

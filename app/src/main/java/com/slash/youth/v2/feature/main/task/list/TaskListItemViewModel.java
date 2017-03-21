@@ -291,11 +291,14 @@ public class TaskListItemViewModel extends BaseListItemViewModel {
                     break;
                 case 7:/*订单确认完成*/
                     //评价中 大状态
-                    status = "待评价";
+                    status = "已完成";//待评价变成已完成
                     statusBg = activity.getResources().getDrawable(R.mipmap.state_bg);
                     break;
-                case 4:/*订单已经取消*/
                 case 11:/*服务方拒绝*/
+                    status = "已拒绝";
+                    statusBg = activity.getResources().getDrawable(R.mipmap.state_huise);
+                    break;
+                case 4:/*订单已经取消*/
                 default:
                     //失效 过期 状态 四个圈全都是灰色
                     status = "已过期";

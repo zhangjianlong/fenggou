@@ -43,7 +43,7 @@ public class FindItemViewModel extends BViewModel {
 
     public String title;
 
-    public String quote;
+    public ObservableField<String> quote = new ObservableField<>();
 
     public final ObservableField<Integer> timeVisibility = new ObservableField<>(View.GONE);
     public final ObservableField<Integer> instalmentVisibility = new ObservableField<>(View.GONE);
@@ -95,9 +95,9 @@ public class FindItemViewModel extends BViewModel {
         title = listBean.getTitle();
         double quote = listBean.getQuote();
         if (quote > 0) {
-            this.quote = FirstPagerManager.QUOTE + quote + "元";
+            this.quote.set(FirstPagerManager.QUOTE + quote + "元" + "/" + FirstPagerManager.QUOTEUNITS[listBean.getQuoteunit() - 1]);
         } else {
-            this.quote = FirstPagerManager.DEMAND_QUOTE;
+            this.quote.set(FirstPagerManager.DEMAND_QUOTE);
         }
 
         int instalment = listBean.getInstalment();//0代表分期，1代表一次性到账
@@ -162,9 +162,9 @@ public class FindItemViewModel extends BViewModel {
         title = listBean.getTitle();
         double quote = listBean.getQuote();
         if (quote > 0) {
-            this.quote = FirstPagerManager.QUOTE + quote + "元";
+            this.quote.set(FirstPagerManager.QUOTE + quote + "元" + "/" + FirstPagerManager.QUOTEUNITS[listBean.getQuoteunit() - 1]);
         } else {
-            this.quote = FirstPagerManager.DEMAND_QUOTE;
+            this.quote.set(FirstPagerManager.DEMAND_QUOTE);
         }
 
         int instalment = listBean.getInstalment();

@@ -204,8 +204,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     public ObservableField<String> uri = new ObservableField<>();
     public ObservableField<String> over = new ObservableField<>();
 
-    public String grade;
-
+    public ObservableField<String> grade = new ObservableField<>();
     public ObservableField<String> mark = new ObservableField<>("0");
     public ObservableField<String> connection = new ObservableField<>("0");
     public ObservableField<String> serverStar = new ObservableField<>("0.0星");
@@ -285,8 +284,11 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                         expertMarks = data.getExpertscore();
                         int expertlevel = data.getExpertlevel();//当前对应的等级
                         if (expertlevel > 0 && expertlevel <= 4) {
-                            grade = grades[expertlevel];
+                            grade.set(grades[expertlevel]);
                             int expertscore = expertlevels.get(expertlevel - 1);
+                            if (expertscore < expertMarks) {
+                                expertscore = expertlevels.get(expertlevel);
+                            }
                             mark.set(((int) (expertscore - expertMarks)) + "");
                         }
                     }

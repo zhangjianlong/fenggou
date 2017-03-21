@@ -7,7 +7,9 @@ import android.view.View;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ItemRecommendDemandBinding;
 import com.slash.youth.domain.RecommendDemandUserBean;
+import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.ui.adapter.RecommendDemandAdapter;
+import com.slash.youth.ui.adapter.RecommendServicePartAdapter;
 import com.slash.youth.ui.viewmodel.ItemRecommendDemandModel;
 import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
@@ -18,19 +20,19 @@ import com.slash.youth.utils.CommonUtils;
 public class RecommendDemandHolder extends BaseHolder<RecommendDemandUserBean.DemandUserInfo> {
 
     private ItemRecommendDemandBinding mItemRecommendDemandBinding;
-    private ItemRecommendDemandModel mItemRecommendDemandModel;
+    private ItemRecommendDemandModel mItemRecommendServicePartModel;
 
     @Override
     public View initView() {
         mItemRecommendDemandBinding = DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_recommend_demand, null, false);
-        mItemRecommendDemandModel = new ItemRecommendDemandModel(mItemRecommendDemandBinding);
-        mItemRecommendDemandBinding.setItemRecommendDemandModel(mItemRecommendDemandModel);
+        mItemRecommendServicePartModel = new ItemRecommendDemandModel(mItemRecommendDemandBinding);
+        mItemRecommendDemandBinding.setItemRecommendDemandModel(mItemRecommendServicePartModel);
         return mItemRecommendDemandBinding.getRoot();
     }
 
     @Override
     public void refreshView(RecommendDemandUserBean.DemandUserInfo data) {
-        mItemRecommendDemandModel.setCurrentPosition(getCurrentPosition());
+        mItemRecommendServicePartModel.setCurrentPosition(getCurrentPosition());
         if (RecommendDemandAdapter.listCheckedItemId.contains(getCurrentPosition())) {
             mItemRecommendDemandBinding.ivRecommendDemandChecked.setImageResource(R.mipmap.pitchon_btn);
         } else {
@@ -40,11 +42,11 @@ public class RecommendDemandHolder extends BaseHolder<RecommendDemandUserBean.De
         BitmapKit.bindImage(mItemRecommendDemandBinding.ivDemandUserAvatar, data.avatar);
         if (data.isauth == 0) {
             //未认证
-            mItemRecommendDemandModel.setAuthVisibility(View.GONE);
+            mItemRecommendServicePartModel.setAuthVisibility(View.GONE);
         } else {
             //已认证
-            mItemRecommendDemandModel.setAuthVisibility(View.VISIBLE);
+            mItemRecommendServicePartModel.setAuthVisibility(View.VISIBLE);
         }
-        mItemRecommendDemandModel.setDemandUsername(data.name);
+        mItemRecommendServicePartModel.setDemandUsername(data.name);
     }
 }
