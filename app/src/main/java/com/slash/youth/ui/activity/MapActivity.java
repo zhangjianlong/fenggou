@@ -292,7 +292,7 @@ public class MapActivity extends BaseActivity {
                 }
             }
         });
-        mMap.setOnCameraChangeListener(new SlashOnCameraChangeListener());
+//        mMap.setOnCameraChangeListener(new SlashOnCameraChangeListener());
         mActivityMapBinding.ivbtnActivityMapCurrentLocation.setOnClickListener(new CurrentLocationClickListener());
         mActivityMapBinding.lvActivityMapNearLocation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

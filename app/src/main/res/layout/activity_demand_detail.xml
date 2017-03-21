@@ -952,7 +952,8 @@
                                 android:layout_marginBottom="45dp"
                                 android:layout_marginLeft="14dp"
                                 android:layout_marginTop="7dp"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <TextView
                                     android:layout_width="15dp"
