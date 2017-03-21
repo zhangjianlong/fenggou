@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.core.op.lib.utils.PreferenceUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.slash.youth.BR;
@@ -27,6 +28,7 @@ import com.slash.youth.ui.view.RefreshListView;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.v2.util.ShareKey;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -243,7 +245,22 @@ public class TagRecommendModel extends BaseObservable {
                     if (offset == 0) {// 首次进入页面，或者是刷新操作,或者是切换tab的时候，offset都会为0
                         listTagRecommend.clear();
                     }
-                    listTagRecommend.addAll(dataBean.data.list);
+
+                    //true 为需求，false为服务
+                    boolean isDemand = PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.ISDEMAND);
+                    for (TagRecommendList.TagRecommendInfo tagRecommendInfo : dataBean.data.list) {
+                        if (isDemand) {
+                            //type 0为需求  2为服务
+                            if (tagRecommendInfo.type == 0) {
+                                listTagRecommend.add(tagRecommendInfo);
+                            }
+                        } else {
+                            if (tagRecommendInfo.type == 2) {
+                                listTagRecommend.add(tagRecommendInfo);
+                            }
+
+                        }
+                    }
                     if (tagRecommendAdapter == null) {
                         tagRecommendAdapter = new TagRecommendAdapter(listTagRecommend);
                         mActivityTagRecommendBinding.lvTagRecommend.setAdapter(tagRecommendAdapter);

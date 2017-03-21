@@ -19,6 +19,7 @@ import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.core.op.lib.weight.EmptyLayout;
 import com.core.op.lib.weight.RecycleScrollView;
 import com.core.op.lib.weight.loading.Indicator;
@@ -40,6 +41,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.v2.base.list.ListViewModel;
 import com.slash.youth.v2.feature.dialog.find.PubDialog;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.util.ShareKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -82,7 +84,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_main_find);
     public final List<FindItemViewModel> itemViewModels = new ArrayList<>();
 
-    public boolean isDemand = false;//如果存true，表示展示需求列表，false为展示服务列表,默认为true
+    public boolean isDemand = false;//如果存true，表示展示需求列表，false为展示服务列表,默认为false
 
     public final ReplyCommand click = new ReplyCommand(() -> {
     });
@@ -124,6 +126,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     @Override
     public void afterViews() {
         super.afterViews();
+        PreferenceUtil.write(CommonUtils.getContext(), ShareKey.ISDEMAND, isDemand);
         errorVisible.set(View.VISIBLE);
         binding.recyclerView.setNestedScrollingEnabled(false);
         binding.likeRecyclerView.setNestedScrollingEnabled(false);
@@ -151,6 +154,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 isDemand = true;
                 loadRecommand(false);
             }
+            PreferenceUtil.write(CommonUtils.getContext(), ShareKey.ISDEMAND, isDemand);
         });
 
         binding.banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

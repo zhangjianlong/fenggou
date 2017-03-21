@@ -21,12 +21,9 @@
     <string name="app.bottom.menu.task">任务</string>
     <string name="app.bottom.menu.mine">我的</string>
 
-    <string name="dispute_handling"><Data><![CDATA[<p><strong>1、平台处理规则</strong></p><p><span style="color:#666666;">需求方满意后，资金付给需求方；否则，不付给</span></p>
-<p><span style="color:#666666;">需求方</span></p>
+    <string name="dispute_handling"><Data><![CDATA[<p><strong>1、平台处理规则</strong></p><p><span style="color:#666666;">需求方满意后，资金付给需求方；否则，不付给需求方</span></p>
 <p><strong>2、协商处理规则</strong></p>
-<p><span style="color:#666666;">由交易双方协商处理的规则，详见“</span><span style="color:#666666;">帮助 -</span><span style="color:#666666;">常见</span><span style="color:#666666;">”</span></p>
-<p><span style="color:#666666;">问题。”</span>
-</p>]]></Data></string>
+<p><span style="color:#666666;">由交易双方协商处理的规则，详见“帮助 - 常见问题。"</p>]]></Data></string>
 
 
     <string name="securityRulesContent" formatted="false"><Data><![CDATA[<p><strong>斜杠青年通过顺利成交保证金、预支付、分期到账等一系列规则来保障双方的顺利成交。</strong></p><p><strong>1、顺利成交保证金规则</strong>
