@@ -42,3 +42,4 @@ proguard/
 .idea
 
 android_build/build.properties
+gradle.properties
