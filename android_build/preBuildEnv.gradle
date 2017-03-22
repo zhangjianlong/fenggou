@@ -55,7 +55,7 @@ def createApkParams() {
         BUILD_VERSION_NAME = BUILD_ENV + "_" + BUILD_VERSION_NAME
         FILE_NAME = BUILD_VERSION_NAME + ".apk"
     } else {
-        FILE_NAME = BUILD_VERSION_NAME + ".apk"
+        FILE_NAME = "斜杠青年" + ".apk"
     }
 
     File temp = new File(project.projectDir, "temp")
