@@ -559,13 +559,14 @@ public class DemandDetailModel extends BaseObservable {
             @Override
             public void execute(UserInfoBean dataBean) {
                 UserInfoBean.UInfo uinfo = dataBean.data.uinfo;
-                demandUserAvatar = uinfo.avatar;
                 avatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
                 if (anonymity == 1) {//实名
+                    demandUserAvatar = uinfo.avatar;
                     isAnonymity = false;
                     BitmapKit.bindImage(mActivityDemandDetailBinding.ivDemandUserAvatar, avatarUrl);
                     setUsername(uinfo.name);
                 } else {//匿名
+                    demandUserAvatar = "AnonymityAvatar";
                     isAnonymity = true;
                     mActivityDemandDetailBinding.ivDemandUserAvatar.setImageResource(R.mipmap.anonymity_avater);
                     String anonymityName;

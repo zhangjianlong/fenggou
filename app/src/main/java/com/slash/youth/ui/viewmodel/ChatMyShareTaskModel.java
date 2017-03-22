@@ -68,7 +68,11 @@ public class ChatMyShareTaskModel extends BaseObservable {
             }
         }
 
-        BitmapKit.bindImage(mItemChatMyShareTaskBinding.ivShareTaskAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + chatCmdShareTaskBean.avatar);
+        if (chatCmdShareTaskBean.avatar.equals("AnonymityAvatar")) {
+            mItemChatMyShareTaskBinding.ivShareTaskAvatar.setImageResource(R.mipmap.anonymity_avater);
+        } else {
+            BitmapKit.bindImage(mItemChatMyShareTaskBinding.ivShareTaskAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + chatCmdShareTaskBean.avatar);
+        }
         mItemChatMyShareTaskBinding.tvShareTaskTitle.setText(chatCmdShareTaskBean.title);
         mItemChatMyShareTaskBinding.tvShareTaskQuote.setText(chatCmdShareTaskBean.quote);
 
