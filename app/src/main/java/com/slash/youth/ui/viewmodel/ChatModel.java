@@ -37,6 +37,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.PreferenceUtil;
 import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.google.gson.Gson;
@@ -58,10 +59,12 @@ import com.slash.youth.databinding.ItemChatOtherSendAddFriendBinding;
 import com.slash.youth.databinding.ItemChatOtherSendBusinessCardBinding;
 import com.slash.youth.databinding.ItemChatOtherSendVoiceBinding;
 import com.slash.youth.databinding.ItemChatOtherShareTaskBinding;
+import com.slash.youth.databinding.ItemChatWebChangeContactWayBinding;
 import com.slash.youth.domain.ChatCmdAddFriendBean;
 import com.slash.youth.domain.ChatCmdBusinesssCardBean;
 import com.slash.youth.domain.ChatCmdChangeContactBean;
 import com.slash.youth.domain.ChatCmdShareTaskBean;
+import com.slash.youth.domain.ChatCmdWebChangeContactBean;
 import com.slash.youth.domain.ChatTaskInfoBean;
 import com.slash.youth.domain.CommonResultBean;
 import com.slash.youth.domain.IsChangeContactBean;
@@ -1166,6 +1169,16 @@ public class ChatModel extends BaseObservable {
 
     boolean isSendChangeContack = false;//表示是否已经发送了交换手机号的请求，因为发送交换手机号请求，完全走的是融云，服务端没有相关接口，所以服务端没提供查找是否已经发送交换手机号请求的接口，这里只能用一个变量来判断
 
+    public void addViewInfo(String info) {
+        View infoView = createInfoView(info);
+        mLlChatContent.addView(infoView);
+    }
+
+    public void addViewPhone(String phone) {
+        View changeContactWayInfoView = createChangeContactWayInfoView(targetName, phone);
+        mLlChatContent.addView(changeContactWayInfoView);
+    }
+
     /**
      * 交换联系方式
      */
@@ -1405,6 +1418,33 @@ public class ChatModel extends BaseObservable {
                 mLlChatContent.addView(infoView);
             }
         });
+    }
+
+    //同意交换手机与web好友
+    public void agreeChangePhone(final String uid, final String relatedTaskTitle, final String agree) {
+        MsgManager.agreeWebChangePhone(new BaseProtocol.IResultExecutor<CommonResultBean>() {
+            @Override
+            public void execute(CommonResultBean dataBean) {
+                int status = dataBean.data.status;
+                if (status > 0) {
+                    if (agree.equals("1")) {
+                        View infoView = createInfoView("同意交换手机号");
+                        mLlChatContent.addView(infoView);
+                    } else {
+                        View infoView = createInfoView("拒绝交换手机号");
+                        mLlChatContent.addView(infoView);
+                    }
+                } else {
+                    AppToast.show(CommonUtils.getContext(), "请求失败！");
+                }
+            }
+
+            @Override
+            public void executeResultError(String result) {
+                //这里不会执行
+            }
+        }, uid, agree, relatedTaskTitle);
+
     }
 
     //同意添加对方为好友
@@ -1698,6 +1738,14 @@ public class ChatModel extends BaseObservable {
         return itemChatMySendBusinessCardBinding.getRoot();
     }
 
+
+    private View createWebChangContactWayView(ChatCmdWebChangeContactBean chatCmdChangeContactBean, boolean isChangeContact) {
+        ItemChatWebChangeContactWayBinding itemChatWebChangeContactWayBinding = DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_chat_web_change_contact_way, null, false);
+        ChatWebChangeContactWayModel chatOtherChangeContactWayModel = new ChatWebChangeContactWayModel(itemChatWebChangeContactWayBinding, mActivity, this, chatCmdChangeContactBean);
+        itemChatWebChangeContactWayBinding.setChatOtherChangeContactWayModel(chatOtherChangeContactWayModel);
+        return itemChatWebChangeContactWayBinding.getRoot();
+    }
+
     private View createOtherChangeContactWayView(ChatCmdChangeContactBean chatCmdChangeContactBean, String otherPhone, boolean isChangeContact) {
         ItemChatOtherChangeContactWayBinding itemChatOtherChangeContactWayBinding = DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_chat_other_change_contact_way, null, false);
         ChatOtherChangeContactWayModel chatOtherChangeContactWayModel = new ChatOtherChangeContactWayModel(itemChatOtherChangeContactWayBinding, mActivity, this, otherPhone, targetAvatar, isChangeContact, targetId);
@@ -1707,7 +1755,7 @@ public class ChatModel extends BaseObservable {
 
     private View createChangeContactWayInfoView(String name, String otherPhone) {
         ItemChatChangeContactWayInfoBinding itemChatChangeContactWayInfoBinding = DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_chat_change_contact_way_info, null, false);
-        ChatChangeContactWayInfoModel chatChangeContactWayInfoModel = new ChatChangeContactWayInfoModel(itemChatChangeContactWayInfoBinding, mActivity, name, otherPhone);
+        ChatChangeContactWayInfoModel chatChangeContactWayInfoModel = new ChatChangeContactWayInfoModel(itemChatChangeContactWayInfoBinding, mActivity, otherPhone);
         itemChatChangeContactWayInfoBinding.setChatChangeContactWayInfoModel(chatChangeContactWayInfoModel);
         return itemChatChangeContactWayInfoBinding.getRoot();
     }
@@ -2099,11 +2147,22 @@ public class ChatModel extends BaseObservable {
         TextMessage textMessage = (TextMessage) message.getContent();
         String content = textMessage.getContent();
         String extra = textMessage.getExtra();//这里面是“{"tid":663,"type":1,"uid":10091}”
-        View friendTextView = createFriendTextView(content, extra);
-        if (isLoadHis) {
-            mLlChatContent.addView(friendTextView, 0);
+        if (("changeContact").equals(content)) {
+            Gson gson = new Gson();
+            ChatCmdWebChangeContactBean bean = gson.fromJson(extra, ChatCmdWebChangeContactBean.class);
+            View friendTextView = createWebChangContactWayView(bean, true);
+            if (isLoadHis) {
+                mLlChatContent.addView(friendTextView, 0);
+            } else {
+                mLlChatContent.addView(friendTextView);
+            }
         } else {
-            mLlChatContent.addView(friendTextView);
+            View friendTextView = createFriendTextView(content, extra);
+            if (isLoadHis) {
+                mLlChatContent.addView(friendTextView, 0);
+            } else {
+                mLlChatContent.addView(friendTextView);
+            }
         }
     }
 

@@ -22,7 +22,7 @@ public class ChatChangeContactWayInfoModel extends BaseObservable {
     Activity mActivity;
     String otherPhone;
 
-    public ChatChangeContactWayInfoModel(ItemChatChangeContactWayInfoBinding itemChatChangeContactWayInfoBinding, Activity activity, String name, String otherPhone) {
+    public ChatChangeContactWayInfoModel(ItemChatChangeContactWayInfoBinding itemChatChangeContactWayInfoBinding, Activity activity, String otherPhone) {
         this.mItemChatChangeContactWayInfoBinding = itemChatChangeContactWayInfoBinding;
         this.mActivity = activity;
         this.otherPhone = otherPhone;

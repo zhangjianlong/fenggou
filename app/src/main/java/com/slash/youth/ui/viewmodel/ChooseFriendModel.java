@@ -177,8 +177,6 @@ public class ChooseFriendModel extends BaseObservable {
                 } else {
                     //进行斜杠好友分享任务（需求或者服务）
                     long friendUid = friendArrayList.get(position).getUid();
-
-                    PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + friendUid, false);
                     Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
                     intentChatActivity.putExtra("targetId", friendUid + "");
                     intentChatActivity.putExtra("chatCmdName", "sendShareTask");

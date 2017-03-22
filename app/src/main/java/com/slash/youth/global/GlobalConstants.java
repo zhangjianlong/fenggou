@@ -295,6 +295,8 @@ public class GlobalConstants {
         public static final String GET_CUSTOMER_SERVICE = CUSTOMER_SERVICE + "/frontend/speciallist/select";
 
         //一、[消息系统]-查看是否设置手机交换标识   聊天中判断是否已经交换过联系方式
+        public static final String AGREE_CHANGE_CONTACT_WEB = SERVER_HOST_MESSAGE_SYSTEM + "phoneswtich/agree";
+        //一、[消息系统]-同意交换手机号
         public static final String GET_IS_CHANGE_CONTACT = SERVER_HOST_MESSAGE_SYSTEM + "phoneswtich/get";
         //二、[消息系统]-设置手机交换标识  聊天中设置已经交换过手机号的标识
         public static final String SET_CHANGE_CONTACT = SERVER_HOST_MESSAGE_SYSTEM + "phoneswtich/set";

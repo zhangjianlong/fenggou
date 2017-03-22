@@ -33,6 +33,7 @@ import com.slash.youth.http.protocol.AddFriendStatusProtocol;
 import com.slash.youth.http.protocol.AgreeAddFriendProtocol;
 import com.slash.youth.http.protocol.AskCustomerServiceProtocol;
 import com.slash.youth.http.protocol.BaseProtocol;
+import com.slash.youth.http.protocol.ChangePhoneProtocol;
 import com.slash.youth.http.protocol.ConversationListProtocol;
 import com.slash.youth.http.protocol.DelConversationListProtocol;
 import com.slash.youth.http.protocol.GetIsChangeContactProtocol;
@@ -262,47 +263,6 @@ public class MsgManager {
                 String data = commandNotificationMessage.getData();
                 LogKit.v("CmdNtf name:" + name + "  data:" + data);
             }
-
-
-//            if (objectName.equals("RC:TxtMsg")) {
-//                TextMessage textMessage = (TextMessage) message.getContent();
-//                String content = textMessage.getContent();
-//                String extra = textMessage.getExtra();
-//                LogKit.v("conent:" + content);
-//                LogKit.v("extra:" + extra);
-//            } else if (objectName.equals("RC:ImgMsg")) {
-//                ImageMessage imageMessage = (ImageMessage) message.getContent();
-//
-//            } else if (objectName.equals("RC:VcMsg")) {
-//                VoiceMessage voiceMessage = (VoiceMessage) message.getContent();
-//
-//            } else if (objectName.equals("RC:ImgTextMsg")) {
-//
-//
-//            } else if (objectName.equals("RC:LBSMsg")) {
-//                LocationMessage locationMessage = (LocationMessage) message.getContent();
-//
-//            } else if (objectName.equals("RC:InfoNtf")) {
-//
-//            } else if (objectName.equals("RC:ProfileNtf")) {
-//
-//            } else if (objectName.equals("RC:CmdNtf")) {
-//                CommandNotificationMessage commandNotificationMessage = (CommandNotificationMessage) message.getContent();
-//                String name = commandNotificationMessage.getName();
-//                String data = commandNotificationMessage.getData();
-//                LogKit.v("CmdNtf name:" + name + "  data:" + data);
-//
-//            } else if (objectName.equals("RC:CmdMsg")) {
-//                CommandMessage commandMessage = (CommandMessage) message.getContent();
-//                String name = commandMessage.getName();
-//                String data = commandMessage.getData();
-//                LogKit.v("CmdMsg name:" + name + " data:" + data);
-//
-//            } else if (objectName.equals("RC:ContactNtf")) {
-//
-//            } else {
-//                //这里可能是自定义的消息类型
-//            }
 
             if (senderUserId.equals("100")) {//系统推送账号
                 if (objectName.equals("RC:CmdNtf")) {
@@ -1167,6 +1127,15 @@ public class MsgManager {
     public static void getAddFriendStatus(BaseProtocol.IResultExecutor onGetAddFriendStatusFinished, String uid) {
         AddFriendStatusProtocol addFriendStatusProtocol = new AddFriendStatusProtocol(uid);
         addFriendStatusProtocol.getDataFromServer(onGetAddFriendStatusFinished);
+    }
+
+
+    /**
+     * 十、同意web好友交换手机
+     */
+    public static void agreeWebChangePhone(BaseProtocol.IResultExecutor changePhoneListener, String uid, String agree, String relationTitle) {
+        ChangePhoneProtocol changePhoneProtocol = new ChangePhoneProtocol(uid, agree, relationTitle);
+        changePhoneProtocol.getDataFromServer(changePhoneListener);
     }
 
     /**
