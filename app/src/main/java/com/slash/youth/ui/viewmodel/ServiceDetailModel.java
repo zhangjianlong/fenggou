@@ -6,6 +6,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.text.Html;
 import android.text.TextUtils;
@@ -60,6 +61,7 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
+import java.nio.BufferUnderflowException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -84,6 +86,7 @@ public class ServiceDetailModel extends BaseObservable {
     int pattern;
     int isonline;
     int anonymity;
+    private boolean isAnonymity;
 
     public ServiceDetailModel(ActivityServiceDetailBinding activityServiceDetailBinding, Activity activity) {
         this.mActivityServiceDetailBinding = activityServiceDetailBinding;
@@ -196,6 +199,7 @@ public class ServiceDetailModel extends BaseObservable {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_SERVICE_DETAIL_CHAT);
         Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
         intentChatActivity.putExtra("targetId", serviceUserId + "");
+        intentChatActivity.putExtra(ShareKey.USER_ANONYMITY, isAnonymity);
         mActivity.startActivity(intentChatActivity);
     }
 
@@ -291,6 +295,7 @@ public class ServiceDetailModel extends BaseObservable {
         chatCmdShareTaskBean.type = 2;
         chatCmdShareTaskBean.tid = serviceId;
         intentMyFriendActivity.putExtra("chatCmdShareTaskBean", chatCmdShareTaskBean);
+        intentMyFriendActivity.putExtra(ShareKey.USER_ANONYMITY, isAnonymity);
         mActivity.startActivity(intentMyFriendActivity);
 
         setShareLayerVisibility(View.GONE);
@@ -391,6 +396,7 @@ public class ServiceDetailModel extends BaseObservable {
         Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
         intentUserInfoActivity.putExtra("Uid", serviceUserId);
         intentUserInfoActivity.putExtra("anonymity", anonymity);
+        intentUserInfoActivity.putExtra(ShareKey.USER_ANONYMITY, isAnonymity);
         mActivity.startActivity(intentUserInfoActivity);
     }
 
@@ -725,11 +731,11 @@ public class ServiceDetailModel extends BaseObservable {
                 avatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
 
                 if (anonymity == 1) {//实名
-                    PreferenceUtil.write(mActivity, ShareKey.USER_ANONYMITY + serviceUserId, false);
+                    isAnonymity = false;
                     BitmapKit.bindImage(mActivityServiceDetailBinding.ivServiceUserAvatar, avatarUrl);
                     setUsername(uinfo.name);
                 } else {//匿名
-                    PreferenceUtil.write(mActivity, ShareKey.USER_ANONYMITY + serviceUserId, true);
+                    isAnonymity = true;
                     mActivityServiceDetailBinding.ivServiceUserAvatar.setImageResource(R.mipmap.anonymity_avater);
                     String anonymityName;
                     if (TextUtils.isEmpty(uinfo.name)) {

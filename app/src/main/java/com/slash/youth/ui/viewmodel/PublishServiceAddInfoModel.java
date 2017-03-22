@@ -252,16 +252,6 @@ public class PublishServiceAddInfoModel extends BaseObservable {
     boolean isClickPublish = false;
 
     public void publish(View v) {
-        //发布成功以后才能跳转到成功页面,这里只是为了方便测试直接跳转
-//        Intent intentPublishServiceSuccessActivity = new Intent(CommonUtils.getContext(), PublishServiceSucceddActivity.class);
-//        intentPublishServiceSuccessActivity.putExtra("serviceId", 88l);
-//        mActivity.startActivity(intentPublishServiceSuccessActivity);
-//        mActivity.finish();
-//        if (PublishServiceBaseInfoActivity.activity != null) {
-//            PublishServiceBaseInfoActivity.activity.finish();
-//            PublishServiceBaseInfoActivity.activity = null;
-//        }
-
         if (isClickPublish) {
             return;
         }

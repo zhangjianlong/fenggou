@@ -15,5 +15,6 @@ public class ShareKey {
     public static final String USER_TAG = "USER_TAG";//用戶tag
     public static final String USER_TAG_NAME = "USER_TAG_NAME";//用戶tag
     public static final String USER_ANONYMITY = "USER_ANONYMITY";//匿名用户
+    public static final String USER_ANONYMITY_BUNDLE = "USER_ANONYMITY_BUNDLE";//匿名用户
     public static final String ISDEMAND = "ISDEMAND";//true 表示需求，false表示为服务
 }

@@ -147,6 +147,7 @@ public class ChatModel extends BaseObservable {
 
     private int getBaseDataFinishedCount = 0;
     private int getBaseDataTotalCount = 0;
+    private boolean isAnonymity;
     ChatCmdShareTaskBean chatCmdShareTaskBean;
     ChatCmdBusinesssCardBean chatCmdBusinesssCardBean;
 
@@ -168,12 +169,22 @@ public class ChatModel extends BaseObservable {
     public ChatModel(ActivityChatBinding activityChatBinding, Activity activity) {
         this.mActivityChatBinding = activityChatBinding;
         this.mActivity = activity;
+        isAnonymity = mActivity.getIntent().getBooleanExtra(ShareKey.USER_ANONYMITY, false);
+        targetId = mActivity.getIntent().getStringExtra("targetId");
+        PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + targetId, isAnonymity);
+
 
         hideSoftInputMethod();//隐藏软件盘的方法要尽早调用，一开始就让输入框失去焦点，这样，软键盘一开始就不会弹出来
-        targetId = mActivity.getIntent().getStringExtra("targetId");
+
         MsgManager.targetId = targetId;//设置聊天界面只显示当前聊天UserId发来的消息
         //清楚对方发给我的未读消息数
         clearOtherMessagesUnreadCount();
+
+        if (mActivity.getIntent().getBundleExtra(ShareKey.USER_ANONYMITY_BUNDLE) != null) {
+            Bundle bundle = mActivity.getIntent().getBundleExtra(ShareKey.USER_ANONYMITY_BUNDLE);
+            boolean isAnonymity = bundle.getBoolean(ShareKey.USER_ANONYMITY);
+            PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + targetId, isAnonymity);
+        }
         //判断聊天目标是否是斜杠小助手
         if ((!"1000".equals(targetId)) && (!MsgManager.customerServiceUid.equals(targetId))) {
             displayLoadLayer();

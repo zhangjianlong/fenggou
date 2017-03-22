@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -36,6 +37,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +71,7 @@ public class ChooseFriendModel extends BaseObservable {
 
     private int addMeFriendLocalCount;
     int addMeFriendCount;
+    private Bundle bundle;
 
     public ChooseFriendModel(Activity activity, ActivityChooseFriendBinding activityChooseFriendBinding, MyFriendActivtiy chooseFriendActivtiy, boolean sendFriend) {
         this.activityChooseFriendBinding = activityChooseFriendBinding;
@@ -145,7 +148,7 @@ public class ChooseFriendModel extends BaseObservable {
     private void initData() {
         chatCmdShareTaskBean = (ChatCmdShareTaskBean) mActivity.getIntent().getSerializableExtra("chatCmdShareTaskBean");
         ContactsManager.getMyFriendList(new onMyFriendList(null, LOAD_DATA_TYPE_INIT), offset, limit);
-
+        bundle = chooseFriendActivtiy.getIntent().getBundleExtra(ShareKey.USER_ANONYMITY_BUNDLE);
         addMeFriendLocalCount = SpUtils.getInt("addMeFriendCount", 0);
         for (char cha = 'A'; cha <= 'Z'; cha++) {
             letterList.add(cha);
@@ -181,6 +184,7 @@ public class ChooseFriendModel extends BaseObservable {
                     intentChatActivity.putExtra("targetId", friendUid + "");
                     intentChatActivity.putExtra("chatCmdName", "sendShareTask");
                     intentChatActivity.putExtra("chatCmdShareTaskBean", chatCmdShareTaskBean);
+                    intentChatActivity.putExtra(ShareKey.USER_ANONYMITY_BUNDLE, bundle);
                     mActivity.startActivity(intentChatActivity);
                     PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + chatCmdShareTaskBean.uid, false);
                 }

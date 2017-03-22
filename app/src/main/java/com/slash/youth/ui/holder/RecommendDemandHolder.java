@@ -38,8 +38,8 @@ public class RecommendDemandHolder extends BaseHolder<RecommendDemandUserBean.De
         } else {
             mItemRecommendDemandBinding.ivRecommendDemandChecked.setImageResource(R.mipmap.default_btn);
         }
-
-        BitmapKit.bindImage(mItemRecommendDemandBinding.ivDemandUserAvatar, data.avatar);
+        String url = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.avatar;
+        BitmapKit.bindImage(mItemRecommendDemandBinding.ivDemandUserAvatar, url);
         if (data.isauth == 0) {
             //未认证
             mItemRecommendServicePartModel.setAuthVisibility(View.GONE);

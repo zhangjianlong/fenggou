@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="publishServiceBaseInfoModel"
-            type="com.slash.youth.ui.viewmodel.PublishServiceBaseInfoModel"/>
+            type="com.slash.youth.ui.viewmodel.PublishServiceBaseInfoModel" />
     </data>
 
     <FrameLayout
@@ -34,9 +34,9 @@
                         android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:padding="8dp"
                         android:onClick="@{publishServiceBaseInfoModel.gotoBack}"
-                        android:src="@mipmap/nav_back"/>
+                        android:padding="8dp"
+                        android:src="@mipmap/nav_back" />
 
                     <TextView
                         android:id="@+id/tv_publish_service_text"
@@ -45,7 +45,7 @@
                         android:layout_centerInParent="true"
                         android:text="发布服务"
                         android:textColor="#ffffff"
-                        android:textSize="17sp"/>
+                        android:textSize="17sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                         android:text="技能列表"
                         android:textColor="#FFFFFF"
                         android:textSize="15sp"
-                        android:visibility="@{publishServiceBaseInfoModel.gotoSkillManagerVisibility}"/>
+                        android:visibility="@{publishServiceBaseInfoModel.gotoSkillManagerVisibility}" />
 
                 </RelativeLayout>
             </FrameLayout>
@@ -74,13 +74,13 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/timeline_2"/>
+                    android:src="@mipmap/timeline_2" />
 
                 <View
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/point_time"/>
+                    android:background="@mipmap/point_time" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -88,13 +88,13 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/timeline_2"/>
+                    android:src="@mipmap/timeline_2" />
 
                 <View
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/timeline_point"/>
+                    android:background="@mipmap/timeline_point" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -102,13 +102,13 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/timeline_2"/>
+                    android:src="@mipmap/timeline_2" />
 
                 <View
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/timeline_point"/>
+                    android:background="@mipmap/timeline_point" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -116,7 +116,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/timeline_2"/>
+                    android:src="@mipmap/timeline_2" />
 
             </LinearLayout>
 
@@ -129,7 +129,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -137,24 +137,24 @@
                     android:layout_marginLeft="10dp"
                     android:text="基本信息"
                     android:textColor="#FFFFFF"
-                    android:textSize="11dp"/>
+                    android:textSize="11dp" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="补充信息"
                     android:textColor="#FFFFFF"
-                    android:textSize="11dp"/>
+                    android:textSize="11dp" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tv_publish_success_text"
@@ -163,12 +163,12 @@
                     android:layout_marginRight="10dp"
                     android:text="发布成功"
                     android:textColor="#FFFFFF"
-                    android:textSize="11dp"/>
+                    android:textSize="11dp" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -205,7 +205,7 @@
                                 android:onClick="@{publishServiceBaseInfoModel.openPublishWayInfo}"
                                 android:text="发布方式"
                                 android:textColor="#333333"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
 
                             <!--点击添加文案-->
                             <ImageView
@@ -214,12 +214,12 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="5dp"
                                 android:onClick="@{publishServiceBaseInfoModel.openPublishWayInfo}"
-                                android:src="@mipmap/question_icon"/>
+                                android:src="@mipmap/question_icon" />
 
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
-                                android:layout_weight="1"/>
+                                android:layout_weight="1" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -233,7 +233,7 @@
                                     android:layout_width="17dp"
                                     android:layout_height="17dp"
                                     android:layout_gravity="center_vertical"
-                                    android:src="@mipmap/pitchon_btn"/>
+                                    android:src="@mipmap/pitchon_btn" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -242,7 +242,7 @@
                                     android:layout_marginLeft="8dp"
                                     android:text="实名发布"
                                     android:textColor="#999999"
-                                    android:textSize="13sp"/>
+                                    android:textSize="13sp" />
 
                             </LinearLayout>
 
@@ -259,7 +259,7 @@
                                     android:layout_width="17dp"
                                     android:layout_height="17dp"
                                     android:layout_gravity="center_vertical"
-                                    android:src="@mipmap/default_btn"/>
+                                    android:src="@mipmap/default_btn" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -268,7 +268,7 @@
                                     android:layout_marginLeft="8dp"
                                     android:text="匿名发布"
                                     android:textColor="#999999"
-                                    android:textSize="13sp"/>
+                                    android:textSize="13sp" />
 
                             </LinearLayout>
 
@@ -280,7 +280,7 @@
                             android:layout_marginLeft="14dp"
                             android:layout_marginRight="14dp"
                             android:layout_marginTop="15dp"
-                            android:background="#E5E5E5"/>
+                            android:background="#E5E5E5" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -295,7 +295,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="服务标题"
                                 android:textColor="#333333"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
 
                             <EditText
                                 android:id="@+id/et_publish_service_title"
@@ -311,7 +311,7 @@
                                 android:maxLines="1"
                                 android:textColor="#333333"
                                 android:textColorHint="#CCCCCC"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
 
                         </LinearLayout>
 
@@ -335,7 +335,7 @@
                                 android:maxLength="300"
                                 android:textColor="#333333"
                                 android:textColorHint="#cccccc"
-                                android:textSize="16sp"/>
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/tv_desc_text_count"
@@ -346,7 +346,7 @@
                                 android:layout_marginRight="5dp"
                                 android:text="0/300"
                                 android:textColor="#cccccc"
-                                android:textSize="16dp"/>
+                                android:textSize="16dp" />
                         </FrameLayout>
 
                         <LinearLayout
@@ -363,12 +363,12 @@
                                 android:layout_gravity="center_vertical"
                                 android:text="闲置时间"
                                 android:textColor="#333333"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
 
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
-                                android:layout_weight="1"/>
+                                android:layout_weight="1" />
 
                             <TextView
                                 android:id="@+id/tv_public_service_time"
@@ -377,7 +377,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:text="选择下面标签"
                                 android:textColor="#CCCCCC"
-                                android:textSize="13sp"/>
+                                android:textSize="13sp" />
 
                             <!--<ImageView-->
                             <!--android:layout_width="wrap_content"-->
@@ -402,7 +402,7 @@
                                 android:id="@+id/tv_idletime_afterwork"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/shape_idletime_label_bg"
+                                android:background="@drawable/shape_idletime_label_bg_unselected"
                                 android:onClick="@{publishServiceBaseInfoModel.checkIdleTimeAfterWork}"
                                 android:paddingBottom="4dp"
                                 android:paddingLeft="9dp"
@@ -410,14 +410,14 @@
                                 android:paddingTop="4dp"
                                 android:text="下班后"
                                 android:textColor="#FFFFFF"
-                                android:textSize="13sp"/>
+                                android:textSize="13sp" />
 
                             <TextView
                                 android:id="@+id/tv_idletime_weekend"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="9dp"
-                                android:background="@drawable/shape_idletime_label_bg"
+                                android:background="@drawable/shape_idletime_label_bg_unselected"
                                 android:onClick="@{publishServiceBaseInfoModel.checkIdleTimeWeekend}"
                                 android:paddingBottom="4dp"
                                 android:paddingLeft="15dp"
@@ -425,14 +425,14 @@
                                 android:paddingTop="4dp"
                                 android:text="周末"
                                 android:textColor="#FFFFFF"
-                                android:textSize="13sp"/>
+                                android:textSize="13sp" />
 
                             <TextView
                                 android:id="@+id/tv_idletime_afterwork_and_weekend"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="9dp"
-                                android:background="@drawable/shape_idletime_label_bg"
+                                android:background="@drawable/shape_idletime_label_bg_unselected"
                                 android:onClick="@{publishServiceBaseInfoModel.checkIdleTimeAfterWorkAndWeekend}"
                                 android:paddingBottom="4dp"
                                 android:paddingLeft="9dp"
@@ -440,14 +440,14 @@
                                 android:paddingTop="4dp"
                                 android:text="下班后及周末"
                                 android:textColor="#FFFFFF"
-                                android:textSize="13sp"/>
+                                android:textSize="13sp" />
 
                             <TextView
                                 android:id="@+id/tv_idletime_anytime"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="9dp"
-                                android:background="@drawable/shape_idletime_label_bg"
+                                android:background="@drawable/shape_idletime_label_bg_unselected"
                                 android:onClick="@{publishServiceBaseInfoModel.checkIdleTimeAnytime}"
                                 android:paddingBottom="4dp"
                                 android:paddingLeft="15dp"
@@ -455,7 +455,7 @@
                                 android:paddingTop="4dp"
                                 android:text="随时"
                                 android:textColor="#FFFFFF"
-                                android:textSize="13sp"/>
+                                android:textSize="13sp" />
 
 
                         </LinearLayout>
@@ -483,7 +483,7 @@
                                     android:layout_height="15dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="5dp"
-                                    android:src="@mipmap/clock_icon"/>
+                                    android:src="@mipmap/clock_icon" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -493,7 +493,7 @@
                                     android:layout_marginRight="5dp"
                                     android:text="自定义"
                                     android:textColor="#31C5E4"
-                                    android:textSize="14sp"/>
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
                         </android.support.v7.widget.CardView>
@@ -504,7 +504,7 @@
                             android:layout_marginLeft="14dp"
                             android:layout_marginRight="14dp"
                             android:layout_marginTop="15dp"
-                            android:background="#E5E5E5"/>
+                            android:background="#E5E5E5" />
 
 
                         <com.slash.youth.ui.view.SlashAddPicLayout
@@ -523,12 +523,12 @@
                             android:layout_marginTop="24dp"
                             android:text="＊建议上传清晰度高的图片上限5张"
                             android:textColor="#CCCCCC"
-                            android:textSize="11sp"/>
+                            android:textSize="11sp" />
 
                         <View
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -544,7 +544,7 @@
                                 android:onClick="@{publishServiceBaseInfoModel.nextStep}"
                                 android:text="下一步"
                                 android:textColor="#FFFFFF"
-                                android:textSize="15sp"/>
+                                android:textSize="15sp" />
 
                         </FrameLayout>
 
@@ -555,150 +555,5 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#66000000"
-            android:clickable="true"
-            android:visibility="@{publishServiceBaseInfoModel.setStartTimeAndEndTimeLayerVisibility}">
-
-            <FrameLayout
-                android:layout_width="269dp"
-                android:layout_height="214dp"
-                android:layout_gravity="center">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#F8F8F8"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="24dp"
-                        android:text="选择闲置时间"
-                        android:textColor="#333333"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_start_time"
-                        android:layout_width="231dp"
-                        android:layout_height="43dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/shape_starttime_text_bg"
-                        android:gravity="center"
-                        android:onClick="@{publishServiceBaseInfoModel.chooseStartTime}"
-                        android:text="开始时间"
-                        android:textColor="#CCCCCC"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_end_time"
-                        android:layout_width="231dp"
-                        android:layout_height="43dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/shape_starttime_text_bg"
-                        android:gravity="center"
-                        android:onClick="@{publishServiceBaseInfoModel.chooseEndTime}"
-                        android:text=" 结束时间"
-                        android:textColor="#CCCCCC"
-                        android:textSize="14sp"/>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#ffffff">
-
-                        <Button
-                            android:layout_width="170dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/btn_next_step"
-                            android:onClick="@{publishServiceBaseInfoModel.okChooseIdleStartTimeAndEndTime}"
-                            android:text="确定"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"/>
-
-                    </FrameLayout>
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="9dp"
-                    android:layout_marginTop="9dp"
-                    android:onClick="@{publishServiceBaseInfoModel.closeStartTimeAndEndTimeLayer}"
-                    android:src="@mipmap/withdraw_cash_close_icon"/>
-
-
-            </FrameLayout>
-
-        </FrameLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#66000000"
-            android:clickable="true"
-            android:visibility="@{publishServiceBaseInfoModel.chooseDateTimeLayerVisibility}">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="#ffffff"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{publishServiceBaseInfoModel.cancelChooseTime}"
-                        android:padding="12dp"
-                        android:text="取消"
-                        android:textColor="#999999"
-                        android:textSize="18dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:onClick="@{publishServiceBaseInfoModel.okChooseTime}"
-                        android:padding="12dp"
-                        android:text="确定"
-                        android:textColor="#999999"
-                        android:textSize="18dp"/>
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E5E5E5"/>
-
-                <com.slash.youth.ui.view.SlashDateTimePicker
-                    android:id="@+id/sdtp_publish_service_choose_datetime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="36dp"
-                    android:paddingLeft="27dp"
-                    android:paddingRight="37dp"
-                    android:paddingTop="37dp">
-
-                </com.slash.youth.ui.view.SlashDateTimePicker>
-            </LinearLayout>
-
-        </RelativeLayout>
-
     </FrameLayout>
 </layout>
