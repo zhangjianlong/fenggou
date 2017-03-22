@@ -93,6 +93,7 @@ public class MListItemViewModel extends BViewModel {
         }
         Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
         intentChatActivity.putExtra("targetId", uid + "");
+        intentChatActivity.putExtra(ShareKey.USER_ANONYMITY, PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + data.getUid(), false));
         activity.startActivity(intentChatActivity);
     });
 
