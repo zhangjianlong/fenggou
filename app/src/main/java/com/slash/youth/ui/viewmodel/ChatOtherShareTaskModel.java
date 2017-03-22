@@ -3,6 +3,7 @@ package com.slash.youth.ui.viewmodel;
 import android.app.Activity;
 import android.databinding.BaseObservable;
 
+import com.slash.youth.R;
 import com.slash.youth.databinding.ItemChatOtherShareTaskBinding;
 import com.slash.youth.domain.ChatCmdShareTaskBean;
 import com.slash.youth.engine.MsgManager;
@@ -38,8 +39,12 @@ public class ChatOtherShareTaskModel extends BaseObservable {
         } else {
             mItemChatOtherShareTaskBinding.ivChatOtherAvatar.setImageResource(MsgManager.targetAvatarResource);
         }
-
-        BitmapKit.bindImage(mItemChatOtherShareTaskBinding.ivShareTaskAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + chatCmdShareTaskBean.avatar);
+        if (chatCmdShareTaskBean.avatar.equals("AnonymityAvatar")) {
+            mItemChatOtherShareTaskBinding.ivShareTaskAvatar.setImageResource(R.mipmap.anonymity_avater);
+        } else {
+            BitmapKit.bindImage(mItemChatOtherShareTaskBinding.ivShareTaskAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + chatCmdShareTaskBean.avatar);
+        }
+//        BitmapKit.bindImage(mItemChatOtherShareTaskBinding.ivShareTaskAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + chatCmdShareTaskBean.avatar);
         mItemChatOtherShareTaskBinding.tvShareTitle.setText(chatCmdShareTaskBean.title);
         mItemChatOtherShareTaskBinding.tvShareTaskQuote.setText(chatCmdShareTaskBean.quote);
 

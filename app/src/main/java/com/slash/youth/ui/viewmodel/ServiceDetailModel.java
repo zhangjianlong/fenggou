@@ -727,14 +727,15 @@ public class ServiceDetailModel extends BaseObservable {
             @Override
             public void execute(UserInfoBean dataBean) {
                 UserInfoBean.UInfo uinfo = dataBean.data.uinfo;
-                serviceUserAvatar = uinfo.avatar;
                 avatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
 
                 if (anonymity == 1) {//实名
+                    serviceUserAvatar = uinfo.avatar;
                     isAnonymity = false;
                     BitmapKit.bindImage(mActivityServiceDetailBinding.ivServiceUserAvatar, avatarUrl);
                     setUsername(uinfo.name);
                 } else {//匿名
+                    serviceUserAvatar = "AnonymityAvatar";
                     isAnonymity = true;
                     mActivityServiceDetailBinding.ivServiceUserAvatar.setImageResource(R.mipmap.anonymity_avater);
                     String anonymityName;
