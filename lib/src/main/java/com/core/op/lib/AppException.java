@@ -53,9 +53,13 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
      * 系统默认的UncaughtException处理类
      */
     private Context mContext;
+    private Thread.UncaughtExceptionHandler mDefaultHandler;
 
     private AppException(Context context) {
         this.mContext = context;
+
+        //获取系统默认的UncaughtException处理器
+        mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
     }
 
     private AppException(byte type, int code, Exception excp) {
@@ -159,6 +163,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
             onCrashActionListener.onCrashAction();
         }
         if (!handleException(ex)) {
+            mDefaultHandler.uncaughtException(thread, ex);
             System.exit(0);
         }
     }
@@ -193,7 +198,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
                 }.start();
             }
         }
-        return true;
+        return false;
     }
 
     private boolean saveToSDCard(Throwable ex) throws Exception {
