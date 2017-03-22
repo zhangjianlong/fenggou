@@ -97,6 +97,7 @@ public class ActivityUserInfoModel extends BaseObservable {
     private long taskProgress;
     private int relationshipscount;
     private String[] grades = {"少侠", "大侠", "宗师", "至尊"};
+    private boolean isAnonymity;
 
     public ActivityUserInfoModel(ActivityUserinfoBinding activityUserinfoBinding, long otherUid,
                                  UserInfoActivity userInfoActivity, String tag, int anonymity
@@ -229,6 +230,7 @@ public class ActivityUserInfoModel extends BaseObservable {
 
     //加载数据
     private void initData() {
+        isAnonymity = userInfoActivity.getIntent().getBooleanExtra(ShareKey.USER_ANONYMITY, false);
         if (otherUid == LoginManager.currentLoginUserId) {//自己看自己
             MyManager.getOtherPersonInfo(new onGetOtherPersonInfo(), otherUid, anonymity);
             UserInfoEngine.getNewDemandAndServiceList(new onGetNewDemandAndServiceList(), LoginManager.currentLoginUserId, offset, limit, myAnonymity);//自己看自己全部展示
@@ -354,7 +356,7 @@ public class ActivityUserInfoModel extends BaseObservable {
                     textViewTag = new TextView(CommonUtils.getContext());
                     textViewTag.setText(StringUtils.strFormat(textTag));
                     textViewTag.setTextColor(Color.parseColor("#31C5E4"));
-                    textViewTag.setTextSize(CommonUtils.dip2px(4));
+                    textViewTag.setTextSize(12);
                     textViewTag.setPadding(CommonUtils.dip2px(8), CommonUtils.dip2px(6), CommonUtils.dip2px(8), CommonUtils.dip2px(6));
                     textViewTag.setBackgroundColor(Color.parseColor("#d6f3fa"));
                     activityUserinfoBinding.llSkilllabelContainer.addView(textViewTag);
@@ -363,7 +365,7 @@ public class ActivityUserInfoModel extends BaseObservable {
                 textViewTag = new TextView(CommonUtils.getContext());
                 textViewTag.setText(StringUtils.strFormat(tag));
                 textViewTag.setTextColor(Color.parseColor("#31C5E4"));
-                textViewTag.setTextSize(CommonUtils.dip2px(4));
+                textViewTag.setTextSize(12);
                 textViewTag.setPadding(CommonUtils.dip2px(8), CommonUtils.dip2px(6), CommonUtils.dip2px(8), CommonUtils.dip2px(6));
                 textViewTag.setBackgroundColor(Color.parseColor("#d6f3fa"));
                 activityUserinfoBinding.llSkilllabelContainer.addView(textViewTag);
@@ -562,6 +564,7 @@ public class ActivityUserInfoModel extends BaseObservable {
         Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
         intentChatActivity.putExtra("targetId", otherUid + "");
         intentChatActivity.putExtra("anonymity", String.valueOf(anonymity));
+        intentChatActivity.putExtra(ShareKey.USER_ANONYMITY, isAnonymity);
         userInfoActivity.startActivity(intentChatActivity);
         //个人信息聊一聊的埋点
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_PERSON_MESSAGE_CHAT);

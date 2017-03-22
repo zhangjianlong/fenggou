@@ -6,6 +6,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
@@ -72,6 +73,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static android.R.attr.data;
+import static android.R.attr.menuCategory;
 
 /**
  * Created by zhouyifeng on 2016/10/24.
@@ -89,6 +91,7 @@ public class DemandDetailModel extends BaseObservable {
     int pattern;
     int isonline;
     int anonymity;
+    private boolean isAnonymity;
 
     public DemandDetailModel(ActivityDemandDetailBinding activityDemandDetailBinding, Activity activity) {
         this.mActivityDemandDetailBinding = activityDemandDetailBinding;
@@ -559,9 +562,11 @@ public class DemandDetailModel extends BaseObservable {
                 demandUserAvatar = uinfo.avatar;
                 avatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
                 if (anonymity == 1) {//实名
+                    isAnonymity = false;
                     BitmapKit.bindImage(mActivityDemandDetailBinding.ivDemandUserAvatar, avatarUrl);
                     setUsername(uinfo.name);
                 } else {//匿名
+                    isAnonymity = true;
                     mActivityDemandDetailBinding.ivDemandUserAvatar.setImageResource(R.mipmap.anonymity_avater);
                     String anonymityName;
                     if (TextUtils.isEmpty(uinfo.name)) {
@@ -787,7 +792,6 @@ public class DemandDetailModel extends BaseObservable {
      */
     public void shareToSlashFriend(View v) {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_REQUIREMENT_DETAIL_IMMEDIATELY_SHARE_FRIEND);
-
         Intent intentMyFriendActivity = new Intent(CommonUtils.getContext(), MyFriendActivtiy.class);
         ChatCmdShareTaskBean chatCmdShareTaskBean = new ChatCmdShareTaskBean();
         chatCmdShareTaskBean.uid = demandUserId;
@@ -797,8 +801,8 @@ public class DemandDetailModel extends BaseObservable {
         chatCmdShareTaskBean.type = 1;
         chatCmdShareTaskBean.tid = demandId;
         intentMyFriendActivity.putExtra("chatCmdShareTaskBean", chatCmdShareTaskBean);
+        intentMyFriendActivity.putExtra(ShareKey.USER_ANONYMITY, isAnonymity);
         mActivity.startActivity(intentMyFriendActivity);
-
         setShareLayerVisibility(View.GONE);
     }
 
@@ -994,6 +998,7 @@ public class DemandDetailModel extends BaseObservable {
         Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
         intentUserInfoActivity.putExtra("Uid", demandUserId);
         intentUserInfoActivity.putExtra("anonymity", anonymity);
+        intentUserInfoActivity.putExtra(ShareKey.USER_ANONYMITY, isAnonymity);
         mActivity.startActivity(intentUserInfoActivity);
     }
 
@@ -1001,6 +1006,7 @@ public class DemandDetailModel extends BaseObservable {
     public void haveAChat(View v) {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.IDLE_TIME_REQUIREMENT_DETAIL_CHAT);
         Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
+        intentChatActivity.putExtra(ShareKey.USER_ANONYMITY, isAnonymity);
         intentChatActivity.putExtra("targetId", demandUserId + "");
         mActivity.startActivity(intentChatActivity);
 

@@ -9,15 +9,18 @@ import android.view.View;
 
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AndroidBug5497Workaround;
+import com.core.op.lib.utils.PreferenceUtil;
 import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityChatBinding;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.ChatModel;
+import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.IOUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.util.MessageKey;
+import com.slash.youth.v2.util.ShareKey;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,6 +39,7 @@ public class ChatActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ActivityChatBinding activityChatBinding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
         mChatModel = new ChatModel(activityChatBinding, this);
+
         activityChatBinding.setChatModel(mChatModel);
     }
 

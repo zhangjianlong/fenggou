@@ -14,12 +14,10 @@ import com.slash.youth.ui.adapter.RecommendDemandAdapter;
  */
 public class ItemRecommendDemandModel extends BaseObservable {
     ItemRecommendDemandBinding mItemRecommendDemandBinding;
-
     private int mCurrentPosition;
 
     public ItemRecommendDemandModel(ItemRecommendDemandBinding itemRecommendDemandBinding) {
         this.mItemRecommendDemandBinding = itemRecommendDemandBinding;
-
         initData();
         initView();
     }
@@ -49,8 +47,10 @@ public class ItemRecommendDemandModel extends BaseObservable {
 
     private int authVisibility;
     private String demandQuote = "300元";//300元
-    private String demandTitle="设计全套官方网站和微信端的首页";
+    private String demandTitle = "设计全套官方网站和微信端的首页";
     private String demandUsername;
+
+
 
     @Bindable
     public String getDemandUsername() {

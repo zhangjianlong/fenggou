@@ -98,8 +98,6 @@ public class PublishServiceBaseInfoModel extends BaseObservable {
 
 
     private void initView() {
-        mChooseDateTimePicker = mActivityPublishServiceBaseinfoBinding.sdtpPublishServiceChooseDatetime;
-
         mSaplAddPic.setActivity(mActivity);
         mSaplAddPic.initPic();
     }
@@ -398,11 +396,9 @@ public class PublishServiceBaseInfoModel extends BaseObservable {
         mCurrentChooseMinute = mChooseDateTimePicker.getCurrentChooseMinute();
         String dateTimeStr = mCurrentChooseMonth + "月" + mCurrentChooseDay + "日" + "-" + mCurrentChooseHour + ":" + (mCurrentChooseMinute < 10 ? "0" + mCurrentChooseMinute : mCurrentChooseMinute);
         if (mIsChooseStartTime) {
-            mActivityPublishServiceBaseinfoBinding.tvStartTime.setText(dateTimeStr);
             starttime = convertTimeToMillis();
             starttimeStr = dateTimeStr;
         } else {
-            mActivityPublishServiceBaseinfoBinding.tvEndTime.setText(dateTimeStr);
             endtime = convertTimeToMillis();
             endtimeStr = dateTimeStr;
         }
@@ -444,8 +440,6 @@ public class PublishServiceBaseInfoModel extends BaseObservable {
         if (endtime != -1) {
             tmpEndTimeStr = sdf.format(endtime);
         }
-        mActivityPublishServiceBaseinfoBinding.tvStartTime.setText(tmpStartTimeStr);
-        mActivityPublishServiceBaseinfoBinding.tvEndTime.setText(tmpEndTimeStr);
     }
 
     public void okChooseIdleStartTimeAndEndTime(View v) {

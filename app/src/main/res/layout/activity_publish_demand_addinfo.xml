@@ -455,6 +455,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="15dp"
                     android:orientation="horizontal"
+                    android:onClick="@{publishDemandAddInfoModel.openMapActivity}"
                     android:visibility="@{publishDemandAddInfoModel.offlineItemVisibility}">
 
                     <TextView
@@ -485,7 +486,6 @@
                         android:layout_height="18dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
-                        android:onClick="@{publishDemandAddInfoModel.openMapActivity}"
                         android:src="@mipmap/location_icon" />
 
                 </LinearLayout>

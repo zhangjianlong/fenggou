@@ -305,6 +305,7 @@
                         android:layout_marginLeft="14dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="18dp"
+                        android:onClick="@{publishServiceAddInfoModel.openChoosePriceUnit}"
                         android:orientation="horizontal">
 
                         <TextView
@@ -334,7 +335,6 @@
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="6dp"
-                            android:onClick="@{publishServiceAddInfoModel.openChoosePriceUnit}"
                             android:src="@mipmap/towards_right_icon" />
 
                     </LinearLayout>
@@ -507,6 +507,7 @@
                         android:layout_marginLeft="14dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="15dp"
+                        android:onClick="@{publishServiceAddInfoModel.openMapActivity}"
                         android:orientation="horizontal"
                         android:visibility="@{publishServiceAddInfoModel.offlineItemVisibility}">
 
@@ -539,7 +540,7 @@
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="10dp"
-                            android:onClick="@{publishServiceAddInfoModel.openMapActivity}"
+
                             android:src="@mipmap/location_icon" />
 
                     </LinearLayout>
