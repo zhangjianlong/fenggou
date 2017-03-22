@@ -138,11 +138,11 @@ public class ManagerItemViewModel extends BaseListItemViewModel {
                         switch (d.getStatus()) {
                             case 1:
                                 if (text.equals(MyManager.UP)) {
-                                    ToastUtils.shortToast("下架成功");
+                                    ToastUtils.shortToast("上架成功");
                                     status.set(MyManager.DOWN);
                                     statusColor.set(Color.parseColor("#999999"));
                                 } else {
-                                    ToastUtils.shortToast("上架成功");
+                                    ToastUtils.shortToast("下架成功");
                                     status.set(MyManager.UP);
                                     statusColor.set(Color.parseColor("#31C6E4"));
                                 }

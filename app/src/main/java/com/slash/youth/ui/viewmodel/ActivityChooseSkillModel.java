@@ -79,7 +79,7 @@ public class ActivityChooseSkillModel extends BaseObservable {
 
     private void initData() {
         //清空SharePreferences中的登录信息,解决token时未完成个人信息的注册账号直接进入首页的问题
-        LoginManager.clearSpLoginInfo();
+//        LoginManager.clearSpLoginInfo();
         getDataFromServer();
     }
 

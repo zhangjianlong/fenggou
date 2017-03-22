@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityPerfectInfoBinding;
@@ -40,6 +41,7 @@ import org.xutils.x;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.finalteam.galleryfinal.FunctionConfig;
@@ -68,7 +70,7 @@ public class PerfectInfoModel extends BaseObservable {
 
     private void initData() {
         //清空SharePreferences中的登录信息,解决token时未完成个人信息的注册账号直接进入首页的问题
-        LoginManager.clearSpLoginInfo();
+//        LoginManager.clearSpLoginInfo();
 
         thirdPlatformBundle = mActivity.getIntent().getExtras();
         if (thirdPlatformBundle == null) {
@@ -155,123 +157,143 @@ public class PerfectInfoModel extends BaseObservable {
     private static final float compressPicMaxHeight = CommonUtils.dip2px(100);
     RxPermissions permissions;
 
+    private ArrayList<String> mSelectPath;
+
     public void openCamera(View v) {
         permissions.request(Manifest.permission.CAMERA)
                 .subscribe(agree -> {
                     if (agree) {
                         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_PICTURE);
 
-//        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        mActivity.startActivityForResult(intentCamera, 0);
-
                         FunctionConfig functionConfig = new FunctionConfig.Builder().setMutiSelectMaxSize(1).setEnableCamera(true).build();
 
-//        GalleryFinal.openGalleryMuti(20, functionConfig, new GalleryFinal.OnHanlderResultCallback() {
-//            @Override
-//            public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+                        MultiImageSelector selector = MultiImageSelector.create(mActivity);
+                        selector.showCamera(true);
+                        selector.count(9);
+                        selector.single();
+                        selector.origin(mSelectPath);
+                        selector.setCrop(true);
+                        selector.start(mActivity, MultiImageSelector.REQUEST_IMAGE);
+//                        GalleryFinal.openGallerySingle(20, functionConfig, new GalleryFinal.OnHanlderResultCallback() {
+//                            @Override
+//                            public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+//                                PhotoInfo photoInfo = resultList.get(0);
+//                                //LogKit.v("photoInfo.getPhotoPath()" + photoInfo.getPhotoPath());
+//                                //LogKit.v("photoInfo.getWidth()" + photoInfo.getWidth());
+//                                // LogKit.v("photoInfo.getHeight()" + photoInfo.getHeight());
+//                                FunctionConfig functionConfigCrop = new FunctionConfig.Builder().setCropSquare(true).build();
+//                                GalleryFinal.openCrop(21, functionConfigCrop, photoInfo.getPhotoPath(), new GalleryFinal.OnHanlderResultCallback() {
+//                                    @Override
+//                                    public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+//                                        Bitmap bitmap = null;
+//                                        try {
+//                                            PhotoInfo photoInfo = resultList.get(0);
+//                                            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+//                                            bitmapOptions.inJustDecodeBounds = true;
+//                                            BitmapFactory.decodeFile(photoInfo.getPhotoPath(), bitmapOptions);
+//                                            int outWidth = bitmapOptions.outWidth;
+//                                            int outHeight = bitmapOptions.outHeight;
+//                                            LogKit.v("outWidth:" + outWidth);
+//                                            LogKit.v("outHeight:" + outHeight);
+//                                            if (outWidth <= 0 || outHeight <= 0) {
+//                                                ToastUtils.shortToast("请选择图片文件");
+//                                                return;
+//                                            }
+//                                            int scale = 1;
+//                                            int widthScale = (int) (outWidth / compressPicMaxWidth + 0.5f);
+//                                            int heightScale = (int) (outHeight / compressPicMaxHeight + 0.5f);
+//                                            if (widthScale > heightScale) {
+//                                                scale = widthScale;
+//                                            } else {
+//                                                scale = heightScale;
+//                                            }
+//                                            bitmapOptions.inJustDecodeBounds = false;
+//                                            bitmapOptions.inSampleSize = scale;
+//                                            bitmap = BitmapFactory.decodeFile(photoInfo.getPhotoPath(), bitmapOptions);
 //
-//            }
+//                                            String picCachePath = mActivity.getCacheDir().getAbsoluteFile() + "/picache/";
+//                                            File cacheDir = new File(picCachePath);
+//                                            if (!cacheDir.exists()) {
+//                                                cacheDir.mkdir();
+//                                            }
+//                                            final File tempFile = new File(picCachePath + System.currentTimeMillis() + ".jpeg");
+//                                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(tempFile));
+//                                            //调用上传图片接口获取fileId
+//                                            DemandEngine.uploadFile(new BaseProtocol.IResultExecutor<UploadFileResultBean>() {
+//                                                @Override
+//                                                public void execute(UploadFileResultBean dataBean) {
+//                                                    setCameraIconVisibility(View.GONE);//隐藏头像中间的摄像机icon
+//                                                    String fileId = dataBean.data.fileId;
+//                                                    LogKit.v(fileId);
+//                                                    setUploadAvatarFileId(fileId);
+//                                                    setIsUploadAvatar(true);
+//                                                    //页面上显示头像，直接加载本地缓存的图片
+//                                                    ImageOptions.Builder builder = new ImageOptions.Builder();
+//                                                    ImageOptions imageOptions = builder.build();
+//                                                    builder.setCircular(true);
+//                                                    x.image().bind(mActivityPerfectInfoBinding.ivUserAvatar, tempFile.toURI().toString(), imageOptions);
+//                                                }
 //
-//            @Override
-//            public void onHanlderFailure(int requestCode, String errorMsg) {
+//                                                @Override
+//                                                public void executeResultError(String result) {
+//                                                    LogKit.v("上传头像失败：" + result);
+//                                                    ToastUtils.shortToast("上传头像失败：" + result);
+//                                                }
+//                                            }, tempFile.getAbsolutePath());
+//                                        } catch (Exception ex) {
+//                                            ex.printStackTrace();
+//                                        } finally {
+//                                            if (bitmap != null) {
+//                                                bitmap.recycle();
+//                                                bitmap = null;
+//                                            }
+//                                        }
+//                                    }
 //
-//            }
-//        });
-
-                        GalleryFinal.openGallerySingle(20, functionConfig, new GalleryFinal.OnHanlderResultCallback() {
-                            @Override
-                            public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-                                PhotoInfo photoInfo = resultList.get(0);
-                                //LogKit.v("photoInfo.getPhotoPath()" + photoInfo.getPhotoPath());
-                                //LogKit.v("photoInfo.getWidth()" + photoInfo.getWidth());
-                                // LogKit.v("photoInfo.getHeight()" + photoInfo.getHeight());
-                                FunctionConfig functionConfigCrop = new FunctionConfig.Builder().setCropSquare(true).build();
-                                GalleryFinal.openCrop(21, functionConfigCrop, photoInfo.getPhotoPath(), new GalleryFinal.OnHanlderResultCallback() {
-                                    @Override
-                                    public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-                                        Bitmap bitmap = null;
-                                        try {
-                                            PhotoInfo photoInfo = resultList.get(0);
-                                            BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-                                            bitmapOptions.inJustDecodeBounds = true;
-                                            BitmapFactory.decodeFile(photoInfo.getPhotoPath(), bitmapOptions);
-                                            int outWidth = bitmapOptions.outWidth;
-                                            int outHeight = bitmapOptions.outHeight;
-                                            LogKit.v("outWidth:" + outWidth);
-                                            LogKit.v("outHeight:" + outHeight);
-                                            if (outWidth <= 0 || outHeight <= 0) {
-                                                ToastUtils.shortToast("请选择图片文件");
-                                                return;
-                                            }
-                                            int scale = 1;
-                                            int widthScale = (int) (outWidth / compressPicMaxWidth + 0.5f);
-                                            int heightScale = (int) (outHeight / compressPicMaxHeight + 0.5f);
-                                            if (widthScale > heightScale) {
-                                                scale = widthScale;
-                                            } else {
-                                                scale = heightScale;
-                                            }
-                                            bitmapOptions.inJustDecodeBounds = false;
-                                            bitmapOptions.inSampleSize = scale;
-                                            bitmap = BitmapFactory.decodeFile(photoInfo.getPhotoPath(), bitmapOptions);
-
-                                            String picCachePath = mActivity.getCacheDir().getAbsoluteFile() + "/picache/";
-                                            File cacheDir = new File(picCachePath);
-                                            if (!cacheDir.exists()) {
-                                                cacheDir.mkdir();
-                                            }
-                                            final File tempFile = new File(picCachePath + System.currentTimeMillis() + ".jpeg");
-                                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(tempFile));
-                                            //调用上传图片接口获取fileId
-                                            DemandEngine.uploadFile(new BaseProtocol.IResultExecutor<UploadFileResultBean>() {
-                                                @Override
-                                                public void execute(UploadFileResultBean dataBean) {
-                                                    setCameraIconVisibility(View.GONE);//隐藏头像中间的摄像机icon
-                                                    String fileId = dataBean.data.fileId;
-                                                    LogKit.v(fileId);
-                                                    setUploadAvatarFileId(fileId);
-                                                    setIsUploadAvatar(true);
-                                                    //页面上显示头像，直接加载本地缓存的图片
-                                                    ImageOptions.Builder builder = new ImageOptions.Builder();
-                                                    ImageOptions imageOptions = builder.build();
-                                                    builder.setCircular(true);
-                                                    x.image().bind(mActivityPerfectInfoBinding.ivUserAvatar, tempFile.toURI().toString(), imageOptions);
-                                                }
-
-                                                @Override
-                                                public void executeResultError(String result) {
-                                                    LogKit.v("上传头像失败：" + result);
-                                                    ToastUtils.shortToast("上传头像失败：" + result);
-                                                }
-                                            }, tempFile.getAbsolutePath());
-                                        } catch (Exception ex) {
-                                            ex.printStackTrace();
-                                        } finally {
-                                            if (bitmap != null) {
-                                                bitmap.recycle();
-                                                bitmap = null;
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onHanlderFailure(int requestCode, String errorMsg) {
-                                        LogKit.v("---------------crop failure-----------------");
-                                        LogKit.v("--------" + errorMsg + "----------------");
-                                    }
-                                });
-
-
-                            }
-
-                            @Override
-                            public void onHanlderFailure(int requestCode, String errorMsg) {
-
-                            }
-                        });
+//                                    @Override
+//                                    public void onHanlderFailure(int requestCode, String errorMsg) {
+//                                        LogKit.v("---------------crop failure-----------------");
+//                                        LogKit.v("--------" + errorMsg + "----------------");
+//                                    }
+//                                });
+//
+//
+//                            }
+//
+//                            @Override
+//                            public void onHanlderFailure(int requestCode, String errorMsg) {
+//
+//                            }
+//                        });
                     }
                 });
 
+    }
+
+
+    public void uploadImage(String imgPath) {
+        //调用上传图片接口获取fileId
+        DemandEngine.uploadFile(new BaseProtocol.IResultExecutor<UploadFileResultBean>() {
+            @Override
+            public void execute(UploadFileResultBean dataBean) {
+                setCameraIconVisibility(View.GONE);//隐藏头像中间的摄像机icon
+                String fileId = dataBean.data.fileId;
+                LogKit.v(fileId);
+                setUploadAvatarFileId(fileId);
+                setIsUploadAvatar(true);
+                //页面上显示头像，直接加载本地缓存的图片
+                ImageOptions.Builder builder = new ImageOptions.Builder();
+                ImageOptions imageOptions = builder.build();
+                builder.setCircular(true);
+                x.image().bind(mActivityPerfectInfoBinding.ivUserAvatar, new File(imgPath).toURI().toString(), imageOptions);
+            }
+
+            @Override
+            public void executeResultError(String result) {
+                LogKit.v("上传头像失败：" + result);
+                ToastUtils.shortToast("上传头像失败：" + result);
+            }
+        }, imgPath);
     }
 
     String phonenum;

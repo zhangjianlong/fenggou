@@ -60,7 +60,7 @@ abstract public class BaseProtocol<T> {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                ToastUtils.shortToast("加载网络数据失败");
+//                ToastUtils.shortToast("加载网络数据失败");
                 LogKit.v("onError");
                 ex.printStackTrace();
             }
