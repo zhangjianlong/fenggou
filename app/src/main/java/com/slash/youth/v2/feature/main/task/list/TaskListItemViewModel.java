@@ -292,7 +292,7 @@ public class TaskListItemViewModel extends BaseListItemViewModel {
                 case 7:/*订单确认完成*/
                     //评价中 大状态
                     status = "已完成";//待评价变成已完成
-                    statusBg = activity.getResources().getDrawable(R.mipmap.state_bg);
+                    statusBg = activity.getResources().getDrawable(R.mipmap.state_huise);
                     break;
                 case 11:/*服务方拒绝*/
                     status = "已拒绝";

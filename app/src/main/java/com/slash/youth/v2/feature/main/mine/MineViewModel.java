@@ -24,6 +24,7 @@ import com.slash.youth.domain.interactor.main.MineInfoUseCase;
 import com.slash.youth.domain.interactor.main.OtherInfoUseCase;
 import com.slash.youth.domain.interactor.main.PersonRelationUseCase;
 import com.slash.youth.engine.LoginManager;
+import com.slash.youth.engine.MsgManager;
 import com.slash.youth.engine.UserInfoEngine;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.ui.activity.ApprovalActivity;
@@ -317,7 +318,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
         personRelationUseCase.execute().compose(activity.bindToLifecycle())
                 .subscribe(d -> {
-                    if (SpUtils.getInt("addMeFriendCount", 0) != d.getInfo().getAddMeFriendCount()) {
+                    if (SpUtils.getInt("addMeFriendCount" + LoginManager.currentLoginUserId, 0) < d.getInfo().getAddMeFriendCount()) {
                         contactsVisible.set(View.VISIBLE);
                     }
                 }, error -> {
