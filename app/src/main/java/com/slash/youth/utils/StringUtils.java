@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.amap.loc.a.r;
+
 public class StringUtils {
     /**
      * 判断字符串是否有值，如果为null或者是空字符串或者只有空格或者为"null"字符串，则返回true，否则则返回false
@@ -90,6 +92,8 @@ public class StringUtils {
         }
         return tempStr;
     }
+
+
 
     //检查金额是否是小数 是否为0开头
     public static boolean checkMonkey(String tempStr) {

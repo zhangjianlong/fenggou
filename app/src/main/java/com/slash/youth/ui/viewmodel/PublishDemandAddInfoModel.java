@@ -175,14 +175,16 @@ public class PublishDemandAddInfoModel extends BaseObservable {
         double quote = 0;//报价
         int offer;//报价类型 0 需求方报价    1 服务方报价
         String quoteStr = mActivityPublishDemandAddinfoBinding.etDemandQuote.getText().toString();
-        if (!StringUtils.checkMonkey(quoteStr)) {
-            isClickPublish = false;
-            return;
-        }
+
 
         if (TextUtils.isEmpty(quoteStr)) {
             offer = 1;//服务方报价
         } else {
+            if (!StringUtils.checkMonkey(quoteStr)) {
+                isClickPublish = false;
+                return;
+            }
+
             offer = 0;//需求方报价
             try {
                 quote = Double.parseDouble(quoteStr);

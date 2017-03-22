@@ -325,7 +325,7 @@ public class PerfectInfoModel extends BaseObservable {
                         } else if (dataBean.rescode == 7) {
                             ToastUtils.shortToast("验证码错误");
                         } else {
-                            ToastUtils.shortToast("登录失败:" + dataBean.rescode);
+                            ToastUtils.shortToast("登录失败");
                         }
                     }
 

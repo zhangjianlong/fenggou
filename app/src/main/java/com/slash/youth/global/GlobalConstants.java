@@ -135,6 +135,10 @@ public class GlobalConstants {
         //变更手机号
         public static final String UPDATE_VERIFICATION_PHONE_VERIFICATION_CODE = SERVER_HOST + "auth/v1/update/phone";
 
+        //检查手机号和第三方绑定情况
+        public static final String CHECK_PHONE_LOGIN = SERVER_HOST + "auth/v1/check/phone";
+
+
         //手机号登录
         public static final String PHONE_NUMBER_LOGIN = SERVER_HOST + "auth/v1/login/phone";
         //token登录
