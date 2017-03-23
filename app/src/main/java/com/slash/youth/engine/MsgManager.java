@@ -750,6 +750,9 @@ public class MsgManager {
         String message = "";
         if (pushInfoBean.msg_type == PushInfoBean.CHAT_TEXT_MSG) {
             message = pushInfoBean.pushText;
+            if (("changeContact").equals(pushInfoBean.pushText)) {
+                message = "交换联系方式！";
+            }
         } else {
             message = title + pushInfoBean.pushText;
         }

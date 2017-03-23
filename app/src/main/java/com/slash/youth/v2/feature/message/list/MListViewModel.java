@@ -111,7 +111,7 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
         super.onDestroy();
     }
 
-    private void loadData() {
+    private synchronized void loadData() {
         Map<String, String> map = new HashMap<>();
         map.put("offset", pageSize * limit + "");
         map.put("limit", limit + "");
