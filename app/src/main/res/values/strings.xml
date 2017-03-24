@@ -21,7 +21,7 @@
     <string name="app.bottom.menu.task">任务</string>
     <string name="app.bottom.menu.mine">我的</string>
 
-    <string name="dispute_handling"><Data><![CDATA[<p><strong>1、平台处理规则</strong></p><p><span style="color:#666666;">需求方满意后，资金付给需求方；否则，不付给需求方</span></p><p><strong>2、协商处理规则</strong></p><p><span style="color:#666666;">由交易双方协商处理的规则，详见“帮助 - 常见问题。"</p>]]></Data></string>
+    <string name="dispute_handling"><Data><![CDATA[<p><strong>1、平台处理规则</strong></p><p><span style="color:#666666;">需求方满意后，资金付给需求方；否则，不付给需求方。</span></p><p><strong>2、协商处理规则</strong></p><p><span style="color:#666666;">由交易双方协商处理的规则，详见“帮助 - 常见问题”。</span></p>]]></Data></string>
 
 
     <string name="securityRulesContent" formatted="false"><Data><![CDATA[<p><strong>斜杠青年通过顺利成交保证金、预支付、分期到账等一系列规则来保障双方的顺利成交。</strong></p><p><strong>1、顺利成交保证金规则</strong>
@@ -51,5 +51,12 @@
     <string name="app.loadmore.complate">加载完成</string>
     <string name="float_win_title">温馨提示</string>
     <string name="float_win_msg">为了该软件的正常使用，请前往设置/应用管理/斜杠青年，打开该软件的悬浮框权限</string>
+
+    <string name="app.login.phone.error">手机号不能为空!</string>
+    <string name="app.login.phone.num.error">请输入正确的11位手机号码!</string>
+    <string name="app.login.verify.code.suc">验证码已发送，请查收</string>
+    <string name="app.login.verify.code.fail">验证码发送失败</string>
+    <string name="app.logig.verify.code.error">验证码不能为空!</string>
+    <string name="app.login.user.agreement">请同意用户协议</string>
 
 </resources>

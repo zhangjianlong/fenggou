@@ -175,11 +175,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.LoginActivity"
+
+        <activity android:name=".v2.feature.login.LoginActivity"
             android:label="登录页"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
+
+
+
+
         <activity android:name=".ui.activity.SlashProtocolActivity" />
         <activity
             android:name=".ui.activity.HomeActivity"

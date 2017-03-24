@@ -7,6 +7,8 @@ import com.slash.youth.data.api.transformer.ErrorTransformer;
 import com.slash.youth.data.util.RetrofitUtil;
 import com.slash.youth.domain.bean.CustomerService;
 import com.slash.youth.domain.bean.LoginResult;
+import com.slash.youth.domain.bean.ResCodeBean;
+import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.repository.LoginRepository;
 import com.slash.youth.domain.repository.MainRepository;
 
@@ -40,5 +42,10 @@ public class LoginRepositoryImp implements LoginRepository {
     @Override
     public Observable<LoginResult> login(String def) {
         return apiClient.login(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<ResCodeBean> getVerifyCode(String def) {
+        return apiClient.getVerifyCode(RetrofitUtil.toRequestBody(def));
     }
 }
