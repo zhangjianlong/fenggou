@@ -32,6 +32,7 @@ import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.PhoneNumUtils;
+import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.umeng.analytics.MobclickAgent;
@@ -414,9 +415,9 @@ public class PerfectInfoModel extends BaseObservable {
         LoginManager.token = token;
         LoginManager.rongToken = rongToken;
 
-//        SpUtils.setLong("uid", uid);
-//        SpUtils.setString("token", token);
-//        SpUtils.setString("rongToken", rongToken);
+        SpUtils.setLong("uid", uid);
+        SpUtils.setString("token", token);
+        SpUtils.setString("rongToken", rongToken);
     }
 
 

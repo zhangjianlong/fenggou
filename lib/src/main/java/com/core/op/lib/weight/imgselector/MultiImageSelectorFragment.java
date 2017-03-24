@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -25,6 +27,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ListPopupWindow;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +39,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.core.op.lib.R;
+import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.FileUtil;
 import com.core.op.lib.weight.imgselector.adapter.FolderAdapter;
 import com.core.op.lib.weight.imgselector.adapter.ImageGridAdapter;
@@ -45,11 +49,18 @@ import com.core.op.lib.weight.imgselector.utils.FileUtils;
 import com.core.op.lib.weight.imgselector.utils.ScreenUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
+
+import rx.Observable;
 
 import static android.R.attr.fragment;
+import static com.core.op.lib.weight.imgselector.MultiImageSelectorActivity.getFileSize;
 
 /**
  * Multi image selector Fragment
@@ -146,7 +157,7 @@ public class MultiImageSelectorFragment extends Fragment {
         if (mode == MODE_MULTI) {
             ArrayList<String> tmp = getArguments().getStringArrayList(EXTRA_DEFAULT_SELECTED_LIST);
             if (tmp != null && tmp.size() > 0) {
-                resultList = tmp;
+//                resultList = tmp;
             }
         }
         mImageAdapter = new ImageGridAdapter(getActivity(), showCamera(), 3);
@@ -274,16 +285,16 @@ public class MultiImageSelectorFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(KEY_TEMP_FILE, mTmpFile);
-        outState.putSerializable(KEY_TEMP_CROP_FILE, mTmpCropFile);
+//        outState.putSerializable(KEY_TEMP_FILE, mTmpFile);
+//        outState.putSerializable(KEY_TEMP_CROP_FILE, mTmpCropFile);
     }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
-            mTmpFile = (File) savedInstanceState.getSerializable(KEY_TEMP_FILE);
-            mTmpCropFile = (File) savedInstanceState.getSerializable(KEY_TEMP_CROP_FILE);
+//            mTmpFile = (File) savedInstanceState.getSerializable(KEY_TEMP_FILE);
+//            mTmpCropFile = (File) savedInstanceState.getSerializable(KEY_TEMP_CROP_FILE);
         }
     }
 
@@ -300,16 +311,16 @@ public class MultiImageSelectorFragment extends Fragment {
         if (requestCode == REQUEST_CAMERA) {
             if (resultCode == Activity.RESULT_OK) {
                 if (mTmpFile != null) {
-                    if (isCrop()) {
-
+//                    if (isCrop()) {
 //                        cutPhotos(Uri.fromFile(mTmpFile), cropWight, cropHeight);
-                    } else {
+//                    } else {
                         if (mCallback != null) {
                             mCallback.onCameraShot(mTmpFile);
                         }
-                    }
+//                    }
                 }
             } else {
+                AppToast.show(getContext(), "delete:" + mTmpFile);
                 // delete tmp file
                 while (mTmpFile != null && mTmpFile.exists()) {
                     boolean success = mTmpFile.delete();
@@ -322,10 +333,13 @@ public class MultiImageSelectorFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 if (mTmpCropFile != null) {
                     if (mCallback != null) {
-                        mCallback.onCameraShot(mTmpCropFile);
+                        Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(d -> {
+                            mCallback.onCropShot(mTmpCropFile);
+                        });
                     }
                 }
             } else {
+                AppToast.show(getContext(), "delete:" + mTmpCropFile);
                 // delete tmp file
                 while (mTmpCropFile != null && mTmpCropFile.exists()) {
                     boolean success = mTmpCropFile.delete();
@@ -341,7 +355,7 @@ public class MultiImageSelectorFragment extends Fragment {
 
         Intent intent = new Intent("com.android.camera.action.CROP");
         try {
-            mTmpCropFile = FileUtils.createTmpFile(getActivity(), FileUtils.JPEG_FILE_PREFIX + "CROP");
+            mTmpCropFile = FileUtils.createTmpFile(getActivity(), "");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -352,10 +366,12 @@ public class MultiImageSelectorFragment extends Fragment {
             intent.putExtra("crop", "true");
             intent.putExtra("aspectX", 1);// 裁剪框比例
             intent.putExtra("aspectY", 1);
+            intent.putExtra("return-data", false);
             intent.putExtra("outputX", width);// 输出图片大小
             intent.putExtra("outputY", height);
             intent.putExtra("scale", true);// 去黑边
             intent.putExtra("scaleUpIfNeeded", true);// 去黑边
+            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());  //输出格式
             startActivityForResult(intent, REQUEST_CROP);
         } else {
             Toast.makeText(getActivity(), R.string.mis_error_image_not_exist, Toast.LENGTH_SHORT).show();
@@ -460,14 +476,55 @@ public class MultiImageSelectorFragment extends Fragment {
                 }
                 mImageAdapter.select(image);
             } else if (mode == MODE_SINGLE) {
-
-                Uri uri = Uri.fromFile(new File(image.path));
-                cutPhotos(uri, cropWight, cropHeight);
-//                if (mCallback != null) {
-//                    mCallback.onSingleImageSelected(image.path);
-//                }
+//                Uri uri = Uri.fromFile(new File(image.path));
+//                cutPhotos(uri, cropWight, cropHeight);
+                if (mCallback != null) {
+                    mCallback.onSingleImageSelected(getCompressedImgPath(image.path));
+                }
             }
         }
+    }
+
+    public String getCompressedImgPath(String sourceImgPath) {
+        try {
+            BitmapFactory.Options opts = new BitmapFactory.Options();
+            opts.inJustDecodeBounds = true;
+            Bitmap bmp = BitmapFactory.decodeFile(sourceImgPath, opts);
+            opts.inJustDecodeBounds = false;
+
+            int w = opts.outWidth;
+            int h = opts.outHeight;
+            float standardW = 800f;
+            float standardH = 800f;
+
+            int zoomRatio = 1;
+            if (w > h && w > standardW) {
+                zoomRatio = (int) (w / standardW);
+            } else if (w < h && h > standardH) {
+                zoomRatio = (int) (h / standardH);
+            }
+            if (zoomRatio <= 0)
+                zoomRatio = 1;
+            opts.inSampleSize = zoomRatio;
+
+            bmp = BitmapFactory.decodeFile(sourceImgPath, opts);
+
+            File compressedImg = FileUtils.createTmpFile(getActivity(), "");
+            FileOutputStream fos = new FileOutputStream(compressedImg);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+            fos.flush();
+            fos.close();
+
+            return compressedImg.getPath();
+
+        } catch (FileNotFoundException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>() {
@@ -601,5 +658,7 @@ public class MultiImageSelectorFragment extends Fragment {
         void onImageUnselected(String path);
 
         void onCameraShot(File imageFile);
+
+        void onCropShot(File imageFile);
     }
 }

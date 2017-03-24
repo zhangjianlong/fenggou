@@ -1,5 +1,8 @@
 package com.slash.youth.http.protocol;
 
+import android.util.Log;
+
+import com.core.op.lib.utils.AppToast;
 import com.google.gson.Gson;
 import com.slash.youth.domain.UploadFileResultBean;
 import com.slash.youth.global.GlobalConstants;
@@ -10,6 +13,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.http.body.MultipartBody;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +38,31 @@ public class FileUploadProtocol extends BaseProtocol<UploadFileResultBean> {
 //        params.setAsJsonContent(false);
 //        params.setMultipart(true);
 //        params.addBodyParameter("filename", new File("/storage/emulated/0/360WiFi/file/4.jpg"));
+        File file = new File(mFilePath);
+        Log.i("FileUploadProtocol", "imgPath is exist : " + file.exists());
+        Log.i("FileUploadProtocol", "imgPath is  : " + file.getAbsolutePath());
+        try {
+            Log.i("FileUploadProtocol", "imgPath is  : " + getFileSize(file));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<KeyValue> multipartParams = new ArrayList<KeyValue>();
-        multipartParams.add(new KeyValue("filename", new File(mFilePath)));
+        multipartParams.add(new KeyValue("filename", file));
         MultipartBody mb = new MultipartBody(multipartParams, null);
         params.setRequestBody(mb);
+    }
+
+    public static long getFileSize(File file) throws Exception {
+        long size = 0;
+        if (file.exists()) {
+            FileInputStream fis = null;
+            fis = new FileInputStream(file);
+            size = fis.available();
+        } else {
+            file.createNewFile();
+            Log.e("获取文件大小", "文件不存在!");
+        }
+        return size;
     }
 
     @Override

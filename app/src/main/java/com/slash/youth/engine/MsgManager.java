@@ -585,7 +585,7 @@ public class MsgManager {
         String cmdNtfData = textMessage.getExtra();
         try {
             JSONObject jsonObject = new JSONObject(cmdNtfData);
-            if (!StrUtil.isEmpty(jsonObject.getString("tid"))) {
+            if (!jsonObject.isNull("tid") && !StrUtil.isEmpty(jsonObject.getString("tid"))) {
                 long c = PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + jsonObject.getString("tid"), 0);
                 c++;
                 PreferenceUtil.write(CommonUtils.getContext(), "TASK_" + jsonObject.getString("tid"), c);
