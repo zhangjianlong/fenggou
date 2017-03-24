@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.PreferenceUtil;
+import com.core.op.lib.utils.StrUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityUserinfoBinding;
 import com.slash.youth.databinding.DialogRecommendBinding;
@@ -45,6 +46,7 @@ import com.slash.youth.v2.util.MessageKey;
 import com.slash.youth.v2.util.ShareKey;
 import com.umeng.analytics.MobclickAgent;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,6 +100,8 @@ public class ActivityUserInfoModel extends BaseObservable {
     private int relationshipscount;
     private String[] grades = {"少侠", "大侠", "宗师", "至尊"};
     private boolean isAnonymity;
+
+    DecimalFormat df = new DecimalFormat("######0.0");
 
     public ActivityUserInfoModel(ActivityUserinfoBinding activityUserinfoBinding, long otherUid,
                                  UserInfoActivity userInfoActivity, String tag, int anonymity
@@ -405,8 +409,8 @@ public class ActivityUserInfoModel extends BaseObservable {
         int serviceProgress = (int) ((averageservicepoint * 100) / 5);
         activityUserinfoBinding.pbService.setProgress(serviceProgress);
         activityUserinfoBinding.tvUserInfoServicePoint.setText("服务力" + userservicepoint + "星");
-        activityUserinfoBinding.tvAverageServicePoint.setText(String.valueOf(averageservicepoint));
-        activityUserinfoBinding.averageServicePoint.setText("平台平均服务力为" + averageservicepoint + "星");
+        activityUserinfoBinding.tvAverageServicePoint.setText(String.valueOf(df.format(averageservicepoint)));
+        activityUserinfoBinding.averageServicePoint.setText("平台平均服务力为" + df.format(averageservicepoint) + "星");
 
         //职业类型
         careertype = uinfo.getCareertype();

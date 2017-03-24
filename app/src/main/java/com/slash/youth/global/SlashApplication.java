@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -112,6 +113,18 @@ public class SlashApplication extends android.support.multidex.MultiDexApplicati
         exception.setOnCrashActionListener(new AppException.OnCrashActionListener() {
             @Override
             public void onCrashAction() {
+                ArrayList<Activity> listActivities = ((SlashApplication) SlashApplication.getApplication()).listActivities;
+                for (Activity activity : listActivities) {
+                    if (activity != null) {
+                        activity.finish();
+                        listActivities.remove(activity);
+                        activity = null;
+                    }
+                }
+
+                Intent intentLoginActivity = new Intent(CommonUtils.getContext(), LoginActivity.class);
+                CommonUtils.getContext().startActivity(intentLoginActivity);
+
                 Messenger.getDefault().sendNoMsg(MessageKey.REMOVE_FLOAT_WINDOW);
             }
         });

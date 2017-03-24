@@ -111,7 +111,7 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
         super.onDestroy();
     }
 
-    private void loadData() {
+    private synchronized void loadData() {
         Map<String, String> map = new HashMap<>();
         map.put("offset", pageSize * limit + "");
         map.put("limit", limit + "");
@@ -159,6 +159,8 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
                                     }, error -> {
                                         progress.dismiss();
                                     }, () -> {
+                                        conversationBeens.add(aideConversation);
+                                        conversationBeens.add(serviceConversation);
                                         index = 0;
                                         Observable.from(conversationBeens)
                                                 .subscribe(data -> {
@@ -167,8 +169,6 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
                                                 }, error -> {
                                                     progress.dismiss();
                                                 }, () -> {
-                                                    conversationBeens.add(aideConversation);
-                                                    conversationBeens.add(serviceConversation);
                                                     Collections.sort(itemViewModels, new SortComparator());
                                                     binding.recyclerView.getAdapter().notifyDataSetChanged();
                                                     progress.dismiss();
