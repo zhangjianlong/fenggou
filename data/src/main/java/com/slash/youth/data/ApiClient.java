@@ -12,6 +12,7 @@ import com.slash.youth.domain.bean.MineInfo;
 import com.slash.youth.domain.bean.MineManagerList;
 import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
+import com.slash.youth.domain.bean.ResCodeBean;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.domain.bean.base.BaseList;
@@ -36,7 +37,6 @@ public interface ApiClient {
 
     @POST(UriMethod.GET_CUSTOMER_SERVICE)
     Observable<BaseResponse<CustomerService>> getCustomService(@Body RequestBody requestBody);
-
 
     @POST(UriMethod.TOKEN_LOGIN)
     Observable<BaseResponse<LoginResult>> login(@Body RequestBody requestBody);
@@ -81,8 +81,13 @@ public interface ApiClient {
     @POST(UriMethod.GET_CONVERSATION_LIST)
     Observable<BaseResponse<BaseList<ConversationBean>>> getConversationList(@Body RequestBody requestBody);
 
-
     @POST(UriMethod.DEL_CONVERSATION_LIST)
     Observable<BaseResponse<StatusBean>> delConversation(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SEND_PHONE_VERIFICATION_CODE)
+    Observable<ResCodeBean> getVerifyCode(@Body RequestBody requestBody);
+
+    @POST(UriMethod.PHONE_NUMBER_LOGIN)
+    Observable<LoginResult> phoneLogin(@Body RequestBody requestBody);
 }
 

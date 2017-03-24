@@ -54,6 +54,8 @@ import com.slash.youth.utils.TimeUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.dialog.splash.SplashDialog;
 import com.slash.youth.v2.feature.dialog.splash.SplashViewModel;
+import com.slash.youth.v2.feature.login.*;
+import com.slash.youth.v2.feature.login.LoginActivity;
 import com.slash.youth.v2.feature.main.MainActivity;
 import com.slash.youth.v2.util.MessageKey;
 import com.slash.youth.v2.util.ShareKey;

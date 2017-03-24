@@ -52,4 +52,11 @@
     <string name="float_win_title">温馨提示</string>
     <string name="float_win_msg">为了该软件的正常使用，请前往设置/应用管理/斜杠青年，打开该软件的悬浮框权限</string>
 
+    <string name="app.login.phone.error">手机号不能为空!</string>
+    <string name="app.login.phone.num.error">请输入正确的11位手机号码!</string>
+    <string name="app.login.verify.code.suc">验证码已发送，请查收</string>
+    <string name="app.login.verify.code.fail">验证码发送失败</string>
+    <string name="app.logig.verify.code.error">验证码不能为空!</string>
+    <string name="app.login.user.agreement">请同意用户协议</string>
+
 </resources>

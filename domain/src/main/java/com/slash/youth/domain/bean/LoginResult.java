@@ -7,6 +7,5 @@ import java.io.Serializable;
  * on 16-5-24.
  */
 public class LoginResult implements Serializable {
-
     public String token;
 }
