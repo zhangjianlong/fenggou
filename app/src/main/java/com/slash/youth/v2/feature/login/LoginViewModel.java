@@ -71,7 +71,6 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
         map.put("phone",tempPhoneNum);
         map.put("phone",tempPhoneNum);
         verifyUseCase.setParams(JsonUtil.mapToJson(map));
-        phoneLoginCase.
 
 
     });
