@@ -54,8 +54,6 @@ import com.slash.youth.utils.TimeUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.dialog.splash.SplashDialog;
 import com.slash.youth.v2.feature.dialog.splash.SplashViewModel;
-import com.slash.youth.v2.feature.login.*;
-import com.slash.youth.v2.feature.login.LoginActivity;
 import com.slash.youth.v2.feature.main.MainActivity;
 import com.slash.youth.v2.util.MessageKey;
 import com.slash.youth.v2.util.ShareKey;
@@ -214,7 +212,7 @@ public class SplashActivity extends BaseActivity {
     private void gotoGuidActivity() {
         boolean isGuid = SpUtils.getBoolean(GlobalConstants.SpConfigKey.IS_GUID, false);
         if (isGuid) {
-            Intent intentLoginActivity = new Intent(CommonUtils.getContext(), LoginActivity.class);
+            Intent intentLoginActivity = new Intent(CommonUtils.getContext(),LoginActivity.class);
             startActivity(intentLoginActivity);
         } else {
             Intent intentGuidActivity = new Intent(CommonUtils.getContext(), GuidActivity.class);
