@@ -27,8 +27,9 @@ public class LoginResultUseCase extends UseCase<LoginResult> {
         this.repository = repository;
     }
 
+
     @Override
     protected Observable<LoginResult> buildUseCaseObservable() {
-        return repository.login("a");
+        return repository.login(params[0]);
     }
 }

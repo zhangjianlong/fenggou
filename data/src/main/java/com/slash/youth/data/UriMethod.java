@@ -59,7 +59,7 @@ public class UriMethod {
     //一、[通用任务日志]-需求流程日志接口
     public static final String GET_COMMON_LOG = "feed/v1/api/log";
 
-    //手机验证码发送
+    //手机验证码发送"
     public static final String SEND_PHONE_VERIFICATION_CODE = "auth/v1/phone";
 //        public static final String SEND_PHONE_VERIFICATION_CODE = "auth/phone";
 
