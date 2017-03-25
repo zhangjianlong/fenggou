@@ -851,15 +851,17 @@ public class SubscribeActivity extends BaseActivity {
                     }else {
                         addCheckedLabels(labelName, labelTag);
                     }
-
+                    return;
                 }
 
                 if (listCheckedLabelTag.size()>=3){
                     ToastUtils.shortToast(toastTextString);
+                    return;
                 }
 
                 if (listCheckedLabelTag.size()==0){
                     addCheckedLabels(labelName, labelTag);
+                    return;
                 }
 //                if (clickCount >= 0 && clickCount < 3) {
 //                    if (!lastLabelName.equals(labelName)) {
