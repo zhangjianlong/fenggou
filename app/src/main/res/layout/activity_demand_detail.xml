@@ -2040,7 +2040,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#edf1f2"
-            android:visibility="@{demandDetailModel.loadLayerVisibility}">
+            android:visibility="gone">
 
 
             <LinearLayout
