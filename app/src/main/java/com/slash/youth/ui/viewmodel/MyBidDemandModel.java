@@ -365,6 +365,8 @@ public class MyBidDemandModel extends BaseObservable {
                 innerDemandCardInfo.avatar = taskinfo.avatar;
                 innerDemandCardInfo.instalmentratio = taskinfo.instalmentratio;
                 innerDemandCardInfo.username = taskinfo.name;
+                innerDemandCardInfo.type = taskinfo.type;
+                innerDemandCardInfo.anonymity = taskinfo.anonymity;
                 innerDemandCardInfo.isAuth = taskinfo.isauth;
                 innerDemandCardInfo.title = taskinfo.title;
                 innerDemandCardInfo.starttime = taskinfo.starttime;
@@ -566,17 +568,19 @@ public class MyBidDemandModel extends BaseObservable {
                 UserInfoBean.UInfo uinfo = dataBean.data.uinfo;
 
 
-//                if (uinfo.anonymity == 0) {
-//                    mActivityMyBidDemandBinding.ivDemandUserAvatar.setImageResource(R.mipmap.anonymity_avater);
-//                    if (!TextUtils.isEmpty(uinfo.name)) {
-//                        String firstName = uinfo.name.substring(0, 1);
-//                        String anonymityName = firstName + "xx";
-//                        setDemandUsername("需求方:" + uinfo.name);
-//                    }
-//                } else {
-                dAvatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
-                BitmapKit.bindImage(mActivityMyBidDemandBinding.ivDemandUserAvatar, dAvatarUrl);
-                setDemandUsername("需求方:" + uinfo.name);
+                if (innerDemandCardInfo.anonymity == 0 && ((innerDemandCardInfo.type == 1 && innerDemandCardInfo.status < 6) || (innerDemandCardInfo.type == 2 && (innerDemandCardInfo.status < 5 || innerDemandCardInfo.status == 11)))) {
+//
+                    mActivityMyBidDemandBinding.ivDemandUserAvatar.setImageResource(R.mipmap.anonymity_avater);
+                    if (!TextUtils.isEmpty(uinfo.name)) {
+                        String firstName = uinfo.name.substring(0, 1);
+                        String anonymityName = firstName + "xx";
+                        setDemandUsername("需求方:" + uinfo.name);
+                    }
+                } else {
+                    dAvatarUrl = GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + uinfo.avatar;
+                    BitmapKit.bindImage(mActivityMyBidDemandBinding.ivDemandUserAvatar, dAvatarUrl);
+                    setDemandUsername("需求方:" + uinfo.name);
+                }
 //                }
 
 
@@ -772,8 +776,10 @@ public class MyBidDemandModel extends BaseObservable {
         public String username;
         public int isAuth;
 
+        public int type;//需求或者服务类型 1需求 2服务
         public long suid;
 
+        public int anonymity;//匿名
         public String title;
         public long starttime;
         public double quote;

@@ -17,6 +17,8 @@ public class MyTaskBean implements Serializable {
     public int instalmentcurrfinish;//表示当期是否服务方完成 0未完成 1已经完成
     public String instalmentratio;//表示分期情况，格式为30,20,10,40 (英文逗号分隔)
 
+
+    public int anonymity;//匿名
     public int isauth;//用户是否认证 1已经认证 0未认证
     public String name;//用户姓名 （可以是发布人姓名或者竞标人姓名）
     //public String profession;//发布人行业
