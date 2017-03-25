@@ -176,16 +176,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".v2.feature.login.LoginActivity"
+        <activity
+            android:name=".v2.feature.login.LoginActivity"
             android:label="登录页"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
 
 
-        <activity android:name=".ui.activity.LoginActivity"
+        <activity
+            android:name=".ui.activity.LoginActivity"
             android:label="登录页"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
 
 
         <activity android:name=".ui.activity.SlashProtocolActivity" />
@@ -279,7 +281,9 @@
         <activity android:name=".ui.activity.GuidActivity" />
         <activity android:name=".ui.activity.ServicePaymentActivity" />
         <activity android:name=".ui.activity.UserInfoActivity" />
-        <activity android:name=".ui.activity.UserinfoEditorActivity" />
+        <activity
+            android:name=".ui.activity.UserinfoEditorActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.activity.EditorIdentityActivity" />
         <activity android:name=".ui.activity.ReportTAActivity" />
         <activity android:name=".ui.activity.ReplacePhoneActivity" />

@@ -254,7 +254,7 @@ public class TaskListItemViewModel extends BaseListItemViewModel {
                     statusBg = activity.getResources().getDrawable(R.mipmap.state_huise);
                     break;
                 case 6:
-                    status = "待支付";
+                    status = "预支付";
                     statusBg = activity.getResources().getDrawable(R.mipmap.state_bg);
                     break;
                 case 7:

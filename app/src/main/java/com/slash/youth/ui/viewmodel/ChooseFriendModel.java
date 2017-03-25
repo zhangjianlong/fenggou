@@ -150,7 +150,7 @@ public class ChooseFriendModel extends BaseObservable {
         chatCmdShareTaskBean = (ChatCmdShareTaskBean) mActivity.getIntent().getSerializableExtra("chatCmdShareTaskBean");
         ContactsManager.getMyFriendList(new onMyFriendList(null, LOAD_DATA_TYPE_INIT), offset, limit);
         bundle = chooseFriendActivtiy.getIntent().getBundleExtra(ShareKey.USER_ANONYMITY_BUNDLE);
-        addMeFriendLocalCount = SpUtils.getInt("addMeFriendCount", 0);
+        addMeFriendLocalCount = SpUtils.getInt("addMeFriendCount" + LoginManager.currentLoginUserId, 0);
         for (char cha = 'A'; cha <= 'Z'; cha++) {
             letterList.add(cha);
         }
@@ -187,7 +187,6 @@ public class ChooseFriendModel extends BaseObservable {
                     intentChatActivity.putExtra("chatCmdShareTaskBean", chatCmdShareTaskBean);
                     intentChatActivity.putExtra(ShareKey.USER_ANONYMITY_BUNDLE, bundle);
                     mActivity.startActivity(intentChatActivity);
-                    PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + chatCmdShareTaskBean.uid, false);
                 }
 
             }

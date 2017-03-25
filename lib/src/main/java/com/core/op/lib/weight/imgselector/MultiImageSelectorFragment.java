@@ -41,6 +41,7 @@ import com.bumptech.glide.Glide;
 import com.core.op.lib.R;
 import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.FileUtil;
+import com.core.op.lib.weight.crop.UCrop;
 import com.core.op.lib.weight.imgselector.adapter.FolderAdapter;
 import com.core.op.lib.weight.imgselector.adapter.ImageGridAdapter;
 import com.core.op.lib.weight.imgselector.bean.Folder;
@@ -49,18 +50,12 @@ import com.core.op.lib.weight.imgselector.utils.FileUtils;
 import com.core.op.lib.weight.imgselector.utils.ScreenUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import rx.Observable;
-
-import static android.R.attr.fragment;
-import static com.core.op.lib.weight.imgselector.MultiImageSelectorActivity.getFileSize;
 
 /**
  * Multi image selector Fragment
@@ -71,6 +66,7 @@ public class MultiImageSelectorFragment extends Fragment {
 
     public static final String TAG = "MultiImageSelectorFragment";
 
+    private static final String SAMPLE_CROPPED_IMAGE_NAME = "SampleCropImage.jpg";
     private static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 110;
     private static final int REQUEST_CAMERA = 100;
 
@@ -311,16 +307,17 @@ public class MultiImageSelectorFragment extends Fragment {
         if (requestCode == REQUEST_CAMERA) {
             if (resultCode == Activity.RESULT_OK) {
                 if (mTmpFile != null) {
-//                    if (isCrop()) {
-//                        cutPhotos(Uri.fromFile(mTmpFile), cropWight, cropHeight);
-//                    } else {
+                    if (isCrop()) {
+                        Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(d -> {
+                            startCropActivity(Uri.fromFile(mTmpFile));
+                        });
+                    } else {
                         if (mCallback != null) {
                             mCallback.onCameraShot(mTmpFile);
                         }
-//                    }
+                    }
                 }
             } else {
-                AppToast.show(getContext(), "delete:" + mTmpFile);
                 // delete tmp file
                 while (mTmpFile != null && mTmpFile.exists()) {
                     boolean success = mTmpFile.delete();
@@ -329,59 +326,9 @@ public class MultiImageSelectorFragment extends Fragment {
                     }
                 }
             }
-        } else if (requestCode == REQUEST_CROP) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (mTmpCropFile != null) {
-                    if (mCallback != null) {
-                        Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(d -> {
-                            mCallback.onCropShot(mTmpCropFile);
-                        });
-                    }
-                }
-            } else {
-                AppToast.show(getContext(), "delete:" + mTmpCropFile);
-                // delete tmp file
-                while (mTmpCropFile != null && mTmpCropFile.exists()) {
-                    boolean success = mTmpCropFile.delete();
-                    if (success) {
-                        mTmpCropFile = null;
-                    }
-                }
-            }
         }
     }
 
-    private void cutPhotos(Uri data, int width, int height) {
-
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        try {
-            mTmpCropFile = FileUtils.createTmpFile(getActivity(), "");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (mTmpCropFile != null && mTmpCropFile.exists()) {
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, data);
-            intent.setDataAndType(data, "image/*");
-            intent.putExtra("output", Uri.fromFile(mTmpCropFile));
-            intent.putExtra("crop", "true");
-            intent.putExtra("aspectX", 1);// 裁剪框比例
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("return-data", false);
-            intent.putExtra("outputX", width);// 输出图片大小
-            intent.putExtra("outputY", height);
-            intent.putExtra("scale", true);// 去黑边
-            intent.putExtra("scaleUpIfNeeded", true);// 去黑边
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());  //输出格式
-            startActivityForResult(intent, REQUEST_CROP);
-        } else {
-            Toast.makeText(getActivity(), R.string.mis_error_image_not_exist, Toast.LENGTH_SHORT).show();
-        }
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {//4.4系统与5.0系统不一样，相册裁剪判断
-//            String url = getPath(data);
-//            intent.setDataAndType(Uri.fromFile(new File(url)), "image/*");
-//        } else {
-
-    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -476,55 +423,31 @@ public class MultiImageSelectorFragment extends Fragment {
                 }
                 mImageAdapter.select(image);
             } else if (mode == MODE_SINGLE) {
-//                Uri uri = Uri.fromFile(new File(image.path));
-//                cutPhotos(uri, cropWight, cropHeight);
-                if (mCallback != null) {
-                    mCallback.onSingleImageSelected(getCompressedImgPath(image.path));
-                }
+                startCropActivity(Uri.fromFile(new File(image.path)));
             }
         }
     }
 
-    public String getCompressedImgPath(String sourceImgPath) {
+    private void startCropActivity(@NonNull Uri uri) {
+        UCrop uCrop = null;
         try {
-            BitmapFactory.Options opts = new BitmapFactory.Options();
-            opts.inJustDecodeBounds = true;
-            Bitmap bmp = BitmapFactory.decodeFile(sourceImgPath, opts);
-            opts.inJustDecodeBounds = false;
+            uCrop = UCrop.of(uri, Uri.fromFile(FileUtils.createTmpFile(getActivity(), "")));
 
-            int w = opts.outWidth;
-            int h = opts.outHeight;
-            float standardW = 800f;
-            float standardH = 800f;
+            uCrop = uCrop.withAspectRatio(1, 1);
+            uCrop = uCrop.withMaxResultSize(200, 200);
 
-            int zoomRatio = 1;
-            if (w > h && w > standardW) {
-                zoomRatio = (int) (w / standardW);
-            } else if (w < h && h > standardH) {
-                zoomRatio = (int) (h / standardH);
-            }
-            if (zoomRatio <= 0)
-                zoomRatio = 1;
-            opts.inSampleSize = zoomRatio;
+            UCrop.Options options = new UCrop.Options();
+            options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
+            options.setCompressionQuality(100);
 
-            bmp = BitmapFactory.decodeFile(sourceImgPath, opts);
-
-            File compressedImg = FileUtils.createTmpFile(getActivity(), "");
-            FileOutputStream fos = new FileOutputStream(compressedImg);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 10, fos);
-            fos.flush();
-            fos.close();
-
-            return compressedImg.getPath();
-
-        } catch (FileNotFoundException e) {
-            // TODO 自动生成的 catch 块
-            e.printStackTrace();
+            options.setHideBottomControls(false);
+            options.setFreeStyleCropEnabled(false);
+            uCrop.withOptions(options);
+            uCrop.start(getActivity());
         } catch (IOException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
-        return null;
+
     }
 
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>() {
@@ -659,6 +582,6 @@ public class MultiImageSelectorFragment extends Fragment {
 
         void onCameraShot(File imageFile);
 
-        void onCropShot(File imageFile);
+        void onCropShot(String imageFile);
     }
 }

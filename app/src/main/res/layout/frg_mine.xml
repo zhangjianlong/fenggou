@@ -48,7 +48,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="76dp"
-                            android:background="@color/cmbkb_transparent"
+                            android:background="?attr/selectableItemBackground"
                             app:clickCommand="@{viewModel.personInfoClick}">
 
                             <LinearLayout
@@ -293,7 +293,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="bottom"
-                                    android:text="距离"
                                     android:textColor="#999999"
                                     android:textSize="11dp" />
 
@@ -310,7 +309,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="bottom"
-                                    android:text="还有 "
                                     android:textColor="#999999"
                                     android:textSize="11dp" />
 
@@ -515,7 +513,8 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="43dp"
+                            android:layout_height="50dp"
+                            android:background="?attr/selectableItemBackground"
                             app:clickCommand="@{viewModel.accountClick}">
 
                             <ImageView
@@ -567,7 +566,8 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="43dp"
+                            android:layout_height="50dp"
+                            android:background="?attr/selectableItemBackground"
                             app:clickCommand="@{viewModel.friendClick}">
 
                             <ImageView
@@ -611,7 +611,8 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="43dp"
+                            android:layout_height="50dp"
+                            android:background="?attr/selectableItemBackground"
                             app:clickCommand="@{viewModel.visitorClick}">
 
                             <ImageView
@@ -659,6 +660,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
+                            android:background="?attr/selectableItemBackground"
                             app:clickCommand="@{viewModel.managerClick }">
 
                             <ImageView
@@ -701,6 +703,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
+                            android:background="?attr/selectableItemBackground"
                             app:clickCommand="@{viewModel.collectionClick}">
 
                             <ImageView
@@ -743,6 +746,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
+                            android:background="?attr/selectableItemBackground"
                             app:clickCommand="@{viewModel.helpClick}">
 
                             <ImageView
@@ -806,7 +810,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
                         android:layout_marginRight="15dp"
-                        android:background="@mipmap/icon_mine_editor"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@mipmap/icon_mine_editor"
                         app:clickCommand="@{viewModel.editorClick}" />
 
                     <ImageView
@@ -816,7 +821,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="30dp"
                         android:layout_toLeftOf="@id/iv_edit"
-                        android:background="@mipmap/icon_mine_set"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@mipmap/icon_mine_set"
                         app:clickCommand="@{viewModel.settingClick}" />
 
                 </RelativeLayout>
@@ -849,7 +855,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
                         android:layout_marginRight="15dp"
-                        android:background="@mipmap/icon_mine_editor_up"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@mipmap/icon_mine_editor_up"
                         app:clickCommand="@{viewModel.editorClick}" />
 
                     <ImageView
@@ -859,7 +866,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="30dp"
                         android:layout_toLeftOf="@id/iv_edit_up"
-                        android:background="@mipmap/icon_mine_set_up"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@mipmap/icon_mine_set_up"
                         app:clickCommand="@{viewModel.settingClick}" />
 
                 </RelativeLayout>

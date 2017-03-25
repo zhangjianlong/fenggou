@@ -19,7 +19,7 @@ public class SetDataUtils {
             public void execute(SetBean dataBean) {
                 int rescode = dataBean.rescode;
                 if (rescode == 0) {
-                    AppToast.show(CommonUtils.getContext(), "举报信息已提交");
+                    AppToast.show(CommonUtils.getContext(), "举报成功！");
                     LogKit.d("SetBaseProtocol: 设置数据成功");
                 } else {
                     AppToast.show(CommonUtils.getContext(), "举报失败");

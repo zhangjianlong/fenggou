@@ -47,7 +47,9 @@ public class TaskListViewModel extends BaseListViewModel<TaskList.TaskBean, Task
 
     private int type = 0;
 
-    int count;
+    int count = 0;
+
+    int hisCount = 0;
 
     @Inject
     public TaskListViewModel(RxAppCompatActivity activity,
@@ -77,7 +79,7 @@ public class TaskListViewModel extends BaseListViewModel<TaskList.TaskBean, Task
                 count = 0;
                 Observable.from(itemViewModels).subscribe(d -> {
                     if (d.taskBean != null)
-                        count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + d.taskBean.tid);
+                        count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + d.taskBean.tid) > 0 ? 1 : 0;
                 });
                 Messenger.getDefault().send(count, TASK_CHANGE);
             }
@@ -134,7 +136,7 @@ public class TaskListViewModel extends BaseListViewModel<TaskList.TaskBean, Task
 
     @Override
     protected void doData(TaskList.TaskBean data, boolean isLoadMore) {
-        count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + data.tid);
+        count += PreferenceUtil.readLong(CommonUtils.getContext(), "TASK_" + data.tid) > 0 ? 1 : 0;
     }
 
     @Override

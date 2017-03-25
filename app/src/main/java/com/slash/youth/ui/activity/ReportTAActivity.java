@@ -20,7 +20,7 @@ public class ReportTAActivity extends BaseActivity implements View.OnClickListen
     private TextView title;
     private TextView save;
     private ReportTAModel reportTAModel;
-    private int uid;
+    private long uid;
     private String titleText = "举报";
     private String sure = "确定";
 
@@ -29,13 +29,13 @@ public class ReportTAActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        uid = intent.getIntExtra("uid", -1);
+        uid = intent.getLongExtra("uid", -1);
 
-    activityReportTaBinding = DataBindingUtil.setContentView(this, R.layout.activity_report_ta);
-    reportTAModel = new ReportTAModel(activityReportTaBinding,uid);
-    activityReportTaBinding.setReportTAModel(reportTAModel);
+        activityReportTaBinding = DataBindingUtil.setContentView(this, R.layout.activity_report_ta);
+        reportTAModel = new ReportTAModel(activityReportTaBinding, uid);
+        activityReportTaBinding.setReportTAModel(reportTAModel);
 
-    listener();
+        listener();
     }
 
     private void listener() {
@@ -49,7 +49,7 @@ public class ReportTAActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_userinfo_back:
                 finish();
                 break;

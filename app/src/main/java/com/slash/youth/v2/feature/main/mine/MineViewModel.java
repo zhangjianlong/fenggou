@@ -285,12 +285,20 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                         expertMarks = data.getExpertscore();
                         int expertlevel = data.getExpertlevel();//当前对应的等级
                         if (expertlevel > 0 && expertlevel <= 4) {
-                            grade.set(grades[expertlevel]);
                             int expertscore = expertlevels.get(expertlevel - 1);
                             if (expertscore < expertMarks) {
                                 expertscore = expertlevels.get(expertlevel);
+                                if (expertscore == expertⅡMaxMarks) {
+                                    grade.set("请等待客户审核");
+                                    mark.set("");
+                                } else if (expertscore == expertⅢMaxMarks) {
+                                    grade.set("请等待客户审核");
+                                    mark.set("");
+                                }
+                            } else {
+                                grade.set("距离" + grades[expertlevel] + "还有 ");
+                                mark.set(((int) (expertscore - expertMarks)) + "");
                             }
-                            mark.set(((int) (expertscore - expertMarks)) + "");
                         }
                     }
 
