@@ -844,17 +844,36 @@ public class SubscribeActivity extends BaseActivity {
             public void onClick(View v) {
                 String labelTag = (String) v.getTag();
                 labelName = ((TextView) v).getText().toString();
-                if (clickCount >= 0 && clickCount < 3) {
-                    if (!lastLabelName.equals(labelName)) {
-                        addCheckedLabels(labelName, labelTag);
-                        clickCount += 1;
-                        lastLabelName = labelName;
-                    } else {
+
+                if (listCheckedLabelTag.size()>0&&listCheckedLabelTag.size()<3){
+                    if (listCheckedLabelTag.contains(labelName)){
                         ToastUtils.shortToast(toastText);
+                    }else {
+                        addCheckedLabels(labelName, labelTag);
                     }
-                } else {
-                    ToastUtils.shortToast(toastTextString);
+                    return;
                 }
+
+                if (listCheckedLabelTag.size()>=3){
+                    ToastUtils.shortToast(toastTextString);
+                    return;
+                }
+
+                if (listCheckedLabelTag.size()==0){
+                    addCheckedLabels(labelName, labelTag);
+                    return;
+                }
+//                if (clickCount >= 0 && clickCount < 3) {
+//                    if (!lastLabelName.equals(labelName)) {
+//                        addCheckedLabels(labelName, labelTag);
+//                        clickCount += 1;
+//                        lastLabelName = labelName;
+//                    } else {
+//                        ToastUtils.shortToast(toastText);
+//                    }
+//                } else {
+//                    ToastUtils.shortToast(toastTextString);
+//                }
             }
         });
 
