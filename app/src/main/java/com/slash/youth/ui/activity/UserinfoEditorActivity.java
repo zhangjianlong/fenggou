@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.core.op.lib.utils.AndroidBug5497Workaround;
 import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityUserinfoEditorBinding;
@@ -40,6 +41,12 @@ public class UserinfoEditorActivity extends BaseActivity {
         activityUserInfoEditorModel = new ActivityUserInfoEditorModel(activityUserinfoEditorBinding, myId, this);
         activityUserinfoEditorBinding.setActivityUserInfoEditorModel(activityUserInfoEditorModel);
         back();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AndroidBug5497Workaround.assistActivity(this, getApplicationContext());
     }
 
     private void back() {

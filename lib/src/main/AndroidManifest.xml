@@ -19,6 +19,9 @@
             android:name=".weight.imgselector.MultiImageSelectorActivity"
             android:configChanges="orientation|screenSize" />
 
+        <activity
+            android:name=".weight.crop.UCropActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

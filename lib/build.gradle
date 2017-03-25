@@ -11,6 +11,8 @@ android {
         targetSdkVersion ext.targetSdkVersion
         versionCode ext.versionCode
         versionName ext.versionName
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     dataBinding {
@@ -33,6 +35,10 @@ android {
         flatDir {
             dirs 'libs'
         }
+    }
+
+    sourceSets.main {
+        jni.srcDirs = [];
     }
 }
 

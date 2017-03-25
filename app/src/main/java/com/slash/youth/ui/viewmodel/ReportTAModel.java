@@ -25,10 +25,12 @@ public class ReportTAModel extends BaseObservable {
     private boolean checked;
     public ArrayList<String> list = new ArrayList<>();
     public String text; //举报的内容
-    private int uid;
+    private long uid;
     private HashMap<String, String> paramMap = new HashMap<>();
 
-    public ReportTAModel(ActivityReportTaBinding activityReportTaBinding, int uid) {
+    private int reason = 0;
+
+    public ReportTAModel(ActivityReportTaBinding activityReportTaBinding, long uid) {
         this.activityReportTaBinding = activityReportTaBinding;
         this.uid = uid;
         initView();
@@ -90,14 +92,17 @@ public class ReportTAModel extends BaseObservable {
                     int id = cb.getId();
                     switch (id) {
                         case R.id.cb1:
+                            reason = 0;
                             activityReportTaBinding.cb2.setChecked(false);
                             activityReportTaBinding.cb3.setChecked(false);
                             break;
                         case R.id.cb2:
+                            reason = 1;
                             activityReportTaBinding.cb1.setChecked(false);
                             activityReportTaBinding.cb3.setChecked(false);
                             break;
                         case R.id.cb3:
+                            reason = 2;
                             activityReportTaBinding.cb1.setChecked(false);
                             activityReportTaBinding.cb2.setChecked(false);
                             break;
@@ -111,14 +116,15 @@ public class ReportTAModel extends BaseObservable {
 
     //想服务器传递数据
     public void sendData() {
+        paramMap.clear();
         text = activityReportTaBinding.etReportOther.getText().toString();
         list.add("其他举报原因:" + text + " ");
 
         String reason = list.toString();
-        paramMap.put("QQ_uid", String.valueOf(uid));
-        paramMap.put("reason", reason);
+        paramMap.put("uid", String.valueOf(uid));
+        paramMap.put("reason", String.valueOf(reason));
+        paramMap.put("detail", reason);
         SetDataUtils.setProtocol(GlobalConstants.HttpUrl.CLAIMS, paramMap);
-        paramMap.clear();
     }
 
 }

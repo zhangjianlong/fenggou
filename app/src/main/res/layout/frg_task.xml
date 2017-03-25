@@ -40,7 +40,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="17dp"
-                    android:background="@drawable/selector_bg_trans"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:orientation="horizontal">
 
                     <TextView

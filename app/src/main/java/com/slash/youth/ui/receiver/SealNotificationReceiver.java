@@ -14,6 +14,8 @@ import com.slash.youth.utils.StringUtils;
 import io.rong.push.notification.PushMessageReceiver;
 import io.rong.push.notification.PushNotificationMessage;
 
+import static com.slash.youth.engine.MsgManager.updateConversationList;
+
 /**
  * Created by acer on 2017/3/2.
  */
@@ -34,6 +36,11 @@ public class SealNotificationReceiver extends PushMessageReceiver {
     }
 
     private void simpleNotify(Context context, PushNotificationMessage message) {
+
+
+        final String senderUserId = message.getSenderId();
+        updateConversationList(senderUserId);
+
         //为了版本兼容  选择V7包下的NotificationCompat进行构造
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         String[] messages = new String[]{};
