@@ -31,7 +31,7 @@
                     android:layout_height="40dp"
                     android:onClick="@{activityCityLocationModel.finishCityLocationActivity}">
 
-                    <ImageButton
+                    <ImageView
                         android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"

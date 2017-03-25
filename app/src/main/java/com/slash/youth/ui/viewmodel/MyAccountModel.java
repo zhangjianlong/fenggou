@@ -6,6 +6,7 @@ import android.databinding.Bindable;
 import android.view.View;
 
 import com.slash.youth.BR;
+import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityMyAccountBinding;
 import com.slash.youth.domain.MyAccountBean;
 import com.slash.youth.http.protocol.BaseProtocol;
@@ -106,9 +107,16 @@ public class MyAccountModel extends BaseObservable {
     //提示
     public void hint(View view) {
         //埋点
+        String bpTitle = "冻结资金说明";
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_MY_ACCOUNT_CLICK_MY_FREEZE_MONEY_RIGHT_QUESTION);
-
         setHintVisibility(View.VISIBLE);
+        DialogUtils.showDialogOne1(myAccountActivity, new DialogUtils.DialogCallUnderStandBack() {
+            @Override
+            public void OkDown() {
+            }
+        }, CommonUtils.getContext().getString(R.string.frozen_capital), bpTitle);
+
+
 
       /*  DialogUtils.showDialogOne(myAccountActivity, new DialogUtils.DialogCallUnderStandBack() {
             @Override

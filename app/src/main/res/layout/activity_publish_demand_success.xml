@@ -254,8 +254,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="@{publishDemandSuccessModel.recommendServiceInfoVisibility}">
+                        android:visibility="gone"
+                        android:orientation="vertical">
+                        <!--android:visibility="@{publishDemandSuccessModel.recommendServiceInfoVisibility}"-->
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -288,6 +289,7 @@
                         </LinearLayout>
 
                         <com.slash.youth.ui.view.ScrollListView
+                            android:visibility="gone"
                             android:id="@+id/lv_recommend_service_part"
                             android:layout_width="match_parent"
                             android:layout_height="220dp"

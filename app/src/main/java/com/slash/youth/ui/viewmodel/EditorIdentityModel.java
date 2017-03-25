@@ -115,7 +115,7 @@ public class EditorIdentityModel extends BaseObservable {
                 dialogCustomSkillLabelModel.setOnOkDialogListener(new DialogCustomSkillLabelModel.OnOkDialogListener() {
                     @Override
                     public void OnOkDialogClick(String text) {
-                    if(newSkillLabelList.size()>=4){
+                    if(newSkillLabelList.size()>=2){
                         ToastUtils.shortToast("最多创建四个技能");
                     }else {
                         String regex="^[a-zA-Z0-9\u4E00-\u9FA5]+$";
