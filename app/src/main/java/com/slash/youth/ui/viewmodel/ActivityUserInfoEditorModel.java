@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.PreferenceUtil;
 import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.BR;

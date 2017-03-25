@@ -73,10 +73,8 @@
                                             android:layout_width="59dp"
                                             android:layout_height="59dp"
                                             android:layout_marginTop="2dp"
+                                            android:scaleType="centerCrop"
                                             android:src="@mipmap/default_avatar"
-                                            app:round_radius="10dp"
-                                            app:shape_mode="round_rect"
-                                            app:stroke_width="0dp"
                                             app:uri="@{viewModel.uri}" />
 
                                         <LinearLayout

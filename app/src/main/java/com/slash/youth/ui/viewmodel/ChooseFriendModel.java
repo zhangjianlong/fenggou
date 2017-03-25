@@ -18,6 +18,7 @@ import com.slash.youth.domain.ChatCmdShareTaskBean;
 import com.slash.youth.domain.MyFriendListBean;
 import com.slash.youth.domain.PersonRelationBean;
 import com.slash.youth.engine.ContactsManager;
+import com.slash.youth.engine.LoginManager;
 import com.slash.youth.http.protocol.BaseProtocol;
 import com.slash.youth.ui.activity.ChatActivity;
 import com.slash.youth.ui.activity.ContactsCareActivity;
@@ -207,7 +208,7 @@ public class ChooseFriendModel extends BaseObservable {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.RELATIONSHIP_CLICK_ADD_ME);
         openContactsCareActivity(ContactsManager.ADD_ME, "3");
         activityChooseFriendBinding.ivRequest.setVisibility(View.GONE);
-        SpUtils.setInt("addMeFriendCount", addMeFriendCount);
+        SpUtils.setInt("addMeFriendCount" + LoginManager.currentLoginUserId, addMeFriendCount);
         Messenger.getDefault().send(0, MessageKey.HIDE_NEW_CONTACTS);
     }
 

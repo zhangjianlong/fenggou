@@ -1,6 +1,8 @@
 package com.core.op.lib.weight.imgselector;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -9,15 +11,24 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 
 import com.core.op.lib.R;
+import com.core.op.lib.weight.imgselector.utils.FileUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
 
 /**
  * Multi image selector
@@ -190,11 +201,81 @@ public class MultiImageSelectorActivity extends AppCompatActivity
             // notify system the image has change
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(imageFile)));
 
-            Intent data = new Intent();
-            resultList.add(imageFile.getAbsolutePath());
-            data.putStringArrayListExtra(EXTRA_RESULT, resultList);
-            setResult(RESULT_OK, data);
-            finish();
+            Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(d -> {
+                Intent data = new Intent();
+                resultList.add(getCompressedImgPath(imageFile.getAbsolutePath()));
+                data.putStringArrayListExtra(EXTRA_RESULT, resultList);
+                setResult(RESULT_OK, data);
+                finish();
+            });
+        }
+    }
+
+    public String getCompressedImgPath(String sourceImgPath) {
+        try {
+            BitmapFactory.Options opts = new BitmapFactory.Options();
+            opts.inJustDecodeBounds = true;
+            Bitmap bmp = BitmapFactory.decodeFile(sourceImgPath, opts);
+            opts.inJustDecodeBounds = false;
+
+            int w = opts.outWidth;
+            int h = opts.outHeight;
+            float standardW = 800f;
+            float standardH = 800f;
+
+            int zoomRatio = 1;
+            if (w > h && w > standardW) {
+                zoomRatio = (int) (w / standardW);
+            } else if (w < h && h > standardH) {
+                zoomRatio = (int) (h / standardH);
+            }
+            if (zoomRatio <= 0)
+                zoomRatio = 1;
+            opts.inSampleSize = zoomRatio;
+
+            bmp = BitmapFactory.decodeFile(sourceImgPath, opts);
+
+            File compressedImg = FileUtils.createTmpFile(this, "");
+            FileOutputStream fos = new FileOutputStream(compressedImg);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+            fos.flush();
+            fos.close();
+
+            return compressedImg.getPath();
+
+        } catch (FileNotFoundException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static long getFileSize(File file) throws Exception {
+        long size = 0;
+        if (file.exists()) {
+            FileInputStream fis = null;
+            fis = new FileInputStream(file);
+            size = fis.available();
+        } else {
+            file.createNewFile();
+            Log.e("获取文件大小", "文件不存在!");
+        }
+        return size;
+    }
+
+    @Override
+    public void onCropShot(File imageFile) {
+        if (imageFile != null) {
+            Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(d -> {
+                Intent data = new Intent();
+                resultList.add(imageFile.getAbsolutePath());
+                data.putStringArrayListExtra(EXTRA_RESULT, resultList);
+                setResult(RESULT_OK, data);
+                finish();
+            });
         }
     }
 }

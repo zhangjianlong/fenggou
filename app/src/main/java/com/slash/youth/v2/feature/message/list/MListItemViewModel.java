@@ -172,15 +172,18 @@ public class MListItemViewModel extends BViewModel {
         if (PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + data.getUid(), false)) {
             name.set("匿名");
             drawable.set(activity.getResources().getDrawable(R.mipmap.anonymity_avater));
+            uri.set("");
         } else {
             if (data.getUid() == 1000) {
                 enable.set(false);
                 name.set("消息小助手");
                 drawable.set(activity.getResources().getDrawable(R.mipmap.message_icon));
+                uri.set("");
             } else if (MsgManager.customerServiceUid.equals(data.getUid() + "")) {
                 enable.set(false);
                 name.set("斜杠客服");
                 drawable.set(activity.getResources().getDrawable(R.mipmap.customer_service_icon));
+                uri.set("");
             } else {
                 name.set(data.getName());
                 uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());

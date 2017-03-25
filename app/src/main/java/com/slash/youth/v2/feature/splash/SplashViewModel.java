@@ -12,10 +12,12 @@ import com.slash.youth.R;
 import com.slash.youth.databinding.ActSplashBinding;
 import com.slash.youth.domain.interactor.login.CustomServiceUseCase;
 import com.slash.youth.domain.interactor.login.LoginResultUseCase;
+import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.v2.feature.dialog.splash.SplashDialog;
 import com.slash.youth.v2.util.ShareKey;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.umeng.analytics.MobclickAgent;
 
 import javax.inject.Inject;
 
@@ -45,6 +47,7 @@ public class SplashViewModel extends BAViewModel<ActSplashBinding> {
 
     @Override
     public void afterViews() {
+        MobclickAgent.setScenarioType(CommonUtils.getContext(), MobclickAgent.EScenarioType.E_UM_NORMAL);
         permissions.request(Manifest.permission.ACCESS_FINE_LOCATION
                 , Manifest.permission.CAMERA,
                 Manifest.permission.READ_PHONE_STATE,
@@ -69,7 +72,7 @@ public class SplashViewModel extends BAViewModel<ActSplashBinding> {
 
             }
         });
-//        MobclickAgent.setScenarioType(activity, MobclickAgent.EScenarioType.E_UM_NORMAL);
+        MobclickAgent.setScenarioType(activity, MobclickAgent.EScenarioType.E_UM_NORMAL);
     }
 
     private void initdata() {
