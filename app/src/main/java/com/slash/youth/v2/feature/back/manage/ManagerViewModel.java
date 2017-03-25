@@ -54,7 +54,7 @@ public class ManagerViewModel extends BaseListViewModel<MineManagerList.ListBean
     @Override
     public void afterViews() {
         super.afterViews();
-        refresh();
+
 
         Messenger.getDefault().register(activity, MINE_MANAGER_DEL, Integer.class, position -> {
             itemViewModels.remove(position);
@@ -64,6 +64,12 @@ public class ManagerViewModel extends BaseListViewModel<MineManagerList.ListBean
         Messenger.getDefault().register(activity, MINE_MANAGER_REFRESH, Integer.class, position -> {
             binding.recyclerView.getAdapter().notifyDataSetChanged();
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
     }
 
     @Override

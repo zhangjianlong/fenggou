@@ -19,7 +19,6 @@ public class DemandDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ActivityDemandDetailBinding activityDemandDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_demand_detail);
         mDemandDetailModel = new DemandDetailModel(activityDemandDetailBinding, this);
         activityDemandDetailBinding.setDemandDetailModel(mDemandDetailModel);
