@@ -256,6 +256,14 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            loadData();
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         loadData();

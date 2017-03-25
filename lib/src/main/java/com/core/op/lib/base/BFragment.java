@@ -79,6 +79,12 @@ public abstract class BFragment<V extends BFViewModel, T extends ViewDataBinding
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        viewModel.onHiddenChanged(hidden);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         viewModel.onStart();

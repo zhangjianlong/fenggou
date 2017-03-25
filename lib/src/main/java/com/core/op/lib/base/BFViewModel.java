@@ -51,6 +51,10 @@ public abstract class BFViewModel<T> extends BViewModel<T> {
 
     }
 
+    public void onHiddenChanged(boolean hidden) {
+
+    }
+
     @Override
     public void onResume() {
 
