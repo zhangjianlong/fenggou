@@ -677,21 +677,21 @@ public class MsgManager {
                 conversationUidList.remove(senderUserId);
             }
             conversationUidList.add(0, senderUserId);
-            //会话列表顺序发生了变化，需要调用更新接口
-            ArrayList<Long> updateConversationUidList = new ArrayList<Long>();
-            updateConversationUidList.add(Long.parseLong(senderUserId));
-            setConversationList(new BaseProtocol.IResultExecutor<CommonResultBean>() {
-                @Override
-                public void execute(CommonResultBean dataBean) {
-
-                }
-
-                @Override
-                public void executeResultError(String result) {
-                    ToastUtils.shortToast("跟新会话列表失败");
-                }
-            }, updateConversationUidList);
         }
+        //会话列表顺序发生了变化，需要调用更新接口
+        ArrayList<Long> updateConversationUidList = new ArrayList<Long>();
+        updateConversationUidList.add(Long.parseLong(senderUserId));
+        setConversationList(new BaseProtocol.IResultExecutor<CommonResultBean>() {
+            @Override
+            public void execute(CommonResultBean dataBean) {
+
+            }
+
+            @Override
+            public void executeResultError(String result) {
+                ToastUtils.shortToast("跟新会话列表失败");
+            }
+        }, updateConversationUidList);
         //页面展示上的更新
         //这里的代码是对应V1.0版的旧的首页中的消息页
 //        if (ActivityUtils.currentActivity instanceof HomeActivity && HomeActivity.currentCheckedPageNo == HomeActivity.PAGE_INFO) {
