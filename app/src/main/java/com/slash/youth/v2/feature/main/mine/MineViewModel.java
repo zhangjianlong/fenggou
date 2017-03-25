@@ -68,7 +68,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
     float expertⅠMaxMarks = 1000;
     float expertⅡMaxMarks = 4000;
-    float expertⅢMaxMarks = 30000;
+    float expertⅢMaxMarks = 10000;
     float expertⅣMaxMarks = 99999;
     float expertMarks;
     float expertMarksProgress;//0到360
@@ -281,13 +281,13 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                     over.set(v + "%");
 
                     List<Integer> expertlevels = data.getExpertlevels();//每个等级对应的分数
+                    float score = 0;
                     if (expertlevels.size() != 0) {
                         expertMarks = data.getExpertscore();
                         int expertlevel = data.getExpertlevel();//当前对应的等级
                         if (expertlevel > 0 && expertlevel <= 4) {
                             int expertscore = expertlevels.get(expertlevel - 1);
                             if (expertscore < expertMarks) {
-                                expertscore = expertlevels.get(expertlevel);
                                 if (expertscore == expertⅡMaxMarks) {
                                     grade.set("请等待客户审核");
                                     mark.set("");
@@ -295,15 +295,17 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                                     grade.set("请等待客户审核");
                                     mark.set("");
                                 }
+                                score = expertscore;
                             } else {
                                 grade.set("距离" + grades[expertlevel] + "还有 ");
                                 mark.set(((int) (expertscore - expertMarks)) + "");
+                                score = expertMarks;
                             }
                         }
                     }
 
                     serverStar.set(data.getUserservicepoint() + "星");
-                    setExpertMarks();
+                    setExpertMarks(score);
                     initAnimation();
                     isLoadDataFinished = true;
                 }, error -> {
@@ -334,17 +336,17 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
                 });
     }
 
-    private void setExpertMarks() {
+    private void setExpertMarks(float score) {
 //        expertMarks = 2000;//这个数据实际应该从服务端获取
 //             expertMarksProgress = expertMarks / totalExpertMarks * 360;
-        if (expertMarks >= 0 && expertMarks <= expertⅠMaxMarks) {
-            expertMarksProgress = expertMarks / expertⅠMaxMarks * 90;
-        } else if (expertMarks <= expertⅡMaxMarks) {
-            expertMarksProgress = 90 + (expertMarks - expertⅠMaxMarks) / (expertⅡMaxMarks - expertⅠMaxMarks) * 90;
-        } else if (expertMarks <= expertⅢMaxMarks) {
-            expertMarksProgress = 180 + (expertMarks - expertⅡMaxMarks) / (expertⅢMaxMarks - expertⅡMaxMarks) * 90;
-        } else if (expertMarks <= expertⅣMaxMarks) {
-            expertMarksProgress = 270 + (expertMarks - expertⅢMaxMarks) / (expertⅣMaxMarks - expertⅢMaxMarks) * 90;
+        if (score >= 0 && score <= expertⅠMaxMarks) {
+            expertMarksProgress = score / expertⅠMaxMarks * 90;
+        } else if (score <= expertⅡMaxMarks) {
+            expertMarksProgress = 90 + (score - expertⅠMaxMarks) / (expertⅡMaxMarks - expertⅠMaxMarks) * 90;
+        } else if (score <= expertⅢMaxMarks) {
+            expertMarksProgress = 180 + (score - expertⅡMaxMarks) / (expertⅢMaxMarks - expertⅡMaxMarks) * 90;
+        } else if (score <= expertⅣMaxMarks) {
+            expertMarksProgress = 270 + (score - expertⅢMaxMarks) / (expertⅣMaxMarks - expertⅢMaxMarks) * 90;
         }
     }
 

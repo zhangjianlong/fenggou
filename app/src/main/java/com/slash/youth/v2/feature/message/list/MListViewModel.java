@@ -76,10 +76,7 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
             Observable.timer(300, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(d -> {
-                        itemViewModels.clear();
-                        conversationBeens.clear();
-                        pageSize = 0;
-                        loadData();
+                        initData();
                     });
         });
 
@@ -88,27 +85,28 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
             Observable.timer(500, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(d -> {
-                        itemViewModels.clear();
-                        conversationBeens.clear();
-                        pageSize = 0;
-                        loadData();
+                        initData();
                     });
         });
     }
 
     @Override
     public void onResume() {
-        itemViewModels.clear();
-        conversationBeens.clear();
-        pageSize = 0;
-        loadData();
         super.onResume();
+        initData();
     }
 
     @Override
     public void onDestroy() {
         Messenger.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    public void initData() {
+        itemViewModels.clear();
+        conversationBeens.clear();
+        pageSize = 0;
+        loadData();
     }
 
     private synchronized void loadData() {
@@ -123,61 +121,72 @@ public class MListViewModel extends BFViewModel<FrgMlistBinding> {
                     }
                 })
                 .subscribe(data -> {
-                    if (data.getList() != null)
-                        conversationBeens.addAll(data.getList());
+                    if (data.getList() != null) {
+                        Observable.from(data.getList())
+                                .filter(d -> {
+                                    if (d.getUid() == 1000) {
+                                        aideConversation = d;
+                                        return false;
+                                    } else if (d.getUid() == Long.valueOf(MsgManager.customerServiceUid)) {
+                                        serviceConversation = d;
+                                        return false;
+                                    }
+                                    return true;
+                                })
+                                .subscribe(a -> {
+                                    conversationBeens.add(a);
+                                });
+                    }
                 }, error -> {
                 }, () -> {
                     if (!isComplate) {
                         pageSize++;
                         loadData();
                     } else {
-                        if (conversationBeens.size() == 0) {
-                            conversationBeens.add(aideConversation);
-                            conversationBeens.add(serviceConversation);
-                            index = 0;
-                            Observable.from(conversationBeens)
-                                    .subscribe(data -> {
-                                        itemViewModels.add(new MListItemViewModel(activity, data, delConversationsUseCase, index));
-                                        index++;
-                                    }, error -> {
-                                        progress.dismiss();
-                                    }, () -> {
-                                        Collections.sort(itemViewModels, new SortComparator());
-                                        binding.recyclerView.getAdapter().notifyDataSetChanged();
-                                        progress.dismiss();
-                                    });
-                        } else
-                            Observable.from(conversationBeens)
-                                    .subscribe(data -> {
-                                        if (data.getUid() == 1000) {
-                                            aideConversation = data;
-                                            conversationBeens.remove(data);
-                                        } else if (data.getUid() == Long.valueOf(MsgManager.customerServiceUid)) {
-                                            serviceConversation = data;
-                                            conversationBeens.remove(data);
-                                        }
-                                    }, error -> {
-                                        progress.dismiss();
-                                    }, () -> {
-                                        conversationBeens.add(aideConversation);
-                                        conversationBeens.add(serviceConversation);
-                                        index = 0;
-                                        Observable.from(conversationBeens)
-                                                .subscribe(data -> {
-                                                    itemViewModels.add(new MListItemViewModel(activity, data, delConversationsUseCase, index));
-                                                    index++;
-                                                }, error -> {
-                                                    progress.dismiss();
-                                                }, () -> {
-                                                    Collections.sort(itemViewModels, new SortComparator());
-                                                    binding.recyclerView.getAdapter().notifyDataSetChanged();
-                                                    progress.dismiss();
-                                                });
-                                    });
-
+                        disposeData();
                     }
                 });
     }
+
+    private void disposeData() {
+        if (conversationBeens.size() == 0) {
+            conversationBeens.add(aideConversation);
+            conversationBeens.add(serviceConversation);
+            index = 0;
+            Observable.from(conversationBeens)
+                    .subscribe(data -> {
+                        itemViewModels.add(new MListItemViewModel(activity, data, delConversationsUseCase, index));
+                        index++;
+                    }, error -> {
+                        progress.dismiss();
+                    }, () -> {
+                        binding.recyclerView.getAdapter().notifyDataSetChanged();
+                        progress.dismiss();
+                    });
+        } else
+            Observable.from(conversationBeens)
+                    .subscribe(data -> {
+                    }, error -> {
+                        progress.dismiss();
+                    }, () -> {
+                        conversationBeens.add(aideConversation);
+                        conversationBeens.add(serviceConversation);
+                        index = 0;
+                        Observable.from(conversationBeens)
+                                .subscribe(data -> {
+                                    itemViewModels.add(new MListItemViewModel(activity, data, delConversationsUseCase, index));
+                                    index++;
+                                }, error -> {
+                                    progress.dismiss();
+                                }, () -> {
+                                    Collections.sort(itemViewModels, new SortComparator());
+                                    binding.recyclerView.getAdapter().notifyDataSetChanged();
+                                    progress.dismiss();
+                                });
+                    });
+
+    }
+
 
     public class SortComparator implements Comparator {
         @Override

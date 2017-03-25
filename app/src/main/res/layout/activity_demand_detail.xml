@@ -385,6 +385,7 @@
 
                     <FrameLayout
                         style="@style/App.Theme.layout"
+                        android:onClick="@{demandDetailModel.gotoUserInfo}"
                         android:paddingBottom="@dimen/app.padding.normal"
                         android:paddingTop="@dimen/app.padding.normal">
 

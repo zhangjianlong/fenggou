@@ -732,6 +732,7 @@ public class DemandDetailModel extends BaseObservable {
         mActivityDemandDetailBinding.tvCollection.setText("收藏");
     }
 
+
     /**
      * 设置未收藏状态
      */
