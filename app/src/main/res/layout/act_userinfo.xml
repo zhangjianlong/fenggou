@@ -16,21 +16,17 @@
         android:background="@android:color/transparent"
         tools:context="com.core.op.feature.main.MainActivity">
 
+        <include
+            layout="@layout/include_toolbar_alpha"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="viewModel.title" />
+
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:titleTextColor="@color/white"
-                app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </android.support.design.widget.AppBarLayout>
 

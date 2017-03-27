@@ -11,6 +11,7 @@ import javax.inject.Inject;
 @PerActivity
 public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
 
+    public String title;
 
     @Inject
     public UserInfoViewModel(RxAppCompatActivity activity) {
