@@ -1,6 +1,8 @@
 package com.slash.youth.data.api.transformer;
 
 
+import android.widget.Toast;
+
 import com.slash.youth.data.api.BaseResponse;
 import com.slash.youth.data.api.exception.RepositoryException;
 
@@ -33,24 +35,54 @@ public class ErrorTransformer<T> implements Observable.Transformer<BaseResponse<
 
             @Override
             public void call(Subscriber<? super T> subscriber) {
-                if (response.getRescode() != -1) {
-                    if (!subscriber.isUnsubscribed()) {
-                        subscriber.onNext(response.getData());
-                    }
-                } else {
-                    if (!subscriber.isUnsubscribed()) {
-                        subscriber.onError(new RepositoryException(response.getMsg()));
-                    }
-                    return;
+                String msg = "";
+                switch (response.getRescode()) {
+                    case 0:
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onNext(response.getData());
+                            subscriber.onCompleted();
+                        }
+                        return;
+                    case 1:
+                        msg = "请求失败！";
+                        break;
+                    case 2:
+                        msg = "参数错误！";
+                        break;
+                    case 3:
+                        msg = "无效token！";
+                        break;
+                    case 4:
+                        msg = "token超时！";
+                        break;
+                    case 5:
+                        msg = "无效的用户名密码！";
+                        break;
+                    case 6:
+                        msg = "用户存在！";
+                        break;
+                    case 7:
+                        msg = "无效的验证码！";
+                        break;
+                    case 8:
+                        msg = "无效的uid！";
+                        break;
+                    case 9:
+                        msg = "需要手机号登录！";
+                        break;
+                    case 10:
+                        msg = "未找到！";
+                        break;
+                    case 11:
+                        msg = "新用户！";
+                        break;
+                    case 50:
+                        msg = "标签已存在！";
+                        break;
                 }
-//                if (!response.getResponse().isSuccessful() || response.getBody() == null) {
-//                    subscriber.onError(new RepositoryException());
-//                } else if (!response.getBody().getStatus().equals("S")) {
-//                    subscriber.onError(new RepositoryException(response.getBody().getMessage()));
-//                }
 
                 if (!subscriber.isUnsubscribed()) {
-                    subscriber.onCompleted();
+                    subscriber.onError(new RepositoryException(msg));
                 }
             }
         });
