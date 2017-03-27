@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.slash.youth.v2.feature.bindingaccount.BindingViewModel" />
+    </data>
+
+    <LinearLayout
+        android:background="@color/app.theme.background_edf1f2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            app:title="@string/app.binding.phone"
+            app:titleTextColor="@color/black_light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.Toolbar>
+
+
+        <TextView
+            android:background="@color/app.theme.background_edf1f2"
+            style="@style/App.Theme.Linear.TvItem"
+            android:text="@string/app.binding.risk.hint"
+            />
+        <EditText
+            style="@style/App.Theme.Linear.EdItem"
+            android:hint="@string/app.binding.risk.hint" />
+    </LinearLayout>
+</layout>
