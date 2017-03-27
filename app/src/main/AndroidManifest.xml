@@ -175,21 +175,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".v2.feature.login.LoginActivity"
             android:label="登录页"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan" />
-
-
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="登录页"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan" />
-
-
         <activity android:name=".ui.activity.SlashProtocolActivity" />
         <activity
             android:name=".ui.activity.HomeActivity"
@@ -577,7 +572,8 @@
         <activity android:name=".DelManager" />
         <activity android:name=".Pub" />
         <activity android:name=".Splash" />
-        <activity android:name=".DelMessage"></activity>
+        <activity android:name=".DelMessage" />
+        <activity android:name=".UserInfo"></activity>
     </application>
 
 </manifest>
