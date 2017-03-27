@@ -11,6 +11,7 @@ import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.utils.PreferenceUtil;
+import com.core.op.lib.utils.RxCountDown;
 import com.core.op.lib.weight.progress.Progress;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActLoginBinding;
@@ -40,13 +41,16 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import rx.Subscriber;
 
 
 @PerActivity
 public class LoginViewModel extends BAViewModel<ActLoginBinding> {
     public final ObservableField<String> phoneNum = new ObservableField<>();
     public final ObservableField<String> verifyNum = new ObservableField<>();
+    public final ObservableField<String> sendVerifyText = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_login_verify));
     public final ObservableField<Boolean> agreeAgreement = new ObservableField<>(true);
+    public final ObservableField<Boolean> sendVerifyEnable = new ObservableField<>(true);
     private String tempPhoneNum;
     private String tempVerifyNum;
     private Progress progress;
@@ -137,11 +141,30 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
 
 
     public final ReplyCommand sendVerify = new ReplyCommand(() -> {
-        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_VERTIFYCODE);
         tempPhoneNum= phoneNum.get();
         if (!LoginCheckUtil.checkPhoeNumFormat(tempPhoneNum)){
             return;
         }
+        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_VERTIFYCODE);
+        RxCountDown.countdown(60).compose(activity.bindToLifecycle()).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onCompleted() {
+                sendVerifyEnable.set(true);
+                sendVerifyText.set(CommonUtils.getContext().getString(R.string.app_login_verify));
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                sendVerifyEnable.set(false);
+                sendVerifyText.set(integer+"S");
+            }
+        });
+
         tempPhoneNum = tempPhoneNum.trim();
         Map<String,String> map = new HashMap<>();
         map.put("phone",tempPhoneNum);
