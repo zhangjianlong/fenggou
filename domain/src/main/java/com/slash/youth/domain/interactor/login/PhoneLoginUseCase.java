@@ -1,7 +1,6 @@
 package com.slash.youth.domain.interactor.login;
 
 
-import com.slash.youth.domain.bean.CustomerService;
 import com.slash.youth.domain.bean.LoginResult;
 import com.slash.youth.domain.bean.PhoneLoginResultBean;
 import com.slash.youth.domain.executor.PostExecutionThread;
@@ -19,11 +18,11 @@ import rx.Observable;
  * @description
  * @createDate 2016/11/14
  */
-public class LoginResultUseCase extends UseCase<PhoneLoginResultBean> {
+public class PhoneLoginUseCase extends UseCase<PhoneLoginResultBean> {
     LoginRepository repository;
 
     @Inject
-    public LoginResultUseCase(LoginRepository repository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+    public PhoneLoginUseCase(LoginRepository repository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
         this.repository = repository;
     }
@@ -31,6 +30,6 @@ public class LoginResultUseCase extends UseCase<PhoneLoginResultBean> {
 
     @Override
     protected Observable<PhoneLoginResultBean> buildUseCaseObservable() {
-        return repository.login(params[0]);
+        return repository.phoneLogin(params[0]);
     }
 }
