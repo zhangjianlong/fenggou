@@ -224,6 +224,9 @@ public class ActivityLoginModel extends BaseObservable {
                 long uid = dataBean.data.uid;
 
                 if (dataBean.rescode == 0) {
+
+
+
                     //登陆成功，老用户
                     savaLoginState(uid, token, rongToken);
 

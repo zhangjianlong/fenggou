@@ -73,4 +73,20 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
+    <style name="App.Theme.Linear.EdItem">
+        <item name="android:textColorHint">@color/app.text.hint</item>
+        <item name="android:textColor">@color/app.text.black</item>
+        <item name="android:textSize">@dimen/app.text.normal</item>
+        <item name="android:padding">@dimen/app.padding.large13</item>
+        <item name="android:layout_marginLeft">@dimen/app.padding.large13</item>
+
+    </style>
+
+    <style name="App.Theme.Linear.TvItem">
+        <item name="android:textColor">@color/app.text.hint</item>
+        <item name="android:textSize">@dimen/app.text.normal</item>
+        <item name="android:padding">@dimen/app.padding.large13</item>
+
+    </style>
+
 </resources>

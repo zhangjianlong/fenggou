@@ -524,7 +524,7 @@ public class MySettingModel extends BaseObservable {
         }
 
 
-        Intent intentLoginActivity = new Intent(CommonUtils.getContext(), LoginActivity.class);
+        Intent intentLoginActivity = new Intent(CommonUtils.getContext(), com.slash.youth.v2.feature.login.LoginActivity.class);
         mySettingActivity.startActivity(intentLoginActivity);
 
     }

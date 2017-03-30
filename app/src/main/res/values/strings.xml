@@ -63,8 +63,12 @@
     <string name="app.login.phone.num.error">请输入正确的11位手机号码!</string>
     <string name="app.login.verify.code.suc">验证码已发送，请查收</string>
     <string name="app.login.verify.code.fail">验证码发送失败</string>
+    <string name="app.login.verify.code.error">验证码发送失败</string>
     <string name="app.logig.verify.code.error">验证码不能为空!</string>
     <string name="app.login.user.agreement">请同意用户协议</string>
+    <string name="app.login.fail">登录失败</string>
+    <string name="app.binding.phone">绑定手机号</string>
+    <string name="app.binding.risk.hint">为了您的交易安全,请绑定手机号</string>
 
 
     <array name="userinfo_tabs">

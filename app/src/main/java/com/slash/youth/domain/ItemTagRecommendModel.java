@@ -10,7 +10,6 @@ import com.slash.youth.R;
 import com.slash.youth.databinding.ItemTagRecommendBinding;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.global.SlashApplication;
-import com.slash.youth.ui.viewmodel.DemandDetailModel;
 import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.DistanceUtils;
 
