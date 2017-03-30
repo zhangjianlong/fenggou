@@ -3,6 +3,7 @@ package com.slash.youth.v2.feature.userinfo;
 import android.content.Context;
 import android.content.Intent;
 
+import com.core.op.lib.di.HasComponent;
 import com.slash.youth.R;
 import com.slash.youth.v2.base.BaseActivity;
 import com.slash.youth.databinding.ActUserinfoBinding;
@@ -17,7 +18,7 @@ import com.core.op.lib.utils.inject.RootView;
 import javax.inject.Inject;
 
 @RootView(R.layout.act_userinfo)
-public final class UserInfoActivity extends BaseActivity<UserInfoViewModel, ActUserinfoBinding> {
+public final class UserInfoActivity extends BaseActivity<UserInfoViewModel, ActUserinfoBinding> implements HasComponent<UserInfoComponent> {
 
     UserInfoComponent component;
 
@@ -37,5 +38,10 @@ public final class UserInfoActivity extends BaseActivity<UserInfoViewModel, ActU
 
     @AfterViews
     void afterViews() {
+    }
+
+    @Override
+    public UserInfoComponent getComponent() {
+        return component;
     }
 }

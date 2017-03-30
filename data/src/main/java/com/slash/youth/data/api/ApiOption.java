@@ -14,6 +14,7 @@ import com.slash.youth.data.api.cookie.cache.SetCookieCache;
 import com.slash.youth.data.api.cookie.persistence.SharedPrefsCookiePersistor;
 import com.slash.youth.data.util.AuthHeaderUtil;
 import com.slash.youth.data.util.NetUtil;
+import com.slash.youth.data.util.SpUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
@@ -89,6 +91,7 @@ public class ApiOption {
         }
 
         public Builder(Application application) {
+            Global.application = application;
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
             ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(application));
@@ -213,14 +216,14 @@ public class ApiOption {
         public Response intercept(Chain chain) throws IOException {
             final Request.Builder builder = chain.request().newBuilder();
             long timeMillis = System.currentTimeMillis();
-            SharedPreferences preferences = application.getSharedPreferences("slash_sp.config", Context.MODE_PRIVATE);
+
             SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
             String date = sdf.format(new Date(timeMillis));
             builder.addHeader("Date", date);
             builder.addHeader("Authorization", AuthHeaderUtil.getBasicAuthHeader(chain.request().method(), chain.request().url().url().toString(), date).trim());
-            builder.addHeader("uid", preferences.getLong(Global.UID, 0l) + "");
+            builder.addHeader("uid", SpUtil.readLong(Global.UID, 0l) + "");
             builder.addHeader("pass", "1");
-            builder.addHeader("token", preferences.getString(Global.TOKEN, ""));
+            builder.addHeader("token", SpUtil.readString(Global.TOKEN, ""));
             builder.addHeader("Content-Type", "application/json");
             Request request = builder.build();
             return chain.proceed(request);

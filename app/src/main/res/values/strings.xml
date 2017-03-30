@@ -66,4 +66,10 @@
     <string name="app.logig.verify.code.error">验证码不能为空!</string>
     <string name="app.login.user.agreement">请同意用户协议</string>
 
+
+    <array name="userinfo_tabs">
+        <item>个人简介</item>
+        <item>评价</item>
+        <item>最新任务</item>
+    </array>
 </resources>
