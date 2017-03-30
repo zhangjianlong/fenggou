@@ -1,8 +1,12 @@
 package com.slash.youth.v2.feature.login;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.databinding.ObservableField;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 
 import com.core.op.lib.base.BAViewModel;
@@ -15,6 +19,8 @@ import com.core.op.lib.utils.RxCountDown;
 import com.core.op.lib.weight.progress.Progress;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActLoginBinding;
+import com.slash.youth.domain.RongTokenBean;
+import com.slash.youth.domain.ThirdPartyLoginResultBean;
 import com.slash.youth.domain.UserInfoBean;
 import com.slash.youth.domain.bean.PhoneLoginResultBean;
 import com.slash.youth.domain.interactor.login.LoginResultUseCase;
@@ -31,10 +37,14 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.LoginCheckUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.bindingaccount.BindingActivity;
 import com.slash.youth.v2.feature.main.MainActivity;
 import com.slash.youth.v2.util.ShareKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,27 +66,26 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
     private Progress progress;
     VerifyUseCase verifyUseCase;
     PhoneLoginUseCase  phoneLoginCase;
+    private String QQ_access_token;//17301782584  18915521461
+    private String QQ_uid;//这个值应该取openid,而不是uid,为了避免大幅度改代码，不改变变量名
+    private String WEIXIN_access_token;
+    private String WEIXIN_unionid;//这个值应该取openid,而不是unionid,为了避免大幅度改代码，不改变变量名
+    private String WEIXIN_openid;//微信为了和WEB兼容，增加openid参数
+    private String QQ_nickname;
+    private String QQ_gender;
+    private String QQ_avatar;
+    private String QQ_province;
+    private String QQ_city;
+    private  String WEIXIN_nickname;
+    private String WEIXIN_gender;
+    private String WEIXIN_avatar;
+    private String WEIXIN_province;
+    private String WEIXIN_city;
+    private int thirdLoginPlatformType = -1;//WECHAT = 1    QQ = 2    WEIBO = 3
+    private final int QQTYPE = 2;
+    private final int WECHATTYPE = 1;
 
 
-    public final ReplyCommand help = new ReplyCommand(() -> {
-
-    });
-
-    public final ReplyCommand qqLogin = new ReplyCommand(() -> {
-
-    });
-
-    public final ReplyCommand weixinLogin = new ReplyCommand(() -> {
-
-    });
-
-    public final ReplyCommand protocol = new ReplyCommand(() -> {
-
-    });
-
-    public final ReplyCommand agreeProtocol = new ReplyCommand(() -> {
-
-    });
 
     public final ReplyCommand login = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_ENTER);
@@ -110,23 +119,17 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
                  switch (rescode){
                      case 0:
                          //登陆成功，老用户
-                         savaLoginState(uid, token, rongToken);
-                         //链接融云
-                         MsgManager.connectRongCloud(rongToken);
-                         SpUtils.setBoolean("showMoreDemandDialog", false);
-                         oldUserInfoCheck();
-                         break;
-                     case 7:
-                         ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_verify_code_error));
-                         break;
                      case 11:
                          //登陆成功，新用户
                          savaLoginState(uid, token, rongToken);
                          //链接融云
                          MsgManager.connectRongCloud(rongToken);
-                         SpUtils.setBoolean("showMoreDemandDialog", true);
-                         Intent intentPerfectInfoActivity = new Intent(activity, PerfectInfoActivity.class);
-                         activity.startActivity(intentPerfectInfoActivity);
+                         Intent intentHomeActivity2 = new Intent(activity, MainActivity.class);
+                         activity.startActivity(intentHomeActivity2);
+                         activity.finish();
+                         break;
+                     case 7:
+                         ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_verify_code_error));
                          break;
                      default:
                          ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_fail) );
@@ -206,43 +209,187 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
         SpUtils.setString("rongToken", rongToken);
     }
 
-    /**
-     * 根据是否设置了个人信息（真实姓名）和技能标签来跳转到不同的页面
-     */
-    private void oldUserInfoCheck() {
-        //这里需要真实姓名、用户的一级、二级和三级技能标签来做判断
-        UserInfoEngine.getMyUserInfo(new BaseProtocol.IResultExecutor<UserInfoBean>() {
-            @Override
-            public void execute(UserInfoBean dataBean) {
-                UserInfoBean.UInfo uinfo = dataBean.data.uinfo;
-                String realName = uinfo.name;
-                if (TextUtils.isEmpty(realName)) {
-                    Intent intentPerfectInfoActivity = new Intent(activity, PerfectInfoActivity.class);
-                    activity.startActivity(intentPerfectInfoActivity);
-                } else {
-                    String industry = uinfo.industry;
-                    String direction = uinfo.direction;
-                    String tag = uinfo.tag;
-                    if (!TextUtils.isEmpty(industry) && !TextUtils.isEmpty(direction) && !TextUtils.isEmpty(tag)) {
-                        Intent intentHomeActivity2 = new Intent(activity, MainActivity.class);
-                        activity.startActivity(intentHomeActivity2);
-                        if (com.slash.youth.ui.activity.LoginActivity.activity != null) {
-                            com.slash.youth.ui.activity.LoginActivity.activity.finish();
-                            com.slash.youth.ui.activity.LoginActivity.activity = null;
-                        }
-                    } else {
-                        Intent intentChooseSkillActivity = new Intent(activity, ChooseSkillActivity.class);
-                        activity.startActivity(intentChooseSkillActivity);
+
+    private UMAuthListener umAuthListener = new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+
+            UMShareAPI mShareAPI = UMShareAPI.get(activity);
+            switch (platform) {
+                case QQ:
+                    QQ_access_token = data.get("access_token");
+                    QQ_uid = data.get("openid");//通过日志发现， 这里的uid和openid是一样的
+                    SpUtils.setString("QQ_token", QQ_access_token);
+                    SpUtils.setString("QQ_uid", QQ_uid);
+                    if (TextUtils.isEmpty(QQ_access_token) || TextUtils.isEmpty(QQ_uid)) {
+                        ToastUtils.shortToast("QQ登录失败");
+                        return;
                     }
-                }
+                    mShareAPI.getPlatformInfo(activity, SHARE_MEDIA.QQ, umAuthListenerForUserInfo);
+                    break;
+                case WEIXIN:
+                    WEIXIN_access_token = data.get("access_token");
+                    WEIXIN_unionid = data.get("unionid");
+                    WEIXIN_openid = data.get("openid");//微信为了和WEB兼容，增加openid参数
+                    SpUtils.setString("WEIXIN_token", WEIXIN_access_token);
+                    SpUtils.setString("WEIXIN_uid", WEIXIN_unionid);
+                    SpUtils.setString("WEIXIN_openid", WEIXIN_openid);
+                    LogKit.v("WEIXIN_access_token:" + WEIXIN_access_token + " WEIXIN_unionid:" + WEIXIN_unionid + " WEIXIN_openid:" + WEIXIN_openid);
+                    if (TextUtils.isEmpty(WEIXIN_access_token) || TextUtils.isEmpty(WEIXIN_unionid)) {
+                        ToastUtils.shortToast("微信登录失败");
+                        return;
+                    }
+                    mShareAPI.getPlatformInfo(activity, SHARE_MEDIA.WEIXIN, umAuthListenerForUserInfo);
+                    break;
             }
+            ToastUtils.shortToast("登录成功！");
+        }
 
-            @Override
-            public void executeResultError(String result) {
-                LogKit.v("获取个人信息失败:" + result);
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            ToastUtils.shortToast("登录失败！");
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            ToastUtils.shortToast("登录失败！");
+        }
+    };
+
+    private UMAuthListener umAuthListenerForUserInfo = new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            switch (platform) {
+                case QQ:
+                    QQ_nickname = data.get("screen_name");
+                    String gender = data.get("gender");
+                    if (gender.equals("男")) {
+                        QQ_gender = "1";
+                    } else {
+                        QQ_gender = "2";
+                    }
+                    QQ_avatar = data.get("profile_image_url");
+                    QQ_province = data.get("province");
+                    QQ_city = data.get("city");
+                    thirdLoginPlatformType = 2;
+                    LoginManager.serverThirdPartyLogin(onThirdPartyLoginFinished, QQ_access_token, QQ_uid, thirdLoginPlatformType + "", null);
+                    break;
+                case WEIXIN:
+                    WEIXIN_nickname = data.get("screen_name");
+                    WEIXIN_gender = data.get("gender");
+                    WEIXIN_avatar = data.get("profile_image_url");
+                    WEIXIN_province = data.get("province");
+                    WEIXIN_city = data.get("city");
+                    thirdLoginPlatformType = 1;
+                    LoginManager.serverThirdPartyLogin(onThirdPartyLoginFinished, WEIXIN_access_token, WEIXIN_unionid, thirdLoginPlatformType + "", WEIXIN_openid);
+                    break;
             }
-        });
-    }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+        }
+    };
+
+    public BaseProtocol.IResultExecutor onThirdPartyLoginFinished = new BaseProtocol.IResultExecutor<ThirdPartyLoginResultBean>() {
+        @Override
+        public void execute(ThirdPartyLoginResultBean dataBean) {
+            switch(dataBean.rescode){
+                case 9:
+                    String _3ptoken = dataBean.data.token;
+                    if (_3ptoken.split("&").length <= 3) {
+                        _3ptoken = _3ptoken + "&" + WEIXIN_openid;
+                    }
+                    Bundle thirdPlatformBundle = new Bundle();
+                    thirdPlatformBundle.putString("_3ptoken", _3ptoken);
+                    String userInfo = "";
+                    if (thirdLoginPlatformType == 1) {
+                        //微信登录
+                        userInfo = WEIXIN_nickname + "&" + WEIXIN_gender + "&" + WEIXIN_avatar + "&" + WEIXIN_province + "&" + WEIXIN_city;
+                    } else if (thirdLoginPlatformType == 2) {
+                        //QQ登录
+                        userInfo = QQ_nickname + "&" + QQ_gender + "&" + QQ_avatar + "&" + QQ_province + "&" + QQ_city;
+                    } else {
+                        ToastUtils.shortToast("第三方平台 type 编号错误");
+                    }
+                    thirdPlatformBundle.putString("userInfo", userInfo);
+                    Intent bindingIntent= new Intent(activity, BindingActivity.class);
+                    bindingIntent.putExtras(thirdPlatformBundle);
+                    activity.startActivity(bindingIntent);
+                    break;
+                case 0:
+                    LogKit.v("已经登录过的用户");
+                    String token = dataBean.data.token;
+                    long uid = dataBean.data.uid;
+                    LoginManager.token = token;
+                    LoginManager.currentLoginUserId = uid;
+                    SpUtils.setString("token", token);
+                    SpUtils.setLong("uid", uid);
+                    //获取融云token，并连接融云
+                    MsgManager.getRongToken(new BaseProtocol.IResultExecutor<RongTokenBean>() {
+                        @Override
+                        public void execute(RongTokenBean dataBean) {
+                            String rongToken = dataBean.data.token;
+                            SpUtils.setString("rongToken", rongToken);
+                            //这里可能需要先断开和融云的链接，然后重新再链接
+                            MsgManager.connectRongCloud(rongToken);
+                        }
+
+                        @Override
+                        public void executeResultError(String result) {
+                            ToastUtils.shortToast("第三方登录，获取融云token失败:" + result);
+                        }
+                    }, uid + "", "111");//这里的phone随便传一直值
+                    Intent mainActIntent = new Intent(activity, MainActivity.class);
+                    activity.startActivity(mainActIntent);
+                default:
+                    ToastUtils.shortToast("服务端第三方登录失败");
+                    break;
+
+            }
+        }
+
+        @Override
+        public void executeResultError(String result) {
+        }
+    };
+
+    public final ReplyCommand weixinLogin = new ReplyCommand(() -> {
+        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_WECHAT_ENTER);
+        UMShareAPI mShareAPI = UMShareAPI.get(activity);
+        if (mShareAPI.isInstall(activity, SHARE_MEDIA.WEIXIN)) {
+            mShareAPI.doOauthVerify(activity, SHARE_MEDIA.WEIXIN, umAuthListener);
+        } else {
+            ToastUtils.shortToast("请先安装WEIXIN客户端");
+        }
+    });
 
 
+    public final ReplyCommand help = new ReplyCommand(() -> {
+
+    });
+
+    public final ReplyCommand qqLogin = new ReplyCommand(() -> {
+        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_QQ_ENTER);
+        UMShareAPI mShareAPI = UMShareAPI.get(activity);
+        if (mShareAPI.isInstall(activity, SHARE_MEDIA.QQ)) {
+            mShareAPI.doOauthVerify(activity, SHARE_MEDIA.QQ, umAuthListener);
+        } else {
+            ToastUtils.shortToast("请先安装QQ客户端");
+        }
+    });
+
+
+
+    public final ReplyCommand protocol = new ReplyCommand(() -> {
+
+    });
+
+    public final ReplyCommand agreeProtocol = new ReplyCommand(() -> {
+
+    });
 }

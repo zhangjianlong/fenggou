@@ -182,6 +182,12 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan" />
 
+        <activity
+            android:name=".v2.feature.bindingaccount.BindingActivity"
+            android:label="绑定页面"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustResize" />
+
         <!-- <activity -->
         <!-- android:name=".ui.activity.LoginActivity" -->
         <!-- android:label="登录页" -->

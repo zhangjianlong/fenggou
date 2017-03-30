@@ -30,6 +30,41 @@
             />
         <EditText
             style="@style/App.Theme.Linear.EdItem"
-            android:hint="@string/app.binding.risk.hint" />
+            android:hint="@string/app.login.phone" />
+
+        <RelativeLayout
+            android:layout_marginRight="@dimen/app.margin.large12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                style="@style/App.Theme.Linear.EdItem"
+                android:id="@+id/ed_verify_code"
+                android:hint="@string/app.login.verify.edit" />
+
+            <TextView
+                android:id="@+id/tv_get_verify_code"
+                style="@style/App.Theme.Linear.TvItem.WW"
+                android:layout_alignParentRight="true"
+                android:layout_alignBaseline="@+id/ed_verify_code"
+                android:text="@string/app.binding.get.verify.code"
+              />
+
+            <view
+                app:border_color="@color/app.theme.background_edf1f2"
+                android:layout_centerVertical="true"
+                android:layout_alignLeft="@+id/tv_get_verify_code"
+                android:layout_width="0.1dp"
+                android:layout_height="30dp"
+                />
+
+        </RelativeLayout>
+
+        <Button
+            style="@style/App.Theme.Linear.BtnItemWW"
+            android:id="@+id/btn_binding"
+            android:text="进入"
+            app:clickCommand="@{viewModel.binding}" />
+
     </LinearLayout>
 </layout>

@@ -17,6 +17,7 @@ import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
+import com.slash.youth.v2.feature.login.*;
 import com.slash.youth.v2.util.MessageKey;
 import com.umeng.analytics.MobclickAgent;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -134,7 +135,7 @@ public class GuidActivity extends BaseActivity {
 
         @Override
         public void onClick(View v) {
-            Intent intentLoginActivity = new Intent(CommonUtils.getContext(), LoginActivity.class);
+            Intent intentLoginActivity = new Intent(CommonUtils.getContext(), com.slash.youth.v2.feature.login.LoginActivity.class);
             startActivity(intentLoginActivity);
             finish();
         }

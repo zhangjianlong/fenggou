@@ -69,5 +69,6 @@
     <string name="app.login.fail">登录失败</string>
     <string name="app.binding.phone">绑定手机号</string>
     <string name="app.binding.risk.hint">为了您的交易安全,请绑定手机号</string>
+    <string name="app.binding.get.verify.code">获取验证码</string>
 
 </resources>
