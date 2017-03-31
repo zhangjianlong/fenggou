@@ -1,5 +1,7 @@
 package com.slash.youth.data;
 
+import android.app.Application;
+
 /**
  * @author op
  * @version 1.0
@@ -8,6 +10,7 @@ package com.slash.youth.data;
  */
 public class Global {
 
+    public static Application application;
 
     public static final String TOKEN = "token";
     public static final String RONG_TOKEN = "rongToken";

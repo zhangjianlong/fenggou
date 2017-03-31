@@ -71,4 +71,10 @@
     <string name="app.binding.risk.hint">为了您的交易安全,请绑定手机号</string>
     <string name="app.binding.get.verify.code">获取验证码</string>
 
+
+    <array name="userinfo_tabs">
+        <item>个人简介</item>
+        <item>评价</item>
+        <item>最新任务</item>
+    </array>
 </resources>
