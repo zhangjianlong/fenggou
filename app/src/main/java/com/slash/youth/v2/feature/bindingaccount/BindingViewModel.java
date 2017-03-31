@@ -46,6 +46,7 @@ import static io.rong.imlib.statistics.UserData.phone;
 @PerActivity
 public class BindingViewModel extends BAViewModel<ActBindingBinding> {
     public final ObservableField<String> phoneNum = new ObservableField<>();
+    public final ObservableField<String> title = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_binding_phone));
     public final ObservableField<String> sendVerifyText = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_binding_verify));
     public final ObservableField<Boolean> sendVerifyEnable = new ObservableField<>(true);
     public final ObservableField<String> verifyCode = new ObservableField<>();
@@ -86,7 +87,11 @@ public class BindingViewModel extends BAViewModel<ActBindingBinding> {
                 case 10:
                     bindingAccount();
                     break;
+                //手机号已绑定
+                case 0:
+                    AppToast.show(CommonUtils.getContext(), R.string.app_binding_account_already_binding);
                 default:
+                    AppToast.show(CommonUtils.getContext(), R.string.app_binding_account_check_fail);
                     break;
             }
 
