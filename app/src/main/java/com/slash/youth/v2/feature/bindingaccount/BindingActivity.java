@@ -2,8 +2,10 @@ package com.slash.youth.v2.feature.bindingaccount;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
 
 import com.slash.youth.R;
+import com.slash.youth.v2.base.BackActivity;
 import com.slash.youth.v2.base.BaseActivity;
 import com.slash.youth.databinding.ActBindingBinding;
 import com.slash.youth.v2.di.components.BindingComponent;
@@ -17,7 +19,7 @@ import com.core.op.lib.utils.inject.RootView;
 import javax.inject.Inject;
 
 @RootView(R.layout.act_binding)
-public final class BindingActivity extends BaseActivity<BindingViewModel, ActBindingBinding> {
+public final class BindingActivity extends BackActivity<BindingViewModel, ActBindingBinding> {
 
     BindingComponent component;
 
@@ -37,5 +39,10 @@ public final class BindingActivity extends BaseActivity<BindingViewModel, ActBin
 
     @AfterViews
     void afterViews() {
+    }
+
+    @Override
+    protected Toolbar setToolBar() {
+        return binding.toolbar.toolbar;
     }
 }

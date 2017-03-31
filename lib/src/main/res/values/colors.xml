@@ -53,6 +53,8 @@
     <color name="app.text.black6a6a6a">#6a6a6a</color>
     <color name="app.text.black9d9d9d">#9d9d9d</color>
     <color name="app.text.black333">#ff333333</color>
+    <color name="app.text.black999">#999999</color>
+    <color name="app.text.blackCCC">#CCCCCC</color>
     <color name="app.text.bg.yellow">#FEA501</color>
     <color name="app.text.bg.pink">#FD7071</color>
     <color name="app.text.bg.blue">#20C1FD</color>

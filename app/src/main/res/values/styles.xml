@@ -73,20 +73,45 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
-    <style name="App.Theme.Linear.EdItem">
-        <item name="android:textColorHint">@color/app.text.hint</item>
-        <item name="android:textColor">@color/app.text.black</item>
-        <item name="android:textSize">@dimen/app.text.normal</item>
-        <item name="android:padding">@dimen/app.padding.large13</item>
-        <item name="android:layout_marginLeft">@dimen/app.padding.large13</item>
 
+    <style name="App.Theme.RelativeLayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/app.margin.large12</item>
+        <item name="android:layout_marginLeft">@dimen/app.margin.large12</item>
     </style>
 
-    <style name="App.Theme.Linear.TvItem">
-        <item name="android:textColor">@color/app.text.hint</item>
+    <style name="App.Theme.EditText">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColorHint">@color/app.text.blackCCC</item>
+        <item name="android:textColor">@color/app.text.black</item>
+        <item name="android:textSize">@dimen/app.text.normal</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:padding">@dimen/app.padding.large13</item>
+        <item name="android:layout_marginBottom">@dimen/app.margin.normal</item>
+        <item name="android:layout_marginLeft">@dimen/app.margin.large12</item>
+        <item name="android:layout_marginTop">@dimen/app.margin.normal</item>
+    </style>
+
+    <style name="App.Theme.TextView">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/app.text.blackCCC</item>
         <item name="android:textSize">@dimen/app.text.normal</item>
         <item name="android:padding">@dimen/app.padding.large13</item>
+    </style>
 
+    <style name="App.Theme.Button">
+        <item name="android:background">@drawable/btn_background</item>
+        <item name="android:textColorHint">@color/app.text</item>
+        <item name="android:textColor">@color/app.text</item>
+        <item name="android:textSize">@dimen/app.text.normal</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:padding">@dimen/app.padding.large13</item>
+        <item name="android:layout_marginBottom">@dimen/app.margin.normal</item>
+        <item name="android:layout_marginLeft">@dimen/app.margin.large12</item>
+        <item name="android:layout_marginRight">@dimen/app.margin.large12</item>
+        <item name="android:layout_marginTop">@dimen/app.margin.large12</item>
     </style>
 
 

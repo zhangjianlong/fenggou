@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.slash.youth">
-    <!-- 友盟统计权限 -->
+    package="com.slash.youth"> <!-- 友盟统计权限 -->
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
@@ -181,6 +180,11 @@
             android:name=".v2.feature.login.LoginActivity"
             android:label="登录页"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.bindingaccount.BindingActivity"
+            android:label="绑定页面"
+            android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
 
         <!-- <activity -->
@@ -445,6 +449,7 @@
             android:name="io.rong.push.PushService"
             android:exported="true"
             android:process="io.rong.push">
+
             <!-- push进程，可以改名 -->
         </service>
 
@@ -452,6 +457,7 @@
         <receiver
             android:name="io.rong.push.PushReceiver"
             android:process="io.rong.push">
+
             <!-- 此处进程可以改名，名称需要和PushService所在进程统一 -->
             <!-- 心跳事件 -->
             <intent-filter>

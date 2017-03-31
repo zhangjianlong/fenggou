@@ -54,4 +54,9 @@ public class LoginRepositoryImp implements LoginRepository {
     public Observable<PhoneLoginResultBean> phoneLogin(String def) {
         return apiClient.phoneLogin(RetrofitUtil.toRequestBody(def));
     }
+
+    @Override
+    public Observable<ResCodeBean> checkBindng(String def) {
+        return apiClient.checkBinding(RetrofitUtil.toRequestBody(def));
+    }
 }

@@ -186,6 +186,7 @@
         android:layout_gravity="left"
         android:clickable="true"
         android:orientation="horizontal"
+            android:background="?attr/selectableItemBackgroundBorderless"
         app:clickCommand="@{viewModel.weixinLogin}">
 
 
@@ -211,6 +212,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
         android:orientation="horizontal"
         app:clickCommand="@{viewModel.qqLogin}">
 

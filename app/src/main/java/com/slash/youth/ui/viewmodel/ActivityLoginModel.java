@@ -437,7 +437,6 @@ public class ActivityLoginModel extends BaseObservable {
 
     public void qqLogin(View v) {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_QQ_ENTER);
-
 //        LoginManager.loginQQ(qqLoginUiListener, loginActivity);
         UMShareAPI mShareAPI = UMShareAPI.get(loginActivity);
         if (mShareAPI.isInstall(loginActivity, SHARE_MEDIA.QQ)) {

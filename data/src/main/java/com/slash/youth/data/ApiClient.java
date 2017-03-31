@@ -94,5 +94,8 @@ public interface ApiClient {
 
     @POST(UriMethod.NEW_DEMAND_ANDSERVICE_LIST)
     Observable<BaseResponse<BaseList<UserTaskBean>>> getUserTasks(@Body RequestBody requestBody);
+
+    @POST(UriMethod.CHECK_ACCOUNT_BINDING)
+    Observable<ResCodeBean> checkBinding(@Body RequestBody requestBody);
 }
 
