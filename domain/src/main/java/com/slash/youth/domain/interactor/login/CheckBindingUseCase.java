@@ -27,6 +27,6 @@ public class CheckBindingUseCase extends UseCase<ResCodeBean> {
 
     @Override
     protected Observable<ResCodeBean> buildUseCaseObservable() {
-        return repository.getVerifyCode(params[0]);
+        return repository.checkBindng(params[0]);
     }
 }

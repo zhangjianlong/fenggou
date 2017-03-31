@@ -90,6 +90,7 @@ public class BindingViewModel extends BAViewModel<ActBindingBinding> {
                 //手机号已绑定
                 case 0:
                     AppToast.show(CommonUtils.getContext(), R.string.app_binding_account_already_binding);
+                    break;
                 default:
                     AppToast.show(CommonUtils.getContext(), R.string.app_binding_account_check_fail);
                     break;
