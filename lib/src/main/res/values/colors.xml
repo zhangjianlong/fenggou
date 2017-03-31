@@ -34,7 +34,7 @@
 
     <color name="app.theme.colorPrimary">#31C5E4</color><!--toolbar背景顏色-->
     <color name="app.theme.colorPrimaryDark">#31C5E4</color><!--状态栏背景顏色-->
-    <color name="app.theme.colorAccent">#31C5E4</color><!--字体顏色-->
+    <color name="app.theme.colorAccent">#ffffff</color><!--字体顏色-->
     <color name="app.theme.textColorPrimary">#ffffff</color><!--toolbar title字体顏色-->
     <color name="app.theme.textColorSecondary">#fff</color>
 

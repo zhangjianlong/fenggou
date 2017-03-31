@@ -16,6 +16,7 @@ import com.slash.youth.domain.bean.PhoneLoginResultBean;
 import com.slash.youth.domain.bean.ResCodeBean;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
 
 import okhttp3.RequestBody;
@@ -90,5 +91,8 @@ public interface ApiClient {
 
     @POST(UriMethod.PHONE_NUMBER_LOGIN)
     Observable<PhoneLoginResultBean> phoneLogin(@Body RequestBody requestBody);
+
+    @POST(UriMethod.NEW_DEMAND_ANDSERVICE_LIST)
+    Observable<BaseResponse<BaseList<UserTaskBean>>> getUserTasks(@Body RequestBody requestBody);
 }
 

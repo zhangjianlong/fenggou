@@ -89,4 +89,11 @@
 
     </style>
 
+
+    <!--toolbar style-->
+    <style name="App.Theme.Widget.Toolbar.Back">
+        <!--<item name="android:homeAsUpIndicator">@mipmap/nav_back</item>-->
+    </style>
+
+
 </resources>

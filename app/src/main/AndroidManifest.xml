@@ -209,6 +209,9 @@
         <activity
             android:name=".v2.feature.message.MessageActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.userinfo.UserInfoActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.CityLocationActivity" />
         <activity android:name=".ui.activity.SubscribeActivity" />
         <activity

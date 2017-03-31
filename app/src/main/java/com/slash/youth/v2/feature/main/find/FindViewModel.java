@@ -132,6 +132,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
         binding.likeRecyclerView.setNestedScrollingEnabled(false);
         binding.scScroll.smoothScrollTo(0, 0);
         binding.swipeRefreshLayout.setColorSchemeResources(R.color.app_theme_colorPrimary);
+        binding.swipeRefreshLayout.setProgressViewOffset(true, -20, 100);
         binding.rlTitleBar.setAlpha(0);
         binding.scScroll.setOnScrollChangedListener(new RecycleScrollView.OnScrollChangedListener() {
             @Override

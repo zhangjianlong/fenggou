@@ -6,8 +6,8 @@ import android.content.Intent;
 import com.slash.youth.R;
 import com.slash.youth.v2.base.BaseActivity;
 import com.slash.youth.databinding.ActBindingBinding;
-import com.slash.youth.v2.di.components.DaggerBindingComponent;
 import com.slash.youth.v2.di.components.BindingComponent;
+import com.slash.youth.v2.di.components.DaggerBindingComponent;
 import com.slash.youth.v2.di.modules.BindingModule;
 
 import com.core.op.lib.utils.inject.AfterViews;

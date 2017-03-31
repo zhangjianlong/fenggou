@@ -29,6 +29,6 @@ public class UserInfoTabViewModel extends TabViewModel {
 
     @Override
     public void afterViews() {
-
+        super.afterViews();
     }
 }

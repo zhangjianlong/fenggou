@@ -14,6 +14,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.repository.MainRepository;
 
@@ -92,5 +93,10 @@ public class MainRepositoryImp implements MainRepository {
     @Override
     public Observable<PersonRelation> getPersonRelation(String def) {
         return apiClient.getPersonRelation(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<BaseList<UserTaskBean>> getUserTasks(String def) {
+        return apiClient.getUserTasks(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
     }
 }

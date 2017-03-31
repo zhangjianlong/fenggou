@@ -26,16 +26,17 @@
             app:tabMode="fixed"
             app:tabPadding="2dp"
             app:tabSelectedTextColor="@color/app.theme.colorPrimary"
-            app:tabTextColor="@color/app.theme.textColorSecondary" />
+            app:tabTextColor="@color/app.text.black" />
 
         <include layout="@layout/include_line_h" />
 
-        <android.support.v4.view.ViewPager
+        <com.core.op.lib.weight.navigation.AHBottomNavigationViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:fragments="@{viewModel.fragments}"
             app:frgManager="@{viewModel.fragmentManager}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:pageLimit="@{viewModel.pageLimit}"
             app:selectPosition="@{viewModel.selectPosition}"
             app:titles="@{viewModel.titles}" />

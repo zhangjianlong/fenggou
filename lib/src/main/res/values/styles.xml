@@ -98,10 +98,11 @@
         <item name="android:button">@null</item>
     </style>
 
-    <style name="App.Theme.Widget.Toolbar">
-        <item name="android:id">@id/toolbar</item>
+    <style name="App.Theme.Widget.Toolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?android:attr/actionBarSize</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:paddingTop">@dimen/app.toolbar.paddingTop</item>
         <item name="titleTextAppearance">@style/App.Theme.TextAppearance.Light.Toolbar.Title</item>
     </style>
 
@@ -259,15 +260,26 @@
         <item name="android:textSize">@dimen/app.text.tiny</item>
     </style>
 
+
+    <style name="App.Theme.TextAppearance.ww.tiny8">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/app.text.tiny8</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.ww.tiny10">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/app.text.tiny10</item>
+    </style>
     <style name="App.Theme.TextAppearance.ww.small">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/app.text.small</item>
     </style>
 
+
     <style name="App.Theme.TextAppearance.ww.normal">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/app.text.normal</item>
     </style>
 

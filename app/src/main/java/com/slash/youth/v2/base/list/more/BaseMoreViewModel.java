@@ -1,4 +1,4 @@
-package com.slash.youth.v2.base.list;
+package com.slash.youth.v2.base.list.more;
 
 
 import android.databinding.ObservableBoolean;
@@ -14,9 +14,10 @@ import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.weight.EmptyLayout;
 import com.slash.youth.BR;
 import com.slash.youth.R;
-import com.slash.youth.databinding.FrgBaselistBinding;
+import com.slash.youth.databinding.FrgBasemoreBinding;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.interactor.UseCase;
+import com.slash.youth.v2.base.list.BaseListItemViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
@@ -27,7 +28,13 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 
-public abstract class BaseListViewModel<V, T extends BaseListItemViewModel> extends BFViewModel<FrgBaselistBinding> {
+/**
+ * 加载更多viewModel
+ *
+ * @param <V>
+ * @param <T>
+ */
+public abstract class BaseMoreViewModel<V, T extends BaseListItemViewModel> extends BFViewModel<FrgBasemoreBinding> {
 
     public int pageSize = 0;
 
@@ -43,7 +50,6 @@ public abstract class BaseListViewModel<V, T extends BaseListItemViewModel> exte
 
     public final ItemViewSelector<T> itemView = itemView();
 
-    public final ObservableBoolean isRefreshing = new ObservableBoolean(false);
 
     public final ObservableField<Integer> errorVisible = new ObservableField(View.GONE);
 
@@ -57,18 +63,13 @@ public abstract class BaseListViewModel<V, T extends BaseListItemViewModel> exte
             loadMore();
     });
 
-    public final ReplyCommand onRefreshCommand = new ReplyCommand<>(() -> {
-        refresh();
-    });
 
-    public BaseListViewModel(RxAppCompatActivity activity) {
+    public BaseMoreViewModel(RxAppCompatActivity activity) {
         super(activity);
     }
 
     @Override
     public void afterViews() {
-        binding.swipeRefreshLayout.setProgressViewOffset(true, -20, 100);
-        binding.swipeRefreshLayout.setColorSchemeResources(R.color.app_theme_colorPrimary);
     }
 
     public void loadMore() {
@@ -110,7 +111,6 @@ public abstract class BaseListViewModel<V, T extends BaseListItemViewModel> exte
     }
 
     protected void loadData(boolean loadMore) {
-        isRefreshing.set(true);
         if (prams() != null) {
             useCase().setParams(JsonUtil.mapToJson(prams()));
         }
@@ -135,11 +135,9 @@ public abstract class BaseListViewModel<V, T extends BaseListItemViewModel> exte
                 .subscribe(d -> {
                     addData(d);
                 }, error -> {
-                    isRefreshing.set(false);
                 }, () -> {
                     doComplate();
                     binding.recyclerView.getAdapter().notifyDataSetChanged();
-                    isRefreshing.set(false);
                 });
 
     }

@@ -58,6 +58,8 @@
     <dimen name="app.image.height.xxlarge.140">140dp</dimen>
 
     <dimen name="app.text.tiny4">4sp</dimen>
+    <dimen name="app.text.tiny8">8sp</dimen>
+    <dimen name="app.text.tiny10">10sp</dimen>
     <dimen name="app.text.tiny">12sp</dimen>
     <dimen name="app.text.small">14sp</dimen>
     <dimen name="app.text.normal">16sp</dimen>
@@ -80,7 +82,7 @@
     <dimen name="app.tablayout.indicator.corner.radius.tiny">1dp</dimen>
     <dimen name="app.tablayout.indicator.corner.radius.normal">1.5dp</dimen>
 
-    <dimen name="app.toolbar.paddingTop">0dp</dimen>
+    <dimen name="app.toolbar.paddingTop">25dp</dimen>
 
     <dimen name="app.material.marginLeft">72dp</dimen>
 

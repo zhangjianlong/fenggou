@@ -206,6 +206,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
+        isStartDrag = false;
         if (!enabled) {
             reset();
         }
@@ -415,6 +416,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
             mNotify = false;
             startScaleUpAnimation(mRefreshListener);
         } else {
+            isStartDrag = false;
             setRefreshing(refreshing, false /* notify */);
         }
     }
@@ -989,6 +991,7 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
             setRefreshing(true, true /* notify */);
         } else {
             if (onDragListener != null) {
+                isStartDrag = false;
                 onDragListener.onStopDragNoRefresh();
             }
             // cancel refresh

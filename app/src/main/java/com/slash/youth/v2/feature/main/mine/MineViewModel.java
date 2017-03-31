@@ -24,7 +24,6 @@ import com.slash.youth.domain.interactor.main.MineInfoUseCase;
 import com.slash.youth.domain.interactor.main.OtherInfoUseCase;
 import com.slash.youth.domain.interactor.main.PersonRelationUseCase;
 import com.slash.youth.engine.LoginManager;
-import com.slash.youth.engine.MsgManager;
 import com.slash.youth.engine.UserInfoEngine;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.ui.activity.ApprovalActivity;
@@ -33,8 +32,6 @@ import com.slash.youth.ui.activity.MyCollectionActivity;
 import com.slash.youth.ui.activity.MyFriendActivtiy;
 import com.slash.youth.ui.activity.MyHelpActivity;
 import com.slash.youth.ui.activity.MySettingActivity;
-import com.slash.youth.ui.activity.MySkillManageActivity;
-import com.slash.youth.ui.activity.UserInfoActivity;
 import com.slash.youth.ui.activity.UserinfoEditorActivity;
 import com.slash.youth.ui.activity.VisitorsActivity;
 import com.slash.youth.ui.activity.WebViewActivity;
@@ -47,6 +44,7 @@ import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.feature.back.SimpleBackActivity;
 import com.slash.youth.v2.feature.back.SimpleBackPage;
 import com.slash.youth.v2.feature.dialog.mine.IdentificateDialog;
+import com.slash.youth.v2.feature.userinfo.UserInfoActivity;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -80,20 +78,33 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
     public final ReplyCommand personInfoClick = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_PERSON_MESSAGE);
-        Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
+//        Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
+        Bundle bundle = new Bundle();
+        if (null != data && null != data.get()) {
+            bundle.putString("phone", data.get().getPhone());
+            bundle.putString("skillTag", data.get().getTag());
+            bundle.putLong("Uid", LoginManager.currentLoginUserId);
+        }
+        UserInfoActivity.instance(activity, bundle);
+//        activity.startActivity(intentUserInfoActivity);
+    });
+
+    public final ReplyCommand identificateClick = new ReplyCommand(() -> {
+
+        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_PERSON_MESSAGE);
+        Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), com.slash.youth.ui.activity.UserInfoActivity.class);
+//        Bundle bundle = new Bundle();
         if (null != data && null != data.get()) {
             intentUserInfoActivity.putExtra("phone", data.get().getPhone());
             intentUserInfoActivity.putExtra("skillTag", data.get().getTag());
             intentUserInfoActivity.putExtra("Uid", LoginManager.currentLoginUserId);
         }
+//        UserInfoActivity.instance(activity, bundle);
         activity.startActivity(intentUserInfoActivity);
-    });
-
-    public final ReplyCommand identificateClick = new ReplyCommand(() -> {
-        Intent intentApprovalActivity = new Intent(CommonUtils.getContext(), ApprovalActivity.class);
-        intentApprovalActivity.putExtra("careertype", data.get().getCareertype());
-        intentApprovalActivity.putExtra("Uid", LoginManager.currentLoginUserId);
-        activity.startActivityForResult(intentApprovalActivity, UserInfoEngine.MY_USER_EDITOR);
+//        Intent intentApprovalActivity = new Intent(CommonUtils.getContext(), ApprovalActivity.class);
+//        intentApprovalActivity.putExtra("careertype", data.get().getCareertype());
+//        intentApprovalActivity.putExtra("Uid", LoginManager.currentLoginUserId);
+//        activity.startActivityForResult(intentApprovalActivity, UserInfoEngine.MY_USER_EDITOR);
     });
 
     public final ReplyCommand approvalClick = new ReplyCommand(() -> {

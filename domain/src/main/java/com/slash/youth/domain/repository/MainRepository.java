@@ -11,6 +11,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
 
 import rx.Observable;
@@ -44,5 +45,7 @@ public interface MainRepository {
     Observable<StatusBean> pubManager(String def);
 
     Observable<PersonRelation> getPersonRelation(String def);
+
+    Observable<BaseList<UserTaskBean>> getUserTasks(String def);
 
 }

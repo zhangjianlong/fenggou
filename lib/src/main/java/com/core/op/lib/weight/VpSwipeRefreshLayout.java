@@ -26,12 +26,6 @@ public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
     private boolean isMove;
     private boolean isFirstMove;
 
-    private OnStartDraggerListener onStartDraggerListener;
-
-    public void setOnStartDraggerListener(OnStartDraggerListener onStartDraggerListener) {
-        this.onStartDraggerListener = onStartDraggerListener;
-    }
-
     public VpSwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -83,24 +77,5 @@ public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
         }
         // 如果是Y轴位移大于X轴，事件交给swipeRefreshLayout处理。
         return super.onInterceptTouchEvent(ev);
-    }
-
-    private void move() {
-        if (isMove && isFirstMove) {
-            startDragger();
-            isFirstMove = false;
-        }
-    }
-
-    protected void startDragger() {
-        if (onStartDraggerListener != null) {
-            onStartDraggerListener.onStartDragger();
-        }
-    }
-
-    public interface OnStartDraggerListener {
-        void onStartDragger();
-
-        void onStopDragger();
     }
 }

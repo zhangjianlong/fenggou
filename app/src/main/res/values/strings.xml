@@ -69,7 +69,15 @@
     <string name="app.login.fail">登录失败</string>
     <string name="app.binding.phone">绑定手机号</string>
     <string name="app.binding.risk.hint">为了您的交易安全,请绑定手机号</string>
+    <string name="app.menu.userinfo">更多</string>
+    <string name="app.userinfo.relation">人脉:%1$2s</string>
+    <string name="app.userinfo.relationprogress">超过平台%1$d%%的用户</string>
 
+    <string name="app.userinfo.task">顺利成交:%1$2d单</string>
+    <string name="app.userinfo.taskprogress">共%1$d单任务</string>
+
+    <string name="app.userinfo.service">服务力:%1$2s星</string>
+    <string name="app.userinfo.serviceprogress">平台平均为%1$s星</string>
 
     <array name="userinfo_tabs">
         <item>个人简介</item>
