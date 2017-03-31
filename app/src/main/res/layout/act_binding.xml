@@ -21,6 +21,8 @@
             layout="@layout/include_toolbar_alpha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textColorPrimary="@color/app.text.black.alpha.66"
             app:toolTitle="@{viewModel.title}" />
 
         <TextView

@@ -14,6 +14,7 @@ import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.utils.RxCountDown;
 import com.core.op.lib.weight.progress.Progress;
 import com.slash.youth.R;
+import com.slash.youth.data.util.SpUtil;
 import com.slash.youth.databinding.ActBindingBinding;
 import com.slash.youth.domain.bean.PhoneLoginResultBean;
 import com.slash.youth.domain.interactor.login.CheckBindingUseCase;
@@ -219,8 +220,8 @@ public class BindingViewModel extends BAViewModel<ActBindingBinding> {
         LoginManager.token = token;
         LoginManager.rongToken = rongToken;
 
-        SpUtils.setLong("uid", uid);
-        SpUtils.setString("token", token);
-        SpUtils.setString("rongToken", rongToken);
+        SpUtil.write("uid", uid);
+        SpUtil.write("token", token);
+        SpUtil.write("rongToken", rongToken);
     }
 }

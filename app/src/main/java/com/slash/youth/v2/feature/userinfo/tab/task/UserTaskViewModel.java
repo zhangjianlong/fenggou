@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+
 @PerActivity
 public class UserTaskViewModel extends BaseMoreViewModel<UserTaskBean, UserTaskItemViewModel> {
 

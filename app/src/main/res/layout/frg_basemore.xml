@@ -14,7 +14,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app.theme.background_edf1f2">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
