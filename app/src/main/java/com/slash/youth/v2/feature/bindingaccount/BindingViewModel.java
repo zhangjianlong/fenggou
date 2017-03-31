@@ -1,10 +1,13 @@
 package com.slash.youth.v2.feature.bindingaccount;
 
 
+import android.content.Intent;
 import android.databinding.ObservableField;
+import android.os.Bundle;
 
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.base.BViewModel;
+import com.core.op.lib.base.OnDialogLisetener;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.utils.AppToast;
@@ -14,10 +17,19 @@ import com.core.op.lib.utils.RxCountDown;
 import com.core.op.lib.weight.progress.Progress;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActBindingBinding;
+import com.slash.youth.domain.bean.PhoneLoginResultBean;
 import com.slash.youth.domain.interactor.login.CheckBindingUseCase;
+import com.slash.youth.domain.interactor.login.PhoneLoginUseCase;
 import com.slash.youth.domain.interactor.login.VerifyUseCase;
+import com.slash.youth.engine.LoginManager;
+import com.slash.youth.engine.MsgManager;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.LoginCheckUtil;
+import com.slash.youth.utils.SpUtils;
+import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.feature.dialog.common.CommonDialog;
+import com.slash.youth.v2.feature.dialog.common.CommonViewModel;
+import com.slash.youth.v2.feature.main.MainActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.HashMap;
@@ -26,6 +38,10 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import rx.Subscriber;
+
+import static com.slash.youth.engine.LoginManager.rongToken;
+import static io.rong.imlib.statistics.UserData.getPicturePathFromQuery;
+import static io.rong.imlib.statistics.UserData.phone;
 
 @PerActivity
 public class BindingViewModel extends BAViewModel<ActBindingBinding> {
@@ -37,7 +53,13 @@ public class BindingViewModel extends BAViewModel<ActBindingBinding> {
     private String tempVerifyCode;
     private VerifyUseCase verifyUseCase;
     private CheckBindingUseCase checkBindingUseCase;
+    private PhoneLoginUseCase loginUseCase;
     private Progress progress;
+    private CommonDialog commonDialog;
+    private String userInfo;
+    private String _3ptoken;
+    private int platformType;
+
 
     public final ReplyCommand binding = new ReplyCommand(() -> {
         tempVerifyCode = verifyCode.get();
@@ -51,15 +73,18 @@ public class BindingViewModel extends BAViewModel<ActBindingBinding> {
         progress.show();
         Map<String, String> map = new HashMap<>();
         map.put("phone", tempPhoneNum);
-        map.put("loginPlatform", "2");
+        map.put("loginPlatform", platformType + "");
         checkBindingUseCase.setParams(JsonUtil.mapToJson(map));
         checkBindingUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            progress.dismiss();
             switch (data.getRescode()) {
                 //手机号已注册，未绑定
                 case 1:
+                    openDialog();
                     break;
                 //手机号未注册
                 case 10:
+                    bindingAccount();
                     break;
                 default:
                     break;
@@ -69,6 +94,11 @@ public class BindingViewModel extends BAViewModel<ActBindingBinding> {
 
 
     });
+
+    private void openDialog() {
+        if (!commonDialog.isShowing())
+            commonDialog.show();
+    }
 
 
     public final ReplyCommand sendVerify = new ReplyCommand(() -> {
@@ -110,17 +140,88 @@ public class BindingViewModel extends BAViewModel<ActBindingBinding> {
                     }
                 });
     });
-    
+
 
     @Inject
-    public BindingViewModel(RxAppCompatActivity activity, CheckBindingUseCase checkBindingUseCase, VerifyUseCase verifyUseCase) {
+    public BindingViewModel(RxAppCompatActivity activity,
+                            CheckBindingUseCase checkBindingUseCase,
+                            VerifyUseCase verifyUseCase, PhoneLoginUseCase loginUseCase,
+                            CommonDialog commonDialog) {
         super(activity);
         this.verifyUseCase = verifyUseCase;
         this.checkBindingUseCase = checkBindingUseCase;
+        this.commonDialog = commonDialog;
+        this.loginUseCase = loginUseCase;
     }
 
     @Override
     public void afterViews() {
+        Bundle bundle = activity.getIntent().getExtras();
+        if (bundle != null) {
+            userInfo = bundle.getString("userInfo");
+            _3ptoken = bundle.getString("3ptoken");
+            platformType = bundle.getInt("platformType");
+        }
+        commonDialog.initValue(CommonUtils.getContext().getString(R.string.app_binding_account_binding));
+        commonDialog.setOnDialogLisetener(new OnDialogLisetener() {
+            @Override
+            public void onConfirm() {
+                bindingAccount();
+            }
 
+            @Override
+            public void onCancel() {
+                activity.finish();
+            }
+        });
+    }
+
+
+    private void bindingAccount() {
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", tempPhoneNum);
+        map.put("pin", tempVerifyCode);
+        map.put("3pToken", _3ptoken);
+        map.put("userInfo", userInfo);
+        loginUseCase.setParams(JsonUtil.mapToJson(map));
+        loginUseCase.execute().compose(activity.bindToLifecycle())
+                .subscribe(data -> {
+                    if (data.getData() == null) {
+                        ToastUtils.shortToast("登录失败");
+                        return;
+                    }
+                    PhoneLoginResultBean.Data data1 = data.getData();
+                    String rongToken = data1.getRongToken();//融云token
+                    String token = data1.getToken();
+                    long uid = data1.getUid();
+                    switch (data.getRescode()) {
+                        case 11:
+                            break;
+                        case 0:
+                            MsgManager.connectRongCloud(rongToken);
+                            savaLoginState(uid, token, rongToken);
+                            Intent mainActIntent = new Intent(activity, MainActivity.class);
+                            activity.startActivity(mainActIntent);
+                            activity.finish();
+                            break;
+                        case 7:
+                            ToastUtils.shortToast("验证码错误");
+                            break;
+                        default:
+                            break;
+                    }
+
+                });
+    }
+
+
+    private void savaLoginState(long uid, String token, String rongToken) {
+        LoginManager.currentLoginUserId = uid;
+        LoginManager.token = token;
+        LoginManager.rongToken = rongToken;
+
+        SpUtils.setLong("uid", uid);
+        SpUtils.setString("token", token);
+        SpUtils.setString("rongToken", rongToken);
     }
 }

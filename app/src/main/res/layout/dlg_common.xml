@@ -21,15 +21,17 @@
             style="@style/App.Theme.TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
-
+            android:layout_marginTop="@dimen/app.margin.small"
+            android:gravity="center"
+            android:text="@{viewModel.title}" />
 
         <TextView
             android:id="@+id/tv_hint"
             style="@style/App.Theme.TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="@{viewModel.hint}" />
 
         <FrameLayout
             android:layout_width="match_parent"

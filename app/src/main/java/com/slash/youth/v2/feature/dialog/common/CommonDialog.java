@@ -1,5 +1,7 @@
 package com.slash.youth.v2.feature.dialog.common;
 
+import android.view.Gravity;
+
 import com.core.op.lib.base.BDialog;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.RootView;
@@ -15,7 +17,10 @@ public final class CommonDialog extends BaseDialog<CommonViewModel, DlgCommonBin
 
     @Inject
     public CommonDialog(RxAppCompatActivity activity, CommonViewModel viewModel) {
-        super(BDialog.newDialog(activity), viewModel);
+        super(BDialog.newDialog(activity)
+                .setGravity(Gravity.CENTER)
+                .setMargin(100, 0, 100, 0)
+                .setCancelable(false), viewModel);
     }
 
     @AfterViews
@@ -24,5 +29,9 @@ public final class CommonDialog extends BaseDialog<CommonViewModel, DlgCommonBin
 
     public void initValue(String title, String content) {
         viewModel.initValue(title, content);
+    }
+
+    public void initValue(String content) {
+        viewModel.initValue(content);
     }
 }

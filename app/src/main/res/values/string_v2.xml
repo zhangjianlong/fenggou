@@ -15,4 +15,9 @@
 
     <!--BindingAct-->
     <string name="app.binding.verify">获取验证码</string>
+    <string name="app.binding.account.binding">该手机号已注册，确认需要绑定么？</string>
+
+    <!--CommonDialog-->
+    <string name="app.common.dialog.title">温馨提示</string>
+    <string name="app.common.dialog.hint">确定退出么？</string>
 </resources>

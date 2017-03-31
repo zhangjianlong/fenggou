@@ -65,7 +65,7 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
     private String tempVerifyNum;
     private Progress progress;
     VerifyUseCase verifyUseCase;
-    PhoneLoginUseCase  phoneLoginCase;
+    PhoneLoginUseCase phoneLoginCase;
     private String QQ_access_token;//17301782584  18915521461
     private String QQ_uid;//这个值应该取openid,而不是uid,为了避免大幅度改代码，不改变变量名
     private String WEIXIN_access_token;
@@ -76,7 +76,7 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
     private String QQ_avatar;
     private String QQ_province;
     private String QQ_city;
-    private  String WEIXIN_nickname;
+    private String WEIXIN_nickname;
     private String WEIXIN_gender;
     private String WEIXIN_avatar;
     private String WEIXIN_province;
@@ -86,66 +86,65 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
     private final int WECHATTYPE = 1;
 
 
-
     public final ReplyCommand login = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_ENTER);
         tempVerifyNum = verifyNum.get();
         tempPhoneNum = phoneNum.get();
-        if (!LoginCheckUtil.checkLogin(tempPhoneNum,tempVerifyNum,agreeAgreement.get())){
+        if (!LoginCheckUtil.checkLogin(tempPhoneNum, tempVerifyNum, agreeAgreement.get())) {
             return;
         }
         tempVerifyNum = tempVerifyNum.trim();
         tempPhoneNum = tempPhoneNum.trim();
         progress = Progress.create(activity).setStyle(Progress.Style.SPIN_INDETERMINATE);
         progress.show();
-        Map<String,String> map = new HashMap<>();
-        map.put("phone",tempPhoneNum);
-        map.put("pin",tempVerifyNum);
-        map.put("3pToken","");
-        map.put("userInfo","");
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", tempPhoneNum);
+        map.put("pin", tempVerifyNum);
+        map.put("3pToken", "");
+        map.put("userInfo", "");
         phoneLoginCase.setParams(JsonUtil.mapToJson(map));
-             phoneLoginCase.execute().compose(activity.bindToLifecycle()).subscribe(data->{
-                 if (data!=null&&data.getData()==null){
-                     ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_fail));
-                     return;
-                 }
-                 PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_PHONE, tempPhoneNum);
-                 LoginManager.currentLoginUserPhone = tempPhoneNum;
-                 int rescode = data.getRescode();
-                 PhoneLoginResultBean.Data  loginRes = data.getData();
-                 String rongToken = loginRes.getRongToken();//融云token
-                 String token = loginRes.getToken();
-                 long uid = loginRes.getUid();
-                 switch (rescode){
-                     case 0:
-                         //登陆成功，老用户
-                     case 11:
-                         //登陆成功，新用户
-                         savaLoginState(uid, token, rongToken);
-                         //链接融云
-                         MsgManager.connectRongCloud(rongToken);
-                         Intent intentHomeActivity2 = new Intent(activity, MainActivity.class);
-                         activity.startActivity(intentHomeActivity2);
-                         activity.finish();
-                         break;
-                     case 7:
-                         ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_verify_code_error));
-                         break;
-                     default:
-                         ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_fail) );
-                         break;
-                 }
-        },error->{
+        phoneLoginCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            if (data != null && data.getData() == null) {
+                ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_fail));
+                return;
+            }
+            PreferenceUtil.write(CommonUtils.getContext(), ShareKey.USER_PHONE, tempPhoneNum);
+            LoginManager.currentLoginUserPhone = tempPhoneNum;
+            int rescode = data.getRescode();
+            PhoneLoginResultBean.Data loginRes = data.getData();
+            String rongToken = loginRes.getRongToken();//融云token
+            String token = loginRes.getToken();
+            long uid = loginRes.getUid();
+            switch (rescode) {
+                case 0:
+                    //登陆成功，老用户
+                case 11:
+                    //登陆成功，新用户
+                    savaLoginState(uid, token, rongToken);
+                    //链接融云
+                    MsgManager.connectRongCloud(rongToken);
+                    Intent intentHomeActivity2 = new Intent(activity, MainActivity.class);
+                    activity.startActivity(intentHomeActivity2);
+                    activity.finish();
+                    break;
+                case 7:
+                    ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_verify_code_error));
+                    break;
+                default:
+                    ToastUtils.shortToast(CommonUtils.getContext().getString(R.string.app_login_fail));
+                    break;
+            }
+        }, error -> {
             progress.dismiss();
-        },()->{
+        }, () -> {
             progress.dismiss();
         });
     });
 
 
     public final ReplyCommand sendVerify = new ReplyCommand(() -> {
-        tempPhoneNum= phoneNum.get();
-        if (!LoginCheckUtil.checkPhoeNumFormat(tempPhoneNum)){
+        tempPhoneNum = phoneNum.get();
+        if (!LoginCheckUtil.checkPhoeNumFormat(tempPhoneNum)) {
             return;
         }
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.REGISTER_CLICK_VERTIFYCODE);
@@ -164,22 +163,22 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
             @Override
             public void onNext(Integer integer) {
                 sendVerifyEnable.set(false);
-                sendVerifyText.set(integer+"S");
+                sendVerifyText.set(integer + "S");
             }
         });
 
         tempPhoneNum = tempPhoneNum.trim();
-        Map<String,String> map = new HashMap<>();
-        map.put("phone",tempPhoneNum);
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", tempPhoneNum);
         verifyUseCase.setParams(JsonUtil.mapToJson(map));
         verifyUseCase.execute().compose(activity.bindToLifecycle())
-                .subscribe(data->{
-                   switch (data.getRescode()){
-                       case 0:
-                           AppToast.show(CommonUtils.getContext(), R.string.app_login_verify_code_suc);
-                           break;
-                       default:
-                           AppToast.show(CommonUtils.getContext(), R.string.app_login_verify_code_fail);
+                .subscribe(data -> {
+                    switch (data.getRescode()) {
+                        case 0:
+                            AppToast.show(CommonUtils.getContext(), R.string.app_login_verify_code_suc);
+                            break;
+                        default:
+                            AppToast.show(CommonUtils.getContext(), R.string.app_login_verify_code_fail);
                     }
                 });
     });
@@ -187,9 +186,9 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
 
     @Inject
     public LoginViewModel(RxAppCompatActivity activity,
-                          VerifyUseCase verifyUseCase,PhoneLoginUseCase phoneLoginCase) {
+                          VerifyUseCase verifyUseCase, PhoneLoginUseCase phoneLoginCase) {
         super(activity);
-        this.verifyUseCase =verifyUseCase;
+        this.verifyUseCase = verifyUseCase;
         this.phoneLoginCase = phoneLoginCase;
     }
 
@@ -270,7 +269,7 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
                     QQ_avatar = data.get("profile_image_url");
                     QQ_province = data.get("province");
                     QQ_city = data.get("city");
-                    thirdLoginPlatformType = 2;
+                    thirdLoginPlatformType = QQTYPE;
                     LoginManager.serverThirdPartyLogin(onThirdPartyLoginFinished, QQ_access_token, QQ_uid, thirdLoginPlatformType + "", null);
                     break;
                 case WEIXIN:
@@ -279,7 +278,7 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
                     WEIXIN_avatar = data.get("profile_image_url");
                     WEIXIN_province = data.get("province");
                     WEIXIN_city = data.get("city");
-                    thirdLoginPlatformType = 1;
+                    thirdLoginPlatformType = WECHATTYPE;
                     LoginManager.serverThirdPartyLogin(onThirdPartyLoginFinished, WEIXIN_access_token, WEIXIN_unionid, thirdLoginPlatformType + "", WEIXIN_openid);
                     break;
             }
@@ -297,7 +296,7 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
     public BaseProtocol.IResultExecutor onThirdPartyLoginFinished = new BaseProtocol.IResultExecutor<ThirdPartyLoginResultBean>() {
         @Override
         public void execute(ThirdPartyLoginResultBean dataBean) {
-            switch(dataBean.rescode){
+            switch (dataBean.rescode) {
                 case 9:
                     String _3ptoken = dataBean.data.token;
                     if (_3ptoken.split("&").length <= 3) {
@@ -316,7 +315,9 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
                         ToastUtils.shortToast("第三方平台 type 编号错误");
                     }
                     thirdPlatformBundle.putString("userInfo", userInfo);
-                    Intent bindingIntent= new Intent(activity, BindingActivity.class);
+                    thirdPlatformBundle.putString("3ptoken", _3ptoken);
+                    thirdPlatformBundle.putInt("platformType", thirdLoginPlatformType);
+                    Intent bindingIntent = new Intent(activity, BindingActivity.class);
                     bindingIntent.putExtras(thirdPlatformBundle);
                     activity.startActivity(bindingIntent);
                     break;
@@ -345,6 +346,7 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
                     }, uid + "", "111");//这里的phone随便传一直值
                     Intent mainActIntent = new Intent(activity, MainActivity.class);
                     activity.startActivity(mainActIntent);
+                    break;
                 default:
                     ToastUtils.shortToast("服务端第三方登录失败");
                     break;
@@ -381,7 +383,6 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
             ToastUtils.shortToast("请先安装QQ客户端");
         }
     });
-
 
 
     public final ReplyCommand protocol = new ReplyCommand(() -> {
