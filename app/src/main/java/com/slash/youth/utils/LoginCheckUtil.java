@@ -43,4 +43,17 @@ public class LoginCheckUtil {
         }
         return true;
     }
+
+
+    public static  boolean checkBinding(String phone,String verifyCode){
+        if (!checkPhoeNumFormat(phone)){
+            return false;
+        }
+        if (StrUtil.isEmpty(verifyCode)){
+            AppToast.show(CommonUtils.getContext(),CommonUtils.getContext().getString(R.string.app_logig_verify_code_error));
+            return  false;
+        }
+
+        return true;
+    }
 }

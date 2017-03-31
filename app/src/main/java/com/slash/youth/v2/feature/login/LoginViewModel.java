@@ -242,7 +242,6 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
                     mShareAPI.getPlatformInfo(activity, SHARE_MEDIA.WEIXIN, umAuthListenerForUserInfo);
                     break;
             }
-            ToastUtils.shortToast("登录成功！");
         }
 
         @Override

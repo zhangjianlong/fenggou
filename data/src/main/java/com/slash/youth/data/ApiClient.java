@@ -90,5 +90,8 @@ public interface ApiClient {
 
     @POST(UriMethod.PHONE_NUMBER_LOGIN)
     Observable<PhoneLoginResultBean> phoneLogin(@Body RequestBody requestBody);
+
+    @POST(UriMethod.CHECK_ACCOUNT_BINDING)
+    Observable<ResCodeBean> checkBinding(@Body RequestBody requestBody);
 }
 

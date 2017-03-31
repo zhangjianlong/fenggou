@@ -68,6 +68,9 @@ public class UriMethod {
     //变更手机号
     public static final String UPDATE_VERIFICATION_PHONE_VERIFICATION_CODE = "auth/v1/update/phone";
 
+    //检查手机号是否已经绑定
+    public static final String CHECK_ACCOUNT_BINDING = "auth/v1/check/phone";
+
     //手机号登录
     public static final String PHONE_NUMBER_LOGIN = "auth/v1/login/phone";
     //token登录

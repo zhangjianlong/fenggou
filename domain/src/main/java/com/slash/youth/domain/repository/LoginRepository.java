@@ -18,4 +18,6 @@ public interface LoginRepository {
     Observable<ResCodeBean> getVerifyCode(String def);
 
     Observable<PhoneLoginResultBean> phoneLogin(String def);
+
+    Observable<ResCodeBean> checkBindng(String def);
 }

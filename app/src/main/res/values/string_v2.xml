@@ -12,4 +12,7 @@
     <string name="app.login.third">同第三方登录</string>
     <string name="app.login.weixin">微信登录</string>
     <string name="app.login.qq">QQ登录</string>
+
+    <!--BindingAct-->
+    <string name="app.binding.verify">获取验证码</string>
 </resources>
