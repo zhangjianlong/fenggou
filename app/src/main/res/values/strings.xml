@@ -59,16 +59,7 @@
     <string name="float_win_title">温馨提示</string>
     <string name="float_win_msg">为了该软件的正常使用，请前往设置/应用管理/斜杠青年，打开该软件的悬浮框权限</string>
 
-    <string name="app.login.phone.error">手机号不能为空!</string>
-    <string name="app.login.phone.num.error">请输入正确的11位手机号码!</string>
-    <string name="app.login.verify.code.suc">验证码已发送，请查收</string>
-    <string name="app.login.verify.code.fail">验证码发送失败</string>
-    <string name="app.login.verify.code.error">验证码发送失败</string>
-    <string name="app.logig.verify.code.error">验证码不能为空!</string>
-    <string name="app.login.user.agreement">请同意用户协议</string>
-    <string name="app.login.fail">登录失败</string>
-    <string name="app.binding.phone">绑定手机号</string>
-    <string name="app.binding.risk.hint">为了您的交易安全,请绑定手机号</string>
+
     <string name="app.menu.userinfo">更多</string>
     <string name="app.userinfo.relation">人脉:%1$2s</string>
     <string name="app.userinfo.relationprogress">超过平台%1$d%%的用户</string>
@@ -84,4 +75,38 @@
         <item>评价</item>
         <item>最新任务</item>
     </array>
+
+    <string name="app.error.customservice">获取客服UID失败</string>
+
+    <string name="app.login.help">遇到问题</string>
+    <string name="app.login.phone">输入您的手机号</string>
+    <string name="app.login.verify.edit">输入验证码</string>
+    <string name="app.login.verify">验证码</string>
+    <string name="app.login.login">进入</string>
+    <string name="app.login.agredd">同意《用户协议》</string>
+    <string name="app.login.third">同第三方登录</string>
+    <string name="app.login.weixin">微信登录</string>
+    <string name="app.login.qq">QQ登录</string>
+
+    <!--BindingAct-->
+    <string name="app.binding.verify">获取验证码</string>
+    <string name="app.binding.account.binding">该手机号已注册，确认需要绑定么？</string>
+    <string name="app.binding.account.already.binding">该手机号已绑定，请更换其他手机号</string>
+    <string name="app.binding.account.check.fail">查询失败，请稍后再试</string>
+
+    <string name="app.login.phone.error">手机号不能为空!</string>
+    <string name="app.login.phone.num.error">请输入正确的11位手机号码!</string>
+    <string name="app.login.verify.code.suc">验证码已发送，请查收</string>
+    <string name="app.login.verify.code.fail">验证码发送失败</string>
+    <string name="app.login.verify.code.error">验证码发送失败</string>
+    <string name="app.logig.verify.code.error">验证码不能为空!</string>
+    <string name="app.login.user.agreement">请同意用户协议</string>
+    <string name="app.login.fail">登录失败</string>
+    <string name="app.binding.phone">绑定手机号</string>
+    <string name="app.binding.risk.hint">为了您的交易安全,请绑定手机号</string>
+    <string name="app.binding.get.verify.code">获取验证码</string>
+
+    <!--CommonDialog-->
+    <string name="app.common.dialog.title">温馨提示</string>
+    <string name="app.common.dialog.hint">确定退出么？</string>
 </resources>
