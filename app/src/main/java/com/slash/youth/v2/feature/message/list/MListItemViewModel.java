@@ -1,5 +1,6 @@
 package com.slash.youth.v2.feature.message.list;
 
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -78,14 +79,14 @@ public class MListItemViewModel extends BViewModel {
             MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_CLICK_OTHER_CHAT);
         }
 
-        Bundle bundle = new Bundle();
-        bundle.putLong("uid", uid);
-        ChatActivity.instance(activity, bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putLong("uid", uid);
+//        ChatActivity.instance(activity, bundle);
 
-//        Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
-//        intentChatActivity.putExtra("targetId", uid + "");
-//        intentChatActivity.putExtra(ShareKey.USER_ANONYMITY, PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + data.getUid(), false));
-//        activity.startActivity(intentChatActivity);
+        Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
+        intentChatActivity.putExtra("targetId", uid + "");
+        intentChatActivity.putExtra(ShareKey.USER_ANONYMITY, PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + data.getUid(), false));
+        activity.startActivity(intentChatActivity);
     });
 
     public final ReplyCommand delClick = new ReplyCommand(() -> {
