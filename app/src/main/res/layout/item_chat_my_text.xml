@@ -69,17 +69,15 @@
                 android:paddingRight="16dp"
                 android:paddingTop="10dp">
 
-                <TextView
+                <com.slash.youth.ui.view.HttpTextView
                     android:id="@+id/tv_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:autoLink="web"
                     android:maxWidth="150dp"
                     android:text="@{chatMyTextModel.mySendText}"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
-                <!--android:text="@{chatMyTextModel.mySendText}"-->
             </FrameLayout>
 
             <ImageView

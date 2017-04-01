@@ -88,6 +88,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.util.MessageKey;
 import com.slash.youth.v2.util.ShareKey;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -130,7 +131,7 @@ public class ChatModel extends BaseObservable {
     public static final String noChangePhoneText = "换电话";//没有交换过手机号的文本
 
     public ActivityChatBinding mActivityChatBinding;
-    Activity mActivity;
+    RxAppCompatActivity mActivity;
     private TextView mTvChatFriendName;
     private LinearLayout mLlChatContent;//聊天内容容器
     private ScrollView mSvChatContent;
@@ -166,20 +167,16 @@ public class ChatModel extends BaseObservable {
 
     private ArrayList<String> mSelectPath;
 
-    public ChatModel(ActivityChatBinding activityChatBinding, Activity activity) {
+    public ChatModel(ActivityChatBinding activityChatBinding, RxAppCompatActivity activity) {
         this.mActivityChatBinding = activityChatBinding;
         this.mActivity = activity;
         isAnonymity = mActivity.getIntent().getBooleanExtra(ShareKey.USER_ANONYMITY, false);
         targetId = mActivity.getIntent().getStringExtra("targetId");
         PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + targetId, isAnonymity);
-
-
         hideSoftInputMethod();//隐藏软件盘的方法要尽早调用，一开始就让输入框失去焦点，这样，软键盘一开始就不会弹出来
-
         MsgManager.targetId = targetId;//设置聊天界面只显示当前聊天UserId发来的消息
         //清楚对方发给我的未读消息数
         clearOtherMessagesUnreadCount();
-
         if (mActivity.getIntent().getBundleExtra(ShareKey.USER_ANONYMITY_BUNDLE) != null) {
             Bundle bundle = mActivity.getIntent().getBundleExtra(ShareKey.USER_ANONYMITY_BUNDLE);
             boolean isAnonymity = bundle.getBoolean(ShareKey.USER_ANONYMITY);

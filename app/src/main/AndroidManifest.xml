@@ -582,7 +582,8 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity android:name=".Chat" />
         <activity android:name=".view.impl.ChatList" />
-        <activity android:name=".TextCopy"></activity>
+        <activity android:name=".TextCopy" />
+        <activity android:name=".CopyText"></activity>
     </application>
 
 </manifest>

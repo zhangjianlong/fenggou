@@ -3,6 +3,8 @@ package com.slash.youth.ui.viewmodel;
 import android.app.Activity;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -14,6 +16,9 @@ import com.slash.youth.databinding.ItemChatMyTextBinding;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.utils.BitmapKit;
+import com.slash.youth.v2.feature.dialog.common.CopyTextDialog;
+import com.slash.youth.v2.feature.dialog.common.CopyTextViewModel;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
@@ -25,13 +30,14 @@ import io.rong.message.TextMessage;
 public class ChatMyTextModel extends BaseObservable {
 
     ItemChatMyTextBinding mItemChatMyTextBinding;
-    Activity mActivity;
+    RxAppCompatActivity mActivity;
     boolean mIsRead;
     TextMessage mTextMessage;
     String mTargetId;
     boolean isFail;
+    private CopyTextDialog copyTextDialog;
 
-    public ChatMyTextModel(ItemChatMyTextBinding itemChatMyTextBinding, Activity activity, String inputText, boolean isRead, TextMessage textMessage, String targetId, boolean isFail) {
+    public ChatMyTextModel(ItemChatMyTextBinding itemChatMyTextBinding, RxAppCompatActivity activity, String inputText, boolean isRead, TextMessage textMessage, String targetId, boolean isFail) {
         this.mItemChatMyTextBinding = itemChatMyTextBinding;
         this.mActivity = activity;
         this.mIsRead = isRead;
@@ -50,7 +56,15 @@ public class ChatMyTextModel extends BaseObservable {
     }
 
     private void initView() {
-        mItemChatMyTextBinding.tvContent.setMovementMethod(LinkMovementMethod.getInstance());
+        copyTextDialog = new CopyTextDialog(mActivity, new CopyTextViewModel(mActivity));
+        mItemChatMyTextBinding.tvContent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                copyTextDialog.setCopyText(getMySendText());
+                copyTextDialog.show();
+                return false;
+            }
+        });
         if (!TextUtils.isEmpty(LoginManager.currentLoginUserAvatar)) {
             BitmapKit.bindImage(mItemChatMyTextBinding.ivChatMyAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + LoginManager.currentLoginUserAvatar);
         } else {
@@ -119,7 +133,8 @@ public class ChatMyTextModel extends BaseObservable {
 
     public void setMySendText(String mySendText) {
         this.mySendText = mySendText;
-        notifyPropertyChanged(BR.mySendText);
+        mItemChatMyTextBinding.tvContent.setUrlText(mySendText.trim());
+//        notifyPropertyChanged(BR.mySendText);
     }
 
 }

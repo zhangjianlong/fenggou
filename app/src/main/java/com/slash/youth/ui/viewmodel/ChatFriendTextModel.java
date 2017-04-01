@@ -17,7 +17,10 @@ import com.slash.youth.ui.activity.MyTaskActivity;
 import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.TextUtil;
+import com.slash.youth.v2.feature.dialog.common.CopyTextDialog;
+import com.slash.youth.v2.feature.dialog.common.CopyTextViewModel;
 import com.slash.youth.v2.util.ShareKey;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.Arrays;
 
@@ -26,10 +29,11 @@ import java.util.Arrays;
  */
 public class ChatFriendTextModel extends BaseObservable {
     ItemChatFriendTextBinding mItemChatFriendTextBinding;
-    Activity mActivity;
+    RxAppCompatActivity mActivity;
     String mTargetAvatar;
+    private CopyTextDialog copyTextDialog;
 
-    public ChatFriendTextModel(ItemChatFriendTextBinding itemChatFriendTextBinding, Activity activity, String targetAvatar) {
+    public ChatFriendTextModel(ItemChatFriendTextBinding itemChatFriendTextBinding, RxAppCompatActivity activity, String targetAvatar) {
         this.mItemChatFriendTextBinding = itemChatFriendTextBinding;
         this.mActivity = activity;
         this.mTargetAvatar = targetAvatar;
@@ -43,6 +47,15 @@ public class ChatFriendTextModel extends BaseObservable {
     }
 
     private void initView() {
+        copyTextDialog = new CopyTextDialog(mActivity, new CopyTextViewModel(mActivity));
+        mItemChatFriendTextBinding.tvRev.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                copyTextDialog.setCopyText(getTextContent().toString());
+                copyTextDialog.show();
+                return false;
+            }
+        });
 
         if (PreferenceUtil.readBoolean(mActivity, ShareKey.USER_ANONYMITY + MsgManager.targetId, false)) {
             mItemChatFriendTextBinding.ivChatOtherAvatar.setImageResource(R.mipmap.anonymity_avater);
@@ -84,8 +97,14 @@ public class ChatFriendTextModel extends BaseObservable {
     }
 
     public void setTextContent(String textContent) {
-        this.textContent = TextUtil.matcherSearchTitle(CommonUtils.getContext().getResources().getColor(R.color.app_text_bg_blue), textContent, Arrays.asList(CommonUtils.getContext().getResources().getStringArray(R.array.keyword)));
-        notifyPropertyChanged(BR.textContent);
+        if ("1000".equals(MsgManager.targetId)) {
+            this.textContent = TextUtil.matcherSearchTitle(CommonUtils.getContext().getResources().getColor(R.color.app_text_bg_blue), textContent, Arrays.asList(CommonUtils.getContext().getResources().getStringArray(R.array.keyword)));
+            notifyPropertyChanged(BR.textContent);
+        } else {
+            this.textContent = new SpannableString(textContent);
+//            notifyPropertyChanged(BR.textContent);
+            mItemChatFriendTextBinding.tvRev.setUrlText(textContent.trim());
+        }
     }
 
 

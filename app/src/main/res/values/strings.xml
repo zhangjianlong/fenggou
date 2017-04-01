@@ -111,5 +111,5 @@
     <string name="app.common.dialog.hint">确定退出么？</string>
     <!--TextCopyDialog-->
     <string name="app.text.copy.dialog.copy">复制</string>
-    <string name="app.text.copy.dialog.paste">确定退出么？</string>
+    <string name="app.text.copy.dialog.cal">取消</string>
 </resources>

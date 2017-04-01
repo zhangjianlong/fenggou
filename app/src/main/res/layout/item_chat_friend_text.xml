@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
-        <variable name="chatFriendTextModel"
-                  type="com.slash.youth.ui.viewmodel.ChatFriendTextModel"/>
+
+        <variable
+            name="chatFriendTextModel"
+            type="com.slash.youth.ui.viewmodel.ChatFriendTextModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,14 +17,14 @@
             android:layout_width="39dp"
             android:layout_height="39dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="11dp"
-        >
+            android:layout_marginTop="11dp">
+
             <ImageView
                 android:id="@+id/iv_chat_other_avatar"
                 android:layout_width="39dp"
                 android:layout_height="39dp"
                 android:scaleType="fitXY"
-                android:src="@mipmap/chat_test_header"/>
+                android:src="@mipmap/chat_test_header" />
 
 
         </FrameLayout>
@@ -36,14 +40,16 @@
             android:paddingLeft="17dp"
             android:paddingRight="12dp"
             android:paddingTop="10dp">
-            <TextView
+
+            <com.slash.youth.ui.view.HttpTextView
+                android:id="@+id/tv_rev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:maxWidth="150dp"
                 android:text="@{chatFriendTextModel.textContent}"
                 android:textColor="#333333"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <!--android:text="@{chatFriendTextModel.textContent}"-->
         </FrameLayout>
