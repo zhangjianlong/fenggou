@@ -581,7 +581,8 @@
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
         <activity android:name=".Chat" />
-        <activity android:name=".view.impl.ChatList"></activity>
+        <activity android:name=".view.impl.ChatList" />
+        <activity android:name=".TextCopy"></activity>
     </application>
 
 </manifest>

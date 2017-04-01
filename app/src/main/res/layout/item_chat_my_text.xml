@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
-        <variable name="chatMyTextModel" type="com.slash.youth.ui.viewmodel.ChatMyTextModel"/>
+
+        <variable
+            name="chatMyTextModel"
+            type="com.slash.youth.ui.viewmodel.ChatMyTextModel" />
     </data>
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-    >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -38,7 +42,7 @@
                     android:gravity="center"
                     android:text="送达"
                     android:textColor="#FFFFFF"
-                    android:textSize="11sp"/>
+                    android:textSize="11sp" />
                 <!--shape_chat_text_readed_marker_bg-->
 
                 <TextView
@@ -51,7 +55,7 @@
                     android:text="失败"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </FrameLayout>
 
@@ -66,13 +70,15 @@
                 android:paddingTop="10dp">
 
                 <TextView
+                    android:id="@+id/tv_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:autoLink="web"
                     android:maxWidth="150dp"
                     android:text="@{chatMyTextModel.mySendText}"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
                 <!--android:text="@{chatMyTextModel.mySendText}"-->
             </FrameLayout>
 
@@ -83,8 +89,7 @@
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="12dp"
                 android:scaleType="fitXY"
-                android:src="@mipmap/assistant_icon"
-            />
+                android:src="@mipmap/assistant_icon" />
 
         </LinearLayout>
 

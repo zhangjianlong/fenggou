@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -49,6 +50,7 @@ public class ChatMyTextModel extends BaseObservable {
     }
 
     private void initView() {
+        mItemChatMyTextBinding.tvContent.setMovementMethod(LinkMovementMethod.getInstance());
         if (!TextUtils.isEmpty(LoginManager.currentLoginUserAvatar)) {
             BitmapKit.bindImage(mItemChatMyTextBinding.ivChatMyAvatar, GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + LoginManager.currentLoginUserAvatar);
         } else {

@@ -18,6 +18,7 @@ import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
+import com.slash.youth.domain.bean.base.ChangePhoneBean;
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -85,6 +86,12 @@ public interface ApiClient {
 
     @POST(UriMethod.DEL_CONVERSATION_LIST)
     Observable<BaseResponse<StatusBean>> delConversation(@Body RequestBody requestBody);
+
+    @POST(UriMethod.GET_ADD_FRIEND_STATUS)
+    Observable<BaseResponse<StatusBean>> friendStatus(@Body RequestBody requestBody);
+
+    @POST(UriMethod.GET_IS_CHANGE_CONTACT)
+    Observable<BaseResponse<ChangePhoneBean>> changePhoneStatus(@Body RequestBody requestBody);
 
     @POST(UriMethod.SEND_PHONE_VERIFICATION_CODE)
     Observable<ResCodeBean> getVerifyCode(@Body RequestBody requestBody);

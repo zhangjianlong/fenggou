@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 
 import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**
  * Created by acer on 2017/3/31.
@@ -75,4 +76,22 @@ public class ChatListItemViewModel extends BViewModel {
     });
     public final ObservableField<String> revVoiceDuration = new ObservableField<>();
 
+    public enum ChatType {
+        SEND_TEXT,
+        SEND_IMG,
+        SEND_SHARE,
+        RECEIVE_TEXT,
+        RECEIVE_IMG,
+        RECEIVE_SHARE,
+        RECEIVE_PHONE,
+        INFO,
+        PHONE;
+    }
+
+    /*text显示内容*/
+    public ObservableField<String> text = new ObservableField<>();
+
+    public ChatListItemViewModel(RxAppCompatActivity activity) {
+        super(activity);
+    }
 }

@@ -6,6 +6,7 @@ import com.slash.youth.data.util.RetrofitUtil;
 import com.slash.youth.domain.bean.ConversationBean;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.base.BaseList;
+import com.slash.youth.domain.bean.base.ChangePhoneBean;
 import com.slash.youth.domain.repository.MessageRepository;
 
 import javax.inject.Inject;
@@ -34,5 +35,15 @@ public class MessageRepositoryImp implements MessageRepository {
     @Override
     public Observable<StatusBean> delConversation(String def) {
         return apiClient.delConversation(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> friendStatus(String def) {
+        return apiClient.friendStatus(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<ChangePhoneBean> changePhoneStatus(String def) {
+        return apiClient.changePhoneStatus(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
     }
 }

@@ -3,6 +3,7 @@ package com.slash.youth.domain.repository;
 import com.slash.youth.domain.bean.ConversationBean;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.base.BaseList;
+import com.slash.youth.domain.bean.base.ChangePhoneBean;
 
 import rx.Observable;
 
@@ -16,4 +17,7 @@ public interface MessageRepository {
 
     Observable<StatusBean> delConversation(String def);
 
+    Observable<StatusBean> friendStatus(String def);
+
+    Observable<ChangePhoneBean> changePhoneStatus(String def);
 }
