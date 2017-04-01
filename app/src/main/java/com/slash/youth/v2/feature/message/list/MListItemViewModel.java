@@ -1,8 +1,8 @@
 package com.slash.youth.v2.feature.message.list;
 
-import android.content.Intent;
 import android.databinding.ObservableField;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -10,27 +10,19 @@ import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.base.OnDialogLisetener;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.messenger.Messenger;
-import com.core.op.lib.utils.AppToast;
-import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.utils.PreferenceUtil;
 import com.google.gson.Gson;
 import com.slash.youth.R;
 import com.slash.youth.domain.ChatTaskInfoBean;
-import com.slash.youth.domain.ConversationListBean;
 import com.slash.youth.domain.bean.ConversationBean;
 import com.slash.youth.domain.interactor.message.DelConversationsUseCase;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.engine.MsgManager;
 import com.slash.youth.global.GlobalConstants;
-import com.slash.youth.ui.activity.ChatActivity;
-import com.slash.youth.utils.BitmapKit;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.IOUtils;
-import com.slash.youth.utils.LogKit;
-import com.slash.youth.v2.base.list.BaseListItemViewModel;
-import com.slash.youth.v2.feature.dialog.manage.DelManagerDialog;
-import com.slash.youth.v2.feature.dialog.manage.DelManagerViewModel;
+import com.slash.youth.v2.feature.chat.ChatActivity;
 import com.slash.youth.v2.feature.dialog.message.DelMessageDialog;
 import com.slash.youth.v2.feature.dialog.message.DelMessageViewModel;
 import com.slash.youth.v2.util.MessageKey;
@@ -40,7 +32,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.xutils.http.body.StringBody;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,17 +39,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
 import io.rong.message.TextMessage;
-
-import static android.R.id.list;
-import static com.slash.youth.engine.MsgManager.conversationUidList;
 
 /**
  * Created by acer on 2017/3/13.
@@ -91,10 +77,15 @@ public class MListItemViewModel extends BViewModel {
         } else {
             MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MESSAGE_CLICK_OTHER_CHAT);
         }
-        Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
-        intentChatActivity.putExtra("targetId", uid + "");
-        intentChatActivity.putExtra(ShareKey.USER_ANONYMITY, PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + data.getUid(), false));
-        activity.startActivity(intentChatActivity);
+
+        Bundle bundle = new Bundle();
+        bundle.putLong("uid", uid);
+        ChatActivity.instance(activity, bundle);
+
+//        Intent intentChatActivity = new Intent(CommonUtils.getContext(), ChatActivity.class);
+//        intentChatActivity.putExtra("targetId", uid + "");
+//        intentChatActivity.putExtra(ShareKey.USER_ANONYMITY, PreferenceUtil.readBoolean(CommonUtils.getContext(), ShareKey.USER_ANONYMITY + data.getUid(), false));
+//        activity.startActivity(intentChatActivity);
     });
 
     public final ReplyCommand delClick = new ReplyCommand(() -> {
