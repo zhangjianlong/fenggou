@@ -19,7 +19,7 @@
             android:layout_marginTop="@dimen/app.margin.large12"
             android:background="@drawable/shape_chat_datetime_bg"
             android:gravity="center"
-            android:text="@{viewModel.datetimeText}"
+            android:text="@{viewModel.infoText}"
             android:textColor="@color/app.text"
             android:textSize="@dimen/app.text.tiny" />
         <!--11月7日 14:17-->
