@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
         <variable
@@ -39,7 +39,7 @@
                 android:layout_height="39dp"
                 android:layout_marginLeft="6dp"
                 android:background="@drawable/chat_box_bg"
-                android:onClick="@{viewModel.playVoice}"
+                app:clickCommand="@{viewModel.playRevVoice}"
                 android:paddingLeft="17dp">
 
                 <ImageView
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
-                android:text="@{viewModel.voiceDuration}"
+                android:text="@{viewModel.revVoiceDuration}"
                 android:textColor="#CCCCCC"
                 android:textSize="15sp" />
 

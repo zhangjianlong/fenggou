@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -40,11 +41,11 @@
                     android:layout_height="17dp"
                     android:background="@drawable/shape_chat_text_fail_marker_bg"
                     android:gravity="center"
-                    android:onClick="@{chatMySendBusinessCardModel.sendMsgAgain}"
                     android:text="失败"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    app:clickCommand="@{viewModel.sendInfoMsgAgain}" />
 
             </FrameLayout>
 
@@ -53,9 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:background="@drawable/right_chat_bg"
-                android:onClick="@{viewModel.gotoUserInfoPage}"
                 android:orientation="vertical"
-                android:paddingRight="4dp">
+                android:paddingRight="4dp"
+                app:clickCommand="@{viewModel.gotoUserInfoPage}">
 
                 <LinearLayout
                     android:layout_width="match_parent"

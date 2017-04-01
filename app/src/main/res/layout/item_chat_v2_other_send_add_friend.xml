@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -67,10 +68,10 @@
                     android:layout_weight="1"
                     android:background="@drawable/shape_chat_deny_add_friend_bg"
                     android:gravity="center"
-                    android:onClick="@{viewModel.refuseAddFriend}"
                     android:text="拒绝"
                     android:textColor="#ffffff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:clickCommand="@{viewModel.refuseAddFriend}" />
 
                 <TextView
                     android:id="@+id/tv_agree"
@@ -81,10 +82,10 @@
                     android:layout_weight="1"
                     android:background="@drawable/shape_chat_agree_add_friend_bg"
                     android:gravity="center"
-                    android:onClick="@{viewModel.agreeAddFriend}"
                     android:text="同意"
                     android:textColor="#ffffff"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:clickCommand="@{viewModel.agreeAddFriend}" />
 
             </LinearLayout>
         </LinearLayout>
