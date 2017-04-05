@@ -5,6 +5,7 @@ import com.slash.youth.data.ApiClient;
 import com.slash.youth.data.api.transformer.ErrorTransformer;
 import com.slash.youth.data.util.RetrofitUtil;
 import com.slash.youth.domain.bean.BannerConfigBean;
+import com.slash.youth.domain.bean.CountBean;
 import com.slash.youth.domain.bean.FindDemand;
 import com.slash.youth.domain.bean.FindServices;
 import com.slash.youth.domain.bean.HomeTagInfoBean;
@@ -14,6 +15,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.repository.MainRepository;
@@ -98,5 +100,41 @@ public class MainRepositoryImp implements MainRepository {
     @Override
     public Observable<BaseList<UserTaskBean>> getUserTasks(String def) {
         return apiClient.getUserTasks(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<CountBean> getUserTaskCount(String def) {
+        return apiClient.getUserTaskCount(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<BaseList<UserEvaluateBean>> getUserEvaluates(String def) {
+        return apiClient.getUserEvaluates(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<CountBean> getUserEvaluateCount(String def) {
+        return apiClient.getUserEvaluateCount(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> getFriendsStatus(String def) {
+        return apiClient.getFriendStatus(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+
+    @Override
+    public Observable<StatusBean> addFriend(String def) {
+        return apiClient.addFriend(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> agreeFriend(String def) {
+        return apiClient.agreeFriend(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> removeFriend(String def) {
+        return apiClient.removeFriend(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
     }
 }

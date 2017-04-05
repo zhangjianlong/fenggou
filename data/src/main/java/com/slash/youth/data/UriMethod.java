@@ -108,6 +108,10 @@ public class UriMethod {
     public static final String QUERY_COMMENT_STATUS = SERVER_HOST_COMMENT_SHARE + "query";
     //四、[转发]-服务者转发服务到外界专家系统加分
     public static final String SHARE_FORWARD = SERVER_HOST_COMMENT_SHARE + "forward";
+    //五、[评价]-一個服務者被评价聚合分页列表
+    public static final String SHARE_TO = SERVER_HOST_COMMENT_SHARE + "to";
+    //六、[评价]-一個服務者被评价数量
+    public static final String SHARE_TO_COUNT = SERVER_HOST_COMMENT_SHARE + "to/count";
 
     //一、[文件]-图片上传
     public static final String IMG_UPLOAD = SERVER_HOST_IMG_UPLOAD_DOWNLOAD + "upload";
@@ -333,6 +337,7 @@ public class UriMethod {
     public static final String CLAIMS = "/claims";
     //十三、[我的]-[用户中心]-我的首页数据
     public static final String NEW_DEMAND_ANDSERVICE_LIST = "feed/v1/api/latest" + "/list";
+    public static final String NEW_DEMAND_ANDSERVICE_COUNT = "feed/v1/api/latest" + "/count";
     public static final String MY_INFO = SERVER_HOST_MY_USERINFO + "/my/info/get";
     //十四，[我的]-[用户中心]-认证//USER_INFO_HOST
     public static final String MY_CHECKOUT_AUTH = "uinfo/v1/api" + "/real/auth";

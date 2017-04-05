@@ -5,6 +5,26 @@ package com.slash.youth.domain.bean;
  */
 
 public class UserTaskBean {
+    /**
+     * anonymity : 1
+     * avatar : group1/M00/00/09/eBtor1jXNGKAE0TYAAAngmQ0KUI.242bfe
+     * endtime : 0
+     * id : 63
+     * instalment : 1
+     * isauth : 1
+     * lat : 0
+     * lng : 0
+     * name : 杨路
+     * pattern : 0
+     * place : null
+     * quote : 1
+     * quoteunit : 3
+     * starttime : 0
+     * timetype : 4
+     * title : 承接安卓项目
+     * type : 2
+     * uid : 10289
+     */
 
     private int anonymity;
     private String avatar;
@@ -15,8 +35,8 @@ public class UserTaskBean {
     private double lat;
     private double lng;
     private String name;
-    private int pattern;
     private String place;
+    private int pattern;
     private int quote;
     private int quoteunit;
     private long starttime;
@@ -24,6 +44,14 @@ public class UserTaskBean {
     private String title;
     private int type;
     private long uid;
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
 
     public int getAnonymity() {
         return anonymity;
@@ -103,14 +131,6 @@ public class UserTaskBean {
 
     public void setPattern(int pattern) {
         this.pattern = pattern;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
     }
 
     public int getQuote() {
