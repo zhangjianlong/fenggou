@@ -118,10 +118,16 @@
     <!--CommonDialog-->
     <string name="app.common.dialog.title">温馨提示</string>
     <string name="app.common.dialog.hint">确定退出么？</string>
+<<<<<<< HEAD
     <string name="app.userinfo.evaluate.item.title">服务:《%1$s》</string>
     <string name="app.userinfo.company.none">暂未填写职务信息</string>
     <string name="app.userinfo.chat">聊一聊</string>
     <string name="app.userinfo.recommend">推荐</string>
     <string name="app.userinfo.title.edit">编辑</string>
     <string name="app.userinfo.report">举报Ta</string>
+=======
+    <!--TextCopyDialog-->
+    <string name="app.text.copy.dialog.copy">复制</string>
+    <string name="app.text.copy.dialog.cal">取消</string>
+>>>>>>> 155d81aa61e77dc35d6c1d7b741f435ef0199008
 </resources>

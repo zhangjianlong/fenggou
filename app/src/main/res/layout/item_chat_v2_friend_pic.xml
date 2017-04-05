@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="chatFriendTextModel"
-            type="com.slash.youth.ui.viewmodel.ChatFriendTextModel" />
+            name="viewModel"
+            type="com.slash.youth.v2.feature.chat.list.ChatListItemViewModel" />
     </data>
 
     <LinearLayout
@@ -29,31 +30,21 @@
 
         </FrameLayout>
 
-        <FrameLayout
+
+        <ImageView
+            android:id="@+id/iv_chat_friend_pic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="11dp"
             android:background="@drawable/chat_box_bg"
-            android:onClick="@{chatFriendTextModel.gotoTask}"
-            android:paddingBottom="10dp"
-            android:paddingLeft="17dp"
-            android:paddingRight="12dp"
-            android:paddingTop="10dp">
+            android:maxHeight="160dp"
+            android:maxWidth="160dp"
+            android:paddingLeft="4dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/chat_pic_test"
+            app:uri="@{viewModel.imgUrl}" />
 
-            <com.slash.youth.ui.view.HttpTextView
-                android:id="@+id/tv_rev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:maxWidth="150dp"
-                android:text="@{chatFriendTextModel.textContent}"
-                android:textColor="#333333"
-                android:textSize="14sp" />
-
-            <!--android:text="@{chatFriendTextModel.textContent}"-->
-        </FrameLayout>
 
     </LinearLayout>
 </layout>
-
