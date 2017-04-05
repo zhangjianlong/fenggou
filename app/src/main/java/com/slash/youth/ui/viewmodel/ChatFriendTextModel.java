@@ -37,14 +37,10 @@ public class ChatFriendTextModel extends BaseObservable {
         this.mItemChatFriendTextBinding = itemChatFriendTextBinding;
         this.mActivity = activity;
         this.mTargetAvatar = targetAvatar;
-
-        initData();
         initView();
     }
 
-    private void initData() {
 
-    }
 
     private void initView() {
         copyTextDialog = new CopyTextDialog(mActivity, new CopyTextViewModel(mActivity));
@@ -53,7 +49,7 @@ public class ChatFriendTextModel extends BaseObservable {
             public boolean onLongClick(View v) {
                 copyTextDialog.setCopyText(getTextContent().toString());
                 copyTextDialog.show();
-                return false;
+                return true;
             }
         });
 

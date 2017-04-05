@@ -33,14 +33,14 @@ public class HttpTextView extends AppCompatTextView {
     private String pattern =
             "((http|ftp|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?|(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?";
     // 创建 Pattern 对象
-    Pattern r = Pattern.compile(pattern);
+    private Pattern r = Pattern.compile(pattern);
     // 现在创建 matcher 对象
-    Matcher m;
+    private Matcher m;
     //记录网址的list
-    LinkedList<String> mStringList;
+    private LinkedList<String> mStringList;
     //记录该网址所在位置的list
-    LinkedList<UrlInfo> mUrlInfos;
-    int flag = Spanned.SPAN_POINT_MARK;
+    private LinkedList<UrlInfo> mUrlInfos;
+    private int flag = Spanned.SPAN_POINT_MARK;
 
     private boolean needToRegionUrl = true;//是否开启识别URL，默认开启
 
@@ -64,20 +64,11 @@ public class HttpTextView extends AppCompatTextView {
 //            super.setText(stringBuilderAllVer);
             this.setText(stringBuilderAllVer);
             this.setMovementMethod(LinkMovementMethod.getInstance());
-        } else {
-            super.setText(text);
         }
     }
 
-    public boolean getIsNeedToRegionUrl() {
-        return needToRegionUrl;
-    }
 
-    public void setOpenRegionUrl(boolean needToRegionUrl) {
-        this.needToRegionUrl = needToRegionUrl;
-    }
-
-    private SpannableStringBuilderAllVer recognUrl(CharSequence text) {
+    private  SpannableStringBuilderAllVer  recognUrl(CharSequence text) {
         mStringList.clear();
         mUrlInfos.clear();
         CharSequence contextText;
@@ -104,15 +95,16 @@ public class HttpTextView extends AppCompatTextView {
         }
         m = r.matcher(contextText);
         //匹配成功
-        while (m.find()) {
-            //得到网址数
-            UrlInfo info = new UrlInfo();
-            info.start = m.start();
-            info.end = m.end();
-            mStringList.add(m.group());
-            mUrlInfos.add(info);
-        }
-        return jointText(clickText, contextText);
+            while (m.find()) {
+                //得到网址数
+                UrlInfo info = new UrlInfo();
+                info.start = m.start();
+                info.end = m.end();
+                mStringList.add(m.group());
+                mUrlInfos.add(info);
+            }
+            return jointText(clickText, contextText);
+
     }
 
     /**
@@ -198,7 +190,7 @@ public class HttpTextView extends AppCompatTextView {
         public void updateDrawState(TextPaint ds) {
             super.updateDrawState(ds);
             ds.setColor(0xff517fae);
-            ds.setUnderlineText(false);
+            ds.setUnderlineText(true);
         }
     }
 

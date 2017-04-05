@@ -45,7 +45,7 @@ public class ChatMyTextModel extends BaseObservable {
         this.mTargetId = targetId;
         this.isFail = isFail;
 
-        setMySendText(inputText);
+//        setMySendText(inputText.trim());
 
         initData();
         initView();
@@ -62,7 +62,7 @@ public class ChatMyTextModel extends BaseObservable {
             public boolean onLongClick(View v) {
                 copyTextDialog.setCopyText(getMySendText());
                 copyTextDialog.show();
-                return false;
+                return true;
             }
         });
         if (!TextUtils.isEmpty(LoginManager.currentLoginUserAvatar)) {
@@ -133,7 +133,8 @@ public class ChatMyTextModel extends BaseObservable {
 
     public void setMySendText(String mySendText) {
         this.mySendText = mySendText;
-        mItemChatMyTextBinding.tvContent.setUrlText(mySendText.trim());
+        String tempStr = mySendText.trim();
+        mItemChatMyTextBinding.tvContent.setUrlText(tempStr);
 //        notifyPropertyChanged(BR.mySendText);
     }
 

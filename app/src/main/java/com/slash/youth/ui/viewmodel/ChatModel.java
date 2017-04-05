@@ -1655,6 +1655,7 @@ public class ChatModel extends BaseObservable {
         ItemChatMyTextBinding itemChatMyTextBinding = DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_chat_my_text, null, false);
         ChatMyTextModel chatMyTextModel = new ChatMyTextModel(itemChatMyTextBinding, mActivity, inputText, isRead, textMessage, targetId, isFail);
         itemChatMyTextBinding.setChatMyTextModel(chatMyTextModel);
+        chatMyTextModel.setMySendText(inputText.trim());
         return itemChatMyTextBinding.getRoot();
     }
 
@@ -1663,8 +1664,8 @@ public class ChatModel extends BaseObservable {
         ItemChatFriendTextBinding itemChatFriendTextBinding = DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_chat_friend_text, null, false);
         ChatFriendTextModel chatFriendTextModel = new ChatFriendTextModel(itemChatFriendTextBinding, mActivity, targetAvatar);
         itemChatFriendTextBinding.setChatFriendTextModel(chatFriendTextModel);
-        chatFriendTextModel.setTextContent(content);
         chatFriendTextModel.setExtraInfo(extra);
+        chatFriendTextModel.setTextContent(content.trim());
         return itemChatFriendTextBinding.getRoot();
     }
 
