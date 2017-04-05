@@ -1655,17 +1655,17 @@ public class ChatModel extends BaseObservable {
         ItemChatMyTextBinding itemChatMyTextBinding = DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_chat_my_text, null, false);
         ChatMyTextModel chatMyTextModel = new ChatMyTextModel(itemChatMyTextBinding, mActivity, inputText, isRead, textMessage, targetId, isFail);
         itemChatMyTextBinding.setChatMyTextModel(chatMyTextModel);
-        chatMyTextModel.setMySendText(inputText.trim());
+//        chatMyTextModel.setMySendText(inputText.trim());
         return itemChatMyTextBinding.getRoot();
     }
 
     //创建好友发的文本消息View
     private View createFriendTextView(String content, String extra) {
         ItemChatFriendTextBinding itemChatFriendTextBinding = DataBindingUtil.inflate(LayoutInflater.from(CommonUtils.getContext()), R.layout.item_chat_friend_text, null, false);
-        ChatFriendTextModel chatFriendTextModel = new ChatFriendTextModel(itemChatFriendTextBinding, mActivity, targetAvatar);
+        ChatFriendTextModel chatFriendTextModel = new ChatFriendTextModel(itemChatFriendTextBinding, mActivity,content, targetAvatar);
         itemChatFriendTextBinding.setChatFriendTextModel(chatFriendTextModel);
         chatFriendTextModel.setExtraInfo(extra);
-        chatFriendTextModel.setTextContent(content.trim());
+//        chatFriendTextModel.setTextContent(content.trim());
         return itemChatFriendTextBinding.getRoot();
     }
 

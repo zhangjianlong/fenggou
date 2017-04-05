@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.ObservableField;
 import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 
 import com.core.op.lib.utils.PreferenceUtil;
@@ -24,6 +26,8 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.Arrays;
 
+import static android.databinding.tool.util.GenerationalClassUtil.ExtensionFilter.BR;
+
 /**
  * Created by zhouyifeng on 2016/11/16.
  */
@@ -31,23 +35,27 @@ public class ChatFriendTextModel extends BaseObservable {
     ItemChatFriendTextBinding mItemChatFriendTextBinding;
     RxAppCompatActivity mActivity;
     String mTargetAvatar;
+    String content;
     private CopyTextDialog copyTextDialog;
+    public final ObservableField<SpannableString> textContent = new ObservableField<>();
 
-    public ChatFriendTextModel(ItemChatFriendTextBinding itemChatFriendTextBinding, RxAppCompatActivity activity, String targetAvatar) {
+    public ChatFriendTextModel(ItemChatFriendTextBinding itemChatFriendTextBinding, RxAppCompatActivity activity, String content, String targetAvatar) {
         this.mItemChatFriendTextBinding = itemChatFriendTextBinding;
         this.mActivity = activity;
         this.mTargetAvatar = targetAvatar;
+        this.content = content;
         initView();
+        setTextContent(content.trim());
     }
 
 
-
     private void initView() {
+        mItemChatFriendTextBinding.tvRev.setMovementMethod(LinkMovementMethod.getInstance());
         copyTextDialog = new CopyTextDialog(mActivity, new CopyTextViewModel(mActivity));
         mItemChatFriendTextBinding.tvRev.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                copyTextDialog.setCopyText(getTextContent().toString());
+                copyTextDialog.setCopyText(textContent.get().toString());
                 copyTextDialog.show();
                 return true;
             }
@@ -74,7 +82,8 @@ public class ChatFriendTextModel extends BaseObservable {
         }
     }
 
-    private SpannableString textContent;
+//    private SpannableString textContent;
+
     private String extraInfo;
 
     @Bindable
@@ -84,22 +93,20 @@ public class ChatFriendTextModel extends BaseObservable {
 
     public void setExtraInfo(String extraInfo) {
         this.extraInfo = extraInfo;
-        notifyPropertyChanged(BR.extraInfo);
+//        notifyPropertyChanged(BR.extraInfo);
     }
+//
+//    @Bindable
+//    public SpannableString getTextContent() {
+//        return textContent;
+//    }
 
-    @Bindable
-    public SpannableString getTextContent() {
-        return textContent;
-    }
-
-    public void setTextContent(String textContent) {
+    public void setTextContent(String content) {
         if ("1000".equals(MsgManager.targetId)) {
-            this.textContent = TextUtil.matcherSearchTitle(CommonUtils.getContext().getResources().getColor(R.color.app_text_bg_blue), textContent, Arrays.asList(CommonUtils.getContext().getResources().getStringArray(R.array.keyword)));
-            notifyPropertyChanged(BR.textContent);
+            textContent.set(TextUtil.matcherSearchTitle(CommonUtils.getContext().getResources().getColor(R.color.app_text_bg_blue), content, Arrays.asList(CommonUtils.getContext().getResources().getStringArray(R.array.keyword))));
         } else {
-            this.textContent = new SpannableString(textContent);
-//            notifyPropertyChanged(BR.textContent);
-            mItemChatFriendTextBinding.tvRev.setUrlText(textContent.trim());
+            textContent.set(new TextUtil().matcherUrl(content));
+
         }
     }
 

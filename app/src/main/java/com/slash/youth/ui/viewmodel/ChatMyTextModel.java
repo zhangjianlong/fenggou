@@ -3,7 +3,9 @@ package com.slash.youth.ui.viewmodel;
 import android.app.Activity;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.ObservableField;
 import android.text.Html;
+import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -16,6 +18,8 @@ import com.slash.youth.databinding.ItemChatMyTextBinding;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.utils.BitmapKit;
+import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.utils.TextUtil;
 import com.slash.youth.v2.feature.dialog.common.CopyTextDialog;
 import com.slash.youth.v2.feature.dialog.common.CopyTextViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -36,6 +40,7 @@ public class ChatMyTextModel extends BaseObservable {
     String mTargetId;
     boolean isFail;
     private CopyTextDialog copyTextDialog;
+    public final ObservableField<SpannableString> mySendText = new ObservableField<>();
 
     public ChatMyTextModel(ItemChatMyTextBinding itemChatMyTextBinding, RxAppCompatActivity activity, String inputText, boolean isRead, TextMessage textMessage, String targetId, boolean isFail) {
         this.mItemChatMyTextBinding = itemChatMyTextBinding;
@@ -44,9 +49,7 @@ public class ChatMyTextModel extends BaseObservable {
         this.mTextMessage = textMessage;
         this.mTargetId = targetId;
         this.isFail = isFail;
-
-//        setMySendText(inputText.trim());
-
+        setMySendText(inputText.trim());
         initData();
         initView();
     }
@@ -56,11 +59,12 @@ public class ChatMyTextModel extends BaseObservable {
     }
 
     private void initView() {
+        mItemChatMyTextBinding.tvContent.setMovementMethod(LinkMovementMethod.getInstance());
         copyTextDialog = new CopyTextDialog(mActivity, new CopyTextViewModel(mActivity));
         mItemChatMyTextBinding.tvContent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                copyTextDialog.setCopyText(getMySendText());
+                copyTextDialog.setCopyText(mySendText.get().toString().trim());
                 copyTextDialog.show();
                 return true;
             }
@@ -124,18 +128,9 @@ public class ChatMyTextModel extends BaseObservable {
         }
     }
 
-    private String mySendText;
 
-    @Bindable
-    public String getMySendText() {
-        return mySendText;
-    }
-
-    public void setMySendText(String mySendText) {
-        this.mySendText = mySendText;
-        String tempStr = mySendText.trim();
-        mItemChatMyTextBinding.tvContent.setUrlText(tempStr);
-//        notifyPropertyChanged(BR.mySendText);
+    public void setMySendText(String content) {
+        mySendText.set(new TextUtil().matcherUrl(content));
     }
 
 }
