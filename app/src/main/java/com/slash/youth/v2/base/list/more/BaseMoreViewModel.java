@@ -68,9 +68,6 @@ public abstract class BaseMoreViewModel<V, T extends BaseListItemViewModel> exte
         super(activity);
     }
 
-    @Override
-    public void afterViews() {
-    }
 
     public void loadMore() {
         if (!isComplate) {
@@ -116,6 +113,10 @@ public abstract class BaseMoreViewModel<V, T extends BaseListItemViewModel> exte
         }
         useCase().execute().compose(activity.bindToLifecycle())
                 .doOnNext(data -> {
+                    if (data == null || data.getList() == null || data.getList().size() == 0) {
+                        errorVisible.set(View.VISIBLE);
+                        errorType.set(EmptyLayout.NODATA);
+                    }
                     if (data.getList() != null && data.getList().size() < limit) {
                         isComplate = true;
                     }

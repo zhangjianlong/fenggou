@@ -161,7 +161,7 @@ public class EmptyLayout extends LinearLayout implements
             case NODATA:
                 mErrorState = NODATA;
                 // img.setBackgroundDrawable(SkinsUtil.getDrawable(context,"page_icon_empty"));
-                img.setBackgroundResource(R.drawable.page_icon_empty);
+                img.setBackgroundResource(R.drawable.ic_tip_fail1);
                 img.setVisibility(View.VISIBLE);
                 mLoading.setVisibility(View.GONE);
                 setTvNoDataContent();

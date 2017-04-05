@@ -173,9 +173,13 @@ public class ChooseFriendModel extends BaseObservable {
                     } else {
                         MyFriendListBean.DataBean.ListBean listBean = friendArrayList.get(position);
                         long uid = listBean.getUid();
-                        Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
-                        intentUserInfoActivity.putExtra("Uid", uid);
-                        chooseFriendActivtiy.startActivity(intentUserInfoActivity);
+//                        Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
+//                        intentUserInfoActivity.putExtra("Uid", uid);
+//                        chooseFriendActivtiy.startActivity(intentUserInfoActivity);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("Uid", uid);
+                        com.slash.youth.v2.feature.userinfo.UserInfoActivity.instance(mActivity, bundle);
                     }
 
                 } else {

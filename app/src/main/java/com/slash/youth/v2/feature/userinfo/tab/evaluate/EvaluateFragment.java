@@ -1,17 +1,11 @@
 package com.slash.youth.v2.feature.userinfo.tab.evaluate;
 
-import com.slash.youth.R;
-import com.slash.youth.v2.base.BaseFragment;
-import com.slash.youth.databinding.FrgEvaluateBinding;
-import com.slash.youth.v2.di.components.UserInfoComponent;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
-import com.core.op.lib.utils.inject.RootView;
+import com.slash.youth.v2.base.list.more.BaseMoreFragment;
+import com.slash.youth.v2.di.components.UserInfoComponent;
 
-import javax.inject.Inject;
-
-@RootView(R.layout.frg_evaluate)
-public final class EvaluateFragment extends BaseFragment<EvaluateViewModel, FrgEvaluateBinding> {
+public final class EvaluateFragment extends BaseMoreFragment<EvaluateViewModel> {
 
     public static EvaluateFragment instance() {
         return new EvaluateFragment();

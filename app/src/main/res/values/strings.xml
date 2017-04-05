@@ -69,11 +69,20 @@
 
     <string name="app.userinfo.service">服务力:%1$2s星</string>
     <string name="app.userinfo.serviceprogress">平台平均为%1$s星</string>
+    <string name="app.userinfo.task.title">最新任务(%1$s)</string>
+    <string name="app.userinfo.evaluate.title">评论(%1$s)</string>
 
     <array name="userinfo_tabs">
         <item>个人简介</item>
         <item>评价</item>
         <item>最新任务</item>
+    </array>
+
+    <array name="user_grades">
+        <item>少侠</item>
+        <item>大侠</item>
+        <item>宗师</item>
+        <item>至尊</item>
     </array>
 
     <string name="app.error.customservice">获取客服UID失败</string>
@@ -109,4 +118,10 @@
     <!--CommonDialog-->
     <string name="app.common.dialog.title">温馨提示</string>
     <string name="app.common.dialog.hint">确定退出么？</string>
+    <string name="app.userinfo.evaluate.item.title">服务:《%1$s》</string>
+    <string name="app.userinfo.company.none">暂未填写职务信息</string>
+    <string name="app.userinfo.chat">聊一聊</string>
+    <string name="app.userinfo.recommend">推荐</string>
+    <string name="app.userinfo.title.edit">编辑</string>
+    <string name="app.userinfo.report">举报Ta</string>
 </resources>

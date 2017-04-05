@@ -3,6 +3,7 @@ package com.slash.youth.data;
 import com.slash.youth.data.api.BaseResponse;
 import com.slash.youth.domain.bean.BannerConfigBean;
 import com.slash.youth.domain.bean.ConversationBean;
+import com.slash.youth.domain.bean.CountBean;
 import com.slash.youth.domain.bean.CustomerService;
 import com.slash.youth.domain.bean.FindDemand;
 import com.slash.youth.domain.bean.FindServices;
@@ -16,6 +17,7 @@ import com.slash.youth.domain.bean.PhoneLoginResultBean;
 import com.slash.youth.domain.bean.ResCodeBean;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.bean.base.ChangePhoneBean;
@@ -102,7 +104,29 @@ public interface ApiClient {
     @POST(UriMethod.NEW_DEMAND_ANDSERVICE_LIST)
     Observable<BaseResponse<BaseList<UserTaskBean>>> getUserTasks(@Body RequestBody requestBody);
 
+    @POST(UriMethod.NEW_DEMAND_ANDSERVICE_COUNT)
+    Observable<BaseResponse<CountBean>> getUserTaskCount(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SHARE_TO)
+    Observable<BaseResponse<BaseList<UserEvaluateBean>>> getUserEvaluates(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SHARE_TO_COUNT)
+    Observable<BaseResponse<CountBean>> getUserEvaluateCount(@Body RequestBody requestBody);
+
+    @POST(UriMethod.CHECK_FRIEND_STATUS)
+    Observable<BaseResponse<StatusBean>> getFriendStatus(@Body RequestBody requestBody);
+
+    @POST(UriMethod.ADD_FRIEND_RELATION)
+    Observable<BaseResponse<StatusBean>> addFriend(@Body RequestBody requestBody);
+
+    @POST(UriMethod.AGREE_FRIEND_RELATION)
+    Observable<BaseResponse<StatusBean>> agreeFriend(@Body RequestBody requestBody);
+
+    @POST(UriMethod.DELETE_FRIEND_RELATION)
+    Observable<BaseResponse<StatusBean>> removeFriend(@Body RequestBody requestBody);
+
     @POST(UriMethod.CHECK_ACCOUNT_BINDING)
     Observable<ResCodeBean> checkBinding(@Body RequestBody requestBody);
+
 }
 

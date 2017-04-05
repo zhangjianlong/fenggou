@@ -113,6 +113,17 @@ public class DateUtil {
         return YYYYMMDDHHMM.get().format(toDate(sdate));
     }
 
+
+    /**
+     * transform date to string that's type like YYYY-MM-DD HH:mm
+     *
+     * @param date
+     * @return
+     */
+    public static String getDateString(long date) {
+        return YYYYMMDDHHMM.get().format(new Date(date));
+    }
+
     /**
      * format time friendly
      *

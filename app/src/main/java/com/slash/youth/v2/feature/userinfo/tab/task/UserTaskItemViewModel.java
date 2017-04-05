@@ -54,15 +54,15 @@ public class UserTaskItemViewModel extends BaseListItemViewModel {
         uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());
 
         timeVisibility.set(View.VISIBLE);
-        int anonymity = data.getAnonymity();
-        String name = data.getName();
-        String avatar = data.getAvatar();
 
         isauthVisibility.set((data.getIsauth() == 0) ? View.GONE : View.VISIBLE);
         title = data.getTitle();
         double quote = data.getQuote();
         if (quote > 0) {
-            this.quote.set(FirstPagerManager.QUOTE + quote + "元" + "/" + FirstPagerManager.QUOTEUNITS[data.getQuoteunit() - 1]);
+            if (data.getType() == 2)
+                this.quote.set(FirstPagerManager.QUOTE + quote + "元" + "/" + FirstPagerManager.QUOTEUNITS[data.getQuoteunit() - 1]);
+            else
+                this.quote.set(FirstPagerManager.QUOTE + quote + "元");
         } else {
             this.quote.set(FirstPagerManager.DEMAND_QUOTE);
         }
