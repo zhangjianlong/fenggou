@@ -13,7 +13,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/App.Theme.Widget.Toolbar"
-        app:navigationIcon="@mipmap/nav_back"
+        android:background="@color/app.text"
+        app:navigationIcon="@mipmap/nav_back_gray"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="  ">
 
@@ -23,7 +24,7 @@
             android:layout_gravity="center"
             android:singleLine="true"
             android:text="@{toolTitle}"
-            android:textColor="@color/app.text" />
+            android:textColor="@color/app.text.black" />
 
     </android.support.v7.widget.Toolbar>
 </layout>

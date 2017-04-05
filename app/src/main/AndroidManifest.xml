@@ -169,7 +169,6 @@
         <activity
             android:name=".ui.activity.SplashActivity"
             android:icon="@mipmap/slash_helper_square"
-            android:label="斜杠青年"
             android:theme="@style/App.Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -185,6 +184,11 @@
         <activity
             android:name=".v2.feature.bindingaccount.BindingActivity"
             android:label="绑定页面"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".v2.feature.protocol.ProtocolActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
 

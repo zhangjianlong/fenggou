@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
@@ -19,6 +20,7 @@ import com.core.op.lib.utils.RxCountDown;
 import com.core.op.lib.weight.progress.Progress;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActLoginBinding;
+import com.slash.youth.domain.CustomerServiceBean;
 import com.slash.youth.domain.RongTokenBean;
 import com.slash.youth.domain.ThirdPartyLoginResultBean;
 import com.slash.youth.domain.UserInfoBean;
@@ -39,6 +41,7 @@ import com.slash.youth.utils.SpUtils;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.bindingaccount.BindingActivity;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.feature.protocol.ProtocolActivity;
 import com.slash.youth.v2.util.ShareKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -48,9 +51,11 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
+import io.rong.imlib.RongIMClient;
 import rx.Subscriber;
 
 
@@ -196,6 +201,55 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
     @Override
     public void afterViews() {
 
+    }
+
+
+    private void connectToRongCloud(String tmpRongToken) {
+        RongIMClient.connect(tmpRongToken, new RongIMClient.ConnectCallback() {
+            /**
+             * Token 错误，在线上环境下主要是因为 Token 已经过期，您需要向 App Server 重新请求一个新的 Token
+             */
+            @Override
+            public void onTokenIncorrect() {
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                gotoChatSlashHelperActivity();
+            }
+
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+
+            }
+        });
+    }
+
+    private void gotoChatSlashHelperActivity() {
+        final Intent intentChatActivity = new Intent(activity, ChatActivity.class);
+//        intentChatActivity.putExtra("targetId", "1000");
+        long customerServiceUid = MsgManager.getCustomerServiceUidFromSp();
+        if (customerServiceUid > 0) {
+            //sp中保存有随机客服的uid
+            MsgManager.customerServiceUid = customerServiceUid + "";
+            intentChatActivity.putExtra("targetId", customerServiceUid + "");
+            activity.startActivity(intentChatActivity);
+        } else {
+            MsgManager.getCustomerService(new BaseProtocol.IResultExecutor<CustomerServiceBean>() {
+                @Override
+                public void execute(CustomerServiceBean dataBean) {
+                    long customerServiceUid = dataBean.data.uid;
+                    MsgManager.customerServiceUid = customerServiceUid + "";
+                    intentChatActivity.putExtra("targetId", customerServiceUid + "");
+                    activity.startActivity(intentChatActivity);
+                }
+
+                @Override
+                public void executeResultError(String result) {
+                    ToastUtils.shortToast("获取客服UID失败:" + result);
+                }
+            });
+        }
     }
 
 
@@ -371,6 +425,27 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
 
 
     public final ReplyCommand help = new ReplyCommand(() -> {
+        final String tmpRongToken = SpUtils.getString("tmpRongToken", "");
+        if (TextUtils.isEmpty(tmpRongToken)) {
+            UUID uuid = UUID.randomUUID();
+            String tmpUid = uuid.toString();//创建一个临时的uid，用来获取临时的融云token
+            LogKit.v("tmpUid:" + tmpUid);
+            MsgManager.getRongToken(new BaseProtocol.IResultExecutor<RongTokenBean>() {
+                @Override
+                public void execute(RongTokenBean dataBean) {
+                    String newTmpRongToken = dataBean.data.token;
+                    SpUtils.setString("tmpRongToken", newTmpRongToken);
+                    connectToRongCloud(newTmpRongToken);
+                }
+
+                @Override
+                public void executeResultError(String result) {
+                    ToastUtils.shortToast("获取临时融云token失败");
+                }
+            }, tmpUid, "11");
+        } else {
+            connectToRongCloud(tmpRongToken);
+        }
 
     });
 
@@ -386,6 +461,8 @@ public class LoginViewModel extends BAViewModel<ActLoginBinding> {
 
 
     public final ReplyCommand protocol = new ReplyCommand(() -> {
+        Intent intentSlashProtocolActivity = new Intent(activity, ProtocolActivity.class);
+        activity.startActivity(intentSlashProtocolActivity);
 
     });
 

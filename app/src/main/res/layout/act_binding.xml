@@ -18,7 +18,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/include_toolbar_alpha"
+            layout="@layout/include_white_toolbar_alpha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -30,9 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/app.theme.background_edf1f2"
-            android:text="@string/app.binding.risk.hint"
-
-            />
+            android:text="@string/app.binding.risk.hint" />
 
         <EditText
             style="@style/App.Theme.EditText"
