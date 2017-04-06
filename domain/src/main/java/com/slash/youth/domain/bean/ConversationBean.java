@@ -1,6 +1,8 @@
 package com.slash.youth.domain.bean;
 
-public class ConversationBean {
+import java.io.Serializable;
+
+public class ConversationBean implements Serializable {
     private String avatar;
     private String company;
     private int isAuth;
@@ -10,6 +12,11 @@ public class ConversationBean {
     private long uts;
 
     public ConversationBean() {
+    }
+
+    public ConversationBean(long uid, long uts) {
+        this.uid = uid;
+        this.uts = uts;
     }
 
     public ConversationBean(long uid) {

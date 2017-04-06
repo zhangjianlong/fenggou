@@ -39,5 +39,6 @@ public class MessageKey {
     public static final String MESSAGE_PUSH = "MESSAGE_PUSH";
     //删除消息
     public static final String DELETE_MESSAGE = "DELETE_MESSAGE";
-
+    //共享好友
+    public static final String SHARE_FRIEND = "SHARE_FRIEND";
 }

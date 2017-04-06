@@ -107,7 +107,7 @@
                                             android:id="@+id/tv_name"
                                             style="@style/App.Theme.TextAppearance.ww.normal"
                                             android:layout_centerInParent="true"
-                                            android:paddingTop="@dimen/app.padding.normal"
+                                            android:layout_marginTop="@dimen/app.padding.normal"
                                             android:text="@{viewModel.data.name}"
                                             android:textColor="@color/white" />
 
@@ -263,7 +263,7 @@
                 style="@style/App.Theme.TextAppearance.ww.tiny"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@mipmap/chat_icon"
                 android:gravity="center"
@@ -276,11 +276,12 @@
                 style="@style/App.Theme.TextAppearance.ww.tiny"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@mipmap/attention_icon"
                 android:gravity="center"
                 android:paddingTop="@dimen/app.margin.normal"
+                app:clickCommand="@{viewModel.share}"
                 android:text="@string/app.userinfo.recommend"
                 android:textColor="@color/app.text.black.alpha.66" />
 
