@@ -90,6 +90,7 @@
                         android:maxHeight="20dp"
                         android:minHeight="20dp"
                         android:rating="@{viewModel.data.score}"
+                        android:shadowColor="@color/transparent"
                         android:stepSize="0.5" />
                 </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.slash.youth.v2.feature.userinfo.tab.task;
 
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,6 +11,9 @@ import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.engine.FirstPagerManager;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.global.SlashApplication;
+import com.slash.youth.ui.activity.DemandDetailActivity;
+import com.slash.youth.ui.activity.ServiceDetailActivity;
+import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.DistanceUtils;
 import com.slash.youth.v2.base.list.BaseListItemViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -38,7 +42,16 @@ public class UserTaskItemViewModel extends BaseListItemViewModel {
     public String place;
     public String distance;
     public ReplyCommand click = new ReplyCommand(() -> {
-
+        if (userTaskBean.getType() != 2) {
+            Intent intentDemandDetailActivity = new Intent(CommonUtils.getContext(), DemandDetailActivity.class);
+            intentDemandDetailActivity.putExtra("demandId", userTaskBean.getId());
+            activity.startActivity(intentDemandDetailActivity);
+        } else {
+            //服务
+            Intent intentServiceDetailActivity = new Intent(CommonUtils.getContext(), ServiceDetailActivity.class);
+            intentServiceDetailActivity.putExtra("serviceId", userTaskBean.getId());
+            activity.startActivity(intentServiceDetailActivity);
+        }
     });
 
     public ObservableField<String> uri = new ObservableField<>();
@@ -52,8 +65,6 @@ public class UserTaskItemViewModel extends BaseListItemViewModel {
         this.userTaskBean = data;
 
         uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());
-
-        timeVisibility.set(View.VISIBLE);
 
         isauthVisibility.set((data.getIsauth() == 0) ? View.GONE : View.VISIBLE);
         title = data.getTitle();
@@ -81,6 +92,9 @@ public class UserTaskItemViewModel extends BaseListItemViewModel {
         int timetype = data.getTimetype();
         if (timetype != 0) {
             freeTime = FirstPagerManager.TIMETYPES[timetype - 1];
+            timeVisibility.set(View.VISIBLE);
+        } else {
+            timeVisibility.set(View.GONE);
         }
 
         int pattern = data.getPattern();

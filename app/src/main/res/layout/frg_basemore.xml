@@ -30,12 +30,19 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <com.core.op.lib.weight.EmptyLayout
-            android:id="@+id/el_error"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{viewModel.errorVisible}"
-            app:errorClickCommand="@{viewModel.errorClick}"
-            app:errorType="@{viewModel.errorType}" />
+            android:visibility="@{viewModel.errorVisible}">
+
+            <com.core.op.lib.weight.EmptyLayout
+                android:id="@+id/el_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/app.margin.xxxlarge"
+                app:errorClickCommand="@{viewModel.errorClick}"
+                app:errorType="@{viewModel.errorType}" />
+
+        </android.support.v4.widget.NestedScrollView>
     </FrameLayout>
 </layout>

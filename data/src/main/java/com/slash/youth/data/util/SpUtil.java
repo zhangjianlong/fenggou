@@ -42,6 +42,11 @@ public class SpUtil {
         write(FILE_NAME, k, v);
     }
 
+    public static void write(String k, Serializable v) {
+        saveObject(v, k);
+    }
+
+
     public static int readInt(String k, int defv) {
         return readInt(FILE_NAME, k, defv);
     }

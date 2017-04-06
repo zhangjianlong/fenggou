@@ -18,6 +18,7 @@ import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.weight.swipe.SwipeRefreshLayout;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActUserinfoBinding;
+import com.slash.youth.domain.ChatCmdBusinesssCardBean;
 import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.interactor.main.OtherInfoUseCase;
 import com.slash.youth.domain.interactor.main.UserAddFriendUseCase;
@@ -30,6 +31,7 @@ import com.slash.youth.engine.MsgManager;
 import com.slash.youth.engine.UserInfoEngine;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.ui.activity.ChatActivity;
+import com.slash.youth.ui.activity.MyFriendActivtiy;
 import com.slash.youth.ui.activity.ReportTAActivity;
 import com.slash.youth.ui.activity.UserinfoEditorActivity;
 import com.slash.youth.ui.viewmodel.ActivityUserInfoModel;
@@ -39,6 +41,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.dialog.report.ReportDialog;
+import com.slash.youth.v2.feature.dialog.share.ShareDialog;
 import com.slash.youth.v2.feature.userinfo.tab.UserInfoTabFragment;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -48,6 +51,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+
+import static io.rong.imlib.statistics.UserData.name;
 
 @PerActivity
 public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
@@ -75,6 +80,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
 
     OtherInfoUseCase useCase;
     ReportDialog reportDialog;
+    ShareDialog shareDialog;
     UserStatusUseCase userStatusUseCase;
     UserAddFriendUseCase addFriendUseCase;
     UserRemoveFriendUseCase removeFriendUseCase;
@@ -94,6 +100,13 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
     public ObservableField<String> company = new ObservableField<>();
     public ObservableField<String> removeFriend = new ObservableField<>("");
     public ObservableField<OtherInfo.DataBean> data = new ObservableField<>();
+
+    public final ReplyCommand share = new ReplyCommand<>(() -> {
+        if (!shareDialog.isShowing()) {
+            shareDialog.show();
+        }
+    });
+
     public final ReplyCommand addClick = new ReplyCommand<>(() -> {
         switch (friendStatus) {
             case 0://现在是陌生人，点击之后是加好友
@@ -119,9 +132,11 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                              UserAddFriendUseCase addFriendUseCase,
                              UserRemoveFriendUseCase removeFriendUseCase,
                              UserAgreeFriendUseCase agreeFriendUseCase,
-                             ReportDialog reportDialog) {
+                             ReportDialog reportDialog,
+                             ShareDialog shareDialog) {
         super(activity);
         this.reportDialog = reportDialog;
+        this.shareDialog = shareDialog;
         this.userStatusUseCase = userStatusUseCase;
         this.addFriendUseCase = addFriendUseCase;
         this.removeFriendUseCase = removeFriendUseCase;
@@ -179,6 +194,23 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
         if (LoginManager.currentLoginUserId != uid) {
             fiends();
         }
+
+        Messenger.getDefault().register(this, MessageKey.SHARE_FRIEND, () -> {
+
+            ChatCmdBusinesssCardBean chatCmdBusinesssCardBean = new ChatCmdBusinesssCardBean();
+            chatCmdBusinesssCardBean.avatar = data.get().getAvatar();
+            chatCmdBusinesssCardBean.industry = data.get().getIndustry();
+            chatCmdBusinesssCardBean.name = name;
+            chatCmdBusinesssCardBean.profession = data.get().getPosition();
+//        chatCmdBusinesssCardBean.uid = uid;
+            chatCmdBusinesssCardBean.uid = uid + "";
+            Intent intentChooseFriendActivtiy = new Intent(CommonUtils.getContext(), MyFriendActivtiy.class);
+            intentChooseFriendActivtiy.putExtra("sendFriend", true);
+            intentChooseFriendActivtiy.putExtra("ChatCmdBusinesssCardBean", chatCmdBusinesssCardBean);
+            intentChooseFriendActivtiy.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            CommonUtils.getContext().startActivity(intentChooseFriendActivtiy);
+        });
+
         refresh();
     }
 

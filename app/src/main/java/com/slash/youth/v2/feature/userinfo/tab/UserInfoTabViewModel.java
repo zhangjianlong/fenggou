@@ -1,6 +1,12 @@
 package com.slash.youth.v2.feature.userinfo.tab;
 
 
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.BackgroundColorSpan;
+
 import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.utils.JsonUtil;
@@ -62,7 +68,12 @@ public class UserInfoTabViewModel extends TabViewModel {
         userTaskCountUseCase.setParams(JsonUtil.mapToJson(map));
         userTaskCountUseCase.execute().compose(activity.bindToLifecycle())
                 .subscribe(data -> {
-                    binding.tabLayout.getTabAt(2).setText(String.format(activity.getString(R.string.app_userinfo_task_title), data.getCount()));
+
+                    String d = String.format(activity.getString(R.string.app_userinfo_task_title), data.getCount());
+                    Spannable spannable = new SpannableString(d);
+                    spannable.setSpan(new BackgroundColorSpan(Color.GRAY), 4, d.length(), 0);
+                    spannable.setSpan(new AbsoluteSizeSpan(8), 4, d.length(), 0);
+                    binding.tabLayout.getTabAt(2).setText(spannable);
                 });
     }
 
@@ -74,7 +85,11 @@ public class UserInfoTabViewModel extends TabViewModel {
 
         userEvaluateCountUseCase.execute().compose(activity.bindToLifecycle())
                 .subscribe(data -> {
-                    binding.tabLayout.getTabAt(1).setText(String.format(activity.getString(R.string.app_userinfo_evaluate_title), data.getCount()));
+                    String d = String.format(activity.getString(R.string.app_userinfo_evaluate_title), data.getCount());
+                    Spannable spannable = new SpannableString(d);
+                    spannable.setSpan(new BackgroundColorSpan(Color.GRAY), 2, d.length(), 0);
+                    spannable.setSpan(new AbsoluteSizeSpan(8), 2, d.length(), 0);
+                    binding.tabLayout.getTabAt(1).setText(spannable);
                 });
     }
 }

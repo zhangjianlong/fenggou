@@ -3,6 +3,7 @@ package com.slash.youth.v2.base;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.core.op.lib.base.BAViewModel;
 
@@ -16,19 +17,14 @@ public abstract class BackActivity<V extends BAViewModel, T extends ViewDataBind
 
     @Override
     protected void initAfterView() {
-        setSupportActionBar(setToolBar());
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        super.initAfterView();
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+        setToolBar().setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+            }
+        });
+        super.initAfterView();
     }
 
     protected abstract Toolbar setToolBar();
