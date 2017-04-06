@@ -81,6 +81,7 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
     public final ObservableField<Boolean> timeCheck = new ObservableField<>(false);
     public final ObservableField<String> weixinBinding = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_setting_bind));
     public final ObservableField<String> qqBinding = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_setting_bind));
+    public final ObservableField<String> title = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_setting_title));
 
     @Inject
     public MySettingViewModel(RxAppCompatActivity activity, CommonDialog commonDialog, BindingDialog bindingDialog) {
@@ -137,7 +138,7 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
         }
     });
 
-    private void  showCommonDialog(String content ){
+    private void showCommonDialog(String content) {
         commonDialog.initValue(content);
         commonDialog.hintCalBtn();
         commonDialog.setOnDialogLisetener(new OnDialogLisetener() {
@@ -324,7 +325,7 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
 
             }
         });
-        if (commonDialog!=null&&!commonDialog.isShowing()){
+        if (commonDialog != null && !commonDialog.isShowing()) {
             commonDialog.show();
         }
     }
@@ -436,7 +437,7 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
                     int status = data.status;
                     switch (status) {
                         case 1://1有审核中的交易密码
-                                showCommonDialog(CommonUtils.getContext().getString(R.string.app_setting_psd_find));
+                            showCommonDialog(CommonUtils.getContext().getString(R.string.app_setting_psd_find));
                             break;
                         case 2://2没有审核中的交易密码
                             switch (prama) {

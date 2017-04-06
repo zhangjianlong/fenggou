@@ -141,6 +141,7 @@
     <string name="app.setting.psd.remind">密码设置在审核中，请等待审核</string>
     <string name="app.setting.bind">去绑定</string>
     <string name="app.setting.unbind">解绑</string>
+    <string name="app.setting.title">设置</string>
     <string name="app.setting.logout">真的要退出登录吗？</string>
 
 
