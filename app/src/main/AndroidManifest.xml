@@ -191,11 +191,11 @@
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
 
-        <!-- <activity -->
-        <!-- android:name=".ui.activity.LoginActivity" -->
-        <!-- android:label="登录页" -->
-        <!-- android:launchMode="singleTask" -->
-        <!-- android:windowSoftInputMode="adjustPan" /> -->
+        <activity
+            android:name=".v2.feature.setting.MySettingActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
+
 
         <activity android:name=".ui.activity.SlashProtocolActivity" />
         <activity

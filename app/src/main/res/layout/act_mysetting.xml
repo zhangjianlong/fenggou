@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.slash.youth.v2.feature.setting.MySettingViewModel" />
@@ -49,135 +50,24 @@
                     android:text="22:00-08:00"
                     android:textColor="#60A7B6"
                     android:textSize="15dp" />
-                <!--时间设置-->
-                <FrameLayout
+
+                <android.support.v7.widget.SwitchCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:onClick="@{mySettingModel.setTime}">
+                    android:checked="@{viewModel.timeCheck}"
+                    app:clickCommand="@{viewModel.setTime}" />
 
-                    <ImageView
-                        android:id="@+id/iv_toggle_close"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@mipmap/switch_close_btn" />
-
-                    <ImageView
-                        android:id="@+id/iv_toggle_open"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@mipmap/switch_on_btn" />
-                </FrameLayout>
 
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
-                android:background="#E5E5E5"
-                android:visibility="gone" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:text="信息免打扰"
-                    android:textColor="#333333"
-                    android:textSize="15dp" />
-
-                <!--消息设置-->
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:onClick="@{mySettingModel.setMsg}">
-
-                    <ImageView
-                        android:id="@+id/iv_toggle_close1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@mipmap/switch_close_btn" />
-
-                    <ImageView
-                        android:id="@+id/iv_toggle_open1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@mipmap/switch_on_btn" />
-                </FrameLayout>
-            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="0.1dp"
                 android:layout_marginTop="15dp"
                 android:background="#E5E5E5"
-                android:visibility="gone" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:text="屏蔽"
-                    android:textColor="#333333"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="30dp"
-                    android:text="暂无屏蔽人"
-                    android:textColor="#60A7B6"
-                    android:textSize="13dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/right1_icon" />
-
-            </RelativeLayout>
-
-            <View
-                android:id="@+id/view_revise"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
-                android:background="#E5E5E5"
-                android:visibility="gone" />
+                android:visibility="@{viewModel.changePsdShow}" />
 
             <RelativeLayout
                 android:id="@+id/rl_revise"
@@ -185,8 +75,8 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
-                android:onClick="@{mySettingModel.revisePassWord}"
-                android:visibility="gone">
+                app:clickCommand="@{viewModel.revisePassWord}"
+                android:visibility="@{viewModel.changePsdShow}">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,9 +99,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="0.1dp"
                 android:layout_marginTop="15dp"
                 android:background="#E5E5E5" />
 
@@ -222,7 +110,7 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
-                android:onClick="@{mySettingModel.setPassWord}">
+                app:clickCommand="@{viewModel.setPassWord}">
 
                 <TextView
                     android:id="@+id/tv_setAndfindPassword"
@@ -230,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:text="设置交易密码"
+                    android:text="@{viewModel.setPsd}"
                     android:textColor="#333333"
                     android:textSize="15dp" />
 
@@ -260,8 +148,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:clickCommand="@{viewModel.weixin}">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -284,12 +172,11 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/tv_weixin_binding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:text="去绑定"
+                    android:text="@{viewModel.weixinBinding}"
                     android:textColor="#60A7B6"
                     android:textSize="13dp" />
 
@@ -302,7 +189,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.1dp"
                 android:background="#E5E5E5" />
 
             <LinearLayout
@@ -312,8 +199,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:onClick="@{mySettingModel.qq}"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:clickCommand="@{viewModel.qq}">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -341,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:text="去绑定"
+                    android:text="@{viewModel.qqBinding}"
                     android:textColor="#60A7B6"
                     android:textSize="13dp" />
 
@@ -380,7 +267,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.1dp"
             android:background="#E5E5E5" />
 
         <RelativeLayout
@@ -400,7 +287,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.1dp"
             android:background="#E5E5E5" />
 
         <RelativeLayout
@@ -420,14 +307,15 @@
 
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="49dp"
             android:layout_marginTop="15dp"
             android:background="@color/white"
             android:gravity="center"
-            android:onClick="@{mySettingModel.finishApp}"
             android:text="退出登录"
             android:textColor="#333333"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            app:clickCommand="@{viewModel.finishApp}" />
     </LinearLayout>
 </layout>

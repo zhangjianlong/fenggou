@@ -34,4 +34,8 @@ public final class CommonDialog extends BaseDialog<CommonViewModel, DlgCommonBin
     public void initValue(String content) {
         viewModel.initValue(content);
     }
+
+    public void hintCalBtn() {
+        viewModel.hintCalBtn();
+    }
 }

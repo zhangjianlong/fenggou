@@ -61,20 +61,20 @@ import java.util.Map;
  * Created by zss on 2016/11/3.
  */
 public class MySettingModel extends BaseObservable {
-    public  static final  int SY_RES_SUCCESS                   = 0; //成功
-    public  static final int SY_RES_FAIL                      = 1 ; //失败
-    public  static final int SY_RES_INVALID_PARAMS            = 2; //参数错误
-    public  static final int SY_RES_INVALID_TOKEN             = 3 ;//Token错误
-    public  static final int SY_RES_TOKEN_TIMEOUT             = 4;  //Token过期
-    public  static final int SY_RES_INVALID_USERNAME_PASSWORD = 5 ; //用户名或密码错误
-    public  static final int SY_RES_USER_EXISTS               = 6 ;//用户名已存在
-    public  static final int  SY_RES_INVALID_PIN               = 7 ; //验证码错误
-    public  static final int  SY_RES_INVALID_UID               = 8;  //UID错误
-    public  static final int  SY_RES_NEED_LOGIN_WITH_PHONE     = 9 ; //通过第三方登录并且未绑定手机号码
-    public  static final int  SY_RES_NOT_FOUND                 = 10; //不存在
-    public  static final int SY_RES_NEW_USER                  = 11; //新用户
-    public  static final int SY_RES_BINDED_THIRDPART          = 12; //已绑定了其他账号
-    public  static final int SY_RES_TAG_EXIST                 = 50 ; //标签已存在
+    public static final int SY_RES_SUCCESS = 0; //成功
+    public static final int SY_RES_FAIL = 1; //失败
+    public static final int SY_RES_INVALID_PARAMS = 2; //参数错误
+    public static final int SY_RES_INVALID_TOKEN = 3;//Token错误
+    public static final int SY_RES_TOKEN_TIMEOUT = 4;  //Token过期
+    public static final int SY_RES_INVALID_USERNAME_PASSWORD = 5; //用户名或密码错误
+    public static final int SY_RES_USER_EXISTS = 6;//用户名已存在
+    public static final int SY_RES_INVALID_PIN = 7; //验证码错误
+    public static final int SY_RES_INVALID_UID = 8;  //UID错误
+    public static final int SY_RES_NEED_LOGIN_WITH_PHONE = 9; //通过第三方登录并且未绑定手机号码
+    public static final int SY_RES_NOT_FOUND = 10; //不存在
+    public static final int SY_RES_NEW_USER = 11; //新用户
+    public static final int SY_RES_BINDED_THIRDPART = 12; //已绑定了其他账号
+    public static final int SY_RES_TAG_EXIST = 50; //标签已存在
 
 
     private ActivityMySettingBinding activityMySettingBinding;
@@ -670,21 +670,21 @@ public class MySettingModel extends BaseObservable {
                 int rescode = dataBean.getRescode();
                 TextView textView = null;
 
-                switch (type){
-                        case GlobalConstants.LoginPlatformType.WECHAT://微信
-                            textView = activityMySettingBinding.tvWeixinBinding;
-                            if (rescode == SY_RES_SUCCESS){
-                                isWinxinBing = true;
-                            }
-                            break;
-                        case GlobalConstants.LoginPlatformType.QQ://qq
-                            textView =  activityMySettingBinding.tvQQBinding;
-                            if (rescode == SY_RES_SUCCESS){
-                                isQQBing = true;
-                            }
-                            break;
+                switch (type) {
+                    case GlobalConstants.LoginPlatformType.WECHAT://微信
+                        textView = activityMySettingBinding.tvWeixinBinding;
+                        if (rescode == SY_RES_SUCCESS) {
+                            isWinxinBing = true;
+                        }
+                        break;
+                    case GlobalConstants.LoginPlatformType.QQ://qq
+                        textView = activityMySettingBinding.tvQQBinding;
+                        if (rescode == SY_RES_SUCCESS) {
+                            isQQBing = true;
+                        }
+                        break;
                 }
-                switch (rescode){
+                switch (rescode) {
                     case SY_RES_SUCCESS:
                         textView.setText("解绑");
                         ToastUtils.shortCenterToast("绑定成功");

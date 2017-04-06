@@ -31,7 +31,6 @@ import com.slash.youth.ui.activity.MyAccountActivity;
 import com.slash.youth.ui.activity.MyCollectionActivity;
 import com.slash.youth.ui.activity.MyFriendActivtiy;
 import com.slash.youth.ui.activity.MyHelpActivity;
-import com.slash.youth.ui.activity.MySettingActivity;
 import com.slash.youth.ui.activity.UserinfoEditorActivity;
 import com.slash.youth.ui.activity.VisitorsActivity;
 import com.slash.youth.ui.activity.WebViewActivity;
@@ -44,6 +43,7 @@ import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.feature.back.SimpleBackActivity;
 import com.slash.youth.v2.feature.back.SimpleBackPage;
 import com.slash.youth.v2.feature.dialog.mine.IdentificateDialog;
+import com.slash.youth.v2.feature.setting.MySettingActivity;
 import com.slash.youth.v2.feature.userinfo.UserInfoActivity;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -201,11 +201,11 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     });
 
     public final ReplyCommand settingClick = new ReplyCommand(() -> {
-        Intent intentMySettingActivity = new Intent(CommonUtils.getContext(), MySettingActivity.class);
-        intentMySettingActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_SET);
+        Intent intentMySettingActivity = new Intent(activity, MySettingActivity.class);
         activity.startActivity(intentMySettingActivity);
         //设置的埋点
-        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_SET);
+
     });
 
     MineInfoUseCase mineInfoUseCase;
