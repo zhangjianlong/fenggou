@@ -36,7 +36,6 @@ public class MySettingActivity extends BaseActivity implements View.OnClickListe
         mySettingModel = new MySettingModel(activityMySettingBinding, this);
         activityMySettingBinding.setMySettingModel(mySettingModel);
         listener();
-
     }
 
     private void listener() {

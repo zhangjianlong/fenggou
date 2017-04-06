@@ -129,4 +129,11 @@
     <string name="app.text.copy.dialog.cal">取消</string>
     <!--ProocolAct-->
     <string name="app.procol.title">斜杠青年服务协议</string>
+    <!--MySettingAct-->
+    <string name="app.setting.personal.setting">以下三项设置针对个人信息页面</string>
+    <string name="app.setting.company.show">显示公司</string>
+    <string name="app.setting.evaluate.show">显示评价</string>
+    <string name="app.setting.service.show">显示服务力</string>
+    <string name="app.setting.find.psd">找回交易密码</string>
+    <string name="app.setting.set.psd">设置交易密码</string>
 </resources>
