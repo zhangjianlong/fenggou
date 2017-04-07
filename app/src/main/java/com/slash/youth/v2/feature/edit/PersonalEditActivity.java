@@ -3,6 +3,7 @@ package com.slash.youth.v2.feature.edit;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPersonaleditBinding;
@@ -39,6 +40,14 @@ public final class PersonalEditActivity extends BackActivity<PersonalEditViewMod
 
     @AfterViews
     void afterViews() {
+        binding.toolbar.toolbar.inflateMenu(R.menu.menu_userinfo_save);
+        binding.toolbar.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return true;
+            }
+        });
+
     }
 
     @Override

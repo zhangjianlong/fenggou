@@ -194,6 +194,12 @@
             android:name=".v2.feature.setting.MySettingActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".v2.feature.edit.PersonalEditActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".v2.feature.pub.PubActivity"
             android:launchMode="standard"
@@ -207,6 +213,8 @@
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SlashProtocolActivity" />
+
+
         <activity
             android:name=".ui.activity.HomeActivity"
             android:label="首页"
