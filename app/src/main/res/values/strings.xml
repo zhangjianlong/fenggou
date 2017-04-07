@@ -146,5 +146,24 @@
     <!--MySettingAct-->
     <string name="app.personal.edit.hint">完善个人信息，可以让大家更了解你哦</string>
     <string name="app.personal.title">编辑个人信息</string>
+    <string name="app.personal.edit.head">头像</string>
     <string name="app.personal.edit.real.name">真实姓名</string>
+    <string name="app.personal.edit.gender">性别</string>
+    <string name="app.personal.edit.phone.number">手机号码</string>
+    <string name="app.personal.edit.occupation">职业类型</string>
+    <string name="app.personal.edit.company">所在公司</string>
+    <string name="app.personal.edit.company.hint">请填写(您可在“设置”中选择隐藏)</string>
+    <string name="app.personal.edit.write">请填写</string>
+    <string name="app.personal.edit.select">请选择</string>
+    <string name="app.personal.edit">编辑</string>
+    <string name="app.personal.edit.position">公司职位</string>
+    <string name="app.personal.edit.need">我需要</string>
+    <string name="app.personal.edit.provide">能提供</string>
+    <string name="app.personal.edit.area">区域</string>
+    <string name="app.personal.edit.profile">个人简介</string>
+    <string name="app.personal.edit.man">男</string>
+    <string name="app.personal.edit.woman">女</string>
+    <string name="app.personal.edit.job">职场人士</string>
+    <string name="app.personal.edit.self.employed">自雇者</string>
+    <string name="app.personal.edit.save">保存</string>
 </resources>

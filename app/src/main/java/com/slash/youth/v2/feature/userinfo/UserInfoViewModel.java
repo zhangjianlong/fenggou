@@ -42,6 +42,7 @@ import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
 import com.slash.youth.v2.feature.dialog.report.ReportDialog;
 import com.slash.youth.v2.feature.dialog.share.ShareDialog;
+import com.slash.youth.v2.feature.edit.PersonalEditActivity;
 import com.slash.youth.v2.feature.userinfo.tab.UserInfoTabFragment;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -389,7 +390,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
     public void gotoEidt() {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_EDIT_PROFILE);
 
-        Intent intent = new Intent(CommonUtils.getContext(), UserinfoEditorActivity.class);
+        Intent intent = new Intent(CommonUtils.getContext(), PersonalEditActivity.class);
         intent.putExtra("myId", data.get().getId());
         activity.startActivityForResult(intent, UserInfoEngine.MY_USER_EDITOR);
     }

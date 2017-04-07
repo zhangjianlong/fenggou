@@ -16,6 +16,7 @@ import com.slash.youth.ui.view.fly.RandomLayout;
 import com.slash.youth.ui.viewmodel.ActivityUserInfoModel;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
+import com.slash.youth.v2.feature.edit.PersonalEditActivity;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.UMShareAPI;
 
@@ -104,7 +105,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 //埋点
                 MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_PERSON_MESSAGE_CLICK_EDIT);
 
-                Intent intentUserinfoEditorActivity = new Intent(CommonUtils.getContext(), UserinfoEditorActivity.class);
+                Intent intentUserinfoEditorActivity = new Intent(CommonUtils.getContext(), PersonalEditActivity.class);
                 intentUserinfoEditorActivity.putExtra("phone", phone);
                 intentUserinfoEditorActivity.putExtra("myId", myId);
                 UserInfoActivity.this.startActivity(intentUserinfoEditorActivity);

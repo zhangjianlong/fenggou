@@ -43,6 +43,7 @@ import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.feature.back.SimpleBackActivity;
 import com.slash.youth.v2.feature.back.SimpleBackPage;
 import com.slash.youth.v2.feature.dialog.mine.IdentificateDialog;
+import com.slash.youth.v2.feature.edit.PersonalEditActivity;
 import com.slash.youth.v2.feature.setting.MySettingActivity;
 import com.slash.youth.v2.feature.userinfo.UserInfoActivity;
 import com.slash.youth.v2.util.MessageKey;
@@ -193,8 +194,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
     public final ReplyCommand editorClick = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_EDIT_PROFILE);
-
-        Intent intentUserinfoEditorActivity = new Intent(CommonUtils.getContext(), UserinfoEditorActivity.class);
+        Intent intentUserinfoEditorActivity = new Intent(CommonUtils.getContext(), PersonalEditActivity.class);
         intentUserinfoEditorActivity.putExtra("phone", data.get().getPhone());
         intentUserinfoEditorActivity.putExtra("myId", data.get().getId());
         activity.startActivityForResult(intentUserinfoEditorActivity, UserInfoEngine.MY_USER_EDITOR);
@@ -236,7 +236,7 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
         dialog.setOnDialogLisetener(new OnDialogLisetener() {
             @Override
             public void onConfirm() {
-                Intent intentUserinfoEditorActivity = new Intent(CommonUtils.getContext(), UserinfoEditorActivity.class);
+                Intent intentUserinfoEditorActivity = new Intent(CommonUtils.getContext(), PersonalEditActivity.class);
                 intentUserinfoEditorActivity.putExtra("myId", data.get().getId());
                 activity.startActivityForResult(intentUserinfoEditorActivity, UserInfoEngine.MY_USER_EDITOR);
             }
