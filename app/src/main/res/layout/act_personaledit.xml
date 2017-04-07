@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/app.theme.background"
         android:orientation="vertical">
 
         <include
@@ -51,10 +52,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="@string/app.personal.edit.real.name"
-                android:textColor="@color/app.text.black" />
-
-
+                android:textColor="@color/app.text.black6a6a6a" />
         </RelativeLayout>
+
+        <include layout="@layout/include_line_h_margin"></include>
+
+
 
 
     </LinearLayout>
