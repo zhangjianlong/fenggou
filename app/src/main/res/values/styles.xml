@@ -128,15 +128,10 @@
         <item name="android:numColumns">5</item>
     </style>
 
-    <style name="App.Theme.Linear.task">
-        <!-- 定义星星图片 -->
+    <style name="App.Theme.Linear.padding">
         <item name="android:background">@color/app.theme.background</item>
         <item name="android:orientation">horizontal</item>
-        <!-- 根据自定义星星图片的大小,设置相应的值,否则可能显示不全 -->
-        <item name="android:paddingLeft">@dimen/app.padding.normal</item>
-        <item name="android:paddingRight">@dimen/app.padding.normal</item>
-        <item name="android:paddingTop">@dimen/app.padding.large</item>
-        <item name="android:paddingBottom">@dimen/app.padding.large</item>
+        <item name="android:padding">@dimen/app.padding.large</item>
     </style>
 
 </resources>

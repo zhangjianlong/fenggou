@@ -90,7 +90,7 @@
 
     <color name="app.popupMenu.background">#B4D2E0</color>
 
-    <color name="app.text.hint">#9CBDCC</color>
+    <color name="app.text.hint">#cccccc</color>
 
     <!-- Segmented Control -->
     <color name="app.widget.segmented.default">?attr/colorAccent</color>

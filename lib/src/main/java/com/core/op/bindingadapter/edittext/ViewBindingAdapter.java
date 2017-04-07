@@ -29,6 +29,13 @@ public final class ViewBindingAdapter {
 
     }
 
+    @android.databinding.BindingAdapter({"textWatcher"})
+    public static void textWatcher(EditText editText, final TextWatcher textWatcher) {
+        if (textWatcher != null) {
+            editText.addTextChangedListener(textWatcher);
+        }
+    }
+
 
     @android.databinding.BindingAdapter(value = {"beforeTextChangedCommand", "onTextChangedCommand", "afterTextChangedCommand"}, requireAll = false)
     public static void editTextCommand(EditText editText,

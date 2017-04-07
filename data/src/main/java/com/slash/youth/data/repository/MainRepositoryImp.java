@@ -4,6 +4,7 @@ package com.slash.youth.data.repository;
 import com.slash.youth.data.ApiClient;
 import com.slash.youth.data.api.transformer.ErrorTransformer;
 import com.slash.youth.data.util.RetrofitUtil;
+import com.slash.youth.data.util.UpDownLoadUtil;
 import com.slash.youth.domain.bean.BannerConfigBean;
 import com.slash.youth.domain.bean.CountBean;
 import com.slash.youth.domain.bean.FindDemand;
@@ -15,9 +16,11 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
+import com.slash.youth.domain.interfaces.OnProgressListener;
 import com.slash.youth.domain.repository.MainRepository;
 
 import javax.inject.Inject;
@@ -136,5 +139,11 @@ public class MainRepositoryImp implements MainRepository {
     @Override
     public Observable<StatusBean> removeFriend(String def) {
         return apiClient.removeFriend(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<UploadBean> uploadUserHead(String path, OnProgressListener onProgressListener) {
+        return apiClient.uploadUserHead(UpDownLoadUtil.uploadImageFile("filename", path, onProgressListener))
+                .compose(new ErrorTransformer<>());
     }
 }

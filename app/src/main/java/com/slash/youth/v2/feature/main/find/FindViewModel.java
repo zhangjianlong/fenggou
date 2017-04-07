@@ -234,8 +234,12 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 .subscribe(data -> {
                     tItemViewModel.add(new FindTagItemViewModel(activity, data));
                 }, error -> {
+                    startInAnim();
+                    isRefreshing.set(false);
                 }, () -> {
                     binding.idRecyclerviewHorizontal.getAdapter().notifyDataSetChanged();
+                    startInAnim();
+                    isRefreshing.set(false);
                 });
 
 //        loadService(true);

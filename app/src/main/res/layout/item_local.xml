@@ -23,6 +23,7 @@
             android:drawablePadding="@dimen/app.padding.small"
             android:paddingBottom="@dimen/app.padding.normal"
             android:paddingTop="@dimen/app.padding.normal"
+            android:text="@{viewModel.name}"
             android:textColor="@color/app.text.black333"
             tools:text="苏州" />
 
