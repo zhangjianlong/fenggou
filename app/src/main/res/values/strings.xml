@@ -85,6 +85,19 @@
         <item>至尊</item>
     </array>
 
+
+    <array name="hot_citys">
+        <item>北京</item>
+        <item>深圳</item>
+        <item>广州</item>
+        <item>上海</item>
+        <item>杭州</item>
+        <item>成都</item>
+        <item>重庆</item>
+        <item>武汉</item>
+        <item>苏州</item>
+    </array>
+
     <string name="app.error.customservice">获取客服UID失败</string>
 
     <string name="app.login.help">遇到问题</string>
@@ -166,4 +179,13 @@
     <string name="app.personal.edit.job">职场人士</string>
     <string name="app.personal.edit.self.employed">自雇者</string>
     <string name="app.personal.edit.save">保存</string>
+    <string name="app.pub.taskname">输入任务名称</string>
+    <string name="app.pub.title.numble">%1$s/15</string>
+    <string name="app.pub.top.text1">发布你公司的运营任务</string>
+    <string name="app.pub.top.text2">会有专业的运营小伙伴帮你完成哦</string>
+    <string name="app.pub.name.hint">例如:写一篇关于推广的文章</string>
+    <string name="app.pub.type.select">请选择类别</string>
+    <string name="app.pub.local.select">请选择服务地点</string>
+    <string name="app.pub.unit.hint">单位</string>
+    <string name="app.pub.title">发布任务</string>
 </resources>

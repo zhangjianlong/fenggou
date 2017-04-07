@@ -16,7 +16,7 @@ public class ProvinceBean implements Serializable {
      */
 
     private String name;
-    private int provinceId;
+    private String provinceId;
     private List<CityBean> city;
 
     public String getName() {
@@ -27,11 +27,11 @@ public class ProvinceBean implements Serializable {
         this.name = name;
     }
 
-    public int getProvinceId() {
+    public String getProvinceId() {
         return provinceId;
     }
 
-    public void setProvinceId(int provinceId) {
+    public void setProvinceId(String provinceId) {
         this.provinceId = provinceId;
     }
 
@@ -52,7 +52,7 @@ public class ProvinceBean implements Serializable {
 
         private String name;
         private String cityId;
-        private int provinceId;
+        private String provinceId;
 
         public String getName() {
             return name;
@@ -70,11 +70,11 @@ public class ProvinceBean implements Serializable {
             this.cityId = cityId;
         }
 
-        public int getProvinceId() {
+        public String getProvinceId() {
             return provinceId;
         }
 
-        public void setProvinceId(int provinceId) {
+        public void setProvinceId(String provinceId) {
             this.provinceId = provinceId;
         }
     }

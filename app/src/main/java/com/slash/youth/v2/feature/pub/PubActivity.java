@@ -1,4 +1,4 @@
-package com.slash.youth.v2.feature.local;
+package com.slash.youth.v2.feature.pub;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,28 +9,24 @@ import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
 import com.core.op.lib.utils.inject.RootView;
 import com.slash.youth.R;
-import com.slash.youth.databinding.ActLabelBinding;
-import com.slash.youth.databinding.ActLocalBinding;
+import com.slash.youth.databinding.ActPubBinding;
 import com.slash.youth.v2.base.BackActivity;
 import com.slash.youth.v2.base.BaseActivity;
-import com.slash.youth.v2.di.components.DaggerLabelComponent;
-import com.slash.youth.v2.di.components.DaggerLocalComponent;
-import com.slash.youth.v2.di.components.LabelComponent;
-import com.slash.youth.v2.di.components.LocalComponent;
-import com.slash.youth.v2.di.modules.LabelModule;
-import com.slash.youth.v2.di.modules.LocalModule;
+import com.slash.youth.v2.di.components.DaggerPubComponent;
+import com.slash.youth.v2.di.components.PubComponent;
+import com.slash.youth.v2.di.modules.PubModule;
 
-@RootView(R.layout.act_local)
-public final class LocalActivity extends BackActivity<LocalViewModel, ActLocalBinding> {
+@RootView(R.layout.act_pub)
+public final class PubActivity extends BackActivity<PubViewModel, ActPubBinding> {
 
-    LocalComponent component;
+    PubComponent component;
 
     public final static void instance(Context context) {
         instance(context, null);
     }
 
     public final static void instance(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, LocalActivity.class);
+        Intent intent = new Intent(context, PubActivity.class);
         if (bundle != null) {
             intent.putExtra("data", bundle);
         }
@@ -39,10 +35,10 @@ public final class LocalActivity extends BackActivity<LocalViewModel, ActLocalBi
 
     @BeforeViews
     void beforViews() {
-        component = DaggerLocalComponent.builder()
+        component = DaggerPubComponent.builder()
                 .appComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
-                .localModule(new LocalModule())
+                .pubModule(new PubModule())
                 .build();
         component.inject(this);
     }
@@ -53,6 +49,6 @@ public final class LocalActivity extends BackActivity<LocalViewModel, ActLocalBi
 
     @Override
     protected Toolbar setToolBar() {
-        return binding.toobar.toolbar;
+        return binding.toolbar.toolbar;
     }
 }

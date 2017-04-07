@@ -12,9 +12,11 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
+import com.slash.youth.domain.interfaces.OnProgressListener;
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -58,6 +60,8 @@ public interface MainRepository {
     Observable<BaseList<UserEvaluateBean>> getUserEvaluates(String def);
 
     Observable<StatusBean> getFriendsStatus(String def);
+
+    Observable<UploadBean> uploadUserHead(String path, OnProgressListener onProgressListener);
 
     Observable<CountBean> getUserEvaluateCount(String def);
 

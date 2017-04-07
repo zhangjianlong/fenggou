@@ -92,7 +92,8 @@ public class ProgressRequestBody extends RequestBody {
                 if (totalBytesCount == 0) {
                     totalBytesCount = contentLength();
                 }
-                onProgressListener.onProgress(writtenBytesCount, totalBytesCount);
+                if (onProgressListener != null)
+                    onProgressListener.onProgress(writtenBytesCount, totalBytesCount);
             }
         };
     }

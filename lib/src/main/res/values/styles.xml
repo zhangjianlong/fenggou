@@ -272,17 +272,45 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/app.text.tiny10</item>
     </style>
+
     <style name="App.Theme.TextAppearance.ww.small">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/app.text.small</item>
     </style>
 
+    <style name="App.Theme.TextAppearance.ww.small.white"></style>
+
+    <style name="App.Theme.TextAppearance.ww.small.black666">
+        <item name="android:textColor">@color/app.text.black666</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.ww.small.black333">
+        <item name="android:textColor">@color/app.text.black333</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.ww.small.blue">
+        <item name="android:textColor">@color/app.theme.colorPrimary</item>
+    </style>
 
     <style name="App.Theme.TextAppearance.ww.normal">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/app.text.normal</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.ww.normal.white"></style>
+
+    <style name="App.Theme.TextAppearance.ww.normal.black666">
+        <item name="android:textColor">@color/app.text.black666</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.ww.normal.black333">
+        <item name="android:textColor">@color/app.text.black333</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.ww.normal.blue">
+        <item name="android:textColor">@color/app.theme.colorPrimary</item>
     </style>
 
     <style name="App.Theme.TextAppearance.ww.large">
@@ -365,6 +393,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/selector_bg_button</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--edit style-->
+    <style name="App.Theme.Edit" parent="App.Theme.TextAppearance.ww.small.black666">
+        <item name="android:textColorHint">@color/app.text.hint</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
     <!--image style-->

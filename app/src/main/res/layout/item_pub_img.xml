@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.slash.youth.v2.feature.local.LocalItemViewModel" />
+            type="com.slash.youth.v2.feature.pub.PubItemViewModel" />
 
         <import type="android.view.View" />
 
@@ -16,18 +16,16 @@
 
     <LinearLayout
         style="@style/App.Theme.layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <TextView
             style="@style/App.Theme.TextAppearance.ww.normal"
             android:drawablePadding="@dimen/app.padding.small"
             android:paddingBottom="@dimen/app.padding.normal"
-            android:paddingLeft="@dimen/app.padding.large30"
-            android:paddingRight="@dimen/app.padding.large30"
             android:paddingTop="@dimen/app.padding.normal"
-            android:text="@{viewModel.name}"
             android:textColor="@color/app.text.black333"
             tools:text="苏州" />
+
+        <include layout="@layout/include_line_h_padding" />
     </LinearLayout>
 </layout>

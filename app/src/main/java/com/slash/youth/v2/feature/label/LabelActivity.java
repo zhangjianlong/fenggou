@@ -3,8 +3,10 @@ package com.slash.youth.v2.feature.label;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.slash.youth.R;
+import com.slash.youth.v2.base.BackActivity;
 import com.slash.youth.v2.base.BaseActivity;
 import com.slash.youth.databinding.ActLabelBinding;
 import com.slash.youth.v2.di.components.DaggerLabelComponent;
@@ -18,7 +20,7 @@ import com.core.op.lib.utils.inject.RootView;
 import javax.inject.Inject;
 
 @RootView(R.layout.act_label)
-public final class LabelActivity extends BaseActivity<LabelViewModel, ActLabelBinding> {
+public final class LabelActivity extends BackActivity<LabelViewModel, ActLabelBinding> {
 
     LabelComponent component;
 
@@ -46,5 +48,10 @@ public final class LabelActivity extends BaseActivity<LabelViewModel, ActLabelBi
 
     @AfterViews
     void afterViews() {
+    }
+
+    @Override
+    protected Toolbar setToolBar() {
+        return binding.toobar.toolbar;
     }
 }

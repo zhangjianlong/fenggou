@@ -126,7 +126,6 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.slash.youth.permission.MIPUSH_RECEIVE" />
-
     <!-- ⼩米 配置结束 < -->
     <application
         android:name=".global.SlashApplication"
@@ -197,6 +196,15 @@
 
         <activity
             android:name=".v2.feature.edit.PersonalEditActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".v2.feature.pub.PubActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.local.LocalActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SlashProtocolActivity" />
@@ -587,5 +595,7 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity android:name=".Pub"></activity>
     </application>
+
 </manifest>

@@ -383,6 +383,19 @@
                         android:text="@string/app.personal.edit.profile"
                         android:textColor="@color/app.text.black666" />
 
+                    <
+
+                    <
+
+                    <
+
+                    <
+
+                    <
+
+                    <
+
+                    < HEAD
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww"
@@ -397,6 +410,5 @@
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
 </layout>

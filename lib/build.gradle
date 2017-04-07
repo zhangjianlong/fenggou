@@ -64,6 +64,7 @@ dependencies {
     compile compiles.zxing
 
     compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.google.code.gson:gson:2.6.1'
 }
 
 //uploadArchives {

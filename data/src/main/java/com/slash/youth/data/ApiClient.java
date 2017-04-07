@@ -17,17 +17,21 @@ import com.slash.youth.domain.bean.PhoneLoginResultBean;
 import com.slash.youth.domain.bean.ResCodeBean;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.bean.base.ChangePhoneBean;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -127,6 +131,10 @@ public interface ApiClient {
 
     @POST(UriMethod.CHECK_ACCOUNT_BINDING)
     Observable<ResCodeBean> checkBinding(@Body RequestBody requestBody);
+
+    @Multipart
+    @POST(UriMethod.IMG_UPLOAD)
+    Observable<BaseResponse<UploadBean>> uploadUserHead(@Part MultipartBody.Part file);
 
 }
 
