@@ -128,7 +128,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
         super.afterViews();
         PreferenceUtil.write(CommonUtils.getContext(), ShareKey.ISDEMAND, isDemand);
         errorVisible.set(View.VISIBLE);
-        binding.recyclerView.setNestedScrollingEnabled(false);
+//        binding.recyclerView.setNestedScrollingEnabled(false);
         binding.likeRecyclerView.setNestedScrollingEnabled(false);
         binding.scScroll.smoothScrollTo(0, 0);
         binding.swipeRefreshLayout.setColorSchemeResources(R.color.app_theme_colorPrimary);
@@ -147,16 +147,16 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
             }
         });
 
-        binding.dtChoice.setServiceDemandToggle((isCheckedService) -> {
-            if (isCheckedService) {
-                loadService(false);
-                isDemand = false;
-            } else {
-                isDemand = true;
-                loadRecommand(false);
-            }
-            PreferenceUtil.write(CommonUtils.getContext(), ShareKey.ISDEMAND, isDemand);
-        });
+//        binding.dtChoice.setServiceDemandToggle((isCheckedService) -> {
+//            if (isCheckedService) {
+//                loadService(false);
+//                isDemand = false;
+//            } else {
+//                isDemand = true;
+//                loadRecommand(false);
+//            }
+//            PreferenceUtil.write(CommonUtils.getContext(), ShareKey.ISDEMAND, isDemand);
+//        });
 
         binding.banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -185,7 +185,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                 startInAnim();
             }
         });
-        binding.dtChoice.checkedService();
+//        binding.dtChoice.checkedService();
         titleVisible.set(View.GONE);
         initBanner();
         loadData();
@@ -236,7 +236,7 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
                     binding.idRecyclerviewHorizontal.getAdapter().notifyDataSetChanged();
                 });
 
-        loadService(true);
+//        loadService(true);
     }
 
     private void initIndicator() {
@@ -270,80 +270,80 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
         }
     }
 
-    private void loadRecommand(boolean isRefresh) {
-        findDemandUseCase.cleanParams();
-        findDemandUseCase.setParams("{\"limit\":\"10\"}");
-        findDemandUseCase.execute().compose(activity.bindToLifecycle())
-                .flatMap(data -> {
-                    lItemViewModels.clear();
-                    itemViewModels.clear();
-                    if (data.getRadlist().size() == 0 && data.getReclist().size() == 0) {
-                        errorVisible.set(View.VISIBLE);
-                        errorType.set(EmptyLayout.NODATA);
-                    } else {
-                        errorVisible.set(View.GONE);
-                    }
-                    if (data.getReclist() != null && data.getReclist().size() != 0) {
-                        for (FindDemand.ListBean listBean : data.getReclist()) {
-                            lItemViewModels.add(new FindItemViewModel(activity, listBean));
-                        }
-                    }
-                    binding.likeRecyclerView.getAdapter().notifyDataSetChanged();
-                    return Observable.from(data.getRadlist());
-                })
-                .subscribe(data -> {
-                    itemViewModels.add(new FindItemViewModel(activity, data));
-                }, error -> {
-                    if (isRefresh) {
-                        startInAnim();
-                        isRefreshing.set(false);
-                    }
-                }, () -> {
-                    binding.recyclerView.getAdapter().notifyDataSetChanged();
-
-                    if (isRefresh) {
-                        isRefreshing.set(false);
-                        startInAnim();
-                    }
-                });
-    }
-
-    private void loadService(boolean isRefresh) {
-        findServiceUseCase.cleanParams();
-        findServiceUseCase.setParams("{\"limit\":\"10\"}");
-        findServiceUseCase.execute().compose(activity.bindToLifecycle())
-                .flatMap(data -> {
-                    lItemViewModels.clear();
-                    itemViewModels.clear();
-                    if (data.getRadlist().size() == 0 && data.getReclist().size() == 0) {
-                        errorVisible.set(View.VISIBLE);
-                        errorType.set(EmptyLayout.NODATA);
-                    } else {
-                        errorVisible.set(View.GONE);
-                    }
-                    if (data.getReclist() != null && data.getReclist().size() != 0) {
-                        for (FindServices.ListBean listBean : data.getReclist()) {
-                            lItemViewModels.add(new FindItemViewModel(activity, listBean));
-                        }
-                    }
-                    binding.likeRecyclerView.getAdapter().notifyDataSetChanged();
-                    return Observable.from(data.getRadlist());
-                })
-                .subscribe(data -> {
-                    itemViewModels.add(new FindItemViewModel(activity, data));
-                }, error -> {
-                    if (isRefresh) {
-                        startInAnim();
-                        isRefreshing.set(false);
-                    }
-                }, () -> {
-                    binding.recyclerView.getAdapter().notifyDataSetChanged();
-                    if (isRefresh) {
-                        startInAnim();
-                        isRefreshing.set(false);
-                    }
-                });
-    }
+//    private void loadRecommand(boolean isRefresh) {
+//        findDemandUseCase.cleanParams();
+//        findDemandUseCase.setParams("{\"limit\":\"10\"}");
+//        findDemandUseCase.execute().compose(activity.bindToLifecycle())
+//                .flatMap(data -> {
+//                    lItemViewModels.clear();
+//                    itemViewModels.clear();
+//                    if (data.getRadlist().size() == 0 && data.getReclist().size() == 0) {
+//                        errorVisible.set(View.VISIBLE);
+//                        errorType.set(EmptyLayout.NODATA);
+//                    } else {
+//                        errorVisible.set(View.GONE);
+//                    }
+//                    if (data.getReclist() != null && data.getReclist().size() != 0) {
+//                        for (FindDemand.ListBean listBean : data.getReclist()) {
+//                            lItemViewModels.add(new FindItemViewModel(activity, listBean));
+//                        }
+//                    }
+//                    binding.likeRecyclerView.getAdapter().notifyDataSetChanged();
+//                    return Observable.from(data.getRadlist());
+//                })
+//                .subscribe(data -> {
+//                    itemViewModels.add(new FindItemViewModel(activity, data));
+//                }, error -> {
+//                    if (isRefresh) {
+//                        startInAnim();
+//                        isRefreshing.set(false);
+//                    }
+//                }, () -> {
+//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
+//
+//                    if (isRefresh) {
+//                        isRefreshing.set(false);
+//                        startInAnim();
+//                    }
+//                });
+//    }
+//
+//    private void loadService(boolean isRefresh) {
+//        findServiceUseCase.cleanParams();
+//        findServiceUseCase.setParams("{\"limit\":\"10\"}");
+//        findServiceUseCase.execute().compose(activity.bindToLifecycle())
+//                .flatMap(data -> {
+//                    lItemViewModels.clear();
+//                    itemViewModels.clear();
+//                    if (data.getRadlist().size() == 0 && data.getReclist().size() == 0) {
+//                        errorVisible.set(View.VISIBLE);
+//                        errorType.set(EmptyLayout.NODATA);
+//                    } else {
+//                        errorVisible.set(View.GONE);
+//                    }
+//                    if (data.getReclist() != null && data.getReclist().size() != 0) {
+//                        for (FindServices.ListBean listBean : data.getReclist()) {
+//                            lItemViewModels.add(new FindItemViewModel(activity, listBean));
+//                        }
+//                    }
+//                    binding.likeRecyclerView.getAdapter().notifyDataSetChanged();
+//                    return Observable.from(data.getRadlist());
+//                })
+//                .subscribe(data -> {
+//                    itemViewModels.add(new FindItemViewModel(activity, data));
+//                }, error -> {
+//                    if (isRefresh) {
+//                        startInAnim();
+//                        isRefreshing.set(false);
+//                    }
+//                }, () -> {
+//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
+//                    if (isRefresh) {
+//                        startInAnim();
+//                        isRefreshing.set(false);
+//                    }
+//                });
+//    }
 
     private void more(boolean isDemand) {
         Intent intentFirstPagerMoreActivity = new Intent(CommonUtils.getContext(), FirstPagerMoreActivity.class);

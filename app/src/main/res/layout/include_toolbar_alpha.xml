@@ -15,13 +15,13 @@
         style="@style/App.Theme.Widget.Toolbar"
         app:navigationIcon="@mipmap/nav_back"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="  ">
+        app:title="">
 
         <TextView
             android:id="@+id/toolbar_title"
             style="@style/App.Theme.TextAppearance.ww.large"
             android:layout_gravity="center"
-            android:singleLine="true"
+            android:maxLines="1"
             android:text="@{toolTitle}"
             android:textColor="@color/app.text" />
 

@@ -39,8 +39,6 @@ public class FileUploadProtocol extends BaseProtocol<UploadFileResultBean> {
 //        params.setMultipart(true);
 //        params.addBodyParameter("filename", new File("/storage/emulated/0/360WiFi/file/4.jpg"));
         File file = new File(mFilePath);
-        Log.i("FileUploadProtocol", "imgPath is exist : " + file.exists());
-        Log.i("FileUploadProtocol", "imgPath is  : " + file.getAbsolutePath());
         try {
             Log.i("FileUploadProtocol", "imgPath is  : " + getFileSize(file));
         } catch (Exception e) {

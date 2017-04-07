@@ -186,7 +186,6 @@
             android:label="绑定页面"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".v2.feature.protocol.ProtocolActivity"
             android:launchMode="standard"
@@ -587,7 +586,8 @@
         <activity android:name=".Chat" />
         <activity android:name=".view.impl.ChatList" />
         <activity android:name=".TextCopy" />
-        <activity android:name=".CopyText"></activity>
+        <activity android:name=".CopyText" />
+        <activity android:name=".Label"></activity>
     </application>
 
 </manifest>

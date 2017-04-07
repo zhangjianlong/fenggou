@@ -129,4 +129,5 @@
     <string name="app.text.copy.dialog.cal">取消</string>
     <!--ProocolAct-->
     <string name="app.procol.title">斜杠青年服务协议</string>
+    <string name="app.label.title">定位城市</string>
 </resources>
