@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
 import com.core.op.lib.utils.inject.RootView;
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPubBinding;
 import com.slash.youth.v2.base.BackActivity;
@@ -15,6 +16,10 @@ import com.slash.youth.v2.base.BaseActivity;
 import com.slash.youth.v2.di.components.DaggerPubComponent;
 import com.slash.youth.v2.di.components.PubComponent;
 import com.slash.youth.v2.di.modules.PubModule;
+
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
 
 @RootView(R.layout.act_pub)
 public final class PubActivity extends BackActivity<PubViewModel, ActPubBinding> {
@@ -50,5 +55,14 @@ public final class PubActivity extends BackActivity<PubViewModel, ActPubBinding>
     @Override
     protected Toolbar setToolBar() {
         return binding.toolbar.toolbar;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MultiImageSelector.REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                viewModel.uploadImage(data);
+            }
+        }
     }
 }

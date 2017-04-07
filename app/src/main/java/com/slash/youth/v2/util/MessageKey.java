@@ -43,4 +43,6 @@ public class MessageKey {
     public static final String SHARE_FRIEND = "SHARE_FRIEND";
     //选择好城市消息
     public static final String PUB_CITY_SELECTED = "PUB_CITY_SELECTED";
+    //发布删除图片
+    public static final String PUB_DEL_IMG = "PUB_DEL_IMG";
 }

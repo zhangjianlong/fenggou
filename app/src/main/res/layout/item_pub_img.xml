@@ -18,12 +18,21 @@
         style="@style/App.Theme.Linear"
         android:orientation="vertical">
 
-        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/app.padding.normal"
+            android:paddingTop="@dimen/app.padding.normal"
+            android:src="@mipmap/icon_pub_upload_img"
+            app:clickCommand="@{viewModel.imgClick}"
+            app:uri="@{viewModel.uri}" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_pub_upload_img" />
-
+            android:padding="@dimen/app.padding.small"
+            android:src="@mipmap/guanbi_icon"
+            android:visibility="@{viewModel.closeVisible}"
+            app:clickCommand="@{viewModel.closeClick}" />
     </RelativeLayout>
 </layout>
