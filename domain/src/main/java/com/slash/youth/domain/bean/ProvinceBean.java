@@ -43,7 +43,7 @@ public class ProvinceBean implements Serializable {
         this.city = city;
     }
 
-    public static class CityBean {
+    public static class CityBean implements Serializable {
         /**
          * name : 北京
          * cityId : 101

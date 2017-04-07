@@ -98,6 +98,18 @@
         <item>苏州</item>
     </array>
 
+    <array name="hot_provinces">
+        <item></item>
+        <item>广东</item>
+        <item>广东</item>
+        <item></item>
+        <item>浙江</item>
+        <item>四川</item>
+        <item></item>
+        <item>湖北</item>
+        <item>江苏</item>
+    </array>
+
     <string name="app.error.customservice">获取客服UID失败</string>
 
     <string name="app.login.help">遇到问题</string>
@@ -188,4 +200,6 @@
     <string name="app.pub.local.select">请选择服务地点</string>
     <string name="app.pub.unit.hint">单位</string>
     <string name="app.pub.title">发布任务</string>
+    <string name="app.local.hotcity">热门城市</string>
+    <string name="app.local.location">定位城市</string>
 </resources>

@@ -16,6 +16,7 @@
     <dimen name="app.padding.large">16dp</dimen>
     <dimen name="app.padding.large30">30dp</dimen>
     <dimen name="app.padding.xlarge">24dp</dimen>
+    <dimen name="app.padding.xxlarge">48dp</dimen>
 
     <dimen name="app.margin.tiny">2dp</dimen>
     <dimen name="app.margin.small">4dp</dimen>

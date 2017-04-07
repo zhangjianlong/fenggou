@@ -15,15 +15,15 @@
     </data>
 
     <LinearLayout
-        style="@style/App.Theme.layout"
-        android:orientation="vertical">
+        style="@style/App.Theme.Linear.padding"
+        android:orientation="vertical"
+        android:paddingBottom="0dp"
+        app:clickCommand="@{viewModel.click}">
 
         <TextView
             style="@style/App.Theme.TextAppearance.ww.normal"
-            android:drawablePadding="@dimen/app.padding.small"
-            android:paddingBottom="@dimen/app.padding.normal"
-            android:paddingTop="@dimen/app.padding.normal"
-            android:text="@{viewModel.name}"
+            android:paddingBottom="@dimen/app.padding.large"
+            android:text="@{viewModel.provinceBean.name}"
             android:textColor="@color/app.text.black333"
             tools:text="苏州" />
 

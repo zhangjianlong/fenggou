@@ -169,7 +169,8 @@
 
                 <include layout="@layout/include_line_h_padding" />
 
-                <LinearLayout style="@style/App.Theme.Linear.padding"
+                <LinearLayout
+                    style="@style/App.Theme.Linear.padding"
                     app:clickCommand="@{viewModel.localClick}">
 
                     <TextView
@@ -179,7 +180,7 @@
                         android:layout_weight="1"
                         android:drawableLeft="@mipmap/icon_pub_local"
                         android:drawablePadding="@dimen/app.padding.normal"
-                        android:text="@string/app.pub.local.select" />
+                        android:text="@{viewModel.local}" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -197,7 +198,7 @@
                     android:paddingRight="@dimen/app.padding.large12"
                     app:itemView="@{viewModel.itemView}"
                     app:items="@{viewModel.itemViewModels}"
-                    app:layoutManager="@{LayoutManagers.grid(3)}" />
+                    app:layoutManager="@{LayoutManagers.nestGrid(3)}" />
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

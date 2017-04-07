@@ -129,9 +129,10 @@
     </style>
 
     <style name="App.Theme.Linear.padding">
-        <item name="android:background">@color/app.theme.background</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:padding">@dimen/app.padding.large</item>
+        <item name="android:paddingTop">@dimen/app.padding.large</item>
+        <item name="android:paddingLeft">@dimen/app.padding.large</item>
+        <item name="android:paddingBottom">@dimen/app.padding.large</item>
     </style>
 
 </resources>

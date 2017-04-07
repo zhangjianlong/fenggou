@@ -8,6 +8,7 @@ import android.databinding.ObservableList;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.FileUtil;
 import com.core.op.lib.utils.JsonUtil;
 import com.slash.youth.BR;
@@ -17,9 +18,11 @@ import com.slash.youth.databinding.ActLocalBinding;
 import com.slash.youth.domain.bean.ProvinceBean;
 import com.slash.youth.engine.Scheduler;
 import com.slash.youth.v2.feature.main.find.FindItemViewModel;
+import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,19 +41,27 @@ public class LocalViewModel extends BAViewModel<ActLocalBinding> {
     public String title;
 
     public final ItemView hotItemView = ItemView.of(BR.viewModel, R.layout.item_local_hot);
-    public final ObservableList<LocalItemViewModel> hotItemViewModels = new ObservableArrayList<>();
+    public final ObservableList<LocalHotItemViewModel> hotItemViewModels = new ObservableArrayList<>();
 
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_local);
     public final ObservableList<LocalItemViewModel> itemViewModels = new ObservableArrayList<>();
+
+    List<String> provinces;
+    int index;
 
     @Inject
     public LocalViewModel(RxAppCompatActivity activity) {
         super(activity);
         title = activity.getString(R.string.app_label_title);
+        provinces = Arrays.asList(activity.getResources().getStringArray(R.array.hot_provinces));
+
     }
 
     @Override
     public void afterViews() {
+        Messenger.getDefault().register(this, MessageKey.PUB_CITY_SELECTED, String.class, data -> {
+            activity.finish();
+        });
         loadData();
     }
 
@@ -59,14 +70,15 @@ public class LocalViewModel extends BAViewModel<ActLocalBinding> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {
-                    itemViewModels.add(new LocalItemViewModel(activity, data.getName()));
+                    itemViewModels.add(new LocalItemViewModel(activity, data));
                 }, error -> {
 
                 });
-
+        index = 0;
         Observable.from(activity.getResources().getStringArray(R.array.hot_citys))
                 .subscribe(data -> {
-                    hotItemViewModels.add(new LocalItemViewModel(activity, data));
+                    hotItemViewModels.add(new LocalHotItemViewModel(activity, data, provinces.get(index)));
+                    index++;
                 }, error -> {
 
                 });

@@ -41,4 +41,6 @@ public class MessageKey {
     public static final String DELETE_MESSAGE = "DELETE_MESSAGE";
     //共享好友
     public static final String SHARE_FRIEND = "SHARE_FRIEND";
+    //选择好城市消息
+    public static final String PUB_CITY_SELECTED = "PUB_CITY_SELECTED";
 }
