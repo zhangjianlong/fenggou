@@ -8,6 +8,7 @@ import android.view.View;
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.utils.PreferenceUtil;
@@ -30,6 +31,8 @@ import com.slash.youth.utils.CountUtils;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LoginCheckUtil;
 import com.slash.youth.utils.SpUtils;
+import com.slash.youth.v2.feature.local.LocalActivity;
+import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
@@ -76,6 +79,9 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
 
     @Override
     public void afterViews() {
+        Messenger.getDefault().register(this, MessageKey.PUB_CITY_SELECTED, String.class, data -> {
+            area.set(data);
+        });
 
     }
 
@@ -114,6 +120,12 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     });
 
 
+    public final ReplyCommand setArea = new ReplyCommand(() -> {
+        Intent replacePhoneActivity = new Intent(activity, LocalActivity.class);
+        activity.startActivityForResult(replacePhoneActivity, Constants.USERINFO_AREA);
+
+    });
+
     private void loadData() {
         mineInfoUseCase.execute().compose(activity.bindToLifecycle())
                 .subscribe(d -> {
@@ -125,7 +137,7 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
                     name.set(data.getName());
                     company.set(data.getCompany());
                     companyPostion.set(data.getPosition());
-                    headUrl.set(data.getAvatar());
+                    headUrl.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());
                 }, error -> {
 
                 });
