@@ -94,11 +94,12 @@
     </style>
 
     <style name="App.Theme.TextView">
+        <item name="android:padding">@dimen/app.padding.large13</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:background">@color/white</item>
         <item name="android:textColor">@color/app.text.blackCCC</item>
         <item name="android:textSize">@dimen/app.text.normal</item>
-        <item name="android:padding">@dimen/app.padding.large13</item>
+
     </style>
 
     <style name="App.Theme.Button">

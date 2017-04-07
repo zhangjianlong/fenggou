@@ -136,13 +136,13 @@
     <string name="app.setting.service.show">显示服务力</string>
     <string name="app.setting.find.psd">找回交易密码</string>
     <string name="app.setting.set.psd">设置交易密码</string>
-
     <string name="app.setting.psd.find">密码找回在审核中，请等待审核</string>
     <string name="app.setting.psd.remind">密码设置在审核中，请等待审核</string>
     <string name="app.setting.bind">去绑定</string>
     <string name="app.setting.unbind">解绑</string>
     <string name="app.setting.title">设置</string>
     <string name="app.setting.logout">真的要退出登录吗？</string>
-
-
+    <!--MySettingAct-->
+    <string name="app.personal.edit.hint">完善个人信息，可以让大家更了解你哦</string>
+    <string name="app.personal.edit.real.name">真实姓名</string>
 </resources>
