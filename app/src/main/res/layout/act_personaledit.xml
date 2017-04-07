@@ -52,11 +52,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="@string/app.personal.edit.real.name"
-                android:textColor="@color/app.text.black6a6a6a" />
+                android:textColor="@color/app.text.black666" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/app.personal.edit.real.name"
+                android:textColor="@color/app.text.black333" />
         </RelativeLayout>
 
         <include layout="@layout/include_line_h_margin"></include>
-
-
     </LinearLayout>
 </layout>
