@@ -2,6 +2,7 @@ package com.core.op.lib.base;
 
 import android.support.v4.app.FragmentManager;
 
+import com.core.op.lib.messenger.Messenger;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
@@ -50,6 +51,6 @@ public class BViewModel<T> {
     }
 
     protected void onDestroy() {
-
+//        Messenger.getDefault().unregister(this);
     }
 }

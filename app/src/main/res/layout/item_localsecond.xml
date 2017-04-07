@@ -7,28 +7,24 @@
 
         <variable
             name="viewModel"
-            type="com.slash.youth.v2.feature.local.LocalHotItemViewModel" />
+            type="com.slash.youth.v2.feature.localsecond.LocalsecondItemViewModel" />
 
         <import type="android.view.View" />
-
-        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>
 
     <LinearLayout
-        style="@style/App.Theme.layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/App.Theme.Linear.padding"
+        android:orientation="vertical"
+        android:paddingBottom="0dp"
         app:clickCommand="@{viewModel.click}">
 
         <TextView
             style="@style/App.Theme.TextAppearance.ww.normal"
-            android:drawablePadding="@dimen/app.padding.small"
-            android:paddingBottom="@dimen/app.padding.normal"
-            android:paddingLeft="@dimen/app.padding.large30"
-            android:paddingRight="@dimen/app.padding.large30"
-            android:paddingTop="@dimen/app.padding.normal"
+            android:paddingBottom="@dimen/app.padding.large"
             android:text="@{viewModel.name}"
             android:textColor="@color/app.text.black333"
             tools:text="苏州" />
+
+        <include layout="@layout/include_line_h_padding" />
     </LinearLayout>
 </layout>
