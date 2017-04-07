@@ -23,7 +23,8 @@
     <color name="app.line">#DADADA</color>
     <!-- Theme - Dark Blue -->
     <color name="app.theme.background">#FFFFFF</color>
-    <color name="app.theme.background_edf1f2">#f3f3f3</color>
+    <color name="app.theme.background_edf1f2">#edf1f2</color>
+    <color name="app.theme.background_f3f3f3">#f3f3f3</color>
     <color name="app.theme.background_f6f6f6">#f6f6f6</color>
     <color name="app.theme.background_dadada">#DADADA</color>
     <color name="app.theme.background_31C5E4">#31C5E4</color>

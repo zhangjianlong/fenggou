@@ -146,4 +146,11 @@
     <!--MySettingAct-->
     <string name="app.personal.edit.hint">完善个人信息，可以让大家更了解你哦</string>
     <string name="app.personal.edit.real.name">真实姓名</string>
+    <string name="app.pub.taskname">输入任务名称</string>
+    <string name="app.pub.title.numble">%1$s/15</string>
+    <string name="app.pub.top.text1">发布你公司的运营任务</string>
+    <string name="app.pub.top.text2">会有专业的运营小伙伴帮你完成哦</string>
+    <string name="app.pub.name.hint">例如:写一篇关于推广的文章</string>
+    <string name="app.pub.type.select">请选择类别</string>
+    <string name="app.pub.local.select">请选择服务地点</string>
 </resources>

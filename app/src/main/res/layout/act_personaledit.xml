@@ -58,7 +58,5 @@
         <include layout="@layout/include_line_h_margin"></include>
 
 
-
-
     </LinearLayout>
 </layout>

@@ -41,6 +41,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.v2.base.list.ListViewModel;
 import com.slash.youth.v2.feature.dialog.find.PubDialog;
 import com.slash.youth.v2.feature.main.MainActivity;
+import com.slash.youth.v2.feature.pub.PubActivity;
 import com.slash.youth.v2.util.ShareKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -97,7 +98,8 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     public final ReplyCommand pub = new ReplyCommand(() -> {
 //        Intent intentPublishActivity = new Intent(CommonUtils.getContext(), PublishActivity.class);
 //        activity.startActivity(intentPublishActivity);
-        Messenger.getDefault().sendNoMsg(SHOW_MAIN_PUG);
+//        Messenger.getDefault().sendNoMsg(SHOW_MAIN_PUG);
+        PubActivity.instance(activity);
     });
 
     public final ReplyCommand moreDemand = new ReplyCommand(() -> {
