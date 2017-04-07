@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPersonaleditBinding;
 import com.slash.youth.v2.base.BackActivity;
@@ -16,6 +17,8 @@ import com.slash.youth.v2.di.modules.PersonalEditModule;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
 import com.core.op.lib.utils.inject.RootView;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -48,6 +51,19 @@ public final class PersonalEditActivity extends BackActivity<PersonalEditViewMod
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MultiImageSelector.REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<String> paths = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
+                if (paths != null && paths.size() > 0)
+                    viewModel.uploadImage(paths.get(0));
+            }
+        }
     }
 
     @Override

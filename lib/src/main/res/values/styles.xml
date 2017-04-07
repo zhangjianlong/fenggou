@@ -106,6 +106,10 @@
         <item name="titleTextAppearance">@style/App.Theme.TextAppearance.Light.Toolbar.Title</item>
     </style>
 
+    <style name="ToolbarTheme">
+        <item name="actionMenuTextColor">@color/app.theme.background_31C5E4</item>
+    </style>
+
     <style name="App.Theme.Widget.ActionMode" parent="@style/Widget.AppCompat.ActionMode">
         <item name="background">@color/app.theme.actionMode.background</item>
         <item name="height">?attr/actionBarSize</item>

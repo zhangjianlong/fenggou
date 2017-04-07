@@ -16,6 +16,7 @@
         android:background="@color/app.theme.background"
         app:navigationIcon="@mipmap/nav_back_gray"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarTheme"
         app:title="  ">
 
         <TextView

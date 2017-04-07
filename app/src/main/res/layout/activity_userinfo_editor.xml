@@ -261,13 +261,13 @@
 
                         <!--斜杠身份-->
                         <RelativeLayout
-                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginBottom="15dp"
                             android:layout_marginTop="15dp"
                             android:layout_weight="1"
-                            android:onClick="@{activityUserInfoEditorModel.editorIdentity}">
+                            android:onClick="@{activityUserInfoEditorModel.editorIdentity}"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -598,7 +598,7 @@
             android:layout_height="match_parent"
             android:background="#66000000"
             android:clickable="true"
-            android:visibility="@{activityUserInfoEditorModel.uploadPicLayerVisibility}">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
