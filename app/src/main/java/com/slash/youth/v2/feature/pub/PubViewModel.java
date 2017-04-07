@@ -46,7 +46,7 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
     public ObservableField<String> unit = new ObservableField<>();
     public ObservableField<String> local = new ObservableField<>();
 
-    private ArrayList<String> mSelectPath;
+    private ArrayList<String> mSelectPath = new ArrayList<>();
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_pub_img);
     public final ObservableList<PubItemViewModel> itemViewModels = new ObservableArrayList<>();
 
@@ -88,16 +88,21 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
             local.set(data);
         });
         Messenger.getDefault().register(this, MessageKey.PUB_DEL_IMG, Integer.class, data -> {
-            itemViewModels.remove(data);
+            mSelectPath.remove(data);
+            updataData();
         });
 
         itemViewModels.add(new PubItemViewModel(activity, 0, "", true));
     }
 
     public void uploadImage(Intent data) {
-        mSelectPath = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
+        mSelectPath.addAll(data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT));
+        updataData();
+    }
+
+    public void updataData() {
         if (mSelectPath != null && mSelectPath.size() != 0) {
-            itemViewModels.remove(itemViewModels.size() - 1);
+            itemViewModels.clear();
             index = 0;
             Observable.from(mSelectPath)
                     .subscribe(d -> {

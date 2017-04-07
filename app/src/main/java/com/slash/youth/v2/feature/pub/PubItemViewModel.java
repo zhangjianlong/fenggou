@@ -30,7 +30,7 @@ public class PubItemViewModel extends BViewModel {
         if (isDefault) {
             MultiImageSelector selector = MultiImageSelector.create(activity);
             selector.showCamera(true);
-            selector.count(5);
+            selector.count(5 - index);
             selector.multi();
             selector.setCrop(true);
             selector.start(activity, MultiImageSelector.REQUEST_IMAGE);

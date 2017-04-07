@@ -25,7 +25,7 @@
             android:textColorPrimary="@color/app.text.black666"
             app:toolTitle="@{viewModel.title}" />
 
-        <android.support.v4.widget.NestedScrollView
+        <com.core.op.lib.weight.RecycleScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -188,19 +188,34 @@
                         android:layout_gravity="right"
                         android:src="@mipmap/icon_arrow_right" />
                 </LinearLayout>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/hot_recyclerView"
+                <include layout="@layout/include_line_h_padding" />
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fadingEdge="none"
-                    android:paddingLeft="@dimen/app.padding.large12"
-                    android:paddingRight="@dimen/app.padding.large12"
-                    app:itemView="@{viewModel.itemView}"
-                    app:items="@{viewModel.itemViewModels}"
-                    app:layoutManager="@{LayoutManagers.nestGrid(3)}" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/app.theme.background_f3f3f3"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/hot_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fadingEdge="none"
+                        android:paddingLeft="@dimen/app.padding.large12"
+                        android:paddingRight="@dimen/app.padding.large12"
+                        android:paddingTop="@dimen/app.padding.large12"
+                        app:itemView="@{viewModel.itemView}"
+                        app:items="@{viewModel.itemViewModels}"
+                        app:layoutManager="@{LayoutManagers.nestGrid(3)}" />
+
+                    <TextView
+                        style="@style/App.Theme.TextAppearance.ww.small.black666"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/app.padding.large"
+                        android:text="*(选传)如有需要可上传相关图片上限，5张" />
+                </LinearLayout>
 
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </com.core.op.lib.weight.RecycleScrollView>
     </LinearLayout>
 </layout>
