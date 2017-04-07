@@ -145,5 +145,6 @@
     <string name="app.setting.logout">真的要退出登录吗？</string>
     <!--MySettingAct-->
     <string name="app.personal.edit.hint">完善个人信息，可以让大家更了解你哦</string>
+    <string name="app.personal.title">编辑个人信息</string>
     <string name="app.personal.edit.real.name">真实姓名</string>
 </resources>
