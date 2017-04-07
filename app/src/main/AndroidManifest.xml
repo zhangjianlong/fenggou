@@ -190,13 +190,10 @@
             android:name=".v2.feature.protocol.ProtocolActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
-
-        <!-- <activity -->
-        <!-- android:name=".ui.activity.LoginActivity" -->
-        <!-- android:label="登录页" -->
-        <!-- android:launchMode="singleTask" -->
-        <!-- android:windowSoftInputMode="adjustPan" /> -->
-
+        <activity
+            android:name=".v2.feature.setting.MySettingActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SlashProtocolActivity" />
         <activity
             android:name=".ui.activity.HomeActivity"
@@ -583,11 +580,5 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity android:name=".Chat" />
-        <activity android:name=".view.impl.ChatList" />
-        <activity android:name=".TextCopy" />
-        <activity android:name=".CopyText" />
-        <activity android:name=".Label"></activity>
     </application>
-
 </manifest>

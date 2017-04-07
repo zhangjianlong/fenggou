@@ -130,4 +130,21 @@
     <!--ProocolAct-->
     <string name="app.procol.title">斜杠青年服务协议</string>
     <string name="app.label.title">定位城市</string>
+    <!--MySettingAct-->
+    <string name="app.setting.personal.setting">以下三项设置针对个人信息页面</string>
+    <string name="app.setting.company.show">显示公司</string>
+    <string name="app.setting.evaluate.show">显示评价</string>
+    <string name="app.setting.service.show">显示服务力</string>
+    <string name="app.setting.find.psd">找回交易密码</string>
+    <string name="app.setting.set.psd">设置交易密码</string>
+    <string name="app.setting.psd.find">密码找回在审核中，请等待审核</string>
+    <string name="app.setting.psd.remind">密码设置在审核中，请等待审核</string>
+    <string name="app.setting.bind">去绑定</string>
+    <string name="app.setting.unbind">解绑</string>
+    <string name="app.setting.title">设置</string>
+    <string name="app.setting.logout">真的要退出登录吗？</string>
+    <!--MySettingAct-->
+    <string name="app.personal.edit.hint">完善个人信息，可以让大家更了解你哦</string>
+    <string name="app.personal.edit.real.name">真实姓名</string>
+    >>>>>>> 3f70ddc2a2afe7ea2e8c1f5eb36272c23cb70137
 </resources>

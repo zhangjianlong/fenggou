@@ -2,6 +2,7 @@ package com.slash.youth.v2.feature.dialog.common;
 
 
 import android.databinding.ObservableField;
+import android.view.View;
 
 import com.core.op.lib.base.BDViewModel;
 import com.core.op.lib.command.ReplyCommand;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 public class CommonViewModel extends BDViewModel<DlgCommonBinding> {
     public final ObservableField<String> title = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_common_dialog_title));
     public final ObservableField<String> hint = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_common_dialog_hint));
+    public final ObservableField<Integer> cancelHint = new ObservableField<>(View.VISIBLE);
 
     public final ReplyCommand confim = new ReplyCommand(() -> {
         dialog.dismiss();
@@ -43,5 +45,9 @@ public class CommonViewModel extends BDViewModel<DlgCommonBinding> {
 
     public void initValue(String content) {
         this.hint.set(content);
+    }
+
+    public void hintCalBtn() {
+        cancelHint.set(View.GONE);
     }
 }

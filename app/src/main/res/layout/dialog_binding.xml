@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.slash.youth.ui.dialog.binding.BindingViewModel" />
+            type="com.slash.youth.v2.feature.dialog.binding.BindingViewModel" />
     </data>
 
     <LinearLayout

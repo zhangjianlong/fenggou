@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.slash.youth.v2.feature.edit.PersonalEditViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/include_white_toolbar_alpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorPrimary="@color/app.text.black.alpha.66"
+            app:toolTitle="@{viewModel.title}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app.theme.colorPrimary">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@color/app.theme.colorPrimary"
+                android:drawableLeft="@mipmap/tips_icon"
+                android:drawablePadding="@dimen/app.padding.normal"
+                android:text="@string/app.personal.edit.hint"
+                android:textColor="@color/app.text" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/app.padding.large13">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/app.personal.edit.real.name"
+                android:textColor="@color/app.text.black" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>
