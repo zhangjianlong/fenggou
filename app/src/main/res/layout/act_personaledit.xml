@@ -12,12 +12,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/app.theme.background_edf1f2">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <include
@@ -53,6 +53,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app.padding.large13"
@@ -68,12 +69,17 @@
                         android:textColor="@color/app.text.black666" />
 
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/app.margin.normal"
-                        android:layout_toLeftOf="@+id/icon" />
+                    <com.core.op.lib.weight.ShapedImageView
+                        android:id="@+id/iv_assistant_icon"
+                        android:layout_width="59dp"
+                        android:layout_height="59dp"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        android:layout_marginTop="2dp"
+                        android:layout_toLeftOf="@+id/icon"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/default_avatar"
+                        app:uri="@{viewModel.headUrl}" />
+
 
                     <ImageView
                         android:id="@+id/icon"
@@ -90,6 +96,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:padding="@dimen/app.padding.large13">
 
                     <android.support.v7.widget.AppCompatTextView
@@ -97,17 +105,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:text="@string/app.personal.edit.real.name"
                         android:textColor="@color/app.text.black666" />
 
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <android.support.v7.widget.AppCompatEditText
                         style="@style/App.Theme.TextAppearance.ww"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/app.personal.edit.write"
                         android:text="@{viewModel.name}"
-                        android:textColor="@color/app.text.black333" />
+                        android:textColor="@color/app.text.black333"
+                        android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
 
                 <include layout="@layout/include_line_h_margin"></include>
@@ -137,12 +150,14 @@
                             style="@style/App.Theme.TextAppearance.ww"
                             android:layout_marginRight="@dimen/app.margin.normal"
                             android:button="@drawable/radio_group_selector"
+                            android:checked="@{viewModel.man}"
                             android:text="@string/app.personal.edit.man"
                             android:textColor="@color/app.text.black666" />
 
                         <android.support.v7.widget.AppCompatRadioButton
                             style="@style/App.Theme.TextAppearance.ww"
                             android:button="@drawable/radio_group_selector"
+                            android:checked="@{viewModel.woman}"
                             android:text="@string/app.personal.edit.woman"
                             android:textColor="@color/app.text.black666" />
 
@@ -155,9 +170,11 @@
 
 
                 <RelativeLayout
+                    style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/app.padding.large13">
+                    android:padding="@dimen/app.padding.large13"
+                    app:clickCommand="@{viewModel.setPhoneNumber}">
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww"
@@ -165,7 +182,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:text="@string/app.personal.edit.phone.number"
-                        android:textColor="@color/app.text.black666" />
+                        android:textColor="@color/app.text.black666"
+                        app:clickCommand="@{viewModel.setHead}" />
 
 
                     <android.support.v7.widget.AppCompatTextView
@@ -173,6 +191,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:background="@null"
                         android:drawablePadding="@dimen/app.margin.normal"
                         android:drawableRight="@mipmap/icon_nav_back"
                         android:hint="@string/app.personal.edit.write"
@@ -213,6 +232,7 @@
                             style="@style/App.Theme.TextAppearance.ww"
                             android:layout_marginRight="@dimen/app.margin.normal"
                             android:button="@drawable/radio_group_selector"
+                            android:checked="@{viewModel.job}"
                             android:text="@string/app.personal.edit.job"
                             android:textColor="@color/app.text.black666" />
 
@@ -220,6 +240,7 @@
                             style="@style/App.Theme.TextAppearance.ww"
                             android:layout_alignParentRight="true"
                             android:button="@drawable/radio_group_selector"
+                            android:checked="@{viewModel.self}"
                             android:text="@string/app.personal.edit.self.employed"
                             android:textColor="@color/app.text.black666" />
                     </RadioGroup>
@@ -239,15 +260,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:text="@string/app.personal.edit.company"
                         android:textColor="@color/app.text.black666" />
 
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <android.support.v7.widget.AppCompatEditText
                         style="@style/App.Theme.TextAppearance.ww"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:background="@null"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.company.hint"
                         android:text="@{viewModel.company}"
@@ -266,24 +289,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:text="@string/app.personal.edit.position"
                         android:textColor="@color/app.text.black666" />
 
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <android.support.v7.widget.AppCompatEditText
                         style="@style/App.Theme.TextAppearance.ww"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:background="@null"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.write"
                         android:text="@{viewModel.companyPostion}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -294,6 +317,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app.padding.large13">
@@ -321,6 +345,7 @@
                 <include layout="@layout/include_line_h_margin"></include>
 
                 <RelativeLayout
+                    style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app.padding.large13">
@@ -347,9 +372,11 @@
                 <include layout="@layout/include_line_h_margin"></include>
 
                 <RelativeLayout
+                    style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/app.padding.large13">
+                    android:padding="@dimen/app.padding.large13"
+                    app:clickCommand="@{viewModel.setArea}">
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww"
@@ -373,6 +400,7 @@
                 <include layout="@layout/include_line_h_margin"></include>
 
                 <RelativeLayout
+                    style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app.padding.large13">
@@ -382,20 +410,6 @@
                         android:layout_alignParentLeft="true"
                         android:text="@string/app.personal.edit.profile"
                         android:textColor="@color/app.text.black666" />
-
-                    <
-
-                    <
-
-                    <
-
-                    <
-
-                    <
-
-                    <
-
-                    < HEAD
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww"
