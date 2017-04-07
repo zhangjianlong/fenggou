@@ -126,7 +126,6 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.slash.youth.permission.MIPUSH_RECEIVE" />
-
     <!-- ⼩米 配置结束 < -->
     <application
         android:name=".global.SlashApplication"
@@ -580,5 +579,7 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity android:name=".Pub"></activity>
     </application>
+
 </manifest>
