@@ -401,6 +401,7 @@
 
                 <RelativeLayout
                     style="@style/App.Theme.Linear"
+                    app:clickCommand="@{viewModel.setProfile}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/app.padding.large13">

@@ -202,4 +202,6 @@
     <string name="app.pub.title">发布任务</string>
     <string name="app.local.hotcity">热门城市</string>
     <string name="app.local.location">定位城市</string>
+    <!--profileAct-->
+    <string name="app.profile.title">个人简介</string>
 </resources>

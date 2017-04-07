@@ -10,6 +10,7 @@ public class Constants {
     public static final int USERINFO_IDENTITY = 3;//斜杠身份
     public static final int USERINFO_SKILLLABEL = 5;//技能标签
     public static final int USERINFO_AREA = 6;//区域
+    public static final int USERINFO_PROFILE = 7;//个人简介
     public static final int MYSETTING_SETPASSWORD = 1;//设置密码
     //地区页面的最经访问的城市
     public static final int CURRENT_ACCESS_CITY = 10;

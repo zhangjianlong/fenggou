@@ -32,6 +32,7 @@ import com.slash.youth.utils.CustomEventAnalyticsUtils;
 import com.slash.youth.utils.LoginCheckUtil;
 import com.slash.youth.utils.SpUtils;
 import com.slash.youth.v2.feature.local.LocalActivity;
+import com.slash.youth.v2.feature.profile.ProfileActivity;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -101,6 +102,12 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         selector.start(activity, MultiImageSelector.REQUEST_IMAGE);
         //编辑头像的埋点
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_EDIT_AVATAR);
+    });
+
+
+    public final ReplyCommand setProfile = new ReplyCommand(() -> {
+        Intent intent  = new Intent(activity, ProfileActivity.class);
+        activity.startActivityForResult(intent,Constants.USERINFO_PROFILE);
     });
 
 
