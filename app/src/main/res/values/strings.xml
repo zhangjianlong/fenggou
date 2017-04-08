@@ -204,4 +204,10 @@
     <string name="app.local.location">定位城市</string>
     <!--profileAct-->
     <string name="app.profile.title">个人简介</string>
+    <string name="app.profile.template.reference">模板参考</string>
+    <string name="app.profile.template.limit">0/300</string>
+    <string name="app.profile.template.hint">本人从事UI设计行业，有八年的工作经验，对设计有升入研究，把握现有的流行设计趋势，有能级自助晚餐APP，UI等全套设计.\n 毕业于XX大学校，曾任职XX科技公司，为公司设计UI。另外为XX网络公司设计APP并协助公司完成A轮融资，用我的专业换你的认可</string>
+    <string name="app.profile.template.write.hint">个人简介可包含从事行业、从业年限、自身特长、毕业学校、职业简介、从业经历、代表作等</string>
+
+    <string name="app.profile.change">换一个</string>
 </resources>
