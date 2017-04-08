@@ -198,7 +198,6 @@
             android:name=".v2.feature.edit.PersonalEditActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".v2.feature.profile.ProfileActivity"
             android:launchMode="standard"
@@ -209,6 +208,14 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".v2.feature.local.LocalActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.pubcontent.PubContentActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.pubaccept.PubAcceptActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -601,7 +608,11 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".PubContent" />
+        <activity android:name=".PubAccept" />
+        <activity android:name=".ReleaseSuc" />
+        <activity android:name=".ReleaseFail"></activity>
     </application>
 
 </manifest>

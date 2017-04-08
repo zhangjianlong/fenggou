@@ -61,6 +61,7 @@
     <color name="app.text.bg.pink">#FD7071</color>
     <color name="app.text.bg.blue">#20C1FD</color>
     <color name="app.text.31C5E4">#31C5E4</color>
+    <color name="app.text.5c5c5c">#5c5c5c</color>
     <color name="app.text.pink">#fb7299</color>
     <color name="app.text.black.normal">#555555</color>
     <color name="app.text.black.alpha.45">#71000000</color>

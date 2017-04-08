@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.slash.youth.v2.feature.profile.ProfileViewModel" />
+            type="com.slash.youth.v2.feature.pubcontent.PubContentViewModel" />
     </data>
 
     <LinearLayout
@@ -36,7 +36,7 @@
                 android:height="@dimen/app.image.height.xxlarge.140"
                 android:background="@null"
                 android:gravity="top"
-                android:hint="@string/app.profile.template.write.hint"
+                android:hint="@string/app.pub.content.remind"
                 android:maxLength="300"
                 android:padding="@dimen/app.padding.normal"
                 android:text="@={viewModel.templateInput}"
@@ -95,6 +95,7 @@
                 app:clickCommand="@{viewModel.changeTemplate}" />
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_template_hint"
                 style="@style/App.Theme.TextAppearance.ww"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,8 +103,19 @@
                 android:layout_below="@+id/tv_change"
                 android:layout_marginTop="@dimen/app.margin.normal"
                 android:gravity="center"
-                android:text="@{viewModel.profileTemplate}"
+                android:text="@{viewModel.pubContentTemplate}"
                 android:textColor="@color/app.text.blackCCC" />
+
+            <android.support.v7.widget.AppCompatButton
+                style="@style/App.Theme.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_template_hint"
+                android:gravity="center"
+                android:text="@string/app.pub.content.use.template"
+                app:clickCommand="@{viewModel.useTemplate}" />
         </RelativeLayout>
     </LinearLayout>
+
+
 </layout>

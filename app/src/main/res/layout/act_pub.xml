@@ -92,25 +92,41 @@
 
                 <include layout="@layout/include_line_h_padding" />
 
-                <TextView
-                    style="@style/App.Theme.TextAppearance.ww.small.black666"
+                <LinearLayout
+                    style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="@color/transparent"
-                    android:hint="@string/app.pub.name.hint"
-                    android:padding="@dimen/app.padding.normal"
-                    android:text="@{viewModel.content}" />
+                    android:layout_height="wrap_content"
+                    app:clickCommand="@{viewModel.pubContent}">
+
+                    <TextView
+                        android:id="@+id/tv_pub_content"
+                        style="@style/App.Theme.TextAppearance.ww.small.black666"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@color/transparent"
+                        android:padding="@dimen/app.padding.normal"
+                        android:text="@{viewModel.content}" />
+
+                </LinearLayout>
+
 
                 <include layout="@layout/include_space_h" />
 
-                <TextView
-                    style="@style/App.Theme.TextAppearance.ww.small.black666"
+                <LinearLayout
+                    style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="@color/transparent"
-                    android:hint="@string/app.pub.name.hint"
-                    android:padding="@dimen/app.padding.normal"
-                    android:text="@{viewModel.standard}" />
+                    android:layout_height="wrap_content"
+                    app:clickCommand="@{viewModel.pubAccept}">
+
+                    <TextView
+                        android:id="@+id/tv_pub_accept"
+                        style="@style/App.Theme.TextAppearance.ww.small.black666"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@color/transparent"
+                        android:padding="@dimen/app.padding.normal"
+                        android:text="@{viewModel.standard}" />
+                </LinearLayout>
 
 
                 <include layout="@layout/include_space_h" />
@@ -188,7 +204,9 @@
                         android:layout_gravity="right"
                         android:src="@mipmap/icon_arrow_right" />
                 </LinearLayout>
+
                 <include layout="@layout/include_line_h_padding" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

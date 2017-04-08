@@ -46,6 +46,7 @@
 ]]></Data></string>
     <string name="instalmentInfoContent" formatted="false"><Data><![CDATA[<span style="color:#999999;">基于任务的阶段性特征，若双方将任务划分成若干个阶段，预支付的资金也将会被划分成对应的若干个部分，在需求方确认服务方提交的某阶段的服务时，该阶段的资金将被划转给服务方。</span>]]></Data></string>
 
+
     <string name="frozen_capital" formatted="false"><Data><![CDATA[<p>
 	<span style="color:#000000;"><strong>有两种原因可能导致您的资金暂时处于冻结状态：</strong></span> </p><p><span style="color:#000000;"><strong>第一种是分期到账：</strong></span>
 </p><p><span style="color:#999999;">为了保障需求方权益，需求方预支付的全部资金将被托管在平台。在需求方满意服务方提交的某阶段的服务时，该阶段的资金将被划转给服务方。此时，该资金处于冻结状态，所有阶段的服务均被需求方认可后，划转给服务方的资金才取消冻结，可用于提现或支付。</span>
@@ -196,6 +197,11 @@
     <string name="app.pub.top.text1">发布你公司的运营任务</string>
     <string name="app.pub.top.text2">会有专业的运营小伙伴帮你完成哦</string>
     <string name="app.pub.name.hint">例如:写一篇关于推广的文章</string>
+    <string name="app.pub.content.hint" formatted="false"><Data><![CDATA[<p><span style="color:#000000;">任务内容</span><span style="color:#CCCCCC;">详细描写你的任务内容，例如：需要运营小伙伴解决什么问题（不得少于10个字）</span>
+</p></span>]]></Data></string>
+
+    <string name="app.pub.accept.hint" formatted="false"><Data><![CDATA[<p><span style="color:#000000;">验收标准</span><span style="color:#CCCCCC;">将作为后续双方的成果交付标准。请认真填写</span>
+</p></span>]]></Data></string>
     <string name="app.pub.type.select">请选择类别</string>
     <string name="app.pub.local.select">请选择服务地点</string>
     <string name="app.pub.unit.hint">单位</string>
@@ -204,10 +210,25 @@
     <string name="app.local.location">定位城市</string>
     <!--profileAct-->
     <string name="app.profile.title">个人简介</string>
+    <string name="app.profile.empty">个人简介不能为空</string>
     <string name="app.profile.template.reference">模板参考</string>
     <string name="app.profile.template.limit">0/300</string>
-    <string name="app.profile.template.hint">本人从事UI设计行业，有八年的工作经验，对设计有升入研究，把握现有的流行设计趋势，有能级自助晚餐APP，UI等全套设计.\n 毕业于XX大学校，曾任职XX科技公司，为公司设计UI。另外为XX网络公司设计APP并协助公司完成A轮融资，用我的专业换你的认可</string>
+    <string name="app.profile.template.hint">本人从事UI设计行业，有八年的工作经验，对设计有升入研究，把握现有的流行设计趋势，有能级自助晚餐APP，UI等全套设计。 毕业于XX大学校，曾任职XX科技公司，为公司设计UI。另外为XX网络公司设计APP并协助公司完成A轮融资，用我的专业换你的认可</string>
     <string name="app.profile.template.write.hint">个人简介可包含从事行业、从业年限、自身特长、毕业学校、职业简介、从业经历、代表作等</string>
-
     <string name="app.profile.change">换一个</string>
+    <!--PubContent-->
+    <string name="app.pub.content.title">任务内容</string>
+    <string name="app.pub.content.empty">任务内容不能为空</string>
+    <string name="app.pub.content.remind">描述你的任务,建议你的任务描述要清晰直观，例如：写一篇关于推广的文章</string>
+    <string name="app.pub.content.use.template">调用该模板</string>
+    <!--PubAccept-->
+    <string name="app.pub.accept.title">验收标准</string>
+    <string name="app.pub.accept.empty">验收标准不能为空</string>
+    <!--ReleaseAct-->
+    <string name="app.menu.close">关闭</string>
+    <string name="app.release.suc">提交成功</string>
+    <string name="app.release.title">发布结果</string>
+    <string name="app.release.review">查看详情</string>
+    <string name="app.release.suc.hint">您的任务已保存至发布管理，完善个人资料后可上架</string>
+    <string name="app.release.complete">完善资料</string>
 </resources>

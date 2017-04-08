@@ -6,6 +6,7 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.widget.Toast;
 
@@ -19,8 +20,11 @@ import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPubBinding;
 import com.slash.youth.ui.activity.test.TestActivity;
+import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.v2.feature.local.LocalActivity;
 import com.slash.youth.v2.feature.main.find.FindItemViewModel;
+import com.slash.youth.v2.feature.pubaccept.PubAcceptActivity;
+import com.slash.youth.v2.feature.pubcontent.PubContentActivity;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -52,6 +56,14 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
 
     public ReplyCommand localClick = new ReplyCommand(() -> {
         LocalActivity.instance(activity);
+    });
+
+    public ReplyCommand pubContent = new ReplyCommand(() -> {
+        PubContentActivity.instance(activity);
+    });
+
+    public ReplyCommand pubAccept = new ReplyCommand(() -> {
+        PubAcceptActivity.instance(activity);
     });
 
     public TextWatcher textWatcher = new TextWatcher() {
@@ -91,7 +103,8 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
             mSelectPath.remove(data);
             updataData();
         });
-
+        binding.tvPubContent.setHint(Html.fromHtml(CommonUtils.getContext().getString(R.string.app_pub_content_hint)));
+        binding.tvPubAccept.setHint(Html.fromHtml(CommonUtils.getContext().getString(R.string.app_pub_accept_hint)));
         itemViewModels.add(new PubItemViewModel(activity, 0, "", true));
     }
 
