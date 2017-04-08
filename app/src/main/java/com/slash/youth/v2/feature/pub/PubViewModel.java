@@ -1,7 +1,10 @@
 package com.slash.youth.v2.feature.pub;
 
 
+import android.content.Intent;
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.databinding.ObservableList;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Toast;
@@ -11,6 +14,7 @@ import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPubBinding;
@@ -22,8 +26,11 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+
+import rx.Observable;
 
 import static android.R.attr.data;
 
@@ -39,8 +46,9 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
     public ObservableField<String> unit = new ObservableField<>();
     public ObservableField<String> local = new ObservableField<>();
 
+    private ArrayList<String> mSelectPath = new ArrayList<>();
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_pub_img);
-    public final List<PubItemViewModel> itemViewModels = new ArrayList<>();
+    public final ObservableList<PubItemViewModel> itemViewModels = new ObservableArrayList<>();
 
     public ReplyCommand localClick = new ReplyCommand(() -> {
         LocalActivity.instance(activity);
@@ -65,6 +73,8 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
         }
     };
 
+    int index = 0;
+
     @Inject
     public PubViewModel(RxAppCompatActivity activity) {
         super(activity);
@@ -77,5 +87,33 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
         Messenger.getDefault().register(this, MessageKey.PUB_CITY_SELECTED, String.class, data -> {
             local.set(data);
         });
+        Messenger.getDefault().register(this, MessageKey.PUB_DEL_IMG, Integer.class, data -> {
+            mSelectPath.remove(data);
+            updataData();
+        });
+
+        itemViewModels.add(new PubItemViewModel(activity, 0, "", true));
+    }
+
+    public void uploadImage(Intent data) {
+        mSelectPath.addAll(data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT));
+        updataData();
+    }
+
+    public void updataData() {
+        if (mSelectPath != null && mSelectPath.size() != 0) {
+            itemViewModels.clear();
+            index = 0;
+            Observable.from(mSelectPath)
+                    .subscribe(d -> {
+                        itemViewModels.add(new PubItemViewModel(activity, index, d, false));
+                        index++;
+                    }, error -> {
+                    }, () -> {
+                        if (itemViewModels.size() > 5) {
+                            itemViewModels.add(new PubItemViewModel(activity, index, "", true));
+                        }
+                    });
+        }
     }
 }

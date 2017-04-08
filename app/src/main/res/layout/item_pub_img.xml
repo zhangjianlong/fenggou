@@ -16,14 +16,25 @@
 
     <RelativeLayout
         style="@style/App.Theme.Linear"
+        android:background="@color/app.theme.background_f3f3f3"
         android:orientation="vertical">
 
-        
+        <com.core.op.lib.weight.ShapedImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:paddingLeft="@dimen/app.padding.normal"
+            android:paddingTop="@dimen/app.padding.normal"
+            android:scaleType="fitXY"
+            android:src="@mipmap/icon_pub_upload_img"
+            app:clickCommand="@{viewModel.imgClick}"
+            app:uri="@{viewModel.uri}" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_pub_upload_img" />
-
+            android:padding="@dimen/app.padding.small"
+            android:src="@mipmap/guanbi_icon"
+            android:visibility="@{viewModel.closeVisible}"
+            app:clickCommand="@{viewModel.closeClick}" />
     </RelativeLayout>
 </layout>
