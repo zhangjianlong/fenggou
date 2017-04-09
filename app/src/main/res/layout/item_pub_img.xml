@@ -17,17 +17,23 @@
     <RelativeLayout
         style="@style/App.Theme.Linear"
         android:background="@color/app.theme.background_f3f3f3"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="@dimen/app.padding.large12">
 
-        <com.core.op.lib.weight.ShapedImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:paddingLeft="@dimen/app.padding.normal"
-            android:paddingTop="@dimen/app.padding.normal"
-            android:scaleType="fitXY"
-            android:src="@mipmap/icon_pub_upload_img"
-            app:clickCommand="@{viewModel.imgClick}"
-            app:uri="@{viewModel.uri}" />
+            android:paddingTop="@dimen/app.padding.normal">
+
+            <com.core.op.lib.weight.ShapedImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:src="@{viewModel.defaultImg}"
+                app:clickCommand="@{viewModel.imgClick}"
+                app:uri="@{viewModel.uri}" />
+        </FrameLayout>
 
         <ImageView
             android:layout_width="wrap_content"

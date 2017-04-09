@@ -193,6 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/app.theme.background_f3f3f3"
+                    android:paddingTop="@dimen/app.padding.large12"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
@@ -201,8 +202,7 @@
                         android:layout_height="match_parent"
                         android:fadingEdge="none"
                         android:paddingLeft="@dimen/app.padding.large12"
-                        android:paddingRight="@dimen/app.padding.large12"
-                        android:paddingTop="@dimen/app.padding.large12"
+                        android:paddingRight="@dimen/app.padding.xlarge"
                         app:itemView="@{viewModel.itemView}"
                         app:items="@{viewModel.itemViewModels}"
                         app:layoutManager="@{LayoutManagers.nestGrid(3)}" />

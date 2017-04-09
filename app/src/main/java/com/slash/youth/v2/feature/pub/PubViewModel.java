@@ -31,6 +31,9 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.Scheduler;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static android.R.attr.data;
 
@@ -88,8 +91,28 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
             local.set(data);
         });
         Messenger.getDefault().register(this, MessageKey.PUB_DEL_IMG, Integer.class, data -> {
-            mSelectPath.remove(data);
-            updataData();
+//            Observable.just(data)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(d -> {
+//                        mSelectPath.remove((int) data);
+//                        itemViewModels.remove((int) data);
+//                    });
+
+
+            mSelectPath.remove((int) data);
+            itemViewModels.remove((int) data);
+            index = 0;
+            Observable.from(itemViewModels)
+                    .subscribe(d -> {
+                        d.setIndex(index);
+                        index++;
+                    }, error -> {
+                    }, () -> {
+                        if (itemViewModels.size() == 4 && !itemViewModels.get(3).isDefault) {
+                            itemViewModels.add(new PubItemViewModel(activity, index, "", true));
+                        }
+                    });
         });
 
         itemViewModels.add(new PubItemViewModel(activity, 0, "", true));
@@ -110,7 +133,7 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
                         index++;
                     }, error -> {
                     }, () -> {
-                        if (itemViewModels.size() > 5) {
+                        if (itemViewModels.size() < 5) {
                             itemViewModels.add(new PubItemViewModel(activity, index, "", true));
                         }
                     });
