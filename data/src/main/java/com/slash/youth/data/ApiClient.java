@@ -17,6 +17,7 @@ import com.slash.youth.domain.bean.PhoneLoginResultBean;
 import com.slash.youth.domain.bean.ResCodeBean;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.TimeStatusBean;
 import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
@@ -140,6 +141,33 @@ public interface ApiClient {
 
     @POST(UriMethod.USER_VISIBLE)
     Observable<BaseResponse<UserVisibleBean>> getUserVisible();
+
+    @POST(UriMethod.USER_COMPANY_DISPLAY)
+    Observable<BaseResponse<StatusBean>> userCompanyDisplay(@Body RequestBody requestBody);
+
+    @POST(UriMethod.USER_EVALUTION_DISPLAY)
+    Observable<BaseResponse<StatusBean>> userEvalutionDisplay(@Body RequestBody requestBody);
+
+    @POST(UriMethod.USER_SERVICEPOWER_DISPLAY)
+    Observable<BaseResponse<StatusBean>> userServicepowerDisplay(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SAVE_NAME)
+    Observable<BaseResponse<StatusBean>> saveName(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SAVE_SEX)
+    Observable<BaseResponse<StatusBean>> saveSex(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SAVE_INFO)
+    Observable<BaseResponse<StatusBean>> saveInfo(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SAVE_COMPANY)
+    Observable<BaseResponse<StatusBean>> saveCompany(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SET_TIME_GET)
+    Observable<BaseResponse<TimeStatusBean>> checkTimeStatus();
+
+    @POST(UriMethod.SET_TIME_SET)
+    Observable<BaseResponse<StatusBean>> setTimeStatus(@Body RequestBody requestBody);
 
 }
 

@@ -118,7 +118,7 @@
                         android:background="@null"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.write"
-                        android:text="@{viewModel.name}"
+                        android:text="@={viewModel.name}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
@@ -273,7 +273,7 @@
                         android:background="@null"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.company.hint"
-                        android:text="@{viewModel.company}"
+                        android:text="@={viewModel.company}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
@@ -302,7 +302,7 @@
                         android:background="@null"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.write"
-                        android:text="@{viewModel.companyPostion}"
+                        android:text="@={viewModel.companyPostion}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
@@ -337,7 +337,7 @@
                         android:drawableRight="@mipmap/icon_nav_back"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.write"
-                        android:text="@{viewModel.need}"
+                        android:text="@{viewModel.data.needtag}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
@@ -364,7 +364,7 @@
                         android:drawableRight="@mipmap/icon_nav_back"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.select"
-                        android:text="@{viewModel.provide}"
+                        android:text="@{viewModel.data.servicetag}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
@@ -387,12 +387,13 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
                         android:drawablePadding="@dimen/app.margin.normal"
                         android:drawableRight="@mipmap/icon_nav_back"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.select"
-                        android:text="@{viewModel.area}"
+                        android:text="@{viewModel.data.province + viewModel.data.city}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
@@ -401,10 +402,10 @@
 
                 <RelativeLayout
                     style="@style/App.Theme.Linear"
-                    app:clickCommand="@{viewModel.setProfile}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/app.padding.large13">
+                    android:padding="@dimen/app.padding.large13"
+                    app:clickCommand="@{viewModel.setProfile}">
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww"
@@ -419,7 +420,7 @@
                         android:drawableRight="@mipmap/icon_nav_back"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit"
-                        android:text="@{viewModel.profile}"
+                        android:text="@{viewModel.data.desc}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>

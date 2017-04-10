@@ -100,7 +100,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
     public ObservableField<String> level = new ObservableField<>();
     public ObservableField<String> company = new ObservableField<>();
     public ObservableField<String> removeFriend = new ObservableField<>("");
-    public ObservableField<OtherInfo.DataBean> data = new ObservableField<>();
+    public ObservableField<OtherInfo.UinfoBean> data = new ObservableField<>();
 
     public final ReplyCommand share = new ReplyCommand<>(() -> {
         if (!shareDialog.isShowing()) {
@@ -200,7 +200,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
 
             ChatCmdBusinesssCardBean chatCmdBusinesssCardBean = new ChatCmdBusinesssCardBean();
             chatCmdBusinesssCardBean.avatar = data.get().getAvatar();
-            chatCmdBusinesssCardBean.industry = data.get().getIndustry();
+//            chatCmdBusinesssCardBean.industry = data.get().getIndustry();
             chatCmdBusinesssCardBean.name = name;
             chatCmdBusinesssCardBean.profession = data.get().getPosition();
 //        chatCmdBusinesssCardBean.uid = uid;
@@ -259,7 +259,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                     uri.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + data.getAvatar());
 
                     relationCount.set(String.format(activity.getString(R.string.app_userinfo_relation), data.getRelationshipscount()));
-                    relationProgress.set(String.format(activity.getString(R.string.app_userinfo_relationprogress), (int) (data.getFansratio() * 100)));
+//                    relationProgress.set(String.format(activity.getString(R.string.app_userinfo_relationprogress), (int) (data.getFansratio() * 100)));
 
 
                     taskCount.set(String.format(activity.getString(R.string.app_userinfo_task), (int) data.getAchievetaskcount()));
@@ -268,8 +268,8 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
 
                     serviceCount.set(String.format(activity.getString(R.string.app_userinfo_service), DoubleUtil.changeDecimal(data.getUserservicepoint(), 1) + ""));
                     serviceProgress.set(String.format(activity.getString(R.string.app_userinfo_serviceprogress), DoubleUtil.changeDecimal(data.getAverageservicepoint(), 1) + ""));
-                    authVisible.set(data.getIsauth() == 1 ? View.VISIBLE : View.GONE);
-                    level.set(activity.getResources().getStringArray(R.array.user_grades)[data.getExpert() - 1]);
+//                    authVisible.set(data.getIsauth() == 1 ? View.VISIBLE : View.GONE);
+//                    level.set(activity.getResources().getStringArray(R.array.user_grades)[data.getExpert() - 1]);
 
                     int careertype = data.getCareertype();
                     if (careertype == 1) {//固定职业者

@@ -12,6 +12,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.TimeStatusBean;
 import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
@@ -73,5 +74,23 @@ public interface MainRepository {
     Observable<StatusBean> removeFriend(String def);
 
     Observable<UserVisibleBean> getUserVisible();
+
+    Observable<StatusBean> setUserCompanyVisible(String def);
+
+    Observable<StatusBean> setUserEvalutionVisible(String def);
+
+    Observable<StatusBean> setUserServiceVisible(String def);
+
+    Observable<StatusBean> saveName(String def);
+
+    Observable<StatusBean> saveSex(String def);
+
+    Observable<StatusBean> saveInfo(String def);
+
+    Observable<StatusBean> saveCompany(String def);
+
+    Observable<TimeStatusBean> checkTimeStatus();
+
+    Observable<StatusBean> setTimeStatus(String def);
 
 }

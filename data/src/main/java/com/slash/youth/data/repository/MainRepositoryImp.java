@@ -16,6 +16,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.bean.PersonRelation;
 import com.slash.youth.domain.bean.StatusBean;
 import com.slash.youth.domain.bean.TaskList;
+import com.slash.youth.domain.bean.TimeStatusBean;
 import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
@@ -145,6 +146,52 @@ public class MainRepositoryImp implements MainRepository {
     @Override
     public Observable<UserVisibleBean> getUserVisible() {
         return apiClient.getUserVisible().compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> setUserCompanyVisible(String def) {
+        return apiClient.userCompanyDisplay(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> setUserEvalutionVisible(String def) {
+        return apiClient.userEvalutionDisplay(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> setUserServiceVisible(String def) {
+        return apiClient.userServicepowerDisplay(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> saveName(String def) {
+        return apiClient.saveName(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> saveSex(String def) {
+        return apiClient.saveSex(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+
+    @Override
+    public Observable<StatusBean> saveInfo(String def) {
+        return apiClient.saveInfo(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> saveCompany(String def) {
+        return apiClient.saveCompany(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<TimeStatusBean> checkTimeStatus() {
+        return apiClient.checkTimeStatus().compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> setTimeStatus(String def) {
+        return apiClient.setTimeStatus(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
     }
 
     @Override

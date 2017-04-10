@@ -355,8 +355,8 @@ public class UriMethod {
     public static final String SERVER_HOST_SETTING = "uinfo/v1/api/config";
     public static final String SET_TIME_GET = SERVER_HOST_SETTING + "/dnd/time/get";
     //二、[设置]-时间免打扰设置
-    //public static final String SET_TIME_SET = SERVER_HOST_SETTING +"/dnd/time/set";
-    public static final String SET_TIME_SET = "/dnd/time/set";
+    public static final String SET_TIME_SET = SERVER_HOST_SETTING +"/dnd/time/set";
+//    public static final String SET_TIME_SET = "/dnd/time/set";
     //三、[设置]-获取消息免打扰设置
     public static final String SET_MSG_GET = SERVER_HOST_SETTING + "/dnd/msg/get";
     //四、[设置]-消息免打扰设置
@@ -476,5 +476,23 @@ public class UriMethod {
 
 
     //获取用户可见性设置
-    public static final String USER_VISIBLE = "settings/get";
+    public static final String USER_VISIBLE = SERVER_HOST_USER_SETTING + "settings/get";
+    //设置公司是否显示
+    public static final String USER_COMPANY_DISPLAY = SERVER_HOST_USER_SETTING + "company/display";
+    //设置服务力是否显示
+    public static final String USER_SERVICEPOWER_DISPLAY = SERVER_HOST_USER_SETTING + "servicepower/display";
+    //设置评价是否显示
+    public static final String USER_EVALUTION_DISPLAY = SERVER_HOST_USER_SETTING + "evalution/display";
+
+    public static final String USER_HOSR = "uinfo/v1/api/";
+    //保存用户姓名
+    public static final String SAVE_NAME = USER_HOSR + "vcard/name/set";
+    //保存用户性别
+    public static final String SAVE_SEX = USER_HOSR + "vcard/sex/set";
+    //保存个人信息
+    public static final String SAVE_INFO = USER_HOSR + "vcard/basic/info/set";
+    //保存公司和职位
+    public static final String SAVE_COMPANY = USER_HOSR + "vcard/company/set";
+    public static final String SAVE_USER_HEAD = USER_HOSR + "vcard/avatar/set";
+
 }

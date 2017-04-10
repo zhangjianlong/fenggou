@@ -1,56 +1,73 @@
 package com.slash.youth.domain.bean;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
  * Created by acer on 2017/3/10.
  */
 
 public class OtherInfo {
-    private DataBean uinfo;
 
-    public DataBean getUinfo() {
+    /**
+     * uinfo : {"achievetaskcount":0,"avatar":"","averageservicepoint":0,"careertype":1,"city":"","company":"","desc":"","id":0,"name":"","needtag":"","position":"","province":"","relationshipscount":0,"relationshipsratio":0,"servicetag":"","sex":1,"totoltaskcount":0,"userservicepoint":-1}
+     */
+
+    private UinfoBean uinfo;
+
+    public UinfoBean getUinfo() {
         return uinfo;
     }
 
-    public void setUinfo(DataBean uinfo) {
+    public void setUinfo(UinfoBean uinfo) {
         this.uinfo = uinfo;
     }
 
-    public static class DataBean implements Serializable {
-        private long achievetaskcount;
+    public static class UinfoBean {
+        /**
+         * achievetaskcount : 0
+         * avatar :
+         * averageservicepoint : 0
+         * careertype : 1
+         * city :
+         * company :
+         * desc :
+         * id : 0
+         * name :
+         * needtag :
+         * position :
+         * province :
+         * relationshipscount : 0
+         * relationshipsratio : 0
+         * servicetag :
+         * sex : 1
+         * totoltaskcount : 0
+         * userservicepoint : -1
+         */
+
+        private int achievetaskcount;
         private String avatar;
-        private double averageservicepoint;
+        private int averageservicepoint;
         private int careertype;
         private String city;
         private String company;
         private String desc;
-        private String direction;
-        private int expert;
-        private int fanscount;
-        private double fansratio;
         private int id;
-        private String identity;
-        private String industry;
-        private int isauth;
         private String name;
+        private String needtag;
         private String position;
         private String province;
-        private String tag;
-        private long totoltaskcount;
-        private double userservicepoint;
         private int relationshipscount;
+        private int relationshipsratio;
+        private String servicetag;
+        private int sex;
+        private int totoltaskcount;
+        private int userservicepoint;
 
-
-        public int getRelationshipscount() {
-            return relationshipscount;
+        public int getAchievetaskcount() {
+            return achievetaskcount;
         }
 
-        public void setRelationshipscount(int relationshipscount) {
-            this.relationshipscount = relationshipscount;
+        public void setAchievetaskcount(int achievetaskcount) {
+            this.achievetaskcount = achievetaskcount;
         }
-
 
         public String getAvatar() {
             return avatar;
@@ -60,6 +77,13 @@ public class OtherInfo {
             this.avatar = avatar;
         }
 
+        public int getAverageservicepoint() {
+            return averageservicepoint;
+        }
+
+        public void setAverageservicepoint(int averageservicepoint) {
+            this.averageservicepoint = averageservicepoint;
+        }
 
         public int getCareertype() {
             return careertype;
@@ -93,23 +117,6 @@ public class OtherInfo {
             this.desc = desc;
         }
 
-        public String getDirection() {
-            return direction;
-        }
-
-        public void setDirection(String direction) {
-            this.direction = direction;
-        }
-
-        public int getExpert() {
-            return expert;
-        }
-
-        public void setExpert(int expert) {
-            this.expert = expert;
-        }
-
-
         public int getId() {
             return id;
         }
@@ -118,36 +125,20 @@ public class OtherInfo {
             this.id = id;
         }
 
-        public String getIdentity() {
-            return identity;
-        }
-
-        public void setIdentity(String identity) {
-            this.identity = identity;
-        }
-
-        public String getIndustry() {
-            return industry;
-        }
-
-        public void setIndustry(String industry) {
-            this.industry = industry;
-        }
-
-        public int getIsauth() {
-            return isauth;
-        }
-
-        public void setIsauth(int isauth) {
-            this.isauth = isauth;
-        }
-
         public String getName() {
             return name;
         }
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public String getNeedtag() {
+            return needtag;
+        }
+
+        public void setNeedtag(String needtag) {
+            this.needtag = needtag;
         }
 
         public String getPosition() {
@@ -166,59 +157,51 @@ public class OtherInfo {
             this.province = province;
         }
 
-        public String getTag() {
-            return tag;
+        public int getRelationshipscount() {
+            return relationshipscount;
         }
 
-        public void setTag(String tag) {
-            this.tag = tag;
+        public void setRelationshipscount(int relationshipscount) {
+            this.relationshipscount = relationshipscount;
         }
 
-        public long getAchievetaskcount() {
-            return achievetaskcount;
+        public int getRelationshipsratio() {
+            return relationshipsratio;
         }
 
-        public void setAchievetaskcount(long achievetaskcount) {
-            this.achievetaskcount = achievetaskcount;
+        public void setRelationshipsratio(int relationshipsratio) {
+            this.relationshipsratio = relationshipsratio;
         }
 
-        public double getAverageservicepoint() {
-            return averageservicepoint;
+        public String getServicetag() {
+            return servicetag;
         }
 
-        public void setAverageservicepoint(double averageservicepoint) {
-            this.averageservicepoint = averageservicepoint;
+        public void setServicetag(String servicetag) {
+            this.servicetag = servicetag;
         }
 
-        public int getFanscount() {
-            return fanscount;
+        public int getSex() {
+            return sex;
         }
 
-        public void setFanscount(int fanscount) {
-            this.fanscount = fanscount;
+        public void setSex(int sex) {
+            this.sex = sex;
         }
 
-        public double getFansratio() {
-            return fansratio;
-        }
-
-        public void setFansratio(double fansratio) {
-            this.fansratio = fansratio;
-        }
-
-        public long getTotoltaskcount() {
+        public int getTotoltaskcount() {
             return totoltaskcount;
         }
 
-        public void setTotoltaskcount(long totoltaskcount) {
+        public void setTotoltaskcount(int totoltaskcount) {
             this.totoltaskcount = totoltaskcount;
         }
 
-        public double getUserservicepoint() {
+        public int getUserservicepoint() {
             return userservicepoint;
         }
 
-        public void setUserservicepoint(double userservicepoint) {
+        public void setUserservicepoint(int userservicepoint) {
             this.userservicepoint = userservicepoint;
         }
     }
