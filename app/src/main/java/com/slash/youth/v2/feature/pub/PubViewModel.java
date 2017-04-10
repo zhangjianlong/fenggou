@@ -25,6 +25,7 @@ import com.slash.youth.v2.feature.local.LocalActivity;
 import com.slash.youth.v2.feature.main.find.FindItemViewModel;
 import com.slash.youth.v2.feature.pubaccept.PubAcceptActivity;
 import com.slash.youth.v2.feature.pubcontent.PubContentActivity;
+import com.slash.youth.v2.feature.release.ReleaseSucActivity;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -143,5 +144,9 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
                         }
                     });
         }
+    }
+
+    public void commit() {
+        ReleaseSucActivity.instance(activity);
     }
 }

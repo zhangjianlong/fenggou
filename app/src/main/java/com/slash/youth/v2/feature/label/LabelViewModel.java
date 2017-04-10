@@ -20,8 +20,8 @@ public class LabelViewModel extends BAViewModel<ActLabelBinding> {
 
     public String title;
 
-    public final ItemView hotItemView = ItemView.of(BR.viewModel, R.layout.item_label_hot);
-    public final List<FindItemViewModel> hotItemViewModels = new ArrayList<>();
+    public final ItemView secondItemView = ItemView.of(BR.viewModel, R.layout.item_label_hot);
+    public final List<FindItemViewModel> secondItemViewModels = new ArrayList<>();
 
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_label);
     public final List<FindItemViewModel> itemViewModels = new ArrayList<>();

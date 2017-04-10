@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
@@ -50,6 +51,18 @@ public final class PubActivity extends BackActivity<PubViewModel, ActPubBinding>
 
     @AfterViews
     void afterViews() {
+        binding.toolbar.toolbar.inflateMenu(R.menu.menu_pub_commit);
+        binding.toolbar.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.commit:
+                        viewModel.commit();
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     @Override

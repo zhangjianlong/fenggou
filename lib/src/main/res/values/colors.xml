@@ -51,6 +51,7 @@
     <!-- TextView Control -->
     <color name="app.text">#ffffff</color>
     <color name="app.text.black">@color/black</color>
+    <color name="app.text.red">#ff7333</color>
     <color name="app.text.black6a6a6a">#6a6a6a</color>
     <color name="app.text.black9d9d9d">#9d9d9d</color>
     <color name="app.text.black333">#333333</color>
@@ -108,7 +109,7 @@
     <color name="app.characterView.textColor">@color/app.list.text.title</color>
 
     <color name="app.button.backgroun">@color/app.theme.colorPrimary</color>
-    <color name="app.button.backgroun.pressed">#18be40</color>
+    <color name="app.button.backgroun.pressed">#f6f6f6</color>
 
     <!-- link -->
     <color name="app.link">#ffbedfff</color>

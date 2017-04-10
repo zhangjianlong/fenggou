@@ -138,7 +138,6 @@ public interface ApiClient {
     @POST(UriMethod.IMG_UPLOAD)
     Observable<BaseResponse<UploadBean>> uploadUserHead(@Part MultipartBody.Part file);
 
-
     @POST(UriMethod.USER_VISIBLE)
     Observable<BaseResponse<UserVisibleBean>> getUserVisible();
 

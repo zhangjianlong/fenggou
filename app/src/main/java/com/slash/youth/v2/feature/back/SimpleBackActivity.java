@@ -70,7 +70,7 @@ public final class SimpleBackActivity extends BackActivity<SimpleBackViewModel, 
 
     @Override
     protected Toolbar setToolBar() {
-        return binding.toolbar;
+        return binding.toolbar.toolbar;
     }
 
     @Override

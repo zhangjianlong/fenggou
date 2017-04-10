@@ -20,11 +20,13 @@ import com.slash.youth.R;
 import com.slash.youth.databinding.ActUserinfoBinding;
 import com.slash.youth.domain.ChatCmdBusinesssCardBean;
 import com.slash.youth.domain.bean.OtherInfo;
+import com.slash.youth.domain.bean.UserVisibleBean;
 import com.slash.youth.domain.interactor.main.OtherInfoUseCase;
 import com.slash.youth.domain.interactor.main.UserAddFriendUseCase;
 import com.slash.youth.domain.interactor.main.UserAgreeFriendUseCase;
 import com.slash.youth.domain.interactor.main.UserRemoveFriendUseCase;
 import com.slash.youth.domain.interactor.main.UserStatusUseCase;
+import com.slash.youth.domain.interactor.main.UserVisibleUseCase;
 import com.slash.youth.engine.ContactsManager;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.engine.MsgManager;
@@ -83,9 +85,12 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
     ReportDialog reportDialog;
     ShareDialog shareDialog;
     UserStatusUseCase userStatusUseCase;
+    UserVisibleUseCase userVisibleUseCase;
     UserAddFriendUseCase addFriendUseCase;
     UserRemoveFriendUseCase removeFriendUseCase;
     UserAgreeFriendUseCase agreeFriendUseCase;
+
+    UserVisibleBean userVisibleBean;
 
 
     public ObservableField<String> uri = new ObservableField<>();
@@ -133,6 +138,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                              UserAddFriendUseCase addFriendUseCase,
                              UserRemoveFriendUseCase removeFriendUseCase,
                              UserAgreeFriendUseCase agreeFriendUseCase,
+                             UserVisibleUseCase userVisibleUseCase,
                              ReportDialog reportDialog,
                              ShareDialog shareDialog) {
         super(activity);
@@ -140,6 +146,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
         this.shareDialog = shareDialog;
         this.userStatusUseCase = userStatusUseCase;
         this.addFriendUseCase = addFriendUseCase;
+        this.userVisibleUseCase = userVisibleUseCase;
         this.removeFriendUseCase = removeFriendUseCase;
         this.agreeFriendUseCase = agreeFriendUseCase;
         this.useCase = useCase;
@@ -212,7 +219,11 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
             CommonUtils.getContext().startActivity(intentChooseFriendActivtiy);
         });
 
-        refresh();
+        if (LoginManager.currentLoginUserId != uid) {
+            loadConfig();
+        } else {
+            refresh();
+        }
     }
 
     private void fiends() {
@@ -243,6 +254,18 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                             removeFriend.set(ContactsManager.IS_FRIEND);
                             break;
                     }
+                }, error -> {
+
+                });
+    }
+
+    private void loadConfig() {
+        userVisibleUseCase.execute().compose(activity.bindToLifecycle())
+                .subscribe(data -> {
+                    userVisibleBean = data;
+                }, error -> {
+                }, () -> {
+                    refresh();
                 });
     }
 
@@ -309,6 +332,8 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                             ToastUtils.shortToast("加好友失败");
                             break;
                     }
+                }, error -> {
+
                 });
     }
 
@@ -327,6 +352,8 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                             ToastUtils.shortToast("同意未成功");
                             break;
                     }
+                }, error -> {
+
                 });
     }
 
@@ -346,6 +373,8 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                             ToastUtils.shortToast("删除好友失败");
                             break;
                     }
+                }, error -> {
+
                 });
     }
 

@@ -231,4 +231,9 @@
     <string name="app.release.review">查看详情</string>
     <string name="app.release.suc.hint">您的任务已保存至发布管理，完善个人资料后可上架</string>
     <string name="app.release.complete">完善资料</string>
+    <string name="app.userinfo.about.need">我需要</string>
+    <string name="app.userinfo.about.skill">能提供</string>
+    <string name="app.userinfo.about.area">区&#160;&#160;&#160;&#160;域</string>
+    <string name="app.userinfo.about.info">简&#160;&#160;&#160;&#160;介</string>
+    <string name="app.service.list">服务方列表</string>
 </resources>

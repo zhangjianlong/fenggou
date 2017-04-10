@@ -93,7 +93,7 @@
         <attr name="ucrop_show_frame" format="boolean" />
 
     </declare-styleable>
-
+    <!--crop-->
     <declare-styleable name="ucrop_AspectRatioTextView">
 
         <attr name="ucrop_artv_ratio_title" format="string" />
@@ -101,5 +101,21 @@
         <attr name="ucrop_artv_ratio_x" format="float" />
         <attr name="ucrop_artv_ratio_y" format="float" />
 
+    </declare-styleable>
+
+    <!--FlowLayout-->
+    <declare-styleable name="FlowLayout">
+        <attr name="flow" format="boolean" />
+        <attr name="childSpacing" format="enum|dimension">
+            <enum name="auto" value="-65536" />
+        </attr>
+        <attr name="childSpacingForLastRow" format="enum|dimension">
+            <enum name="auto" value="-65536" />
+            <enum name="align" value="-65537" />
+        </attr>
+        <attr name="rowSpacing" format="enum|dimension">
+            <enum name="auto" value="-65536" />
+        </attr>
+        <attr name="rtl" format="boolean" />
     </declare-styleable>
 </resources>

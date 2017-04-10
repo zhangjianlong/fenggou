@@ -23,61 +23,65 @@
             layout="@layout/include_white_toolbar_alpha"
             app:toolTitle="@{viewModel.title}" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/app.theme.background_edf1f2"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/App.Theme.TextAppearance.ww.normal"
-                android:padding="@dimen/app.padding.large12"
-                android:textColor="@color/app.text.black666"
-                tools:text="定位城市" />
-
             <LinearLayout
-                style="@style/App.Theme.layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-                <TextView
-                    style="@style/App.Theme.TextAppearance.ww.normal"
-                    android:drawableLeft="@mipmap/icon_label_local_in"
-                    android:drawablePadding="@dimen/app.padding.small"
-                    android:paddingBottom="@dimen/app.padding.normal"
-                    android:paddingLeft="@dimen/app.padding.xlarge"
-                    android:paddingRight="@dimen/app.padding.xlarge"
-                    android:paddingTop="@dimen/app.padding.normal"
-                    android:textColor="@color/app.text.black333"
-                    tools:text="苏州" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fadingEdge="none"
+                    app:itemView="@{viewModel.itemView}"
+                    app:items="@{viewModel.itemViewModels}"
+                    app:layoutManager="@{LayoutManagers.linear()}" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/second_recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:fadingEdge="none"
+                    app:itemView="@{viewModel.secondItemView}"
+                    app:items="@{viewModel.secondItemViewModels}"
+                    app:layoutManager="@{LayoutManagers.linear()}" />
             </LinearLayout>
 
-            <TextView
-                style="@style/App.Theme.TextAppearance.ww.normal"
-                android:padding="@dimen/app.padding.large12"
-                android:textColor="@color/app.text.black666"
-                tools:text="热门城市" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/hot_recyclerView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fadingEdge="none"
-                android:paddingLeft="@dimen/app.padding.large12"
-                android:paddingRight="@dimen/app.padding.large12"
-                app:itemView="@{viewModel.hotItemView}"
-                app:items="@{viewModel.hotItemViewModels}"
-                app:layoutManager="@{LayoutManagers.grid(3)}" />
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.small.black333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/app.padding.normal" />
+
+                <Button
+                    style="@style/App.Theme.Button.ww.blue"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <com.core.op.lib.weight.FlowLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+
+            </com.core.op.lib.weight.FlowLayout>
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fadingEdge="none"
-            app:itemView="@{viewModel.itemView}"
-            app:items="@{viewModel.itemViewModels}"
-            app:layoutManager="@{LayoutManagers.linear()}" />
     </LinearLayout>
 </layout>

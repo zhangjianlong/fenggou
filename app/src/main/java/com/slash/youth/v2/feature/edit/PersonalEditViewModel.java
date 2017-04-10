@@ -122,7 +122,6 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         userHeadUseCase.setParams(imgPath);
         userHeadUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
         }, error -> {
-
         });
     }
 
