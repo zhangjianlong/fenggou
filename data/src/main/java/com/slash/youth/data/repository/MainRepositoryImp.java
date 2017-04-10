@@ -19,6 +19,7 @@ import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
+import com.slash.youth.domain.bean.UserVisibleBean;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.interfaces.OnProgressListener;
 import com.slash.youth.domain.repository.MainRepository;
@@ -139,6 +140,11 @@ public class MainRepositoryImp implements MainRepository {
     @Override
     public Observable<StatusBean> removeFriend(String def) {
         return apiClient.removeFriend(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<UserVisibleBean> getUserVisible(String def) {
+        return apiClient.getUserVisible(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
     }
 
     @Override

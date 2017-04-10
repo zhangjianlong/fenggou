@@ -201,10 +201,10 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
     });
 
     public final ReplyCommand settingClick = new ReplyCommand(() -> {
-        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_SET);
-        Intent intentMySettingActivity = new Intent(activity, MySettingActivity.class);
-        activity.startActivity(intentMySettingActivity);
         //设置的埋点
+        MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_SET);
+        MySettingActivity.instance(activity);
+
 
     });
 

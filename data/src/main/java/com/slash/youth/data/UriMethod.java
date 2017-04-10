@@ -473,4 +473,8 @@ public class UriMethod {
     public static final String GET_RECOMMEND_DEMAND_MORE2 = "feed/v2/api/demand/recommend/more";
     //四、[推荐]-更多服务推荐列表  v1.1查看更多服务推荐列表
     public static final String GET_RECOMMEND_SERVICE_MORE2 = "feed/v2/api/service/recommend/more";
+
+
+    //获取用户可见性设置
+    public static final String USER_VISIBLE = "/settings/get";
 }

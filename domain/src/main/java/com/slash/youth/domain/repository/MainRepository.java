@@ -15,6 +15,7 @@ import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
+import com.slash.youth.domain.bean.UserVisibleBean;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.interfaces.OnProgressListener;
 
@@ -70,5 +71,7 @@ public interface MainRepository {
     Observable<StatusBean> agreeFriend(String def);
 
     Observable<StatusBean> removeFriend(String def);
+
+    Observable<UserVisibleBean> getUserVisible(String def);
 
 }
