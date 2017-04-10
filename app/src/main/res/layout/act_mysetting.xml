@@ -290,7 +290,8 @@
                     <android.support.v7.widget.SwitchCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:checked="@{viewModel.showCompany}" />
                 </RelativeLayout>
 
                 <View
@@ -313,7 +314,8 @@
                     <android.support.v7.widget.SwitchCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:checked="@{viewModel.evaluate}" />
                 </RelativeLayout>
 
                 <View
@@ -335,7 +337,8 @@
                     <android.support.v7.widget.SwitchCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:checked="@{viewModel.service}" />
                 </RelativeLayout>
 
             </LinearLayout>

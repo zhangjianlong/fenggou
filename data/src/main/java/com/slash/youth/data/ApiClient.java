@@ -20,6 +20,7 @@ import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
 import com.slash.youth.domain.bean.UserTaskBean;
+import com.slash.youth.domain.bean.UserVisibleBean;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.bean.base.ChangePhoneBean;
 
@@ -135,6 +136,10 @@ public interface ApiClient {
     @Multipart
     @POST(UriMethod.IMG_UPLOAD)
     Observable<BaseResponse<UploadBean>> uploadUserHead(@Part MultipartBody.Part file);
+
+
+    @POST(UriMethod.USER_VISIBLE)
+    Observable<BaseResponse<UserVisibleBean>> getUserVisible(@Body RequestBody requestBody);
 
 }
 

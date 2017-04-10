@@ -11,6 +11,7 @@ import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.base.OnDialogLisetener;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.weight.progress.Progress;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActMysettingBinding;
@@ -22,6 +23,7 @@ import com.slash.youth.domain.RecodeBean;
 import com.slash.youth.domain.SetBean;
 import com.slash.youth.domain.SetMsgBean;
 import com.slash.youth.domain.SetTimeBean;
+import com.slash.youth.domain.interactor.main.UserVisibleUseCase;
 import com.slash.youth.engine.AccountManager;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.engine.MyManager;
@@ -75,6 +77,7 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
     private boolean isWinxinBing = false;
     private boolean isQQBing = false;
     private BindingDialog bindingDialog;
+    private UserVisibleUseCase userVisibleUseCase;
 
     public final ObservableField<String> setPsd = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_setting_find_psd));
     public final ObservableField<Integer> changePsdShow = new ObservableField<>(View.GONE);
@@ -82,15 +85,22 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
     public final ObservableField<String> weixinBinding = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_setting_bind));
     public final ObservableField<String> qqBinding = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_setting_bind));
     public final ObservableField<String> title = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_setting_title));
+    public final ObservableField<Boolean> evaluate = new ObservableField<>(false);
+    public final ObservableField<Boolean> showCompany = new ObservableField<>(false);
+    public final ObservableField<Boolean> service = new ObservableField<>(false);
 
     @Inject
-    public MySettingViewModel(RxAppCompatActivity activity, CommonDialog commonDialog, BindingDialog bindingDialog) {
+    public MySettingViewModel(RxAppCompatActivity activity, CommonDialog commonDialog, BindingDialog bindingDialog, UserVisibleUseCase userVisibleUseCase) {
         super(activity);
         this.commonDialog = commonDialog;
         this.bindingDialog = bindingDialog;
+        this.userVisibleUseCase = userVisibleUseCase;
         progress = new Progress(activity);
 
     }
+
+
+    
 
     public final ReplyCommand setTime = new ReplyCommand(() -> {
         int timeStatus = 0;
