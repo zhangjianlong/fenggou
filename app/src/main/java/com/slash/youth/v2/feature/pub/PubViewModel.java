@@ -103,19 +103,11 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
             local.set(data);
         });
         Messenger.getDefault().register(this, MessageKey.PUB_DEL_IMG, Integer.class, data -> {
-//            Observable.just(data)
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(d -> {
-//                        mSelectPath.remove((int) data);
-//                        itemViewModels.remove((int) data);
-//                    });
-
-
             mSelectPath.remove((int) data);
             itemViewModels.remove((int) data);
             index = 0;
             Observable.from(itemViewModels)
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(d -> {
                         d.setIndex(index);
                         index++;
