@@ -476,5 +476,5 @@ public class UriMethod {
 
 
     //获取用户可见性设置
-    public static final String USER_VISIBLE = "/settings/get";
+    public static final String USER_VISIBLE = "settings/get";
 }

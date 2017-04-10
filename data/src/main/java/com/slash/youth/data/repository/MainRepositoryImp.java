@@ -143,8 +143,8 @@ public class MainRepositoryImp implements MainRepository {
     }
 
     @Override
-    public Observable<UserVisibleBean> getUserVisible(String def) {
-        return apiClient.getUserVisible(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    public Observable<UserVisibleBean> getUserVisible() {
+        return apiClient.getUserVisible().compose(new ErrorTransformer<>());
     }
 
     @Override

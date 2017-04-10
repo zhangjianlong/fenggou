@@ -139,7 +139,7 @@ public interface ApiClient {
 
 
     @POST(UriMethod.USER_VISIBLE)
-    Observable<BaseResponse<UserVisibleBean>> getUserVisible(@Body RequestBody requestBody);
+    Observable<BaseResponse<UserVisibleBean>> getUserVisible();
 
 }
 

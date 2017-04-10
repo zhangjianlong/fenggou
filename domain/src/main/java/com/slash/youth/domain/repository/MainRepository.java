@@ -72,6 +72,6 @@ public interface MainRepository {
 
     Observable<StatusBean> removeFriend(String def);
 
-    Observable<UserVisibleBean> getUserVisible(String def);
+    Observable<UserVisibleBean> getUserVisible();
 
 }
