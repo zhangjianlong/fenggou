@@ -14,16 +14,89 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/app.padding.large"
+            android:paddingRight="@dimen/app.padding.large">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="2000dp"></FrameLayout>
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        </FrameLayout>
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                    android:padding="@dimen/app.padding.large"
+                    android:text="@string/app.userinfo.about.need" />
 
+                <com.core.op.lib.weight.FlowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.core.op.lib.weight.FlowLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/include_line_h" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                    android:padding="@dimen/app.padding.large"
+                    android:text="@string/app.userinfo.about.skill" />
+
+                <com.core.op.lib.weight.FlowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.core.op.lib.weight.FlowLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/include_line_h" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                    android:padding="@dimen/app.padding.large"
+                    android:text="@string/app.userinfo.about.area" />
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                    android:padding="@dimen/app.padding.large"
+                    android:text="" />
+
+
+            </LinearLayout>
+
+            <include layout="@layout/include_line_h" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                    android:padding="@dimen/app.padding.large"
+                    android:text="@string/app.userinfo.about.info" />
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                    android:padding="@dimen/app.padding.large"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </layout>

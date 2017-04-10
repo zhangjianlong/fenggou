@@ -222,6 +222,10 @@
             android:name=".v2.feature.localsecond.LocalsecondActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.release.ReleaseSucActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SlashProtocolActivity" />
         <activity
             android:name=".ui.activity.HomeActivity"
@@ -248,7 +252,6 @@
         <activity
             android:name=".v2.feature.label.LabelActivity"
             android:windowSoftInputMode="adjustPan" />
-
         <activity android:name=".ui.activity.CityLocationActivity" />
         <activity android:name=".ui.activity.SubscribeActivity" />
         <activity
@@ -616,7 +619,9 @@
         <activity android:name=".PubContent" />
         <activity android:name=".PubAccept" />
         <activity android:name=".ReleaseSuc" />
-        <activity android:name=".ReleaseFail"></activity>
+        <activity android:name=".ReleaseFail" />
+        <activity android:name=".view.impl.Service" />
+        <activity android:name=".view.impl.SList"></activity>
     </application>
 
 </manifest>

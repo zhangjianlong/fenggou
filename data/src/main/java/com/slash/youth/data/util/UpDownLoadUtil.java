@@ -29,6 +29,6 @@ public class UpDownLoadUtil {
         if (!file.exists())
             throw new UploadException("upload image file not exists!");
         RequestBody requestBody = new ProgressRequestBody(RequestBody.create(MediaType.parse("multipart/form-data"), file), onProgressListener);
-        return MultipartBody.Part.createFormData(param, file.getName(), requestBody);
+        return MultipartBody.Part.createFormData(param, file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
     }
 }

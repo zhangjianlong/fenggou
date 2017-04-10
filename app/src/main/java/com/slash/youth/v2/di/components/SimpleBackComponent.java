@@ -5,6 +5,8 @@ import com.slash.youth.v2.di.modules.ActivityModule;
 import com.slash.youth.v2.di.modules.SimpleBackModule;
 import com.slash.youth.v2.feature.back.SimpleBackActivity;
 import com.slash.youth.v2.feature.back.manage.ManagerFragment;
+import com.slash.youth.v2.feature.back.service.ServiceFragment;
+import com.slash.youth.v2.feature.back.service.slist.SListFragment;
 
 import dagger.Component;
 
@@ -15,4 +17,7 @@ public interface SimpleBackComponent extends ActivityComponent {
 
     void inject(ManagerFragment fragment);
 
+    void inject(ServiceFragment fragment);
+
+    void inject(SListFragment fragment);
 }

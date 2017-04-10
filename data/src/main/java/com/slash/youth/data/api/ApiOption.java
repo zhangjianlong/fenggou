@@ -221,8 +221,8 @@ public class ApiOption {
             String date = sdf.format(new Date(timeMillis));
             builder.addHeader("Date", date);
             builder.addHeader("Authorization", AuthHeaderUtil.getBasicAuthHeader(chain.request().method(), chain.request().url().url().toString(), date).trim());
-            builder.addHeader("uid", SpUtil.readLong(Global.UID, 0l) + "");
-            builder.addHeader("pass", "1");
+//            builder.addHeader("uid", SpUtil.readLong(Global.UID, 0l) + "");
+//            builder.addHeader("pass", "1");
             builder.addHeader("token", SpUtil.readString(Global.TOKEN, ""));
             builder.addHeader("Content-Type", "application/json");
             Request request = builder.build();
