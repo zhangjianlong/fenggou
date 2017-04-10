@@ -100,8 +100,6 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
     }
 
 
-    
-
     public final ReplyCommand setTime = new ReplyCommand(() -> {
         int timeStatus = 0;
         String startTime = "22:00";
@@ -374,7 +372,26 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
 
     @Override
     public void afterViews() {
+        initData();
+    }
 
+    private void initData() {
+        userVisibleUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            if (data == null) {
+                return;
+            }
+            if (data.getCompany() == 1) {
+                showCompany.set(true);
+            }
+            if (data.getEvalution() == 1) {
+                evaluate.set(true);
+            }
+            if (data.getServicepower() == 1) {
+                service.set(true);
+            }
+        }, e -> {
+            System.out.println(e + "user error");
+        });
     }
 
     @Override

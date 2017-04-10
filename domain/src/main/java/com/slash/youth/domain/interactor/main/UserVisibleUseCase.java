@@ -29,7 +29,7 @@ public class UserVisibleUseCase extends UseCase<UserVisibleBean> {
 
     @Override
     protected Observable<UserVisibleBean> buildUseCaseObservable() {
-        return repository.getUserVisible(params[0]);
+        return repository.getUserVisible();
     }
 }
 

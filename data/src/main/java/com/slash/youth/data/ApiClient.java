@@ -138,7 +138,7 @@ public interface ApiClient {
     Observable<BaseResponse<UploadBean>> uploadUserHead(@Part MultipartBody.Part file);
 
     @POST(UriMethod.USER_VISIBLE)
-    Observable<BaseResponse<UserVisibleBean>> getUserVisible(@Body RequestBody requestBody);
+    Observable<BaseResponse<UserVisibleBean>> getUserVisible();
 
 }
 
