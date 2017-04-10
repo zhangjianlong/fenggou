@@ -404,6 +404,18 @@
         <item name="android:textColorHint">@color/app.text.hint</item>
         <item name="android:background">@color/transparent</item>
     </style>
+    <!--buttom style-->
+    <style name="App.Theme.Button" />
+
+
+    <style name="App.Theme.Button.ww">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="App.Theme.Button.ww.blue">
+        <item name="android:background">@drawable/selector_bg_button</item>
+    </style>
 
     <!--image style-->
     <style name="App.Theme.Image">

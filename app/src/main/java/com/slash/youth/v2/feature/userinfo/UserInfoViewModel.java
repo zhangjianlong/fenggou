@@ -83,6 +83,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
     ReportDialog reportDialog;
     ShareDialog shareDialog;
     UserStatusUseCase userStatusUseCase;
+    UserVisibleUseCase userVisibleUseCase;
     UserAddFriendUseCase addFriendUseCase;
     UserRemoveFriendUseCase removeFriendUseCase;
     UserAgreeFriendUseCase agreeFriendUseCase;
@@ -133,6 +134,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                              UserAddFriendUseCase addFriendUseCase,
                              UserRemoveFriendUseCase removeFriendUseCase,
                              UserAgreeFriendUseCase agreeFriendUseCase,
+                             UserVisibleUseCase userVisibleUseCase,
                              ReportDialog reportDialog,
                              ShareDialog shareDialog) {
         super(activity);
@@ -140,6 +142,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
         this.shareDialog = shareDialog;
         this.userStatusUseCase = userStatusUseCase;
         this.addFriendUseCase = addFriendUseCase;
+        this.userVisibleUseCase = userVisibleUseCase;
         this.removeFriendUseCase = removeFriendUseCase;
         this.agreeFriendUseCase = agreeFriendUseCase;
         this.useCase = useCase;

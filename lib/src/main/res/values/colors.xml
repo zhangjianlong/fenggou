@@ -108,7 +108,7 @@
     <color name="app.characterView.textColor">@color/app.list.text.title</color>
 
     <color name="app.button.backgroun">@color/app.theme.colorPrimary</color>
-    <color name="app.button.backgroun.pressed">#18be40</color>
+    <color name="app.button.backgroun.pressed">#f6f6f6</color>
 
     <!-- link -->
     <color name="app.link">#ffbedfff</color>
