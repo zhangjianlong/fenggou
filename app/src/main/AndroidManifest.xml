@@ -621,7 +621,8 @@
         <activity android:name=".ReleaseSuc" />
         <activity android:name=".ReleaseFail" />
         <activity android:name=".view.impl.Service" />
-        <activity android:name=".view.impl.SList"></activity>
+        <activity android:name=".view.impl.SList" />
+        <activity android:name=".view.impl.ServiceDetail"></activity>
     </application>
 
 </manifest>
