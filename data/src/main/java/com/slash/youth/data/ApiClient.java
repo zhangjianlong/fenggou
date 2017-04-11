@@ -168,5 +168,8 @@ public interface ApiClient {
     @POST(UriMethod.SET_TIME_SET)
     Observable<BaseResponse<StatusBean>> setTimeStatus(@Body RequestBody requestBody);
 
+    @POST(UriMethod.SAVE_USER_HEAD)
+    Observable<BaseResponse<StatusBean>> saveHead(@Body RequestBody requestBody);
+
 }
 

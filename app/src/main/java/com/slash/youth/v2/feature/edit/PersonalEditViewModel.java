@@ -18,6 +18,7 @@ import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.interactor.main.SaveCompanyUseCase;
 import com.slash.youth.domain.interactor.main.MineInfoUseCase;
 import com.slash.youth.domain.interactor.main.OtherInfoUseCase;
+import com.slash.youth.domain.interactor.main.SaveHeadUserCase;
 import com.slash.youth.domain.interactor.main.SaveInfoUseCase;
 import com.slash.youth.domain.interactor.main.SaveNameUseCase;
 import com.slash.youth.domain.interactor.main.SaveSexUseCase;
@@ -64,6 +65,7 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     private SaveSexUseCase saveSexUseCase;
     private SaveInfoUseCase saveInfoUseCase;
     private SaveCompanyUseCase saveCompanyUseCase;
+    private SaveHeadUserCase saveHeadUserCase;
     private String userName;
     private String userDesc;
     private String userPosition;
@@ -74,7 +76,7 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
 
     @Inject
     public PersonalEditViewModel(RxAppCompatActivity activity, UserHeadUseCase userHeadUseCase, MineInfoUseCase mineInfoUseCase, OtherInfoUseCase infoUseCase,
-                                 SaveNameUseCase saveNameUseCase, SaveSexUseCase saveSexUseCase, SaveInfoUseCase saveInfoUseCase, SaveCompanyUseCase saveCompanyUseCase) {
+                                 SaveNameUseCase saveNameUseCase, SaveSexUseCase saveSexUseCase, SaveInfoUseCase saveInfoUseCase, SaveCompanyUseCase saveCompanyUseCase, SaveHeadUserCase saveHeadUserCase) {
         super(activity);
         this.userHeadUseCase = userHeadUseCase;
         this.mineInfoUseCase = mineInfoUseCase;
@@ -83,6 +85,7 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         this.saveSexUseCase = saveSexUseCase;
         this.saveInfoUseCase = saveInfoUseCase;
         this.saveCompanyUseCase = saveCompanyUseCase;
+        this.saveHeadUserCase = saveHeadUserCase;
     }
 
     @Override
@@ -118,9 +121,22 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     });
 
 
+    public void saveHead(String url) {
+        Map<String, String> map = new HashMap<>();
+        map.put("url", url);
+        saveHeadUserCase.setParams(JsonUtil.mapToJson(map));
+        saveHeadUserCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+        }, error -> {
+        });
+    }
+
+
     public void uploadImage(String imgPath) {
         userHeadUseCase.setParams(imgPath);
         userHeadUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            String url = data.getFileId();
+            saveHead(url);
+
         }, error -> {
         });
     }

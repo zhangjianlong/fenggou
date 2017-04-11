@@ -93,4 +93,5 @@ public interface MainRepository {
 
     Observable<StatusBean> setTimeStatus(String def);
 
+    Observable<StatusBean> saveHead(String param);
 }
