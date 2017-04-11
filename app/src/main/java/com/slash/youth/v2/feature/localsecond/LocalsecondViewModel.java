@@ -14,6 +14,9 @@ import com.slash.youth.domain.bean.ProvinceBean;
 import com.slash.youth.v2.feature.local.LocalItemViewModel;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import rx.Observable;
@@ -26,7 +29,7 @@ public class LocalsecondViewModel extends BAViewModel<ActLocalsecondBinding> {
     public String title;
 
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_localsecond);
-    public final ObservableList<LocalsecondItemViewModel> itemViewModels = new ObservableArrayList<>();
+    public final List<LocalsecondItemViewModel> itemViewModels = new ArrayList<>();
 
 
     @Inject
@@ -45,6 +48,10 @@ public class LocalsecondViewModel extends BAViewModel<ActLocalsecondBinding> {
         Observable.from(provinceBean.getCity())
                 .subscribe(data -> {
                     itemViewModels.add(new LocalsecondItemViewModel(activity, data.getName(), provinceBean.getName()));
+                },error->{
+
+                },()->{
+//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
                 });
     }
 }

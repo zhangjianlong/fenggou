@@ -227,7 +227,7 @@
                         android:paddingRight="@dimen/app.padding.xlarge"
                         app:itemView="@{viewModel.itemView}"
                         app:items="@{viewModel.itemViewModels}"
-                        app:layoutManager="@{LayoutManagers.nestGrid(3)}" />
+                        app:layoutManager="@{LayoutManagers.grid(3)}" />
 
                     <TextView
                         style="@style/App.Theme.TextAppearance.ww.small.black666"

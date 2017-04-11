@@ -41,10 +41,10 @@ public class LocalViewModel extends BAViewModel<ActLocalBinding> {
     public String title;
 
     public final ItemView hotItemView = ItemView.of(BR.viewModel, R.layout.item_local_hot);
-    public final ObservableList<LocalHotItemViewModel> hotItemViewModels = new ObservableArrayList<>();
+    public final List<LocalHotItemViewModel> hotItemViewModels = new ArrayList<>();
 
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_local);
-    public final ObservableList<LocalItemViewModel> itemViewModels = new ObservableArrayList<>();
+    public final List<LocalItemViewModel> itemViewModels = new ArrayList<>();
 
     List<String> provinces;
     int index;
@@ -73,6 +73,8 @@ public class LocalViewModel extends BAViewModel<ActLocalBinding> {
                     itemViewModels.add(new LocalItemViewModel(activity, data));
                 }, error -> {
 
+                },()->{
+//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
                 });
         index = 0;
         Observable.from(activity.getResources().getStringArray(R.array.hot_citys))
@@ -80,7 +82,8 @@ public class LocalViewModel extends BAViewModel<ActLocalBinding> {
                     hotItemViewModels.add(new LocalHotItemViewModel(activity, data, provinces.get(index)));
                     index++;
                 }, error -> {
-
+                },()->{
+//                    binding.recyclerView.getAdapter().notifyDataSetChanged();
                 });
     }
 }

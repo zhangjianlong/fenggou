@@ -70,7 +70,7 @@
                     android:padding="@dimen/app.padding.normal" />
 
                 <Button
-                    style="@style/App.Theme.Button.ww.blue"
+                    style="@style/App.Theme.TextAppearance.Button.ww.blue"
                     android:gravity="center" />
 
             </LinearLayout>
