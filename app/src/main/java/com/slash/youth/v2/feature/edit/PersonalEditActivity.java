@@ -47,6 +47,9 @@ public final class PersonalEditActivity extends BackActivity<PersonalEditViewMod
         binding.toolbar.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                viewModel.saveName();
+                viewModel.saveInfo();
+                viewModel.saveCompany();
                 return true;
             }
         });

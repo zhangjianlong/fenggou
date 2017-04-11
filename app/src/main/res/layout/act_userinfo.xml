@@ -281,9 +281,9 @@
                 android:drawableTop="@mipmap/attention_icon"
                 android:gravity="center"
                 android:paddingTop="@dimen/app.margin.normal"
-                app:clickCommand="@{viewModel.share}"
                 android:text="@string/app.userinfo.recommend"
-                android:textColor="@color/app.text.black.alpha.66" />
+                android:textColor="@color/app.text.black.alpha.66"
+                app:clickCommand="@{viewModel.share}" />
 
             <FrameLayout
                 android:layout_width="0dp"

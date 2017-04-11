@@ -71,9 +71,10 @@
                     <android.support.v7.widget.SwitchCompat
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
                         android:checked="@{viewModel.timeCheck}"
-                        app:clickCommand="@{viewModel.setTime}" />
+                        app:onCheckedChangeListener="@{viewModel.setTimeListener}" />
 
 
                 </RelativeLayout>
@@ -291,7 +292,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:checked="@{viewModel.showCompany}" />
+                        android:checked="@{viewModel.showCompany}"
+                        app:onCheckedChangeListener="@{viewModel.setCompanyListener}" />
                 </RelativeLayout>
 
                 <View
@@ -315,7 +317,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:checked="@{viewModel.evaluate}" />
+                        android:checked="@{viewModel.evaluate}"
+                        app:onCheckedChangeListener="@{viewModel.setEvaluateListener}" />
                 </RelativeLayout>
 
                 <View
@@ -338,7 +341,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:checked="@{viewModel.service}" />
+                        android:checked="@{viewModel.service}"
+                        app:onCheckedChangeListener="@{viewModel.setServiceListener}" />
                 </RelativeLayout>
 
             </LinearLayout>

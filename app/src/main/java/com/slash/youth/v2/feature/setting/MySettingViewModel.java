@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.base.OnDialogLisetener;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.weight.progress.Progress;
 import com.slash.youth.R;
@@ -23,6 +25,13 @@ import com.slash.youth.domain.RecodeBean;
 import com.slash.youth.domain.SetBean;
 import com.slash.youth.domain.SetMsgBean;
 import com.slash.youth.domain.SetTimeBean;
+import com.slash.youth.domain.interactor.main.CheckTimeUseCase;
+import com.slash.youth.domain.interactor.main.SetTimeUseCase;
+import com.slash.youth.domain.interactor.main.UserCompanyVisibleUseCase;
+import com.slash.youth.domain.interactor.main.UserEvaluateCountUseCase;
+import com.slash.youth.domain.interactor.main.UserEvaluateUseCase;
+import com.slash.youth.domain.interactor.main.UserEvalutionVisibleUseCase;
+import com.slash.youth.domain.interactor.main.UserServiceVisibleUseCase;
 import com.slash.youth.domain.interactor.main.UserVisibleUseCase;
 import com.slash.youth.engine.AccountManager;
 import com.slash.youth.engine.LoginManager;
@@ -78,6 +87,11 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
     private boolean isQQBing = false;
     private BindingDialog bindingDialog;
     private UserVisibleUseCase userVisibleUseCase;
+    private UserCompanyVisibleUseCase companyVisibleUseCase;
+    private UserServiceVisibleUseCase serviceVisibleUseCase;
+    private UserEvalutionVisibleUseCase evalutionVisibleUseCase;
+    private CheckTimeUseCase checkTimeUseCase;
+    private SetTimeUseCase setTimeUseCase;
 
     public final ObservableField<String> setPsd = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_setting_find_psd));
     public final ObservableField<Integer> changePsdShow = new ObservableField<>(View.GONE);
@@ -88,39 +102,71 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
     public final ObservableField<Boolean> evaluate = new ObservableField<>(false);
     public final ObservableField<Boolean> showCompany = new ObservableField<>(false);
     public final ObservableField<Boolean> service = new ObservableField<>(false);
+    public CompoundButton.OnCheckedChangeListener setTimeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            int timeStatus = 0;
+            String startTime = "22:00";
+            String endTime = "08:00";
+            if (isChecked) {
+                timeStatus = 1;
+            } else {
+                timeStatus = 0;
+            }
+            HashMap<String, String> paramsMap = new HashMap<>();
+            paramsMap.put("status", timeStatus + "");
+            paramsMap.put("starttime", startTime);
+            paramsMap.put("endtime", endTime);
+            setTimeUseCase.setParams(JsonUtil.mapToJson(paramsMap));
+            setTimeUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+
+            }, error -> {
+
+            });
+
+
+        }
+    };
+    public CompoundButton.OnCheckedChangeListener setCompanyListener = new CompoundButton.OnCheckedChangeListener() {
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            setCompany(isChecked);
+        }
+    };
+
+    public CompoundButton.OnCheckedChangeListener setServiceListener = new CompoundButton.OnCheckedChangeListener() {
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            setService(isChecked);
+        }
+    };
+
+    public CompoundButton.OnCheckedChangeListener setEvaluateListener = new CompoundButton.OnCheckedChangeListener() {
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            setEvalution(isChecked);
+        }
+    };
+
 
     @Inject
-    public MySettingViewModel(RxAppCompatActivity activity, CommonDialog commonDialog, BindingDialog bindingDialog, UserVisibleUseCase userVisibleUseCase) {
+    public MySettingViewModel(RxAppCompatActivity activity, CommonDialog commonDialog, BindingDialog bindingDialog, UserVisibleUseCase userVisibleUseCase, UserEvalutionVisibleUseCase evalutionVisibleUseCase
+            , UserCompanyVisibleUseCase companyVisibleUseCase, UserServiceVisibleUseCase serviceVisibleUseCase, CheckTimeUseCase checkTimeUseCase, SetTimeUseCase setTimeUseCase) {
         super(activity);
         this.commonDialog = commonDialog;
         this.bindingDialog = bindingDialog;
         this.userVisibleUseCase = userVisibleUseCase;
+        this.serviceVisibleUseCase = serviceVisibleUseCase;
+        this.evalutionVisibleUseCase = evalutionVisibleUseCase;
+        this.companyVisibleUseCase = companyVisibleUseCase;
+        this.checkTimeUseCase = checkTimeUseCase;
+        this.setTimeUseCase = setTimeUseCase;
         progress = new Progress(activity);
 
     }
-
-
-    public final ReplyCommand setTime = new ReplyCommand(() -> {
-        int timeStatus = 0;
-        String startTime = "22:00";
-        String endTime = "08:00";
-        if (timeCheck.get()) {
-            timeStatus = 0;
-        } else {
-            timeStatus = 1;
-        }
-        HashMap<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("status", timeStatus + "");
-        paramsMap.put("starttime", startTime);
-        paramsMap.put("endtime", endTime);
-        int state = setData(GlobalConstants.HttpUrl.SET_TIME_SET, paramsMap);
-        if (state == 1 && timeCheck.get()) {
-            timeCheck.set(false);
-        } else if (state == 1 && !timeCheck.get()) {
-            timeCheck.set(true);
-        }
-    });
-
 
     public final ReplyCommand revisePassWord = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_SET_MODIFICATE_TRADE_PASSWORD);
@@ -145,6 +191,49 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
                 break;
         }
     });
+
+    private void setCompany(boolean isChecked) {
+        int status = 0;
+        if (isChecked) {
+            status = 1;
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("status", status + "");
+        companyVisibleUseCase.setParams(JsonUtil.mapToJson(map));
+        companyVisibleUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+        }, error -> {
+
+        });
+    }
+
+    private void setEvalution(boolean isChecked) {
+        int status = 0;
+        if (isChecked) {
+            status = 1;
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("status", status + "");
+        evalutionVisibleUseCase.setParams(JsonUtil.mapToJson(map));
+        evalutionVisibleUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+        }, error -> {
+
+        });
+    }
+
+    private void setService(boolean isChecked) {
+        int status = 0;
+        if (isChecked) {
+            status = 1;
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("status", status + "");
+        serviceVisibleUseCase.setParams(JsonUtil.mapToJson(map));
+        serviceVisibleUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+        }, error -> {
+
+        });
+    }
+
 
     private void showCommonDialog(String content) {
         commonDialog.initValue(content);
@@ -235,7 +324,6 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
                 switch (rescode) {
                     case SY_RES_SUCCESS:
                         initView(isWinxinBing, isQQBing);
-//                        ToastUtils.shortCenterToast("绑定成功");
                         break;
                     case SY_RES_BINDED_THIRDPART:
                         ToastUtils.shortCenterToast(String.format("该三方账号已绑定%S，请解绑后再绑定新账号", StringUtils.phoneFormat(dataBean.getData().getPhone())));
@@ -526,33 +614,17 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
     }
 
     private void getTimeState() {
-        SetTimeProtocol setTimeProtocol = new SetTimeProtocol();
-        setTimeProtocol.getDataFromServer(new BaseProtocol.IResultExecutor<SetTimeBean>() {
-            @Override
-            public void execute(SetTimeBean dataBean) {
-                int rescode = dataBean.getRescode();
-                if (rescode == 0) {
-                    SetTimeBean.DataBean data = dataBean.getData();
-                    SetTimeBean.DataBean.DataBean1 timeData = data.getData();
-                    int timeDnd = timeData.getDnd(); //1表示已经设置 0表示未设置
-                    switch (timeDnd) {
-                        case 1:
-                            timeCheck.set(true);
-                            break;
-                        case 0:
-                            timeCheck.set(false);
-                            break;
-                        default:
-                            timeCheck.set(false);
-                    }
-                }
-            }
-
-            @Override
-            public void executeResultError(String result) {
-                LogKit.d("result:" + result);
+        checkTimeUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            switch (data.getData().getDnd()) {
+                case 0:
+                    timeCheck.set(false);
+                    break;
+                case 1:
+                    timeCheck.set(true);
+                    break;
             }
         });
+
     }
 
     private void getMsgState() {
