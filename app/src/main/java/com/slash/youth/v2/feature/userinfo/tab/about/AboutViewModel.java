@@ -20,4 +20,5 @@ public class AboutViewModel extends BFViewModel<FrgAboutBinding> {
     public void afterViews() {
 
     }
+
 }
