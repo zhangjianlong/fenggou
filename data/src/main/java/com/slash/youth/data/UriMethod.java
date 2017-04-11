@@ -355,8 +355,8 @@ public class UriMethod {
     public static final String SERVER_HOST_SETTING = "uinfo/v1/api/config";
     public static final String SET_TIME_GET = SERVER_HOST_SETTING + "/dnd/time/get";
     //二、[设置]-时间免打扰设置
-    public static final String SET_TIME_SET = SERVER_HOST_SETTING +"/dnd/time/set";
-//    public static final String SET_TIME_SET = "/dnd/time/set";
+    public static final String SET_TIME_SET = SERVER_HOST_SETTING + "/dnd/time/set";
+    //    public static final String SET_TIME_SET = "/dnd/time/set";
     //三、[设置]-获取消息免打扰设置
     public static final String SET_MSG_GET = SERVER_HOST_SETTING + "/dnd/msg/get";
     //四、[设置]-消息免打扰设置
@@ -494,5 +494,8 @@ public class UriMethod {
     //保存公司和职位
     public static final String SAVE_COMPANY = USER_HOSR + "vcard/company/set";
     public static final String SAVE_USER_HEAD = USER_HOSR + "vcard/avatar/set";
+
+    public static final String SAVE_USER_TAG = USER_HOSR + "vcard/tag/set";
+    public static final String SAVE_USER_LOCATION = USER_HOSR + "vcard/location/set";
 
 }

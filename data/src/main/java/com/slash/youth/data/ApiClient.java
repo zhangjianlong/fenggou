@@ -171,5 +171,11 @@ public interface ApiClient {
     @POST(UriMethod.SAVE_USER_HEAD)
     Observable<BaseResponse<StatusBean>> saveHead(@Body RequestBody requestBody);
 
+    @POST(UriMethod.SAVE_USER_TAG)
+    Observable<BaseResponse<StatusBean>> savaTag(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SAVE_USER_LOCATION)
+    Observable<BaseResponse<StatusBean>> savaLocation(@Body RequestBody requestBody);
+
 }
 

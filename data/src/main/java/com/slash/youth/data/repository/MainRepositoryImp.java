@@ -201,6 +201,16 @@ public class MainRepositoryImp implements MainRepository {
     }
 
     @Override
+    public Observable<StatusBean> saveTag(String param) {
+        return apiClient.savaTag(RetrofitUtil.toRequestBody(param)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> saveLocation(String param) {
+          return apiClient.savaLocation(RetrofitUtil.toRequestBody(param)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
     public Observable<UploadBean> uploadUserHead(String path, OnProgressListener onProgressListener) {
         return apiClient.uploadUserHead(UpDownLoadUtil.uploadImageFile("filename", path, onProgressListener))
                 .compose(new ErrorTransformer<>());

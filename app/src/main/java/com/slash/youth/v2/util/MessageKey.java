@@ -45,4 +45,8 @@ public class MessageKey {
     public static final String PUB_CITY_SELECTED = "PUB_CITY_SELECTED";
     //发布删除图片
     public static final String PUB_DEL_IMG = "PUB_DEL_IMG";
+    //保存个人简介
+    public static final String USER_SAVE_PROFILE = "USER_SAVE_PROFILE";
+    //保存个人电话号码
+    public static final String USER_SAVE_PHONE = "USER_SAVE_PHONE";
 }

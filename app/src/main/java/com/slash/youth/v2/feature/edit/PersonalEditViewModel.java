@@ -14,14 +14,17 @@ import com.core.op.lib.utils.StrUtil;
 import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPersonaleditBinding;
+import com.slash.youth.domain.TagBean;
 import com.slash.youth.domain.bean.OtherInfo;
 import com.slash.youth.domain.interactor.main.SaveCompanyUseCase;
 import com.slash.youth.domain.interactor.main.MineInfoUseCase;
 import com.slash.youth.domain.interactor.main.OtherInfoUseCase;
 import com.slash.youth.domain.interactor.main.SaveHeadUserCase;
 import com.slash.youth.domain.interactor.main.SaveInfoUseCase;
+import com.slash.youth.domain.interactor.main.SaveLocationUseCase;
 import com.slash.youth.domain.interactor.main.SaveNameUseCase;
 import com.slash.youth.domain.interactor.main.SaveSexUseCase;
+import com.slash.youth.domain.interactor.main.SaveTagUserCase;
 import com.slash.youth.domain.interactor.main.UserHeadUseCase;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.global.GlobalConstants;
@@ -29,6 +32,7 @@ import com.slash.youth.ui.activity.ReplacePhoneActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.utils.Constants;
 import com.slash.youth.utils.CustomEventAnalyticsUtils;
+import com.slash.youth.v2.feature.label.LabelActivity;
 import com.slash.youth.v2.feature.local.LocalActivity;
 import com.slash.youth.v2.feature.profile.ProfileActivity;
 import com.slash.youth.v2.util.MessageKey;
@@ -37,9 +41,13 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+
+import static com.slash.youth.ui.activity.CityLocationActivity.map;
+import static com.slash.youth.ui.viewmodel.EditorIdentityModel.TAG;
 
 @PerActivity
 public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
@@ -66,17 +74,25 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     private SaveInfoUseCase saveInfoUseCase;
     private SaveCompanyUseCase saveCompanyUseCase;
     private SaveHeadUserCase saveHeadUserCase;
+    private SaveTagUserCase saveTagUserCase;
+    private SaveLocationUseCase saveLocationUseCase;
     private String userName;
+    private String userProvince;
+    private String userCity;
     private String userDesc;
     private String userPosition;
     private String userCompany;
     private int userSex;
     private int userCareertype;
+    private ArrayList<String> needTag = new ArrayList<>();
+    private ArrayList<String> provideTag = new ArrayList<>();
 
 
     @Inject
     public PersonalEditViewModel(RxAppCompatActivity activity, UserHeadUseCase userHeadUseCase, MineInfoUseCase mineInfoUseCase, OtherInfoUseCase infoUseCase,
-                                 SaveNameUseCase saveNameUseCase, SaveSexUseCase saveSexUseCase, SaveInfoUseCase saveInfoUseCase, SaveCompanyUseCase saveCompanyUseCase, SaveHeadUserCase saveHeadUserCase) {
+                                 SaveNameUseCase saveNameUseCase, SaveSexUseCase saveSexUseCase, SaveInfoUseCase saveInfoUseCase,
+                                 SaveCompanyUseCase saveCompanyUseCase, SaveHeadUserCase saveHeadUserCase, SaveTagUserCase saveTagUserCase
+            , SaveLocationUseCase saveLocationUseCase) {
         super(activity);
         this.userHeadUseCase = userHeadUseCase;
         this.mineInfoUseCase = mineInfoUseCase;
@@ -86,21 +102,30 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         this.saveInfoUseCase = saveInfoUseCase;
         this.saveCompanyUseCase = saveCompanyUseCase;
         this.saveHeadUserCase = saveHeadUserCase;
+        this.saveTagUserCase = saveTagUserCase;
     }
 
     @Override
     public void afterViews() {
         Messenger.getDefault().register(this, MessageKey.PUB_CITY_SELECTED, String.class, data -> {
             area.set(data);
+
         });
 
+        Messenger.getDefault().register(this, MessageKey.USER_SAVE_PROFILE, String.class, data -> {
+            profile.set(data);
+        });
+
+        Messenger.getDefault().register(this, MessageKey.USER_SAVE_PHONE, String.class, data -> {
+            phoneNumber.set(data);
+        });
+        loadData();
+        needTag.add("测试");
+        needTag.add("开发");
+        needTag.add("后台");
+
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadData();
-    }
 
     public final ReplyCommand setHead = new ReplyCommand(() -> {
         MultiImageSelector selector = MultiImageSelector.create(activity);
@@ -120,6 +145,14 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         activity.startActivityForResult(intent, Constants.USERINFO_PROFILE);
     });
 
+    public final ReplyCommand setNeedTag = new ReplyCommand(() -> {
+        LabelActivity.instance(activity);
+    });
+
+    public final ReplyCommand setProvideTag = new ReplyCommand(() -> {
+        LabelActivity.instance(activity);
+    });
+
 
     public void saveHead(String url) {
         Map<String, String> map = new HashMap<>();
@@ -128,6 +161,32 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         saveHeadUserCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
         }, error -> {
         });
+    }
+
+    public void saveLocation() {
+        Map<String, String> map = new HashMap<>();
+        map.put("province", userProvince);
+        map.put("city", userCity);
+        saveLocationUseCase.setParams(JsonUtil.mapToJson(map));
+        saveLocationUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+        }, error -> {
+        });
+    }
+
+
+    public void saveTag(ArrayList<String> tag, int type) {
+        TagBean tagBean = new TagBean();
+        tagBean.setTag(tag);
+        tagBean.setType(type);
+        saveTagUserCase.setParams(JsonUtil.GsonString(tagBean));
+        saveTagUserCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+        }, error -> {
+        });
+    }
+
+
+    public void saveNeedTag() {
+        saveTag(needTag, 1);
     }
 
 
@@ -146,7 +205,7 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         //埋点
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_TELEPHONE_NUMBER);
         Intent replacePhoneActivity = new Intent(activity, ReplacePhoneActivity.class);
-        activity.startActivityForResult(replacePhoneActivity, Constants.USERINFO_PHONE);
+        activity.startActivity(replacePhoneActivity);
     });
 
 
@@ -164,10 +223,16 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         infoUseCase.execute().compose(activity.bindToLifecycle()).subscribe(d -> {
             data.set(d.getUinfo());
             OtherInfo.UinfoBean info = d.getUinfo();
+            profile.set(info.getDesc());
             name.set(info.getName());
             company.set(info.getCompany());
             companyPostion.set(info.getPosition());
             headUrl.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + info.getAvatar());
+            if (StrUtil.isEmpty(info.getCity())) {
+                area.set(info.getProvince());
+            } else {
+                area.set(info.getProvince() + "-" + info.getCity());
+            }
             switch (info.getSex()) {
                 case 1:
                     man.set(true);
@@ -185,9 +250,6 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
 
 
     public void saveName() {
-        if (!getName()) {
-            return;
-        }
         Map<String, String> map = new HashMap<>();
         map.put("name", userName);
         saveNameUseCase.setParams(JsonUtil.mapToJson(map));
@@ -200,7 +262,6 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
 
 
     public void saveSex() {
-        getSex();
         Map<String, String> map = new HashMap<>();
         map.put("sex", userSex + "");
         saveSexUseCase.setParams(JsonUtil.mapToJson(map));
@@ -210,15 +271,10 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     }
 
     public void saveInfo() {
-        if (!getName()) {
-            return;
-        }
-        getCareertype();
-
         Map<String, String> map = new HashMap<>();
         map.put("name", userName);
         map.put("careertype", userCareertype + "");
-        map.put("desc", "个人简介");
+        map.put("desc", userDesc);
         saveInfoUseCase.setParams(JsonUtil.mapToJson(map));
         saveInfoUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
         }, err -> {
@@ -226,9 +282,6 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     }
 
     public void saveCompany() {
-        if (!getCompany()) {
-            return;
-        }
         Map<String, String> map = new HashMap<>();
         map.put("company", userCompany);
         map.put("position", userPosition);
@@ -238,17 +291,13 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         });
     }
 
-
-    private boolean getName() {
+    public boolean checkData() {
         userName = name.get();
         if (StrUtil.isEmpty(userName)) {
             AppToast.show(activity, "姓名不能为空");
             return false;
         }
-        return true;
-    }
 
-    private boolean getCompany() {
         userCompany = company.get();
         userPosition = companyPostion.get();
         if (StrUtil.isEmpty(userCompany)) {
@@ -260,26 +309,54 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
             AppToast.show(activity, "职位不能为空");
             return false;
         }
-        return true;
-    }
 
+        if (!(needTag != null && needTag.size() > 0)) {
+            AppToast.show(activity, "我需要的标签不能为空");
+            return false;
+        }
 
-    private void getSex() {
+        if (!(provideTag != null && needTag.size() > 0)) {
+            AppToast.show(activity, "能提供的标签不能为空");
+            return false;
+        }
+
         if (man.get()) {
             userSex = 1;
         }
         if (woman.get()) {
             userSex = 2;
         }
-    }
 
-    private void getCareertype() {
         if (job.get()) {
             userCareertype = 1;
         }
         if (self.get()) {
             userCareertype = 2;
         }
+
+        userDesc = profile.get();
+        if (StrUtil.isEmpty(userDesc)) {
+            AppToast.show(activity, "个人简介不能为空");
+            return false;
+        }
+
+        if (StrUtil.isEmpty(area.get())) {
+            AppToast.show(activity, "区域不能为空");
+            return false;
+        }
+        String areaTemp = area.get();
+        String[] sourceStrArray = areaTemp.split("-");
+        switch (sourceStrArray.length) {
+            case 1:
+                userProvince = sourceStrArray[0];
+                break;
+            case 2:
+                userProvince = sourceStrArray[0];
+                userCity = sourceStrArray[1];
+                break;
+        }
+
+        return true;
     }
 
 

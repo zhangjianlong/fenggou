@@ -8,11 +8,13 @@ import android.text.TextWatcher;
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.StrUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActProfileBinding;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.HashMap;
@@ -76,5 +78,8 @@ public class ProfileViewModel extends BAViewModel<ActProfileBinding> {
         content = content.toString().trim();
         HashMap<String, String> data = new HashMap<>();
         data.put("", content);
+
+        Messenger.getDefault().send(content, MessageKey.USER_SAVE_PROFILE);
+        activity.finish();
     }
 }
