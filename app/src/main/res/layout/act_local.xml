@@ -76,7 +76,7 @@
                         android:paddingRight="@dimen/app.padding.xxlarge"
                         app:itemView="@{viewModel.hotItemView}"
                         app:items="@{viewModel.hotItemViewModels}"
-                        app:layoutManager="@{LayoutManagers.nestGrid(3)}" />
+                        app:layoutManager="@{LayoutManagers.grid(3)}" />
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
@@ -86,7 +86,7 @@
                     android:fadingEdge="none"
                     app:itemView="@{viewModel.itemView}"
                     app:items="@{viewModel.itemViewModels}"
-                    app:layoutManager="@{LayoutManagers.nestLinear()}" />
+                    app:layoutManager="@{LayoutManagers.linear()}" />
 
             </LinearLayout>
         </com.core.op.lib.weight.RecycleScrollView>

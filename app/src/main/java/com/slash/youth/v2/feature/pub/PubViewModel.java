@@ -2,13 +2,10 @@ package com.slash.youth.v2.feature.pub;
 
 
 import android.content.Intent;
-import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
-import android.databinding.ObservableList;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.widget.Toast;
 
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.lib.base.BAViewModel;
@@ -19,10 +16,8 @@ import com.core.op.lib.weight.imgselector.MultiImageSelector;
 import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPubBinding;
-import com.slash.youth.ui.activity.test.TestActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.v2.feature.local.LocalActivity;
-import com.slash.youth.v2.feature.main.find.FindItemViewModel;
 import com.slash.youth.v2.feature.pubaccept.PubAcceptActivity;
 import com.slash.youth.v2.feature.pubcontent.PubContentActivity;
 import com.slash.youth.v2.feature.release.ReleaseSucActivity;
@@ -31,16 +26,11 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
-import static android.R.attr.data;
 
 @PerActivity
 public class PubViewModel extends BAViewModel<ActPubBinding> {
@@ -56,7 +46,7 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
 
     private ArrayList<String> mSelectPath = new ArrayList<>();
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_pub_img);
-    public final ObservableList<PubItemViewModel> itemViewModels = new ObservableArrayList<>();
+    public final List<PubItemViewModel> itemViewModels = new ArrayList<>();
 
     public ReplyCommand localClick = new ReplyCommand(() -> {
         LocalActivity.instance(activity);
@@ -117,6 +107,7 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
                         if (itemViewModels.size() == 4 && !itemViewModels.get(3).isDefault) {
                             itemViewModels.add(new PubItemViewModel(activity, index, "", true));
                         }
+                        binding.hotRecyclerView.getAdapter().notifyDataSetChanged();
                     });
         });
         binding.tvPubContent.setHint(Html.fromHtml(CommonUtils.getContext().getString(R.string.app_pub_content_hint)));
@@ -142,6 +133,7 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
                         if (itemViewModels.size() < 5) {
                             itemViewModels.add(new PubItemViewModel(activity, index, "", true));
                         }
+                        binding.hotRecyclerView.getAdapter().notifyDataSetChanged();
                     });
         }
     }
