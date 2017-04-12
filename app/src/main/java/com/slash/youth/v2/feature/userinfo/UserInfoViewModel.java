@@ -3,6 +3,7 @@ package com.slash.youth.v2.feature.userinfo;
 
 import android.content.Intent;
 import android.databinding.ObservableField;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.AppBarLayout;
 import android.view.View;
 import android.view.animation.Animation;
@@ -67,6 +68,7 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
     public final ObservableField<Integer> titleVisible = new ObservableField<>(View.VISIBLE);
     public final ObservableField<Integer> authVisible = new ObservableField<>(View.GONE);
     public final ObservableField<Integer> otherVisible = new ObservableField<>(View.GONE);
+    public final ObservableField<Drawable> sexIcon = new ObservableField<>();
 
     public final ObservableField<Boolean> isRefreshing = new ObservableField<>(false);
 
@@ -96,10 +98,8 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
     public ObservableField<String> uri = new ObservableField<>();
     public ObservableField<String> relationCount = new ObservableField<>();
     public ObservableField<String> relationProgress = new ObservableField<>();
-
     public ObservableField<String> taskCount = new ObservableField<>();
     public ObservableField<String> taskProgress = new ObservableField<>();
-
     public ObservableField<String> serviceCount = new ObservableField<>();
     public ObservableField<String> serviceProgress = new ObservableField<>();
     public ObservableField<String> level = new ObservableField<>();
@@ -204,7 +204,6 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
         }
 
         Messenger.getDefault().register(this, MessageKey.SHARE_FRIEND, () -> {
-
             ChatCmdBusinesssCardBean chatCmdBusinesssCardBean = new ChatCmdBusinesssCardBean();
             chatCmdBusinesssCardBean.avatar = data.get().getAvatar();
 //            chatCmdBusinesssCardBean.industry = data.get().getIndustry();
@@ -219,6 +218,12 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
             CommonUtils.getContext().startActivity(intentChooseFriendActivtiy);
         });
 
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if (LoginManager.currentLoginUserId != uid) {
             loadConfig();
         } else {
@@ -307,6 +312,14 @@ public class UserInfoViewModel extends BAViewModel<ActUserinfoBinding> {
                     } else if (careertype == 2) {//自由职业者
                         this.company.set("自雇者");
                     }
+                    int sex = data.getSex();
+                    if (sex == 1) {
+                        sexIcon.set(CommonUtils.getContext().getResources().getDrawable(R.mipmap.list_man_icon));
+                    } else {
+                        sexIcon.set(CommonUtils.getContext().getResources().getDrawable(R.mipmap.list_woman_icon));
+                    }
+
+
                 }, error -> {
                     isRefreshing.set(false);
                     startInAnim();

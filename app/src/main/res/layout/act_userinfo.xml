@@ -108,20 +108,9 @@
                                             style="@style/App.Theme.TextAppearance.ww.normal"
                                             android:layout_centerInParent="true"
                                             android:layout_marginTop="@dimen/app.padding.normal"
+                                            android:drawablePadding="@dimen/app.padding.normal"
+                                            android:drawableRight="@{viewModel.sexIcon}"
                                             android:text="@{viewModel.data.name}"
-                                            android:textColor="@color/white" />
-
-                                        <TextView
-                                            style="@style/App.Theme.TextAppearance.ww.tiny"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginLeft="@dimen/app.margin.normal"
-                                            android:layout_marginTop="@dimen/app.padding.normal"
-                                            android:layout_toRightOf="@id/tv_name"
-                                            android:background="@drawable/btn_send_pin_blue"
-                                            android:gravity="center"
-                                            android:paddingLeft="@dimen/app.padding.normal"
-                                            android:paddingRight="@dimen/app.padding.normal"
-                                            android:text="@{viewModel.level}"
                                             android:textColor="@color/white" />
                                     </RelativeLayout>
 

@@ -79,7 +79,6 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
 
     public final ReplyCommand personInfoClick = new ReplyCommand(() -> {
         MobclickAgent.onEvent(CommonUtils.getContext(), CustomEventAnalyticsUtils.EventID.MINE_CLICK_PERSON_MESSAGE);
-//        Intent intentUserInfoActivity = new Intent(CommonUtils.getContext(), UserInfoActivity.class);
         Bundle bundle = new Bundle();
         if (null != data && null != data.get()) {
             bundle.putString("phone", data.get().getPhone());
@@ -87,7 +86,6 @@ public class MineViewModel extends BFViewModel<FrgMineBinding> {
             bundle.putLong("Uid", LoginManager.currentLoginUserId);
         }
         UserInfoActivity.instance(activity, bundle);
-//        activity.startActivity(intentUserInfoActivity);
     });
 
     public final ReplyCommand identificateClick = new ReplyCommand(() -> {
