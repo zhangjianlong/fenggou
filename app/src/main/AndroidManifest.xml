@@ -622,7 +622,9 @@
         <activity android:name=".ReleaseFail" />
         <activity android:name=".view.impl.Service" />
         <activity android:name=".view.impl.SList" />
-        <activity android:name=".view.impl.ServiceDetail"></activity>
+        <activity android:name=".view.impl.ServiceDetail" />
+        <activity android:name=".view.impl.Follow" />
+        <activity android:name=".Refund"></activity>
     </application>
 
 </manifest>

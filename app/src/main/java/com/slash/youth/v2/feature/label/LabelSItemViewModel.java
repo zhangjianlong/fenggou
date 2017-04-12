@@ -9,13 +9,11 @@ import com.slash.youth.domain.bean.LabelBean;
 import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
-import rx.Observable;
-
 /**
  * Created by acer on 2017/4/6.
  */
 
-public class LabelItemViewModel extends BViewModel {
+public class LabelSItemViewModel extends BViewModel {
 
     public LabelBean data;
 
@@ -24,11 +22,10 @@ public class LabelItemViewModel extends BViewModel {
     public ObservableField<Boolean> selected = new ObservableField<>();
 
     public ReplyCommand click = new ReplyCommand(()->{
-        selected.set(true);
-        Messenger.getDefault().send(index,MessageKey.LABEL_SELECT_STAIR);
+        Messenger.getDefault().send(data.getId(),MessageKey.LABEL_SELECT_STAIR);
     });
 
-    public LabelItemViewModel(RxAppCompatActivity activity, LabelBean data,int index, boolean selected) {
+    public LabelSItemViewModel(RxAppCompatActivity activity, LabelBean data, int index, boolean selected) {
         super(activity);
         this.data = data;
         this.selected.set(selected);

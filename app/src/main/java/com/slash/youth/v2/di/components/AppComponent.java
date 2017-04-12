@@ -24,6 +24,7 @@ import com.slash.youth.domain.executor.ThreadExecutor;
 import com.slash.youth.domain.repository.LoginRepository;
 import com.slash.youth.domain.repository.MainRepository;
 import com.slash.youth.domain.repository.MessageRepository;
+import com.slash.youth.domain.repository.TaskRepository;
 import com.slash.youth.global.SlashApplication;
 import com.slash.youth.v2.di.modules.AppModule;
 
@@ -50,6 +51,8 @@ public interface AppComponent {
     LoginRepository loginRepository();
 
     MessageRepository mssageRepository();
+
+    TaskRepository taskRepository();
 
     Gson gson();
 

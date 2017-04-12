@@ -16,8 +16,6 @@ import javax.inject.Inject;
 @PerActivity
 public class SListViewModel extends BaseMoreViewModel<ServiceBean, SListItemViewModel> {
 
-    public ItemView itemView = ItemView.of(BR.viewModel,R.layout.item_localsecond);
-
     @Inject
     public SListViewModel(RxAppCompatActivity activity) {
         super(activity);
@@ -46,6 +44,7 @@ public class SListViewModel extends BaseMoreViewModel<ServiceBean, SListItemView
 
     @Override
     public int setItem(ItemView itemView, int position, SListItemViewModel item) {
-        return 0;
+        itemView.set(BR.viewModel,R.layout.item_service);
+        return 1;
     }
 }

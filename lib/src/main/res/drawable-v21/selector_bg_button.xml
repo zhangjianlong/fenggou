@@ -3,7 +3,7 @@
     android:color="@color/app.button.backgroun.pressed">
     <item>
         <shape>
-            <corners android:radius="2dp" />
+            <corners android:radius="5dp" />
             <solid android:color="@color/app.theme.colorPrimary" />
         </shape>
     </item>

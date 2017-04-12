@@ -10,6 +10,7 @@ import com.slash.youth.data.executor.JobExecutor;
 import com.slash.youth.data.repository.LoginRepositoryImp;
 import com.slash.youth.data.repository.MainRepositoryImp;
 import com.slash.youth.data.repository.MessageRepositoryImp;
+import com.slash.youth.data.repository.TaskRepositoryImp;
 import com.slash.youth.domain.executor.PostExecutionThread;
 import com.slash.youth.domain.executor.ThreadExecutor;
 import com.slash.youth.domain.repository.LoginRepository;
@@ -68,6 +69,12 @@ public class AppModule {
     @Singleton
     LoginRepository loginRepository(LoginRepositoryImp loginRepository) {
         return loginRepository;
+    }
+
+    @Provides
+    @Singleton
+    TaskRepositoryImp taskRepository(TaskRepositoryImp taskRepositoryImp) {
+        return taskRepositoryImp;
     }
 
     @Provides

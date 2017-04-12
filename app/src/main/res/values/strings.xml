@@ -236,4 +236,17 @@
     <string name="app.userinfo.about.area">区&#160;&#160;&#160;&#160;域</string>
     <string name="app.userinfo.about.info">简&#160;&#160;&#160;&#160;介</string>
     <string name="app.service.list">服务方列表</string>
+    <string name="app.servicedetail.step1">预约</string>
+    <string name="app.servicedetail.step2">预支付</string>
+    <string name="app.servicedetail.step3">服务中</string>
+    <string name="app.servicedetail.step4">完成</string>
+    <string name="app.servicedetail.price">任务价格</string>
+    <string name="app.servicedetail.time">完成时间</string>
+    <string name="app.servicedetail.addr">任务地点</string>
+    <string name="app.servicedetail.type">任务类型</string>
+    <string name="app.servicedetail.content">任务内容</string>
+    <string name="app.servicedetail.info">展开信息</string>
+    <string name="app.follow.name">任务名称:</string>
+    <string name="app.follow.requst.name">需求方:</string>
+    <string name="app.follow.service.name">服务方:</string>
 </resources>

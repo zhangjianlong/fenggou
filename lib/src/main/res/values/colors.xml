@@ -27,7 +27,9 @@
     <color name="app.theme.background_f3f3f3">#f3f3f3</color>
     <color name="app.theme.background_fcfcfc">#fcfcfc</color>
     <color name="app.theme.background_f6f6f6">#f6f6f6</color>
+    <color name="app.theme.background_fafafa">#fafafa</color>
     <color name="app.theme.background_dadada">#DADADA</color>
+    <color name="app.theme.background_ddd">#dddddd</color>
     <color name="app.theme.background_31C5E4">#31C5E4</color>
     <color name="app.theme.gradientColor">#507E9F</color>
     <color name="app.theme.colorControlActivated">#31C5E4</color>

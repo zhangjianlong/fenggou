@@ -8,7 +8,7 @@ import com.slash.youth.domain.bean.CustomerService;
 import com.slash.youth.domain.bean.FindDemand;
 import com.slash.youth.domain.bean.FindServices;
 import com.slash.youth.domain.bean.HomeTagInfoBean;
-import com.slash.youth.domain.bean.LoginResult;
+import com.slash.youth.domain.bean.LabelBean;
 import com.slash.youth.domain.bean.MineInfo;
 import com.slash.youth.domain.bean.MineManagerList;
 import com.slash.youth.domain.bean.OtherInfo;
@@ -25,16 +25,14 @@ import com.slash.youth.domain.bean.UserVisibleBean;
 import com.slash.youth.domain.bean.base.BaseList;
 import com.slash.youth.domain.bean.base.ChangePhoneBean;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -167,6 +165,9 @@ public interface ApiClient {
 
     @POST(UriMethod.SET_TIME_SET)
     Observable<BaseResponse<StatusBean>> setTimeStatus(@Body RequestBody requestBody);
+
+    @POST(UriMethod.LOGNI_GET_TAG)
+    Observable<List<LabelBean>> getLables(@Body RequestBody requestBody);
 
 }
 
