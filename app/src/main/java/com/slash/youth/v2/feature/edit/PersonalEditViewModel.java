@@ -16,6 +16,7 @@ import com.slash.youth.R;
 import com.slash.youth.databinding.ActPersonaleditBinding;
 import com.slash.youth.domain.TagBean;
 import com.slash.youth.domain.bean.OtherInfo;
+import com.slash.youth.domain.bean.UserInfo;
 import com.slash.youth.domain.interactor.main.SaveCompanyUseCase;
 import com.slash.youth.domain.interactor.main.MineInfoUseCase;
 import com.slash.youth.domain.interactor.main.OtherInfoUseCase;
@@ -26,6 +27,7 @@ import com.slash.youth.domain.interactor.main.SaveNameUseCase;
 import com.slash.youth.domain.interactor.main.SaveSexUseCase;
 import com.slash.youth.domain.interactor.main.SaveTagUserCase;
 import com.slash.youth.domain.interactor.main.UserHeadUseCase;
+import com.slash.youth.domain.interactor.main.UserInfoUseCase;
 import com.slash.youth.engine.LoginManager;
 import com.slash.youth.global.GlobalConstants;
 import com.slash.youth.ui.activity.ReplacePhoneActivity;
@@ -63,7 +65,7 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     public final ObservableField<Boolean> woman = new ObservableField<>(false);
     public final ObservableField<Boolean> job = new ObservableField<>(true);
     public final ObservableField<Boolean> self = new ObservableField<>(false);
-    public final ObservableField<OtherInfo.UinfoBean> data = new ObservableField<>();
+    public final ObservableField<UserInfo.UinfoBean> data = new ObservableField<>();
 
     private ArrayList<String> mSelectPath;
     private UserHeadUseCase userHeadUseCase;
@@ -76,6 +78,7 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     private SaveHeadUserCase saveHeadUserCase;
     private SaveTagUserCase saveTagUserCase;
     private SaveLocationUseCase saveLocationUseCase;
+    private UserInfoUseCase userInfoUseCase;
     private String userName;
     private String userProvince;
     private String userCity;
@@ -92,7 +95,7 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     public PersonalEditViewModel(RxAppCompatActivity activity, UserHeadUseCase userHeadUseCase, MineInfoUseCase mineInfoUseCase, OtherInfoUseCase infoUseCase,
                                  SaveNameUseCase saveNameUseCase, SaveSexUseCase saveSexUseCase, SaveInfoUseCase saveInfoUseCase,
                                  SaveCompanyUseCase saveCompanyUseCase, SaveHeadUserCase saveHeadUserCase, SaveTagUserCase saveTagUserCase
-            , SaveLocationUseCase saveLocationUseCase) {
+            , SaveLocationUseCase saveLocationUseCase, UserInfoUseCase userInfoUseCase) {
         super(activity);
         this.userHeadUseCase = userHeadUseCase;
         this.mineInfoUseCase = mineInfoUseCase;
@@ -102,7 +105,9 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         this.saveInfoUseCase = saveInfoUseCase;
         this.saveCompanyUseCase = saveCompanyUseCase;
         this.saveHeadUserCase = saveHeadUserCase;
+        this.saveLocationUseCase = saveLocationUseCase;
         this.saveTagUserCase = saveTagUserCase;
+        this.userInfoUseCase = userInfoUseCase;
     }
 
     @Override
@@ -123,6 +128,8 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         needTag.add("测试");
         needTag.add("开发");
         needTag.add("后台");
+        provideTag.add("开发1");
+        provideTag.add("后台1");
 
     }
 
@@ -189,6 +196,10 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         saveTag(needTag, 1);
     }
 
+    public void saveProTag() {
+        saveTag(provideTag, 2);
+    }
+
 
     public void uploadImage(String imgPath) {
         userHeadUseCase.setParams(imgPath);
@@ -216,17 +227,15 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     });
 
     private void loadData() {
-        Map<String, String> map = new HashMap<>();
-        map.put("uid", LoginManager.currentLoginUserId + "");
-        map.put("isvisitor", "0");
-        infoUseCase.setParams(JsonUtil.mapToJson(map));
-        infoUseCase.execute().compose(activity.bindToLifecycle()).subscribe(d -> {
+        userInfoUseCase.execute().compose(activity.bindToLifecycle()).subscribe(d -> {
+
             data.set(d.getUinfo());
-            OtherInfo.UinfoBean info = d.getUinfo();
+            UserInfo.UinfoBean info = d.getUinfo();
             profile.set(info.getDesc());
             name.set(info.getName());
             company.set(info.getCompany());
             companyPostion.set(info.getPosition());
+            phoneNumber.set(info.getPhone() + "");
             headUrl.set(GlobalConstants.HttpUrl.IMG_DOWNLOAD + "?fileId=" + info.getAvatar());
             if (StrUtil.isEmpty(info.getCity())) {
                 area.set(info.getProvince());
@@ -241,6 +250,17 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
                 case 2:
                     man.set(false);
                     woman.set(true);
+                    break;
+            }
+
+            switch (info.getCareertype()) {
+                case 1:
+                    job.set(true);
+                    self.set(false);
+                    break;
+                case 2:
+                    job.set(false);
+                    self.set(true);
                     break;
             }
         }, error -> {

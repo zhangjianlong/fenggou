@@ -226,6 +226,7 @@
     <string name="app.pub.accept.empty">验收标准不能为空</string>
     <!--ReleaseAct-->
     <string name="app.menu.close">关闭</string>
+    <string name="app.menu.cancel">取消</string>
     <string name="app.release.suc">提交成功</string>
     <string name="app.release.title">发布结果</string>
     <string name="app.release.review">查看详情</string>

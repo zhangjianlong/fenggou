@@ -465,16 +465,16 @@ public class MySettingViewModel extends BAViewModel<ActMysettingBinding> {
 
     private void initData() {
         userVisibleUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
-            if (data == null) {
+            if (data.getData() == null) {
                 return;
             }
-            if (data.getCompany() == 1) {
+            if (data.getData().getCompany() == 1) {
                 showCompany.set(true);
             }
-            if (data.getEvalution() == 1) {
+            if (data.getData().getEvalution() == 1) {
                 evaluate.set(true);
             }
-            if (data.getServicepower() == 1) {
+            if (data.getData().getServicepower() == 1) {
                 service.set(true);
             }
         }, e -> {

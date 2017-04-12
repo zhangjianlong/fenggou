@@ -8,37 +8,74 @@ package com.slash.youth.domain.bean;
 
 public class UserVisibleBean {
 
+
     /**
-     * servicepower : 1
-     * evalution : 1
-     * company : 1
+     * data : {"company":1,"evalution":1,"id":1,"servicepower":1,"uid":10008}
      */
 
-    private int servicepower;
-    private int evalution;
-    private int company;
+    private DataBean data;
 
-    public int getServicepower() {
-        return servicepower;
+    public DataBean getData() {
+        return data;
     }
 
-    public void setServicepower(int servicepower) {
-        this.servicepower = servicepower;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
-    public int getEvalution() {
-        return evalution;
-    }
+    public static class DataBean {
+        /**
+         * company : 1
+         * evalution : 1
+         * id : 1
+         * servicepower : 1
+         * uid : 10008
+         */
 
-    public void setEvalution(int evalution) {
-        this.evalution = evalution;
-    }
+        private int company;
+        private int evalution;
+        private int id;
+        private int servicepower;
+        private int uid;
 
-    public int getCompany() {
-        return company;
-    }
+        public int getCompany() {
+            return company;
+        }
 
-    public void setCompany(int company) {
-        this.company = company;
+        public void setCompany(int company) {
+            this.company = company;
+        }
+
+        public int getEvalution() {
+            return evalution;
+        }
+
+        public void setEvalution(int evalution) {
+            this.evalution = evalution;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getServicepower() {
+            return servicepower;
+        }
+
+        public void setServicepower(int servicepower) {
+            this.servicepower = servicepower;
+        }
+
+        public int getUid() {
+            return uid;
+        }
+
+        public void setUid(int uid) {
+            this.uid = uid;
+        }
     }
 }

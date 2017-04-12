@@ -110,6 +110,10 @@
         <item name="actionMenuTextColor">@color/app.theme.background_31C5E4</item>
     </style>
 
+    <style name="ToolbarWhiteTheme">
+        <item name="actionMenuTextColor">@color/app.text.black666</item>
+    </style>
+
     <style name="App.Theme.Widget.ActionMode" parent="@style/Widget.AppCompat.ActionMode">
         <item name="background">@color/app.theme.actionMode.background</item>
         <item name="height">?attr/actionBarSize</item>
@@ -397,8 +401,7 @@
         <item name="android:textColor">@color/app.theme.colorPrimary</item>
     </style>
 
-    <style name="App.Theme.TextAppearance.Button">
-    </style>
+    <style name="App.Theme.TextAppearance.Button"></style>
 
     <style name="App.Theme.TextAppearance.Button.ww">
         <item name="android:layout_width">wrap_content</item>

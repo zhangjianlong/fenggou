@@ -252,6 +252,10 @@
         <activity
             android:name=".v2.feature.label.LabelActivity"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".v2.feature.search.SearchActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.CityLocationActivity" />
         <activity android:name=".ui.activity.SubscribeActivity" />
         <activity
@@ -615,14 +619,6 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity android:name=".Profile" />
-        <activity android:name=".PubContent" />
-        <activity android:name=".PubAccept" />
-        <activity android:name=".ReleaseSuc" />
-        <activity android:name=".ReleaseFail" />
-        <activity android:name=".view.impl.Service" />
-        <activity android:name=".view.impl.SList" />
-        <activity android:name=".view.impl.ServiceDetail"></activity>
     </application>
 
 </manifest>
