@@ -52,7 +52,6 @@ public final class PersonalEditActivity extends BackActivity<PersonalEditViewMod
                 }
                 viewModel.saveInfo();
                 viewModel.saveCompany();
-
                 viewModel.saveSex();
                 viewModel.saveLocation();
                 viewModel.saveNeedTag();

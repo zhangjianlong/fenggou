@@ -48,9 +48,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import static com.slash.youth.ui.activity.CityLocationActivity.map;
-import static com.slash.youth.ui.viewmodel.EditorIdentityModel.TAG;
-
 @PerActivity
 public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     public final ObservableField<String> title = new ObservableField<>(CommonUtils.getContext().getString(R.string.app_personal_title));
@@ -89,6 +86,12 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
     private int userCareertype;
     private ArrayList<String> needTag = new ArrayList<>();
     private ArrayList<String> provideTag = new ArrayList<>();
+    private boolean isSaveInfo;
+    private boolean isSaveCompany;
+    private boolean isSaveSex;
+    private boolean isSaveNeedTag;
+    private boolean isSaveLocation;
+    private boolean isSaveProTag;
 
 
     @Inject
@@ -176,6 +179,8 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         map.put("city", userCity);
         saveLocationUseCase.setParams(JsonUtil.mapToJson(map));
         saveLocationUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            isSaveLocation = true;
+            closeAct();
         }, error -> {
         });
     }
@@ -187,6 +192,15 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         tagBean.setType(type);
         saveTagUserCase.setParams(JsonUtil.GsonString(tagBean));
         saveTagUserCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            switch (type) {
+                case 1:
+                    isSaveNeedTag = true;
+                    break;
+                case 2:
+                    isSaveProTag = true;
+                    break;
+            }
+            closeAct();
         }, error -> {
         });
     }
@@ -286,6 +300,8 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         map.put("sex", userSex + "");
         saveSexUseCase.setParams(JsonUtil.mapToJson(map));
         saveSexUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            isSaveSex = true;
+            closeAct();
         }, err -> {
         });
     }
@@ -297,6 +313,8 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         map.put("desc", userDesc);
         saveInfoUseCase.setParams(JsonUtil.mapToJson(map));
         saveInfoUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            isSaveInfo = true;
+            closeAct();
         }, err -> {
         });
     }
@@ -307,6 +325,8 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         map.put("position", userPosition);
         saveCompanyUseCase.setParams(JsonUtil.mapToJson(map));
         saveCompanyUseCase.execute().compose(activity.bindToLifecycle()).subscribe(data -> {
+            isSaveCompany = true;
+            closeAct();
         }, err -> {
         });
     }
@@ -377,6 +397,14 @@ public class PersonalEditViewModel extends BAViewModel<ActPersonaleditBinding> {
         }
 
         return true;
+    }
+
+
+    private void closeAct() {
+        if (isSaveInfo && isSaveCompany && isSaveLocation && isSaveNeedTag && isSaveProTag && isSaveSex) {
+            activity.finish();
+        }
+
     }
 
 
