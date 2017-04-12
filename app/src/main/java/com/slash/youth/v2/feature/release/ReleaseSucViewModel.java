@@ -27,14 +27,17 @@ public class ReleaseSucViewModel extends BAViewModel<ActReleasesucBinding> {
 
     }
 
+    public ReplyCommand complete = new ReplyCommand(() -> {
+
+    });
+
+    public ReplyCommand review = new ReplyCommand(() -> {
+
+    });
+
     public void finsh() {
         if (!activity.isFinishing()) {
             activity.finish();
         }
     }
-
-
-    public ReplyCommand review = new ReplyCommand(() -> {
-
-    });
 }

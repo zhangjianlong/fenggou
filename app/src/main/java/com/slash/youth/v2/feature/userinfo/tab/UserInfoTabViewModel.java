@@ -74,6 +74,8 @@ public class UserInfoTabViewModel extends TabViewModel {
                     spannable.setSpan(new BackgroundColorSpan(Color.GRAY), 4, d.length(), 0);
                     spannable.setSpan(new AbsoluteSizeSpan(8), 4, d.length(), 0);
                     binding.tabLayout.getTabAt(2).setText(spannable);
+                }, error -> {
+
                 });
     }
 
@@ -90,6 +92,8 @@ public class UserInfoTabViewModel extends TabViewModel {
                     spannable.setSpan(new BackgroundColorSpan(Color.GRAY), 2, d.length(), 0);
                     spannable.setSpan(new AbsoluteSizeSpan(8), 2, d.length(), 0);
                     binding.tabLayout.getTabAt(1).setText(spannable);
+                }, error -> {
+
                 });
     }
 }

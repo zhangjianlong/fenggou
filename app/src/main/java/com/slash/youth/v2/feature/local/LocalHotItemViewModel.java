@@ -19,7 +19,7 @@ public class LocalHotItemViewModel extends BViewModel {
     public String name;
     String province;
     public ReplyCommand click = new ReplyCommand(() -> {
-        Messenger.getDefault().send(province + name, MessageKey.PUB_CITY_SELECTED);
+        Messenger.getDefault().send(province + "-" + name, MessageKey.PUB_CITY_SELECTED);
         activity.finish();
     });
 

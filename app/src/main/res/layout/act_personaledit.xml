@@ -150,14 +150,14 @@
                             style="@style/App.Theme.TextAppearance.ww"
                             android:layout_marginRight="@dimen/app.margin.normal"
                             android:button="@drawable/radio_group_selector"
-                            android:checked="@{viewModel.man}"
+                            android:checked="@={viewModel.man}"
                             android:text="@string/app.personal.edit.man"
                             android:textColor="@color/app.text.black666" />
 
                         <android.support.v7.widget.AppCompatRadioButton
                             style="@style/App.Theme.TextAppearance.ww"
                             android:button="@drawable/radio_group_selector"
-                            android:checked="@{viewModel.woman}"
+                            android:checked="@={viewModel.woman}"
                             android:text="@string/app.personal.edit.woman"
                             android:textColor="@color/app.text.black666" />
 
@@ -232,7 +232,7 @@
                             style="@style/App.Theme.TextAppearance.ww"
                             android:layout_marginRight="@dimen/app.margin.normal"
                             android:button="@drawable/radio_group_selector"
-                            android:checked="@{viewModel.job}"
+                            android:checked="@={viewModel.job}"
                             android:text="@string/app.personal.edit.job"
                             android:textColor="@color/app.text.black666" />
 
@@ -240,7 +240,7 @@
                             style="@style/App.Theme.TextAppearance.ww"
                             android:layout_alignParentRight="true"
                             android:button="@drawable/radio_group_selector"
-                            android:checked="@{viewModel.self}"
+                            android:checked="@={viewModel.self}"
                             android:text="@string/app.personal.edit.self.employed"
                             android:textColor="@color/app.text.black666" />
                     </RadioGroup>
@@ -320,7 +320,8 @@
                     style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/app.padding.large13">
+                    android:padding="@dimen/app.padding.large13"
+                    app:clickCommand="@{viewModel.setNeedTag}">
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww"
@@ -348,7 +349,8 @@
                     style="@style/App.Theme.Linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/app.padding.large13">
+                    android:padding="@dimen/app.padding.large13"
+                    app:clickCommand="@{viewModel.setProvideTag}">
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww"
@@ -393,7 +395,7 @@
                         android:drawableRight="@mipmap/icon_nav_back"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit.select"
-                        android:text="@{viewModel.data.province + viewModel.data.city}"
+                        android:text="@{viewModel.area}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
@@ -420,7 +422,7 @@
                         android:drawableRight="@mipmap/icon_nav_back"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.personal.edit"
-                        android:text="@{viewModel.data.desc}"
+                        android:text="@{viewModel.profile}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>

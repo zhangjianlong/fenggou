@@ -20,6 +20,7 @@ import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.domain.bean.TimeStatusBean;
 import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
+import com.slash.youth.domain.bean.UserInfo;
 import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.UserVisibleBean;
 import com.slash.youth.domain.bean.base.BaseList;
@@ -168,6 +169,18 @@ public interface ApiClient {
 
     @POST(UriMethod.LOGNI_GET_TAG)
     Observable<List<LabelBean>> getLables(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SAVE_USER_HEAD)
+    Observable<BaseResponse<StatusBean>> saveHead(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SAVE_USER_TAG)
+    Observable<BaseResponse<StatusBean>> savaTag(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SAVE_USER_LOCATION)
+    Observable<BaseResponse<StatusBean>> savaLocation(@Body RequestBody requestBody);
+
+    @POST(UriMethod.GET_USERINFO)
+    Observable<BaseResponse<UserInfo>> getUserInfo();
 
 }
 

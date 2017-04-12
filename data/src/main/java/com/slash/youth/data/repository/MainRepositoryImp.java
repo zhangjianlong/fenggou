@@ -19,6 +19,7 @@ import com.slash.youth.domain.bean.TaskList;
 import com.slash.youth.domain.bean.TimeStatusBean;
 import com.slash.youth.domain.bean.UploadBean;
 import com.slash.youth.domain.bean.UserEvaluateBean;
+import com.slash.youth.domain.bean.UserInfo;
 import com.slash.youth.domain.bean.UserTaskBean;
 import com.slash.youth.domain.bean.UserVisibleBean;
 import com.slash.youth.domain.bean.base.BaseList;
@@ -192,6 +193,27 @@ public class MainRepositoryImp implements MainRepository {
     @Override
     public Observable<StatusBean> setTimeStatus(String def) {
         return apiClient.setTimeStatus(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> saveHead(String def) {
+        return apiClient.saveHead(RetrofitUtil.toRequestBody(def)).compose(new ErrorTransformer<>());
+
+    }
+
+    @Override
+    public Observable<StatusBean> saveTag(String param) {
+        return apiClient.savaTag(RetrofitUtil.toRequestBody(param)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> saveLocation(String param) {
+          return apiClient.savaLocation(RetrofitUtil.toRequestBody(param)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<UserInfo> getUserInfo() {
+        return apiClient.getUserInfo().compose(new ErrorTransformer<>());
     }
 
     @Override

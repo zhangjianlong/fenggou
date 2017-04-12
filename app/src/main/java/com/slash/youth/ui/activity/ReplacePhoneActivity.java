@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.core.op.lib.messenger.Messenger;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActivityReplacePhoneBinding;
 import com.slash.youth.domain.SendPinResultBean;
@@ -15,6 +16,7 @@ import com.slash.youth.ui.activity.base.BaseActivity;
 import com.slash.youth.ui.viewmodel.ReplacePhoneModel;
 import com.slash.youth.utils.LogKit;
 import com.slash.youth.utils.ToastUtils;
+import com.slash.youth.v2.util.MessageKey;
 
 /**
  * Created by zss on 2016/11/2.
@@ -78,6 +80,7 @@ public class ReplacePhoneActivity extends BaseActivity implements View.OnClickLi
             int rescode = dataBean.rescode;
             switch (rescode) {
                 case 0:
+                    Messenger.getDefault().send(phone, MessageKey.USER_SAVE_PHONE);
                     intent.putExtra("phone", phone);
                     setResult(RESULT_OK, intent);
                     finish();

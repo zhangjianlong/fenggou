@@ -91,8 +91,9 @@ public class FindViewModel extends ListViewModel<FindItemViewModel, FrgFindBindi
     });
 
     public final ReplyCommand search = new ReplyCommand(() -> {
-        Intent intentSearchActivity = new Intent(CommonUtils.getContext(), SearchActivity.class);
-        activity.startActivity(intentSearchActivity);
+//        Intent intentSearchActivity = new Intent(CommonUtils.getContext(), SearchActivity.class);
+//        activity.startActivity(intentSearchActivity);
+        com.slash.youth.v2.feature.search.SearchActivity.instance(activity);
     });
 
     public final ReplyCommand pub = new ReplyCommand(() -> {

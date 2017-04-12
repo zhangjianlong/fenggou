@@ -20,7 +20,7 @@ public class LocalsecondItemViewModel extends BViewModel {
     public String province;
 
     public ReplyCommand click = new ReplyCommand(() -> {
-        Messenger.getDefault().send(province + name, MessageKey.PUB_CITY_SELECTED);
+        Messenger.getDefault().send(province + "-" + name, MessageKey.PUB_CITY_SELECTED);
         activity.finish();
     });
 
