@@ -7,6 +7,6 @@
         android:id="@+id/cancle"
         android:orderInCategory="2"
         android:textColor="@color/app.theme.colorPrimary"
-        android:title="@string/app.menu.close"
+        android:title="@string/app.menu.cancel"
         app:showAsAction="ifRoom" />
 </menu>

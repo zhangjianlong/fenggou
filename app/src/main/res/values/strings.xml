@@ -250,4 +250,8 @@
     <string name="app.follow.name">任务名称:</string>
     <string name="app.follow.requst.name">需求方:</string>
     <string name="app.follow.service.name">服务方:</string>
+    <!--SearchAct-->
+    <string name="app.search.del.hint">清空历史投资记录</string>
+    <string name="app.search.more.task">查看更多任务</string>
+    <string name="app.search.more.user">查看更多用户</string>
 </resources>

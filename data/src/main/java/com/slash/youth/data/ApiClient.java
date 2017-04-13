@@ -1,6 +1,7 @@
 package com.slash.youth.data;
 
 import com.slash.youth.data.api.BaseResponse;
+import com.slash.youth.domain.bean.AssociateBean;
 import com.slash.youth.domain.bean.BannerConfigBean;
 import com.slash.youth.domain.bean.ConversationBean;
 import com.slash.youth.domain.bean.CountBean;
@@ -181,6 +182,14 @@ public interface ApiClient {
 
     @POST(UriMethod.GET_USERINFO)
     Observable<BaseResponse<UserInfo>> getUserInfo();
+
+
+    @POST(UriMethod.SEARCH_ASSOCIATIVE)
+    Observable<BaseResponse<AssociateBean>> getAssociate(@Body RequestBody requestBody);
+
+
+    @POST(UriMethod.SEARCH_DATA)
+    Observable<BaseResponse<StatusBean>> searchData(@Body RequestBody requestBody);
 
 }
 

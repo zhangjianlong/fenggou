@@ -1,5 +1,6 @@
 package com.slash.youth.domain.repository;
 
+import com.slash.youth.domain.bean.AssociateBean;
 import com.slash.youth.domain.bean.BannerConfigBean;
 import com.slash.youth.domain.bean.CountBean;
 import com.slash.youth.domain.bean.CustomerService;
@@ -101,4 +102,8 @@ public interface MainRepository {
     Observable<StatusBean> saveLocation(String param);
 
     Observable<UserInfo> getUserInfo();
+
+    Observable<AssociateBean> getAssociate(String param);
+
+    Observable<StatusBean> searchData(String param);
 }
