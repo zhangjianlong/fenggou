@@ -47,6 +47,14 @@ public class MessageKey {
     public static final String PUB_DEL_IMG = "PUB_DEL_IMG";
     //点击一级标签
     public static final String LABEL_SELECT_STAIR = "LABEL_SELECT_STAIR";
+    //点击二级标签
+    public static final String LABEL_SELECT_SCOND = "LABEL_SELECT_SCOND";
+    //刪除标签
+    public static final String LABEL_FLOW_DELETE = "LABEL_FLOW_DELETE";
+    //添加标签
+    public static final String LABEL_NEW = "LABEL_NEW";
+    //删除标签
+    public static final String LABEL_DELETE = "LABEL_DELETE";
     //保存个人简介
     public static final String USER_SAVE_PROFILE = "USER_SAVE_PROFILE";
     //保存个人电话号码

@@ -15,18 +15,27 @@
     </data>
 
     <LinearLayout
-        style="@style/App.Theme.layout"
-        android:layout_width="wrap_content"
+        style="@style/App.Theme.Linear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             style="@style/App.Theme.TextAppearance.ww.normal"
-            android:drawablePadding="@dimen/app.padding.small"
-            android:paddingBottom="@dimen/app.padding.normal"
+            android:layout_weight="1"
+            android:paddingBottom="@dimen/app.padding.large"
             android:paddingLeft="@dimen/app.padding.large30"
             android:paddingRight="@dimen/app.padding.large30"
-            android:paddingTop="@dimen/app.padding.normal"
+            android:paddingTop="@dimen/app.padding.large"
             android:textColor="@color/app.text.black333"
+            android:text="@{viewModel.data.tag}"
             tools:text="苏州" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/App.Theme.CheckBox"
+            android:layout_marginRight="@dimen/app.margin.large"
+            app:checkedChangeCommand="@{viewModel.checkedChangeCommand}"
+            android:checked="@{viewModel.checked}"/>
     </LinearLayout>
 </layout>

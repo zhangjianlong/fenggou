@@ -25,6 +25,7 @@ import com.slash.youth.ui.activity.PublishServiceBaseInfoActivity;
 import com.slash.youth.utils.CommonUtils;
 import com.slash.youth.v2.feature.main.find.FindFragment;
 import com.slash.youth.v2.feature.main.mine.MineFragment;
+import com.slash.youth.v2.feature.main.order.OrderFragment;
 import com.slash.youth.v2.feature.main.task.TaskFragment;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -96,7 +97,7 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
         super(activity);
         fragmentManager = activity.getSupportFragmentManager();
         fragments.add(new FindFragment());
-        fragments.add(new TaskFragment());
+        fragments.add(new OrderFragment());
         fragments.add(new MineFragment());
     }
 

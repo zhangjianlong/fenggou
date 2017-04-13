@@ -252,7 +252,6 @@
         <activity
             android:name=".v2.feature.label.LabelActivity"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".v2.feature.search.SearchActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -619,6 +618,11 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity android:name=".Label" />
+        <activity android:name=".view.impl.Order" />
+        <activity android:name=".view.impl.Mission" />
+        <activity android:name=".view.impl.Indent" />
+        <activity android:name=".view.impl.History"></activity>
     </application>
 
 </manifest>

@@ -17,6 +17,7 @@ import com.slash.youth.BR;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPubBinding;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.v2.feature.label.LabelActivity;
 import com.slash.youth.v2.feature.local.LocalActivity;
 import com.slash.youth.v2.feature.pubaccept.PubAcceptActivity;
 import com.slash.youth.v2.feature.pubcontent.PubContentActivity;
@@ -50,6 +51,11 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
 
     public ReplyCommand localClick = new ReplyCommand(() -> {
         LocalActivity.instance(activity);
+    });
+
+
+    public ReplyCommand lableClick = new ReplyCommand(() -> {
+        LabelActivity.instance(activity);
     });
 
     public ReplyCommand pubContent = new ReplyCommand(() -> {

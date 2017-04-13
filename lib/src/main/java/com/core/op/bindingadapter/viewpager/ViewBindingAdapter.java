@@ -4,12 +4,15 @@ import android.databinding.BindingAdapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.weight.navigation.AHBottomNavigationViewPager;
 
 /**
  * Created by kelin on 16-6-1.
@@ -21,6 +24,8 @@ public class ViewBindingAdapter {
         if (items == null) {
             items = new ArrayList<>();
         }
+
+        Log.i("ytp " , "ViewPager");
         ViewPagerFragmentAdatper adatper;
         if (titles == null) {
             adatper = new ViewPagerFragmentAdatper(fragmentManager, items);
@@ -28,6 +33,11 @@ public class ViewBindingAdapter {
             adatper = new ViewPagerFragmentAdatper(fragmentManager, items, titles);
         }
         viewPager.setAdapter(adatper);
+    }
+
+    @BindingAdapter(value = {"scrollEnable"}, requireAll = false)
+    public static void init(final AHBottomNavigationViewPager viewPager, final boolean scrollEnable) {
+        viewPager.setPagingEnabled(scrollEnable);
     }
 
     @BindingAdapter(value = {"selectPosition"}, requireAll = false)

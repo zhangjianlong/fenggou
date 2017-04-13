@@ -15,7 +15,7 @@
 
         <item name="android:windowBackground">@color/app.theme.background</item>
 
-        <item name="colorControlNormal">?attr/colorAccent</item>
+        <item name="colorControlNormal">@color/app.text.black999</item>
         <item name="colorControlActivated">@color/app.theme.colorControlActivated</item>
         <item name="colorControlHighlight">@color/app.theme.colorControlHighlight</item>
 
@@ -427,6 +427,11 @@
     <style name="App.Theme.Image">
         <item name="android:layout_width">@dimen/app.image.height.normal58</item>
         <item name="android:layout_height">@dimen/app.image.height.normal58</item>
+    </style>
+    <!--image style-->
+    <style name="App.Theme.CheckBox">
+        <item name="colorControlActivated">@color/app.theme.colorPrimary</item>
+        <item name="colorControlNormal">@color/app.text.black999</item>
     </style>
 
     <!--viewgroup style-->

@@ -15,19 +15,30 @@
     </data>
 
     <LinearLayout
-        style="@style/App.Theme.layout"
-        android:background="@{viewModel.selected?@color/white:@color/app_theme_background_f3f3f3}"
-        app:clickCommand="@{viewModel.click}"
-        android:orientation="vertical">
+        style="@style/App.Theme.Linear"
+        android:background="@{viewModel.bgDrawable}"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:clickCommand="@{viewModel.click}">
 
-        <TextView
-            style="@style/App.Theme.TextAppearance.ww.normal"
-            android:drawablePadding="@dimen/app.padding.small"
-            android:paddingBottom="@dimen/app.padding.normal"
-            android:paddingTop="@dimen/app.padding.normal"
-            android:textColor="@{viewModel.selected?@color/app_theme_colorPrimary:@color/app_text_black999}"
-            android:text="@{viewModel.data.tag}"
-            tools:text="苏州" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/App.Theme.TextAppearance.ww.normal"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/app.padding.large"
+                android:paddingTop="@dimen/app.padding.large"
+                android:gravity="center"
+                android:text="@{viewModel.data.tag}"
+                android:textColor="@{viewModel.textDrawable}"
+                tools:text="苏州" />
+
+            <include layout="@layout/include_line_v"
+                android:visibility="@{viewModel.selected}"/>
+        </LinearLayout>
 
         <include layout="@layout/include_line_h" />
     </LinearLayout>

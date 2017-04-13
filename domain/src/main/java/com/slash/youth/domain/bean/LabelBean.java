@@ -16,6 +16,7 @@ public class LabelBean {
     private int f1;
     private int id;
     private String tag;
+    private int uid;
 
     public int getF1() {
         return f1;
@@ -39,5 +40,13 @@ public class LabelBean {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 }

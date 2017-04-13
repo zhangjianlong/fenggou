@@ -91,7 +91,7 @@ public class BindingUtils {
      * Ensures the call was made on the main thread. This is enforced for all ObservableList change
      * operations.
      */
-    static void ensureChangeOnMainThread() {
+    public static void ensureChangeOnMainThread() {
         if (Thread.currentThread() != Looper.getMainLooper().getThread()) {
             throw new IllegalStateException("You must only modify the ObservableList on the main thread.");
         }
@@ -101,7 +101,7 @@ public class BindingUtils {
      * Constructs a binding adapter class from it's class name using reflection.
      */
     @SuppressWarnings("unchecked")
-    static <T, A extends BindingCollectionAdapter<T>> A createClass(String className, ItemViewArg<T> arg) {
+    public static <T, A extends BindingCollectionAdapter<T>> A createClass(String className, ItemViewArg<T> arg) {
         try {
             return (A) Class.forName(className).getConstructor(ItemViewArg.class).newInstance(arg);
         } catch (Exception e) {
