@@ -28,8 +28,8 @@
             <android.support.v7.widget.SearchView
                 android:id="@+id/serachview"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/search_bg"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_search_bg"
                 android:iconifiedByDefault="false"
                 android:searchIcon="@mipmap/search_zoom_icon" />
 

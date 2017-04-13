@@ -62,6 +62,8 @@ public final class SearchActivity extends BaseActivity<SearchViewModel, ActSearc
         binding.serachview.setIconifiedByDefault(false);
         SearchView.SearchAutoComplete textView = (SearchView.SearchAutoComplete) binding.serachview.findViewById(R.id.search_src_text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);//14sp
+        textView.setBackground(null);
+        textView.setBackgroundColor(CommonUtils.getContext().getResources().getColor(R.color.cmbkb_transparent));
         textView.setTextColor(CommonUtils.getContext().getResources().getColor(R.color.app_text_black333));
         ImageView delButton = (ImageView) binding.serachview.findViewById(R.id.search_close_btn);
         delButton.setImageDrawable(CommonUtils.getContext().getResources().getDrawable(R.mipmap.search_del_icon));
