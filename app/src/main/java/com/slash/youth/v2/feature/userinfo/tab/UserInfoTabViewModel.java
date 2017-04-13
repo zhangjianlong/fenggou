@@ -7,14 +7,12 @@ import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
 
-import com.core.op.lib.base.BFViewModel;
+import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.utils.JsonUtil;
 import com.slash.youth.R;
 import com.slash.youth.domain.interactor.main.UserEvaluateCountUseCase;
-import com.slash.youth.domain.interactor.main.UserEvaluateUseCase;
 import com.slash.youth.domain.interactor.main.UserTaskCountUseCase;
-import com.slash.youth.domain.interactor.main.UserTaskUseCase;
 import com.slash.youth.v2.base.tab.TabViewModel;
 import com.slash.youth.v2.feature.userinfo.tab.about.AboutFragment;
 import com.slash.youth.v2.feature.userinfo.tab.evaluate.EvaluateFragment;
@@ -27,11 +25,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import static android.R.attr.data;
-import static com.slash.youth.R.id.tabLayout;
-
 @PerActivity
-public class UserInfoTabViewModel extends TabViewModel {
+public class UserInfoTabViewModel extends TabViewModel<BViewModel> {
 
     private long uid;
 

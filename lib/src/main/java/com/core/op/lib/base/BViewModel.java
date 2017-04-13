@@ -51,6 +51,6 @@ public class BViewModel<T> {
     }
 
     protected void onDestroy() {
-//        Messenger.getDefault().unregister(this);
+        Messenger.getDefault().unregister(this);
     }
 }

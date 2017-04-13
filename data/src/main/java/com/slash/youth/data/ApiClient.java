@@ -170,6 +170,15 @@ public interface ApiClient {
     @POST(UriMethod.LOGNI_GET_TAG)
     Observable<List<LabelBean>> getLables(@Body RequestBody requestBody);
 
+    @POST(UriMethod.SKILLLABEL_CREATE)
+    Observable<BaseResponse> createLable(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SKILLLABEL_DELETE)
+    Observable<BaseResponse> deleteLable(@Body RequestBody requestBody);
+
+    @POST(UriMethod.SKILLLABEL_GET)
+    Observable<List<LabelBean>> getCustomLables(@Body RequestBody requestBody);
+
     @POST(UriMethod.SAVE_USER_HEAD)
     Observable<BaseResponse<StatusBean>> saveHead(@Body RequestBody requestBody);
 

@@ -2,11 +2,21 @@ package com.core.op.lib.weight;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.core.op.bindingadapter.common.BindingCollectionAdapter;
+import com.core.op.bindingadapter.common.BindingUtils;
+import com.core.op.bindingadapter.common.ItemView;
+import com.core.op.bindingadapter.common.ItemViewArg;
 import com.core.op.lib.R;
 
 import java.util.ArrayList;
@@ -53,13 +63,18 @@ public class FlowLayout extends ViewGroup {
     private List<Integer> mHeightForRow = new ArrayList<>();
     private List<Integer> mChildNumForRow = new ArrayList<>();
 
+    private List<ViewDataBinding> viewDataBindings = new ArrayList<>();
+    private FlowAdapter adapter;
+
+    LayoutInflater inflater;
+
     public FlowLayout(Context context) {
         this(context, null);
     }
 
     public FlowLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        inflater = LayoutInflater.from(context);
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs, R.styleable.FlowLayout, 0, 0);
         try {
@@ -260,6 +275,25 @@ public class FlowLayout extends ViewGroup {
         return new MarginLayoutParams(getContext(), attrs);
     }
 
+    public FlowAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(FlowAdapter adapter) {
+        this.adapter = adapter;
+        notifyChange();
+    }
+
+    public void notifyChange(){
+        this.removeAllViews();
+        for(int i = 0; i < adapter.getItems().size();i++){
+            ViewDataBinding viewDataBinding = adapter.onCreateBinding(inflater,adapter.getItemViewArg().layoutRes(),this);
+            viewDataBindings.add(viewDataBinding);
+            adapter.onBindBinding(viewDataBinding,adapter.getItemViewArg().bindingVariable(),adapter.getItemViewArg().layoutRes(),i,adapter.getItems().get(i));
+            this.addView(viewDataBinding.getRoot());
+        }
+    }
+
     /**
      * Returns whether to allow child views flow to next row when there is no enough space.
      *
@@ -367,4 +401,55 @@ public class FlowLayout extends ViewGroup {
         return TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
+
+
+    public static class FlowAdapter<T> implements BindingCollectionAdapter<T> {
+
+        @NonNull
+        protected final ItemViewArg<T> itemViewArg;
+        protected List<T> items;
+
+        public FlowAdapter(@NonNull ItemViewArg<T> arg) {
+            this.itemViewArg = arg;
+        }
+
+        @Override
+        public ItemViewArg<T> getItemViewArg() {
+            return itemViewArg;
+        }
+
+        @Override
+        public void setItems(@Nullable List<T> items) {
+            if (this.items == items) {
+                return;
+            }
+            this.items = items;
+        }
+
+        @Override
+        public T getAdapterItem(int position) {
+            return items.get(position);
+        }
+
+        public List<T> getItems() {
+            return items;
+        }
+
+        @Override
+        public ViewDataBinding onCreateBinding(LayoutInflater inflater, @LayoutRes int layoutId, ViewGroup viewGroup) {
+            return DataBindingUtil.inflate(inflater, itemViewArg.layoutRes(), viewGroup, false);
+        }
+
+        @Override
+        public void onBindBinding(ViewDataBinding binding, int bindingVariable, @LayoutRes int layoutRes, int position, T item) {
+            if (bindingVariable != ItemView.BINDING_VARIABLE_NONE) {
+                boolean result = binding.setVariable(bindingVariable, item);
+                if (!result) {
+                    BindingUtils.throwMissingVariable(binding, bindingVariable, layoutRes);
+                }
+                binding.executePendingBindings();
+            }
+        }
+    }
+
 }

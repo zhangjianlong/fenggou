@@ -132,7 +132,8 @@
 
                 <include layout="@layout/include_space_h" />
 
-                <LinearLayout style="@style/App.Theme.Linear.padding">
+                <LinearLayout style="@style/App.Theme.Linear.padding"
+                    app:clickCommand="@{viewModel.lableClick}">
 
                     <TextView
                         style="@style/App.Theme.TextAppearance.ww.small.black666"

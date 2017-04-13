@@ -79,6 +79,13 @@
         <item>最新任务</item>
     </array>
 
+    <array name="order_tabs">
+        <item>任务</item>
+        <item>订单</item>
+        <item>历史</item>
+    </array>
+
+
     <array name="user_grades">
         <item>少侠</item>
         <item>大侠</item>
@@ -250,4 +257,10 @@
     <string name="app.follow.name">任务名称:</string>
     <string name="app.follow.requst.name">需求方:</string>
     <string name="app.follow.service.name">服务方:</string>
+    <string name="app.label.selected">已选择%1$d个，还可以选择%2$d个。</string>
+    <string name="app.label.custom">自定义</string>
+    <string name="app.label.new">新建标签</string>
+    <string name="app.label.new.cancel">取消</string>
+    <string name="app.label.new.confim">确定</string>
+    <string name="app.label.new.hint">输入10个字以内</string>
 </resources>
