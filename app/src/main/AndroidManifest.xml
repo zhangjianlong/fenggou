@@ -244,6 +244,9 @@
             android:name=".v2.feature.back.SimpleBackActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".v2.feature.task.PubDetailActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".v2.feature.message.MessageActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity

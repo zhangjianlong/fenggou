@@ -274,4 +274,9 @@
     <string name="app.pub.detail.title">任务详情</string>
     <string name="app.pub.detail.content">任务内容</string>
     <string name="app.pub.detail.accept">考核标准</string>
+    <string name="app.pub.detail.base.case">基本情况</string>
+    <string name="app.pub.detail.type">任务类别</string>
+    <string name="app.pub.detail.price">任务价格</string>
+    <string name="app.pub.detail.location">任务地点</string>
+    <string name="app.pub.detail.time">任务时间</string>
 </resources>
