@@ -55,6 +55,7 @@
     <color name="app.text.black">@color/black</color>
     <color name="app.text.red">#ff7333</color>
     <color name="app.text.black6a6a6a">#6a6a6a</color>
+    <color name="app.text.blackb6b6b6">#b6b6b6</color>
     <color name="app.text.black9d9d9d">#9d9d9d</color>
     <color name="app.text.black333">#333333</color>
     <color name="app.text.black666">#666</color>

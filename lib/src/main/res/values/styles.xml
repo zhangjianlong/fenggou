@@ -447,6 +447,12 @@
         <item name="android:background">@drawable/selector_bg_white</item>
     </style>
 
+    <style name="App.Theme.Linear.ww">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/selector_bg_white</item>
+    </style>
+
     <style name="App.Theme.Relative"></style>
 
     <!--layout style-->

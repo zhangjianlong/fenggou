@@ -8,11 +8,13 @@ import android.text.TextWatcher;
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.StrUtil;
 import com.slash.youth.R;
 import com.slash.youth.databinding.ActPubcontentBinding;
 import com.slash.youth.utils.CommonUtils;
+import com.slash.youth.v2.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.HashMap;
@@ -71,13 +73,12 @@ public class PubContentViewModel extends BAViewModel<ActPubcontentBinding> {
     });
 
     public void savaTemplate() {
-        String content = templateInput.get();
+        String content = templateInput.get().trim();
         if (content == null || StrUtil.isEmpty(content.toString().trim())) {
             AppToast.show(CommonUtils.getContext(), CommonUtils.getContext().getString(R.string.app_pub_content_empty));
             return;
         }
-        content = content.toString().trim();
-        HashMap<String, String> data = new HashMap<>();
-        data.put("", content);
+        Messenger.getDefault().send(content, MessageKey.PUB_CONTENT);
+        activity.finish();
     }
 }

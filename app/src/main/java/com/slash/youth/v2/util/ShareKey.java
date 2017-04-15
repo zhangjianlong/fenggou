@@ -17,4 +17,5 @@ public class ShareKey {
     public static final String USER_ANONYMITY = "USER_ANONYMITY";//匿名用户
     public static final String USER_ANONYMITY_BUNDLE = "USER_ANONYMITY_BUNDLE";//匿名用户
     public static final String ISDEMAND = "ISDEMAND";//true 表示需求，false表示为服务
+    public static final String HOSTORYDATA = "HOSTORYDATA";//保存的搜索历史记录
 }

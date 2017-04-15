@@ -51,7 +51,6 @@ public final class UserInfoActivity extends BackActivity<UserInfoViewModel, ActU
     @AfterViews
     void afterViews() {
         long uid = getIntent().getBundleExtra("data").getLong("Uid");
-
         if (LoginManager.currentLoginUserId == uid) {
             binding.toolbar.inflateMenu(R.menu.menu_userinfo_edit);
         } else {

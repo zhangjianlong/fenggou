@@ -496,6 +496,9 @@ public class UriMethod {
     public static final String SAVE_USER_HEAD = USER_HOSR + "vcard/avatar/set";
 
     public static final String SAVE_USER_TAG = USER_HOSR + "vcard/tag/set";
+    //保存个人区域
     public static final String SAVE_USER_LOCATION = USER_HOSR + "vcard/location/set";
+    //搜索
+    public static final String SEARCH_DATA = "";
 
 }

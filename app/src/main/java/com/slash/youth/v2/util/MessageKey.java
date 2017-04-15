@@ -59,4 +59,20 @@ public class MessageKey {
     public static final String USER_SAVE_PROFILE = "USER_SAVE_PROFILE";
     //保存个人电话号码
     public static final String USER_SAVE_PHONE = "USER_SAVE_PHONE";
+    //搜索点击item 发送消息
+    public static final String SEARCH_CLICK = "SEARCH_CLICK";
+    //搜索删除历史记录 发送消息
+    public static final String DEL_CLICK = "DEL_CLICK";
+    //搜索点击更多用户 发送消息
+    public static final String MORE_USER = "MORE_USER";
+    //搜索点击更多任务 发送消息
+    public static final String MORE_TASK = "MORE_TASK";
+    //搜索点击任务 发送消息
+    public static final String TASK_DETAIL = "TASK_DETAIL";
+    //搜索点击用户 发送消息
+    public static final String USER_DETAIL = "USER_DETAIL";
+    //任务发布 完成任务内容填写
+    public static final String PUB_CONTENT = "PUB_CONTENT";
+    //任务发布 完成任务标准填写
+    public static final String PUB_STANDED = "PUB_STANDED";
 }

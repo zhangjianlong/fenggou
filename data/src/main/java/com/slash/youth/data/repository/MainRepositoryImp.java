@@ -5,6 +5,7 @@ import com.slash.youth.data.ApiClient;
 import com.slash.youth.data.api.transformer.ErrorTransformer;
 import com.slash.youth.data.util.RetrofitUtil;
 import com.slash.youth.data.util.UpDownLoadUtil;
+import com.slash.youth.domain.bean.AssociateBean;
 import com.slash.youth.domain.bean.BannerConfigBean;
 import com.slash.youth.domain.bean.CountBean;
 import com.slash.youth.domain.bean.FindDemand;
@@ -208,12 +209,22 @@ public class MainRepositoryImp implements MainRepository {
 
     @Override
     public Observable<StatusBean> saveLocation(String param) {
-          return apiClient.savaLocation(RetrofitUtil.toRequestBody(param)).compose(new ErrorTransformer<>());
+        return apiClient.savaLocation(RetrofitUtil.toRequestBody(param)).compose(new ErrorTransformer<>());
     }
 
     @Override
     public Observable<UserInfo> getUserInfo() {
         return apiClient.getUserInfo().compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<AssociateBean> getAssociate(String param) {
+        return apiClient.getAssociate(RetrofitUtil.toRequestBody(param)).compose(new ErrorTransformer<>());
+    }
+
+    @Override
+    public Observable<StatusBean> searchData(String param) {
+        return apiClient.searchData(RetrofitUtil.toRequestBody(param)).compose(new ErrorTransformer<>());
     }
 
     @Override
