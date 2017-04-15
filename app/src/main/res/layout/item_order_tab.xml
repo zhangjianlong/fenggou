@@ -20,15 +20,19 @@
             android:id="@android:id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@mipmap/icon_mine_dot"
-            android:padding="@dimen/app.padding.normal"
+            android:paddingLeft="@dimen/app.padding.normal"
+            android:paddingTop="@dimen/app.padding.large"
             android:text="@{viewModel.title}"
-            tools:text="任务"/>
+            android:textColor="@color/selector_text_color"
+            android:textSize="@dimen/app.text.normal"
+            android:textStyle="bold"
+            tools:text="任务" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.dotVisible}"
-            android:src="@mipmap/icon_mine_dot"/>
+            android:paddingTop="@dimen/app.padding.normal"
+            android:src="@mipmap/icon_mine_dot"
+            android:visibility="@{viewModel.dotVisible}" />
     </LinearLayout>
 </layout>

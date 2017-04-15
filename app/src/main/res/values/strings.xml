@@ -268,6 +268,7 @@
     <string name="app.label.new.cancel">取消</string>
     <string name="app.label.new.confim">确定</string>
     <string name="app.label.new.hint">输入10个字以内</string>
+    <string name="app.refund.title">选择退款理由</string>
 
     <!--PubDetaol-->
     <string name="app.pub.detail.share">分享</string>

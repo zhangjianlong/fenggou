@@ -135,7 +135,7 @@ public class LabelViewModel extends BAViewModel<ActLabelBinding> {
         });
 
         Messenger.getDefault().register(this,MessageKey.LABEL_FLOW_DELETE, Integer.class, a -> {
-            selecteds.remove(selecteds.size()-a);
+            selecteds.remove((selecteds.size()-1)-a);
             updataSecond();
             updataText(selecteds.size());
             updataFlow();

@@ -25,6 +25,7 @@
             android:textColorPrimary="@color/app.text.black666"
             app:toolTitle="@{viewModel.title}" />
 
+        <include layout="@layout/include_line_h" />
         <com.core.op.lib.weight.RecycleScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">

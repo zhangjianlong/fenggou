@@ -226,6 +226,10 @@
             android:name=".v2.feature.release.ReleaseSucActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.refund.RefundActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SlashProtocolActivity" />
         <activity
             android:name=".ui.activity.HomeActivity"
@@ -621,7 +625,6 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-
     </application>
 
 </manifest>
