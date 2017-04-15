@@ -22,7 +22,7 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/btn_background"
             android:text="@string/app.pub.detail.share"
-            app:clickCommand="@{viewMode.share}" />
+            app:clickCommand="@{viewModel.share}" />
 
 
         <ScrollView

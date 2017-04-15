@@ -28,6 +28,10 @@ public class PubDetailViewModel extends BAViewModel<ActPubdetailBinding> {
 
     }
 
+    
+    public ReplyCommand moreTask = new ReplyCommand(() -> {
+
+    });
 
     public ReplyCommand share = new ReplyCommand(() -> {
 
