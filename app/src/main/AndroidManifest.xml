@@ -226,6 +226,10 @@
             android:name=".v2.feature.release.ReleaseSucActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".v2.feature.refund.RefundActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SlashProtocolActivity" />
         <activity
             android:name=".ui.activity.HomeActivity"
@@ -618,11 +622,8 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity android:name=".Label" />
-        <activity android:name=".view.impl.Order" />
-        <activity android:name=".view.impl.Mission" />
-        <activity android:name=".view.impl.Indent" />
-        <activity android:name=".view.impl.History"></activity>
+        <activity android:name=".view.impl.Ordercontent" />
+        <activity android:name=".view.impl.Taskcontent"></activity>
     </application>
 
 </manifest>

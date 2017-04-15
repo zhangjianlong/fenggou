@@ -10,8 +10,8 @@ import com.core.op.lib.utils.inject.BeforeViews;
 import com.core.op.lib.utils.inject.RootView;
 
 import javax.inject.Inject;
-
-public final class OrderFragment extends TabFragment<OrderViewModel> {
+@RootView(R.layout.frg_order)
+public final class OrderFragment extends BaseFragment<OrderViewModel,FrgOrderBinding> {
 
     public static OrderFragment instance() {
         return new OrderFragment();

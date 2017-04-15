@@ -15,18 +15,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabGravity="fill"
-                app:tabIndicatorColor="@color/app.theme.colorPrimary"
-                app:tabMode="fixed"
-                app:tabPadding="2dp"
-                app:tabSelectedTextColor="@color/app.theme.colorPrimary"
-                app:tabTextColor="@color/app.text.black" />
 
-            <include layout="@layout/include_line_h" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            app:itemView="@{viewModel.itemView}"
+            app:items="@{viewModel.items}"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/app.theme.colorPrimary"
+            app:tabMode="fixed"
+            app:tabPadding="2dp"
+            app:tabSelectedTextColor="@color/app.theme.colorPrimary"
+            app:tabTextColor="@color/app.text.black" />
+
+        <include layout="@layout/include_line_h" />
+
+        <com.core.op.lib.weight.navigation.AHBottomNavigationViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:scrollEnable="@{viewModel.scrollEnable}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:pageLimit="@{viewModel.pageLimit}"
+            app:selectPosition="@{viewModel.selectPosition}" />
+
 
 
     </LinearLayout>

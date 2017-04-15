@@ -428,6 +428,12 @@
         <item name="android:layout_width">@dimen/app.image.height.normal58</item>
         <item name="android:layout_height">@dimen/app.image.height.normal58</item>
     </style>
+
+    <!--image style-->
+    <style name="App.Theme.Image.Small">
+        <item name="android:layout_width">@dimen/app.image.height.normal40</item>
+        <item name="android:layout_height">@dimen/app.image.height.normal40</item>
+    </style>
     <!--image style-->
     <style name="App.Theme.CheckBox">
         <item name="colorControlActivated">@color/app.theme.colorPrimary</item>
