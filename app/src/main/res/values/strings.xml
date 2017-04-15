@@ -268,4 +268,10 @@
     <string name="app.label.new.cancel">取消</string>
     <string name="app.label.new.confim">确定</string>
     <string name="app.label.new.hint">输入10个字以内</string>
+
+    <!--PubDetaol-->
+    <string name="app.pub.detail.share">分享</string>
+    <string name="app.pub.detail.title">任务详情</string>
+    <string name="app.pub.detail.content">任务内容</string>
+    <string name="app.pub.detail.accept">考核标准</string>
 </resources>

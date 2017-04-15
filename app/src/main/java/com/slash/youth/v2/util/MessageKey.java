@@ -71,4 +71,8 @@ public class MessageKey {
     public static final String TASK_DETAIL = "TASK_DETAIL";
     //搜索点击用户 发送消息
     public static final String USER_DETAIL = "USER_DETAIL";
+    //任务发布 完成任务内容填写
+    public static final String PUB_CONTENT = "PUB_CONTENT";
+    //任务发布 完成任务标准填写
+    public static final String PUB_STANDED = "PUB_STANDED";
 }

@@ -99,6 +99,14 @@ public class PubViewModel extends BAViewModel<ActPubBinding> {
         Messenger.getDefault().register(this, MessageKey.PUB_CITY_SELECTED, String.class, data -> {
             local.set(data);
         });
+        Messenger.getDefault().register(this, MessageKey.PUB_CONTENT, String.class, data -> {
+            content.set(data);
+        });
+
+        Messenger.getDefault().register(this, MessageKey.PUB_STANDED, String.class, data -> {
+            standard.set(data);
+        });
+
         Messenger.getDefault().register(this, MessageKey.PUB_DEL_IMG, Integer.class, data -> {
             mSelectPath.remove((int) data);
             itemViewModels.remove((int) data);

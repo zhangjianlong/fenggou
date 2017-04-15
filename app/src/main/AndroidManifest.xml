@@ -618,11 +618,7 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity android:name=".Label" />
-        <activity android:name=".view.impl.Order" />
-        <activity android:name=".view.impl.Mission" />
-        <activity android:name=".view.impl.Indent" />
-        <activity android:name=".view.impl.History"></activity>
+
     </application>
 
 </manifest>
