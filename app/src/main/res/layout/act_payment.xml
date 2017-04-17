@@ -154,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/payment_balance_icon" />
+                    android:src="@mipmap/payment_alipay_icon" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/payment_alipay_tv"
@@ -194,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/payment_balance_icon" />
+                    android:src="@mipmap/payment_weixin_icon" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/payment_webchat_tv"

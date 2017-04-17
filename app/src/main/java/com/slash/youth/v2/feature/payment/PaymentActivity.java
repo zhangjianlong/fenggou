@@ -12,7 +12,6 @@ import com.slash.youth.databinding.ActPaymentBinding;
 import com.slash.youth.v2.di.components.DaggerPaymentComponent;
 import com.slash.youth.v2.di.components.PaymentComponent;
 import com.slash.youth.v2.di.modules.PaymentModule;
-
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
 import com.core.op.lib.utils.inject.RootView;
