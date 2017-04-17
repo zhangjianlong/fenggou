@@ -625,6 +625,7 @@
         <activity
             android:name="cn.finalteam.galleryfinal.PhotoPreviewActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
+        <activity android:name=".Payment"></activity>
     </application>
 
 </manifest>

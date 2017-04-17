@@ -234,6 +234,7 @@
     <!--ReleaseAct-->
     <string name="app.menu.close">关闭</string>
     <string name="app.menu.cancel">取消</string>
+    <string name="app.menu.modify">修改</string>
     <string name="app.release.suc">提交成功</string>
     <string name="app.release.title">发布结果</string>
     <string name="app.release.review">查看详情</string>
@@ -280,4 +281,14 @@
     <string name="app.pub.detail.price">任务价格</string>
     <string name="app.pub.detail.location">任务地点</string>
     <string name="app.pub.detail.time">任务时间</string>
+
+    <!--Payment-->
+    <string name="app.payment.title">预支付</string>
+    <string name="app.payment.hint">预支付款项将暂时托管在平台上，顺利完成服务后才打款给对方</string>
+    <string name="app.payment.task.type">任务类型:</string>
+    <string name="app.payment.task.amount">任务金额:</string>
+    <string name="app.payment.pay.type">请选择支付方式</string>
+    <string name="app.payment.pay.balance">余额支付</string>
+    <string name="app.payment.pay.alipay">支付宝支付</string>
+    <string name="app.payment.pay.webchat">微信支付</string>
 </resources>

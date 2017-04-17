@@ -10,16 +10,18 @@
             type="com.slash.youth.v2.feature.task.PubDetailViewModel" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app.theme.background_f3f3f3">
+        android:background="@color/app.theme.background_f3f3f3"
+        android:orientation="vertical">
 
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/share_btn">
+            android:layout_height="0dp"
+            android:layout_above="@+id/share_btn"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,48 +91,14 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <FrameLayout
+                    android:id="@+id/fl_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/app.margin.large"
-                    android:background="@color/app.theme.background"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/app.margin.large">
 
+                </FrameLayout>
 
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal"
-                        android:gravity="center"
-                        android:padding="@dimen/app.padding.large"
-                        android:text="@string/app.pub.detail.content"
-                        android:textColor="@color/app.text.black333" />
-
-                    <include layout="@layout/include_line_h" />
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal"
-                        android:gravity="left"
-                        android:padding="@dimen/app.padding.large"
-                        android:text="@string/app.pub.detail.content"
-                        android:textColor="@color/app.text.black666" />
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal"
-                        android:gravity="left"
-                        android:padding="@dimen/app.padding.large"
-                        android:text="@string/app.pub.detail.accept"
-                        android:textColor="@color/app.text.black666" />
-
-                    <include layout="@layout/include_line_h" />
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal"
-                        android:gravity="left"
-                        android:padding="@dimen/app.padding.large"
-                        android:text="@string/app.pub.detail.accept"
-                        android:textColor="@color/app.text.black666" />
-
-                    <include layout="@layout/include_line_h" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -236,16 +204,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/app.margin.large"
                     android:background="@color/app.theme.background"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="@dimen/app.padding.large">
 
                     <com.core.op.lib.weight.ShapedImageView
                         android:id="@+id/iv_assistant_icon"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/app.margin.normal"
-                        android:layout_marginTop="2dp"
-                        android:layout_toLeftOf="@+id/icon"
                         android:scaleType="centerCrop"
                         android:src="@mipmap/default_avatar"
                         app:uri="@{viewModel.headUrl}" />
@@ -253,7 +219,7 @@
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww.normal"
                         android:layout_gravity="center_vertical"
-                        android:padding="@dimen/app.padding.large"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
                         android:text="曹文成"
                         android:textColor="@color/app.text.black666" />
 
@@ -261,7 +227,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
                         android:src="@{viewModel.sexIcon}" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        android:src="@mipmap/icon_task" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        android:text="顺利成交:"
+                        android:textColor="@color/app.text.black666" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        android:text="123单:"
+                        android:textColor="@color/app.text.black666" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
@@ -275,7 +263,55 @@
             android:background="@drawable/btn_background"
             android:text="@string/app.pub.detail.share"
             app:clickCommand="@{viewModel.share}" />
-    </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/app.theme.background"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/app.padding.small"
+                android:drawableTop="@mipmap/friend_icon"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.small"
+                android:text="加好友"
+                android:textColor="@color/app.text.black666" />
+
+            <include layout="@layout/include_line_v" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/app.padding.small"
+                android:drawableTop="@mipmap/recommend_icon"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.small"
+                android:text="分享"
+                android:textColor="@color/app.text.black666" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.wm.normal"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:background="@drawable/btn_background"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.small"
+                android:text="立即抢单" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </layout>

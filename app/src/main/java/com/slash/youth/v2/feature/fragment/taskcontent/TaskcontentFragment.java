@@ -1,5 +1,7 @@
 package com.slash.youth.v2.feature.fragment.taskcontent;
 
+import android.os.Bundle;
+
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
 import com.core.op.lib.utils.inject.RootView;
@@ -14,9 +16,17 @@ import com.slash.youth.v2.di.modules.TaskcontentModule;
 public final class TaskcontentFragment extends BaseFragment<TaskcontentViewModel, FrgTaskcontentBinding> {
 
     TaskcontentComponent component;
+
     public static TaskcontentFragment instance() {
         return new TaskcontentFragment();
     }
+
+    public static TaskcontentFragment instance(Bundle bundle) {
+        TaskcontentFragment taskcontentFragment = new TaskcontentFragment();
+        taskcontentFragment.setArguments(bundle);
+        return taskcontentFragment;
+    }
+
 
     @BeforeViews
     void beforViews() {
@@ -30,5 +40,6 @@ public final class TaskcontentFragment extends BaseFragment<TaskcontentViewModel
 
     @AfterViews
     void afterViews() {
+        Bundle bundle = getArguments();
     }
 }
