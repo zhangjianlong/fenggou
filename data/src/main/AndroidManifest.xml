@@ -1,8 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.slash.youth.data">
-
-    <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="21" />
+    package="com.odbpo.fenggou.data">
 
 </manifest>

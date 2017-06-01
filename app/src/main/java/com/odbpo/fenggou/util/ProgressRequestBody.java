@@ -1,7 +1,7 @@
 package com.odbpo.fenggou.util;
 
 
-import com.slash.youth.domain.interfaces.OnProgressListener;
+import com.odbpo.fenggou.domain.interfaces.OnProgressListener;
 
 import java.io.IOException;
 

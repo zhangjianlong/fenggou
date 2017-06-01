@@ -20,9 +20,9 @@ import android.app.Activity;
 import com.google.gson.Gson;
 import com.odbpo.fenggou.di.modules.AppModule;
 import com.odbpo.fenggou.global.SlashApplication;
-import com.slash.youth.data.ApiClient;
-import com.slash.youth.domain.executor.PostExecutionThread;
-import com.slash.youth.domain.executor.ThreadExecutor;
+import com.odbpo.fenggou.data.ApiClient;
+import com.odbpo.fenggou.domain.executor.PostExecutionThread;
+import com.odbpo.fenggou.domain.executor.ThreadExecutor;
 
 import javax.inject.Singleton;
 

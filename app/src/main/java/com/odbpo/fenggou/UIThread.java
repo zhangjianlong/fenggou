@@ -15,7 +15,7 @@ package com.odbpo.fenggou;
  * limitations under the License.
  */
 
-import com.slash.youth.domain.executor.PostExecutionThread;
+import com.odbpo.fenggou.domain.executor.PostExecutionThread;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

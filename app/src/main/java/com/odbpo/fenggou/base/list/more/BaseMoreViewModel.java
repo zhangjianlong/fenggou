@@ -15,8 +15,9 @@ import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.base.list.BaseListItemViewModel;
 import com.odbpo.fenggou.databinding.FrgBasemoreBinding;
-import com.slash.youth.domain.bean.base.BaseList;
-import com.slash.youth.domain.interactor.UseCase;
+import com.odbpo.fenggou.domain.bean.base.BaseList;
+import com.odbpo.fenggou.domain.interactor.UseCase;
+import com.odbpo.fenggou.domain.interactor.UseCase;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;

@@ -5,12 +5,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.odbpo.fenggou.UIThread;
 import com.odbpo.fenggou.global.SlashApplication;
-import com.slash.youth.data.ApiClient;
-import com.slash.youth.data.UrlRoot;
-import com.slash.youth.data.api.ApiOption;
-import com.slash.youth.data.executor.JobExecutor;
-import com.slash.youth.domain.executor.PostExecutionThread;
-import com.slash.youth.domain.executor.ThreadExecutor;
+import com.odbpo.fenggou.data.ApiClient;
+import com.odbpo.fenggou.data.UrlRoot;
+import com.odbpo.fenggou.data.api.ApiOption;
+import com.odbpo.fenggou.data.executor.JobExecutor;
+import com.odbpo.fenggou.domain.executor.PostExecutionThread;
+import com.odbpo.fenggou.domain.executor.ThreadExecutor;
 
 import javax.inject.Singleton;
 

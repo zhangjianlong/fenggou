@@ -8,6 +8,8 @@ android {
     buildToolsVersion ext.buildToolsVersion
 
     defaultConfig {
+        minSdkVersion ext.minSdkVersion
+        targetSdkVersion ext.targetSdkVersion
         versionCode ext.versionCode
         versionName ext.versionName
     }
@@ -22,7 +24,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    lintOptions{
+    lintOptions {
         abortOnError false
     }
 }
@@ -47,6 +49,7 @@ dependencies {
 
     compile compiles.stetho
     compile compiles.stethoOkhttp
+    compile 'io.reactivex:rxandroid:1.1.0'
 }
 
 tasks.withType(JavaCompile) {

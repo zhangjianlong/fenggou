@@ -1,8 +1,9 @@
 package com.odbpo.fenggou.util;
 
 
-import com.slash.youth.data.api.exception.UploadException;
-import com.slash.youth.domain.interfaces.OnProgressListener;
+import com.odbpo.fenggou.data.api.exception.UploadException;
+import com.odbpo.fenggou.data.api.exception.UploadException;
+import com.odbpo.fenggou.domain.interfaces.OnProgressListener;
 
 import java.io.File;
 
