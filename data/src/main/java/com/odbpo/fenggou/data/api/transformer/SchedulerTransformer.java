@@ -7,12 +7,14 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+
 /**
- * @author op
- * @version 1.0
- * @description 请求线程
- * @createDate 2016/7/21
+ * @author: zjl
+ * @Time: 2017/6/1 15:13
+ * @Desc: 请求线程
  */
+
+
 public class SchedulerTransformer<T> implements Observable.Transformer<BaseResponse<T>, BaseResponse<T>> {
 
     @Override

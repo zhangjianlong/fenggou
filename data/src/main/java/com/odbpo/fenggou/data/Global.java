@@ -3,11 +3,11 @@ package com.odbpo.fenggou.data;
 import android.app.Application;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/11/16
+ * @author: zjl
+ * @Time:  2017/6/1 15:13
+ * @Desc: 
  */
+
 public class Global {
 
     public static Application application;

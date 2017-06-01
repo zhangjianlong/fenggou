@@ -20,11 +20,11 @@ import javax.inject.Inject;
 
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/2/2
+ * @author: zjl
+ * @Time:  2017/6/1 15:18
+ * @Desc:
  */
+
 public abstract class BFragment<V extends BFViewModel, T extends ViewDataBinding> extends RxFragment {
 
     protected LayoutInflater inflater;

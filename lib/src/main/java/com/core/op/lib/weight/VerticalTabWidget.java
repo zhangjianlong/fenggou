@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TabWidget;
 
+
 /**
- * @author op
- * @version 1.0
- * @description 竖向的tabwidget
- * @createDate 2016/10/11
+ * @author: zjl
+ * @Time:  2017/6/1 15:18
+ * @Desc: 竖向的tabwidget
  */
+
+
 public class VerticalTabWidget extends TabWidget {
 
     public VerticalTabWidget(Context context, AttributeSet attrs) {

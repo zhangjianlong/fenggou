@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/7/21
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc:
  */
+
 public abstract class BAViewModel<T> extends BViewModel<T> {
 
     protected FragmentManager fragmentManager;

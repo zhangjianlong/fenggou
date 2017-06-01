@@ -11,11 +11,11 @@ import com.core.op.lib.BuildConfig;
 import timber.log.Timber;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/8/10
+ * @author: zjl
+ * @Time:  2017/6/1 15:16
+ * @Desc: 
  */
+
 public class BaseApplication extends android.support.multidex.MultiDexApplication {
 
     @Override

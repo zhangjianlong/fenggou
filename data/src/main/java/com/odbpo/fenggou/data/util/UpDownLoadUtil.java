@@ -13,11 +13,11 @@ import okhttp3.RequestBody;
 
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/12/20
+ * @author: zjl
+ * @Time:  2017/6/1 15:16
+ * @Desc: 
  */
+
 public class UpDownLoadUtil {
 
     /**

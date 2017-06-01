@@ -8,11 +8,11 @@ import com.core.op.lib.weight.picker.view.DialogBuilder;
 import com.odbpo.fenggou.BR;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/12/21
+ * @author: zjl
+ * @Time:  2017/6/1 15:12
+ * @Desc:
  */
+
 public class BaseDialog<V extends BDViewModel, T extends ViewDataBinding> extends BDialog<V, T> {
 
     public BaseDialog(DialogBuilder builder, V viewModel) {

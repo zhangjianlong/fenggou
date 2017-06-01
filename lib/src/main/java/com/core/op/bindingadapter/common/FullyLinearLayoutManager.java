@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 /**
- * @author op
- * @version 1.0
- * @description 解决scrollview 嵌套 recycleview不显示问题
- * @createDate 2016/12/28
+ * @author: zjl
+ * @Time:  2017/6/1 15:15
+ * @Desc: 解决scrollview 嵌套 recycleview不显示问题
  */
+
+
 public class FullyLinearLayoutManager extends LinearLayoutManager {
 
     private static final String TAG = FullyLinearLayoutManager.class.getSimpleName();

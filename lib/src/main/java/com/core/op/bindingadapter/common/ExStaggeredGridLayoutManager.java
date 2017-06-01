@@ -6,11 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/12/28
+ * @author: zjl
+ * @Time:  2017/6/1 15:16
+ * @Desc: 
  */
+
 public class ExStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
 
     public ExStaggeredGridLayoutManager(int spanCount, int orientation) {

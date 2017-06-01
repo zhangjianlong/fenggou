@@ -1,6 +1,9 @@
 package com.odbpo.fenggou.data;
 
 
+import com.odbpo.fenggou.data.api.BaseResponse;
+import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
+
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -12,13 +15,16 @@ import retrofit2.http.Part;
 import rx.Observable;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/8/8
+ * @author: zjl
+ * @Time:  2017/6/1 15:12
+ * @Desc: 
  */
 
+
 public interface ApiClient {
+
+    @POST(UriMethod.TOKEN_LOGIN)
+    Observable<BaseResponse<PhoneLoginResultBean>> login(@Body RequestBody requestBody);
 
 
 }

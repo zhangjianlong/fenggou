@@ -4,11 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/3/10
+ * @author: zjl
+ * @Time:  2017/6/1 15:18
+ * @Desc: 
  */
+
 public class Verify {
 
     /**

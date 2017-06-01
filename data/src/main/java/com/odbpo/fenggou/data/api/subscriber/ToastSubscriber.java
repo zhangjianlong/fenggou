@@ -6,11 +6,11 @@ import android.widget.Toast;
 import com.odbpo.fenggou.data.api.subscriber.*;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/7/21
+ * @author: zjl
+ * @Time:  2017/6/1 15:14
+ * @Desc: 
  */
+
 public abstract class ToastSubscriber<T> extends BaseSubscriber<T> {
 
     public ToastSubscriber(Context context) {

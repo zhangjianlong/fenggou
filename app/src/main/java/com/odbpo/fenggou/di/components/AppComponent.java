@@ -19,6 +19,7 @@ import android.app.Activity;
 
 import com.google.gson.Gson;
 import com.odbpo.fenggou.di.modules.AppModule;
+import com.odbpo.fenggou.domain.repository.LoginRepository;
 import com.odbpo.fenggou.global.SlashApplication;
 import com.odbpo.fenggou.data.ApiClient;
 import com.odbpo.fenggou.domain.executor.PostExecutionThread;
@@ -41,6 +42,8 @@ public interface AppComponent {
     PostExecutionThread postExecutionThread();
 
     ApiClient apiClient();
+
+    LoginRepository loginRepository();
 
     Gson gson();
 

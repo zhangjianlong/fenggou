@@ -10,11 +10,11 @@ import com.core.op.lib.weight.picker.view.BasePickerView;
 import com.core.op.lib.weight.picker.view.DialogBuilder;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/12/21
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc:
  */
+
 public abstract class BDialog<V extends BDViewModel, T extends ViewDataBinding> extends BasePickerView {
 
     protected LayoutInflater inflater;

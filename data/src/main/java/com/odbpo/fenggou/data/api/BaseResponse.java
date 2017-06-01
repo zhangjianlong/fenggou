@@ -5,13 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 import static android.R.id.message;
-
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/7/15
+ * @author: zjl
+ * @Time:  2017/6/1 15:13
+ * @Desc: 
  */
+
 public class BaseResponse<T> implements Serializable {
 
     public static final int RESULT_SUCCESS = 1;
@@ -24,7 +23,6 @@ public class BaseResponse<T> implements Serializable {
 
     private T data;
     private int rescode;
-
     private String msg;
 
     public T getData() {

@@ -6,11 +6,11 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/11/8
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc: 
  */
+
 public class PermissionUtil {
 
     public static final int REQUEST_EXTERNAL_STORAGE = 1;

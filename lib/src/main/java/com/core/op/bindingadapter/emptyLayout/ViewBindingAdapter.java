@@ -6,11 +6,11 @@ import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.weight.EmptyLayout;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/10/9
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc:
  */
+
 public final class ViewBindingAdapter {
     /**
      * 设置错误类型

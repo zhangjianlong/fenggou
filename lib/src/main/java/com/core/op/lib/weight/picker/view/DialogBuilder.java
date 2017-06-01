@@ -14,11 +14,11 @@ import com.core.op.lib.weight.picker.utils.PickerViewAnimateUtil;
 import java.util.Arrays;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2017/2/22
+ * @author: zjl
+ * @Time:  2017/6/1 15:18
+ * @Desc: 
  */
+
 public class DialogBuilder {
     private static final int INVALID = -1;
 

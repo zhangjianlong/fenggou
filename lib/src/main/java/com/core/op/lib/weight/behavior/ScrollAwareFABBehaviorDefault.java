@@ -8,11 +8,11 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/11/30
+ * @author: zjl
+ * @Time:  2017/6/1 15:18
+ * @Desc: 
  */
+
 public class ScrollAwareFABBehaviorDefault extends FloatingActionButton.Behavior {
 
     public ScrollAwareFABBehaviorDefault(Context context, AttributeSet attrs) {

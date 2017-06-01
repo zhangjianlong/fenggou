@@ -13,11 +13,11 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/11/30
+ * @author: zjl
+ * @Time:  2017/6/1 15:18
+ * @Desc: 
  */
+
 public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
     private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
     private boolean mIsAnimatingOut = false;

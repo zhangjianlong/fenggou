@@ -6,11 +6,11 @@ import android.widget.Toast;
 
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/3/12
+ * @author: zjl
+ * @Time:  2017/6/1 15:18
+ * @Desc:
  */
+
 public class AppToast {
 
     public static void show(Context context, String message) {

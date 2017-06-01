@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/10/9
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc:
  */
+
 public final class ViewBindingAdapter {
 
     /**

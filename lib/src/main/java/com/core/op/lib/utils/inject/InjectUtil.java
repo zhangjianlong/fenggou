@@ -12,11 +12,12 @@ import com.core.op.lib.AppException;
 import static android.R.attr.fragment;
 
 /**
- * @author op
- * @version 1.0
- * @description view依赖注入
- * @createDate 2016/2/1
+ * @author: zjl
+ * @Time: 2017/6/1 15:18
+ * @Desc: view依赖注入
  */
+
+
 public class InjectUtil {
 
     /**

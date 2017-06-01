@@ -13,11 +13,11 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/11/11
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc: 
  */
+
 public class PreferenceUtil {
 
     private static final String SEPARATOR = "#";

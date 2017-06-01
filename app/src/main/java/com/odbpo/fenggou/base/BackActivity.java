@@ -7,11 +7,11 @@ import android.view.View;
 import com.core.op.lib.base.BAViewModel;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2017/1/5
+ * @author: zjl
+ * @Time:  2017/6/1 15:12
+ * @Desc:
  */
+
 public abstract class BackActivity<V extends BAViewModel, T extends ViewDataBinding> extends BaseActivity<V, T> {
 
     @Override

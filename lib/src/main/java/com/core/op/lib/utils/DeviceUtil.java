@@ -35,11 +35,11 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2015/5/21
+ * @author: zjl
+ * @Time:  2017/6/1 15:18
+ * @Desc:
  */
+
 public class DeviceUtil {
 
     /**

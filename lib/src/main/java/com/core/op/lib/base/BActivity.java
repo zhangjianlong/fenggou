@@ -17,11 +17,11 @@ import javax.inject.Inject;
 
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/2/1
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc:
  */
+
 public abstract class BActivity<V extends BAViewModel, T extends ViewDataBinding> extends RxAppCompatActivity {
 
     protected LayoutInflater inflater;

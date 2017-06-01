@@ -14,11 +14,11 @@ import okio.Okio;
 import okio.Sink;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/12/20
+ * @author: zjl
+ * @Time:  2017/6/1 15:15
+ * @Desc: 
  */
+
 public class ProgressRequestBody extends RequestBody {
 
     //实际的待包装请求体

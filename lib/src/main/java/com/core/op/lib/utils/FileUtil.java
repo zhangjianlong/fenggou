@@ -27,11 +27,11 @@ import java.nio.channels.FileChannel;
 import java.util.List;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2015/6/11
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc: 
  */
+
 public class FileUtil {
 
     /**

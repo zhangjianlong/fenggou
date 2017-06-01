@@ -1,11 +1,12 @@
 package com.odbpo.fenggou.domain.interfaces;
 
 /**
- * @author op
- * @version 1.0
- * @description 上传下载进度监听器
- * @createDate 2016/12/20
+ * @author: zjl
+ * @Time:  2017/6/1 15:13
+ * @Desc: 上传下载进度监听器
  */
+
+
 public interface OnProgressListener {
 
     /**

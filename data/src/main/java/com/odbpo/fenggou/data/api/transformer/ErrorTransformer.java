@@ -9,13 +9,13 @@ import com.odbpo.fenggou.data.api.exception.RepositoryException;
 import rx.Observable;
 import rx.Subscriber;
 
-
 /**
- * @author op
- * @version 1.0
- * @description 对response数据进行拦截处理
- * @createDate 2016/3/24
+ * @author: zjl
+ * @Time:  2017/6/1 15:13
+ * @Desc: 对response数据进行拦截处理
  */
+
+
 public class ErrorTransformer<T> implements Observable.Transformer<BaseResponse<T>, T> {
 
     @Override

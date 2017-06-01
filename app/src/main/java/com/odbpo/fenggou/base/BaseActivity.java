@@ -11,11 +11,11 @@ import com.odbpo.fenggou.global.SlashApplication;
 
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/8/4
+ * @author: zjl
+ * @Time:  2017/6/1 15:12
+ * @Desc:
  */
+
 public class BaseActivity<V extends BAViewModel, T extends ViewDataBinding> extends BActivity<V, T> {
 
     @Override

@@ -45,11 +45,11 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import rx.Observable;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/3/4
+ * @author: zjl
+ * @Time:  2017/6/1 15:13
+ * @Desc: 
  */
+
 public class ApiOption {
 
     private Map<Class, Object> apis;

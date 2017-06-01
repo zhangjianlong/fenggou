@@ -13,11 +13,11 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/8/11
+ * @author: zjl
+ * @Time:  2017/6/1 15:12
+ * @Desc:
  */
+
 public class BaseFragment<V extends BFViewModel, T extends ViewDataBinding> extends BFragment<V, T> {
 
     protected <C> C getComponent(Class<C> componentType) {

@@ -21,11 +21,12 @@ import com.core.op.lib.utils.DateUtil;
 import com.core.op.lib.utils.FileUtil;
 
 /**
- * @author op
- * @version 1.0
- * @description 应用程序异常：用于捕获异常和提示错误信息
- * @createDate 2015/5/21
+ * @author: zjl
+ * @Time: 2017/6/1 15:16
+ * @Desc: 应用程序异常：用于捕获异常和提示错误信息
  */
+
+
 public class AppException extends Exception implements UncaughtExceptionHandler {
 
     /**

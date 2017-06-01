@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/10/10
+ * @author: zjl
+ * @Time:  2017/6/1 15:16
+ * @Desc: 
  */
+
 public class BindingLoopViewPagerAdapter<T> extends BindingViewPagerAdapter<T> {
 
     public BindingLoopViewPagerAdapter(@NonNull ItemViewArg arg) {

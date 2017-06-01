@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/9/12
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc:
  */
+
 public class ViewPagerFragmentAdatper extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;

@@ -14,11 +14,11 @@ import com.google.zxing.Result;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2017/1/13
+ * @author: zjl
+ * @Time: 2017/6/1 15:19
+ * @Desc: 
  */
+
 public abstract class CaptureViewModel<T> extends BAViewModel<T> implements SurfaceHolder.Callback {
 
     protected CameraManager cameraManager;

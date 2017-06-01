@@ -7,11 +7,11 @@ import com.core.op.bindingadapter.common.ItemViewArg;
 
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/9/19
+ * @author: zjl
+ * @Time:  2017/6/1 15:17
+ * @Desc:
  */
+
 public class MultiRecyclerViewAdapter<T> extends BindingRecyclerViewAdapter {
 
     public MultiRecyclerViewAdapter(@NonNull ItemViewArg arg) {

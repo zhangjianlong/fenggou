@@ -5,11 +5,11 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.MenuRes;
 
 /**
- * @author op
- * @version 1.0
- * @description
- * @createDate 2016/9/8
+ * @author: zjl
+ * @Time:  2017/6/1 15:16
+ * @Desc: 
  */
+
 public class NavigationRes {
 
     @ArrayRes
