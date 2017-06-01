@@ -13,6 +13,7 @@
     <color name="check_bg">#f2f2f2</color>
     <color name="un_press_color">#9C27B0</color>
     <color name="light_blue">#6593cb</color>
+    <color name="cmbkb_transparent">#6593cb</color>
 
     <array name="tab_colors">
         <item name="tab_1">#455C65</item>

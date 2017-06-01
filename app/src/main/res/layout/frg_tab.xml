@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.slash.youth.v2.base.tab.TabViewModel" />
+            type="com.odbpo.fenggou.base.tab.TabViewModel" />
     </data>
 
     <LinearLayout

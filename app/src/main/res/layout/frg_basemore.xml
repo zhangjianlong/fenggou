@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.slash.youth.v2.base.list.more.BaseMoreViewModel" />
+            type="com.odbpo.fenggou.base.list.more.BaseMoreViewModel" />
 
         <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>

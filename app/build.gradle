@@ -122,7 +122,6 @@ dependencies {
 //    compile 'com.android.support:cardview-v7:24.2.0'
     compile 'com.jungly:gridPasswordView:0.3'
 //    compile 'com.android.support:design:24.2.0'
-    compile project(':pingpplib:pingpp')
     //GalleryFinal
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
 //    compile 'com.android.support:support-v4:24.2.0'

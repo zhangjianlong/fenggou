@@ -54,6 +54,7 @@ dependencies {
     compile compiles.supportDesgin
     compile compiles.supportCardView
     compile compiles.glide
+    compile compiles.multidex
     compile compiles.viewpagerIndicator
     compile compiles.logansquareConverter
     compile compiles.eventbus
@@ -67,26 +68,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.1'
 }
 
-//uploadArchives {
-//    configuration = configurations.archives
-//    repositories {
-//        mavenDeployer {
-//            snapshotRepository(url: "http://127.0.0.1:8081/nexus/content/repositories/releases/") {
-//                authentication(userName: "admin", password: "admin123")
-//            }
-//            repository(url: "http://127.0.0.1:8081/nexus/content/repositories/snapshots/") {
-//                authentication(userName: "admin", password: "admin123")
-//            }
-//            pom.project {
-//                version '1.0.1'
-//                artifactId 'core'
-//                groupId 'com.core.op'
-//                packaging 'aar'
-//                description 'android core'
-//            }
-//        }
-//    }
-//}
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
