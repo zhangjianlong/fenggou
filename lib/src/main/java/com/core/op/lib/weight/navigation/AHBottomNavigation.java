@@ -277,7 +277,7 @@ public class AHBottomNavigation extends FrameLayout {
                 (items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW)) {
             createClassicItems(linearLayoutContainer);
         } else {
-            createSmallItems(linearLayoutContainer);
+            createClassicItems(linearLayoutContainer);
         }
 
         // Force a request layout after all the items have been created
