@@ -4,6 +4,8 @@ package com.odbpo.fenggou.di.modules;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.odbpo.fenggou.UIThread;
+import com.odbpo.fenggou.data.repository.LoginRepositoryImp;
+import com.odbpo.fenggou.domain.repository.LoginRepository;
 import com.odbpo.fenggou.global.SlashApplication;
 import com.odbpo.fenggou.data.ApiClient;
 import com.odbpo.fenggou.data.UrlRoot;
@@ -50,6 +52,13 @@ public class AppModule {
     @Singleton
     PostExecutionThread providePostExecutionThread(UIThread uiThread) {
         return uiThread;
+    }
+
+
+    @Provides
+    @Singleton
+    LoginRepository loginRepository(LoginRepositoryImp loginRepository) {
+        return loginRepository;
     }
 
 
