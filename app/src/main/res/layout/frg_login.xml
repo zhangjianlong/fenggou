@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"></import>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.main.login.LoginViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        android:weightSum="4">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.mm.normal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/app.padding.normal"
+                    android:text="@string/app.main.login"
+                    app:clickCommand="@{viewModel.showLogin}" />
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.mm.normal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/app.padding.normal"
+                    android:text="@string/app.main.register"
+                    app:clickCommand="@{viewModel.showRegister}" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <LinearLayout
+                android:id="@+id/left_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="@{viewModel.showRegisterLayout?View.VISIBLE:View.GONE}">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/app.main.register.phone" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/app.main.register.phone.hint"
+                        android:text="@={viewModel.phone}"
+                        android:textColor="@color/app.text.black333"
+                        android:textColorHint="@color/app.text.black999" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/app.main.register.image.code" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/app.main.register.image.code.hint"
+                        android:text="@={viewModel.imageCode}"
+                        android:textColor="@color/app.text.black333"
+                        android:textColorHint="@color/app.text.black999" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/app.main.register.verify.code" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/app.main.register.verify.code.hint"
+                        android:text="@={viewModel.verifyCode}"
+                        android:textColor="@color/app.text.black333"
+                        android:textColorHint="@color/app.text.black999" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/app.main.register.psd" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/app.main.register.psd.hint"
+                        android:text="@={viewModel.psd}"
+                        android:textColor="@color/app.text.black333"
+                        android:textColorHint="@color/app.text.black999" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/app.main.register.psd.again" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/app.main.register.psd.again.hint"
+                        android:text="@={viewModel.psdAgain}"
+                        android:textColor="@color/app.text.black333"
+                        android:textColorHint="@color/app.text.black999" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <CheckBox
+                        android:id="@+id/iv_check_protocol_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@{viewModel.agreeAgreement}"
+                        android:gravity="center"
+                        app:clickCommand="@{viewModel.agreeProtocol}" />
+
+                    <TextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/app.main.register.agredd"
+                        app:clickCommand="@{viewModel.protocol}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:clickCommand="@{viewModel.register}">
+
+                    <TextView
+                        style="@style/App.Theme.TextAppearance.mw.normal"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        android:layout_marginRight="@dimen/app.margin.normal"
+                        android:background="@drawable/btn_red_background"
+                        android:gravity="center"
+                        android:padding="@dimen/app.padding.large"
+                        android:text="@string/app.main.register" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/right_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="@{viewModel.showRegisterLayout?View.GONE:View.VISIBLE}">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/app.main.login.user.name" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/app.main.login.user.name.hint"
+                        android:text="@={viewModel.phone}"
+                        android:textColor="@color/app.text.black333"
+                        android:textColorHint="@color/app.text.black999" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/app.main.login.user.psd" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        style="@style/App.Theme.TextAppearance.ww.normal"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/app.main.login.user.psd.hint"
+                        android:text="@={viewModel.phone}"
+                        android:textColor="@color/app.text.black333"
+                        android:textColorHint="@color/app.text.black999" />
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                    android:gravity="right"
+                    android:padding="@dimen/app.padding.large13"
+                    android:text="@string/app.main.login.forget.psd" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:clickCommand="@{viewModel.register}">
+
+                    <TextView
+                        style="@style/App.Theme.TextAppearance.mw.normal"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        android:layout_marginRight="@dimen/app.margin.normal"
+                        android:background="@drawable/btn_red_background"
+                        android:gravity="center"
+                        android:padding="@dimen/app.padding.large"
+                        android:text="@string/app.main.login" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</layout>
