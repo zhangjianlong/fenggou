@@ -22,7 +22,10 @@
         <activity android:name=".view.impl.MIne" />
         <activity android:name=".view.impl.Mine" />
         <activity android:name=".view.impl.Shopping" />
-        <activity android:name=".view.impl.Product"></activity>
+        <activity android:name=".view.impl.Product" />
+        <activity android:name=".view.impl.Login" />
+        <activity android:name=".view.impl.info" />
+        <activity android:name=".view.impl.Info"></activity>
     </application>
 
 </manifest>

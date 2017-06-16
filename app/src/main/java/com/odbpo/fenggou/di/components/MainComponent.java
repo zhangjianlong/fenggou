@@ -8,6 +8,8 @@ import com.odbpo.fenggou.di.modules.MainModule;
 import com.odbpo.fenggou.feature.main.MainActivity;
 import com.core.op.lib.di.PerActivity;
 import com.odbpo.fenggou.feature.main.category.CategoryFragment;
+import com.odbpo.fenggou.feature.main.info.InfoFragment;
+import com.odbpo.fenggou.feature.main.login.LoginFragment;
 import com.odbpo.fenggou.feature.main.mine.MineFragment;
 import com.odbpo.fenggou.feature.main.product.ProductFragment;
 import com.odbpo.fenggou.feature.main.shopping.ShoppingFragment;
@@ -26,5 +28,9 @@ public interface MainComponent extends ActivityComponent {
     void inject(ShoppingFragment fragment);
 
     void inject(MineFragment fragment);
+
+    void inject(LoginFragment fragment);
+
+    void inject(InfoFragment fragment);
 
 }

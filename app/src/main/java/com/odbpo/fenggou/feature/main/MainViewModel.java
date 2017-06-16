@@ -52,5 +52,6 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
 
     public final ReplyCommand<ViewBindingAdapter.NavigationDataWrapper> selectedCommand = new ReplyCommand<>(p -> {
         selectPosition.set(p.position);
+
     });
 }

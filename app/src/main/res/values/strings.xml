@@ -22,5 +22,25 @@
     <string name="app.bottom.menu.tab3">购物车</string>
     <string name="app.bottom.menu.tab4">我的</string>
 
+    <!--loginFrg-->
+    <string name="app.main.login">登录</string>
+    <string name="app.main.register">注册</string>
+    <string name="app.main.register.agredd">请同意用户协议</string>
+    <string name="app.main.register.phone">手机号码</string>
+    <string name="app.main.register.phone.hint">输入手机号码</string>
+    <string name="app.main.register.image.code">图片验证</string>
+    <string name="app.main.register.image.code.hint">输入验证码</string>
+    <string name="app.main.register.verify.code">验证码</string>
+    <string name="app.main.register.verify.code.hint">输入验证码</string>
+    <string name="app.main.register.psd">密码</string>
+    <string name="app.main.register.psd.hint">设置密码</string>
+    <string name="app.main.register.psd.again">确认密码</string>
+    <string name="app.main.register.psd.again.hint">再次输入密码</string>
+    <string name="app.main.login.user.name">用户名</string>
+    <string name="app.main.login.user.name.hint">账号/手机号码</string>
+    <string name="app.main.login.user.psd">密码</string>
+    <string name="app.main.login.user.psd.hint">请输入密码</string>
+    <string name="app.main.login.forget.psd">忘记密码？</string>
+
 
 </resources>
