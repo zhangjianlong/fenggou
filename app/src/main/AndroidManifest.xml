@@ -14,6 +14,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.impl.Category" />
+        <activity android:name=".view.impl.Mine" />
+        <activity android:name=".view.impl.Product" />
+        <activity android:name=".view.impl.Shopping" />
+        <activity android:name=".view.impl.Category" />
+        <activity android:name=".view.impl.MIne" />
+        <activity android:name=".view.impl.Mine" />
+        <activity android:name=".view.impl.Shopping" />
+        <activity android:name=".view.impl.Product"></activity>
     </application>
 
 </manifest>

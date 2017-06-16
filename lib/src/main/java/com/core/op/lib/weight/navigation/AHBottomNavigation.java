@@ -373,11 +373,11 @@ public class AHBottomNavigation extends FrameLayout {
         }
 
         float itemWidth = layoutWidth / items.size();
-        if (itemWidth < minWidth) {
-            itemWidth = minWidth;
-        } else if (itemWidth > maxWidth) {
-            itemWidth = maxWidth;
-        }
+//        if (itemWidth < minWidth) {
+//            itemWidth = minWidth;
+//        } else if (itemWidth > maxWidth) {
+//            itemWidth = maxWidth;
+//        }
 
         float activeSize = resources.getDimension(R.dimen.bottom_navigation_text_size_active);
         float inactiveSize = resources.getDimension(R.dimen.bottom_navigation_text_size_inactive);

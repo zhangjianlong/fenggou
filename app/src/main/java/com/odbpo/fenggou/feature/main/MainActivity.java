@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.core.op.lib.di.HasComponent;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.base.BaseActivity;
 import com.odbpo.fenggou.databinding.ActMainBinding;
@@ -18,7 +19,7 @@ import com.core.op.lib.utils.inject.RootView;
 import javax.inject.Inject;
 
 @RootView(R.layout.act_main)
-public final class MainActivity extends BaseActivity<MainViewModel, ActMainBinding> {
+public final class MainActivity extends BaseActivity<MainViewModel, ActMainBinding> implements HasComponent<MainComponent> {
 
     MainComponent component;
 
@@ -46,5 +47,10 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
 
     @AfterViews
     void afterViews() {
+    }
+
+    @Override
+    public MainComponent getComponent() {
+        return component;
     }
 }
