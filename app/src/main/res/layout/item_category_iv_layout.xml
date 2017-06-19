@@ -1,0 +1,37 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.main.category.CategoryItemIvViewModel" />
+
+        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
+    </data>
+
+
+    <LinearLayout
+        style="@style/App.Theme.Linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:uri="@{viewModel.imageUri}" />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/App.Theme.TextAppearance.ww.normal.black999"
+            android:fadingEdge="none"
+            android:gravity="center"
+            android:padding="@dimen/app.padding.normal"
+            android:text="@{viewModel.thirdContent}" />
+
+
+    </LinearLayout>
+
+</layout>
