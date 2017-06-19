@@ -30,7 +30,6 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
     }
 
-
     public final ObservableField<String> phone = new ObservableField<>();
     public final ObservableField<String> imageCode = new ObservableField<>();
     public final ObservableField<String> verifyCode = new ObservableField<>();

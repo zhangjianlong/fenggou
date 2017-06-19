@@ -45,7 +45,7 @@ public class MessageKey {
     public static final String PUB_CITY_SELECTED = "PUB_CITY_SELECTED";
     //发布删除图片
     public static final String PUB_DEL_IMG = "PUB_DEL_IMG";
-    //点击一级标签
+    //点击产品列表一级目录
     public static final String LABEL_SELECT_STAIR = "LABEL_SELECT_STAIR";
     //点击二级标签
     public static final String LABEL_SELECT_SCOND = "LABEL_SELECT_SCOND";

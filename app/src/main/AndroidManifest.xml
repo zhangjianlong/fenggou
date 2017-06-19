@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.odbpo.fenggou">
 
+    <!-- 用于访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:name=".global.SlashApplication"
         android:icon="@mipmap/slash_helper_square"
@@ -14,18 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.impl.Category" />
-        <activity android:name=".view.impl.Mine" />
-        <activity android:name=".view.impl.Product" />
-        <activity android:name=".view.impl.Shopping" />
-        <activity android:name=".view.impl.Category" />
-        <activity android:name=".view.impl.MIne" />
-        <activity android:name=".view.impl.Mine" />
-        <activity android:name=".view.impl.Shopping" />
-        <activity android:name=".view.impl.Product" />
-        <activity android:name=".view.impl.Login" />
-        <activity android:name=".view.impl.info" />
-        <activity android:name=".view.impl.Info"></activity>
     </application>
 
 </manifest>
