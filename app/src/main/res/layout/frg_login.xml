@@ -25,6 +25,16 @@
             android:layout_weight="1"
             android:background="@color/colorPrimary">
 
+
+            <com.core.op.lib.weight.ShapedImageView
+                android:layout_centerInParent="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="fitXY"
+                app:round_radius="@dimen/app.margin.small5"
+                app:uri="@{viewModel.imageUri}" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -290,12 +300,12 @@
                     style="@style/App.Theme.TextAppearance.mw.normal.black999"
                     android:gravity="right"
                     android:padding="@dimen/app.padding.large13"
-                    android:text="@string/app.main.login.forget.psd" />
+                    android:text="@string/app.main.login.forget.psd"
+                    app:clickCommand="@{viewModel.forgetPsd}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:clickCommand="@{viewModel.register}">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/App.Theme.TextAppearance.mw.normal"
@@ -304,7 +314,8 @@
                         android:background="@drawable/btn_red_background"
                         android:gravity="center"
                         android:padding="@dimen/app.padding.large"
-                        android:text="@string/app.main.login" />
+                        android:text="@string/app.main.login"
+                        app:clickCommand="@{viewModel.register}" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>

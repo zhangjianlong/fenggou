@@ -62,7 +62,6 @@ public class CategoryItemViewModel extends BViewModel {
         thirdItemViewModels.clear();
         getThirdLableBeens(data.getTag3()).subscribe(data1 -> {
             thirdItemViewModels.add(new CategoryItemIvViewModel(activity, data1));
-
         }, error -> {
         }, () -> {
 

@@ -71,20 +71,41 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
 
     private void initData() {
         List<CategoryResultBean.Tag3> tag3s = new ArrayList<>();
-        for (int i = 0; i <= 10; i++) {
-            tag3s.add(new CategoryResultBean.Tag3("tag3-" + i, "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1497864298066&di=be32a155347b62af416b33f5d65f7e75&imgtype=0&src=http%3A%2F%2Fwww.southcn.com%2Fent%2Fceleb4%2Fzhanghanyun%2Fpics%2F200611030698_1389012.jpg"));
-        }
+        List<CategoryResultBean.Tag3> tag3s1 = new ArrayList<>();
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img0.imgtn.bdimg.com/it/u=556033446,1973250852&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
+
+
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=1330670873,411940905&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
 
         List<CategoryResultBean.Tag2> tag2s = new ArrayList<>();
+        List<CategoryResultBean.Tag2> tag2s1 = new ArrayList<>();
         for (int i = 0; i <= 10; i++) {
-            tag2s.add(new CategoryResultBean.Tag2("tag2-" + i, tag3s));
+            tag2s.add(new CategoryResultBean.Tag2("tag2" + i, tag3s));
         }
+
+        tag2s1.add(new CategoryResultBean.Tag2("tag2-0", tag3s1));
 
 
         List<CategoryResultBean.Tag1> tag1s = new ArrayList<>();
-        for (int i = 0; i <= 10; i++) {
-            tag1s.add(new CategoryResultBean.Tag1("tag1-" + i, tag2s));
-        }
+        tag1s.add(new CategoryResultBean.Tag1("精品酒类", tag2s));
+        tag1s.add(new CategoryResultBean.Tag1("个护化妆", tag2s1));
 
         categoryResultBean = new CategoryResultBean();
         categoryResultBean.setTag1(tag1s);
@@ -140,8 +161,6 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
     private Observable<CategoryResultBean.Tag2> getSecondLableBeens(List<CategoryResultBean.Tag2> tag2) {
         return Observable.from(tag2);
     }
-
-
 
 
 }

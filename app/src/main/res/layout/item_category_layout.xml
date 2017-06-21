@@ -21,8 +21,9 @@
 
         <android.support.v7.widget.AppCompatTextView
             style="@style/App.Theme.TextAppearance.mw.normal.black999"
+            android:background="@color/app.theme.background_f3f3f3"
             android:fadingEdge="none"
-            android:gravity="center"
+            android:gravity="left"
             android:padding="@dimen/app.padding.normal"
             android:text="@{viewModel.senondContent}" />
 

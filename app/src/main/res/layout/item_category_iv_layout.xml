@@ -11,27 +11,33 @@
         <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>
 
-
-    <LinearLayout
-        style="@style/App.Theme.Linear"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:uri="@{viewModel.imageUri}" />
+        android:layout_marginBottom="@dimen/app.margin.normal"
+        android:layout_marginLeft="@dimen/app.margin.normal">
 
 
         <android.support.v7.widget.AppCompatTextView
-            style="@style/App.Theme.TextAppearance.ww.normal.black999"
+            style="@style/App.Theme.TextAppearance.mw.normal.white"
+            android:layout_below="@+id/iv"
+            android:layout_gravity="bottom"
+            android:background="@color/app.text.black.alpha.45"
             android:fadingEdge="none"
             android:gravity="center"
-            android:padding="@dimen/app.padding.normal"
+            android:padding="@dimen/app.padding.small"
             android:text="@{viewModel.thirdContent}" />
 
 
-    </LinearLayout>
+        <com.core.op.lib.weight.ShapedImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:round_radius="@dimen/app.margin.small5"
+            app:uri="@{viewModel.imageUri}" />
+
+    </RelativeLayout>
+
 
 </layout>

@@ -42,5 +42,14 @@
     <string name="app.main.login.user.psd.hint">请输入密码</string>
     <string name="app.main.login.forget.psd">忘记密码？</string>
 
+    <!--ForgetAct-->
+    <string name="app.forget.title">忘记密码</string>
+    <string name="app.forget.verify.text">验证码</string>
+    <string name="app.forget.verify.hint">请输入手机号码</string>
+    <string name="app.forget.verify.code.hint">请输入验证码</string>
+    <string name="app.forget.psd.hint">请输入密码</string>
+    <string name="app.forget.psd.again.hint">请确认密码</string>
+    <string name="app.forget.submit">提交</string>
+
 
 </resources>

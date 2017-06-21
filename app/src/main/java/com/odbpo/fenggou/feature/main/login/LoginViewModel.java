@@ -12,6 +12,7 @@ import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgLoginBinding;
+import com.odbpo.fenggou.feature.forget.ForgetActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
@@ -35,8 +36,9 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
     public final ObservableField<String> verifyCode = new ObservableField<>();
     public final ObservableField<String> psd = new ObservableField<>();
     public final ObservableField<String> psdAgain = new ObservableField<>();
+    public final ObservableField<String> imageUri = new ObservableField<>("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1498020154&di=354e0947d9d994db9cd65e630cde85e7&src=http://pic7.nipic.com/20100519/4862714_212100033649_2.jpg");
     public final ObservableField<Boolean> agreeAgreement = new ObservableField<>(true);
-    public final ObservableBoolean showRegisterLayout = new ObservableBoolean(true);
+    public final ObservableBoolean showRegisterLayout = new ObservableBoolean(false);
 
 
     public final ReplyCommand showLogin = new ReplyCommand(() -> {
@@ -68,6 +70,11 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
         ));
 
 
+    });
+
+
+    public final ReplyCommand forgetPsd = new ReplyCommand(() -> {
+        ForgetActivity.instance(activity);
     });
 
 

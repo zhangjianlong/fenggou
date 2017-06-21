@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.forget.ForgetViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app.theme.background_ddd"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app.theme.colorPrimary"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/include_toolbar_alpha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:toolTitle="@{viewModel.title}" />
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="@string/app.forget.verify.hint"
+                android:padding="@dimen/app.padding.large"
+                android:textColorHint="@color/app.text.hint" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.white"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/app.margin.normal"
+                android:background="@drawable/circular_btn_red_background"
+                android:padding="@dimen/app.padding.normal"
+                android:text="@{viewModel.verifyText}"
+                app:clickCommand="@{viewModel.getVerifyCode}" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="@string/app.forget.verify.code.hint"
+                android:padding="@dimen/app.padding.large"
+                android:textColorHint="@color/app.text.hint" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="@string/app.forget.psd.hint"
+                android:padding="@dimen/app.padding.large"
+                android:textColorHint="@color/app.text.hint" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="@string/app.forget.psd.again.hint"
+                android:padding="@dimen/app.padding.large"
+                android:textColorHint="@color/app.text.hint" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/app.margin.normal">
+
+            <TextView
+                style="@style/App.Theme.TextAppearance.mw.normal"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/app.margin.normal"
+                android:layout_marginRight="@dimen/app.margin.normal"
+                android:background="@drawable/btn_red_background"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.large"
+                android:text="@string/app.forget.submit"
+                app:clickCommand="@{viewModel.submit}" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
