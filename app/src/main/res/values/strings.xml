@@ -41,6 +41,8 @@
     <string name="app.main.login.user.psd">密码</string>
     <string name="app.main.login.user.psd.hint">请输入密码</string>
     <string name="app.main.login.forget.psd">忘记密码？</string>
+    <string name="app.main.login.phone.empty">手机号码不能为空</string>
+    <string name="app.main.login.psd.empty">密码不能为空</string>
 
     <!--ForgetAct-->
     <string name="app.forget.title">忘记密码</string>
@@ -50,6 +52,11 @@
     <string name="app.forget.psd.hint">请输入密码</string>
     <string name="app.forget.psd.again.hint">请确认密码</string>
     <string name="app.forget.submit">提交</string>
+
+    <!--Search-->
+    <string name="app.search.default">默认</string>
+    <string name="app.search.price">价格</string>
+    <string name="app.search.sale">销量</string>
 
 
 </resources>

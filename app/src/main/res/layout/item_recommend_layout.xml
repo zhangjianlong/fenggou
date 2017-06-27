@@ -1,0 +1,43 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.main.info.InfoItemViewModel" />
+
+        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
+    </data>
+
+
+    <LinearLayout
+        style="@style/App.Theme.Linear"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/app.padding.normal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:uri="@{viewModel.recommendProduct.productUrl}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/App.Theme.TextAppearance.mw.normal.black999"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@{viewModel.recommendProduct.productName}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/App.Theme.TextAppearance.mw.normal.black999"
+            android:fadingEdge="none"
+            android:gravity="center"
+            android:text="@{viewModel.recommendProduct.productPrice}"
+            android:textColor="@color/colorAccent" />
+
+
+    </LinearLayout>
+
+</layout>

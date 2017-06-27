@@ -10,7 +10,7 @@ import com.trello.rxlifecycle.components.support.RxFragment;
 
 /**
  * @author: zjl
- * @Time:  2017/6/1 15:18
+ * @Time: 2017/6/1 15:18
  * @Desc:
  */
 
@@ -43,6 +43,12 @@ public abstract class BFViewModel<T> extends BViewModel<T> {
     public void addFragment(int containerViewId, Fragment fragment) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(containerViewId, fragment);
+        fragmentTransaction.commit();
+    }
+
+    public void replaceFragment(int containerViewId, Fragment fragment) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(containerViewId, fragment);
         fragmentTransaction.commit();
     }
 

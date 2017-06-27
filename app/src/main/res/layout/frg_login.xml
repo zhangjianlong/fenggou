@@ -27,9 +27,9 @@
 
 
             <com.core.op.lib.weight.ShapedImageView
-                android:layout_centerInParent="true"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_centerInParent="true"
                 android:scaleType="fitXY"
                 app:round_radius="@dimen/app.margin.small5"
                 app:uri="@{viewModel.imageUri}" />
@@ -46,6 +46,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:padding="@dimen/app.padding.normal"
                     android:text="@string/app.main.login"
@@ -56,6 +57,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:padding="@dimen/app.padding.normal"
                     android:text="@string/app.main.register"
@@ -265,7 +267,7 @@
                         android:background="@null"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.main.login.user.name.hint"
-                        android:text="@={viewModel.phone}"
+                        android:text="@={viewModel.userName}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
@@ -291,13 +293,14 @@
                         android:background="@null"
                         android:gravity="right|center_vertical"
                         android:hint="@string/app.main.login.user.psd.hint"
-                        android:text="@={viewModel.phone}"
+                        android:text="@={viewModel.psd}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
                 </RelativeLayout>
 
                 <android.support.v7.widget.AppCompatTextView
                     style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="right"
                     android:padding="@dimen/app.padding.large13"
                     android:text="@string/app.main.login.forget.psd"
@@ -315,7 +318,7 @@
                         android:gravity="center"
                         android:padding="@dimen/app.padding.large"
                         android:text="@string/app.main.login"
-                        app:clickCommand="@{viewModel.register}" />
+                        app:clickCommand="@{viewModel.login}" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>

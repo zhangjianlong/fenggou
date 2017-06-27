@@ -1,45 +1,60 @@
-package com.odbpo.fenggou.feature.main.category;
+package com.odbpo.fenggou.feature.search;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.StackView;
 
 import com.core.op.Static;
 import com.odbpo.fenggou.R;
-import com.odbpo.fenggou.base.BaseFragment;
-import com.odbpo.fenggou.databinding.FrgCategoryBinding;
-import com.odbpo.fenggou.di.components.MainComponent;
+import com.odbpo.fenggou.base.BackActivity;
+import com.odbpo.fenggou.base.BaseActivity;
+import com.odbpo.fenggou.databinding.ActSearchBinding;
+import com.odbpo.fenggou.di.components.DaggerSearchComponent;
+import com.odbpo.fenggou.di.components.SearchComponent;
+import com.odbpo.fenggou.di.modules.SearchModule;
+
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
 import com.core.op.lib.utils.inject.RootView;
 
 import java.lang.reflect.Field;
-import java.util.Observable;
 
 import javax.inject.Inject;
 
-import static com.odbpo.fenggou.R.id.serachview;
+@RootView(R.layout.act_search)
+public final class SearchActivity extends BackActivity<SearchViewModel, ActSearchBinding> {
 
-@RootView(R.layout.frg_category)
-public final class CategoryFragment extends BaseFragment<CategoryViewModel, FrgCategoryBinding> {
+    SearchComponent component;
 
-    public static CategoryFragment instance() {
-        return new CategoryFragment();
+    public final static void instance(Context context) {
+        instance(context, null);
+    }
+
+    public final static void instance(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        if (bundle != null) {
+            intent.putExtra("data", bundle);
+        }
+        context.startActivity(intent);
     }
 
     @BeforeViews
     void beforViews() {
-        getComponent(MainComponent.class).inject(this);
+        component = DaggerSearchComponent.builder()
+                .appComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .searchModule(new SearchModule())
+                .build();
+        component.inject(this);
     }
-
 
     @AfterViews
     void afterViews() {
-        ((AppCompatActivity) getActivity()).setSupportActionBar(binding.toolbar);
         SearchView searchView = binding.serachview;
         searchView.setIconifiedByDefault(false);
         SearchView.SearchAutoComplete textView = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
@@ -60,5 +75,11 @@ public final class CategoryFragment extends BaseFragment<CategoryViewModel, FrgC
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    protected Toolbar setToolBar() {
+        return binding.toolbar;
     }
 }

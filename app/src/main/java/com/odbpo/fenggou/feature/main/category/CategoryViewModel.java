@@ -5,6 +5,8 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.nfc.Tag;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 
 import com.core.op.bindingadapter.common.BaseItemViewSelector;
 import com.core.op.bindingadapter.common.ItemView;
@@ -16,6 +18,7 @@ import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgCategoryBinding;
 import com.odbpo.fenggou.domain.bean.CategoryResultBean;
+import com.odbpo.fenggou.feature.search.SearchActivity;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle.components.support.RxFragment;
@@ -43,10 +46,30 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
         Messenger.getDefault().register(this, MessageKey.LABEL_SELECT_STAIR, Integer.class, a -> {
             upadataView((int) a);
         });
+        Messenger.getDefault().register(this, MessageKey.SEARCH, () -> {
+            SearchActivity.instance(activity);
+        });
 
+
+        initSearchView();
         initData();
         upadataView(0);
 
+    }
+
+    private void initSearchView() {
+        binding.serachview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SearchActivity.instance(activity);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     private CategoryItemViewModel categoryItemViewModel;

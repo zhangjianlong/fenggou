@@ -31,6 +31,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/shape_search_bg"
                 android:iconifiedByDefault="false"
+                android:imeOptions="actionSearch"
                 android:searchIcon="@mipmap/search_zoom_icon" />
         </android.support.v7.widget.Toolbar>
 

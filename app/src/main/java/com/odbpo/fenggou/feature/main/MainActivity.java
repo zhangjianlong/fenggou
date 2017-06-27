@@ -3,6 +3,7 @@ package com.odbpo.fenggou.feature.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.core.op.lib.di.HasComponent;
 import com.odbpo.fenggou.R;
@@ -22,6 +23,8 @@ import javax.inject.Inject;
 public final class MainActivity extends BaseActivity<MainViewModel, ActMainBinding> implements HasComponent<MainComponent> {
 
     MainComponent component;
+    //记录第一次点击的时间
+    private long clickTime = 0;
 
     public final static void instance(Context context) {
         instance(context, null);
@@ -52,5 +55,16 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
     @Override
     public MainComponent getComponent() {
         return component;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - clickTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次后退键退出程序", Toast.LENGTH_SHORT).show();
+            clickTime = System.currentTimeMillis();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

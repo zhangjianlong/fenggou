@@ -339,6 +339,10 @@
         <item name="android:textColor">@color/app.text.black333</item>
     </style>
 
+    <style name="App.Theme.TextAppearance.mw.normal.black333">
+        <item name="android:textColor">@color/app.text.black333</item>
+    </style>
+
     <style name="App.Theme.TextAppearance.ww.normal.blue">
         <item name="android:textColor">@color/app.theme.colorPrimary</item>
     </style>

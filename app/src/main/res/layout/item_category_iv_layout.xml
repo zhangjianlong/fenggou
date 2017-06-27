@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/app.margin.normal"
-        android:layout_marginLeft="@dimen/app.margin.normal">
+        android:layout_marginLeft="@dimen/app.margin.normal"
+        app:clickCommand="@{viewModel.search}">
 
 
         <android.support.v7.widget.AppCompatTextView
