@@ -13,6 +13,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/App.Theme.Widget.Toolbar"
+        android:background="@color/app.theme.colorPrimary"
         app:navigationIcon="@mipmap/nav_back"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="">

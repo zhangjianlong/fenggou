@@ -2,20 +2,17 @@ package com.odbpo.fenggou.feature.main.info;
 
 
 import android.databinding.ObservableField;
-import android.support.v4.app.FragmentManager;
 
 import com.core.op.bindingadapter.common.ItemView;
-import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.base.BFViewModel;
+import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgInfoBinding;
-import com.odbpo.fenggou.domain.bean.CategoryResultBean;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
-import com.odbpo.fenggou.feature.main.category.CategoryItemViewModel;
+import com.odbpo.fenggou.feature.profile.ProfileActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.trello.rxlifecycle.components.support.RxFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
+
 
 @PerActivity
 public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
@@ -79,6 +77,11 @@ public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
     private Observable<RecommendProductBean> getproducts() {
         return Observable.from(recommendProductBeanList);
     }
+
+    public ReplyCommand profileAct = new ReplyCommand(() -> {
+        ProfileActivity.instance(activity);
+
+    });
 
 
 }

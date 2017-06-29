@@ -58,5 +58,35 @@
     <string name="app.search.price">价格</string>
     <string name="app.search.sale">销量</string>
 
+    <!--Info-->
+    <string name="app.info.attention">我的关注</string>
+    <string name="app.info.history">浏览历史</string>
+    <string name="app.info.order">订单</string>
+    <string name="app.info.all.order">全部订单</string>
+    <string name="app.info.new.pay">新付款</string>
+    <string name="app.info.wait.receiving">待收货</string>
+    <string name="app.info.wait.evaluate">待评价</string>
+    <string name="app.info.refund">退款/退货</string>
+    <string name="app.info.my.property">我的资产</string>
+    <string name="app.info.advance.charge">预付款</string>
+    <string name="app.info.account.details">账户明细</string>
+    <string name="app.info.integration">积分</string>
+    <string name="app.info.discount.coupon">优惠券</string>
+    <string name="app.info.recommend">猜你喜欢</string>
+
+    <!--ProfileAct-->
+    <string name="app.profile.title">个人信息</string>
+    <string name="app.profile.username">用户名</string>
+    <string name="app.profile.member.Levels">会员级别</string>
+    <string name="app.profile.nick.name">昵称</string>
+    <string name="app.profile.name">姓名</string>
+    <string name="app.profile.gender">性别</string>
+    <string name="app.profile.phone">手机号码</string>
+    <string name="app.profile.qq">QQ号码</string>
+    <string name="app.profile.recommend.register">推荐注册</string>
+    <string name="app.profile.delivery.address">收货地址管理</string>
+    <string name="app.profile.account">账号安全</string>
+    <string name="app.profile.versiuon">版本号</string>
+
 
 </resources>

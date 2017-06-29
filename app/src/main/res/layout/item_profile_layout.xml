@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="leftContent"
+            type="java.lang.String" />
+
+        <variable
+            name="rightContent"
+            type="java.lang.String" />
+
+        <variable
+            name="show"
+            type="boolean" />
+
+
+        <import type="android.view.View" />
+        />
+
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/app.padding.large12">
+
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/App.Theme.TextAppearance.ww.normal.black999"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{leftContent}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/App.Theme.TextAppearance.ww.normal.black999"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@{rightContent}" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/app.margin.normal"
+            android:background="@mipmap/icon_arrow_right"
+            android:visibility="@{show?View.VISIBLE:View.GONE}" />
+    </LinearLayout>
+
+
+</layout>

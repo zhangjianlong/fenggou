@@ -9,21 +9,6 @@
         <item name="colorPrimary">@color/app.theme.colorPrimary</item>
         <item name="colorPrimaryDark">@color/app.theme.colorPrimaryDark</item>
         <item name="colorAccent">@color/app.theme.colorAccent</item>
-
-        <item name="android:textColorPrimary">@color/app.theme.textColorPrimary</item>
-        <item name="android:textColorSecondary">@color/app.theme.textColorSecondary</item>
-
-        <item name="android:windowBackground">@color/app.theme.background</item>
-
-        <item name="colorControlNormal">@color/app.text.black999</item>
-        <item name="colorControlActivated">@color/app.theme.colorControlActivated</item>
-        <item name="colorControlHighlight">@color/app.theme.colorControlHighlight</item>
-
-        <item name="android:statusBarColor" tools:targetApi="lollipop">
-            @android:color/transparent
-            <!--@color/app.theme.actionMode.statusBarColor-->
-        </item>
-
         <!-- ActionMode -->
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeStyle">@style/App.Theme.Widget.ActionMode</item>

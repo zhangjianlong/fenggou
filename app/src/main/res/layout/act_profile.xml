@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.profile.ProfileViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/include_toolbar_alpha"
+            app:toolTitle="@{viewModel.toolTitle}"></include>
+
+        <include
+            android:id="@+id/item1"
+            layout="@layout/item_profile_layout"
+            app:leftContent="@{viewModel.title}"
+            app:show="@{viewModel.show1}"
+            app:rightContent="@{viewModel.title}"></include>
+
+
+        <include
+            android:id="@+id/item1"
+            layout="@layout/item_profile_layout"
+            app:leftContent="@{viewModel.title}"
+            app:show="@{viewModel.show}"
+            app:rightContent="@{viewModel.title}"></include>
+
+        <include
+            android:id="@+id/item1"
+            layout="@layout/item_profile_layout"
+            app:leftContent="@{viewModel.title}"
+            app:rightContent="@{viewModel.title}"></include>
+
+        <include
+            android:id="@+id/item1"
+            layout="@layout/item_profile_layout"
+            app:leftContent="@{viewModel.title}"
+            app:rightContent="@{viewModel.title}"></include>
+    </LinearLayout>
+</layout>

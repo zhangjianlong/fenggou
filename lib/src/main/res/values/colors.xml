@@ -35,7 +35,6 @@
     <color name="app.theme.gradientColor">#507E9F</color>
     <color name="app.theme.colorControlActivated">#31C5E4</color>
     <color name="app.theme.colorControlHighlight">#DADADA</color>
-
     <color name="app.theme.colorPrimary">#ff445a</color><!--toolbar背景顏色-->
     <color name="app.theme.colorPrimaryDark">#9e0000</color><!--状态栏背景顏色-->
     <color name="app.theme.colorAccent">#ffffff</color><!--字体顏色-->

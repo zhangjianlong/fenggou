@@ -1,6 +1,11 @@
 package com.odbpo.fenggou.base;
 
 import android.databinding.ViewDataBinding;
+import android.graphics.Color;
+import android.os.Build;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.base.BActivity;
