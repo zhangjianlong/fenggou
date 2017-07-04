@@ -82,11 +82,10 @@
                 android:layout_height="230dp">
 
                 <FrameLayout
-                    android:background="@color/app.theme.colorPrimary"
                     android:id="@+id/fl"
                     android:layout_width="match_parent"
                     android:layout_height="210dp"
-                   ></FrameLayout>
+                    android:background="@color/app.theme.colorPrimary"></FrameLayout>
 
                 <com.core.op.lib.weight.CircleImageView
                     android:id="@+id/iv"
@@ -117,12 +116,12 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:paddingTop="26dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/app.margin.normal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingTop="26dp">
 
                     <com.core.op.lib.weight.CircleImageView
                         android:layout_width="50dp"

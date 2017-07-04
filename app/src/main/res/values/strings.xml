@@ -57,6 +57,7 @@
     <string name="app.search.default">默认</string>
     <string name="app.search.price">价格</string>
     <string name="app.search.sale">销量</string>
+    <string name="app.search">搜索</string>
 
     <!--Info-->
     <string name="app.info.attention">我的关注</string>
@@ -86,7 +87,7 @@
     <string name="app.profile.recommend.register">推荐注册</string>
     <string name="app.profile.delivery.address">收货地址管理</string>
     <string name="app.profile.account">账号安全</string>
-    <string name="app.profile.versiuon">版本号</string>
+    <string name="app.profile.version">版本号</string>
 
 
 </resources>

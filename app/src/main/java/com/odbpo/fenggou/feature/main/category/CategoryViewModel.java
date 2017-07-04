@@ -12,6 +12,7 @@ import com.core.op.bindingadapter.common.BaseItemViewSelector;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.base.BFViewModel;
+import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
 import com.odbpo.fenggou.BR;
@@ -185,5 +186,9 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
         return Observable.from(tag2);
     }
 
+
+    public final ReplyCommand clickSearchView = new ReplyCommand(() -> {
+        SearchActivity.instance(activity);
+    });
 
 }

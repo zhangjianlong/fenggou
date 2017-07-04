@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:icon="@drawable/tab_icon_find"
+        android:icon="@drawable/tab_icon_home"
         android:title="@string/app.bottom.menu.tab1" />
 
     <item
-        android:icon="@drawable/tab_icon_find"
+        android:icon="@drawable/tab_channel"
         android:title="@string/app.bottom.menu.tab2" />
 
     <item
-        android:icon="@drawable/tab_icon_find"
+        android:icon="@drawable/tab_icon_cart"
         android:title="@string/app.bottom.menu.tab3" />
 
     <item
-        android:icon="@drawable/tab_icon_find"
+        android:icon="@drawable/tab_user"
         android:title="@string/app.bottom.menu.tab4" />
 </menu>

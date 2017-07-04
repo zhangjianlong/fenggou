@@ -26,8 +26,7 @@ public class ProfileViewModel extends BAViewModel<ActProfileBinding> {
 
     }
 
-    public final ObservableField<String> title = new ObservableField<>("dsaads");
     public final ObservableField<String> toolTitle = new ObservableField<>(Static.CONTEXT.getString(R.string.app_profile_title));
-    public final ObservableField<Boolean> show = new ObservableField<>(false);
-    public final ObservableField<Boolean> show1 = new ObservableField<>(true);
+    public final ObservableField<String> userName = new ObservableField<>();
+    public final ObservableField<String> show1 = new ObservableField<>();
 }

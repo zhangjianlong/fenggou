@@ -1,9 +1,12 @@
 package com.odbpo.fenggou.feature.main.category;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.StackView;
@@ -16,6 +19,7 @@ import com.odbpo.fenggou.di.components.MainComponent;
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
 import com.core.op.lib.utils.inject.RootView;
+import com.odbpo.fenggou.feature.search.SearchActivity;
 
 import java.lang.reflect.Field;
 import java.util.Observable;
@@ -39,15 +43,16 @@ public final class CategoryFragment extends BaseFragment<CategoryViewModel, FrgC
 
     @AfterViews
     void afterViews() {
-        ((AppCompatActivity) getActivity()).setSupportActionBar(binding.toolbar);
+        ((AppCompatActivity) activity).setSupportActionBar(binding.toolbar);
         SearchView searchView = binding.serachview;
         searchView.setIconifiedByDefault(false);
         SearchView.SearchAutoComplete textView = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);//14sp
         textView.setTextColor(Static.CONTEXT.getResources().getColor(R.color.white_light));
+        textView.setFocusable(false);
+        textView.setFocusableInTouchMode(false);
         ImageView delButton = (ImageView) binding.serachview.findViewById(R.id.search_close_btn);
         delButton.setImageDrawable(Static.CONTEXT.getResources().getDrawable(R.mipmap.search_del_icon));
-
         try {
             Class<?> argClass = searchView.getClass();
             //指定某个私有属性
@@ -61,4 +66,6 @@ public final class CategoryFragment extends BaseFragment<CategoryViewModel, FrgC
             e.printStackTrace();
         }
     }
+
+
 }
