@@ -30,15 +30,24 @@
                 app:theme="@style/ToolbarWhiteTheme"
                 app:title="  ">
 
-                <android.support.v7.widget.SearchView
-                    android:id="@+id/serachview"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:iconifiedByDefault="false"
+                    android:layout_height="wrap_content"
+                    app:clickCommand="@{viewModel.clickSearchView}">
 
-                    android:imeOptions="actionSearch"
-                    android:searchIcon="@mipmap/search_zoom_icon"
-                    app:clickCommand="@{viewModel.clickSearchView}" />
+                    <android.support.v7.widget.SearchView
+                        android:id="@+id/serachview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:background="@color/white"
+                        android:iconifiedByDefault="false"
+
+                        android:imeOptions="actionSearch"
+                        android:searchIcon="@mipmap/search_zoom_icon" />
+
+                </LinearLayout>
+
+
             </android.support.v7.widget.Toolbar>
 
 
