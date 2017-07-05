@@ -29,13 +29,16 @@
     <color name="app.theme.background_f6f6f6">#f6f6f6</color>
     <color name="app.theme.background_fafafa">#fafafa</color>
     <color name="app.theme.background_dadada">#DADADA</color>
+    <color name="app.theme.background_ffffff">#ffffff</color>
+    <color name="app.theme.background_f7f7f7">#f7f7f7</color>
     <color name="app.theme.background_ddd">#dddddd</color>
     <color name="app.theme.background_31C5E4">#31C5E4</color>
     <color name="app.theme.background_000000_aphla.40">#ae000000</color>
+    <color name="app.theme.background_fc3e50">#fc3e50</color>
     <color name="app.theme.gradientColor">#507E9F</color>
     <color name="app.theme.colorControlActivated">#31C5E4</color>
     <color name="app.theme.colorControlHighlight">#DADADA</color>
-    <color name="app.theme.colorPrimary">#ff445a</color><!--toolbar背景顏色-->
+    <color name="app.theme.colorPrimary">#fe4a62</color><!--toolbar背景顏色-->
     <color name="app.theme.colorPrimaryDark">#9e0000</color><!--状态栏背景顏色-->
     <color name="app.theme.colorAccent">#ffffff</color><!--字体顏色-->
     <color name="app.theme.textColorPrimary">#ffffff</color><!--toolbar title字体顏色-->
@@ -53,7 +56,6 @@
     <!-- TextView Control -->
     <color name="app.text">#ffffff</color>
     <color name="app.text.black">@color/black</color>
-    <color name="app.text.red">#ff7333</color>
     <color name="app.text.black6a6a6a">#6a6a6a</color>
     <color name="app.text.blackb6b6b6">#b6b6b6</color>
     <color name="app.text.black9d9d9d">#9d9d9d</color>
@@ -64,6 +66,7 @@
     <color name="app.text.bg.yellow">#FEA501</color>
     <color name="app.text.bg.pink">#FD7071</color>
     <color name="app.text.bg.blue">#20C1FD</color>
+    <color name="app.text.e23e56">#e23e56</color>
     <color name="app.text.31C5E4">#31C5E4</color>
     <color name="app.text.5c5c5c">#5c5c5c</color>
     <color name="app.text.pink">#fb7299</color>

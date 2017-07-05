@@ -58,6 +58,7 @@
     <string name="app.search.price">价格</string>
     <string name="app.search.sale">销量</string>
     <string name="app.search">搜索</string>
+    <string name="app.search.hint">搜索想要的商品</string>
 
     <!--Info-->
     <string name="app.info.attention">我的关注</string>
@@ -88,6 +89,12 @@
     <string name="app.profile.delivery.address">收货地址管理</string>
     <string name="app.profile.account">账号安全</string>
     <string name="app.profile.version">版本号</string>
+
+    <!--Shopping-->
+    <string name="app.shopping.hint">登录后可同步购物车哦~</string>
+    <string name="app.shopping.empty">您的购物车空空如也，快去装满它！</string>
+    <string name="app.shopping.go">去逛逛</string>
+    <string name="app.shopping.like">----猜你喜欢----</string>
 
 
 </resources>

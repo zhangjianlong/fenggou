@@ -319,7 +319,9 @@
                 android:fadingEdge="none"
                 app:itemView="@{viewModel.itemView}"
                 app:items="@{viewModel.itemViewModels}"
-                app:layoutManager="@{LayoutManagers.linear(LinearLayout.HORIZONTAL,false)}"></android.support.v7.widget.RecyclerView>
+                app:layoutManager="@{LayoutManagers.linear(LinearLayout.HORIZONTAL,false)}">
+
+            </android.support.v7.widget.RecyclerView>
 
 
         </LinearLayout>

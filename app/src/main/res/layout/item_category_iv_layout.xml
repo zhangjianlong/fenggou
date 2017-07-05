@@ -16,14 +16,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/app.margin.normal"
         android:layout_marginLeft="@dimen/app.margin.normal"
+        android:background="@color/app.theme.background_f3f3f3"
         app:clickCommand="@{viewModel.search}">
 
 
         <android.support.v7.widget.AppCompatTextView
-            style="@style/App.Theme.TextAppearance.mw.normal.white"
+            style="@style/App.Theme.TextAppearance.mw.normal.black999"
             android:layout_below="@+id/iv"
             android:layout_gravity="bottom"
-            android:background="@color/app.text.black.alpha.45"
             android:fadingEdge="none"
             android:gravity="center"
             android:padding="@dimen/app.padding.small"

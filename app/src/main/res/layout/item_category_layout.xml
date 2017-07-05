@@ -21,7 +21,7 @@
 
         <android.support.v7.widget.AppCompatTextView
             style="@style/App.Theme.TextAppearance.mw.normal.black999"
-            android:background="@color/app.theme.background_f3f3f3"
+            android:background="@color/app.theme.background"
             android:fadingEdge="none"
             android:gravity="left"
             android:padding="@dimen/app.padding.normal"
@@ -29,6 +29,8 @@
 
 
         <android.support.v7.widget.RecyclerView
+            android:background="@color/app.theme.background_f3f3f3"
+            android:paddingTop="@dimen/app.padding.normal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:itemView="@{viewModel.thirdItemView}"

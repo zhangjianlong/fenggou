@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.core.op.lib.di.HasComponent;
+import com.core.op.lib.utils.MyStateBarUtil;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.base.BaseActivity;
 import com.odbpo.fenggou.databinding.ActMainBinding;
@@ -50,6 +51,7 @@ public final class MainActivity extends BaseActivity<MainViewModel, ActMainBindi
 
     @AfterViews
     void afterViews() {
+        MyStateBarUtil.transparencyBar(this);
     }
 
     @Override

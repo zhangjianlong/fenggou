@@ -1171,6 +1171,10 @@ public class AHBottomNavigation extends FrameLayout {
         setCurrentItem(position, true);
     }
 
+    public void setCurrentItem1(int position) {
+        currentItem = position;
+    }
+
     /**
      * Set the current item
      *

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.Searchable.SearchableViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/App.Theme.Widget.Toolbar"
+            android:background="@color/app.theme.colorPrimary"
+            app:navigationIcon="@mipmap/nav_back"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ToolbarWhiteTheme"
+            app:title="  ">
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/serachview"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_search_bg"
+                android:iconifiedByDefault="false"
+                android:imeOptions="actionSearch"
+                android:searchIcon="@mipmap/search_zoom_icon" />
+        </android.support.v7.widget.Toolbar>
+
+    </LinearLayout>
+</layout>

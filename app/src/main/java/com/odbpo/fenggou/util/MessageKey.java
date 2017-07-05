@@ -12,4 +12,6 @@ public class MessageKey {
     //CategoryFragment
     public static final String LABEL_SELECT_STAIR = "LABEL_SELECT_STAIR";
     public static final String SEARCH = "SEARCH";
+    //Shopping
+    public static final String GOLOGIN = "GOLOGIN";
 }

@@ -5,6 +5,8 @@ import dagger.Component;
 
 import com.odbpo.fenggou.di.modules.ActivityModule;
 import com.odbpo.fenggou.di.modules.MainModule;
+import com.odbpo.fenggou.feature.Searchable.loginCart.LogincartFragment;
+import com.odbpo.fenggou.feature.Searchable.unloginCart.UnlonincartFragment;
 import com.odbpo.fenggou.feature.main.MainActivity;
 import com.core.op.lib.di.PerActivity;
 import com.odbpo.fenggou.feature.main.category.CategoryFragment;
@@ -32,5 +34,9 @@ public interface MainComponent extends ActivityComponent {
     void inject(LoginFragment fragment);
 
     void inject(InfoFragment fragment);
+
+    void inject(UnlonincartFragment fragment);
+
+    void inject(LogincartFragment fragment);
 
 }

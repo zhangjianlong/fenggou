@@ -7,7 +7,10 @@ import android.nfc.Tag;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.core.op.Static;
 import com.core.op.bindingadapter.common.BaseItemViewSelector;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
@@ -15,10 +18,12 @@ import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.MyStateBarUtil;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgCategoryBinding;
 import com.odbpo.fenggou.domain.bean.CategoryResultBean;
+import com.odbpo.fenggou.feature.Searchable.SearchableActivity;
 import com.odbpo.fenggou.feature.search.SearchActivity;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -44,34 +49,17 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
 
     @Override
     public void afterViews() {
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MyStateBarUtil.getStateBarHeight(activity)));
         Messenger.getDefault().register(this, MessageKey.LABEL_SELECT_STAIR, Integer.class, a -> {
             upadataView((int) a);
         });
         Messenger.getDefault().register(this, MessageKey.SEARCH, () -> {
             SearchActivity.instance(activity);
         });
-
-
-        initSearchView();
         initData();
         upadataView(0);
-
     }
 
-    private void initSearchView() {
-        binding.serachview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                SearchActivity.instance(activity);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-    }
 
     private CategoryItemViewModel categoryItemViewModel;
     public final List<CategoryItemViewModel> itemViewModels = new ArrayList<>();
@@ -188,7 +176,7 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
 
 
     public final ReplyCommand clickSearchView = new ReplyCommand(() -> {
-        SearchActivity.instance(activity);
+        SearchableActivity.instance(activity);
     });
 
 }
