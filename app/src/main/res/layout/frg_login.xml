@@ -16,61 +16,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:weightSum="4">
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/include_toolbar_not_back"
+            app:toolTitle="@{viewModel.title}" />
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary">
+            android:layout_height="wrap_content">
 
-
-            <com.core.op.lib.weight.ShapedImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_centerInParent="true"
-                android:scaleType="fitXY"
-                app:round_radius="@dimen/app.margin.small5"
-                app:uri="@{viewModel.imageUri}" />
-
-
-            <LinearLayout
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
+                android:background="@drawable/bg" />
 
-                <TextView
-                    style="@style/App.Theme.TextAppearance.mm.normal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center"
-                    android:padding="@dimen/app.padding.normal"
-                    android:text="@string/app.main.login"
-                    app:clickCommand="@{viewModel.showLogin}" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/logo" />
 
-                <TextView
-                    style="@style/App.Theme.TextAppearance.mm.normal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center"
-                    android:padding="@dimen/app.padding.normal"
-                    android:text="@string/app.main.register"
-                    app:clickCommand="@{viewModel.showRegister}" />
-            </LinearLayout>
 
-        </RelativeLayout>
+        </FrameLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            style="@style/customTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.design.widget.TabLayout>
 
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app.margin.normal">
 
             <LinearLayout
                 android:id="@+id/left_ll"
@@ -79,153 +60,69 @@
                 android:orientation="vertical"
                 android:visibility="@{viewModel.showRegisterLayout?View.VISIBLE:View.GONE}">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:padding="@dimen/app.padding.large13">
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww.normal.black666"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="@string/app.main.register.phone" />
 
                     <android.support.v7.widget.AppCompatEditText
                         style="@style/App.Theme.TextAppearance.ww.normal"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
                         android:background="@null"
-                        android:gravity="right|center_vertical"
                         android:hint="@string/app.main.register.phone.hint"
                         android:text="@={viewModel.phone}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:padding="@dimen/app.padding.large13">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="@string/app.main.register.image.code" />
-
-                    <android.support.v7.widget.AppCompatEditText
-                        style="@style/App.Theme.TextAppearance.ww.normal"
-                        android:layout_alignParentRight="true"
-                        android:background="@null"
-                        android:gravity="right|center_vertical"
-                        android:hint="@string/app.main.register.image.code.hint"
-                        android:text="@={viewModel.imageCode}"
-                        android:textColor="@color/app.text.black333"
-                        android:textColorHint="@color/app.text.black999" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:padding="@dimen/app.padding.large13">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="@string/app.main.register.verify.code" />
-
-                    <android.support.v7.widget.AppCompatEditText
-                        style="@style/App.Theme.TextAppearance.ww.normal"
-                        android:layout_alignParentRight="true"
-                        android:background="@null"
-                        android:gravity="right|center_vertical"
-                        android:hint="@string/app.main.register.verify.code.hint"
-                        android:text="@={viewModel.verifyCode}"
-                        android:textColor="@color/app.text.black333"
-                        android:textColorHint="@color/app.text.black999" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:padding="@dimen/app.padding.large13">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="@string/app.main.register.psd" />
-
-                    <android.support.v7.widget.AppCompatEditText
-                        style="@style/App.Theme.TextAppearance.ww.normal"
-                        android:layout_alignParentRight="true"
-                        android:background="@null"
-                        android:gravity="right|center_vertical"
-                        android:hint="@string/app.main.register.psd.hint"
-                        android:text="@={viewModel.psd}"
-                        android:textColor="@color/app.text.black333"
-                        android:textColorHint="@color/app.text.black999" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:padding="@dimen/app.padding.large13">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="@string/app.main.register.psd.again" />
-
-                    <android.support.v7.widget.AppCompatEditText
-                        style="@style/App.Theme.TextAppearance.ww.normal"
-                        android:layout_alignParentRight="true"
-                        android:background="@null"
-                        android:gravity="right|center_vertical"
-                        android:hint="@string/app.main.register.psd.again.hint"
-                        android:text="@={viewModel.psdAgain}"
-                        android:textColor="@color/app.text.black333"
-                        android:textColorHint="@color/app.text.black999" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/app.padding.large13">
-
-                    <CheckBox
-                        android:id="@+id/iv_check_protocol_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="@{viewModel.agreeAgreement}"
-                        android:gravity="center"
-                        app:clickCommand="@{viewModel.agreeProtocol}" />
-
-                    <TextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/app.main.register.agredd"
-                        app:clickCommand="@{viewModel.protocol}" />
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/app.padding.large13">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/app.main.register.verify.code" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            style="@style/App.Theme.TextAppearance.ww.normal"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="@string/app.main.register.verify.code.hint"
+                            android:text="@={viewModel.verifyCode}"
+                            android:textColor="@color/app.text.black333"
+                            android:textColorHint="@color/app.text.black999" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/App.Theme.TextAppearance.ww.normal.blue"
+                            android:gravity="center"
+                            android:text="@string/app.main.login.get.verifycode" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/app.margin.normal"
                     app:clickCommand="@{viewModel.register}">
 
                     <TextView
@@ -246,69 +143,73 @@
                 android:orientation="vertical"
                 android:visibility="@{viewModel.showRegisterLayout?View.GONE:View.VISIBLE}">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:padding="@dimen/app.padding.large13">
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww.normal.black666"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="@string/app.main.login.user.name" />
 
                     <android.support.v7.widget.AppCompatEditText
                         style="@style/App.Theme.TextAppearance.ww.normal"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
                         android:background="@null"
-                        android:gravity="right|center_vertical"
                         android:hint="@string/app.main.login.user.name.hint"
                         android:text="@={viewModel.userName}"
                         android:textColor="@color/app.text.black333"
                         android:textColorHint="@color/app.text.black999" />
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:padding="@dimen/app.padding.large13">
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww.normal.black666"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="@string/app.main.login.user.psd" />
 
-                    <android.support.v7.widget.AppCompatEditText
-                        style="@style/App.Theme.TextAppearance.ww.normal"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
-                        android:background="@null"
-                        android:gravity="right|center_vertical"
-                        android:hint="@string/app.main.login.user.psd.hint"
-                        android:text="@={viewModel.psd}"
-                        android:textColor="@color/app.text.black333"
-                        android:textColorHint="@color/app.text.black999" />
-                </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
 
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black999"
-                    android:background="?attr/selectableItemBackground"
-                    android:gravity="right"
-                    android:padding="@dimen/app.padding.large13"
-                    android:text="@string/app.main.login.forget.psd"
-                    app:clickCommand="@{viewModel.forgetPsd}" />
+                        <android.support.v7.widget.AppCompatEditText
+                            style="@style/App.Theme.TextAppearance.ww.normal"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="@string/app.main.login.user.psd.hint"
+                            android:text="@={viewModel.psd}"
+                            android:textColor="@color/app.text.black333"
+                            android:textColorHint="@color/app.text.black999" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@{viewModel.eye}"
+                            app:clickCommand="@{viewModel.clickEye}" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/app.margin.normal">
 
                     <TextView
                         style="@style/App.Theme.TextAppearance.mw.normal"
@@ -320,7 +221,52 @@
                         android:text="@string/app.main.login"
                         app:clickCommand="@{viewModel.login}" />
                 </LinearLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.red"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="right"
+                    android:padding="@dimen/app.padding.large13"
+                    android:text="@string/app.main.login.forget.psd"
+                    app:clickCommand="@{viewModel.forgetPsd}" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.small.black999"
+                    android:gravity="left"
+                    android:padding="@dimen/app.padding.large13"
+                    android:text="@string/app.main.login.other.login" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app.margin.large"
+                        android:background="@drawable/weibo" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app.margin.large"
+                        android:background="@drawable/qq" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app.margin.large"
+                        android:background="@drawable/weixin" />
+
+                </LinearLayout>
+
+
             </LinearLayout>
+
+
         </FrameLayout>
     </LinearLayout>
 </layout>

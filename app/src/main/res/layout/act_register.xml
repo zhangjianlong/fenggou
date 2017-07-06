@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.register.RegisterViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/include_toolbar_alpha"
+            app:toolTitle="@{viewModel.title}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="@dimen/app.padding.large13">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/app.main.register.phone" />
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.ww.normal"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/app.main.register.phone.hint"
+                android:textColor="@color/app.text.black333"
+                android:textColorHint="@color/app.text.black999" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="@dimen/app.padding.large13">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/app.main.register.image.code" />
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.ww.normal"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/app.main.register.image.code.hint"
+                android:textColor="@color/app.text.black333"
+                android:textColorHint="@color/app.text.black999" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="@dimen/app.padding.large13">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/app.main.register.verify.code" />
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.ww.normal"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/app.main.register.verify.code.hint"
+                android:textColor="@color/app.text.black333"
+                android:textColorHint="@color/app.text.black999" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="@dimen/app.padding.large13">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/app.main.register.psd" />
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.ww.normal"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/app.main.register.psd.hint"
+                android:textColor="@color/app.text.black333"
+                android:textColorHint="@color/app.text.black999" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="@dimen/app.padding.large13">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/app.main.register.psd.again" />
+
+            <android.support.v7.widget.AppCompatEditText
+                style="@style/App.Theme.TextAppearance.ww.normal"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="@string/app.main.register.psd.again.hint"
+                android:textColor="@color/app.text.black333"
+                android:textColorHint="@color/app.text.black999" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="@dimen/app.padding.large13">
+
+            <CheckBox
+                android:id="@+id/iv_check_protocol_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <TextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                android:layout_gravity="center_vertical"
+                android:text="@string/app.main.register.agredd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/App.Theme.TextAppearance.mw.normal"
+                android:layout_marginLeft="@dimen/app.margin.normal"
+                android:layout_marginRight="@dimen/app.margin.normal"
+                android:background="@drawable/btn_red_background"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.large"
+                android:text="@string/app.main.register" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

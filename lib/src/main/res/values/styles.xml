@@ -12,6 +12,7 @@
         <item name="colorPrimary">@color/app.theme.colorPrimary</item>
         <item name="colorPrimaryDark">@color/app.theme.colorPrimaryDark</item>
         <item name="colorAccent">@color/app.theme.colorAccent</item>
+        <item name="actionMenuTextColor">@color/app.text</item>
 
     </style>
 
@@ -235,6 +236,19 @@
         <item name="android:textColor">@color/app.text.black999</item>
     </style>
 
+
+    <style name="App.Theme.TextAppearance.mw.small.black999">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app.text.black999</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.mw.normal.red">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app.text.e23e56</item>
+    </style>
+
     <style name="App.Theme.TextAppearance.mw.normal.white">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -304,6 +318,8 @@
     </style>
 
 
+
+
     <style name="App.Theme.TextAppearance.ww.normal.black333">
         <item name="android:textColor">@color/app.text.black333</item>
     </style>
@@ -324,7 +340,7 @@
     </style>
 
     <style name="App.Theme.TextAppearance.ww.normal.blue">
-        <item name="android:textColor">@color/app.theme.colorPrimary</item>
+        <item name="android:textColor">@color/app.text.31C5E4</item>
     </style>
 
 

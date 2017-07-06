@@ -24,6 +24,8 @@
 
     <!--loginFrg-->
     <string name="app.main.login">登录</string>
+    <string name="app.main.account.login">账号密码登录</string>
+    <string name="app.main.phone.login">手机验证码登录</string>
     <string name="app.main.register">注册</string>
     <string name="app.main.register.agredd">请同意用户协议</string>
     <string name="app.main.register.phone">手机号码</string>
@@ -41,8 +43,10 @@
     <string name="app.main.login.user.psd">密码</string>
     <string name="app.main.login.user.psd.hint">请输入密码</string>
     <string name="app.main.login.forget.psd">忘记密码？</string>
+    <string name="app.main.login.other.login">你也可以使用一下账号登录:</string>
     <string name="app.main.login.phone.empty">手机号码不能为空</string>
     <string name="app.main.login.psd.empty">密码不能为空</string>
+    <string name="app.main.login.get.verifycode">获取验证码</string>
 
     <!--ForgetAct-->
     <string name="app.forget.title">忘记密码</string>

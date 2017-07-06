@@ -48,7 +48,6 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
         tab.setText(Static.CONTEXT.getText(R.string.app_search_sale));
         tab.setTag(TAG_SALE);
         binding.tabLayout.addTab(tab);
-
     }
 
 }

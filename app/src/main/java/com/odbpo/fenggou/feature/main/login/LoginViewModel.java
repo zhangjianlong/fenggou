@@ -3,6 +3,8 @@ package com.odbpo.fenggou.feature.main.login;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.graphics.drawable.Drawable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,6 +19,7 @@ import com.core.op.lib.utils.StrUtil;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgLoginBinding;
 import com.odbpo.fenggou.feature.forget.ForgetActivity;
+import com.odbpo.fenggou.feature.main.category.CategoryFragment;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle.components.support.RxFragment;
@@ -25,6 +28,8 @@ import javax.inject.Inject;
 
 @PerActivity
 public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
+    private final static String TAG_LOGIN = "TAG_LOGIN";
+    private final static String TAG_REGISTER = "TAG_REGISTER";
 
     @Inject
     public LoginViewModel(RxAppCompatActivity activity) {
@@ -33,22 +38,20 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
     @Override
     public void afterViews() {
-
+        initTab();
     }
 
+    public final ObservableField<String> title = new ObservableField<>(Static.CONTEXT.getString(R.string.app_main_login));
     public final ObservableField<String> phone = new ObservableField<>();
     public final ObservableField<String> psd = new ObservableField<>();
 
     public final ObservableField<String> userName = new ObservableField<>();
-    public final ObservableField<String> imageCode = new ObservableField<>();
+    public final ObservableField<Drawable> eye = new ObservableField<>(Static.CONTEXT.getResources().getDrawable(R.drawable.eye_unclick));
     public final ObservableField<String> verifyCode = new ObservableField<>();
-    public final ObservableField<String> psdAgain = new ObservableField<>();
-    public final ObservableField<String> imageUri = new ObservableField<>("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1498020154&di=354e0947d9d994db9cd65e630cde85e7&src=http://pic7.nipic.com/20100519/4862714_212100033649_2.jpg");
-    public final ObservableField<Boolean> agreeAgreement = new ObservableField<>(true);
     public final ObservableBoolean showRegisterLayout = new ObservableBoolean(false);
 
 
-    public final ReplyCommand showLogin = new ReplyCommand(() -> {
+    public void showLogin() {
         if (!showRegisterLayout.get()) {
             return;
         }
@@ -77,7 +80,9 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
         ));
 
 
-    });
+    }
+
+    ;
 
 
     public final ReplyCommand forgetPsd = new ReplyCommand(() -> {
@@ -85,7 +90,7 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
     });
 
 
-    public final ReplyCommand showRegister = new ReplyCommand(() -> {
+    public void showRegister() {
         if (showRegisterLayout.get()) {
             return;
         }
@@ -113,7 +118,9 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
         ));
 
 
-    });
+    }
+
+    ;
 
     public final ReplyCommand agreeProtocol = new ReplyCommand(() -> {
 
@@ -149,4 +156,49 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
 
     });
+
+    public final ReplyCommand clickEye = new ReplyCommand(() -> {
+        if (eye.get().getConstantState().equals(Static.CONTEXT.getResources().getDrawable(R.drawable.eye_unclick).getConstantState())) {
+            eye.set(Static.CONTEXT.getResources().getDrawable(R.drawable.eye_click));
+        } else {
+            eye.set(Static.CONTEXT.getResources().getDrawable(R.drawable.eye_unclick));
+        }
+
+    });
+
+
+    private void initTab() {
+        TabLayout.Tab tab = binding.tabLayout.newTab();
+        tab.setText(Static.CONTEXT.getText(R.string.app_main_account_login));
+        tab.setTag(TAG_LOGIN);
+        binding.tabLayout.addTab(tab);
+        tab = binding.tabLayout.newTab();
+        tab.setText(Static.CONTEXT.getText(R.string.app_main_phone_login));
+        tab.setTag(TAG_REGISTER);
+        binding.tabLayout.addTab(tab);
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getTag().equals(TAG_LOGIN)) {
+                    showLogin();
+
+                } else if (tab.getTag().equals(TAG_REGISTER)) {
+                    showRegister();
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+
 }

@@ -14,115 +14,120 @@
         <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>
 
-
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
+        android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <View
-            android:id="@+id/status_bar_fix"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white_light" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/app.theme.background_ffffff"
-            android:orientation="horizontal"
-            android:padding="@dimen/app.padding.large">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatTextView
-                style="@style/App.Theme.TextAppearance.ww.large.red"
-                android:background="@drawable/background_red_annulus"
-                android:gravity="center"
-                android:paddingBottom="@dimen/app.margin.normal"
-                android:paddingLeft="@dimen/app.padding.large13"
-                android:paddingRight="@dimen/app.padding.large13"
-                android:paddingTop="@dimen/app.margin.normal"
-                android:text="@string/app.main.login"
-                app:clickCommand="@{viewModel.login}" />
-
-            <android.support.v7.widget.AppCompatTextView
-                style="@style/App.Theme.TextAppearance.ww.normal.black333"
-                android:gravity="center"
-                android:padding="@dimen/app.padding.large12"
-                android:text="@string/app.shopping.hint" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/app.theme.background_f7f7f7"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/app.padding.large"
-            android:paddingTop="@dimen/app.padding.xxlarge">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/app.theme.background_f7f7f7"
-                android:src="@drawable/android_cart" />
-
-            <android.support.v7.widget.AppCompatTextView
-                style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                android:layout_marginTop="@dimen/app.margin.normal"
-                android:gravity="center"
-                android:padding="@dimen/app.padding.large12"
-                android:text="@string/app.shopping.hint" />
-
+            <View
+                android:id="@+id/status_bar_fix"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/white_light" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/app.margin.normal">
+                android:background="@color/app.theme.background_ffffff"
+                android:orientation="horizontal"
+                android:padding="@dimen/app.padding.small">
 
-                <TextView
-                    style="@style/App.Theme.TextAppearance.mw.normal"
-                    android:layout_marginLeft="@dimen/app.margin.normal"
-                    android:layout_marginRight="@dimen/app.margin.normal"
-                    android:background="@drawable/btn_red_background"
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.ww.large.red"
+                    android:background="@drawable/background_red_annulus"
                     android:gravity="center"
-                    android:padding="@dimen/app.padding.large"
-                    android:text="@string/app.shopping.go"
-                    app:clickCommand="@{viewModel.go}" />
+                    android:paddingBottom="@dimen/app.margin.normal"
+                    android:paddingLeft="@dimen/app.padding.large13"
+                    android:paddingRight="@dimen/app.padding.large13"
+                    android:paddingTop="@dimen/app.margin.normal"
+                    android:text="@string/app.main.login"
+                    app:clickCommand="@{viewModel.login}" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black333"
+                    android:gravity="center"
+                    android:padding="@dimen/app.padding.large12"
+                    android:text="@string/app.shopping.hint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app.theme.background_f7f7f7"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/app.padding.large"
+                android:paddingTop="@dimen/app.padding.xxlarge">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/app.theme.background_f7f7f7"
+                    android:src="@drawable/cart" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                    android:layout_marginTop="@dimen/app.margin.normal"
+                    android:gravity="center"
+                    android:padding="@dimen/app.padding.large12"
+                    android:text="@string/app.shopping.hint" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/app.margin.normal">
+
+                    <TextView
+                        style="@style/App.Theme.TextAppearance.mw.normal"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        android:layout_marginRight="@dimen/app.margin.normal"
+                        android:background="@drawable/btn_red_background"
+                        android:gravity="center"
+                        android:padding="@dimen/app.padding.large"
+                        android:text="@string/app.shopping.go"
+                        app:clickCommand="@{viewModel.go}" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/app.theme.background_ffffff"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/app.padding.large">
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                    android:layout_marginTop="@dimen/app.margin.normal"
+                    android:gravity="center"
+                    android:padding="@dimen/app.padding.large12"
+                    android:text="@string/app.shopping.like" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    app:itemView="@{viewModel.itemView}"
+                    app:items="@{viewModel.itemViewModels}"
+                    app:layoutManager="@{LayoutManagers.linear(LinearLayout.HORIZONTAL,false)}" />
+
+
             </LinearLayout>
 
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/app.theme.background_ffffff"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/app.padding.large">
-
-
-            <android.support.v7.widget.AppCompatTextView
-                style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                android:layout_marginTop="@dimen/app.margin.normal"
-                android:gravity="center"
-                android:padding="@dimen/app.padding.large12"
-                android:text="@string/app.shopping.like" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fadingEdge="none"
-                app:itemView="@{viewModel.itemView}"
-                app:items="@{viewModel.itemViewModels}"
-                app:layoutManager="@{LayoutManagers.linear(LinearLayout.HORIZONTAL,false)}" />
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </layout>
