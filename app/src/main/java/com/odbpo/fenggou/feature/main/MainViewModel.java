@@ -48,9 +48,7 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
     @Override
     public void afterViews() {
         Messenger.getDefault().register(this, MessageKey.GOLOGIN, () -> {
-            selectedCommand.execute(new ViewBindingAdapter.NavigationDataWrapper(3, true));
-            binding.bottomNavigation.setCurrentItem1(3);
-            selectPosition.set(3);
+            binding.bottomNavigation.clickView(3);
 
         });
 

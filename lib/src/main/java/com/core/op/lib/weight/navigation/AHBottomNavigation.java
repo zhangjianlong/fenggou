@@ -1171,9 +1171,6 @@ public class AHBottomNavigation extends FrameLayout {
         setCurrentItem(position, true);
     }
 
-    public void setCurrentItem1(int position) {
-        currentItem = position;
-    }
 
     /**
      * Set the current item
@@ -1191,7 +1188,7 @@ public class AHBottomNavigation extends FrameLayout {
                 (items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW)) {
             updateItems(position, useCallback);
         } else {
-            updateSmallItems(position, useCallback);
+            updateItems(position, useCallback);
         }
     }
 
@@ -1551,6 +1548,14 @@ public class AHBottomNavigation extends FrameLayout {
     ////////////////
     // INTERFACES //
     ////////////////
+
+
+    public void clickView(int index) {
+        if (views.size() >= index + 1) {
+            views.get(index).performClick();
+        }
+
+    }
 
     /**
      *
