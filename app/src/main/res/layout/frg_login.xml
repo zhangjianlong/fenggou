@@ -63,6 +63,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
                     android:padding="@dimen/app.padding.large13">
 
                     <android.support.v7.widget.AppCompatTextView
@@ -87,6 +88,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
                     android:padding="@dimen/app.padding.large13">
 
                     <android.support.v7.widget.AppCompatTextView
@@ -99,7 +101,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3">
+                        android:layout_weight="3"
+                        android:focusableInTouchMode="true">
 
                         <android.support.v7.widget.AppCompatEditText
                             style="@style/App.Theme.TextAppearance.ww.normal"

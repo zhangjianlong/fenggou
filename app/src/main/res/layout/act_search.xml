@@ -28,10 +28,10 @@
                 android:id="@+id/serachview"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:background="@drawable/shape_search_bg"
+                android:layout_marginRight="@dimen/app.margin.large"
+                android:background="@drawable/background_white"
                 android:iconifiedByDefault="false"
-                android:imeOptions="actionSearch"
-                android:searchIcon="@mipmap/search_zoom_icon" />
+                android:imeOptions="actionSearch" />
         </android.support.v7.widget.Toolbar>
 
 
