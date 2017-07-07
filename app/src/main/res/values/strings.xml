@@ -99,6 +99,12 @@
     <string name="app.shopping.empty">您的购物车空空如也，快去装满它！</string>
     <string name="app.shopping.go">去逛逛</string>
     <string name="app.shopping.like">----猜你喜欢----</string>
+    <string name="app.shopping.my">我的购物车</string>
+    <string name="app.shopping.edit">编辑</string>
+
+    <!--search-->
+    <string name="app.search.hot">热搜</string>
+    <string name="app.search.history">历史搜索</string>
 
 
 </resources>

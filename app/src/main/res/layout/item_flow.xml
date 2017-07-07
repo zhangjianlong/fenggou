@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.Searchable.LabelFItemViewModel" />
+    </data>
+
+    <TextView
+        style="@style/App.Theme.TextAppearance.ww.small.black999"
+        android:layout_margin="@dimen/app.margin.normal"
+        android:drawablePadding="@dimen/app.padding.normal"
+        android:paddingBottom="@dimen/app.padding.small"
+        android:paddingLeft="@dimen/app.padding.normal"
+        android:paddingRight="@dimen/app.padding.normal"
+        android:paddingTop="@dimen/app.padding.small"
+        android:text="@{viewModel.data}"
+        tools:text="平面设计" />
+</layout>

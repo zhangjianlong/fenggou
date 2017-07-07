@@ -7,13 +7,38 @@
 
         <variable
             name="viewModel"
-            type="com.odbpo.fenggou.feature.Searchable.loginCart.LogincartViewModel" />
+            type="com.odbpo.fenggou.feature.main.shopping.loginCart.LogincartViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/include_toolbar_not_back"
+            app:toolTitle="@{viewModel.title}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/app.padding.large">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black333"
+                android:layout_alignParentLeft="true"
+                android:text="@{viewModel.salesPromotion}" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/right" />
+        </RelativeLayout>
+
 
     </LinearLayout>
 </layout>

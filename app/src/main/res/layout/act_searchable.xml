@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/app.theme.background_f3f3f3"
         android:orientation="vertical">
 
 
@@ -33,9 +34,64 @@
                 android:background="@drawable/background_white"
                 android:iconifiedByDefault="false"
                 android:imeOptions="actionSearch" />
-
-
         </android.support.v7.widget.Toolbar>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/App.Theme.TextAppearance.mw.large.black333"
+            android:padding="@dimen/app.padding.normal"
+            android:text="@string/app.search.hot" />
+
+
+        <com.core.op.lib.weight.FlowLayout
+            android:id="@+id/flowlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemView="@{viewModel.flowItemView}"
+            app:items="@{viewModel.flowItemViewModels}"></com.core.op.lib.weight.FlowLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/app.theme.background_e8e8e8"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/app.padding.small">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app.theme.background_f3f3f3"
+                android:gravity="center_vertical">
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.large.black333"
+                    android:layout_weight="1"
+                    android:width="0dp"
+                    android:background="@color/app.theme.background_f3f3f3"
+                    android:padding="@dimen/app.padding.normal"
+                    android:text="@string/app.search.history" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/app.margin.normal"
+                    android:background="@drawable/delete" />
+
+
+            </LinearLayout>
+
+
+            <com.core.op.lib.weight.FlowLayout
+                android:id="@+id/hostoryflowlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app.theme.background_f3f3f3"
+                app:itemView="@{viewModel.hostoryFlowItemView}"
+                app:items="@{viewModel.hostoryFlowItemViewModels}"></com.core.op.lib.weight.FlowLayout>
+
+        </LinearLayout>
 
 
     </LinearLayout>

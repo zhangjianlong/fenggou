@@ -14,10 +14,6 @@
         <item name="colorAccent">@color/app.theme.colorPrimary</item>
         <item name="actionMenuTextColor">@color/app.text</item>
 
-
-
-
-
     </style>
 
     <!--<style name="activityAnim">-->
@@ -234,6 +230,12 @@
     </style>
 
     <!-- TextAppearance mw-->
+    <style name="App.Theme.TextAppearance.mw.large.black333">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app.text.black333</item>
+    </style>
+
     <style name="App.Theme.TextAppearance.mw.normal.black999">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -320,8 +322,6 @@
     <style name="App.Theme.TextAppearance.ww.normal.black666">
         <item name="android:textColor">@color/app.text.black666</item>
     </style>
-
-
 
 
     <style name="App.Theme.TextAppearance.ww.normal.black333">

@@ -25,6 +25,7 @@
     <color name="app.theme.background">#FFFFFF</color>
     <color name="app.theme.background_edf1f2">#edf1f2</color>
     <color name="app.theme.background_f3f3f3">#f3f3f3</color>
+    <color name="app.theme.background_e8e8e8">#e8e8e8</color>
     <color name="app.theme.background_fcfcfc">#fcfcfc</color>
     <color name="app.theme.background_f6f6f6">#f6f6f6</color>
     <color name="app.theme.background_fafafa">#fafafa</color>

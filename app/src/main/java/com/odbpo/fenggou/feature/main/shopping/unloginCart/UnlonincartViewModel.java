@@ -1,7 +1,7 @@
-package com.odbpo.fenggou.feature.Searchable.unloginCart;
+package com.odbpo.fenggou.feature.main.shopping.unloginCart;
 
 
-import android.support.v4.app.FragmentManager;
+import android.databinding.ObservableBoolean;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -18,7 +18,6 @@ import com.odbpo.fenggou.domain.bean.RecommendProductBean;
 import com.odbpo.fenggou.feature.main.info.InfoItemViewModel;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.trello.rxlifecycle.components.support.RxFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +40,9 @@ public class UnlonincartViewModel extends BFViewModel<FrgUnlonincartBinding> {
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MyStateBarUtil.getStateBarHeight(activity)));
         initData();
         upadataView();
+        Messenger.getDefault().register(activity, MessageKey.LOGIN, () -> {
+            isLogin.set(true);
+        });
     }
 
     public final List<InfoItemViewModel> itemViewModels = new ArrayList<>();
@@ -48,6 +50,7 @@ public class UnlonincartViewModel extends BFViewModel<FrgUnlonincartBinding> {
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_recommend_layout);
     private List<RecommendProductBean> recommendProductBeanList = new ArrayList<>();
 
+    public ObservableBoolean isLogin = new ObservableBoolean(false);
 
     public final ReplyCommand go = new ReplyCommand(() -> {
 

@@ -7,9 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.odbpo.fenggou.feature.Searchable.unloginCart.UnlonincartViewModel" />
+            type="com.odbpo.fenggou.feature.main.shopping.unloginCart.UnlonincartViewModel" />
 
         <import type="android.widget.LinearLayout" />
+
+        <import type="android.view.View" />
 
         <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>
@@ -19,9 +21,9 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:descendantFocusability="blocksDescendants"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
             android:orientation="vertical">
 
             <View
@@ -35,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/app.theme.background_ffffff"
                 android:orientation="horizontal"
-                android:padding="@dimen/app.padding.small">
+                android:padding="@dimen/app.padding.small"
+                android:visibility="@{viewModel.isLogin?View.GONE:View.VISIBLE}">
 
                 <android.support.v7.widget.AppCompatTextView
                     style="@style/App.Theme.TextAppearance.ww.large.red"
@@ -53,6 +56,23 @@
                     android:gravity="center"
                     android:padding="@dimen/app.padding.large12"
                     android:text="@string/app.shopping.hint" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app.theme.background_ffffff"
+                android:orientation="horizontal"
+                android:padding="@dimen/app.padding.small"
+                android:visibility="@{viewModel.isLogin?View.VISIBLE:View.GONE}">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black333"
+                    android:gravity="center"
+                    android:padding="@dimen/app.padding.large12"
+                    android:text="@string/app.shopping.my" />
 
             </LinearLayout>
 

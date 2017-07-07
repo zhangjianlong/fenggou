@@ -5,8 +5,6 @@ import dagger.Component;
 
 import com.odbpo.fenggou.di.modules.ActivityModule;
 import com.odbpo.fenggou.di.modules.MainModule;
-import com.odbpo.fenggou.feature.Searchable.loginCart.LogincartFragment;
-import com.odbpo.fenggou.feature.Searchable.unloginCart.UnlonincartFragment;
 import com.odbpo.fenggou.feature.main.MainActivity;
 import com.core.op.lib.di.PerActivity;
 import com.odbpo.fenggou.feature.main.category.CategoryFragment;
@@ -15,6 +13,8 @@ import com.odbpo.fenggou.feature.main.login.LoginFragment;
 import com.odbpo.fenggou.feature.main.mine.MineFragment;
 import com.odbpo.fenggou.feature.main.product.ProductFragment;
 import com.odbpo.fenggou.feature.main.shopping.ShoppingFragment;
+import com.odbpo.fenggou.feature.main.shopping.loginCart.LogincartFragment;
+import com.odbpo.fenggou.feature.main.shopping.unloginCart.UnlonincartFragment;
 
 import dagger.Component;
 
