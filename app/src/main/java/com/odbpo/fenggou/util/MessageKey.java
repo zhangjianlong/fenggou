@@ -14,4 +14,5 @@ public class MessageKey {
     public static final String SEARCH = "SEARCH";
     //Shopping
     public static final String GOLOGIN = "GOLOGIN";
+    public static final String EDIT = "EDIT";
 }

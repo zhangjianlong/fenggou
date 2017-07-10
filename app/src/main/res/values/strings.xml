@@ -101,6 +101,7 @@
     <string name="app.shopping.like">----猜你喜欢----</string>
     <string name="app.shopping.my">我的购物车</string>
     <string name="app.shopping.edit">编辑</string>
+    <string name="app.shopping.sure">确定</string>
 
     <!--search-->
     <string name="app.search.hot">热搜</string>

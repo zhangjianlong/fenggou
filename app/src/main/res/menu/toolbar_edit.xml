@@ -5,4 +5,8 @@
         android:id="@+id/edit"
         android:title="@string/app.shopping.edit"
         app:showAsAction="always"></item>
+    <item
+        android:id="@+id/sure"
+        android:title="@string/app.shopping.sure"
+        app:showAsAction="always"></item>
 </menu>
