@@ -21,20 +21,25 @@
     <color name="black">#000000</color>
 
     <color name="app.line">#DADADA</color>
+    <color name="app.line.f7f7f7">#f7f7f7</color>
+    <color name="app.line.ededed">#ededed</color>
     <!-- Theme - Dark Blue -->
     <color name="app.theme.background">#FFFFFF</color>
     <color name="app.theme.background_edf1f2">#edf1f2</color>
     <color name="app.theme.background_f3f3f3">#f3f3f3</color>
     <color name="app.theme.background_e8e8e8">#e8e8e8</color>
+    <color name="app.theme.background_ededed">#ededed</color>
     <color name="app.theme.background_fcfcfc">#fcfcfc</color>
     <color name="app.theme.background_f6f6f6">#f6f6f6</color>
+    <color name="app.theme.background_efefef">#efefef</color>
     <color name="app.theme.background_fafafa">#fafafa</color>
     <color name="app.theme.background_dadada">#DADADA</color>
     <color name="app.theme.background_ffffff">#ffffff</color>
     <color name="app.theme.background_f7f7f7">#f7f7f7</color>
     <color name="app.theme.background_ddd">#dddddd</color>
     <color name="app.theme.background_31C5E4">#31C5E4</color>
-    <color name="app.theme.background_000000_aphla.40">#ae000000</color>
+    <color name="app.theme.background_000000_aphla.40">#000000</color>
+    <color name="app.theme.background_000000_aphla.50">#50000000</color>
     <color name="app.theme.background_fc3e50">#fc3e50</color>
     <color name="app.theme.gradientColor">#507E9F</color>
     <color name="app.theme.colorControlActivated">#31C5E4</color>

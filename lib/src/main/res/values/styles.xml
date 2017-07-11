@@ -237,6 +237,7 @@
     <style name="App.Theme.TextAppearance.wm.normal.black999">
         <item name="android:textColor">@color/app.text.black999</item>
     </style>
+
     <style name="App.Theme.TextAppearance.wm.large.black999">
         <item name="android:textColor">@color/app.text.black999</item>
     </style>
@@ -246,6 +247,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/app.text.black333</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.mw.large.back999">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app.text.black999</item>
     </style>
 
     <style name="App.Theme.TextAppearance.mw.large.red">
@@ -340,14 +347,20 @@
 
     </style>
 
+    <style name="App.Theme.TextAppearance.ww.normal.black333">
+        <item name="android:textColor">@color/app.text.black333</item>
+
+    </style>
+
+    <style name="App.Theme.TextAppearance.ww.large.black333">
+        <item name="android:textColor">@color/app.text.black333</item>
+
+    </style>
+
     <style name="App.Theme.TextAppearance.ww.normal.black666">
         <item name="android:textColor">@color/app.text.black666</item>
     </style>
 
-
-    <style name="App.Theme.TextAppearance.ww.normal.black333">
-        <item name="android:textColor">@color/app.text.black333</item>
-    </style>
 
 
     <style name="App.Theme.TextAppearance.ww.normal.black999">

@@ -14,320 +14,409 @@
         <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>
 
-
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/app.theme.background_efefef">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="260dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:gravity="right"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                android:background="@color/app.theme.background">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                        android:gravity="center"
-                        android:text="2" />
-
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                        android:gravity="center"
-                        android:text="@string/app.info.attention" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                        android:gravity="center"
-                        android:text="12" />
-
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                        android:layout_below="@+id/attention"
-                        android:gravity="center"
-                        android:text="@string/app.info.history" />
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="230dp">
-
-                <FrameLayout
-                    android:id="@+id/fl"
                     android:layout_width="match_parent"
-                    android:layout_height="210dp"
-                    android:background="@color/app.theme.colorPrimary"></FrameLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/app.margin.normal"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            android:paddingTop="26dp">
+
+                            <FrameLayout
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginRight="@dimen/app.margin.large12"
+                                android:background="@drawable/background_gray_circle">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/set"
+                                    app:clickCommand="@{viewModel.profileAct}" />
+
+
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginRight="@dimen/app.margin.large12"
+                                android:background="@drawable/background_gray_circle">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/dialogue" />
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+
+                    </FrameLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="82dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="bottom|right"
+                            android:gravity="right|center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <android.support.v7.widget.AppCompatTextView
+
+                                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                                    android:gravity="center"
+                                    android:text="2" />
+
+
+                                <android.support.v7.widget.AppCompatTextView
+
+                                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                                    android:layout_marginTop="@dimen/app.margin.normal"
+                                    android:gravity="center"
+                                    android:text="@string/app.info.attention" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <android.support.v7.widget.AppCompatTextView
+
+                                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                                    android:gravity="center"
+                                    android:text="12" />
+
+
+                                <android.support.v7.widget.AppCompatTextView
+
+                                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                                    android:layout_below="@+id/attention"
+                                    android:layout_marginTop="@dimen/app.margin.normal"
+                                    android:gravity="center"
+                                    android:text="@string/app.info.history" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <com.core.op.lib.weight.CircleImageView
                     android:id="@+id/iv"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/app.margin.large12"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="58dp"
+                    android:layout_marginLeft="@dimen/app.margin.large"
                     app:border_color="@color/white"
-                    app:border_width="5dp"
+                    app:border_width="3dp"
                     app:uri="@{viewModel.imageUri}" />
 
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/app.margin.normal"
+                android:background="@color/app.theme.background"
+                android:orientation="vertical">
+
+                <include layout="@layout/include_line_h" />
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/fl"
-                    android:layout_gravity="bottom"
-                    android:layout_marginLeft="@dimen/app.margin.large12"
-                    android:layout_toRightOf="@+id/iv"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.white"
-                        android:text="@{viewModel.userName}" />
+
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/wodedingdanzuo"
+                        android:drawablePadding="@dimen/app.padding.normal"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/app.margin.normal"
+                        android:text="@string/app.info.order" />
 
                     <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.white"
-                        android:text="@{viewModel.userLevel}" />
+
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/right"
+                        android:gravity="right"
+                        android:padding="@dimen/app.margin.normal"
+                        android:text="@string/app.info.all.order" />
+
                 </LinearLayout>
 
+                <include layout="@layout/include_line_h" />
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/app.margin.normal"
                     android:orientation="horizontal"
-                    android:paddingTop="26dp">
+                    android:padding="@dimen/app.padding.normal">
 
-                    <com.core.op.lib.weight.CircleImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        app:clickCommand="@{viewModel.profileAct}"
-                        app:uri="@{viewModel.imageUri}" />
 
-                    <com.core.op.lib.weight.CircleImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="@dimen/app.margin.large12"
-                        android:layout_marginRight="@dimen/app.margin.large12"
-                        app:uri="@{viewModel.imageUri}" />
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/daifukuan"
+                        android:gravity="center"
+                        android:text="@string/app.info.new.pay" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/daishouhuo"
+                        android:gravity="center"
+                        android:text="@string/app.info.wait.receiving" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/daipingjia"
+                        android:gravity="center"
+                        android:text="@string/app.info.wait.evaluate" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/tuikuan"
+                        android:gravity="center"
+                        android:text="@string/app.info.refund" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/app.margin.normal"
+                android:background="@color/app.theme.background"
+                android:orientation="vertical">
+
+                <include layout="@layout/include_line_h" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/wodezichan"
+                        android:drawablePadding="@dimen/app.padding.normal"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/app.margin.normal"
+                        android:text="@string/app.info.my.property" />
 
 
                 </LinearLayout>
 
-            </RelativeLayout>
+                <include layout="@layout/include_line_h" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/app.padding.normal">
 
 
-        </FrameLayout>
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/yucunkuan"
+                        android:gravity="center"
+                        android:text="@string/app.info.advance.charge" />
 
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/zhanghumingxi"
+                        android:gravity="center"
+                        android:text="@string/app.info.account.details" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app.margin.large12"
-            android:orientation="vertical">
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/jifen"
+                        android:gravity="center"
+                        android:text="@string/app.info.integration" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@drawable/youhuijuan"
+                        android:gravity="center"
+                        android:text="@string/app.info.discount.coupon" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="@dimen/app.margin.normal"
+                android:background="@color/app.theme.background"
+                android:orientation="horizontal"
+                android:padding="@dimen/app.padding.normal">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/wodezichan"
+                    android:visibility="invisible" />
+
 
                 <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView2"
                     style="@style/App.Theme.TextAppearance.mw.normal.black333"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="left"
+                    android:drawablePadding="@dimen/app.padding.normal"
+
                     android:padding="@dimen/app.margin.normal"
-                    android:text="@string/app.info.order" />
+                    android:text="@string/app.info.onlie" />
 
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:drawableRight="@mipmap/icon_arrow_right"
-                    android:gravity="right"
-                    android:padding="@dimen/app.margin.normal"
-                    android:text="@string/app.info.all.order" />
+                    android:padding="@dimen/app.margin.normal">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/right"
+                        android:text="@string/app.info.all.order" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/app.info.new.pay" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/app.info.wait.receiving" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/app.info.wait.evaluate" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/app.info.refund" />
+                </RelativeLayout>
 
 
             </LinearLayout>
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app.margin.large12"
-            android:orientation="vertical">
+            <include layout="@layout/include_line_h" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="@dimen/app.margin.normal"
+                android:background="@color/app.theme.background"
+                android:orientation="vertical">
 
                 <android.support.v7.widget.AppCompatTextView
                     style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:padding="@dimen/app.margin.normal"
-                    android:text="@string/app.info.my.property" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/app.info.advance.charge" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/app.info.account.details" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/app.info.integration" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/app.info.discount.coupon" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app.margin.large12"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.AppCompatTextView
-                    style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="left"
+                    android:drawableLeft="@drawable/cainixihuan"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:gravity="center_vertical"
                     android:padding="@dimen/app.margin.normal"
                     android:text="@string/app.info.recommend" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    app:itemView="@{viewModel.itemView}"
+                    app:items="@{viewModel.itemViewModels}"
+                    app:layoutManager="@{LayoutManagers.linear(LinearLayout.HORIZONTAL,false)}">
+
+                </android.support.v7.widget.RecyclerView>
+
 
             </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fadingEdge="none"
-                app:itemView="@{viewModel.itemView}"
-                app:items="@{viewModel.itemViewModels}"
-                app:layoutManager="@{LayoutManagers.linear(LinearLayout.HORIZONTAL,false)}">
-
-            </android.support.v7.widget.RecyclerView>
-
-
         </LinearLayout>
 
-
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 
 </layout>

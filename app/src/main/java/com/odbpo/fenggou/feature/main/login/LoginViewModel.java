@@ -142,15 +142,15 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
     });
     public final ReplyCommand login = new ReplyCommand(() -> {
-        if (StrUtil.isEmpty(userName.get())) {
-            AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_phone_empty));
-            return;
-        }
-
-        if (StrUtil.isEmpty(psd.get())) {
-            AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_psd_empty));
-            return;
-        }
+//        if (StrUtil.isEmpty(userName.get())) {
+//            AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_phone_empty));
+//            return;
+//        }
+//
+//        if (StrUtil.isEmpty(psd.get())) {
+//            AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_psd_empty));
+//            return;
+//        }
 
         Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
 

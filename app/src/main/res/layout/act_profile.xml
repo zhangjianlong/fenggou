@@ -12,7 +12,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/app.theme.background_f7f7f7">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +28,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large"
+                app:clickCommand="@{viewModel.setUserName}">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -36,30 +39,42 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.large">
 
                 <TextView
-
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
+                    android:layout_centerVertical="true"
                     android:text="@string/app.profile.member.Levels" />
 
                 <TextView
-                    style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                    style="@style/App.Theme.TextAppearance.ww.large.white"
                     android:layout_alignParentRight="true"
-                    android:text="@{viewModel.userName}" />
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/btn_red_normal"
+                    android:padding="@dimen/app.padding.small"
+                    android:text="@{viewModel.userLevel}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large"
+                app:clickCommand="@{viewModel.setNickName}">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -68,14 +83,18 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -84,14 +103,18 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large"
+                app:clickCommand="@{viewModel.setGender}">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -100,14 +123,18 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -116,14 +143,18 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -132,14 +163,18 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -148,14 +183,19 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:layout_marginTop="@dimen/app.margin.normal"
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -164,14 +204,18 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -180,14 +224,18 @@
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black999"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="@dimen/app.padding.normal"
+                    android:drawableRight="@drawable/right"
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
+
+            <include layout="@layout/include_line_h" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/app.padding.normal">
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.large">
 
                 <TextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black666"
@@ -199,8 +247,25 @@
                     android:text="@{viewModel.userName}" />
             </RelativeLayout>
 
+            <include layout="@layout/include_line_h" />
+
+
+            <TextView
+                style="@style/App.Theme.TextAppearance.mw.normal"
+                android:layout_marginBottom="@dimen/app.margin.large"
+
+                android:layout_marginLeft="@dimen/app.margin.normal"
+                android:layout_marginRight="@dimen/app.margin.normal"
+                android:layout_marginTop="@dimen/app.margin.large"
+                android:background="@drawable/btn_red_background"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.large12"
+                android:text="@string/app.main.exit"
+                app:clickCommand="@{viewModel.exit}" />
+
 
         </LinearLayout>
+
 
     </android.support.v4.widget.NestedScrollView>
 </layout>

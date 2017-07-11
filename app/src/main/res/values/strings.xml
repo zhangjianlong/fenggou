@@ -24,6 +24,7 @@
 
     <!--loginFrg-->
     <string name="app.main.login">登录</string>
+    <string name="app.main.exit">退出当前登录</string>
     <string name="app.main.account.login">账号密码登录</string>
     <string name="app.main.phone.login">手机验证码登录</string>
     <string name="app.main.register">注册</string>
@@ -79,6 +80,7 @@
     <string name="app.info.integration">积分</string>
     <string name="app.info.discount.coupon">优惠券</string>
     <string name="app.info.recommend">猜你喜欢</string>
+    <string name="app.info.onlie">在线客服</string>
 
     <!--ProfileAct-->
     <string name="app.profile.title">个人信息</string>
@@ -93,6 +95,10 @@
     <string name="app.profile.delivery.address">收货地址管理</string>
     <string name="app.profile.account">账号安全</string>
     <string name="app.profile.version">版本号</string>
+    <string name="app.profile.boy">男</string>
+    <string name="app.profile.girl">女</string>
+    <string name="app.profile.secrecy">保密</string>
+    <string name="app.profile.cancel">取消</string>
 
     <!--Shopping-->
     <string name="app.shopping.hint">登录后可同步购物车哦~</string>
@@ -106,6 +112,14 @@
     <!--search-->
     <string name="app.search.hot">热搜</string>
     <string name="app.search.history">历史搜索</string>
+
+    <!--Username-->
+    <string name="app.user.name.title">设置用户名</string>
+    <string name="app.user.name.set.hint">设置姓名</string>
+    <string name="app.user.name.hint">姓名由中文或字母组成</string>
+    <string name="app.user.name.save">保存</string>
+    <string name="app.nick.name.set.hint">设置昵称</string>
+    <string name="app.nick.name.hint">4-20字符，由中文、英文、数字、-和_组成</string>
 
 
 </resources>

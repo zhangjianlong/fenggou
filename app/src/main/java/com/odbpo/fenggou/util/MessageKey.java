@@ -15,4 +15,6 @@ public class MessageKey {
     //Shopping
     public static final String GOLOGIN = "GOLOGIN";
     public static final String EDIT = "EDIT";
+    //UserName
+    public static final String SAVE_NAME = "SAVE_NAME";
 }
