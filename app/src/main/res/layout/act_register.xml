@@ -10,9 +10,11 @@
             type="com.odbpo.fenggou.feature.register.RegisterViewModel" />
     </data>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/app.theme.background_f7f7f7"
         android:orientation="vertical">
 
         <include
@@ -21,6 +23,7 @@
             app:toolTitle="@{viewModel.title}" />
 
         <LinearLayout
+            android:background="@color/app.theme.background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
@@ -46,10 +49,11 @@
                 android:textColorHint="@color/app.text.black999" />
         </LinearLayout>
 
-        <include layout="@layout/include_line_h"/>
+        <include layout="@layout/include_line_h" />
 
 
         <LinearLayout
+            android:background="@color/app.theme.background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
@@ -74,9 +78,11 @@
                 android:textColor="@color/app.text.black333"
                 android:textColorHint="@color/app.text.black999" />
         </LinearLayout>
-        <include layout="@layout/include_line_h"/>
+
+        <include layout="@layout/include_line_h" />
 
         <LinearLayout
+            android:background="@color/app.theme.background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
@@ -102,9 +108,11 @@
                 android:textColor="@color/app.text.black333"
                 android:textColorHint="@color/app.text.black999" />
         </LinearLayout>
-        <include layout="@layout/include_line_h"/>
+
+        <include layout="@layout/include_line_h" />
 
         <LinearLayout
+            android:background="@color/app.theme.background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
@@ -130,16 +138,17 @@
                 android:textColor="@color/app.text.black333"
                 android:textColorHint="@color/app.text.black999" />
         </LinearLayout>
-        <include layout="@layout/include_line_h"/>
+
+        <include layout="@layout/include_line_h" />
 
         <LinearLayout
-            android:background="?attr/selectableItemBackground"
-            app:clickCommand="@{viewModel.agreeProtocol}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
-            android:padding="@dimen/app.padding.xlarge">
+            android:padding="@dimen/app.padding.xlarge"
+            app:clickCommand="@{viewModel.agreeProtocol}">
 
 
             <CheckBox
@@ -149,33 +158,41 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="@dimen/app.margin.normal"
                 android:button="@drawable/user_agreement_background"
-                android:checked="@{viewModel.agreeAgreement}"
-               />
+                android:checked="@{viewModel.agreeAgreement}" />
 
-
-            <TextView
-                style="@style/App.Theme.TextAppearance.ww.normal.black666"
+            <LinearLayout
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/app.margin.normal"
-                android:layout_weight="3"
-                android:text="@string/app.main.register.agredd" />
+                android:layout_weight="3">
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                    android:text="@string/app.main.register.agree" />
+
+                <TextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black333"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/app.margin.normal"
+                    android:text="@string/app.main.register.agree.protocol"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app.margin.normal">
 
-            <TextView
-                style="@style/App.Theme.TextAppearance.mw.normal"
-                android:layout_marginLeft="@dimen/app.margin.normal"
-                android:layout_marginRight="@dimen/app.margin.normal"
-                android:background="@drawable/btn_red_background"
-                android:gravity="center"
-                android:padding="@dimen/app.padding.large"
-                android:text="@string/app.main.register" />
-        </LinearLayout>
+        <TextView
+            style="@style/App.Theme.TextAppearance.mw.normal"
+            android:layout_marginLeft="@dimen/app.margin.normal"
+            android:layout_marginRight="@dimen/app.margin.normal"
+            android:background="@drawable/btn_red_background"
+            android:gravity="center"
+            android:padding="@dimen/app.padding.large12"
+            android:text="@string/app.main.register" />
 
     </LinearLayout>
 </layout>

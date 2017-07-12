@@ -29,6 +29,8 @@
     <string name="app.main.phone.login">手机验证码登录</string>
     <string name="app.main.register">注册</string>
     <string name="app.main.register.agredd">请同意用户协议</string>
+    <string name="app.main.register.agree">同意</string>
+    <string name="app.main.register.agree.protocol">商城用户注册协议</string>
     <string name="app.main.register.phone">手机号码</string>
     <string name="app.main.register.phone.hint">输入手机号码</string>
     <string name="app.main.register.image.code">图片验证</string>
