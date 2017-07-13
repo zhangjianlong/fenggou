@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
+
         <variable
             name="viewModel"
             type="com.odbpo.fenggou.feature.search.SearchViewModel" />
@@ -34,14 +36,47 @@
                 android:imeOptions="actionSearch" />
         </android.support.v7.widget.Toolbar>
 
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            style="@style/customTabLayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/app.theme.background">
 
-        </android.support.design.widget.TabLayout>
+            <com.core.op.lib.weight.sortView.SortView
+                android:id="@+id/tabLayout"
+                style="@style/customTabLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"></com.core.op.lib.weight.sortView.SortView>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:clickCommand="@{viewModel.changeLayout}">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@{viewModel.bg}"
+                    app:clickCommand="@{viewModel.changeLayout}" />
+
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:itemView="@{viewModel.itemView}"
+            app:items="@{viewModel.itemViewModels}"
+            app:layoutManager="@{LayoutManagers.linear()}"></android.support.v7.widget.RecyclerView>
+
 
     </LinearLayout>
 </layout>

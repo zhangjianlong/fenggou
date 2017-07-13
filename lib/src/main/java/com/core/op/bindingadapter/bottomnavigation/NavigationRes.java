@@ -6,8 +6,8 @@ import android.support.annotation.MenuRes;
 
 /**
  * @author: zjl
- * @Time:  2017/6/1 15:16
- * @Desc: 
+ * @Time: 2017/6/1 15:16
+ * @Desc:
  */
 
 public class NavigationRes {
