@@ -29,14 +29,14 @@
             android:padding="@dimen/app.padding.small"
             android:text="@{viewModel.thirdContent}" />
 
-
-        <com.core.op.lib.weight.ShapedImageView
+        <com.core.op.lib.weight.RatioImageView
             android:id="@+id/iv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             app:round_radius="@dimen/app.margin.small5"
             app:uri="@{viewModel.imageUri}" />
+
 
     </RelativeLayout>
 

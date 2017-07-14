@@ -16,9 +16,10 @@
         android:background="@color/app.theme.background"
         android:orientation="vertical">
 
-        <ImageView
+        <com.core.op.lib.weight.RatioImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:scaleType="fitXY"
             app:uri="@{viewModel.shopping.productUrl}" />
 

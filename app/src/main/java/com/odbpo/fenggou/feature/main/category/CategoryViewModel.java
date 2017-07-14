@@ -84,27 +84,27 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
     private void initData() {
         List<CategoryResultBean.Tag3> tag3s = new ArrayList<>();
         List<CategoryResultBean.Tag3> tag3s1 = new ArrayList<>();
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img0.imgtn.bdimg.com/it/u=556033446,1973250852&fm=26&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img5.imgtn.bdimg.com/it/u=1820297375,2581174810&fm=26&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
 
 
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=1330670873,411940905&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
 
         List<CategoryResultBean.Tag2> tag2s = new ArrayList<>();
         List<CategoryResultBean.Tag2> tag2s1 = new ArrayList<>();

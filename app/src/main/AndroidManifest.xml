@@ -54,7 +54,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Gender"></activity>
+        <activity android:name=".Gender" />
+        <activity android:name=".Detail"></activity>
     </application>
 
 </manifest>
