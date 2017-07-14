@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.search.SearchItemViewModel" />
+    </data>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app.theme.background"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:uri="@{viewModel.shopping.productUrl}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:padding="@dimen/app.padding.normal"
+                android:text="@{viewModel.shopping.productName}" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.red"
+                    android:maxLines="2"
+                    android:text="@{viewModel.shopping.productPrice}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                        android:maxLines="2"
+                        android:text="好评率0%" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        android:maxLines="2"
+                        android:text="0人评价" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</layout>
