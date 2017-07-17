@@ -58,11 +58,11 @@ public class DetailViewModel extends BAViewModel<ActDetailBinding> {
                 if (y <= 0) {   //设置标题的背景颜色
                     binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) 0, 255, 255, 255));
                 } else if (y > 0 && y <= bannerHeight) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
-                    float scale = (float) y / bannerHeight;
+                    float scale = (float) y * 10 / bannerHeight;
                     float alpha = (255 * scale);
                     binding.toolbar.toolbarTitle.setTextColor(Color.argb((int) alpha, 1, 24, 28));
                     binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) alpha, 255, 255, 255));
-                    System.out.print("alpha:"+alpha);
+                    System.out.println("alpha: " + alpha + "scale: " + scale + "y: " + y);
                 } else {    //滑动到banner下面设置普通颜色
                     binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
                 }

@@ -12,20 +12,24 @@
 
 
     <com.core.op.lib.weight.scrollview.GradationScrollView
+
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/app.theme.background_f7f7f7"
         android:fillViewport="true"
         android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/bannerll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@{viewModel.height,default=@dimen/default_height}">
+                android:layout_height="@{viewModel.height,default=@dimen/default_height}"
+                android:background="@color/app.theme.background">
 
                 <com.core.op.lib.weight.BannerView
                     android:id="@+id/banner"
@@ -43,6 +47,146 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"></LinearLayout>
             </FrameLayout>
+
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                android:background="@color/app.theme.background"
+                android:maxLines="2"
+                android:padding="@dimen/app.padding.normal"
+                android:text="意大利原装进口卡拉拖死高级的撒干红葡萄酒单支装（通用）" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.mw.normal.red"
+                android:background="@color/app.theme.background"
+                android:padding="@dimen/app.padding.normal"
+                android:text="￥236.00" />
+
+            <include layout="@layout/include_line_h" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app.theme.background"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/app.padding.normal"
+                android:paddingTop="@dimen/app.padding.normal">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                    android:padding="@dimen/app.padding.normal"
+                    android:text="领券" />
+
+            </LinearLayout>
+
+
+            <include layout="@layout/include_line_h" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app.theme.background"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/app.padding.normal"
+                android:paddingTop="@dimen/app.padding.normal">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                    android:padding="@dimen/app.padding.normal"
+                    android:text="已选" />
+
+            </LinearLayout>
+
+            <include layout="@layout/include_line_h" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app.theme.background"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/app.padding.normal"
+                android:paddingTop="@dimen/app.padding.normal">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                    android:padding="@dimen/app.padding.normal"
+                    android:text="送至" />
+
+            </LinearLayout>
+
+            <include layout="@layout/include_line_h" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/app.margin.large12"
+                android:background="@color/app.theme.background"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/app.padding.normal"
+                android:paddingTop="@dimen/app.padding.normal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                        android:padding="@dimen/app.padding.normal"
+                        android:text="商品评价" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.red"
+                        android:layout_marginLeft="@dimen/app.margin.xlarge"
+                        android:padding="@dimen/app.padding.normal"
+                        android:text="好评度100%" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                        android:layout_marginLeft="@dimen/app.margin.xxxlarge"
+                        android:padding="@dimen/app.padding.normal"
+                        android:text="0人评论" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/app.padding.normal">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                        android:background="@drawable/btn_red_normal"
+                        android:padding="@dimen/app.padding.large12"
+                        android:text="0人评价"
+                        android:textColor="@color/app.text" />
+                </LinearLayout>
+
+                <include layout="@layout/include_line_h" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app.theme.background"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/app.padding.normal"
+                    android:paddingTop="@dimen/app.padding.normal">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                        android:padding="@dimen/app.padding.normal"
+                        android:text="暂无商品评论" />
+
+                </LinearLayout>
+
+                <include layout="@layout/include_line_h" />
+
+
+            </LinearLayout>
 
 
         </LinearLayout>

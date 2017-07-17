@@ -14,10 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/include_toolbar_alpha"
-            app:toolTitle="@{viewModel.title}" />
 
         <com.core.op.lib.weight.scrollview.ScrollViewContainer
             android:layout_width="match_parent"
@@ -31,6 +27,12 @@
             <include layout="@layout/layout_bottom" />
 
         </com.core.op.lib.weight.scrollview.ScrollViewContainer>
+
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/include_toolbar_alpha"
+            app:toolTitle="@{viewModel.title}" />
 
 
     </FrameLayout>
