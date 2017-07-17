@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.detail.DetailViewModel" />
+    </data>
+
+
+    <com.core.op.lib.weight.scrollview.GradationScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/bannerll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@{viewModel.height,default=@dimen/default_height}">
+
+                <com.core.op.lib.weight.BannerView
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemView="@{viewModel.bItemView}"
+                    app:items="@{viewModel.bViewModels}" />
+
+                <LinearLayout
+                    android:id="@+id/ll_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/app.margin.normal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"></LinearLayout>
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+    </com.core.op.lib.weight.scrollview.GradationScrollView>
+
+</layout>
