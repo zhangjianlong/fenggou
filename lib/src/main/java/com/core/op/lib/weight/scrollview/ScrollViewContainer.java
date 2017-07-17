@@ -1,4 +1,4 @@
-package com.hankkin.library;
+package com.core.op.lib.weight.scrollview;
 
 import android.content.Context;
 import android.os.Handler;
@@ -15,7 +15,6 @@ import java.util.TimerTask;
 
 /**
  * 包含两个ScrollView的容器
- *
  */
 public class ScrollViewContainer extends RelativeLayout {
 
@@ -68,7 +67,7 @@ public class ScrollViewContainer extends RelativeLayout {
      * 这点是去除多点拖动剧变的关键
      */
     private int mEvents;
-    boolean isTuninginterface=true;
+    boolean isTuninginterface = true;
     private Handler handler = new Handler() {
 
         @Override
@@ -80,8 +79,8 @@ public class ScrollViewContainer extends RelativeLayout {
                         mMoveLen = -mViewHeight;
                         state = DONE;
                         mCurrentViewIndex = 1;
-                        if(isTuninginterface){
-                            isTuninginterface=false;
+                        if (isTuninginterface) {
+                            isTuninginterface = false;
                         }
                     }
                 } else if (state == AUTO_DOWN) {
@@ -128,7 +127,7 @@ public class ScrollViewContainer extends RelativeLayout {
                 else
                     vt.clear();
                 mLastY = ev.getY();
-                System.out.println("---ACTION_DOWN-mLastY------"+ev.getY());
+                System.out.println("---ACTION_DOWN-mLastY------" + ev.getY());
                 vt.addMovement(ev);
                 mEvents = 0;
                 break;
@@ -148,8 +147,8 @@ public class ScrollViewContainer extends RelativeLayout {
                     } else if (mMoveLen < -mViewHeight) {
                         mMoveLen = -mViewHeight;
                         mCurrentViewIndex = 1;
-                        if(isTuninginterface){
-                            isTuninginterface=false;
+                        if (isTuninginterface) {
+                            isTuninginterface = false;
                         }
                     }
                     if (mMoveLen < -8) {
@@ -202,7 +201,7 @@ public class ScrollViewContainer extends RelativeLayout {
                 mTimer.schedule(2);
                 try {
                     vt.recycle();
-                    vt=null;
+                    vt = null;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -229,8 +228,8 @@ public class ScrollViewContainer extends RelativeLayout {
             isMeasured = true;
             mViewHeight = getMeasuredHeight();
             mViewWidth = getMeasuredWidth();
-            System.out.println("======onMeasure====mViewHeight======"+mViewHeight);
-            System.out.println("======onMeasure====mViewWidth======"+mViewWidth);
+            System.out.println("======onMeasure====mViewHeight======" + mViewHeight);
+            System.out.println("======onMeasure====mViewWidth======" + mViewWidth);
             topView = getChildAt(0);
             bottomView = getChildAt(1);
             bottomView.setOnTouchListener(bottomViewTouchListener);

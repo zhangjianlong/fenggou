@@ -23,7 +23,9 @@ import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.ActSearchBinding;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
+import com.odbpo.fenggou.feature.detail.DetailActivity;
 import com.odbpo.fenggou.feature.main.shopping.loginCart.ShoppingItemViewModel;
+import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
@@ -48,6 +50,9 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
         initTab();
         initData();
         upadataView();
+        Messenger.getDefault().register(activity, MessageKey.PRODUCT_DETAIL, () -> {
+            DetailActivity.instance(activity);
+        });
     }
 
 

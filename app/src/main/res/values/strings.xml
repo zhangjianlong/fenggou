@@ -123,5 +123,6 @@
     <string name="app.nick.name.set.hint">设置昵称</string>
     <string name="app.nick.name.hint">4-20字符，由中文、英文、数字、-和_组成</string>
 
-
+    <!--productDetail-->
+    <string name="app.product.detail.title">商品详情</string>
 </resources>

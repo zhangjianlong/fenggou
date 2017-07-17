@@ -1,6 +1,12 @@
 package com.odbpo.fenggou.feature.detail;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+
 import com.odbpo.fenggou.R;
+import com.odbpo.fenggou.base.BackActivity;
 import com.odbpo.fenggou.base.BaseActivity;
 import com.odbpo.fenggou.databinding.ActDetailBinding;
 import com.odbpo.fenggou.di.components.DaggerDetailComponent;
@@ -14,7 +20,7 @@ import com.core.op.lib.utils.inject.RootView;
 import javax.inject.Inject;
 
 @RootView(R.layout.act_detail)
-public final class DetailActivity extends BaseActivity<DetailViewModel, ActDetailBinding> {
+public final class DetailActivity extends BackActivity<DetailViewModel, ActDetailBinding> {
 
     DetailComponent component;
 
@@ -43,4 +49,11 @@ public final class DetailActivity extends BaseActivity<DetailViewModel, ActDetai
     @AfterViews
     void afterViews() {
     }
+
+    @Override
+    protected Toolbar setToolBar() {
+        return binding.toolbar.toolbar;
+    }
+
+
 }

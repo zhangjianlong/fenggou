@@ -2,11 +2,15 @@ package com.core.op.lib.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import static java.security.AccessController.getContext;
 
 /**
  * @author: zjl
@@ -54,6 +58,23 @@ public class MyStateBarUtil {
             result = a.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+
+    //获取屏幕的宽度
+    public static int getScreenWidth(Context context) {
+        WindowManager manager = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        Display display = manager.getDefaultDisplay();
+        return display.getWidth();
+    }
+
+    //获取屏幕的一般高度
+    public static int getScreenHalfHeight(Context context) {
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        return height / 2;
     }
 
 

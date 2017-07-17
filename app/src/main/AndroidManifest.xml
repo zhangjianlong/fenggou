@@ -54,8 +54,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Gender" />
-        <activity android:name=".Detail"></activity>
+        <activity android:name=".feature.detail.DetailActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.impl.Down" />
+        <activity android:name=".view.impl.Up"></activity>
     </application>
 
 </manifest>

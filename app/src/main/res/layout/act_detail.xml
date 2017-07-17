@@ -10,10 +10,30 @@
             type="com.odbpo.fenggou.feature.detail.DetailViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    </LinearLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/include_toolbar_alpha"
+            app:toolTitle="@{viewModel.title}" />
+
+        <com.core.op.lib.weight.scrollview.ScrollViewContainer
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/topView"
+                layout="@layout/layout_top"
+                app:viewModel="@{viewModel}" />
+
+            <include layout="@layout/layout_bottom" />
+
+        </com.core.op.lib.weight.scrollview.ScrollViewContainer>
+
+
+    </FrameLayout>
+
+
 </layout>

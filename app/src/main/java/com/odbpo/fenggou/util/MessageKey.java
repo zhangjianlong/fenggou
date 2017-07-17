@@ -17,4 +17,5 @@ public class MessageKey {
     public static final String EDIT = "EDIT";
     //UserName
     public static final String SAVE_NAME = "SAVE_NAME";
+    public static final String PRODUCT_DETAIL = "PRODUCT_DETAIL";
 }
