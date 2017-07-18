@@ -11,6 +11,8 @@
     </data>
 
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/app.theme.background_f3f3f3"
@@ -32,8 +34,9 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="@dimen/app.margin.large"
                 android:background="@drawable/background_white"
-                android:iconifiedByDefault="false"
+                android:iconifiedByDefault="true"
                 android:imeOptions="actionSearch" />
+
         </android.support.v7.widget.Toolbar>
 
 

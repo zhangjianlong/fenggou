@@ -19,49 +19,62 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.forget.ForgetActivity">
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".feature.forget.ForgetActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.search.SearchActivity">
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".feature.search.SearchActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.profile.ProfileActivity">
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".feature.profile.ProfileActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.Searchable.SearchableActivity">
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".feature.Searchable.SearchableActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.register.RegisterActivity">
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".feature.register.RegisterActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.username.UsernameActivity">
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".feature.username.UsernameActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.nickname.NicknameActivity">
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".feature.nickname.NicknameActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.detail.DetailActivity">
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".feature.detail.DetailActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.impl.Down" />
-        <activity android:name=".view.impl.Up" />
-        <activity android:name=".Cart"></activity>
     </application>
 
 </manifest>
