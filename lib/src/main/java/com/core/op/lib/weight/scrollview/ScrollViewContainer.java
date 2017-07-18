@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.core.op.Static;
+import com.core.op.lib.utils.MyStateBarUtil;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -68,6 +71,9 @@ public class ScrollViewContainer extends RelativeLayout {
      */
     private int mEvents;
     boolean isTuninginterface = true;
+
+
+
     private Handler handler = new Handler() {
 
         @Override
@@ -214,11 +220,12 @@ public class ScrollViewContainer extends RelativeLayout {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        int toolHeight = (int) MyStateBarUtil.getActionBarHeight() + MyStateBarUtil.getStateBarHeight();
         topView.layout(0, (int) mMoveLen, mViewWidth,
                 topView.getMeasuredHeight() + (int) mMoveLen);
-        bottomView.layout(0, topView.getMeasuredHeight() + (int) mMoveLen,
+        bottomView.layout(0, topView.getMeasuredHeight() + (int) mMoveLen + toolHeight,
                 mViewWidth, topView.getMeasuredHeight() + (int) mMoveLen
-                        + bottomView.getMeasuredHeight());
+                        + bottomView.getMeasuredHeight() + toolHeight);
     }
 
     @Override

@@ -6,15 +6,18 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.databinding.ObservableList;
 import android.graphics.Color;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import com.core.op.Static;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.lib.base.BAViewModel;
+import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.utils.MyStateBarUtil;
 import com.core.op.lib.weight.imgselector.utils.ScreenUtils;
@@ -22,6 +25,8 @@ import com.core.op.lib.weight.scrollview.GradationScrollView;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.ActDetailBinding;
+import com.odbpo.fenggou.feature.dialog.cart.CartDialog;
+import com.odbpo.fenggou.feature.main.MainActivity;
 import com.odbpo.fenggou.util.CommonUtils;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -33,48 +38,64 @@ import javax.inject.Inject;
 import rx.Observable;
 
 import static android.R.attr.data;
+import static com.odbpo.fenggou.R.id.iv;
+import static com.odbpo.fenggou.R.id.tabLayout;
 
 @PerActivity
 public class DetailViewModel extends BAViewModel<ActDetailBinding> {
+    private CartDialog cartDialog;
 
 
     @Inject
-    public DetailViewModel(RxAppCompatActivity activity) {
+    public DetailViewModel(RxAppCompatActivity activity, CartDialog cartDialog) {
         super(activity);
+        this.cartDialog = cartDialog;
     }
 
     @Override
     public void afterViews() {
         initToolBar();
         initBanner();
-        initScroView();
+        initTabs();
+
 
     }
 
-    private void initScroView() {
+    @Override
+    public void onResume() {
+        super.onResume();
         binding.topView.scrollview.setScrollViewListener(new GradationScrollView.ScrollViewListener() {
             @Override
             public void onScrollChanged(GradationScrollView scrollView, int x, int y, int oldx, int oldy) {
+                bannerMeasureHeight = binding.topView.bannerll.getMeasuredHeight();
+                bannerHeight = binding.topView.scrollview.getHeight();
                 if (y <= 0) {   //设置标题的背景颜色
-                    binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) 0, 255, 255, 255));
+                    System.out.println("model0_" + "  bannerHeight" + bannerHeight + "y: " + y);
+                    binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) 0, 254, 74, 98));
                 } else if (y > 0 && y <= bannerHeight) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
-                    float scale = (float) y * 10 / bannerHeight;
+                    float scale = (float) y / (bannerMeasureHeight - (MyStateBarUtil.getScreenHeight() - (MyStateBarUtil.getScreenHeight() - bannerHeight)));
                     float alpha = (255 * scale);
-                    binding.toolbar.toolbarTitle.setTextColor(Color.argb((int) alpha, 1, 24, 28));
-                    binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) alpha, 255, 255, 255));
-                    System.out.println("alpha: " + alpha + "scale: " + scale + "y: " + y);
+                    binding.toolbar.toolbarTitle.setTextColor(Color.argb((int) alpha, 255, 255, 255));
+                    binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) alpha, 254, 74, 98));
+                    System.out.println("model1_" + "  bannerHeight" + bannerHeight + "bannerMeasureHeight:" + bannerMeasureHeight + "alpha: " + alpha + "scale: " + scale + "y: " + y);
                 } else {    //滑动到banner下面设置普通颜色
-                    binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
+                    System.out.println("model2_" + "  bannerHeight" + bannerHeight + "y: " + y);
+                    binding.toolbar.toolbar.setBackgroundColor(Color.argb((int) 255, 254, 74, 98));
                 }
             }
         });
+
     }
+
 
     private void initToolBar() {
         binding.toolbar.toolbar.setBackgroundResource(R.color.transparent);
     }
 
-    private int bannerHeight = MyStateBarUtil.getScreenHalfHeight(Static.CONTEXT);
+    private static final String TAG_DETAIL = "TAG_DETAIL";
+    private static final String TAG_PARAMETERS = "TAG_PARAMETERS";
+    private int bannerMeasureHeight;
+    private int bannerHeight;
     private List<String> images = new ArrayList<>();
     public final ItemView bItemView = ItemView.of(BR.viewModel, R.layout.item_main_find_banner_item);
     public final ObservableList<FindBannerItemViewModel> bViewModels = new ObservableArrayList<>();
@@ -147,6 +168,51 @@ public class DetailViewModel extends BAViewModel<ActDetailBinding> {
             }
         }
     }
+
+    private void initTabs() {
+        TabLayout.Tab tab = binding.bottomView.tabLayout.newTab();
+        tab.setText(Static.CONTEXT.getText(R.string.app_product_detail_title));
+        tab.setTag(TAG_DETAIL);
+        binding.bottomView.tabLayout.addTab(tab);
+        tab = binding.bottomView.tabLayout.newTab();
+        tab.setText(Static.CONTEXT.getText(R.string.app_product_detail_parameters));
+        tab.setTag(TAG_PARAMETERS);
+        binding.bottomView.tabLayout.addTab(tab);
+        binding.bottomView.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getTag().equals(TAG_DETAIL)) {
+
+                } else if (tab.getTag().equals(TAG_PARAMETERS)) {
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+    }
+
+
+    public final ReplyCommand addCart = new ReplyCommand(() -> {
+        if (!cartDialog.isShowing()) {
+            cartDialog.show();
+        }
+    });
+
+    public final ReplyCommand purchase = new ReplyCommand(() -> {
+        if (!cartDialog.isShowing()) {
+            cartDialog.show();
+        }
+    });
 
 
 }

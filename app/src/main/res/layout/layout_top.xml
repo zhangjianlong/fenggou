@@ -12,7 +12,6 @@
 
 
     <com.core.op.lib.weight.scrollview.GradationScrollView
-
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -124,7 +123,6 @@
                 android:layout_marginTop="@dimen/app.margin.large12"
                 android:background="@color/app.theme.background"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/app.padding.normal"
                 android:paddingTop="@dimen/app.padding.normal">
 
                 <LinearLayout
@@ -183,7 +181,11 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/include_line_h" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                    android:gravity="center_horizontal"
+                    android:text="--- 向下滑动，查看图片详情 ---" />
 
 
             </LinearLayout>

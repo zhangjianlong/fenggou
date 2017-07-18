@@ -19,7 +19,7 @@ public final class GenderDialog extends BaseDialog<GenderViewModel, DlgGenderBin
     public GenderDialog(RxAppCompatActivity activity, GenderViewModel viewModel) {
         super(BDialog.newDialog(activity)
                 .setGravity(Gravity.BOTTOM)
-                .setCancelable(true), viewModel);
+                .setCancelable(false), viewModel);
     }
 
     @AfterViews

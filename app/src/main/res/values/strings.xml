@@ -125,4 +125,5 @@
 
     <!--productDetail-->
     <string name="app.product.detail.title">商品详情</string>
+    <string name="app.product.detail.parameters">规格参数</string>
 </resources>

@@ -171,6 +171,10 @@
         <item name="android:textSize">@dimen/app.text.large</item>
     </style>
 
+    <style name="App.Theme.TextAppearance.mm.black333">
+        <item name="android:textColor">@color/app.text.black333</item>
+    </style>
+
     <!-- TextAppearance mw-->
     <style name="App.Theme.TextAppearance.mw">
         <item name="android:layout_width">match_parent</item>
@@ -230,6 +234,10 @@
     </style>
 
     <style name="App.Theme.TextAppearance.wm.normal.white">
+        <item name="android:textColor">@color/app.text</item>
+    </style>
+
+    <style name="App.Theme.TextAppearance.wm.large.white">
         <item name="android:textColor">@color/app.text</item>
     </style>
 
@@ -360,7 +368,6 @@
     <style name="App.Theme.TextAppearance.ww.normal.black666">
         <item name="android:textColor">@color/app.text.black666</item>
     </style>
-
 
 
     <style name="App.Theme.TextAppearance.ww.normal.black999">

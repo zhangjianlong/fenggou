@@ -49,7 +49,7 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
 
     @Override
     public void afterViews() {
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MyStateBarUtil.getStateBarHeight(activity)));
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MyStateBarUtil.getStateBarHeight()));
         Messenger.getDefault().register(this, MessageKey.LABEL_SELECT_STAIR, Integer.class, a -> {
             upadataView((int) a);
         });

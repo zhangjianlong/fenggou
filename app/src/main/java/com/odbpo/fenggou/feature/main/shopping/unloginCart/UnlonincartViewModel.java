@@ -5,6 +5,7 @@ import android.databinding.ObservableBoolean;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.core.op.Static;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.command.ReplyCommand;
@@ -37,7 +38,7 @@ public class UnlonincartViewModel extends BFViewModel<FrgUnlonincartBinding> {
 
     @Override
     public void afterViews() {
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MyStateBarUtil.getStateBarHeight(activity)));
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MyStateBarUtil.getStateBarHeight()));
         initData();
         upadataView();
         Messenger.getDefault().register(activity, MessageKey.LOGIN, () -> {

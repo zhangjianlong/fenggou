@@ -5,10 +5,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.core.op.Static;
 
 import static java.security.AccessController.getContext;
 
@@ -47,15 +50,15 @@ public class MyStateBarUtil {
     /**
      * 获取状态栏高度,在页面还没有显示出来之前
      *
-     * @param a
+     * @param
      * @return
      */
-    public static int getStateBarHeight(Activity a) {
+    public static int getStateBarHeight() {
         int result = 0;
-        int resourceId = a.getResources().getIdentifier("status_bar_height",
+        int resourceId = Static.CONTEXT.getResources().getIdentifier("status_bar_height",
                 "dimen", "android");
         if (resourceId > 0) {
-            result = a.getResources().getDimensionPixelSize(resourceId);
+            result = Static.CONTEXT.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
     }
@@ -75,6 +78,24 @@ public class MyStateBarUtil {
                 .getSystemService(Context.WINDOW_SERVICE);
         int height = wm.getDefaultDisplay().getHeight();
         return height / 2;
+    }
+
+    //获取屏幕的一般高度
+    public static int getScreenHeight() {
+        WindowManager wm = (WindowManager) Static.CONTEXT
+                .getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        return height;
+    }
+
+
+    public static float getActionBarHeight() {
+        float actionBarHeight = 0;
+        TypedValue tv = new TypedValue();
+        if (Static.CONTEXT.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, Static.CONTEXT.getResources().getDisplayMetrics());
+        }
+        return actionBarHeight;
     }
 
 

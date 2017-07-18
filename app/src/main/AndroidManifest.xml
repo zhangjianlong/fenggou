@@ -60,7 +60,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.impl.Down" />
-        <activity android:name=".view.impl.Up"></activity>
+        <activity android:name=".view.impl.Up" />
+        <activity android:name=".Cart"></activity>
     </application>
 
 </manifest>

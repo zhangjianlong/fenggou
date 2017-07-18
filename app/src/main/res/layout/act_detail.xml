@@ -10,32 +10,105 @@
             type="com.odbpo.fenggou.feature.detail.DetailViewModel" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app.theme.background"
+        android:orientation="vertical">
 
 
-        <com.core.op.lib.weight.scrollview.ScrollViewContainer
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.core.op.lib.weight.scrollview.ScrollViewContainer
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app.theme.background">
+
+                <include
+                    android:id="@+id/topView"
+                    layout="@layout/layout_top"
+                    app:viewModel="@{viewModel}" />
+
+                <include
+                    android:id="@+id/bottomView"
+                    layout="@layout/layout_bottom" />
+
+            </com.core.op.lib.weight.scrollview.ScrollViewContainer>
+
 
             <include
-                android:id="@+id/topView"
-                layout="@layout/layout_top"
-                app:viewModel="@{viewModel}" />
-
-            <include layout="@layout/layout_bottom" />
-
-        </com.core.op.lib.weight.scrollview.ScrollViewContainer>
+                android:id="@+id/toolbar"
+                layout="@layout/include_toolbar_alpha"
+                app:toolTitle="@{viewModel.title}" />
 
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/include_toolbar_alpha"
-            app:toolTitle="@{viewModel.title}" />
+        </FrameLayout>
 
 
-    </FrameLayout>
+        <LinearLayout
+            android:id="@+id/shoppingll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/app.padding.small"
+                android:drawableTop="@drawable/cart"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.small"
+                android:text="购物车" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/app.padding.small"
+                android:drawableTop="@drawable/collection"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.small"
+                android:text="收藏" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/app.padding.small"
+                android:drawableTop="@drawable/kefu"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.small"
+                android:text="客服" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.wm.large.white"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:background="@color/app.theme.background_e53e5a"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.large12"
+                app:clickCommand = "@{viewModel.addCart}"
+                android:text="加入购" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.wm.large.white"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:background="@color/app.theme.background_e73e00"
+                android:gravity="center"
+                android:padding="@dimen/app.padding.large12"
+                app:clickCommand = "@{viewModel.purchase}"
+                android:text="立即购" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </layout>

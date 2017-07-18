@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.dialog.cart.CartViewModel" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@{viewModel.height,default=@dimen/default_height}"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/upView"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:background="@color/transparent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/upView"
+            android:background="@color/app.theme.background" />
+
+        <com.core.op.lib.weight.ShapedImageView
+            android:id="@+id/productIv"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="@dimen/app.margin.large"
+            android:scaleType="fitXY"
+            app:round_radius="10dp"
+            app:uri="@{viewModel.uri}" />
+
+        <LinearLayout
+            android:id="@+id/productll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/productIv"
+            android:layout_below="@+id/upView"
+            android:layout_toRightOf="@id/productIv"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                app:clickCommand = "@{viewModel.cancel}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/app.margin.large12"
+                android:layout_marginTop="@dimen/app.margin.large12">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/close" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.mw.normal.red"
+                android:layout_marginLeft="@dimen/app.margin.large12"
+                android:text="478.00" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.mm.black333"
+                android:layout_marginLeft="@dimen/app.margin.large12"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:text="意大利原瓶进口红粉佳人甜白桃红高气泡葡萄甜型起" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/productll"
+            android:background="@color/app.theme.background" />
+    </RelativeLayout>
+
+
+</layout>

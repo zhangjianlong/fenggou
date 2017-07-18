@@ -36,6 +36,8 @@
     <color name="app.theme.background_dadada">#DADADA</color>
     <color name="app.theme.background_ffffff">#ffffff</color>
     <color name="app.theme.background_f7f7f7">#f7f7f7</color>
+    <color name="app.theme.background_e53e5a">#e53e5a</color>
+    <color name="app.theme.background_e73e00">#e73e00</color>
     <color name="app.theme.background_ddd">#dddddd</color>
     <color name="app.theme.background_31C5E4">#31C5E4</color>
     <color name="app.theme.background_000000_aphla.40">#000000</color>
@@ -44,7 +46,7 @@
     <color name="app.theme.gradientColor">#507E9F</color>
     <color name="app.theme.colorControlActivated">#31C5E4</color>
     <color name="app.theme.colorControlHighlight">#DADADA</color>
-    <color name="app.theme.colorPrimary">#fe4a62</color><!--toolbar背景顏色-->
+    <color name="app.theme.colorPrimary">#e53e5a</color><!--toolbar背景顏色-->
     <color name="app.theme.colorPrimaryDark">#9e0000</color><!--状态栏背景顏色-->
     <color name="app.theme.colorAccent">#ffffff</color><!--字体顏色-->
     <color name="app.theme.textColorPrimary">#ffffff</color><!--toolbar title字体顏色-->
