@@ -16,7 +16,7 @@ public abstract class BackActivity<V extends BAViewModel, T extends ViewDataBind
 
     @Override
     protected void initAfterView() {
-
+        setSupportActionBar(setToolBar());
         setToolBar().setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

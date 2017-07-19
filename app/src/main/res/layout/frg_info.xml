@@ -52,6 +52,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_marginRight="@dimen/app.margin.large12"
+                                app:clickCommand="@{viewModel.profileAct}"
                                 android:background="@drawable/background_gray_circle">
 
                                 <ImageView
@@ -59,7 +60,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:background="@drawable/set"
-                                    app:clickCommand="@{viewModel.profileAct}" />
+                                    />
 
 
                             </FrameLayout>
@@ -68,6 +69,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_marginRight="@dimen/app.margin.large12"
+                                app:clickCommand="@{viewModel.message}"
                                 android:background="@drawable/background_gray_circle">
 
                                 <ImageView

@@ -22,6 +22,7 @@ public class EmptyLayout extends LinearLayout implements
     public static final int NODATA = 3;
     public static final int NODATA_ENABLE_CLICK = 5;
     public static final int NO_LOGIN = 6;
+    public static final int NO_NOTIFICATION = 7;
 
     private Loading mLoading;
     private boolean clickEnable = true;
@@ -179,6 +180,13 @@ public class EmptyLayout extends LinearLayout implements
                 setTvNoDataContent();
                 clickEnable = true;
                 break;
+            case NO_NOTIFICATION:
+                mErrorState = NODATA;
+                img.setBackgroundResource(R.drawable.img_no);
+                img.setVisibility(View.VISIBLE);
+                mLoading.setVisibility(View.GONE);
+                setTvNoDataContent();
+                clickEnable = true;
             default:
                 break;
         }

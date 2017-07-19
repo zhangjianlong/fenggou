@@ -47,6 +47,7 @@
 
         </FrameLayout>
 
+        <include layout="@layout/include_line_h" />
 
         <LinearLayout
             android:id="@+id/shoppingll"
@@ -91,8 +92,8 @@
                 android:background="@color/app.theme.background_e53e5a"
                 android:gravity="center"
                 android:padding="@dimen/app.padding.large12"
-                app:clickCommand = "@{viewModel.addCart}"
-                android:text="加入购" />
+                android:text="加入购"
+                app:clickCommand="@{viewModel.addCart}" />
 
 
             <android.support.v7.widget.AppCompatTextView
@@ -102,8 +103,8 @@
                 android:background="@color/app.theme.background_e73e00"
                 android:gravity="center"
                 android:padding="@dimen/app.padding.large12"
-                app:clickCommand = "@{viewModel.purchase}"
-                android:text="立即购" />
+                android:text="立即购"
+                app:clickCommand="@{viewModel.purchase}" />
 
 
         </LinearLayout>

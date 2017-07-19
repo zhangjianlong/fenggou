@@ -109,6 +109,7 @@
     <string name="app.shopping.like">----猜你喜欢----</string>
     <string name="app.shopping.my">我的购物车</string>
     <string name="app.shopping.edit">编辑</string>
+    <string name="app.shopping.more">更多</string>
     <string name="app.shopping.sure">确定</string>
 
     <!--search-->
@@ -126,4 +127,8 @@
     <!--productDetail-->
     <string name="app.product.detail.title">商品详情</string>
     <string name="app.product.detail.parameters">规格参数</string>
+
+
+    <!--message-->
+    <string name="app.message.title">会员中心-站内信</string>
 </resources>

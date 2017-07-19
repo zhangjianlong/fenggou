@@ -17,6 +17,8 @@ public final class CartDialog extends BaseDialog<CartViewModel, DlgCartBinding> 
 
     @Inject
     public CartDialog(RxAppCompatActivity activity, CartViewModel viewModel) {
+
+
         super(BDialog.newDialog(activity)
                 .setGravity(Gravity.BOTTOM)
                 .setCancelable(false), viewModel);

@@ -11,6 +11,7 @@ import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgInfoBinding;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
+import com.odbpo.fenggou.feature.message.MessageActivity;
 import com.odbpo.fenggou.feature.profile.ProfileActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -80,6 +81,11 @@ public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
 
     public ReplyCommand profileAct = new ReplyCommand(() -> {
         ProfileActivity.instance(activity);
+
+    });
+
+    public ReplyCommand message = new ReplyCommand(() -> {
+        MessageActivity.instance(activity);
 
     });
 

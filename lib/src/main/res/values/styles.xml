@@ -618,4 +618,37 @@
         <item name="android:textColor">@color/ucrop_color_widget_text</item>
         <item name="android:textSize">@dimen/ucrop_text_size_widget_text</item>
     </style>
+
+    //popupWindow弹出动画
+
+    <style name="PopFadeLeftUp">
+        <item name="android:windowEnterAnimation">@anim/fade_left_up_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_left_up_out</item>
+    </style>
+
+    <style name="PopFadeSuspendLeftUp">
+        <item name="android:windowEnterAnimation">@anim/fade_suspend_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_suspend_out</item>
+    </style>
+
+    <style name="PopFadeRightUp">
+        <item name="android:windowEnterAnimation">@anim/fade_left_up_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_left_up_out</item>
+    </style>
+
+    <style name="PopFadeLeftdown">
+        <item name="android:windowEnterAnimation">@anim/fade_left_up_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_left_up_out</item>
+    </style>
+
+    <style name="PopFadeRightDown">
+        <item name="android:windowEnterAnimation">@anim/fade_left_up_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_left_up_out</item>
+    </style>
+
+    <style name="PopFadeCenter">
+        <item name="android:windowEnterAnimation">@anim/fade_center_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_center_out</item>
+    </style>
+
 </resources>
