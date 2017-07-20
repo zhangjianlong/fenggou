@@ -29,6 +29,7 @@ public abstract class BasePopupWindow extends PopupWindow {
     protected int aniType = -1;
     protected boolean isCancelable;
     protected WindowManager windowManager;
+    private boolean popupWindowShow = false;
 
     public BasePopupWindow(WindowBuilder builder) {
         super();
@@ -50,13 +51,13 @@ public abstract class BasePopupWindow extends PopupWindow {
     private void iniPopupWindow() {
         this.setContentView(contentView);
         this.setFocusable(true);
-        setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                setFocusable(false);
-            }
-        });
-        this.setOutsideTouchable(true);
+//        setOnDismissListener(new OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                setFocusable(false);
+//            }
+//        });
+        this.setOutsideTouchable(isCancelable);
         this.setBackgroundDrawable(new ColorDrawable());
         this.setWidth(LayoutParams.WRAP_CONTENT);
         this.setHeight(LayoutParams.WRAP_CONTENT);
@@ -107,7 +108,10 @@ public abstract class BasePopupWindow extends PopupWindow {
     public void show(int i, View anchorView) {
         if (isShowing()) {
             return;
+        } else {
+
         }
+        popupWindowShow = true;
         this.anchor = anchorView;
         int[] location = new int[2];
         if (anchor != null) {

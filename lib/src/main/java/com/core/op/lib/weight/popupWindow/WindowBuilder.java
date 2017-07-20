@@ -19,7 +19,7 @@ public class WindowBuilder {
     protected int contentViewId;
     protected Context context;
     protected int aniType = -1;
-    protected boolean isCancelable;
+    protected boolean isCancelable = true;
 
 
     public WindowBuilder setAnchor(View view) {
