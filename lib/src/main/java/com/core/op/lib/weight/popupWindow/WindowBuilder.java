@@ -1,6 +1,7 @@
 package com.core.op.lib.weight.popupWindow;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.view.View;
 
 import java.util.Arrays;
@@ -13,7 +14,9 @@ import java.util.Arrays;
 
 public class WindowBuilder {
     protected View anchor;
-    protected View contentView;
+
+    @LayoutRes
+    protected int contentViewId;
     protected Context context;
     protected int aniType = -1;
     protected boolean isCancelable;
@@ -32,8 +35,8 @@ public class WindowBuilder {
 
     }
 
-    public WindowBuilder setContentView(View view) {
-        this.contentView = view;
+    public WindowBuilder setContentView(int view) {
+        this.contentViewId = view;
         return this;
 
     }

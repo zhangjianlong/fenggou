@@ -106,7 +106,7 @@
 
                 <android.support.v7.widget.AppCompatTextView
                     style="@style/App.Theme.TextAppearance.wm.normal.white"
-                    android:background="@drawable/btn_red_background_normal"
+                    android:background="@drawable/selector_e53e5a_9e0000"
                     android:gravity="center"
                     android:padding="@dimen/app.padding.large"
                     android:text="删除" />
@@ -138,7 +138,7 @@
 
             <android.support.v7.widget.AppCompatTextView
                 style="@style/App.Theme.TextAppearance.wm.normal.white"
-                android:background="@drawable/btn_red_background_normal"
+                android:background="@drawable/selector_e53e5a_9e0000"
                 android:padding="@dimen/app.padding.large"
                 android:text="结算(3)"
                 android:visibility="@{viewModel.isEdit?View.GONE:View.VISIBLE}" />

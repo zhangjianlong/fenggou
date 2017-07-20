@@ -131,4 +131,10 @@
 
     <!--message-->
     <string name="app.message.title">会员中心-站内信</string>
+
+
+    <!--moreWindow-->
+    <string name="app.window.more">更多</string>
+    <string name="app.window.more.main">主页</string>
+    <string name="app.window.more.collect">我的收藏</string>
 </resources>

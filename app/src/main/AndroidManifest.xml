@@ -75,7 +75,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".feature.message.MessageActivity"
             android:windowSoftInputMode="adjustPan">
@@ -83,6 +82,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".Detail" />
+        <activity android:name=".Abc" />
+        <activity android:name=".Tab" />
+        <activity android:name=".More"></activity>
     </application>
 
 </manifest>

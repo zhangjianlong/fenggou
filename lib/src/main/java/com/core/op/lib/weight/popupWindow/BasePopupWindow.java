@@ -2,8 +2,10 @@ package com.core.op.lib.weight.popupWindow;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.LayoutRes;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -31,10 +33,10 @@ public abstract class BasePopupWindow extends PopupWindow {
     public BasePopupWindow(WindowBuilder builder) {
         super();
         this.anchor = builder.anchor;
-        this.contentView = builder.contentView;
         this.context = builder.context;
         this.aniType = builder.aniType;
         this.isCancelable = builder.isCancelable;
+        this.contentView = LayoutInflater.from(context).inflate(builder.contentViewId, null);
         iniPopupWindow();
     }
 
@@ -102,7 +104,11 @@ public abstract class BasePopupWindow extends PopupWindow {
     }
 
 
-    public void show(int i) {
+    public void show(int i, View anchorView) {
+        if (isShowing()) {
+            return;
+        }
+        this.anchor = anchorView;
         int[] location = new int[2];
         if (anchor != null) {
             anchor.getLocationOnScreen(location);

@@ -53,7 +53,7 @@
                                 android:layout_height="50dp"
                                 android:layout_marginRight="@dimen/app.margin.large12"
                                 app:clickCommand="@{viewModel.profileAct}"
-                                android:background="@drawable/background_gray_circle">
+                                android:background="@drawable/shape_50000000_backgd_oval">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                                 android:layout_height="50dp"
                                 android:layout_marginRight="@dimen/app.margin.large12"
                                 app:clickCommand="@{viewModel.message}"
-                                android:background="@drawable/background_gray_circle">
+                                android:background="@drawable/shape_50000000_backgd_oval">
 
                                 <ImageView
                                     android:layout_width="wrap_content"

@@ -62,7 +62,7 @@
             android:layout_marginLeft="@dimen/app.margin.normal"
             android:layout_marginRight="@dimen/app.margin.normal"
             android:layout_marginTop="@dimen/app.margin.large"
-            android:background="@drawable/btn_red_background"
+            android:background="@drawable/selector_e53e5a_9e0000_2radius"
             android:gravity="center"
             android:padding="@dimen/app.padding.large"
             android:text="@string/app.user.name.save"

@@ -72,7 +72,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/background_gray"
+                    android:background="@drawable/shape_ffffff_backgd_dadada_stroke_2radius__rectangle"
                     android:orientation="horizontal"
                     android:padding="@dimen/app.padding.small">
 

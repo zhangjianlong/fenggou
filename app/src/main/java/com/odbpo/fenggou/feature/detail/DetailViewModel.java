@@ -20,13 +20,12 @@ import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.utils.MyStateBarUtil;
-import com.core.op.lib.weight.imgselector.utils.ScreenUtils;
 import com.core.op.lib.weight.scrollview.GradationScrollView;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.ActDetailBinding;
 import com.odbpo.fenggou.feature.dialog.cart.CartDialog;
-import com.odbpo.fenggou.feature.main.MainActivity;
+import com.odbpo.fenggou.feature.window.more.MoreWindow;
 import com.odbpo.fenggou.util.CommonUtils;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -44,12 +43,14 @@ import static com.odbpo.fenggou.R.id.tabLayout;
 @PerActivity
 public class DetailViewModel extends BAViewModel<ActDetailBinding> {
     private CartDialog cartDialog;
+    private MoreWindow moreWindow;
 
 
     @Inject
-    public DetailViewModel(RxAppCompatActivity activity, CartDialog cartDialog) {
+    public DetailViewModel(RxAppCompatActivity activity, CartDialog cartDialog, MoreWindow moreWindow) {
         super(activity);
         this.cartDialog = cartDialog;
+        this.moreWindow = moreWindow;
     }
 
     @Override
@@ -215,5 +216,9 @@ public class DetailViewModel extends BAViewModel<ActDetailBinding> {
     });
 
 
+    public void show() {
+        moreWindow.show(5, binding.toolbar.toolbar);
+
+    }
 }
 

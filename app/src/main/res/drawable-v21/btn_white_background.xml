@@ -2,7 +2,7 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/app.theme.background_dadada">
 
-    <item android:drawable="@drawable/btn_white" />
+    <item android:drawable="@drawable/shape_ffffff_backgd_e5e5e5_stroke_2radius_rectangle" />
 </ripple>
 
 

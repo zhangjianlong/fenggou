@@ -62,7 +62,7 @@
                     style="@style/App.Theme.TextAppearance.ww.large.white"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/btn_red_normal"
+                    android:background="@drawable/shape_e53e5a_backgd_2radius_rectangle"
                     android:padding="@dimen/app.padding.small"
                     android:text="@{viewModel.userLevel}" />
             </RelativeLayout>
@@ -257,7 +257,7 @@
                 android:layout_marginLeft="@dimen/app.margin.normal"
                 android:layout_marginRight="@dimen/app.margin.normal"
                 android:layout_marginTop="@dimen/app.margin.large"
-                android:background="@drawable/btn_red_background"
+                android:background="@drawable/selector_e53e5a_9e0000_2radius"
                 android:gravity="center"
                 android:padding="@dimen/app.padding.large12"
                 android:text="@string/app.main.exit"

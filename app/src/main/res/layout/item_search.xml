@@ -22,7 +22,7 @@
             android:layout_marginBottom="@dimen/app.padding.normal"
             android:layout_marginLeft="@dimen/app.margin.xxlarge"
             android:layout_marginRight="@dimen/app.margin.xxlarge"
-            android:background="@drawable/background_white">
+            android:background="@drawable/shape_ffffff_backgd_20radius_rectangle">
 
 
             <ImageView

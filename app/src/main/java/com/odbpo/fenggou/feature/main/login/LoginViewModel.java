@@ -34,6 +34,7 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
     @Inject
     public LoginViewModel(RxAppCompatActivity activity) {
         super(activity);
+
     }
 
     @Override

@@ -42,7 +42,7 @@
 
                 <android.support.v7.widget.AppCompatTextView
                     style="@style/App.Theme.TextAppearance.ww.large.red"
-                    android:background="@drawable/background_red_annulus"
+                    android:background="@drawable/shape_ffffff_backgd_fc3e50_stroke_2radius_rectangle"
                     android:gravity="center"
                     android:paddingBottom="@dimen/app.margin.normal"
                     android:paddingLeft="@dimen/app.padding.large13"
@@ -108,7 +108,7 @@
                         style="@style/App.Theme.TextAppearance.mw.normal"
                         android:layout_marginLeft="@dimen/app.margin.normal"
                         android:layout_marginRight="@dimen/app.margin.normal"
-                        android:background="@drawable/btn_red_background"
+                        android:background="@drawable/selector_e53e5a_9e0000_2radius"
                         android:gravity="center"
                         android:padding="@dimen/app.padding.large"
                         android:text="@string/app.shopping.go"

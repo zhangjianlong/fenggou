@@ -76,7 +76,7 @@ public final class DetailActivity extends BackActivity<DetailViewModel, ActDetai
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.more:
-                RegisterActivity.instance(this);
+              viewModel.show();
                 break;
         }
 

@@ -157,7 +157,7 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         style="@style/App.Theme.TextAppearance.ww.normal.black999"
-                        android:background="@drawable/btn_red_normal"
+                        android:background="@drawable/shape_e53e5a_backgd_2radius_rectangle"
                         android:padding="@dimen/app.padding.large12"
                         android:text="0人评价"
                         android:textColor="@color/app.text" />

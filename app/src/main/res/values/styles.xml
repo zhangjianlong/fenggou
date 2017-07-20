@@ -61,7 +61,7 @@
     </style>
 
     <style name="App.Theme.Button">
-        <item name="android:background">@drawable/btn_background</item>
+        <item name="android:background">@drawable/selector_cccc_2radius</item>
         <item name="android:textColorHint">@color/app.text</item>
         <item name="android:textColor">@color/app.text</item>
         <item name="android:textSize">@dimen/app.text.normal</item>
