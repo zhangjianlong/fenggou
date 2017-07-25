@@ -51,6 +51,11 @@ def createParams() {
  * 生成APK文件名,VersionName,渠道等参数
  */
 def createApkParams() {
+    def assets = new File("${projectDir.parent}/app/src/main/assets")
+    if (!assets.exists()) {
+        assets.mkdir()
+    }
+
     def propertiesFile = new File("${projectDir.parent}/app/src/main/assets/url.properties")
     def urlContent = ""
 
