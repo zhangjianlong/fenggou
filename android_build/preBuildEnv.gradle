@@ -11,7 +11,7 @@ ext {
 }
 
 class Channels {
-    def channelsName = ["yingyongbao"]//渠道集合
+    def channelsName = ["fenggo"]//渠道集合
     def channelsProductFlavors = "" //渠道集合
 }
 
@@ -51,13 +51,19 @@ def createParams() {
  * 生成APK文件名,VersionName,渠道等参数
  */
 def createApkParams() {
+    def propertiesFile = new File("${projectDir.parent}/app/src/main/assets/url.properties")
+    def urlContent = ""
+
+
     if (BUILD_ENV ==~ /(?i)TEST/) {
+        urlContent = "API_PATH = http://10.33.180.62/"
         BUILD_VERSION_NAME = BUILD_ENV + "_" + BUILD_VERSION_NAME
         FILE_NAME = BUILD_VERSION_NAME + ".apk"
     } else {
+        urlContent = "API_PATH = http://10.33.180.62/"
         FILE_NAME = BUILD_VERSION_NAME + ".apk"
     }
-
+    propertiesFile.write(urlContent, "UTF-8")
     File temp = new File(project.projectDir, "temp")
     if (temp.exists()) {
         temp.deleteDir()

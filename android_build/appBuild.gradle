@@ -43,7 +43,7 @@ android {
     }
 
     productFlavors {
-        ${channelProductFlavors}
+        $ { channelProductFlavors }
     }
 
     repositories {
@@ -61,7 +61,7 @@ android {
                 variant.outputs.each { output ->
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        ${outputApk}
+                        $ { outputApk }
                     }
                 }
             }
@@ -77,10 +77,10 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('SlashYouth.jks')
-            storePassword "slash_youth_nick_123"
-            keyAlias "slashyouth"
-            keyPassword "slash_youth_nick_123"
+            storeFile file('../../odbpo/odbpo.jks')
+            storePassword "odbpo@"
+            keyAlias "odbpo"
+            keyPassword "odbpoAbc"
         }
     }
 }

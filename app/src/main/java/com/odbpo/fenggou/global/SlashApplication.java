@@ -8,6 +8,7 @@ import android.os.Handler;
 import com.core.op.BaseApplication;
 import com.core.op.lib.AppException;
 import com.facebook.stetho.Stetho;
+import com.odbpo.fenggou.data.UrlRoot;
 import com.odbpo.fenggou.di.components.AppComponent;
 import com.odbpo.fenggou.di.components.DaggerAppComponent;
 import com.odbpo.fenggou.di.modules.AppModule;
@@ -37,7 +38,8 @@ public class SlashApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         Stetho.initializeWithDefaults(this);
-        Logger.init("YTP")                 // default PRETTYLOGGER or use just init()
+        UrlRoot.setApiPath();
+        Logger.init("ZJL")                 // default PRETTYLOGGER or use just init()
                 .methodCount(3)                 // default 2
                 .hideThreadInfo()               // default shown
                 .logLevel(LogLevel.FULL)        // default LogLevel.FULL

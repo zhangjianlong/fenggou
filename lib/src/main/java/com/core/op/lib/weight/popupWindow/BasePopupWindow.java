@@ -14,6 +14,8 @@ import android.widget.PopupWindow;
 import com.core.op.lib.R;
 import com.core.op.lib.weight.picker.view.DialogBuilder;
 
+import static android.view.View.Z;
+
 
 /**
  * @author WangXu
@@ -106,10 +108,8 @@ public abstract class BasePopupWindow extends PopupWindow {
 
 
     public void show(int i, View anchorView) {
-        if (isShowing()) {
+        if (contentView == null) {
             return;
-        } else {
-
         }
         popupWindowShow = true;
         this.anchor = anchorView;
