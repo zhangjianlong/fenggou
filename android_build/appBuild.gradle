@@ -77,7 +77,7 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('../../odbpo/odbpo.jks')
+            storeFile file('../../../odbpo/odbpo.jks')
             storePassword "odbpo@"
             keyAlias "odbpo"
             keyPassword "odbpoAbc"
