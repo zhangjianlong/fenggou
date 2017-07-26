@@ -39,7 +39,7 @@ public class AppModule {
     @Provides
     @Singleton
     ApiClient provideApiClient() {
-        return ApiOption.Builder.instance(application).url(UrlRoot.HOST).build().create(ApiClient.class);
+        return ApiOption.Builder.instance(application).url(UrlRoot.API_PATH).build().create(ApiClient.class);
     }
 
     @Provides
