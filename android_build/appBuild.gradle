@@ -43,7 +43,7 @@ android {
     }
 
     productFlavors {
-        ${channelProductFlavors}
+        $ { channelProductFlavors }
     }
 
     repositories {
@@ -61,7 +61,7 @@ android {
                 variant.outputs.each { output ->
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        ${outputApk}
+                        $ { outputApk }
                     }
                 }
             }

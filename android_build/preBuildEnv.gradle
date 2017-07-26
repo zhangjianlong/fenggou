@@ -8,6 +8,7 @@ ext {
     FILE_NAME = ""
     VERSION_NAME = ""
     CHANNELSPRODUCTFLAVORS = ""
+    APK_NAME = ""
 }
 
 class Channels {
@@ -41,6 +42,7 @@ def createParams() {
     BUILD_DIR = properties.getProperty("BUILD_DIR")
     BUILD_VERSION_CODE = properties.getProperty("BUILD_VERSION_CODE")
     BUILD_VERSION_NAME = properties.getProperty("BUILD_VERSION_NAME")
+    APK_NAME = properties.getProperty("APK_NAME")
     File file = new File(BUILD_DIR)
     if (!file.exists()) {
         file.mkdirs()
@@ -63,10 +65,10 @@ def createApkParams() {
     if (BUILD_ENV ==~ /(?i)TEST/) {
         urlContent = "API_PATH = http://10.33.180.62/"
         BUILD_VERSION_NAME = BUILD_ENV + "_" + BUILD_VERSION_NAME
-        FILE_NAME = BUILD_VERSION_NAME + ".apk"
+        FILE_NAME = APK_NAME + "_" + BUILD_VERSION_NAME + ".apk"
     } else {
         urlContent = "API_PATH = http://10.33.180.62/"
-        FILE_NAME = BUILD_VERSION_NAME + ".apk"
+        FILE_NAME = APK_NAME + "_" + BUILD_VERSION_NAME + ".apk"
     }
     propertiesFile.write(urlContent, "UTF-8")
     File temp = new File(project.projectDir, "temp")
