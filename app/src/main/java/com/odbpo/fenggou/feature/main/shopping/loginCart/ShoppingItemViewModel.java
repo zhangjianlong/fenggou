@@ -26,17 +26,13 @@ public class ShoppingItemViewModel extends BViewModel {
 
 
     public ObservableBoolean isChecked = new ObservableBoolean(false);
-    public ObservableField<String> num = new ObservableField<String>("1");
 
     public final ReplyCommand checked = new ReplyCommand(() -> {
-        num.set("2");
-//        if (isChecked.get()) {
-//            isChecked.set(false);
-//        } else {
-//            isChecked.set(true);
-//        }
-//        ((ItemShoppingBinding) binding).setViewModel(this);
-//        ((ItemShoppingBinding) binding).executePendingBindings();
+        if (isChecked.get()) {
+            isChecked.set(false);
+        } else {
+            isChecked.set(true);
+        }
 
     });
 }
