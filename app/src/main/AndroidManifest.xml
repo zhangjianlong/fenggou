@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.odbpo.fenggou">
 
     <!-- 用于访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <meta-data
+        tools:replace="android:value"
+        android:name="android.support.VERSION"
+        android:value="25.0.0" />
 
     <application
         android:name=".global.SlashApplication"

@@ -33,8 +33,8 @@ public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
 
     @Override
     public void afterViews() {
-        initData();
-        upadataView();
+//        initData();
+//        upadataView();
 
     }
 

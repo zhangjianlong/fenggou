@@ -64,9 +64,7 @@
             android:layout_weight="1"
             app:itemView="@{viewModel.itemView}"
             app:items="@{viewModel.itemViewModels}"
-            app:layoutManager="@{LayoutManagers.linear()}">
-
-        </android.support.v7.widget.RecyclerView>
+            app:layoutManager="@{LayoutManagers.linear()}"></android.support.v7.widget.RecyclerView>
 
         <include layout="@layout/include_line_h" />
 
@@ -80,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/app.padding.large">
 
+
                 <android.support.v7.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,6 +86,7 @@
 
                 <android.support.v7.widget.AppCompatTextView
                     style="@style/App.Theme.TextAppearance.ww.normal.black333"
+                    android:layout_marginLeft="@dimen/app.margin.normal"
                     android:text="全选" />
 
 

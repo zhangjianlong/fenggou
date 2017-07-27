@@ -3,7 +3,13 @@ package com.odbpo.fenggou.global;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.core.op.BaseApplication;
 import com.core.op.lib.AppException;
@@ -12,6 +18,8 @@ import com.odbpo.fenggou.data.UrlRoot;
 import com.odbpo.fenggou.di.components.AppComponent;
 import com.odbpo.fenggou.di.components.DaggerAppComponent;
 import com.odbpo.fenggou.di.modules.AppModule;
+import com.odbpo.fenggou.feature.main.MainActivity;
+import com.odbpo.fenggou.util.CommonUtils;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 
@@ -38,6 +46,7 @@ public class SlashApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         Stetho.initializeWithDefaults(this);
+        application = this;
         UrlRoot.setApiPath();
         Logger.init("ZJL")                 // default PRETTYLOGGER or use just init()
                 .methodCount(3)                 // default 2
@@ -58,11 +67,45 @@ public class SlashApplication extends BaseApplication {
                     }
                 }
 
-//                Intent intentLoginActivity = new Intent(CommonUtils.getContext(), LoginActivity.class);
-//                CommonUtils.getContext().startActivity(intentLoginActivity);
-
             }
         });
+
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//禁止Activity横屏
+
+                listActivities.add(activity);
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+                listActivities.remove(activity);
+            }
+        });
+
+
         Thread.setDefaultUncaughtExceptionHandler(exception);
 
         appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();

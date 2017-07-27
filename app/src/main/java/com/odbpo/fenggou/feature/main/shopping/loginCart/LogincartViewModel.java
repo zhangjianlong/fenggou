@@ -55,16 +55,16 @@ public class LogincartViewModel extends BFViewModel<FrgLogincartBinding> {
 
 
     private void initData() {
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥123.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img1.imgtn.bdimg.com/it/u=3936672698,3321331245&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥123.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
+        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img3.imgtn.bdimg.com/it/u=231378,3680054829&fm=26&gp=0.jpg", "￥1269.00"));
 
     }
 
@@ -72,7 +72,7 @@ public class LogincartViewModel extends BFViewModel<FrgLogincartBinding> {
         itemViewModels.clear();
         getproducts()
                 .subscribe(data -> {
-                    itemViewModels.add(new ShoppingItemViewModel(data));
+                    itemViewModels.add(new ShoppingItemViewModel(activity,data));
                 }, error -> {
                 }, () -> {
                     if (binding.recyclerView.getAdapter() != null) {
