@@ -15,14 +15,20 @@ import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AppToast;
+import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.utils.StrUtil;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgLoginBinding;
+import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
+import com.odbpo.fenggou.domain.interactor.login.LoginResultUseCase;
 import com.odbpo.fenggou.feature.forget.ForgetActivity;
 import com.odbpo.fenggou.feature.main.category.CategoryFragment;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle.components.support.RxFragment;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,10 +36,12 @@ import javax.inject.Inject;
 public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
     private final static String TAG_LOGIN = "TAG_LOGIN";
     private final static String TAG_REGISTER = "TAG_REGISTER";
+    private LoginResultUseCase loginResultUseCase;
 
     @Inject
-    public LoginViewModel(RxAppCompatActivity activity) {
+    public LoginViewModel(RxAppCompatActivity activity, LoginResultUseCase loginResultUseCase) {
         super(activity);
+        this.loginResultUseCase = loginResultUseCase;
 
     }
 
@@ -153,7 +161,19 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 //            return;
 //        }
 
-        Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
+//        Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", "18625254516");
+        loginResultUseCase.setParams(JsonUtil.mapToJson(map));
+        loginResultUseCase.execute().compose(activity.bindToLifecycle())
+                .subscribe(data -> {
+
+                }, error -> {
+
+                }, () -> {
+
+                });
 
 
     });

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.InverseBindingAdapter;
 import android.databinding.InverseBindingListener;
-import android.databinding.adapters.ListenerUtil;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.Spanned;

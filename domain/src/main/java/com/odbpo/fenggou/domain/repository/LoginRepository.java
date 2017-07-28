@@ -10,6 +10,7 @@ import rx.Observable;
  */
 
 public interface LoginRepository {
+
     Observable<PhoneLoginResultBean> login(String def);
 
 

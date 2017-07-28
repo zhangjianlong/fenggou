@@ -46,7 +46,6 @@ dependencies {
     compile compiles.logger
     compile compiles.retrofitAdapter
     compile compiles.retrofitConverterGson
-
     compile compiles.stetho
     compile compiles.stethoOkhttp
     compile 'io.reactivex:rxandroid:1.1.0'

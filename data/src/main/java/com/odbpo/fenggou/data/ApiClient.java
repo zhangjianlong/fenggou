@@ -23,7 +23,7 @@ import rx.Observable;
 
 public interface ApiClient {
 
-    @POST(UriMethod.TOKEN_LOGIN)
+    @POST(UriMethod.CHECK_PHONE)
     Observable<BaseResponse<PhoneLoginResultBean>> login(@Body RequestBody requestBody);
 
 

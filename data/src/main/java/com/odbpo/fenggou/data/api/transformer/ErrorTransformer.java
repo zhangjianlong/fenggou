@@ -11,7 +11,7 @@ import rx.Subscriber;
 
 /**
  * @author: zjl
- * @Time:  2017/6/1 15:13
+ * @Time: 2017/6/1 15:13
  * @Desc: 对response数据进行拦截处理
  */
 
@@ -43,42 +43,6 @@ public class ErrorTransformer<T> implements Observable.Transformer<BaseResponse<
                             subscriber.onCompleted();
                         }
                         return;
-                    case 1:
-                        msg = "请求失败！";
-                        break;
-                    case 2:
-                        msg = "参数错误！";
-                        break;
-                    case 3:
-                        msg = "无效token！";
-                        break;
-                    case 4:
-                        msg = "token超时！";
-                        break;
-                    case 5:
-                        msg = "无效的用户名密码！";
-                        break;
-                    case 6:
-                        msg = "用户存在！";
-                        break;
-                    case 7:
-                        msg = "无效的验证码！";
-                        break;
-                    case 8:
-                        msg = "无效的uid！";
-                        break;
-                    case 9:
-                        msg = "需要手机号登录！";
-                        break;
-                    case 10:
-                        msg = "未找到！";
-                        break;
-                    case 11:
-                        msg = "新用户！";
-                        break;
-                    case 50:
-                        msg = "标签已存在！";
-                        break;
                 }
 
                 if (!subscriber.isUnsubscribed()) {

@@ -13,5 +13,7 @@ public class UriMethod {
 
     public static final String TOKEN_LOGIN = "TOKEN_LOGIN";
 
+    public static final String CHECK_PHONE = "customer/registry/checkphone";
+
 
 }
