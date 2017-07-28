@@ -57,7 +57,7 @@
             android:padding="@dimen/app.padding.large12">
 
             <android.support.v7.widget.AppCompatTextView
-                style="@style/App.Theme.TextAppearance.mw.large.black333"
+                style="@style/App.Theme.TextAppearance.mw.normal.black333"
                 android:maxLines="2"
                 android:text="@{viewModel.shopping.productName}" />
 
@@ -69,8 +69,9 @@
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView"
-                    style="@style/App.Theme.TextAppearance.mw.large.red"
+                    style="@style/App.Theme.TextAppearance.mw.normal.red"
                     android:layout_width="0dp"
+
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="@{viewModel.shopping.productPrice}" />
@@ -99,16 +100,16 @@
 
 
                     <android.support.v7.widget.AppCompatEditText
+                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
                         android:gravity="center"
-                        android:maxLines="1"
-                        app:afterTextChangedCommand="@{viewModel.afterTextChangedCommand}"
                         android:inputType="number"
+                        android:maxLines="1"
                         android:padding="@dimen/app.padding.small"
-                        android:text="@={viewModel.productNum}" />
+                        android:selectAllOnFocus="true"
+                        app:intText="@={viewModel.productNum}" />
 
                     <RelativeLayout
                         android:layout_width="0dp"

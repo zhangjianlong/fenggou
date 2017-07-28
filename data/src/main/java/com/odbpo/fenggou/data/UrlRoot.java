@@ -15,7 +15,7 @@ import java.util.Properties;
 public class UrlRoot {
     public static String filename = "assets/url.properties";
 
-    public static String API_PATH = "https://api.slashyounger.com/";
+    public static String API_PATH = "http://10.33.180.12:8080/";
 
     public static void setApiPath() {
         Properties prop = new Properties();

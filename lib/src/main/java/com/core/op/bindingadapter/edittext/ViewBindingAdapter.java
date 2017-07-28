@@ -3,8 +3,11 @@ package com.core.op.bindingadapter.edittext;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.InverseBindingAdapter;
+import android.databinding.InverseBindingListener;
+import android.databinding.adapters.ListenerUtil;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -42,27 +45,46 @@ public final class ViewBindingAdapter {
     }
 
 
-    @BindingAdapter("android:text")
+    @BindingAdapter("app:intText")
     public static void bindIntegerInText(AppCompatEditText tv, int value) {
-        tv.setText(String.valueOf(value));
+        if (!StrUtil.isEmpty(tv.getText())) {
+            int oldValue = Integer.parseInt(tv.getText().toString());
+            if (value == oldValue) {
+                return;
+            } else {
+                tv.setText(String.valueOf(value));
+            }
+        } else {
+            tv.setText(String.valueOf(value));
+        }
+
+
     }
 
-    @InverseBindingAdapter(attribute = "android:text")
+    @InverseBindingAdapter(attribute = "app:intText", event = "app:intTextAttrChanged")
     public static int getIntegerFromBinding(AppCompatEditText view) {
         if (StrUtil.isEmpty(view.getText())) {
+            bindIntegerInText(view, 1);
             return 1;
-        }else {
-            return Integer.parseInt(view.getText().toString());
+        } else {
+            view.setSelection(view.getText().length());
+            int maxNum = Integer.parseInt(view.getText().toString());
+            if (maxNum > 999) {
+                maxNum = 999;
+                bindIntegerInText(view, 999);
+
+            }
+            return maxNum;
         }
 
     }
 
 
-    @android.databinding.BindingAdapter(value = {"beforeTextChangedCommand", "onTextChangedCommand", "afterTextChangedCommand"}, requireAll = false)
+    @android.databinding.BindingAdapter(value = {"beforeTextChangedCommand", "onTextChangedCommand", "afterTextChangedCommand", "intTextAttrChanged"}, requireAll = false)
     public static void editTextCommand(EditText editText,
                                        final ReplyCommand<TextChangeDataWrapper> beforeTextChangedCommand,
                                        final ReplyCommand<TextChangeDataWrapper> onTextChangedCommand,
-                                       final ReplyCommand<String> afterTextChangedCommand) {
+                                       final ReplyCommand<String> afterTextChangedCommand, final InverseBindingListener intTextAttrChanged) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -73,6 +95,10 @@ public final class ViewBindingAdapter {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (intTextAttrChanged != null) {
+                    intTextAttrChanged.onChange();
+                }
+
                 if (onTextChangedCommand != null) {
                     onTextChangedCommand.execute(new TextChangeDataWrapper(s, start, before, count));
                 }
@@ -86,6 +112,7 @@ public final class ViewBindingAdapter {
             }
         });
     }
+
 
     public static class TextChangeDataWrapper {
         public CharSequence s;

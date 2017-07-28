@@ -51,8 +51,11 @@ public class ShoppingItemViewModel extends BViewModel {
 
     });
     public final ReplyCommand plus = new ReplyCommand(() -> {
-
-        productNum.set(productNum.get() + 1);
+        if (productNum.get() >= 999) {
+            return;
+        } else {
+            productNum.set(productNum.get() + 1);
+        }
 
     });
 
@@ -60,7 +63,12 @@ public class ShoppingItemViewModel extends BViewModel {
     public final ReplyCommand<String> afterTextChangedCommand = new ReplyCommand(s -> {
         if (StrUtil.isEmpty(s.toString())) {
             productNum.set(1);
+            return;
         }
+
+//        if (!StrUtil.isEmpty(s.toString()) && Integer.parseInt(s.toString()) <= 998) {
+//            productNum.set(productNum.get() + 1);
+//        }
     });
 
 

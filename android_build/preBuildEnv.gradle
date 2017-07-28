@@ -63,11 +63,11 @@ def createApkParams() {
 
 
     if (BUILD_ENV ==~ /(?i)TEST/) {
-        urlContent = "API_PATH = http://10.33.180.62/"
+        urlContent = "API_PATH = http://10.33.180.12:8080/"
         BUILD_VERSION_NAME = BUILD_ENV + "_" + BUILD_VERSION_NAME
         FILE_NAME = APK_NAME + "_" + BUILD_VERSION_NAME + ".apk"
     } else {
-        urlContent = "API_PATH = http://10.33.180.62/"
+        urlContent = "API_PATH = http://10.33.180.12:8080/"
         FILE_NAME = APK_NAME + "_" + BUILD_VERSION_NAME + ".apk"
     }
     propertiesFile.write(urlContent, "UTF-8")
