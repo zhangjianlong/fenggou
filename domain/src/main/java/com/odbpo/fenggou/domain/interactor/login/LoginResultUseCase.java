@@ -1,6 +1,7 @@
 package com.odbpo.fenggou.domain.interactor.login;
 
 
+import com.odbpo.fenggou.domain.bean.LoginResponse;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.executor.PostExecutionThread;
 import com.odbpo.fenggou.domain.executor.ThreadExecutor;
@@ -11,7 +12,7 @@ import javax.inject.Inject;
 
 import rx.Observable;
 
-public class LoginResultUseCase extends UseCase<PhoneLoginResultBean> {
+public class LoginResultUseCase extends UseCase<LoginResponse> {
     LoginRepository repository;
 
     @Inject
@@ -22,7 +23,7 @@ public class LoginResultUseCase extends UseCase<PhoneLoginResultBean> {
 
 
     @Override
-    protected Observable<PhoneLoginResultBean> buildUseCaseObservable() {
-        return repository.login(params[0]);
+    protected Observable<LoginResponse> buildUseCaseObservable() {
+        return repository.login(map);
     }
 }

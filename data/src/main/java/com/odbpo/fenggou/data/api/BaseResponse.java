@@ -5,10 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 import static android.R.id.message;
+
 /**
  * @author: zjl
- * @Time:  2017/6/1 15:13
- * @Desc: 
+ * @Time: 2017/6/1 15:13
+ * @Desc:
  */
 
 public class BaseResponse<T> implements Serializable {

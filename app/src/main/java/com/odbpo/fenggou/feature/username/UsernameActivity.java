@@ -49,6 +49,7 @@ public final class UsernameActivity extends BackActivity<UsernameViewModel, ActU
 
     @Override
     protected Toolbar setToolBar() {
+        binding.toolbar.toolbar.setTitle("");
         return binding.toolbar.toolbar;
     }
 }

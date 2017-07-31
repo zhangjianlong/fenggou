@@ -52,6 +52,7 @@ public final class ProfileActivity extends BackActivity<ProfileViewModel, ActPro
 
     @Override
     protected Toolbar setToolBar() {
+        binding.toolbar.toolbar.setTitle("");
         return binding.toolbar.toolbar;
     }
 }

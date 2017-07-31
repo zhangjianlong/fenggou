@@ -9,8 +9,13 @@ import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
+import com.odbpo.fenggou.data.net.AbsAPICallback;
+import com.odbpo.fenggou.data.util.ShareKey;
+import com.odbpo.fenggou.data.util.SpUtil;
 import com.odbpo.fenggou.databinding.FrgInfoBinding;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
+import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
+import com.odbpo.fenggou.domain.interactor.customer.CustomerInfoUserCase;
 import com.odbpo.fenggou.feature.message.MessageActivity;
 import com.odbpo.fenggou.feature.profile.ProfileActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -26,15 +31,32 @@ import rx.Observable;
 @PerActivity
 public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
 
+    private CustomerInfoUserCase customerInfoUserCase;
+
     @Inject
-    public InfoViewModel(RxAppCompatActivity activity) {
+    public InfoViewModel(RxAppCompatActivity activity, CustomerInfoUserCase customerInfoUserCase) {
         super(activity);
+        this.customerInfoUserCase = customerInfoUserCase;
     }
+
 
     @Override
     public void afterViews() {
 //        initData();
 //        upadataView();
+        customerInfoUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<CustomerInfo>() {
+            @Override
+            protected void onDone(CustomerInfo customerInfo) {
+                CustomerInfo customerInfo1 = customerInfo;
+                SpUtil.write(ShareKey.CUSTOMER_INFO, customerInfo1);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+            }
+        });
+
 
     }
 

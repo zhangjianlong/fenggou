@@ -8,12 +8,13 @@ package com.odbpo.fenggou.data;
 
 public class UriMethod {
 
-    //需求流程相关接口地址前缀
-    public static final String SERVER_HOST_DEMAND = "feed/v1/api/demand/";
-
-    public static final String TOKEN_LOGIN = "TOKEN_LOGIN";
 
     public static final String CHECK_PHONE = "customer/registry/checkphone";
+
+    //登录
+    public static final String LOGIN = "customer/login";
+    //获取客户信息
+    public static final String CUSTOMERS = "customers";
 
 
 }

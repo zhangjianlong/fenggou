@@ -16,11 +16,11 @@
 package com.odbpo.fenggou.domain.interactor;
 
 
-
-
 import com.odbpo.fenggou.domain.executor.PostExecutionThread;
 import com.odbpo.fenggou.domain.executor.ThreadExecutor;
 import com.odbpo.fenggou.domain.interfaces.OnProgressListener;
+
+import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -44,6 +44,8 @@ public abstract class UseCase<T> {
 
     /*请求参数*/
     protected String[] params;
+
+    protected Map map;
 
     /*上传下载进度监听*/
     protected OnProgressListener onProgressListener;
@@ -104,6 +106,11 @@ public abstract class UseCase<T> {
 
     public void setParams(String... params) {
         this.params = params;
+    }
+
+
+    public void setFormParams(Map map) {
+        this.map = map;
     }
 
     /**

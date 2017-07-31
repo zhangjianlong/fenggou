@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.odbpo.fenggou.util.DatabindingMethod" />
+
         <variable
             name="viewModel"
             type="com.odbpo.fenggou.feature.profile.ProfileViewModel" />
@@ -41,7 +43,7 @@
                     android:layout_alignParentRight="true"
                     android:drawablePadding="@dimen/app.padding.normal"
                     android:drawableRight="@drawable/right"
-                    android:text="@{viewModel.userName}" />
+                    android:text="@{viewModel.customerInfo.username}" />
             </RelativeLayout>
 
             <include layout="@layout/include_line_h" />
@@ -85,7 +87,7 @@
                     android:layout_alignParentRight="true"
                     android:drawablePadding="@dimen/app.padding.normal"
                     android:drawableRight="@drawable/right"
-                    android:text="@{viewModel.userName}" />
+                    android:text="@{viewModel.customerInfo.nickname}" />
             </RelativeLayout>
 
             <include layout="@layout/include_line_h" />
@@ -125,7 +127,7 @@
                     android:layout_alignParentRight="true"
                     android:drawablePadding="@dimen/app.padding.normal"
                     android:drawableRight="@drawable/right"
-                    android:text="@{viewModel.userName}" />
+                    android:text="@{DatabindingMethod.getGender(viewModel.customerInfo.gender)}" />
             </RelativeLayout>
 
             <include layout="@layout/include_line_h" />
@@ -145,7 +147,7 @@
                     android:layout_alignParentRight="true"
                     android:drawablePadding="@dimen/app.padding.normal"
                     android:drawableRight="@drawable/right"
-                    android:text="@{viewModel.userName}" />
+                    android:text="@{viewModel.customerInfo.mobile}" />
             </RelativeLayout>
 
             <include layout="@layout/include_line_h" />

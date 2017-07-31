@@ -49,4 +49,9 @@ public class AuthHeaderUtil {
         }
     }
 
+    public static String getToken() {
+        return SpUtil.readString(ShareKey.TOKEN);
+    }
+
+
 }

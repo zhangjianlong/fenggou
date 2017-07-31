@@ -9,7 +9,10 @@ import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
 import com.odbpo.fenggou.R;
+import com.odbpo.fenggou.data.util.ShareKey;
+import com.odbpo.fenggou.data.util.SpUtil;
 import com.odbpo.fenggou.databinding.ActProfileBinding;
+import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
 import com.odbpo.fenggou.feature.dialog.gender.GenderDialog;
 import com.odbpo.fenggou.feature.nickname.NicknameActivity;
 import com.odbpo.fenggou.feature.username.UsernameActivity;
@@ -17,6 +20,8 @@ import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;
+
+import rx.Observable;
 
 @PerActivity
 public class ProfileViewModel extends BAViewModel<ActProfileBinding> {
@@ -36,7 +41,11 @@ public class ProfileViewModel extends BAViewModel<ActProfileBinding> {
 
         });
 
+
     }
+
+
+    public final ObservableField<CustomerInfo> customerInfo = new ObservableField<>((CustomerInfo) SpUtil.readObject(ShareKey.CUSTOMER_INFO));
 
     public final ObservableField<String> toolTitle = new ObservableField<>(Static.CONTEXT.getString(R.string.app_profile_title));
     public final ObservableField<String> userName = new ObservableField<>();

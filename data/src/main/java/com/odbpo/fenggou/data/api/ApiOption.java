@@ -4,7 +4,9 @@ package com.odbpo.fenggou.data.api;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.odbpo.fenggou.data.net.ResultException;
 import com.orhanobut.logger.Logger;
 import com.odbpo.fenggou.data.Global;
 import com.odbpo.fenggou.data.api.cookie.ClearableCookieJar;
@@ -14,6 +16,9 @@ import com.odbpo.fenggou.data.api.cookie.persistence.SharedPrefsCookiePersistor;
 import com.odbpo.fenggou.data.util.AuthHeaderUtil;
 import com.odbpo.fenggou.data.util.NetUtil;
 import com.odbpo.fenggou.data.util.SpUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +42,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -46,8 +52,8 @@ import rx.Observable;
 
 /**
  * @author: zjl
- * @Time:  2017/6/1 15:13
- * @Desc: 
+ * @Time: 2017/6/1 15:13
+ * @Desc:
  */
 
 public class ApiOption {
@@ -102,6 +108,7 @@ public class ApiOption {
 //                    .sslSocketFactory(getSSLContext(application).getSocketFactory())
                     .addInterceptor(new HeadInterceptor(application))
                     .addInterceptor(new CacheInterceptor(application))
+                    .addInterceptor(new HttpError())
                     .addInterceptor(new HttpLoggingInterceptor())
 //                    .addInterceptor(new CookieInterceptor(application))
                     .addNetworkInterceptor(new StethoInterceptor())
@@ -217,12 +224,10 @@ public class ApiOption {
 
             SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
             String date = sdf.format(new Date(timeMillis));
-            builder.addHeader("Date", date);
-            builder.addHeader("Authorization", AuthHeaderUtil.getBasicAuthHeader(chain.request().method(), chain.request().url().url().toString(), date).trim());
-//            builder.addHeader("uid", SpUtil.readLong(Global.UID, 0l) + "");
-//            builder.addHeader("pass", "1");
-            builder.addHeader("token", SpUtil.readString(Global.TOKEN, ""));
+//            builder.addHeader("Date", date);
+            builder.addHeader("Accept", "application/json");
             builder.addHeader("Content-Type", "application/json");
+            builder.addHeader("Authorization", "Bearer " + AuthHeaderUtil.getToken());
             Request request = builder.build();
             return chain.proceed(request);
         }
@@ -290,6 +295,36 @@ public class ApiOption {
                 editor.putString("cookie", cookieBuffer.toString());
                 editor.commit();
             }
+            return originalResponse;
+        }
+    }
+
+    /**
+     * @author: zjl
+     * @Time: 2017/7/31 11:53
+     * @Desc: 拦截httpError 500错误抛出异常
+     */
+
+
+    static class HttpError implements Interceptor {
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request oldRequest = chain.request();
+            Response originalResponse = chain.proceed(oldRequest);
+            if (originalResponse.code() == 500) {
+                ResponseBody responseBody = originalResponse.body();
+                String response = responseBody.string();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    throw new ResultException(jsonObject.getString("code"), jsonObject.getString("message"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
             return originalResponse;
         }
     }

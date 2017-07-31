@@ -8,14 +8,32 @@ package com.odbpo.fenggou.data.net;
  * 用于捕获服务器约定的错误类型
  */
 public class ResultException extends RuntimeException {
-    private int errCode = 0;
+    private String code;
+    private String message;
 
-    public ResultException(int errCode, String msg) {
-        super(msg);
-        this.errCode = errCode;
+    public ResultException(String code, String message) {
+        super(message);
+        this.code = code;
+        this.message = message;
     }
 
-    public int getErrCode() {
-        return errCode;
+
+    @Override
+    public String getMessage() {
+        return message;
     }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+
 }

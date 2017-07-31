@@ -64,7 +64,7 @@
             android:layout_marginTop="@dimen/app.margin.large"
             android:background="@drawable/selector_e53e5a_9e0000_2radius"
             android:gravity="center"
-            android:padding="@dimen/app.padding.large"
+            android:padding="@dimen/app.padding.normal"
             android:text="@string/app.user.name.save"
             app:clickCommand="@{viewModel.save}" />
 

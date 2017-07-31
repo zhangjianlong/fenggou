@@ -1,8 +1,10 @@
 package com.odbpo.fenggou.data.net;
 
 import android.net.ParseException;
+import android.widget.Toast;
 
 import com.google.gson.JsonParseException;
+import com.odbpo.fenggou.data.Global;
 
 import org.json.JSONException;
 
@@ -39,34 +41,10 @@ public abstract class AbsAPICallback<T> extends Subscriber<T> {
             throwable = throwable.getCause();
         }
 
-        if (e instanceof HttpException) {//HTTP错误
-            HttpException httpException = (HttpException) e;
-            switch (httpException.code()) {
-                case UNAUTHORIZED:
-                case FORBIDDEN:
-                case NOT_FOUND:
-                case REQUEST_TIMEOUT:
-                case GATEWAY_TIMEOUT:
-                case INTERNAL_SERVER_ERROR:
-                case BAD_GATEWAY:
-                case SERVICE_UNAVAILABLE:
-                default:
-                    //Toast.makeText(App.getInstance(), R.string.server_http_error, Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        } else if (e instanceof SocketTimeoutException) {
-            //Toast.makeText(App.getInstance(), R.string.network_error, Toast.LENGTH_SHORT).show();
-        } else if (e instanceof ResultException) {//服务器返回的错误
+        if (e instanceof ResultException) {//服务器返回的错误
             ResultException resultException = (ResultException) e;
-          //  Toast.makeText(App.getInstance(), resultException.getMessage(), Toast.LENGTH_SHORT).show();
-        } else if (e instanceof JsonParseException || e instanceof JSONException || e instanceof ParseException) {
-           // Toast.makeText(App.getInstance(), R.string.data_error, Toast.LENGTH_SHORT).show(); //均视为解析错误
-        } else if(e instanceof ConnectException){
-           // Toast.makeText(App.getInstance(), R.string.server_http_error, Toast.LENGTH_SHORT).show();
-        } else {//未知错误
-
+            Toast.makeText(Global.application, resultException.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
         onCompleted();
     }
 

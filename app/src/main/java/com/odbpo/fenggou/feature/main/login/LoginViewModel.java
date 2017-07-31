@@ -18,7 +18,11 @@ import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.JsonUtil;
 import com.core.op.lib.utils.StrUtil;
 import com.odbpo.fenggou.R;
+import com.odbpo.fenggou.data.net.AbsAPICallback;
+import com.odbpo.fenggou.data.util.ShareKey;
+import com.odbpo.fenggou.data.util.SpUtil;
 import com.odbpo.fenggou.databinding.FrgLoginBinding;
+import com.odbpo.fenggou.domain.bean.LoginResponse;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.interactor.login.LoginResultUseCase;
 import com.odbpo.fenggou.feature.forget.ForgetActivity;
@@ -52,9 +56,9 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
     public final ObservableField<String> title = new ObservableField<>(Static.CONTEXT.getString(R.string.app_main_login));
     public final ObservableField<String> phone = new ObservableField<>();
-    public final ObservableField<String> psd = new ObservableField<>();
+    public final ObservableField<String> psd = new ObservableField<>("wenzi1994");
 
-    public final ObservableField<String> userName = new ObservableField<>();
+    public final ObservableField<String> userName = new ObservableField<>("18550001915");
     public final ObservableField<Drawable> eye = new ObservableField<>(Static.CONTEXT.getResources().getDrawable(R.drawable.eye_unclick));
     public final ObservableField<String> verifyCode = new ObservableField<>();
     public final ObservableBoolean showRegisterLayout = new ObservableBoolean(false);
@@ -151,28 +155,36 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
     });
     public final ReplyCommand login = new ReplyCommand(() -> {
-//        if (StrUtil.isEmpty(userName.get())) {
-//            AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_phone_empty));
-//            return;
-//        }
-//
-//        if (StrUtil.isEmpty(psd.get())) {
-//            AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_psd_empty));
-//            return;
-//        }
+        if (StrUtil.isEmpty(userName.get())) {
+            AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_phone_empty));
+            return;
+        }
 
-//        Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
+        if (StrUtil.isEmpty(psd.get())) {
+            AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_psd_empty));
+            return;
+        }
+
 
         Map<String, String> map = new HashMap<>();
-        map.put("phone", "18625254516");
-        loginResultUseCase.setParams(JsonUtil.mapToJson(map));
+        map.put("user", userName.get());
+        map.put("password", psd.get());
+        loginResultUseCase.setFormParams(map);
         loginResultUseCase.execute().compose(activity.bindToLifecycle())
-                .subscribe(data -> {
+                .subscribe(new AbsAPICallback<LoginResponse>() {
+                    @Override
+                    protected void onDone(LoginResponse loginResponse) {
+                        LoginResponse loginResult = loginResponse;
+                        SpUtil.write(ShareKey.TOKEN, loginResult.getToken());
+                        Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
 
-                }, error -> {
+                    }
 
-                }, () -> {
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
 
+                    }
                 });
 
 

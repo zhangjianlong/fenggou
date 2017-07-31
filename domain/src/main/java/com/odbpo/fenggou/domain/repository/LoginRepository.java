@@ -1,7 +1,11 @@
 package com.odbpo.fenggou.domain.repository;
 
 
+import com.odbpo.fenggou.domain.bean.LoginResponse;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
+import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
+
+import java.util.Map;
 
 import rx.Observable;
 
@@ -11,7 +15,9 @@ import rx.Observable;
 
 public interface LoginRepository {
 
-    Observable<PhoneLoginResultBean> login(String def);
+    Observable<LoginResponse> login(Map map);
+
+    Observable<CustomerInfo> getCustomerInfo();
 
 
 }

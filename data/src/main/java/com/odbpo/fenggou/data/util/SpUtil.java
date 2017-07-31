@@ -64,6 +64,10 @@ public class SpUtil {
         return readString(FILE_NAME, k, defV);
     }
 
+    public static String readString(String k) {
+        return readString(FILE_NAME, k, " ");
+    }
+
 
     public static void remove(Context context, String k) {
         remove(FILE_NAME, k);
