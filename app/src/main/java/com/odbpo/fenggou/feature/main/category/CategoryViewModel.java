@@ -1,16 +1,9 @@
 package com.odbpo.fenggou.feature.main.category;
 
 
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
-import android.nfc.Tag;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.core.op.Static;
 import com.core.op.bindingadapter.common.BaseItemViewSelector;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
@@ -21,30 +14,37 @@ import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.MyStateBarUtil;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
+import com.odbpo.fenggou.data.net.AbsAPICallback;
 import com.odbpo.fenggou.databinding.FrgCategoryBinding;
 import com.odbpo.fenggou.domain.bean.CategoryResultBean;
+import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
+import com.odbpo.fenggou.domain.interactor.category.GetProductCategoryUseCase;
 import com.odbpo.fenggou.feature.Searchable.SearchableActivity;
+import com.odbpo.fenggou.feature.forget.ForgetActivity;
 import com.odbpo.fenggou.feature.search.SearchActivity;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.trello.rxlifecycle.components.support.RxFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.functions.Func1;
 
-import static android.R.attr.data;
-import static android.R.attr.tag;
 
 @PerActivity
 public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
+    private GetProductCategoryUseCase getProductCategoryUseCase;
+
 
     @Inject
-    public CategoryViewModel(RxAppCompatActivity activity) {
+    public CategoryViewModel(RxAppCompatActivity activity, GetProductCategoryUseCase getProductCategoryUseCase) {
         super(activity);
+        this.getProductCategoryUseCase = getProductCategoryUseCase;
     }
 
     @Override
@@ -56,8 +56,23 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
         Messenger.getDefault().register(this, MessageKey.SEARCH, () -> {
             SearchActivity.instance(activity);
         });
-        initData();
-        upadataView(0);
+
+        Map<String, String> maps = new HashMap<>();
+        maps.put("recursion ", "true");
+        getProductCategoryUseCase.setFormParams(maps);
+        getProductCategoryUseCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<ProductCategoryBean>() {
+            @Override
+            protected void onDone(ProductCategoryBean productCategoryBean) {
+                initData(productCategoryBean);
+                upadataView(0);
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+            }
+        });
     }
 
 
@@ -70,6 +85,7 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
 
     private CategoryResultBean categoryResultBean;
     private int index = 0;
+    private ProductCategoryBean productCategoryBean;
 
 
     private ItemViewSelector<CategoryItemViewModel> itemView() {
@@ -81,48 +97,65 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
         };
     }
 
-    private void initData() {
-        List<CategoryResultBean.Tag3> tag3s = new ArrayList<>();
-        List<CategoryResultBean.Tag3> tag3s1 = new ArrayList<>();
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+    private void initData(ProductCategoryBean productCategoryBean) {
+        List<ProductCategoryBean.DataBean> tag1 = new ArrayList<>();
+        List<ProductCategoryBean.DataBean> tag2 = new ArrayList<>();
+        List<ProductCategoryBean.DataBean> tag3 = new ArrayList<>();
+        Observable.from(productCategoryBean.getData()).subscribe(dataBean -> {
+            switch (dataBean.getGrade()) {
+                case 1:
+                    tag1.add(dataBean);
+                    break;
+                case 2:
+                    tag2.add(dataBean);
+                    break;
+                case 3:
+                    tag3.add(dataBean);
+                    break;
+            }
 
+        }, error -> {
 
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
-        tag3s1.add(new CategoryResultBean.Tag3("tag3-" + 1, "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg"));
+        }, () -> {
 
-        List<CategoryResultBean.Tag2> tag2s = new ArrayList<>();
-        List<CategoryResultBean.Tag2> tag2s1 = new ArrayList<>();
-        for (int i = 0; i <= 10; i++) {
-            tag2s.add(new CategoryResultBean.Tag2("tag2" + i, tag3s));
-        }
-
-        tag2s1.add(new CategoryResultBean.Tag2("tag2-0", tag3s1));
-
-
-        List<CategoryResultBean.Tag1> tag1s = new ArrayList<>();
-        tag1s.add(new CategoryResultBean.Tag1("精品酒类", tag2s));
-        tag1s.add(new CategoryResultBean.Tag1("个护化妆", tag2s1));
+        });
 
         categoryResultBean = new CategoryResultBean();
-        categoryResultBean.setTag1(tag1s);
+
+        List<CategoryResultBean.Tag1> tempTag1List = new ArrayList<>();
+
+        Observable.from(tag1).subscribe(tag1Data -> {
+            CategoryResultBean.Tag1 tempTag1 = new CategoryResultBean.Tag1();
+            List<CategoryResultBean.Tag2> tag2List = new ArrayList<CategoryResultBean.Tag2>();
+
+            tempTag1.setDataBean(tag1Data);
+
+            Observable.from(tag2).subscribe(tag2Data -> {
+                List<CategoryResultBean.Tag3> tag3List = new ArrayList<CategoryResultBean.Tag3>();
+
+                if (tag1Data.getId() == tag2Data.getParentId()) {
+                    tag3List.clear();
+                    Observable.from(tag3).subscribe(tag3Data -> {
+                        if (tag3Data.getParentId() == tag2Data.getId()) {
+                            tag3List.add(new CategoryResultBean.Tag3(tag3Data));
+                        }
+                    });
+                    tag2List.add(new CategoryResultBean.Tag2(tag2Data, tag3List));
 
 
+                }
+
+            });
+            tempTag1.setTag2(tag2List);
+            tempTag1List.add(tempTag1);
+
+        }, error -> {
+
+        }, () -> {
+            categoryResultBean.setTag1(tempTag1List);
+
+
+        });
     }
 
     private void upadataView(int selected) {
@@ -132,10 +165,10 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
         getLableBeens()
                 .subscribe(data -> {
                     if (index == selected) {
-                        categoryItemViewModel = new CategoryItemViewModel(activity, data.getTagName(), index, true);
+                        categoryItemViewModel = new CategoryItemViewModel(activity, data.getDataBean(), index, true);
                         itemViewModels.add(categoryItemViewModel);
                     } else {
-                        itemViewModels.add(new CategoryItemViewModel(activity, data.getTagName(), index, false));
+                        itemViewModels.add(new CategoryItemViewModel(activity, data.getDataBean(), index, false));
                     }
                     index++;
                 }, error -> {

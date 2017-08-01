@@ -25,14 +25,14 @@
             android:fadingEdge="none"
             android:gravity="left"
             android:padding="@dimen/app.padding.normal"
-            android:text="@{viewModel.senondContent}" />
+            android:text="@{viewModel.senondContent.name}" />
 
 
         <android.support.v7.widget.RecyclerView
-            android:background="@color/app.theme.background_f3f3f3"
-            android:paddingTop="@dimen/app.padding.normal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/app.theme.background_f3f3f3"
+            android:paddingTop="@dimen/app.padding.normal"
             app:itemView="@{viewModel.thirdItemView}"
             app:items="@{viewModel.thirdItemViewModels}"
             app:layoutManager="@{LayoutManagers.grid(3)}">

@@ -13,6 +13,7 @@ import com.core.op.lib.messenger.Messenger;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.domain.bean.CategoryResultBean;
+import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -31,9 +32,8 @@ import static android.R.attr.data;
 public class CategoryItemViewModel extends BViewModel {
 
     public int index;
-    public ObservableField<Boolean> checked = new ObservableField<>();
-    public ObservableField<String> content = new ObservableField<>();
-    public ObservableField<String> senondContent = new ObservableField<>();
+    public ObservableField<ProductCategoryBean.DataBean> content = new ObservableField<>();
+    public ObservableField<ProductCategoryBean.DataBean> senondContent = new ObservableField<>();
 
     public ObservableField<ColorDrawable> bgDrawable = new ObservableField<>();
     public ObservableField<Integer> textDrawable = new ObservableField<>();
@@ -41,16 +41,16 @@ public class CategoryItemViewModel extends BViewModel {
     public final ItemView thirdItemView = ItemView.of(BR.viewModel, R.layout.item_category_iv_layout);
 
 
-    public CategoryItemViewModel(RxAppCompatActivity activity, String data, int index, boolean selected) {
+    public CategoryItemViewModel(RxAppCompatActivity activity, ProductCategoryBean.DataBean data, int index, boolean selected) {
         super(activity);
         this.content.set(data);
         this.index = index;
 
         if (selected) {
-            bgDrawable.set(new ColorDrawable(activity.getResources().getColor(R.color.white)));
+            bgDrawable.set(new ColorDrawable(activity.getResources().getColor(R.color.app_theme_colorPrimary)));
             textDrawable.set(activity.getResources().getColor(R.color.app_theme_colorPrimary));
         } else {
-            bgDrawable.set(new ColorDrawable(activity.getResources().getColor(R.color.app_theme_background_f3f3f3)));
+            bgDrawable.set(new ColorDrawable(activity.getResources().getColor(R.color.white)));
             textDrawable.set(activity.getResources().getColor(R.color.app_text_black999));
         }
     }
@@ -58,7 +58,7 @@ public class CategoryItemViewModel extends BViewModel {
 
     public CategoryItemViewModel(RxAppCompatActivity activity, CategoryResultBean.Tag2 data) {
         super(activity);
-        this.senondContent.set(data.getTagName());
+        senondContent.set(data.getDataBean());
         thirdItemViewModels.clear();
         getThirdLableBeens(data.getTag3()).subscribe(data1 -> {
             thirdItemViewModels.add(new CategoryItemIvViewModel(activity, data1));

@@ -11,6 +11,7 @@ import com.core.op.lib.messenger.Messenger;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.domain.bean.CategoryResultBean;
+import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -25,14 +26,12 @@ import rx.Observable;
  */
 
 public class CategoryItemIvViewModel extends BViewModel {
-    public ObservableField<String> imageUri = new ObservableField<>();
-    public ObservableField<String> thirdContent = new ObservableField<>();
+    public ObservableField<ProductCategoryBean.DataBean> thirdContent = new ObservableField<>();
 
 
     public CategoryItemIvViewModel(RxAppCompatActivity activity, CategoryResultBean.Tag3 tag3) {
         super(activity);
-        this.thirdContent.set(tag3.getTagName());
-        this.imageUri.set(tag3.getImageUrl());
+        thirdContent.set(tag3.getDataBean());
 
     }
 

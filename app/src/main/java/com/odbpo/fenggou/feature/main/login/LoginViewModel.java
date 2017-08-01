@@ -24,6 +24,9 @@ import com.odbpo.fenggou.data.util.SpUtil;
 import com.odbpo.fenggou.databinding.FrgLoginBinding;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
+import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
+import com.odbpo.fenggou.domain.interactor.category.GetProductCategoryUseCase;
+import com.odbpo.fenggou.domain.interactor.history.GetHistoryUserCase;
 import com.odbpo.fenggou.domain.interactor.login.LoginResultUseCase;
 import com.odbpo.fenggou.feature.forget.ForgetActivity;
 import com.odbpo.fenggou.feature.main.category.CategoryFragment;
@@ -41,11 +44,13 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
     private final static String TAG_LOGIN = "TAG_LOGIN";
     private final static String TAG_REGISTER = "TAG_REGISTER";
     private LoginResultUseCase loginResultUseCase;
+    private GetHistoryUserCase getHistoryUserCase;
 
     @Inject
-    public LoginViewModel(RxAppCompatActivity activity, LoginResultUseCase loginResultUseCase) {
+    public LoginViewModel(RxAppCompatActivity activity, LoginResultUseCase loginResultUseCase, GetHistoryUserCase getHistoryUserCase) {
         super(activity);
         this.loginResultUseCase = loginResultUseCase;
+        this.getHistoryUserCase = getHistoryUserCase;
 
     }
 
@@ -94,8 +99,6 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
 
     }
-
-    ;
 
 
     public final ReplyCommand forgetPsd = new ReplyCommand(() -> {
@@ -176,7 +179,7 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
                     protected void onDone(LoginResponse loginResponse) {
                         LoginResponse loginResult = loginResponse;
                         SpUtil.write(ShareKey.TOKEN, loginResult.getToken());
-                        Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
+//                        Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
 
                     }
 
@@ -186,6 +189,16 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
                     }
                 });
+
+        Map<String, String> maps = new HashMap<>();
+        maps.put("recursion ", "true");
+        getHistoryUserCase.setFormParams(maps);
+        getHistoryUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<CustomerInfo>() {
+            @Override
+            protected void onDone(CustomerInfo customerInfo) {
+
+            }
+        });
 
 
     });

@@ -2,6 +2,8 @@ package com.odbpo.fenggou.domain.bean;
 
 import java.util.List;
 
+import javax.swing.text.html.HTML;
+
 /**
  * @author: zjl
  * @Time: 2017/6/19 13:12
@@ -21,21 +23,12 @@ public class CategoryResultBean {
 
 
     public static class Tag1 {
-        private String tagName;
-        private List<Tag2> tag2;
-
-        public Tag1(String tagName, List<Tag2> tag2) {
-            this.tagName = tagName;
-            this.tag2 = tag2;
-
+        public ProductCategoryBean.DataBean getDataBean() {
+            return dataBean;
         }
 
-        public String getTagName() {
-            return tagName;
-        }
-
-        public void setTagName(String tagName) {
-            this.tagName = tagName;
+        public void setDataBean(ProductCategoryBean.DataBean dataBean) {
+            this.dataBean = dataBean;
         }
 
         public List<Tag2> getTag2() {
@@ -46,24 +39,26 @@ public class CategoryResultBean {
             this.tag2 = tag2;
         }
 
+        private ProductCategoryBean.DataBean dataBean;
+        private List<Tag2> tag2;
+
+
     }
 
 
     public static class Tag2 {
-        private String tagName;
-        private List<Tag3> tag3;
 
-        public Tag2(String tagName, List<Tag3> tag3) {
-            this.tagName = tagName;
-            this.tag3 = tag3;
+        public Tag2(ProductCategoryBean.DataBean dataBean, List<Tag3> tag3List) {
+            this.dataBean = dataBean;
+            this.tag3 = tag3List;
         }
 
-        public String getTagName() {
-            return tagName;
+        public ProductCategoryBean.DataBean getDataBean() {
+            return dataBean;
         }
 
-        public void setTagName(String tagName) {
-            this.tagName = tagName;
+        public void setDataBean(ProductCategoryBean.DataBean dataBean) {
+            this.dataBean = dataBean;
         }
 
         public List<Tag3> getTag3() {
@@ -73,32 +68,27 @@ public class CategoryResultBean {
         public void setTag3(List<Tag3> tag3) {
             this.tag3 = tag3;
         }
+
+        private ProductCategoryBean.DataBean dataBean;
+        private List<Tag3> tag3;
+
+
     }
 
     public static class Tag3 {
-        public Tag3(String tagName, String imageUrl) {
-            this.tagName = tagName;
-            this.imageUrl = imageUrl;
+        public Tag3(ProductCategoryBean.DataBean dataBean) {
+            this.dataBean = dataBean;
         }
 
-        public String getTagName() {
-            return tagName;
+        public ProductCategoryBean.DataBean getDataBean() {
+            return dataBean;
         }
 
-        public void setTagName(String tagName) {
-            this.tagName = tagName;
+        public void setDataBean(ProductCategoryBean.DataBean dataBean) {
+            this.dataBean = dataBean;
         }
 
-        public String getImageUrl() {
-            return imageUrl;
-        }
-
-        public void setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
-        }
-
-        private String tagName;
-        private String imageUrl;
+        private ProductCategoryBean.DataBean dataBean;
     }
 
 }
