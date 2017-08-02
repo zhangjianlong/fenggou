@@ -7,6 +7,8 @@ import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.core.op.Static;
 import com.core.op.bindingadapter.bottomnavigation.NavigationRes;
@@ -18,18 +20,26 @@ import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.JsonUtil;
+import com.core.op.lib.utils.MyStateBarUtil;
 import com.core.op.lib.weight.sortView.SortRes;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
+import com.odbpo.fenggou.data.net.AbsAPICallback;
 import com.odbpo.fenggou.databinding.ActSearchBinding;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
+import com.odbpo.fenggou.domain.bean.SearchProductBean;
+import com.odbpo.fenggou.domain.interactor.search.SearchGoodsUserCase;
+import com.odbpo.fenggou.feature.Searchable.SearchableActivity;
 import com.odbpo.fenggou.feature.detail.DetailActivity;
 import com.odbpo.fenggou.feature.main.shopping.loginCart.ShoppingItemViewModel;
 import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -39,17 +49,18 @@ import static com.odbpo.fenggou.R.id.tabLayout;
 
 @PerActivity
 public class SearchViewModel extends BAViewModel<ActSearchBinding> {
+    private SearchGoodsUserCase searchGoodsUserCase;
 
     @Inject
-    public SearchViewModel(RxAppCompatActivity activity) {
+    public SearchViewModel(RxAppCompatActivity activity, SearchGoodsUserCase searchGoodsUserCase) {
         super(activity);
+        this.searchGoodsUserCase = searchGoodsUserCase;
     }
 
     @Override
     public void afterViews() {
         initTab();
         initData();
-        upadataView();
         Messenger.getDefault().register(activity, MessageKey.PRODUCT_DETAIL, () -> {
             DetailActivity.instance(activity);
         });
@@ -84,7 +95,7 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
     private boolean isLiearlayout = true;
     public final ItemViewSelector<SearchItemViewModel> itemView = itemView();
 
-    private List<RecommendProductBean> recommendProductBeanList = new ArrayList<>();
+    private List<SearchProductBean.DataBean> recommendProductBeanList = new ArrayList<>();
 
 
     public final ReplyCommand changeLayout = new ReplyCommand(() -> {
@@ -104,17 +115,31 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
     });
 
 
+    public final ReplyCommand clickSearchView = new ReplyCommand(() -> {
+        SearchableActivity.instance(activity);
+    });
+
+
     private void initData() {
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥123.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
-        recommendProductBeanList.add(new RecommendProductBean("圣特庄园干红葡萄酒(750ML 优惠价)", "http://img2.imgtn.bdimg.com/it/u=2790627569,4263420720&fm=214&gp=0.jpg", "￥1269.00"));
+        Map<String, String> maps1 = new HashMap<>();
+        maps1.put("queryString", "意大利");
+        searchGoodsUserCase.setParams(JsonUtil.mapToJson(maps1));
+        searchGoodsUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<SearchProductBean>() {
+            @Override
+            protected void onDone(SearchProductBean searchProductBean) {
+                recommendProductBeanList.addAll(searchProductBean.getData());
+
+            }
+
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                upadataView();
+            }
+
+
+        });
+
 
     }
 
@@ -132,7 +157,7 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
     }
 
 
-    private Observable<RecommendProductBean> getproducts() {
+    private Observable<SearchProductBean.DataBean> getproducts() {
         return Observable.from(recommendProductBeanList);
     }
 

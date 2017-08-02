@@ -7,6 +7,7 @@ import com.odbpo.fenggou.data.util.RetrofitUtil;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
+import com.odbpo.fenggou.domain.bean.SearchProductBean;
 import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
 import com.odbpo.fenggou.domain.repository.LoginRepository;
 
@@ -53,6 +54,11 @@ public class LoginRepositoryImp implements LoginRepository {
     @Override
     public Observable<CustomerInfo> getHistory(Map maps) {
         return apiClient.getHistory(maps);
+    }
+
+    @Override
+    public Observable<SearchProductBean> searchGoods(String str) {
+        return apiClient.searchGoods(RetrofitUtil.toRequestBody(str));
     }
 
 

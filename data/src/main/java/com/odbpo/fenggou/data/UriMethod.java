@@ -19,6 +19,8 @@ public class UriMethod {
     public static final String PRODUCT_CATEGORY = "goods/mobcates";
     //获取浏览历史
     public static final String BROWSERECORD = "customers/BROWSERECORD";
+    //商品搜索
+    public static final String SEARCH_GOODS = "search/goods/whole";
 
 
 }

@@ -4,6 +4,7 @@ package com.odbpo.fenggou.domain.repository;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
+import com.odbpo.fenggou.domain.bean.SearchProductBean;
 import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
 
 import java.util.Map;
@@ -24,4 +25,6 @@ public interface LoginRepository {
     Observable<ProductCategoryBean> getProductCategory(Map maps);
 
     Observable<CustomerInfo> getHistory(Map maps);
+
+    Observable<SearchProductBean> searchGoods(String str);
 }

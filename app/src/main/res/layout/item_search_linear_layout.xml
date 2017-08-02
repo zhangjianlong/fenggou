@@ -8,32 +8,36 @@
         <variable
             name="viewModel"
             type="com.odbpo.fenggou.feature.search.SearchItemViewModel" />
+
+
+        <import type="com.odbpo.fenggou.util.DatabindingMethod" />
     </data>
 
     <LinearLayout
-        app:clickCommand = "@{viewModel.productDetail}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/app.theme.background"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:clickCommand="@{viewModel.productDetail}">
 
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:uri="@{viewModel.shopping.productUrl}" />
+            android:scaleType="fitXY"
+            app:uri="@{viewModel.productData.image}" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/app.padding.normal">
 
             <android.support.v7.widget.AppCompatTextView
                 style="@style/App.Theme.TextAppearance.mw.normal.black333"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:maxLines="2"
-                android:padding="@dimen/app.padding.normal"
-                android:text="@{viewModel.shopping.productName}" />
+                android:text="@{viewModel.productData.name}" />
 
 
             <LinearLayout
@@ -45,7 +49,7 @@
                 <android.support.v7.widget.AppCompatTextView
                     style="@style/App.Theme.TextAppearance.mw.normal.red"
                     android:maxLines="2"
-                    android:text="@{viewModel.shopping.productPrice}" />
+                    android:text="@{DatabindingMethod.getPrice(viewModel.productData.marketPrice)}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -53,17 +57,15 @@
                     android:gravity="center_vertical">
 
                     <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                        style="@style/App.Theme.TextAppearance.ww.small.black999"
                         android:maxLines="2"
-                        android:text="好评率0%" />
+                        android:text='@{@string/app_search_comment_percent+viewModel.productData.goodCommentPercent*100+@string/app_search_comment_percent_symbol}' />
 
                     <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.ww.normal.black999"
-                        android:layout_marginLeft="@dimen/app.margin.normal"
+                        style="@style/App.Theme.TextAppearance.ww.small.black999"
+                        android:layout_marginLeft="@dimen/app.margin.large"
                         android:maxLines="2"
-                        android:text="0人评价" />
-
-
+                        android:text='@{viewModel.productData.goodCommentNum+@string/app_search_comment_num}' />
                 </LinearLayout>
 
 

@@ -30,7 +30,9 @@
             android:fitsSystemWindows="true"
             app:clickCommand="@{viewModel.clickSearchView}">
 
-            <include layout="@layout/item_search"></include>
+            <include
+                layout="@layout/item_search"
+                app:searchTitle='@{@string/app_search_hint}'></include>
         </LinearLayout>
 
 

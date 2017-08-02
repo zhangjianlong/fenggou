@@ -1,6 +1,7 @@
 package com.odbpo.fenggou.feature.main.category;
 
 
+import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -54,6 +55,7 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
             upadataView((int) a);
         });
         Messenger.getDefault().register(this, MessageKey.SEARCH, () -> {
+            Bundle bundle = new Bundle();
             SearchActivity.instance(activity);
         });
 

@@ -5,6 +5,7 @@ import com.odbpo.fenggou.data.api.BaseResponse;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
+import com.odbpo.fenggou.domain.bean.SearchProductBean;
 import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
 
 import java.util.List;
@@ -42,5 +43,9 @@ public interface ApiClient {
 
     @GET(UriMethod.BROWSERECORD)
     Observable<CustomerInfo> getHistory(@QueryMap Map<String, String> maps);
+
+
+    @POST(UriMethod.SEARCH_GOODS)
+    Observable<SearchProductBean> searchGoods(@Body RequestBody requestBody);
 }
 

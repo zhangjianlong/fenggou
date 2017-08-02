@@ -32,4 +32,9 @@ public class DatabindingMethod {
         return gender;
 
     }
+
+
+    public static String getPrice(double price) {
+        return "￥" + price;
+    }
 }

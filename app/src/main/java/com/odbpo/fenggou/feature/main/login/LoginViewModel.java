@@ -24,10 +24,12 @@ import com.odbpo.fenggou.data.util.SpUtil;
 import com.odbpo.fenggou.databinding.FrgLoginBinding;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
+import com.odbpo.fenggou.domain.bean.SearchProductBean;
 import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
 import com.odbpo.fenggou.domain.interactor.category.GetProductCategoryUseCase;
 import com.odbpo.fenggou.domain.interactor.history.GetHistoryUserCase;
 import com.odbpo.fenggou.domain.interactor.login.LoginResultUseCase;
+import com.odbpo.fenggou.domain.interactor.search.SearchGoodsUserCase;
 import com.odbpo.fenggou.feature.forget.ForgetActivity;
 import com.odbpo.fenggou.feature.main.category.CategoryFragment;
 import com.odbpo.fenggou.util.MessageKey;
@@ -45,12 +47,14 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
     private final static String TAG_REGISTER = "TAG_REGISTER";
     private LoginResultUseCase loginResultUseCase;
     private GetHistoryUserCase getHistoryUserCase;
+    private SearchGoodsUserCase searchGoodsUserCase;
 
     @Inject
-    public LoginViewModel(RxAppCompatActivity activity, LoginResultUseCase loginResultUseCase, GetHistoryUserCase getHistoryUserCase) {
+    public LoginViewModel(RxAppCompatActivity activity, SearchGoodsUserCase searchGoodsUserCase, LoginResultUseCase loginResultUseCase, GetHistoryUserCase getHistoryUserCase) {
         super(activity);
         this.loginResultUseCase = loginResultUseCase;
         this.getHistoryUserCase = getHistoryUserCase;
+        this.searchGoodsUserCase = searchGoodsUserCase;
 
     }
 
@@ -190,12 +194,13 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
                     }
                 });
 
-        Map<String, String> maps = new HashMap<>();
-        maps.put("recursion ", "true");
-        getHistoryUserCase.setFormParams(maps);
-        getHistoryUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<CustomerInfo>() {
+
+        Map<String, String> maps1 = new HashMap<>();
+        maps1.put("queryString", "意大利");
+        searchGoodsUserCase.setParams(JsonUtil.mapToJson(maps1));
+        searchGoodsUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<SearchProductBean>() {
             @Override
-            protected void onDone(CustomerInfo customerInfo) {
+            protected void onDone(SearchProductBean searchProductBean) {
 
             }
         });

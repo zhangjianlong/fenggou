@@ -66,6 +66,9 @@
     <string name="app.search.sale">销量</string>
     <string name="app.search">搜索</string>
     <string name="app.search.hint">搜索想要的商品</string>
+    <string name="app.search.comment.num">人评价</string>
+    <string name="app.search.comment.percent">好评率</string>
+    <string name="app.search.comment.percent.symbol">%</string>
 
     <!--Info-->
     <string name="app.info.attention">我的关注</string>
