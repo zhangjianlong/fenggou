@@ -144,7 +144,19 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
         } else {
             isLiearlayout = false;
             bg.set(Static.CONTEXT.getResources().getDrawable(R.drawable.view2));
-            binding.recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 2);
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if (position == binding.recyclerView.getAdapter().getItemCount()-1) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
+
+                }
+            });
+            binding.recyclerView.setLayoutManager(gridLayoutManager);
             binding.recyclerView.getAdapter().notifyDataSetChanged();
         }
 
