@@ -22,4 +22,5 @@ public class MessageKey {
     //搜索页面 搜索后传送数据
     public static final String SEARCH_KEY = "SEARCH_KEY";
 
+
 }

@@ -7,5 +7,6 @@ package com.odbpo.fenggou.data.util;
 public class ShareKey {
     public static final String TOKEN = "TOKEN";
     public static final String CUSTOMER_INFO = "CUSTOMER_INFO";
+    public static final String HOSTORYDATA = "HOSTORYDATA";
 
 }

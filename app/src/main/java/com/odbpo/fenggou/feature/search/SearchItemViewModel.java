@@ -5,6 +5,7 @@ import android.databinding.ObservableField;
 import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.messenger.Messenger;
+import com.odbpo.fenggou.base.list.BaseListItemViewModel;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
 import com.odbpo.fenggou.domain.bean.SearchProductBean;
 import com.odbpo.fenggou.feature.detail.DetailActivity;
@@ -17,12 +18,16 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
  * @Desc:
  */
 
-public class SearchItemViewModel extends BViewModel {
+public class SearchItemViewModel extends BaseListItemViewModel {
 
     public final ObservableField<SearchProductBean.DataBean> productData = new ObservableField<>();
 
     public SearchItemViewModel(SearchProductBean.DataBean dataBean) {
         this.productData.set(dataBean);
+    }
+
+    public SearchItemViewModel(RxAppCompatActivity activity, boolean isLoadComplete) {
+        super(activity, isLoadComplete);
     }
 
     public final ReplyCommand productDetail = new ReplyCommand(() -> {

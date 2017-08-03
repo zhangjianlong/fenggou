@@ -59,6 +59,7 @@
             android:layout_weight="1"
             android:background="@color/app.theme.background_e8e8e8"
             android:orientation="vertical"
+            android:visibility="@{viewModel.showHis}"
             android:paddingTop="@dimen/app.padding.small">
 
             <LinearLayout
@@ -77,6 +78,7 @@
                     android:text="@string/app.search.history" />
 
                 <ImageView
+                    app:clickCommand="@{viewModel.clickDelHis}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/app.margin.normal"

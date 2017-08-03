@@ -57,6 +57,14 @@ import static com.odbpo.fenggou.R.id.tabLayout;
 public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearchBinding> {
     private SearchGoodsUserCase searchGoodsUserCase;
     private EsSearchRequest esSearchRequest;
+    private SearchProductBean searchProductData = new SearchProductBean();
+    public List<SortRes> items = new ArrayList<>();
+    public final ObservableField<Drawable> bg = new ObservableField<>(Static.CONTEXT.getResources().getDrawable(R.drawable.view1));
+    //控制recyleview 布局的标志 true为线性布局  false为网格布局
+    private boolean isLiearlayout = true;
+    public final ItemViewSelector<SearchItemViewModel> itemView = itemView();
+    private List<SearchProductBean.DataBean> recommendProductBeanList = new ArrayList<>();
+
 
     @Inject
     public SearchViewModel(RxAppCompatActivity activity, SearchGoodsUserCase searchGoodsUserCase) {
@@ -74,38 +82,18 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
         cateIdList.add((long) 1);
         esSearchRequest = new EsSearchRequest();
         esSearchRequest.setTypeIds(cateIdList);
-
         initTab();
-        initData(esSearchRequest);
         Messenger.getDefault().register(activity, MessageKey.PRODUCT_DETAIL, () -> {
             DetailActivity.instance(activity);
         });
 
         Messenger.getDefault().register(activity, MessageKey.SEARCH_KEY, String.class, data -> {
-            EsSearchRequest esSearchRequest1 = new EsSearchRequest();
-            esSearchRequest = esSearchRequest1;
-            esSearchRequest1.setQueryString(data);
-            initData(esSearchRequest1);
+            EsSearchRequest esSearchRequest = new EsSearchRequest();
+            esSearchRequest.setQueryString(data);
+            this.esSearchRequest = esSearchRequest;
+            loadData(false);
         });
-    }
-
-    @Override
-    public void loadMore() {
-        loadMore = true;
-        EsSearchRequest esSearchRequest = new EsSearchRequest();
-        esSearchRequest = this.esSearchRequest;
-        esSearchRequest.setPageNum(esSearchRequest.getPageNum() + 1);
-        initData(esSearchRequest);
-    }
-
-    @Override
-    public void refresh() {
-        isRefreshing.set(true);
-        EsSearchRequest esSearchRequest = new EsSearchRequest();
-        esSearchRequest = this.esSearchRequest;
-        esSearchRequest.setPageNum(1);
-        initData(esSearchRequest);
-
+        super.afterViews();
     }
 
 
@@ -129,16 +117,22 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
 
     }
 
-    public List<SortRes> items = new ArrayList<>();
-    public final ObservableField<Drawable> bg = new ObservableField<>(Static.CONTEXT.getResources().getDrawable(R.drawable.view1));
-    public final ObservableInt emptyLayoutShow = new ObservableInt(View.GONE);
-    public final List<SearchItemViewModel> itemViewModels = new ArrayList<>();
+    public final ReplyCommand clickSearchView = new ReplyCommand(() -> {
+        SearchableActivity.instance(activity);
+    });
 
-    //控制recyleview 布局的标志 true为线性布局  false为网格布局
-    private boolean isLiearlayout = true;
-    public final ItemViewSelector<SearchItemViewModel> itemView = itemView();
 
-    private List<SearchProductBean.DataBean> recommendProductBeanList = new ArrayList<>();
+    @Override
+    public void refresh() {
+        isRefreshing.set(true);
+        esSearchRequest.setPageNum(0);
+        loadData(false);
+    }
+
+    @Override
+    public void loadMoreData() {
+        esSearchRequest.setPageNum(esSearchRequest.getPageNum() + 1);
+    }
 
 
     public final ReplyCommand changeLayout = new ReplyCommand(() -> {
@@ -157,43 +151,11 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
     });
 
 
-    public final ReplyCommand clickSearchView = new ReplyCommand(() -> {
-        SearchableActivity.instance(activity);
-    });
-
-
     /**
      * @author: zjl
      * @Time: 2017/8/3 10:42
      * @Desc: 网络请求（搜索商品数据）
      */
-
-    private void initData(EsSearchRequest esSearchRequest) {
-        searchGoodsUserCase.setParams(JsonUtil.BeanToJson(esSearchRequest));
-        searchGoodsUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<SearchProductBean>() {
-            @Override
-            protected void onDone(SearchProductBean searchProductBean) {
-                isRefreshing.set(false);
-                if (loadMore) {
-                } else {
-                    recommendProductBeanList.clear();
-                }
-                recommendProductBeanList.addAll(searchProductBean.getData());
-            }
-
-            @Override
-            public void onCompleted() {
-                super.onCompleted();
-                loadMore = false;
-                isRefreshing.set(false);
-                upadataView();
-            }
-
-
-        });
-
-
-    }
 
     private void upadataView() {
         itemViewModels.clear();
@@ -202,6 +164,9 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
                     itemViewModels.add(new SearchItemViewModel(data));
                 }, error -> {
                 }, () -> {
+                    if (totalSize() > 10 && recommendProductBeanList.size() > 0) {
+                        itemViewModels.add(new SearchItemViewModel(activity, isComplete()));
+                    }
                     if (itemViewModels.size() > 0) {
                         binding.emptyLayout.setVisibility(View.GONE);
                     } else {
@@ -218,18 +183,52 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
         return Observable.from(recommendProductBeanList);
     }
 
-    public ItemViewSelector<SearchItemViewModel> itemView() {
-        return new BaseItemViewSelector<SearchItemViewModel>() {
-            @Override
-            public void select(ItemView itemView, int position, SearchItemViewModel item) {
-                if (isLiearlayout) {
-                    itemView.set(BR.viewModel, R.layout.item_search_linear_layout);
-                } else {
-                    itemView.set(BR.viewModel, R.layout.item_search_gird_layout);
-                }
 
+    @Override
+    public boolean isComplete() {
+        return recommendProductBeanList.size() == totalSize() ? true : false;
+    }
+
+    @Override
+    public int totalSize() {
+        return searchProductData.getTotal();
+    }
+
+
+    @Override
+    public void loadData(final boolean loadMore) {
+        searchGoodsUserCase.setParams(JsonUtil.BeanToJson(esSearchRequest));
+        searchGoodsUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<SearchProductBean>() {
+            @Override
+            protected void onDone(SearchProductBean searchProductBean) {
+                isRefreshing.set(false);
+                searchProductData = searchProductBean;
+                if (loadMore) {
+                } else {
+                    recommendProductBeanList.clear();
+                }
+                recommendProductBeanList.addAll(searchProductBean.getData());
+                System.out.println("recommendProductBeanListSize:" + recommendProductBeanList.size());
             }
-        };
+
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                upadataView();
+            }
+
+        });
+
+    }
+
+    @Override
+    public int setItem(ItemView itemView, int position, SearchItemViewModel item) {
+        if (isLiearlayout) {
+            itemView.set(BR.viewModel, R.layout.item_search_linear_layout);
+        } else {
+            itemView.set(BR.viewModel, R.layout.item_search_gird_layout);
+        }
+        return 1;
     }
 
 }

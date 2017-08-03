@@ -11,6 +11,7 @@
     </data>
 
     <TextView
+
         style="@style/App.Theme.TextAppearance.ww.small.black999"
         android:layout_margin="@dimen/app.margin.normal"
         android:drawablePadding="@dimen/app.padding.normal"
@@ -19,5 +20,6 @@
         android:paddingRight="@dimen/app.padding.normal"
         android:paddingTop="@dimen/app.padding.small"
         android:text="@{viewModel.data}"
+        app:clickCommand="@{viewModel.searchHistory}"
         tools:text="平面设计" />
 </layout>

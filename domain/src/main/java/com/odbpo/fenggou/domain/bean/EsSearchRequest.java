@@ -19,7 +19,7 @@ public class EsSearchRequest implements Serializable, Cloneable {
     private List<Long> typeIds;
 
 
-    private int pageNum = 1;
+    private int pageNum = 0;
 
 
     /**

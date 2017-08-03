@@ -5,19 +5,34 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
 
+import com.core.op.bindingadapter.common.BaseItemViewSelector;
+import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.weight.EmptyLayout;
+import com.odbpo.fenggou.BR;
+import com.odbpo.fenggou.R;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
-public abstract class ListViewModel<V extends BViewModel, T> extends BAViewModel<T> {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
+
+public abstract class ListViewModel<V extends BaseListItemViewModel, T> extends BAViewModel<T> {
+
+    private int typeCount = 0;
+
+    private int limit = 10;
+
+    public final List<V> itemViewModels = new ArrayList<>();
 
     public final ObservableBoolean isRefreshing = new ObservableBoolean(false);
 
-    public boolean loadMore = false;
 
     public final ObservableField<Integer> errorVisible = new ObservableField(View.GONE);
 
@@ -40,12 +55,54 @@ public abstract class ListViewModel<V extends BViewModel, T> extends BAViewModel
 
     @Override
     public void afterViews() {
+        loadData(true);
     }
 
-    public abstract void loadMore();
+    public void loadMore() {
+        if (!isComplete()) {
+            loadMoreData();
+
+            Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(d -> {
+                loadData(true);
+            });
+
+        }
+    }
+
 
     public abstract void refresh();
 
-    public abstract ItemViewSelector<V> itemView();
+    public abstract void loadMoreData();
+
+
+    public abstract boolean isComplete();
+
+    public abstract int totalSize();
+
+    public abstract void loadData(final boolean loadMore);
+
+
+    public abstract int setItem(ItemView itemView, int position, V item);
+
+
+    public ItemViewSelector<V> itemView() {
+        return new BaseItemViewSelector<V>() {
+            @Override
+            public void select(ItemView itemView, int position, V item) {
+                if (itemViewModels.size() > limit && position == itemViewModels.size() - 1) {
+                    itemView.set(BR.viewModel, R.layout.item_loadmore);
+                } else {
+                    typeCount = setItem(itemView, position, item);
+                }
+            }
+
+            @Override
+            public int viewTypeCount() {
+                return typeCount + (isComplete() ? 1 : 0);
+            }
+        };
+    }
+
 
 }
+
