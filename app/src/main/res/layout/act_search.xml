@@ -7,79 +7,106 @@
 
         <import type="com.core.op.bindingadapter.common.LayoutManagers" />
 
+        <import type="com.core.op.lib.weight.EmptyLayout" />
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.odbpo.fenggou.feature.search.SearchViewModel" />
     </data>
 
-    <LinearLayout
+    <com.core.op.lib.weight.VpSwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/App.Theme.Widget.Toolbar"
-            android:background="@color/app.theme.colorPrimary"
-            app:navigationIcon="@mipmap/nav_back"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ToolbarWhiteTheme"
-            app:title="  ">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:clickCommand="@{viewModel.clickSearchView}">
-
-                <include layout="@layout/item_search_no_padding" />
-            </LinearLayout>
-
-        </android.support.v7.widget.Toolbar>
-
+        android:orientation="vertical"
+        android:refreshing="@{viewModel.isRefreshing}"
+        app:onSwipeRefreshCommand="@{viewModel.onRefreshCommand}">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/app.theme.background">
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
-            <com.core.op.lib.weight.sortView.SortView
-                android:id="@+id/tabLayout"
-                style="@style/customTabLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"></com.core.op.lib.weight.sortView.SortView>
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                app:clickCommand="@{viewModel.changeLayout}">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/App.Theme.Widget.Toolbar"
+                android:background="@color/app.theme.colorPrimary"
+                app:navigationIcon="@mipmap/nav_back"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ToolbarWhiteTheme"
+                app:title="  ">
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:clickCommand="@{viewModel.clickSearchView}">
+
+                    <include layout="@layout/item_search_no_padding" />
+                </LinearLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app.theme.background">
+
+                <com.core.op.lib.weight.sortView.SortView
+                    android:id="@+id/tabLayout"
+                    style="@style/customTabLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"></com.core.op.lib.weight.sortView.SortView>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@{viewModel.bg}"
-                    app:clickCommand="@{viewModel.changeLayout}" />
+                    android:layout_weight="1"
+                    app:clickCommand="@{viewModel.changeLayout}">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@{viewModel.bg}"
+                        app:clickCommand="@{viewModel.changeLayout}" />
 
 
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemView="@{viewModel.itemView}"
+                    app:items="@{viewModel.itemViewModels}"
+                    app:layoutManager="@{LayoutManagers.linear()}"
+                    app:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}" />
+
+                <com.core.op.lib.weight.EmptyLayout
+                    android:id="@+id/emptyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/app.margin.xxxlarge"
+                    app:errorType="@{EmptyLayout.NO_SEARCH_DATA}"></com.core.op.lib.weight.EmptyLayout>
             </FrameLayout>
 
 
         </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:itemView="@{viewModel.itemView}"
-            app:items="@{viewModel.itemViewModels}"
-            app:layoutManager="@{LayoutManagers.linear()}"></android.support.v7.widget.RecyclerView>
-
-
-    </LinearLayout>
+    </com.core.op.lib.weight.VpSwipeRefreshLayout>
 </layout>

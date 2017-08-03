@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.core.op.Static;
 import com.core.op.lib.R;
 import com.core.op.lib.utils.DeviceUtil;
 import com.core.op.lib.weight.loading.Loading;
@@ -16,13 +17,15 @@ import com.core.op.lib.weight.loading.Loading;
 public class EmptyLayout extends LinearLayout implements
         View.OnClickListener {// , ISkinUIObserver {
 
-    public static final int HIDE_LAYOUT = 4;
+
     public static final int NETWORK_ERROR = 1;
     public static final int NETWORK_LOADING = 2;
     public static final int NODATA = 3;
+    public static final int HIDE_LAYOUT = 4;
     public static final int NODATA_ENABLE_CLICK = 5;
     public static final int NO_LOGIN = 6;
     public static final int NO_NOTIFICATION = 7;
+    public static final int NO_SEARCH_DATA = 8;
 
     private Loading mLoading;
     private boolean clickEnable = true;
@@ -64,18 +67,16 @@ public class EmptyLayout extends LinearLayout implements
             }
         });
         addView(view);
-        changeErrorLayoutBgMode(context);
     }
 
-    public void changeErrorLayoutBgMode(Context context1) {
-        // mLayout.setBackgroundColor(SkinsUtil.getColor(context1,
-        // "bgcolor01"));
-        // tv.setTextColor(SkinsUtil.getColor(context1, "textcolor05"));
-    }
 
-    public void dismiss() {
-        mErrorState = HIDE_LAYOUT;
-        setVisibility(View.GONE);
+    public void dismiss(int isShow) {
+        if (View.GONE == isShow) {
+            mErrorState = HIDE_LAYOUT;
+            setVisibility(View.GONE);
+        } else {
+            setVisibility(View.VISIBLE);
+        }
     }
 
     public int getErrorState() {
@@ -93,7 +94,6 @@ public class EmptyLayout extends LinearLayout implements
     @Override
     public void onClick(View v) {
         if (clickEnable) {
-            // setErrorType(NETWORK_LOADING);
             if (listener != null)
                 listener.onClick(v);
         }
@@ -103,7 +103,6 @@ public class EmptyLayout extends LinearLayout implements
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         // MyApplication.getInstance().getAtSkinObserable().registered(this);
-        onSkinChanged();
     }
 
     @Override
@@ -112,11 +111,6 @@ public class EmptyLayout extends LinearLayout implements
         // MyApplication.getInstance().getAtSkinObserable().unregistered(this);
     }
 
-    public void onSkinChanged() {
-        // mLayout.setBackgroundColor(SkinsUtil
-        // .getColor(getContext(), "bgcolor01"));
-        // tv.setTextColor(SkinsUtil.getColor(getContext(), "textcolor05"));
-    }
 
     public void setErrorMessage(String msg) {
         tv.setText(msg);
@@ -187,6 +181,15 @@ public class EmptyLayout extends LinearLayout implements
                 mLoading.setVisibility(View.GONE);
                 setTvNoDataContent();
                 clickEnable = true;
+                break;
+            case NO_SEARCH_DATA:
+                mErrorState = NO_SEARCH_DATA;
+                img.setBackgroundResource(R.drawable.img_no);
+                img.setVisibility(View.VISIBLE);
+                mLoading.setVisibility(View.GONE);
+                setNoDataContent(Static.CONTEXT.getString(R.string.app_search_empty_data));
+                setTvNoDataContent();
+                clickEnable = true;
             default:
                 break;
         }
@@ -200,7 +203,7 @@ public class EmptyLayout extends LinearLayout implements
         this.listener = listener;
     }
 
-    public void setTvNoDataContent() {
+    public void setTvNoDataContent(String... data) {
         if (!strNoDataContent.equals(""))
             tv.setText(strNoDataContent);
         else

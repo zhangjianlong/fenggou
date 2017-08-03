@@ -7,7 +7,7 @@ import com.core.op.lib.weight.EmptyLayout;
 
 /**
  * @author: zjl
- * @Time:  2017/6/1 15:17
+ * @Time: 2017/6/1 15:17
  * @Desc:
  */
 
@@ -19,6 +19,7 @@ public final class ViewBindingAdapter {
     public static void setErrorType(final EmptyLayout emptyLayout, int errorType) {
         emptyLayout.setErrorType(errorType);
     }
+
 
     @BindingAdapter({"errorClickCommand"})
     public static void layoutClickCommand(final EmptyLayout emptyLayout, final ReplyCommand clickCommand) {

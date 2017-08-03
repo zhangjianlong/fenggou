@@ -23,6 +23,11 @@ public class JsonUtil {
         return jsonObject.toString();
     }
 
+    public static String BeanToJson(Object object) {
+        return new Gson().toJson(object);
+    }
+
+
     private static Gson gson = null;
 
     static {

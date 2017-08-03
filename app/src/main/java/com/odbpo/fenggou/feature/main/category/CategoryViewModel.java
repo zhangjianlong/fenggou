@@ -54,9 +54,10 @@ public class CategoryViewModel extends BFViewModel<FrgCategoryBinding> {
         Messenger.getDefault().register(this, MessageKey.LABEL_SELECT_STAIR, Integer.class, a -> {
             upadataView((int) a);
         });
-        Messenger.getDefault().register(this, MessageKey.SEARCH, () -> {
+        Messenger.getDefault().register(this, MessageKey.SEARCH, Integer.class, data -> {
             Bundle bundle = new Bundle();
-            SearchActivity.instance(activity);
+            bundle.putInt("cateId", data);
+            SearchActivity.instance(activity,bundle);
         });
 
         Map<String, String> maps = new HashMap<>();

@@ -60,7 +60,7 @@ public final class SearchableActivity extends BackActivity<SearchableViewModel, 
         searchView.setIconifiedByDefault(false);
         SearchView.SearchAutoComplete textView = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);//14sp
-        textView.setTextColor(Static.CONTEXT.getResources().getColor(R.color.white_light));
+        textView.setTextColor(Static.CONTEXT.getResources().getColor(R.color.app_text_black));
         ImageView delButton = (ImageView) binding.serachview.findViewById(R.id.search_close_btn);
         delButton.setImageDrawable(Static.CONTEXT.getResources().getDrawable(R.mipmap.search_del_icon));
 

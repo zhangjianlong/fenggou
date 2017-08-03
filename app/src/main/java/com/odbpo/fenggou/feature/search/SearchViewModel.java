@@ -2,11 +2,14 @@ package com.odbpo.fenggou.feature.search;
 
 
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -25,8 +28,10 @@ import com.core.op.lib.utils.MyStateBarUtil;
 import com.core.op.lib.weight.sortView.SortRes;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
+import com.odbpo.fenggou.base.list.ListViewModel;
 import com.odbpo.fenggou.data.net.AbsAPICallback;
 import com.odbpo.fenggou.databinding.ActSearchBinding;
+import com.odbpo.fenggou.domain.bean.EsSearchRequest;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
 import com.odbpo.fenggou.domain.bean.SearchProductBean;
 import com.odbpo.fenggou.domain.interactor.search.SearchGoodsUserCase;
@@ -45,11 +50,13 @@ import javax.inject.Inject;
 
 import rx.Observable;
 
+import static com.odbpo.fenggou.R.id.action0;
 import static com.odbpo.fenggou.R.id.tabLayout;
 
 @PerActivity
-public class SearchViewModel extends BAViewModel<ActSearchBinding> {
+public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearchBinding> {
     private SearchGoodsUserCase searchGoodsUserCase;
+    private EsSearchRequest esSearchRequest;
 
     @Inject
     public SearchViewModel(RxAppCompatActivity activity, SearchGoodsUserCase searchGoodsUserCase) {
@@ -59,11 +66,46 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
 
     @Override
     public void afterViews() {
+        binding.swipeRefreshLayout.setColorSchemeResources(R.color.app_theme_colorPrimary);
+        binding.swipeRefreshLayout.setProgressViewOffset(true, -20, 100);
+        Bundle bundle = activity.getIntent().getBundleExtra("data");
+        int cateId = bundle.getInt("cateId");
+        List<Long> cateIdList = new ArrayList<>();
+        cateIdList.add((long) 1);
+        esSearchRequest = new EsSearchRequest();
+        esSearchRequest.setTypeIds(cateIdList);
+
         initTab();
-        initData();
+        initData(esSearchRequest);
         Messenger.getDefault().register(activity, MessageKey.PRODUCT_DETAIL, () -> {
             DetailActivity.instance(activity);
         });
+
+        Messenger.getDefault().register(activity, MessageKey.SEARCH_KEY, String.class, data -> {
+            EsSearchRequest esSearchRequest1 = new EsSearchRequest();
+            esSearchRequest = esSearchRequest1;
+            esSearchRequest1.setQueryString(data);
+            initData(esSearchRequest1);
+        });
+    }
+
+    @Override
+    public void loadMore() {
+        loadMore = true;
+        EsSearchRequest esSearchRequest = new EsSearchRequest();
+        esSearchRequest = this.esSearchRequest;
+        esSearchRequest.setPageNum(esSearchRequest.getPageNum() + 1);
+        initData(esSearchRequest);
+    }
+
+    @Override
+    public void refresh() {
+        isRefreshing.set(true);
+        EsSearchRequest esSearchRequest = new EsSearchRequest();
+        esSearchRequest = this.esSearchRequest;
+        esSearchRequest.setPageNum(1);
+        initData(esSearchRequest);
+
     }
 
 
@@ -89,6 +131,7 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
 
     public List<SortRes> items = new ArrayList<>();
     public final ObservableField<Drawable> bg = new ObservableField<>(Static.CONTEXT.getResources().getDrawable(R.drawable.view1));
+    public final ObservableInt emptyLayoutShow = new ObservableInt(View.GONE);
     public final List<SearchItemViewModel> itemViewModels = new ArrayList<>();
 
     //控制recyleview 布局的标志 true为线性布局  false为网格布局
@@ -104,7 +147,6 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
             isLiearlayout = true;
             binding.recyclerView.setLayoutManager(new LinearLayoutManager(activity));
             binding.recyclerView.getAdapter().notifyDataSetChanged();
-
         } else {
             isLiearlayout = false;
             bg.set(Static.CONTEXT.getResources().getDrawable(R.drawable.view2));
@@ -120,20 +162,30 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
     });
 
 
-    private void initData() {
-        Map<String, String> maps1 = new HashMap<>();
-        maps1.put("queryString", "意大利");
-        searchGoodsUserCase.setParams(JsonUtil.mapToJson(maps1));
+    /**
+     * @author: zjl
+     * @Time: 2017/8/3 10:42
+     * @Desc: 网络请求（搜索商品数据）
+     */
+
+    private void initData(EsSearchRequest esSearchRequest) {
+        searchGoodsUserCase.setParams(JsonUtil.BeanToJson(esSearchRequest));
         searchGoodsUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<SearchProductBean>() {
             @Override
             protected void onDone(SearchProductBean searchProductBean) {
+                isRefreshing.set(false);
+                if (loadMore) {
+                } else {
+                    recommendProductBeanList.clear();
+                }
                 recommendProductBeanList.addAll(searchProductBean.getData());
-
             }
 
             @Override
             public void onCompleted() {
                 super.onCompleted();
+                loadMore = false;
+                isRefreshing.set(false);
                 upadataView();
             }
 
@@ -150,6 +202,11 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
                     itemViewModels.add(new SearchItemViewModel(data));
                 }, error -> {
                 }, () -> {
+                    if (itemViewModels.size() > 0) {
+                        binding.emptyLayout.setVisibility(View.GONE);
+                    } else {
+                        binding.emptyLayout.setVisibility(View.VISIBLE);
+                    }
                     if (binding.recyclerView.getAdapter() != null) {
                         binding.recyclerView.getAdapter().notifyDataSetChanged();
                     }
@@ -161,7 +218,7 @@ public class SearchViewModel extends BAViewModel<ActSearchBinding> {
         return Observable.from(recommendProductBeanList);
     }
 
-    private ItemViewSelector<SearchItemViewModel> itemView() {
+    public ItemViewSelector<SearchItemViewModel> itemView() {
         return new BaseItemViewSelector<SearchItemViewModel>() {
             @Override
             public void select(ItemView itemView, int position, SearchItemViewModel item) {

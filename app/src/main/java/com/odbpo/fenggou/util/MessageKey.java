@@ -18,4 +18,8 @@ public class MessageKey {
     //UserName
     public static final String SAVE_NAME = "SAVE_NAME";
     public static final String PRODUCT_DETAIL = "PRODUCT_DETAIL";
+
+    //搜索页面 搜索后传送数据
+    public static final String SEARCH_KEY = "SEARCH_KEY";
+
 }

@@ -6,15 +6,18 @@ import android.databinding.ObservableField;
 import android.view.View;
 
 import com.core.op.bindingadapter.common.ItemViewSelector;
+import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.weight.EmptyLayout;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
-public abstract class ListViewModel<V extends BViewModel, T> extends BFViewModel<T> {
+public abstract class ListViewModel<V extends BViewModel, T> extends BAViewModel<T> {
 
     public final ObservableBoolean isRefreshing = new ObservableBoolean(false);
+
+    public boolean loadMore = false;
 
     public final ObservableField<Integer> errorVisible = new ObservableField(View.GONE);
 

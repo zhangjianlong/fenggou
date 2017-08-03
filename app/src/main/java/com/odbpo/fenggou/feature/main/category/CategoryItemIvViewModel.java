@@ -37,7 +37,7 @@ public class CategoryItemIvViewModel extends BViewModel {
 
 
     public final ReplyCommand search = new ReplyCommand(() -> {
-        Messenger.getDefault().sendNoMsg(MessageKey.SEARCH);
+        Messenger.getDefault().send(thirdContent.get().getCateId(), MessageKey.SEARCH);
 
     });
 
