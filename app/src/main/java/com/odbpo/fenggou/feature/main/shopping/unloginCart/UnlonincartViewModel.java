@@ -5,7 +5,6 @@ import android.databinding.ObservableBoolean;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.core.op.Static;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.command.ReplyCommand;
@@ -17,7 +16,7 @@ import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgUnlonincartBinding;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
 import com.odbpo.fenggou.feature.main.info.InfoItemViewModel;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;

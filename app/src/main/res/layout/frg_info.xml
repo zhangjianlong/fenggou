@@ -11,6 +11,8 @@
 
         <import type="android.widget.LinearLayout" />
 
+        <import type="android.view.View" />
+
         <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>
 
@@ -52,15 +54,14 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_marginRight="@dimen/app.margin.large12"
-                                app:clickCommand="@{viewModel.profileAct}"
-                                android:background="@drawable/shape_50000000_backgd_oval">
+                                android:background="@drawable/shape_50000000_backgd_oval"
+                                app:clickCommand="@{viewModel.profileAct}">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:background="@drawable/set"
-                                    />
+                                    android:background="@drawable/set" />
 
 
                             </FrameLayout>
@@ -69,8 +70,8 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_marginRight="@dimen/app.margin.large12"
-                                app:clickCommand="@{viewModel.message}"
-                                android:background="@drawable/shape_50000000_backgd_oval">
+                                android:background="@drawable/shape_50000000_backgd_oval"
+                                app:clickCommand="@{viewModel.message}">
 
                                 <ImageView
                                     android:layout_width="wrap_content"
@@ -211,50 +212,179 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/app.padding.normal">
+                    android:orientation="horizontal">
 
-
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:drawableTop="@drawable/daifukuan"
-                        android:gravity="center"
-                        android:text="@string/app.info.new.pay" />
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/app.padding.normal">
 
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/app.padding.large12"
+                                android:layout_marginRight="@dimen/app.padding.large12"
+                                android:layout_marginTop="@dimen/app.padding.large12"
+                                android:background="@drawable/daifukuan" />
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/App.Theme.TextAppearance.ww.tiny.red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="@dimen/app.margin.small"
+                                android:background="@drawable/shape_e53e5a_backgd_oval"
+                                android:gravity="center" />
+
+                        </FrameLayout>
+
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/app.info.new.pay" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:drawableTop="@drawable/daishouhuo"
-                        android:gravity="center"
-                        android:text="@string/app.info.wait.receiving" />
+                        android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal">
 
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/app.padding.large12"
+                                android:layout_marginRight="@dimen/app.padding.large12"
+                                android:layout_marginTop="@dimen/app.padding.large12"
+                                android:background="@drawable/daishouhuo" />
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/App.Theme.TextAppearance.ww.tiny.red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="@dimen/app.margin.small"
+                                android:background="@drawable/shape_e53e5a_backgd_oval"
+                                android:gravity="center" />
+
+                        </FrameLayout>
+
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/app.info.wait.receiving" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:drawableTop="@drawable/daipingjia"
-                        android:gravity="center"
-                        android:text="@string/app.info.wait.evaluate" />
+                        android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatTextView
-                        style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/app.padding.large12"
+                                android:layout_marginRight="@dimen/app.padding.large12"
+                                android:layout_marginTop="@dimen/app.padding.large12"
+                                android:background="@drawable/daipingjia" />
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/App.Theme.TextAppearance.ww.tiny.red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="@dimen/app.margin.small"
+                                android:background="@drawable/shape_e53e5a_backgd_oval"
+                                android:gravity="center" />
+
+                        </FrameLayout>
+
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/app.info.wait.evaluate" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:drawableTop="@drawable/tuikuan"
-                        android:gravity="center"
-                        android:text="@string/app.info.refund" />
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/app.padding.large12"
+                                android:layout_marginRight="@dimen/app.padding.large12"
+                                android:layout_marginTop="@dimen/app.padding.large12"
+                                android:background="@drawable/tuikuan" />
+
+                            <android.support.v7.widget.AppCompatTextView
+                                style="@style/App.Theme.TextAppearance.ww.tiny.red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="@dimen/app.margin.small"
+                                android:background="@drawable/shape_e53e5a_backgd_oval"
+                                android:gravity="center" />
+
+                        </FrameLayout>
+
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/app.info.refund" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
 

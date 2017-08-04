@@ -7,10 +7,8 @@ import com.core.op.Static;
 import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
-import com.core.op.lib.messenger.Messenger;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.ActForgetBinding;
-import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;

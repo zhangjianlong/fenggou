@@ -16,12 +16,10 @@ import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
 import com.odbpo.fenggou.feature.dialog.gender.GenderDialog;
 import com.odbpo.fenggou.feature.nickname.NicknameActivity;
 import com.odbpo.fenggou.feature.username.UsernameActivity;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;
-
-import rx.Observable;
 
 @PerActivity
 public class ProfileViewModel extends BAViewModel<ActProfileBinding> {

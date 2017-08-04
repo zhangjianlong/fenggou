@@ -1,23 +1,14 @@
 package com.odbpo.fenggou.feature.main.category;
 
-import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
-import android.databinding.ObservableList;
 
-import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.messenger.Messenger;
-import com.odbpo.fenggou.BR;
-import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.domain.bean.CategoryResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-
-import java.util.List;
-
-import rx.Observable;
 
 /**
  * @author: zjl

@@ -3,6 +3,7 @@ package com.odbpo.fenggou.data;
 
 import com.odbpo.fenggou.data.api.BaseResponse;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
+import com.odbpo.fenggou.domain.bean.OrderNumBean;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
 import com.odbpo.fenggou.domain.bean.SearchProductBean;
@@ -18,6 +19,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -47,5 +49,8 @@ public interface ApiClient {
 
     @POST(UriMethod.SEARCH_GOODS)
     Observable<SearchProductBean> searchGoods(@Body RequestBody requestBody);
+
+    @GET(UriMethod.ORDER_NUM)
+    Observable<String> getOrderNum(@Path("status") String status);
 }
 

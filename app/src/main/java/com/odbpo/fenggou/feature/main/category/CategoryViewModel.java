@@ -21,9 +21,8 @@ import com.odbpo.fenggou.domain.bean.CategoryResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
 import com.odbpo.fenggou.domain.interactor.category.GetProductCategoryUseCase;
 import com.odbpo.fenggou.feature.Searchable.SearchableActivity;
-import com.odbpo.fenggou.feature.forget.ForgetActivity;
 import com.odbpo.fenggou.feature.search.SearchActivity;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
@@ -34,7 +33,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.functions.Func1;
 
 
 @PerActivity

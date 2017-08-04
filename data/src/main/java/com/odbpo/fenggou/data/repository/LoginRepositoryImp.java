@@ -5,6 +5,7 @@ import com.odbpo.fenggou.data.ApiClient;
 import com.odbpo.fenggou.data.api.transformer.ErrorTransformer;
 import com.odbpo.fenggou.data.util.RetrofitUtil;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
+import com.odbpo.fenggou.domain.bean.OrderNumBean;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
 import com.odbpo.fenggou.domain.bean.SearchProductBean;
@@ -59,6 +60,11 @@ public class LoginRepositoryImp implements LoginRepository {
     @Override
     public Observable<SearchProductBean> searchGoods(String str) {
         return apiClient.searchGoods(RetrofitUtil.toRequestBody(str));
+    }
+
+    @Override
+    public Observable<String> getOrderNum(String def) {
+        return apiClient.getOrderNum(def);
     }
 
 

@@ -14,6 +14,10 @@ import com.core.op.lib.R;
 
 public class SortRes {
 
+
+    public String searchKey;
+
+
     public int getDesRes() {
         return desRes;
     }
@@ -36,11 +40,26 @@ public class SortRes {
 
     public void setSort(int sort) {
         this.sort = sort;
+
+
     }
 
-    public final static int AES = 2;//升序
-    public final static int DEFAULT = 1;//默认排序，无升降
-    public final static int DES = 3;//降续
+    public String getSearchKey() {
+        return searchKey;
+    }
+
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
+    }
+
+
+    /**
+     * 排序，order 0 表示升序；1表示降序
+     */
+
+    public final static int AES = 0;//升序
+    public final static int DEFAULT = 2;//默认排序，无升降
+    public final static int DES = 1;//降序
 
     @DrawableRes
     private int desRes = R.drawable.down;

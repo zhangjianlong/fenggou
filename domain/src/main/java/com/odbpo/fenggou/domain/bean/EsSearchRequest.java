@@ -4,6 +4,8 @@ package com.odbpo.fenggou.domain.bean;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.swing.SortOrder;
+
 
 /**
  * @author: zjl
@@ -12,7 +14,7 @@ import java.util.*;
  */
 
 
-public class EsSearchRequest implements Serializable, Cloneable {
+public class EsSearchRequest implements Serializable {
     /**
      * 商品类型ID列表
      */
@@ -20,6 +22,12 @@ public class EsSearchRequest implements Serializable, Cloneable {
 
 
     private int pageNum = 0;
+
+
+    /**
+     * 排序字段
+     */
+    private List<SortItem> sorts = new ArrayList<>();
 
 
     /**
@@ -51,6 +59,49 @@ public class EsSearchRequest implements Serializable, Cloneable {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+
+    public List<SortItem> getSorts() {
+        return sorts;
+    }
+
+    public void setSorts(List<SortItem> sorts) {
+        this.sorts = sorts;
+    }
+
+
+    public class SortItem {
+
+        private String field;
+
+        private int order;
+
+        public SortItem() {
+        }
+
+        public SortItem(String field, int order) {
+            this.field = field;
+            this.order = order;
+        }
+
+        public String getField() {
+            return field;
+        }
+
+        public void setField(String field) {
+            this.field = field;
+        }
+
+        public int getOrder() {
+            return order;
+        }
+
+        public void setOrder(int order) {
+            this.order = order;
+        }
+
+
     }
 
 

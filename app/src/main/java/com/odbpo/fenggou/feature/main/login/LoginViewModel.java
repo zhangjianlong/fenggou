@@ -5,7 +5,6 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -16,6 +15,7 @@ import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.AppToast;
 import com.core.op.lib.utils.JsonUtil;
+import com.core.op.lib.utils.MessageKey;
 import com.core.op.lib.utils.StrUtil;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.data.net.AbsAPICallback;
@@ -23,18 +23,12 @@ import com.odbpo.fenggou.data.util.ShareKey;
 import com.odbpo.fenggou.data.util.SpUtil;
 import com.odbpo.fenggou.databinding.FrgLoginBinding;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
-import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.SearchProductBean;
-import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
-import com.odbpo.fenggou.domain.interactor.category.GetProductCategoryUseCase;
 import com.odbpo.fenggou.domain.interactor.history.GetHistoryUserCase;
 import com.odbpo.fenggou.domain.interactor.login.LoginResultUseCase;
 import com.odbpo.fenggou.domain.interactor.search.SearchGoodsUserCase;
 import com.odbpo.fenggou.feature.forget.ForgetActivity;
-import com.odbpo.fenggou.feature.main.category.CategoryFragment;
-import com.odbpo.fenggou.util.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.trello.rxlifecycle.components.support.RxFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,11 +57,11 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
         initTab();
     }
 
+
     public final ObservableField<String> title = new ObservableField<>(Static.CONTEXT.getString(R.string.app_main_login));
     public final ObservableField<String> phone = new ObservableField<>();
-    public final ObservableField<String> psd = new ObservableField<>("wenzi1994");
-
-    public final ObservableField<String> userName = new ObservableField<>("18550001915");
+    public final ObservableField<String> psd = new ObservableField<>("aa123456");
+    public final ObservableField<String> userName = new ObservableField<>("18117164379");
     public final ObservableField<Drawable> eye = new ObservableField<>(Static.CONTEXT.getResources().getDrawable(R.drawable.eye_unclick));
     public final ObservableField<String> verifyCode = new ObservableField<>();
     public final ObservableBoolean showRegisterLayout = new ObservableBoolean(false);
@@ -171,8 +165,6 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
             AppToast.show(Static.CONTEXT.getString(R.string.app_main_login_psd_empty));
             return;
         }
-
-
         Map<String, String> map = new HashMap<>();
         map.put("user", userName.get());
         map.put("password", psd.get());
@@ -183,8 +175,7 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
                     protected void onDone(LoginResponse loginResponse) {
                         LoginResponse loginResult = loginResponse;
                         SpUtil.write(ShareKey.TOKEN, loginResult.getToken());
-//                        Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
-
+                        Messenger.getDefault().sendNoMsg(MessageKey.LOGIN);
                     }
 
                     @Override
@@ -193,18 +184,6 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
                     }
                 });
-
-
-        Map<String, String> maps1 = new HashMap<>();
-        maps1.put("queryString", "意大利");
-        searchGoodsUserCase.setParams(JsonUtil.mapToJson(maps1));
-        searchGoodsUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<SearchProductBean>() {
-            @Override
-            protected void onDone(SearchProductBean searchProductBean) {
-
-            }
-        });
-
 
     });
 

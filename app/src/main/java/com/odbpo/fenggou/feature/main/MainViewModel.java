@@ -17,7 +17,7 @@ import com.odbpo.fenggou.feature.main.category.CategoryFragment;
 import com.odbpo.fenggou.feature.main.mine.MineFragment;
 import com.odbpo.fenggou.feature.main.product.ProductFragment;
 import com.odbpo.fenggou.feature.main.shopping.ShoppingFragment;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;

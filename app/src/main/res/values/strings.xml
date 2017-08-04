@@ -64,6 +64,8 @@
     <string name="app.search.default">默认</string>
     <string name="app.search.price">价格</string>
     <string name="app.search.sale">销量</string>
+    <string name="app.search.price.key">price</string>
+    <string name="app.search.sale.key">saleCount</string>
     <string name="app.search">搜索</string>
     <string name="app.search.hint">搜索想要的商品</string>
     <string name="app.search.comment.num">人评价</string>

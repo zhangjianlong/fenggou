@@ -4,7 +4,6 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
 import android.graphics.drawable.ColorDrawable;
-import android.view.View;
 
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.lib.base.BViewModel;
@@ -14,14 +13,12 @@ import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.domain.bean.CategoryResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.List;
 
 import rx.Observable;
-
-import static android.R.attr.data;
 
 /**
  * @author: zjl

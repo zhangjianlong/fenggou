@@ -2,14 +2,11 @@ package com.odbpo.fenggou.feature.search;
 
 import android.databinding.ObservableField;
 
-import com.core.op.lib.base.BViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.messenger.Messenger;
 import com.odbpo.fenggou.base.list.BaseListItemViewModel;
-import com.odbpo.fenggou.domain.bean.RecommendProductBean;
 import com.odbpo.fenggou.domain.bean.SearchProductBean;
-import com.odbpo.fenggou.feature.detail.DetailActivity;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**

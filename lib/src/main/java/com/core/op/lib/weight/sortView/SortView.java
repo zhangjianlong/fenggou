@@ -19,9 +19,12 @@ import android.widget.TextView;
 
 import com.core.op.Static;
 import com.core.op.lib.R;
+import com.core.op.lib.messenger.Messenger;
+import com.core.op.lib.utils.MessageKey;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.functions.Func1;
@@ -116,6 +119,7 @@ public class SortView extends TabLayout implements TabLayout.OnTabSelectedListen
         }, () -> {
 
         });
+        sendMessage(sortres.get(tab.getPosition()));
 
     }
 
@@ -128,6 +132,7 @@ public class SortView extends TabLayout implements TabLayout.OnTabSelectedListen
     @Override
     public void onTabReselected(Tab tab) {
         ((SortItemView) tab.getCustomView()).updateView();
+        sendMessage(sortres.get(tab.getPosition()));
 
     }
 
@@ -142,6 +147,13 @@ public class SortView extends TabLayout implements TabLayout.OnTabSelectedListen
         Tab tab = newTab();
         tab.setCustomView(sortItem);
         tabs.add(tab);
+    }
+
+
+    private void sendMessage(SortRes data) {
+        Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(d -> {
+            Messenger.getDefault().send(data, MessageKey.SORT);
+        });
 
 
     }

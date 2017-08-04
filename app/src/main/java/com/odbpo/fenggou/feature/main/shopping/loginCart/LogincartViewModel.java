@@ -13,8 +13,7 @@ import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.databinding.FrgLogincartBinding;
 import com.odbpo.fenggou.domain.bean.RecommendProductBean;
-import com.odbpo.fenggou.feature.main.info.InfoItemViewModel;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
@@ -23,8 +22,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
-
-import static android.R.attr.data;
 
 @PerActivity
 public class LogincartViewModel extends BFViewModel<FrgLogincartBinding> {

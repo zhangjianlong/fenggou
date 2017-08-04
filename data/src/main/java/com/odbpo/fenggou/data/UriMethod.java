@@ -21,6 +21,8 @@ public class UriMethod {
     public static final String BROWSERECORD = "customers/BROWSERECORD";
     //商品搜索
     public static final String SEARCH_GOODS = "search/goods/whole";
+    //订单数量接口
+    public static final String ORDER_NUM = "orders/{status}/counts";
 
 
 }

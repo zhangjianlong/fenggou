@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.odbpo.fenggou.data.net.ResultException;
+import com.odbpo.fenggou.data.net.StringConverterFactory;
 import com.orhanobut.logger.Logger;
 import com.odbpo.fenggou.data.Global;
 import com.odbpo.fenggou.data.api.cookie.ClearableCookieJar;
@@ -133,6 +134,7 @@ public class ApiOption {
             retrofit = new Retrofit.Builder()
                     .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(StringConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .client(client)
                     .build();

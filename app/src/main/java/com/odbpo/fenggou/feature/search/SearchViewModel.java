@@ -2,29 +2,19 @@ package com.odbpo.fenggou.feature.search;
 
 
 import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.TabItem;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.core.op.Static;
-import com.core.op.bindingadapter.bottomnavigation.NavigationRes;
-import com.core.op.bindingadapter.bottomnavigation.ViewBindingAdapter;
-import com.core.op.bindingadapter.common.BaseItemViewSelector;
 import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.bindingadapter.common.ItemViewSelector;
-import com.core.op.lib.base.BAViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
 import com.core.op.lib.messenger.Messenger;
 import com.core.op.lib.utils.JsonUtil;
-import com.core.op.lib.utils.MyStateBarUtil;
 import com.core.op.lib.weight.sortView.SortRes;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
@@ -32,26 +22,20 @@ import com.odbpo.fenggou.base.list.ListViewModel;
 import com.odbpo.fenggou.data.net.AbsAPICallback;
 import com.odbpo.fenggou.databinding.ActSearchBinding;
 import com.odbpo.fenggou.domain.bean.EsSearchRequest;
-import com.odbpo.fenggou.domain.bean.RecommendProductBean;
 import com.odbpo.fenggou.domain.bean.SearchProductBean;
 import com.odbpo.fenggou.domain.interactor.search.SearchGoodsUserCase;
 import com.odbpo.fenggou.feature.Searchable.SearchableActivity;
 import com.odbpo.fenggou.feature.detail.DetailActivity;
-import com.odbpo.fenggou.feature.main.shopping.loginCart.ShoppingItemViewModel;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import rx.Observable;
 
-import static com.odbpo.fenggou.R.id.action0;
-import static com.odbpo.fenggou.R.id.tabLayout;
 
 @PerActivity
 public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearchBinding> {
@@ -93,6 +77,29 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
             this.esSearchRequest = esSearchRequest;
             loadData(false);
         });
+
+        Messenger.getDefault().register(activity, MessageKey.SORT, SortRes.class, data -> {
+            SortRes sortRes = data;
+            switch (sortRes.getSort()) {
+                case SortRes.AES:
+                case SortRes.DES:
+                    EsSearchRequest.SortItem sortItem = esSearchRequest.new SortItem(data.getSearchKey(), data.getSort());
+                    List<EsSearchRequest.SortItem> sortItems = new ArrayList<EsSearchRequest.SortItem>();
+                    sortItems.add(sortItem);
+                    esSearchRequest.setSorts(sortItems);
+                    break;
+                case SortRes.DEFAULT:
+                    List<EsSearchRequest.SortItem> defaultSortItems = new ArrayList<EsSearchRequest.SortItem>();
+                    esSearchRequest.setSorts(defaultSortItems);
+                    break;
+            }
+
+
+            esSearchRequest.setPageNum(0);
+            loadData(false);
+
+        });
+
         super.afterViews();
     }
 
@@ -105,9 +112,11 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
         SortRes priceRes = new SortRes();
         priceRes.setTextRes(R.string.app_search_price);
         priceRes.setSort(SortRes.AES);
+        priceRes.setSearchKey(Static.CONTEXT.getString(R.string.app_search_price_key));
 
         SortRes saleRes = new SortRes();
         saleRes.setTextRes(R.string.app_search_sale);
+        saleRes.setSearchKey(Static.CONTEXT.getString(R.string.app_search_sale_key));
         saleRes.setSort(SortRes.AES);
 
         items.add(defaultRes);
@@ -148,7 +157,7 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    if (position == binding.recyclerView.getAdapter().getItemCount()-1) {
+                    if (position == binding.recyclerView.getAdapter().getItemCount() - 1) {
                         return 2;
                     } else {
                         return 1;

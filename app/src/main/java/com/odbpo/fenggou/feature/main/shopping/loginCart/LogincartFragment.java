@@ -13,8 +13,7 @@ import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.base.BaseFragment;
 import com.odbpo.fenggou.databinding.FrgLogincartBinding;
 import com.odbpo.fenggou.di.components.MainComponent;
-import com.odbpo.fenggou.feature.register.RegisterActivity;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 
 @RootView(R.layout.frg_logincart)
 public final class LogincartFragment extends BaseFragment<LogincartViewModel, FrgLogincartBinding> {

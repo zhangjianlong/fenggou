@@ -16,7 +16,7 @@ import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.data.util.ShareKey;
 import com.odbpo.fenggou.data.util.SpUtil;
 import com.odbpo.fenggou.databinding.ActSearchableBinding;
-import com.odbpo.fenggou.util.MessageKey;
+import com.core.op.lib.utils.MessageKey;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.io.Serializable;

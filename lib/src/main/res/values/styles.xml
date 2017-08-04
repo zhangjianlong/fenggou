@@ -330,6 +330,10 @@
         <item name="android:textSize">@dimen/app.text.small</item>
     </style>
 
+    <style name="App.Theme.TextAppearance.ww.tiny.red">
+        <item name="android:textColor">@color/app.text.e23e56</item>
+    </style>
+
     <style name="App.Theme.TextAppearance.ww.small.white"></style>
 
     <style name="App.Theme.TextAppearance.ww.small.black666">

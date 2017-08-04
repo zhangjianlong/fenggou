@@ -1,6 +1,6 @@
-package com.odbpo.fenggou.util;
+package com.core.op.lib.utils;
 
-import com.odbpo.fenggou.feature.main.category.CategoryFragment;
+
 
 /**
  * Created by acer on 2017/3/11.
@@ -21,6 +21,9 @@ public class MessageKey {
 
     //搜索页面 搜索后传送数据
     public static final String SEARCH_KEY = "SEARCH_KEY";
+
+    //点击搜索商品页面排序按钮
+    public static final String SORT = "SORT";
 
 
 }
