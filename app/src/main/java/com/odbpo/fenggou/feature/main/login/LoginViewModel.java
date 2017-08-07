@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.core.op.Static;
+import com.core.op.bindingadapter.tablayout.TabRes;
 import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
@@ -30,7 +31,9 @@ import com.odbpo.fenggou.domain.interactor.search.SearchGoodsUserCase;
 import com.odbpo.fenggou.feature.forget.ForgetActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -62,9 +65,13 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
     public final ObservableField<String> phone = new ObservableField<>();
     public final ObservableField<String> psd = new ObservableField<>("aa123456");
     public final ObservableField<String> userName = new ObservableField<>("18117164379");
+//
+//    public final ObservableField<String> psd = new ObservableField<>("123456");
+//    public final ObservableField<String> userName = new ObservableField<>("18625254516");
     public final ObservableField<Drawable> eye = new ObservableField<>(Static.CONTEXT.getResources().getDrawable(R.drawable.eye_unclick));
     public final ObservableField<String> verifyCode = new ObservableField<>();
     public final ObservableBoolean showRegisterLayout = new ObservableBoolean(false);
+    public List<TabRes> tabRes = new ArrayList<>();
 
 
     public void showLogin() {
@@ -130,11 +137,8 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
         binding.rightLl.startAnimation(AnimationUtils.loadAnimation(
                 activity, R.anim.slide_to_left
         ));
-
-
     }
 
-    ;
 
     public final ReplyCommand agreeProtocol = new ReplyCommand(() -> {
 
@@ -198,14 +202,16 @@ public class LoginViewModel extends BFViewModel<FrgLoginBinding> {
 
 
     private void initTab() {
-        TabLayout.Tab tab = binding.tabLayout.newTab();
-        tab.setText(Static.CONTEXT.getText(R.string.app_main_account_login));
-        tab.setTag(TAG_LOGIN);
-        binding.tabLayout.addTab(tab);
-        tab = binding.tabLayout.newTab();
-        tab.setText(Static.CONTEXT.getText(R.string.app_main_phone_login));
-        tab.setTag(TAG_REGISTER);
-        binding.tabLayout.addTab(tab);
+        tabRes.add(new TabRes(R.string.app_main_account_login, TAG_LOGIN));
+        tabRes.add(new TabRes(R.string.app_main_phone_login, TAG_REGISTER));
+//        TabLayout.Tab tab = binding.tabLayout.newTab();
+//        tab.setText(Static.CONTEXT.getText(R.string.app_main_account_login));
+//        tab.setTag(TAG_LOGIN);
+//        binding.tabLayout.addTab(tab);
+//        tab = binding.tabLayout.newTab();
+//        tab.setText(Static.CONTEXT.getText(R.string.app_main_phone_login));
+//        tab.setTag(TAG_REGISTER);
+//        binding.tabLayout.addTab(tab);
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

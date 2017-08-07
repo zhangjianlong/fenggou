@@ -39,6 +39,20 @@ public final class ViewBindingAdapter {
 //                });
     }
 
+    @BindingAdapter(value = {"tabRes"}, requireAll = false)
+    public static void setTabRes(TabLayout tabLayout, List<TabRes> tabRes) {
+        if (!(tabRes != null && tabRes.size() > 0)) {
+            return;
+        }
+        Observable.from(tabRes).subscribe(data -> {
+            TabLayout.Tab tab = tabLayout.newTab();
+            tab.setText(data.getTextRes());
+            tab.setTag(data.getTag());
+            tabLayout.addTab(tab);
+        });
+
+    }
+
 
 }
 

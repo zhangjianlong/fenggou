@@ -8,18 +8,67 @@
         <variable
             name="viewModel"
             type="com.odbpo.fenggou.feature.message.MessageViewModel" />
+
+        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
+
+        <import type="com.core.op.lib.weight.EmptyLayout" />
+
+        <import type="android.view.View" />
     </data>
 
-    <LinearLayout
+
+    <com.core.op.lib.weight.VpSwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:refreshing="@{viewModel.isRefreshing}"
+        app:onSwipeRefreshCommand="@{viewModel.onRefreshCommand}">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/include_toolbar_alpha"
+                app:toolTitle="@{viewModel.toolTitle}"></include>
 
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/include_toolbar_alpha"
-            app:toolTitle="@{viewModel.toolTitle}"></include>
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                style="@style/customTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabRes="@{viewModel.tabRes}" />
 
-    </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemView="@{viewModel.itemView}"
+                    app:items="@{viewModel.itemViewModels}"
+                    app:layoutManager="@{LayoutManagers.linear()}"
+                    app:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}" />
+
+                <com.core.op.lib.weight.EmptyLayout
+                    android:id="@+id/emptyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/app.margin.xxxlarge"
+                    android:visibility="@{viewModel.errorVisible}"
+                    app:errorType="@{EmptyLayout.NO_NOTIFICATION}"></com.core.op.lib.weight.EmptyLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+    </com.core.op.lib.weight.VpSwipeRefreshLayout>
+
+
 </layout>

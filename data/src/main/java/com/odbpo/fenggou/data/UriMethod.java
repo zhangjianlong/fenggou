@@ -8,9 +8,7 @@ package com.odbpo.fenggou.data;
 
 public class UriMethod {
 
-
     public static final String CHECK_PHONE = "customer/registry/checkphone";
-
     //登录
     public static final String LOGIN = "customer/login";
     //获取客户信息
@@ -23,6 +21,10 @@ public class UriMethod {
     public static final String SEARCH_GOODS = "search/goods/whole";
     //订单数量接口
     public static final String ORDER_NUM = "orders/{status}/counts";
+    //系统消息
+    public static final String SYSTEM_NOTIFICATION = "customers/messages";
+    //订单列表
+    public static final String ORDER_GOODSLIST = "orderGoodsList";
 
 
 }

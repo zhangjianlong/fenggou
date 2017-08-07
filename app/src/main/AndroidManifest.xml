@@ -8,9 +8,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <meta-data
-        tools:replace="android:value"
         android:name="android.support.VERSION"
-        android:value="25.0.0" />
+        android:value="25.0.0"
+        tools:replace="android:value" />
 
     <application
         android:name=".global.SlashApplication"
@@ -90,7 +90,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".Order"></activity>
     </application>
 
 </manifest>

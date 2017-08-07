@@ -13,6 +13,8 @@
 
         <import type="android.view.View" />
 
+        <import type="java.lang.Integer" />
+
         <import type="com.core.op.bindingadapter.common.LayoutManagers" />
     </data>
 
@@ -183,7 +185,6 @@
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.AppCompatTextView
-
                         style="@style/App.Theme.TextAppearance.mw.normal.black333"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -195,7 +196,6 @@
                         android:text="@string/app.info.order" />
 
                     <android.support.v7.widget.AppCompatTextView
-
                         style="@style/App.Theme.TextAppearance.mw.normal.black333"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -203,7 +203,8 @@
                         android:drawableRight="@drawable/right"
                         android:gravity="right"
                         android:padding="@dimen/app.margin.normal"
-                        android:text="@string/app.info.all.order" />
+                        android:text="@string/app.info.all.order"
+                        app:clickCommand="@{viewModel.order}" />
 
                 </LinearLayout>
 
@@ -242,7 +243,9 @@
                                 android:layout_gravity="right"
                                 android:layout_marginTop="@dimen/app.margin.small"
                                 android:background="@drawable/shape_e53e5a_backgd_oval"
-                                android:gravity="center" />
+                                android:gravity="center"
+                                android:text="@{viewModel.orderPayNum}"
+                                android:visibility="@{Integer.parseInt(viewModel.orderPayNum)>0?View.VISIBLE:View.GONE}" />
 
                         </FrameLayout>
 
@@ -284,7 +287,9 @@
                                 android:layout_gravity="right"
                                 android:layout_marginTop="@dimen/app.margin.small"
                                 android:background="@drawable/shape_e53e5a_backgd_oval"
-                                android:gravity="center" />
+                                android:gravity="center"
+                                android:text="@{viewModel.orderReceiveNum}"
+                                android:visibility="@{Integer.parseInt(viewModel.orderReceiveNum)>0?View.VISIBLE:View.GONE}" />
 
                         </FrameLayout>
 
@@ -327,10 +332,10 @@
                                 android:layout_gravity="right"
                                 android:layout_marginTop="@dimen/app.margin.small"
                                 android:background="@drawable/shape_e53e5a_backgd_oval"
-                                android:gravity="center" />
-
+                                android:gravity="center"
+                                android:text="@{viewModel.orderEvaluateNum}"
+                                android:visibility="@{Integer.parseInt(viewModel.orderEvaluateNum)>0?View.VISIBLE:View.GONE}" />
                         </FrameLayout>
-
 
                         <android.support.v7.widget.AppCompatTextView
                             style="@style/App.Theme.TextAppearance.mw.normal.black333"
@@ -370,7 +375,9 @@
                                 android:layout_gravity="right"
                                 android:layout_marginTop="@dimen/app.margin.small"
                                 android:background="@drawable/shape_e53e5a_backgd_oval"
-                                android:gravity="center" />
+                                android:gravity="center"
+                                android:text="@{viewModel.orderReturnNum}"
+                                android:visibility="@{Integer.parseInt(viewModel.orderReturnNum)>0?View.VISIBLE:View.GONE}" />
 
                         </FrameLayout>
 

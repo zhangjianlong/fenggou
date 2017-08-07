@@ -1,17 +1,15 @@
-package com.odbpo.fenggou.feature.message;
+package com.odbpo.fenggou.feature.order;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import com.odbpo.fenggou.R;
-import com.odbpo.fenggou.base.BackActivity;
 import com.odbpo.fenggou.base.BaseActivity;
-import com.odbpo.fenggou.databinding.ActMessageBinding;
-import com.odbpo.fenggou.di.components.DaggerMessageComponent;
-import com.odbpo.fenggou.di.components.MessageComponent;
-import com.odbpo.fenggou.di.modules.MessageModule;
+import com.odbpo.fenggou.databinding.ActOrderBinding;
+import com.odbpo.fenggou.di.components.DaggerOrderComponent;
+import com.odbpo.fenggou.di.components.OrderComponent;
+import com.odbpo.fenggou.di.modules.OrderModule;
 
 import com.core.op.lib.utils.inject.AfterViews;
 import com.core.op.lib.utils.inject.BeforeViews;
@@ -19,17 +17,17 @@ import com.core.op.lib.utils.inject.RootView;
 
 import javax.inject.Inject;
 
-@RootView(R.layout.act_message)
-public final class MessageActivity extends BackActivity<MessageViewModel, ActMessageBinding> {
+@RootView(R.layout.act_order)
+public final class OrderActivity extends BaseActivity<OrderViewModel, ActOrderBinding> {
 
-    MessageComponent component;
+    OrderComponent component;
 
     public final static void instance(Context context) {
         instance(context, null);
     }
 
     public final static void instance(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, MessageActivity.class);
+        Intent intent = new Intent(context, OrderActivity.class);
         if (bundle != null) {
             intent.putExtra("data", bundle);
         }
@@ -38,21 +36,15 @@ public final class MessageActivity extends BackActivity<MessageViewModel, ActMes
 
     @BeforeViews
     void beforViews() {
-        component = DaggerMessageComponent.builder()
+        component = DaggerOrderComponent.builder()
                 .appComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
-                .messageModule(new MessageModule())
+                .orderModule(new OrderModule())
                 .build();
         component.inject(this);
     }
 
     @AfterViews
     void afterViews() {
-    }
-
-    @Override
-    protected Toolbar setToolBar() {
-        binding.toolbar.toolbar.setTitle(" ");
-        return binding.toolbar.toolbar;
     }
 }

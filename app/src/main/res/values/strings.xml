@@ -136,6 +136,8 @@
 
     <!--message-->
     <string name="app.message.title">会员中心-站内信</string>
+    <string name="app.message.manager.notification">管理员通知</string>
+    <string name="app.message.system.notification">系统通知</string>
 
 
     <!--moreWindow-->

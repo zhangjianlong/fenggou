@@ -68,4 +68,10 @@ public class LoginRepositoryImp implements LoginRepository {
     }
 
 
+    @Override
+    public Observable<LoginResponse> getNotification(Map map) {
+        return apiClient.getNotification(map);
+    }
+
+
 }

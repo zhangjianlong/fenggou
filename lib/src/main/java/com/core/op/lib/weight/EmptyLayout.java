@@ -1,6 +1,5 @@
 package com.core.op.lib.weight;
 
-import android.bluetooth.BluetoothClass;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -179,6 +178,7 @@ public class EmptyLayout extends LinearLayout implements
                 img.setBackgroundResource(R.drawable.img_no);
                 img.setVisibility(View.VISIBLE);
                 mLoading.setVisibility(View.GONE);
+                setNoDataContent(Static.CONTEXT.getString(R.string.app_message_empty));
                 setTvNoDataContent();
                 clickEnable = true;
                 break;

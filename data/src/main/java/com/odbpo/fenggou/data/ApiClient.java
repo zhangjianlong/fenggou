@@ -46,11 +46,13 @@ public interface ApiClient {
     @GET(UriMethod.BROWSERECORD)
     Observable<CustomerInfo> getHistory(@QueryMap Map<String, String> maps);
 
-
     @POST(UriMethod.SEARCH_GOODS)
     Observable<SearchProductBean> searchGoods(@Body RequestBody requestBody);
 
     @GET(UriMethod.ORDER_NUM)
     Observable<String> getOrderNum(@Path("status") String status);
+
+    @GET(UriMethod.SYSTEM_NOTIFICATION)
+    Observable<LoginResponse> getNotification(@QueryMap Map<String, String> maps);
 }
 

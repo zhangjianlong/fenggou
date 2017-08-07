@@ -30,4 +30,6 @@ public interface LoginRepository {
     Observable<SearchProductBean> searchGoods(String str);
 
     Observable<String> getOrderNum(String def);
+
+    Observable<LoginResponse> getNotification(Map map);
 }

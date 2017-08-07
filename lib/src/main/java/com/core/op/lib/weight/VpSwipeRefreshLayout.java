@@ -1,11 +1,8 @@
 package com.core.op.lib.weight;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewConfiguration;
 
 import com.core.op.lib.weight.swipe.SwipeRefreshLayout;

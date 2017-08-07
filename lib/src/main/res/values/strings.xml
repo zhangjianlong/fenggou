@@ -47,5 +47,6 @@
     <string name="ucrop_mutate_exception_hint">Therefore, override color resource (ucrop_color_toolbar_widget) in your app to make it work on pre-L devices</string>
     <!--error nodata-->
     <string name="app.search.empty.data">木有搜索到商品哦</string>
+    <string name="app.message.empty">木有通知哦</string>
 
 </resources>

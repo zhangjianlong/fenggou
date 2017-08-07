@@ -9,6 +9,7 @@ import com.core.op.bindingadapter.common.ItemView;
 import com.core.op.lib.base.BFViewModel;
 import com.core.op.lib.command.ReplyCommand;
 import com.core.op.lib.di.PerActivity;
+import com.core.op.lib.utils.StrUtil;
 import com.odbpo.fenggou.BR;
 import com.odbpo.fenggou.R;
 import com.odbpo.fenggou.data.net.AbsAPICallback;
@@ -21,6 +22,7 @@ import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
 import com.odbpo.fenggou.domain.interactor.customer.CustomerInfoUserCase;
 import com.odbpo.fenggou.domain.interactor.customer.OrderNumUserCase;
 import com.odbpo.fenggou.feature.message.MessageActivity;
+import com.odbpo.fenggou.feature.order.OrderActivity;
 import com.odbpo.fenggou.feature.profile.ProfileActivity;
 import com.odbpo.fenggou.util.OrderStatus;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -48,7 +50,6 @@ public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
         this.orderNumUserCase = orderNumUserCase;
     }
 
-
     @Override
     public void afterViews() {
 //        initData();
@@ -61,10 +62,10 @@ public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
     public final ObservableField<String> imageUri = new ObservableField<>("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1498020154&di=354e0947d9d994db9cd65e630cde85e7&src=http://pic7.nipic.com/20100519/4862714_212100033649_2.jpg");
     public final ObservableField<String> userName = new ObservableField<>("18625254516");
     public final ObservableField<String> userLevel = new ObservableField<>("普通会员");
-    public final ObservableField<OrderNumBean> orderPayNum = new ObservableField<>();
-    public final ObservableField<OrderNumBean> orderReceiveNum = new ObservableField<>();
-    public final ObservableField<OrderNumBean> orderEvaluateNum = new ObservableField<>();
-    public final ObservableField<OrderNumBean> orderReturnNum = new ObservableField<>();
+    public final ObservableField<String> orderPayNum = new ObservableField<>("0");
+    public final ObservableField<String> orderReceiveNum = new ObservableField<>("0");
+    public final ObservableField<String> orderEvaluateNum = new ObservableField<>("0");
+    public final ObservableField<String> orderReturnNum = new ObservableField<>("0");
 
     public final List<InfoItemViewModel> itemViewModels = new ArrayList<>();
 
@@ -85,9 +86,11 @@ public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
 
     });
 
-    private void initData() {
+    public ReplyCommand order = new ReplyCommand(() -> {
+        OrderActivity.instance(activity);
 
-    }
+    });
+
 
     private void upadataView() {
         itemViewModels.clear();
@@ -128,7 +131,24 @@ public class InfoViewModel extends BFViewModel<FrgInfoBinding> {
         Observable.from(orderStatus).subscribe(data -> {
             orderNumUserCase.setParams(data + "");
             orderNumUserCase.execute().compose(activity.bindToLifecycle()).subscribe(num -> {
-                System.out.println(num);
+                if (StrUtil.isEmpty(num)) {
+                    return;
+                }
+                int tempValue = Integer.valueOf(data);
+                switch (tempValue) {
+                    case OrderStatus.NOPAY:
+                        orderPayNum.set(num);
+                        break;
+                    case OrderStatus.YESSEND:
+                        orderReceiveNum.set(num);
+                        break;
+                    case OrderStatus.YESGET:
+                        orderEvaluateNum.set(num);
+                        break;
+                    case OrderStatus.SUCESSDRAWBACK:
+                        orderReturnNum.set(num);
+                        break;
+                }
 
             }, error -> {
 
