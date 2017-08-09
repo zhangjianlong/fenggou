@@ -2,7 +2,11 @@ package com.odbpo.fenggou.data;
 
 
 import com.odbpo.fenggou.data.api.BaseResponse;
+import com.odbpo.fenggou.domain.bean.FollowListBean;
+import com.odbpo.fenggou.domain.bean.HistoryListBean;
+import com.odbpo.fenggou.domain.bean.HistoryNumBean;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
+import com.odbpo.fenggou.domain.bean.OrderListBean;
 import com.odbpo.fenggou.domain.bean.OrderNumBean;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
@@ -54,5 +58,21 @@ public interface ApiClient {
 
     @GET(UriMethod.SYSTEM_NOTIFICATION)
     Observable<LoginResponse> getNotification(@QueryMap Map<String, String> maps);
+
+    @GET(UriMethod.ORDER_GOODSLIST)
+    Observable<OrderListBean> getOrderList(@Path("status") String status, @QueryMap Map<String, String> maps);
+
+    @GET(UriMethod.FOLLOW_NUM)
+    Observable<HistoryNumBean> getFollowNum();
+
+    @GET(UriMethod.HISTORY_NUM)
+    Observable<HistoryNumBean> getHistoryNum();
+
+
+    @GET(UriMethod.HISTORY_LIST)
+    Observable<HistoryListBean> getHistoryList(@QueryMap Map<String, String> maps);
+
+    @GET(UriMethod.FOLLOW_LIST)
+    Observable<FollowListBean> getFollowList(@QueryMap Map<String, String> maps);
 }
 

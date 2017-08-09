@@ -1,7 +1,11 @@
 package com.odbpo.fenggou.domain.repository;
 
 
+import com.odbpo.fenggou.domain.bean.FollowListBean;
+import com.odbpo.fenggou.domain.bean.HistoryListBean;
+import com.odbpo.fenggou.domain.bean.HistoryNumBean;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
+import com.odbpo.fenggou.domain.bean.OrderListBean;
 import com.odbpo.fenggou.domain.bean.OrderNumBean;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
@@ -32,4 +36,14 @@ public interface LoginRepository {
     Observable<String> getOrderNum(String def);
 
     Observable<LoginResponse> getNotification(Map map);
+
+    Observable<OrderListBean> getOrderList(String def, Map map);
+
+    Observable<HistoryNumBean> getFollowNum();
+
+    Observable<HistoryNumBean> getHistoryNum();
+
+    Observable<HistoryListBean> getHistoryList(Map map);
+
+    Observable<FollowListBean> getFollowList(Map map);
 }

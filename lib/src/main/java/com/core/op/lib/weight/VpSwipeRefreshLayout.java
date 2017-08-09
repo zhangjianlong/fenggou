@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
+import com.core.op.lib.R;
 import com.core.op.lib.weight.swipe.SwipeRefreshLayout;
 
 import java.util.logging.Logger;
@@ -25,6 +26,8 @@ public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
 
     public VpSwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setColorSchemeResources(R.color.app_theme_colorPrimary);
+        setProgressViewOffset(true, -20, 100);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 

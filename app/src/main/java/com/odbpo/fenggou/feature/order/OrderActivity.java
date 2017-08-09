@@ -3,9 +3,10 @@ package com.odbpo.fenggou.feature.order;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.odbpo.fenggou.R;
-import com.odbpo.fenggou.base.BaseActivity;
+import com.odbpo.fenggou.base.BackActivity;
 import com.odbpo.fenggou.databinding.ActOrderBinding;
 import com.odbpo.fenggou.di.components.DaggerOrderComponent;
 import com.odbpo.fenggou.di.components.OrderComponent;
@@ -18,7 +19,7 @@ import com.core.op.lib.utils.inject.RootView;
 import javax.inject.Inject;
 
 @RootView(R.layout.act_order)
-public final class OrderActivity extends BaseActivity<OrderViewModel, ActOrderBinding> {
+public final class OrderActivity extends BackActivity<OrderViewModel, ActOrderBinding> {
 
     OrderComponent component;
 
@@ -46,5 +47,11 @@ public final class OrderActivity extends BaseActivity<OrderViewModel, ActOrderBi
 
     @AfterViews
     void afterViews() {
+    }
+
+    @Override
+    protected Toolbar setToolBar() {
+        binding.toolbar.toolbar.setTitle(" ");
+        return binding.toolbar.toolbar;
     }
 }

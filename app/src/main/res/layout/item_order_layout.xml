@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.order.OrderItemViewModel" />
+
+        <import type="java.lang.String" />
+
+        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app.theme.background_f7f7f7"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/app.padding.normal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app.theme.background"
+            android:orientation="horizontal"
+            android:padding="@dimen/app.padding.normal">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.black333"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@{@string/app_order_no+viewModel.orderData.orderCode}" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.ww.normal.red"
+                android:text="交易取消" />
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:itemView="@{viewModel.itemView}"
+            app:items="@{viewModel.itemViewModels}"
+            app:layoutManager="@{LayoutManagers.noScrollLinear()}" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app.theme.background"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:padding="@dimen/app.padding.normal">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.black333"
+                    android:text="实付款：" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.ww.normal.red"
+                    android:text="￥73.00" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:padding="@dimen/app.padding.normal">
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.ww.tiny.red"
+                    android:background="@drawable/shape_ffffff_backgd_fc3e50_stroke_1radius_rectangle"
+                    android:padding="@dimen/app.padding.small"
+                    android:text="再次购买" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</layout>

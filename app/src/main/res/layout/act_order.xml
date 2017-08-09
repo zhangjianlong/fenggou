@@ -8,12 +8,92 @@
         <variable
             name="viewModel"
             type="com.odbpo.fenggou.feature.order.OrderViewModel" />
+
+        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
+
+        <import type="com.core.op.lib.weight.EmptyLayout" />
+
+
+        <import type="android.view.View" />
     </data>
 
-    <LinearLayout
+    <com.core.op.lib.weight.VpSwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:refreshing="@{viewModel.isRefreshing}"
+        app:onSwipeRefreshCommand="@{viewModel.onRefreshCommand}">
 
-    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/include_toolbar_alpha"
+                app:toolTitle="@{viewModel.toolTitle}"></include>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemView="@{viewModel.itemView}"
+                    app:items="@{viewModel.itemViewModels}"
+                    app:layoutManager="@{LayoutManagers.linear()}"
+                    app:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.emptyLayoutShow?View.VISIBLE:View.GONE}">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/app.margin.xxxlarge"
+                        android:background="@drawable/dingdanwu" />
+
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black333"
+                        android:layout_marginTop="@dimen/app.margin.xlarge"
+                        android:text="@string/app.order.empty" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.ww.normal.black999"
+                        android:padding="@dimen/app.padding.normal"
+                        android:text="@string/app.order.go.stroll" />
+
+
+                    <TextView
+                        style="@style/App.Theme.TextAppearance.mw.normal"
+                        android:layout_margin="@dimen/app.margin.large"
+                        android:layout_marginTop="@dimen/app.margin.normal"
+                        android:background="@drawable/selector_e53e5a_9e0000_2radius"
+                        app:clickCommand="@{viewModel.goProductPage}"
+                        android:gravity="center"
+                        android:padding="@dimen/app.padding.large12"
+                        android:text="@string/app.order.stroll" />
+                </LinearLayout>
+
+
+            </FrameLayout>
+        </LinearLayout>
+
+
+    </com.core.op.lib.weight.VpSwipeRefreshLayout>
+
 </layout>

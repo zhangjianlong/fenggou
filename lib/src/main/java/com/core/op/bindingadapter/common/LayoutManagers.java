@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+import com.core.op.bindingadapter.recyclerview.NoScrollRecyleLinearMannager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -32,6 +34,17 @@ public class LayoutManagers {
             }
         };
     }
+
+
+    public static LayoutManagerFactory noScrollLinear() {
+        return new LayoutManagerFactory() {
+            @Override
+            public RecyclerView.LayoutManager create(RecyclerView recyclerView) {
+                return new NoScrollRecyleLinearMannager(recyclerView.getContext());
+            }
+        };
+    }
+
 
     /**
      * A {@link LinearLayoutManager} with the given orientation and reverseLayout.

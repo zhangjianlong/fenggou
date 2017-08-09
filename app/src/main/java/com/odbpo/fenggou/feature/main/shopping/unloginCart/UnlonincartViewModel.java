@@ -53,8 +53,8 @@ public class UnlonincartViewModel extends BFViewModel<FrgUnlonincartBinding> {
     public ObservableBoolean isLogin = new ObservableBoolean(false);
 
 
-    public final ReplyCommand go = new ReplyCommand(() -> {
-
+    public final ReplyCommand goProductPage = new ReplyCommand(() -> {
+        Messenger.getDefault().sendNoMsg(MessageKey.GO_PRODUCT);
     });
 
 

@@ -280,6 +280,12 @@
         <item name="android:textColor">@color/app.text.black999</item>
     </style>
 
+    <style name="App.Theme.TextAppearance.mw.small.black333">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app.text.black333</item>
+    </style>
+
 
     <style name="App.Theme.TextAppearance.mw.small.black999">
         <item name="android:layout_width">match_parent</item>

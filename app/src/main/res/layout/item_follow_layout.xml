@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.follow.FollowItemViewModel" />
+
+        <import type="com.odbpo.fenggou.util.DatabindingMethod" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app.theme.background"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="fitXY"
+            app:uri="@{viewModel.data.image}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/app.padding.normal">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.mw.normal.black333"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:text="@{viewModel.data.name}" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/App.Theme.TextAppearance.mw.normal.black999"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="颜色（绿色）毛孔呵护面膜" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <android.support.v7.widget.AppCompatTextView
+                        style="@style/App.Theme.TextAppearance.mw.large.red"
+                        android:text="@{DatabindingMethod.getPrice(viewModel.data.preferPrice)}" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/App.Theme.TextAppearance.ww.small.black999"
+                            android:maxLines="2"
+                            android:text='@{@string/app_search_comment_percent+@string/app_search_comment_percent_symbol}' />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            style="@style/App.Theme.TextAppearance.ww.small.black999"
+                            android:layout_marginLeft="@dimen/app.margin.large"
+                            android:maxLines="2"
+                            android:text='@{ @string/app_search_comment_num}' />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_marginRight="@dimen/app.margin.normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/trash_can" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</layout>

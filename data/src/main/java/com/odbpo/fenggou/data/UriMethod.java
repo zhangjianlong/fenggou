@@ -24,7 +24,17 @@ public class UriMethod {
     //系统消息
     public static final String SYSTEM_NOTIFICATION = "customers/messages";
     //订单列表
-    public static final String ORDER_GOODSLIST = "orderGoodsList";
+    public static final String ORDER_GOODSLIST = "orders/{status}";
+    //我的关注
+    public static final String FOLLOW_NUM = "customers/follows/total";
+    //我的历史记录
+    public static final String HISTORY_NUM = "customers/browserecord/totals ";
+
+
+    //我的关注列表
+    public static final String FOLLOW_LIST = "customers/follows";
+    //我的历史记录列表
+    public static final String HISTORY_LIST = "customers/browserecord";
 
 
 }

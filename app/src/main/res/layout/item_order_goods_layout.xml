@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.order.OrderListItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app.theme.background"
+        android:orientation="vertical">
+
+
+        <include layout="@layout/include_line_h" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+            android:padding="@dimen/app.padding.normal">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_ffffff_backgd_ededed_stroke_2radius_rectangle"
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    app:uri="@{viewModel.orderGoodsData.goodsImg}" />
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/app.margin.normal"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.small.black333"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:maxLines="2"
+                    android:text="@{viewModel.orderGoodsData.goodsName}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/App.Theme.TextAppearance.mw.small.black333"
+                    android:text="@{viewModel.orderGoodsData.specDesc}" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <include layout="@layout/include_line_h" />
+
+    </LinearLayout>
+
+
+</layout>

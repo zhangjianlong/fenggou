@@ -1,5 +1,6 @@
 package com.odbpo.fenggou.domain.interactor.history;
 
+import com.odbpo.fenggou.domain.bean.HistoryListBean;
 import com.odbpo.fenggou.domain.bean.base.CustomerInfo;
 import com.odbpo.fenggou.domain.executor.PostExecutionThread;
 import com.odbpo.fenggou.domain.executor.ThreadExecutor;
@@ -15,7 +16,7 @@ import rx.Observable;
  * @Time: 2017/8/1 13:55
  * @Desc:
  */
-public class GetHistoryUserCase extends UseCase<CustomerInfo> {
+public class GetHistoryUserCase extends UseCase<HistoryListBean> {
     LoginRepository repository;
 
     @Inject
@@ -26,8 +27,8 @@ public class GetHistoryUserCase extends UseCase<CustomerInfo> {
 
 
     @Override
-    protected Observable<CustomerInfo> buildUseCaseObservable() {
-        return repository.getHistory(map);
+    protected Observable<HistoryListBean> buildUseCaseObservable() {
+        return repository.getHistoryList(map);
     }
 
 }

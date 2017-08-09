@@ -35,5 +35,5 @@ public class OrderStatus {
     public final static int FAILEGET = 16;
     public final static int YETDRAWBACK = 17;
     public final static int SUCESSDRAWBACK = 18;
-    public final static int BACKORDER = 0;
+    public final static int BACKORDER = 19;
 }

@@ -112,7 +112,7 @@
                         android:gravity="center"
                         android:padding="@dimen/app.padding.large"
                         android:text="@string/app.shopping.go"
-                        app:clickCommand="@{viewModel.go}" />
+                        app:clickCommand="@{viewModel.goProductPage}" />
                 </LinearLayout>
 
 

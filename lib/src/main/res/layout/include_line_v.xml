@@ -3,4 +3,4 @@
     android:id="@+id/tv_bars"
     android:layout_width="0.1dp"
     android:layout_height="match_parent"
-    android:background="@color/app.line" />
+    android:background="@color/app.line.ededed" />

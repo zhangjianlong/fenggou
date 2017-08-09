@@ -4,7 +4,11 @@ package com.odbpo.fenggou.data.repository;
 import com.odbpo.fenggou.data.ApiClient;
 import com.odbpo.fenggou.data.api.transformer.ErrorTransformer;
 import com.odbpo.fenggou.data.util.RetrofitUtil;
+import com.odbpo.fenggou.domain.bean.FollowListBean;
+import com.odbpo.fenggou.domain.bean.HistoryListBean;
+import com.odbpo.fenggou.domain.bean.HistoryNumBean;
 import com.odbpo.fenggou.domain.bean.LoginResponse;
+import com.odbpo.fenggou.domain.bean.OrderListBean;
 import com.odbpo.fenggou.domain.bean.OrderNumBean;
 import com.odbpo.fenggou.domain.bean.PhoneLoginResultBean;
 import com.odbpo.fenggou.domain.bean.ProductCategoryBean;
@@ -71,6 +75,31 @@ public class LoginRepositoryImp implements LoginRepository {
     @Override
     public Observable<LoginResponse> getNotification(Map map) {
         return apiClient.getNotification(map);
+    }
+
+    @Override
+    public Observable<OrderListBean> getOrderList(String def, Map map) {
+        return apiClient.getOrderList(def, map);
+    }
+
+    @Override
+    public Observable<HistoryNumBean> getFollowNum() {
+        return apiClient.getFollowNum();
+    }
+
+    @Override
+    public Observable<HistoryNumBean> getHistoryNum() {
+        return apiClient.getHistoryNum();
+    }
+
+    @Override
+    public Observable<HistoryListBean> getHistoryList(Map map) {
+        return apiClient.getHistoryList(map);
+    }
+
+    @Override
+    public Observable<FollowListBean> getFollowList(Map map) {
+        return apiClient.getFollowList(map);
     }
 
 

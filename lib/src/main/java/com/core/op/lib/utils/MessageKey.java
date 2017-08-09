@@ -1,7 +1,6 @@
 package com.core.op.lib.utils;
 
 
-
 /**
  * Created by acer on 2017/3/11.
  */
@@ -24,6 +23,8 @@ public class MessageKey {
 
     //点击搜索商品页面排序按钮
     public static final String SORT = "SORT";
+    //点击发送返回产品页面的消息
+    public static final String GO_PRODUCT = "GO_PRODUCT";
 
 
 }

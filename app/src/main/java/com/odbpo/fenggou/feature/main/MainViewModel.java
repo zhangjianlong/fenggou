@@ -52,6 +52,11 @@ public class MainViewModel extends BAViewModel<ActMainBinding> {
 
         });
 
+        Messenger.getDefault().register(this, MessageKey.GO_PRODUCT, () -> {
+            binding.bottomNavigation.clickView(0);
+
+        });
+
     }
 
 

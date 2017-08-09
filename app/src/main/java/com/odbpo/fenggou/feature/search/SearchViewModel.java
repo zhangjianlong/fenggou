@@ -46,7 +46,6 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
     public final ObservableField<Drawable> bg = new ObservableField<>(Static.CONTEXT.getResources().getDrawable(R.drawable.view1));
     //控制recyleview 布局的标志 true为线性布局  false为网格布局
     private boolean isLiearlayout = true;
-    public final ItemViewSelector<SearchItemViewModel> itemView = itemView();
     private List<SearchProductBean.DataBean> recommendProductBeanList = new ArrayList<>();
 
 
@@ -58,8 +57,6 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
 
     @Override
     public void afterViews() {
-        binding.swipeRefreshLayout.setColorSchemeResources(R.color.app_theme_colorPrimary);
-        binding.swipeRefreshLayout.setProgressViewOffset(true, -20, 100);
         Bundle bundle = activity.getIntent().getBundleExtra("data");
         int cateId = bundle.getInt("cateId");
         List<Long> cateIdList = new ArrayList<>();
@@ -222,7 +219,7 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
         searchGoodsUserCase.execute().compose(activity.bindToLifecycle()).subscribe(new AbsAPICallback<SearchProductBean>() {
             @Override
             protected void onDone(SearchProductBean searchProductBean) {
-                isRefreshing.set(false);
+
                 searchProductData = searchProductBean;
                 if (loadMore) {
                 } else {
@@ -235,6 +232,7 @@ public class SearchViewModel extends ListViewModel<SearchItemViewModel, ActSearc
             @Override
             public void onCompleted() {
                 super.onCompleted();
+                isRefreshing.set(false);
                 upadataView();
             }
 

@@ -90,7 +90,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="82dp">
+                        android:layout_height="70dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -102,45 +102,51 @@
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.2"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                app:clickCommand="@{viewModel.goFollow}">
 
                                 <android.support.v7.widget.AppCompatTextView
-
                                     style="@style/App.Theme.TextAppearance.mw.normal.black333"
                                     android:gravity="center"
-                                    android:text="2" />
+                                    android:text="@{viewModel.followNum}" />
 
 
                                 <android.support.v7.widget.AppCompatTextView
 
                                     style="@style/App.Theme.TextAppearance.mw.normal.black333"
-                                    android:layout_marginTop="@dimen/app.margin.normal"
+                                    android:layout_marginTop="@dimen/app.margin.small"
                                     android:gravity="center"
                                     android:text="@string/app.info.attention" />
 
 
                             </LinearLayout>
 
+
+                            <include layout="@layout/include_line_v_marign" />
+
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.2"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                app:clickCommand="@{viewModel.goHistory}">
 
                                 <android.support.v7.widget.AppCompatTextView
 
                                     style="@style/App.Theme.TextAppearance.mw.normal.black333"
                                     android:gravity="center"
-                                    android:text="12" />
+                                    android:text="@{viewModel.historyNum}" />
 
 
                                 <android.support.v7.widget.AppCompatTextView
 
                                     style="@style/App.Theme.TextAppearance.mw.normal.black333"
                                     android:layout_below="@+id/attention"
-                                    android:layout_marginTop="@dimen/app.margin.normal"
+                                    android:layout_marginTop="@dimen/app.margin.small"
                                     android:gravity="center"
                                     android:text="@string/app.info.history" />
 
@@ -161,7 +167,7 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="58dp"
+                    android:layout_marginBottom="40dp"
                     android:layout_marginLeft="@dimen/app.margin.large"
                     app:border_color="@color/white"
                     app:border_width="3dp"
@@ -204,7 +210,7 @@
                         android:gravity="right"
                         android:padding="@dimen/app.margin.normal"
                         android:text="@string/app.info.all.order"
-                        app:clickCommand="@{viewModel.order}" />
+                        app:clickCommand="@{viewModel.orderAll}" />
 
                 </LinearLayout>
 
@@ -221,7 +227,8 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingBottom="@dimen/app.padding.normal">
+                        android:paddingBottom="@dimen/app.padding.normal"
+                        app:clickCommand="@{viewModel.orderPay}">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -265,7 +272,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:clickCommand="@{viewModel.orderReceive}">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -310,7 +318,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:clickCommand="@{viewModel.orderEvaluate}">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -353,7 +362,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:clickCommand="@{viewModel.orderReturn}">
 
                         <FrameLayout
                             android:layout_width="wrap_content"

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.core.op.bindingadapter.common.LayoutManagers" />
+
+        <import type="com.core.op.lib.weight.EmptyLayout" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.odbpo.fenggou.feature.follow.FollowViewModel" />
+    </data>
+
+    <com.core.op.lib.weight.VpSwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:refreshing="@{viewModel.isRefreshing}"
+        app:onSwipeRefreshCommand="@{viewModel.onRefreshCommand}">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/include_toolbar_alpha"
+                app:toolTitle="@{viewModel.toolTitle}"></include>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemView="@{viewModel.itemView}"
+                    app:items="@{viewModel.itemViewModels}"
+                    app:layoutManager="@{LayoutManagers.linear()}"
+                    app:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}" />
+
+
+            </FrameLayout>
+        </LinearLayout>
+
+    </com.core.op.lib.weight.VpSwipeRefreshLayout>
+</layout>
